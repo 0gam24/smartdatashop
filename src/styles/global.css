@@ -193,3 +193,105 @@ hr { border: 0; border-top: 0.5px solid var(--color-ink-quat); margin: 2rem 0; }
   letter-spacing: 0.05em;
   margin-left: 4px;
 }
+
+/* === Print stylesheet ===
+   인쇄/PDF 출력용 클린 뷰. 본문/저자/출처만 남기고 모든 인터랙션 UI는 숨긴다.
+   외부 링크는 텍스트 뒤에 URL을 펼쳐 인용성을 유지한다. */
+@media print {
+  /* 인쇄 시 숨김 — 네비/툴/배너/북마크/인용/TOC */
+  .site-header,
+  .site-footer,
+  nav,
+  .bottom-tabs,
+  .search-modal,
+  .reading-progress,
+  .bookmark-toggle,
+  .citation-export,
+  .preview-banner,
+  .article-preview-warning,
+  .article-toc,
+  [data-article-toc],
+  [data-mobile-tabs],
+  .skip-to-content,
+  .masthead {
+    display: none !important;
+  }
+
+  /* 외부 링크 URL 펼치기 */
+  .article-body a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+  /* 내부 앵커(각주 등)에는 URL 펼침 적용하지 않음 */
+  .article-body a[href^='#']::after {
+    content: '';
+  }
+
+  /* 배경/그림자/외곽선 정리 */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: var(--font-serif);
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+
+  main,
+  .article-wrap,
+  .article-body {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 본문 외부 hairline 제거 (헤더/푸터/마스트헤드 등은 이미 hidden) */
+  body > *:not(main) {
+    border: 0 !important;
+  }
+
+  /* 페이지 브레이크 — 단락 안에서 끊지 말고, H2 앞에서 끊을 수 있게 */
+  p,
+  blockquote,
+  figure,
+  pre,
+  table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  h2 {
+    page-break-before: auto;
+    break-before: auto;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* 기사 헤더 — 인쇄 시 깔끔한 타이틀/바이라인 */
+  .article-header {
+    border-bottom: 0.5pt solid #000;
+    padding-bottom: 8pt;
+    margin-bottom: 14pt;
+  }
+
+  /* 출처 리스트 — 인쇄 시 작은 글자로 정리 */
+  .sources {
+    font-size: 9pt;
+    margin-top: 18pt;
+    border-top: 0.5pt solid #000;
+    padding-top: 8pt;
+  }
+}

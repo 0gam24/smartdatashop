@@ -9,6 +9,8 @@ import AuthorCard from '../components/AuthorCard.astro';
 import CorrectionsBlock from '../components/CorrectionsBlock.astro';
 import Footer from '../components/Footer.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import ArticleTOC from '../components/ArticleTOC.astro';
+import CitationExport from '../components/CitationExport.astro';
 import { categoryToKorean, formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
 import { buildBreadcrumbLD } from '../lib/jsonld';
 
@@ -119,6 +121,8 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
   <BreadcrumbMasthead category={category} dateText={breadcrumbDate} vol={vol} no={no} />
 
   <main id="main" role="main" class="article-wrap" data-screen-label="펄스 글">
+    <ArticleTOC />
+
     <ArticleHeader
       category={category}
       publishedAt={publishedAt}
@@ -136,6 +140,12 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
       <ArticlePreviewWarning previewMode={previewMode} />
       <slot />
       <AuthorCard name={author} />
+      <CitationExport
+        title={title}
+        publishedAt={publishedAt}
+        url={Astro.url.toString()}
+        author={author}
+      />
       <CorrectionsBlock corrections={corrections} />
       <hr />
       <SourceList sources={sources} />

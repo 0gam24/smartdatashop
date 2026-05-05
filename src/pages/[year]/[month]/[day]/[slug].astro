@@ -40,11 +40,13 @@ const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
 
 // SEO — JSON-LD NewsArticle / OG description / OG image
 const articleJsonLd = buildNewsArticleLD(entry);
+// 명시적 coverImage 가 없으면 동적 OG 카드(/og/pulse/<slug>.png)로 자동 폴백.
+// 동적 OG는 기사별 제목·카테고리·날짜를 베이크해 SNS 공유 카드 품질을 올린다.
 const ogImage = data.coverImage
   ? data.coverImage.startsWith('http')
     ? data.coverImage
     : `https://smartdatashop.kr${data.coverImage}`
-  : undefined;
+  : `https://smartdatashop.kr/og/pulse/${entry.slug}.png`;
 
 // 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그를 합쳐 노출.
 const keywords = [

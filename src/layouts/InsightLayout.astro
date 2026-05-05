@@ -19,6 +19,8 @@ import SourceList from '../components/SourceList.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import CorrectionsBlock from '../components/CorrectionsBlock.astro';
 import Footer from '../components/Footer.astro';
+import ArticleTOC from '../components/ArticleTOC.astro';
+import CitationExport from '../components/CitationExport.astro';
 import { categoryToKorean, formatKoreanDate, type Category } from '../lib/korean';
 
 interface Source {
@@ -54,6 +56,8 @@ interface Props {
   corrections?: Correction[];
   /** 페이지 keywords meta — 페르소나/데이터유형/액션 태그 등에서 도출. */
   keywords?: string[];
+  /** OG 이미지 절대 URL. 미지정 시 BaseLayout의 og-default.png 사용. */
+  ogImage?: string;
 }
 
 const {
@@ -71,6 +75,7 @@ const {
   verifiedBy = [],
   corrections = [],
   keywords,
+  ogImage,
 } = Astro.props;
 
 const headerDate = formatKoreanDate(publishedAt);
@@ -81,7 +86,7 @@ const pageTitle = `${title} — 스마트데이터샵 인사이트`;
 const categoryLabel = categoryToKorean(category).replace(/ /g, '');
 ---
 
-<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords}>
+<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage}>
   <Header activeNav="insight" date={headerDate} />
 
   <div class="masthead">
@@ -101,6 +106,8 @@ const categoryLabel = categoryToKorean(category).replace(/ /g, '');
   </div>
 
   <main id="main" role="main" class="article-wrap" data-screen-label="인사이트 글">
+    <ArticleTOC />
+
     <ArticleHeader
       category={category}
       publishedAt={publishedAt}
@@ -118,6 +125,12 @@ const categoryLabel = categoryToKorean(category).replace(/ /g, '');
       <ArticlePreviewWarning previewMode={previewMode} />
       <slot />
       <AuthorCard name={author} />
+      <CitationExport
+        title={title}
+        publishedAt={publishedAt}
+        url={Astro.url.toString()}
+        author={author}
+      />
       <CorrectionsBlock corrections={corrections} />
       <hr />
       <SourceList sources={sources} />

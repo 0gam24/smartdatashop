@@ -1,0 +1,278 @@
+---
+/**
+ * ArticleTOC — 기사 본문 H2 헤딩에서 자동 생성되는 목차.
+ *
+ * 데스크톱(≥980px): 본문 우측에 고정(sticky)되어 페이지 스크롤을 따라간다.
+ * 모바일(<980px): 본문 상단 아코디언("목 차" 토글) 형태로 접힌다.
+ *
+ * id 자동 부여 전략:
+ *   remark-rehype가 MDX 빌드 시 H2에 GitHub 스타일 슬러그 id를 자동 부여하므로
+ *   별도 플러그인을 추가하지 않는다 (rehype-slug 미설치). 만약 한 번이라도
+ *   id가 빠져 있으면 클라이언트 스크립트가 폴백으로 슬러그 id를 생성한다.
+ *
+ * 활성 섹션 하이라이트는 IntersectionObserver로 처리한다.
+ * H2가 0개이면 컴포넌트는 자기 자신을 숨긴다.
+ */
+---
+
+<aside class="article-toc" data-article-toc aria-label="목차" hidden>
+  <button
+    type="button"
+    class="toc-toggle"
+    data-toc-toggle
+    aria-expanded="false"
+    aria-controls="article-toc-list"
+  >
+    <span class="toc-eyebrow">목 차</span>
+    <span class="toc-chevron" aria-hidden="true">▾</span>
+  </button>
+  <nav class="toc-nav" id="article-toc-list" data-toc-nav>
+    <div class="toc-eyebrow toc-eyebrow-desktop">목 차</div>
+    <ol class="toc-list" data-toc-list></ol>
+  </nav>
+</aside>
+
+<style>
+  .article-toc {
+    /* 모바일 기본 — 본문 위 아코디언 */
+    margin: 0 auto 24px;
+    max-width: var(--width-prose);
+    padding: 0 var(--width-gutter);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .toc-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color-paper-soft);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 10px 14px;
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+  }
+  .toc-toggle:hover {
+    background: var(--color-paper-deep);
+  }
+  .toc-chevron {
+    transition: transform 0.15s ease;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .article-toc[data-open='true'] .toc-chevron {
+    transform: rotate(180deg);
+  }
+
+  .toc-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-ink-secondary);
+  }
+
+  .toc-nav {
+    display: none;
+    background: var(--color-paper-soft);
+    border: 0.5px solid var(--color-ink-quat);
+    border-top: none;
+    padding: 12px 16px 14px;
+  }
+  .article-toc[data-open='true'] .toc-nav {
+    display: block;
+  }
+
+  .toc-eyebrow-desktop {
+    display: none;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+  }
+  .toc-list :global(li) {
+    counter-increment: toc;
+    margin: 0;
+    padding: 4px 0 4px 10px;
+    border-left: 2px solid transparent;
+  }
+  .toc-list :global(li.is-active) {
+    border-left-color: var(--color-accent);
+  }
+  .toc-list :global(a) {
+    display: flex;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--color-ink-secondary);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .toc-list :global(li.is-active a) {
+    color: var(--color-ink);
+  }
+  .toc-list :global(a:hover) {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 0.5px;
+  }
+  .toc-list :global(a::before) {
+    content: counter(toc, decimal-leading-zero);
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+  }
+
+  /* 데스크톱: 본문 우측 sticky 부동 */
+  @media (min-width: 980px) {
+    .article-toc {
+      position: sticky;
+      top: 88px;
+      float: right;
+      width: 220px;
+      max-width: 220px;
+      margin: 0 0 24px 32px;
+      padding: 0;
+      /* 본문(article-body)이 등장하면 그 옆 마진에 부동 */
+    }
+    .toc-toggle {
+      display: none;
+    }
+    .toc-nav {
+      display: block;
+      border: 0.5px solid var(--color-ink-quat);
+      background: var(--color-paper-soft);
+      padding: 14px 16px;
+    }
+    .toc-eyebrow-desktop {
+      display: block;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function slugify(text) {
+      return String(text)
+        .trim()
+        .toLowerCase()
+        .replace(/[\s ]+/g, '-')
+        .replace(/[^\p{L}\p{N}\-]+/gu, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
+    function init() {
+      var root = document.querySelector('[data-article-toc]');
+      if (!root) return;
+      var body = document.querySelector('.article-body');
+      if (!body) return;
+
+      // 자동 각주 섹션에 들어 있는 H2(예: id="footnote-label")는 제외
+      var heads = Array.prototype.filter.call(
+        body.querySelectorAll('h2'),
+        function (h) {
+          return !h.closest('section[data-footnotes]') && !h.classList.contains('sr-only');
+        }
+      );
+      if (heads.length === 0) {
+        root.parentNode && root.parentNode.removeChild(root);
+        return;
+      }
+
+      // id가 빠져 있으면 폴백으로 슬러그 부여
+      var used = Object.create(null);
+      heads.forEach(function (h, i) {
+        if (!h.id) {
+          var base = slugify(h.textContent || ('section-' + (i + 1)));
+          if (!base) base = 'section-' + (i + 1);
+          var id = base;
+          var n = 1;
+          while (used[id] || document.getElementById(id)) {
+            n += 1;
+            id = base + '-' + n;
+          }
+          used[id] = true;
+          h.id = id;
+        }
+      });
+
+      var list = root.querySelector('[data-toc-list]');
+      var items = heads.map(function (h) {
+        var li = document.createElement('li');
+        li.dataset.tocItem = h.id;
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent || '';
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.getElementById(h.id);
+          if (!target) return;
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + h.id);
+          // 모바일 — 클릭 후 닫기
+          if (window.matchMedia('(max-width: 979px)').matches) {
+            setOpen(false);
+          }
+        });
+        li.appendChild(a);
+        list.appendChild(li);
+        return { id: h.id, el: h, li: li };
+      });
+
+      root.hidden = false;
+
+      // 토글 (모바일)
+      var toggle = root.querySelector('[data-toc-toggle]');
+      function setOpen(open) {
+        root.dataset.open = open ? 'true' : 'false';
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      setOpen(false);
+      toggle.addEventListener('click', function () {
+        setOpen(root.dataset.open !== 'true');
+      });
+
+      // 활성 섹션 하이라이트
+      if ('IntersectionObserver' in window) {
+        var activeId = null;
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                activeId = entry.target.id;
+              }
+            });
+            items.forEach(function (it) {
+              it.li.classList.toggle('is-active', it.id === activeId);
+            });
+          },
+          { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+        );
+        items.forEach(function (it) {
+          observer.observe(it.el);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

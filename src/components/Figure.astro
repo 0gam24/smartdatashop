@@ -1,0 +1,91 @@
+---
+/**
+ * Figure — 데이터 시각화/이미지 + 캡션 + 출처 wrapper.
+ *
+ * 본문 흐름 안에서 figure 의미론을 갖는 블록으로 사용.
+ * 차트/스크린샷/지도 등 1차 출처 자료를 본문에 끼워넣을 때 표준 형식.
+ *
+ * 사용:
+ *   <Figure
+ *     src={mychart}
+ *     alt="원/달러 환율 추이"
+ *     width={1200} height={630}
+ *     caption="원/달러 환율 (2026년 4월)"
+ *     source="한국은행 ECOS"
+ *     sourceUrl="https://ecos.bok.or.kr/" />
+ */
+import SmartImage from './SmartImage.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  /** 정적 import한 ImageMetadata 또는 절대 URL/경로(string). */
+  src: ImageMetadata | string;
+  /** 접근성용 대체 텍스트. 차트는 핵심 결론 1줄 권장. */
+  alt: string;
+  /** 출력 너비(px). 본문 최대 폭 720 권장. */
+  width?: number;
+  /** 출력 높이(px). CLS 방지를 위해 명시 권장. */
+  height?: number;
+  /** 본문 캡션. 차트 제목/설명. */
+  caption?: string;
+  /** 출처 기관/사이트명. */
+  source?: string;
+  /** 출처 원문 링크(있을 경우). */
+  sourceUrl?: string;
+  /** 위쪽 폴드 figure 일 때 true. */
+  eager?: boolean;
+  /** Responsive sizes 힌트. */
+  sizes?: string;
+}
+
+const { src, alt, width, height, caption, source, sourceUrl, eager, sizes } = Astro.props;
+---
+
+<figure class="data-figure">
+  <SmartImage
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    eager={eager}
+    sizes={sizes}
+    hairline
+  />
+  {(caption || source) && (
+    <figcaption>
+      {caption && <span class="caption-text">{caption}</span>}
+      {source && (
+        <span class="caption-source">
+          {' '}— 출처:{' '}
+          {sourceUrl ? (
+            <a href={sourceUrl} rel="external noopener noreferrer">{source}</a>
+          ) : (
+            source
+          )}
+        </span>
+      )}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .data-figure {
+    margin: 1.75rem 0;
+  }
+  .data-figure figcaption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .caption-source a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .caption-source a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+  }
+</style>

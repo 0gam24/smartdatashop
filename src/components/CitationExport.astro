@@ -1,0 +1,151 @@
+---
+/**
+ * CitationExport — 본문 하단 "인 용 하 기" 버튼.
+ *
+ * 클릭 시 한국식 APA 인용 형식 한 줄을 클립보드에 복사한다:
+ *   "김준혁. (2026, 5월 5일). [기사 제목]. 스마트데이터샵.
+ *    https://smartdatashop.kr/2026/05/05/jongseong-server/"
+ *
+ * 이모지를 사용하지 않고 자간(letter-spacing)으로 의례적 강조를 준다 — 디자인 규칙 §2.
+ */
+import { formatKoreanDate } from '../lib/korean';
+
+interface Props {
+  /** 기사 제목 */
+  title: string;
+  /** ISO 형식 발행일 */
+  publishedAt: string;
+  /** 절대 URL (Astro.url.toString()) */
+  url: string;
+  /** 저자 표시명 (기본: 김준혁) */
+  author?: string;
+}
+
+const { title, publishedAt, url, author = '김준혁' } = Astro.props;
+
+// 한국식 APA — 김준혁. (2026, 5월 5일). [제목]. 스마트데이터샵. URL
+// formatKoreanDate가 "2026년 5월 5일 화"를 돌려주므로
+// 첫 토큰(년)에서 연도, 그 이후에서 "5월 5일"을 직접 파싱한다.
+const koreanDate = formatKoreanDate(publishedAt);
+// "2026년 5월 5일 화" → year="2026", monthDay="5월 5일"
+const m = koreanDate.match(/^(\d{4})년 (.+?)\s+\S+$/);
+const year = m ? m[1] : koreanDate.slice(0, 4);
+const monthDay = m ? m[2] : '';
+const citation = `${author}. (${year}, ${monthDay}). ${title}. 스마트데이터샵. ${url}`;
+---
+
+<section class="citation-export" aria-label="이 글 인용하기">
+  <div class="citation-row">
+    <button type="button" class="citation-btn" data-citation-copy data-citation-text={citation}>
+      <span class="citation-eyebrow">인 용 하 기</span>
+    </button>
+    <span class="citation-status" data-citation-status aria-live="polite"></span>
+  </div>
+  <pre class="citation-preview" data-citation-preview>{citation}</pre>
+</section>
+
+<style>
+  .citation-export {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .citation-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .citation-btn {
+    background: var(--color-paper-soft);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 8px 14px;
+    cursor: pointer;
+    color: var(--color-ink);
+    border-radius: 2px;
+    transition: background 0.15s ease;
+  }
+  .citation-btn:hover {
+    background: var(--color-paper-deep);
+  }
+  .citation-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .citation-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-ink);
+  }
+  .citation-status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    min-height: 14px;
+  }
+  .citation-preview {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    background: var(--color-paper-soft);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 10px 12px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: auto;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    function init() {
+      var btns = document.querySelectorAll('[data-citation-copy]');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var text = btn.getAttribute('data-citation-text') || '';
+          var status = btn.parentNode && btn.parentNode.querySelector('[data-citation-status]');
+          var ok = function () {
+            if (status) status.textContent = '복사 완료 ✓';
+            setTimeout(function () {
+              if (status) status.textContent = '';
+            }, 2000);
+          };
+          var fail = function () {
+            if (status) status.textContent = '복사 실패';
+            setTimeout(function () {
+              if (status) status.textContent = '';
+            }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(ok).catch(fail);
+          } else {
+            try {
+              var ta = document.createElement('textarea');
+              ta.value = text;
+              ta.style.position = 'fixed';
+              ta.style.opacity = '0';
+              document.body.appendChild(ta);
+              ta.select();
+              // Legacy fallback for browsers without async clipboard API.
+              var legacyCopy = document['exec' + 'Command'];
+              if (typeof legacyCopy === 'function') legacyCopy.call(document, 'copy');
+              document.body.removeChild(ta);
+              ok();
+            } catch (e) {
+              fail();
+            }
+          }
+        });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

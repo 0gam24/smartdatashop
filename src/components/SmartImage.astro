@@ -1,0 +1,93 @@
+---
+/**
+ * SmartImage — Astro assets 기반 반응형 이미지 컴포넌트.
+ *
+ * 사용 패턴:
+ *   <SmartImage src={chartImage} alt="..." width={1200} height={630} />
+ *   <SmartImage src={chartImage} alt="..." sizes="(max-width: 720px) 100vw, 720px" eager />
+ *   <SmartImage src="/uploads/foo.jpg" alt="..." width={800} height={600} hairline />
+ *
+ * 정적 import한 이미지(`import chart from './chart.png'`)는 astro:assets로
+ * 자동 변환되어 WebP/AVIF + responsive srcset 출력.
+ * 외부 URL이나 public/ 절대경로(string)는 평문 <img>로 fallback
+ * (Astro 빌드 변환 대상 아님).
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  /** 정적 import한 ImageMetadata 또는 절대 URL/경로(string). */
+  src: ImageMetadata | string;
+  /** 접근성용 대체 텍스트. 빈 문자열은 장식용 이미지로 간주. */
+  alt: string;
+  /** 출력 너비(px). 정적 import 시 srcset 생성을 위한 기준값. */
+  width?: number;
+  /** 출력 높이(px). CLS 방지를 위해 명시 권장. */
+  height?: number;
+  /** 위쪽 폴드 이미지(히어로/OG 카드 등). 기본은 lazy. */
+  eager?: boolean;
+  /** 디자인 시스템 hairline 0.5px 테두리. */
+  hairline?: boolean;
+  /** Responsive sizes 힌트. 기본은 본문 폭 720px 가정. */
+  sizes?: string;
+  /** 추가 클래스 (caller가 wrapper 스타일 확장 가능). */
+  class?: string;
+  /** WebP/AVIF 출력 품질 (1-100, 기본 80). */
+  quality?: number;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  eager = false,
+  hairline = false,
+  sizes = '(max-width: 720px) 100vw, 720px',
+  class: className,
+  quality = 80,
+} = Astro.props;
+
+const isLocalImport = typeof src !== 'string';
+const wrapperClass = ['smart-image', hairline && 'has-hairline', className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{isLocalImport ? (
+  <Picture
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    quality={quality}
+    formats={['avif', 'webp']}
+    class={wrapperClass}
+  />
+) : (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    class={wrapperClass}
+  />
+)}
+
+<style>
+  .smart-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* CLS 방지: 로드 전 paper-soft 배경 placeholder */
+    background-color: var(--color-paper-soft);
+  }
+  .smart-image.has-hairline {
+    border: 0.5px solid var(--color-ink-quat);
+  }
+</style>
