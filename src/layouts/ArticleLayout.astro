@@ -5,7 +5,7 @@ import BreadcrumbMasthead from '../components/BreadcrumbMasthead.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
 import SourceList from '../components/SourceList.astro';
 import Footer from '../components/Footer.astro';
-import { formatKoreanDate, type Category } from '../lib/korean';
+import { formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
 
 interface Source {
   name: string;
@@ -48,9 +48,9 @@ const {
   jsonld,
 } = Astro.props;
 
-// 브레드크럼 표시용 날짜 (YYYY/MM/DD)
-const pubDate = new Date(publishedAt);
-const breadcrumbDate = `${pubDate.getFullYear()}/${String(pubDate.getMonth() + 1).padStart(2, '0')}/${String(pubDate.getDate()).padStart(2, '0')}`;
+// 브레드크럼 표시용 날짜 (YYYY/MM/DD) — KST 기준
+const { year: bcY, month: bcM, day: bcD } = pulseDateParts(publishedAt);
+const breadcrumbDate = `${bcY}/${bcM}/${bcD}`;
 
 // 헤더 우측 한국식 날짜
 const headerDate = formatKoreanDate(publishedAt);

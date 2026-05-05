@@ -4,7 +4,7 @@ import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
 import Tldr from '../../../../components/Tldr.astro';
 import RelatedList from '../../../../components/RelatedList.astro';
 import ToollGate from '../../../../components/ToollGate.astro';
-import { estimateReadingTime, pulseUrl } from '../../../../lib/korean';
+import { estimateReadingTime, pulseUrl, pulseDateParts } from '../../../../lib/korean';
 import { buildNewsArticleLD } from '../../../../lib/jsonld';
 import { resolveToollGate } from '../../../../data/toll-gate-matrix';
 import { SISTER_SITES } from '../../../../data/sister-sites';
@@ -12,10 +12,7 @@ import { SISTER_SITES } from '../../../../data/sister-sites';
 export async function getStaticPaths() {
   const entries = await getCollection('pulse');
   return entries.map((entry) => {
-    const d = new Date(entry.data.publishedAt);
-    const year = String(d.getFullYear());
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
+    const { year, month, day } = pulseDateParts(entry.data.publishedAt);
     return {
       params: { year, month, day, slug: entry.slug },
       props: { entry },
@@ -52,10 +49,9 @@ const related = allEntries
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
   .slice(0, 3)
   .map((e) => {
-    const d = new Date(e.data.publishedAt);
-    const when = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+    const { year, month, day } = pulseDateParts(e.data.publishedAt);
     return {
-      when,
+      when: `${year}.${month}.${day}`,
       title: e.data.title,
       href: pulseUrl(e.slug, e.data.publishedAt),
     };

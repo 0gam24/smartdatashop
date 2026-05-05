@@ -1,29 +1,73 @@
 /**
  * Korean formatting helpers used by both index and article pages.
  * DESIGN.md §3.3 한국 디테일 — 날짜 포맷 / 카테고리 활자 라벨.
+ *
+ * 모든 날짜·시간 출력은 Asia/Seoul (KST = UTC+9) 기준이다.
+ * 빌드 환경(Cloudflare Pages는 UTC)의 로컬 타임존에 의존하지 않도록
+ * Intl.DateTimeFormat에 timeZone을 명시한다.
  */
 
-const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+const KST = 'Asia/Seoul';
 
 /**
- * 2026-05-05 → "2026년 5월 5일 화"
+ * KST 기준 연/월/일/시/분/요일 인덱스를 동시에 반환한다.
+ * Date.getFullYear() 등 로컬 타임존 의존 메서드를 직접 쓰지 않기 위한 헬퍼.
+ */
+function kstParts(input: Date | string): {
+  year: string;
+  month: string;
+  day: string;
+  hour: string;
+  minute: string;
+  weekday: string;
+} {
+  const d = typeof input === 'string' ? new Date(input) : input;
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: KST,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    weekday: 'short',
+  });
+  const parts = fmt.formatToParts(d);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
+  // weekday: 'Sun'..'Sat' (en-CA 'short') → WEEKDAYS_KO 인덱스로 변환
+  const weekdayMap: Record<string, string> = {
+    Sun: '일', Mon: '월', Tue: '화', Wed: '수', Thu: '목', Fri: '금', Sat: '토',
+  };
+  return {
+    year: get('year'),
+    month: get('month'),
+    day: get('day'),
+    hour: get('hour'),
+    minute: get('minute'),
+    weekday: weekdayMap[get('weekday')] ?? '',
+  };
+}
+
+/**
+ * 2026-05-05T07:32:00+09:00 → "2026년 5월 5일 화"
  * (DESIGN.md §3.3 한국식 날짜 포맷, 마침표·점 없음)
  */
 export function formatKoreanDate(input: Date | string): string {
-  const d = typeof input === 'string' ? new Date(input) : input;
-  return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${WEEKDAYS[d.getDay()]}`;
+  const { year, month, day, weekday } = kstParts(input);
+  // 월·일은 0 패딩 제거
+  return `${year}년 ${Number(month)}월 ${Number(day)}일 ${weekday}`;
 }
 
 /**
- * 2026-05-05T07:32:00 → "07:32"
+ * 2026-05-05T07:32:00+09:00 → "07:32"
  */
 export function formatKoreanTime(input: Date | string): string {
-  const d = typeof input === 'string' ? new Date(input) : input;
-  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  const { hour, minute } = kstParts(input);
+  return `${hour}:${minute}`;
 }
 
 /**
- * 2026-05-05T07:32:00 → "2026년 5월 5일 화 · 07:32 발행"
+ * 2026-05-05T07:32:00+09:00 → "2026년 5월 5일 화 · 07:32 발행"
  */
 export function formatKoreanDateTime(input: Date | string): string {
   return `${formatKoreanDate(input)} · ${formatKoreanTime(input)} 발행`;
@@ -50,15 +94,31 @@ export function categoryToKorean(slug: Category): string {
 }
 
 /**
+ * KST 기준 발행일에서 연/월/일 문자열을 추출한다 — 동적 라우트의
+ * getStaticPaths에서 path params를 만들 때, 그리고 RelatedList의
+ * "YYYY.MM.DD" 표기에서 사용한다.
+ *
+ * Date.getFullYear/getMonth/getDate는 빌드 환경의 로컬 타임존을 따르므로
+ * Cloudflare Pages(UTC)와 로컬 KST에서 결과가 달라진다 — 그 버그를
+ * 막기 위해 본 헬퍼만 사용한다.
+ */
+export function pulseDateParts(publishedAt: Date | string): {
+  year: string;
+  month: string;
+  day: string;
+} {
+  const { year, month, day } = kstParts(publishedAt);
+  return { year, month, day };
+}
+
+/**
  * 펄스 글 URL: /YYYY/MM/DD/slug/ (PLANNING.md §9.1)
- * 빌드시 publishedAt에서 날짜를 추출해 동적 라우트로 보낸다.
+ * KST 기준 발행일을 path에 사용한다.
+ * 빌드 환경 타임존(Cloudflare Pages = UTC)과 무관하게 일관된 URL이 생성되어야 한다.
  */
 export function pulseUrl(slug: string, publishedAt: Date | string): string {
-  const d = typeof publishedAt === 'string' ? new Date(publishedAt) : publishedAt;
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `/${yyyy}/${mm}/${dd}/${slug}/`;
+  const { year, month, day } = pulseDateParts(publishedAt);
+  return `/${year}/${month}/${day}/${slug}/`;
 }
 
 /**

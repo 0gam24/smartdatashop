@@ -16,7 +16,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import InsightLayout from '../../layouts/InsightLayout.astro';
 import Tldr from '../../components/Tldr.astro';
 import RelatedList from '../../components/RelatedList.astro';
-import { insightUrl } from '../../lib/korean';
+import { insightUrl, pulseDateParts } from '../../lib/korean';
 
 export async function getStaticPaths() {
   const entries = await getCollection('insight');
@@ -48,10 +48,9 @@ const fallback = others
 
 const relatedEntries = [...sameCategory, ...fallback].slice(0, 3);
 const related = relatedEntries.map((e) => {
-  const d = new Date(e.data.publishedAt);
-  const when = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+  const { year, month, day } = pulseDateParts(e.data.publishedAt);
   return {
-    when,
+    when: `${year}.${month}.${day}`,
     title: e.data.title,
     href: insightUrl(e.slug),
   };
