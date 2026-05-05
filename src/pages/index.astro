@@ -16,8 +16,12 @@ import SisterSiteCard from '../components/SisterSiteCard.astro';
 import ComingSoon from '../components/ComingSoon.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import Footer from '../components/Footer.astro';
-import { categoryToKorean, formatKoreanTime, pulseUrl } from '../lib/korean';
-import { buildOrganizationLD, buildPersonLD } from '../lib/jsonld';
+import { categoryToKorean, formatKoreanTime, pulseUrl, pulseDateParts, type Category } from '../lib/korean';
+import {
+  buildOrganizationLD,
+  buildPersonLD,
+  buildSearchActionLD,
+} from '../lib/jsonld';
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
@@ -28,9 +32,9 @@ const latest = sortedPulses[0];
 const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   const { personas, dataTypes, actions } = entry.data.tags;
   const tags = [
-    ...personas.map((label) => ({ label })),
-    ...dataTypes.map((label) => ({ label })),
-    ...actions.map((label) => ({ label, action: true })),
+    ...personas.map((label) => ({ label, group: 'persona' as const })),
+    ...dataTypes.map((label) => ({ label, group: 'data-type' as const })),
+    ...actions.map((label) => ({ label, group: 'action' as const, action: true })),
   ].slice(0, 3);
   return {
     category: categoryToKorean(entry.data.category),
@@ -42,54 +46,57 @@ const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   };
 });
 
-// 섹션 03 — 카테고리별 최신
-const categories = [
-  {
-    category: '정 책',
-    count: '23편',
-    items: [
-      { num: '01', title: '청년월세 특별지원 6월 마감, 잔여 예산 38%', meta: '05.05 · 복지로' },
-      { num: '02', title: '법제처 5월 시행 법령 23건 — 핵심 5개', meta: '05.04 · 법제처' },
-      { num: '03', title: '육아휴직 6+6 부모제 신청률 34%', meta: '05.03 · 고용부' },
-    ],
-  },
-  {
-    category: '세 금 · 금 융',
-    count: '31편',
-    items: [
-      { num: '01', title: '5월 종소세 모두채움 신고서 발송 1,142만 명', meta: '05.05 · 국세청' },
-      { num: '02', title: '금감원 5월 가계부채 동향, 변동금리 비중 41%', meta: '05.04 · 금감원' },
-      { num: '03', title: 'BOK ECOS 4월 단기자금시장 콜금리 평균 3.49%', meta: '05.03 · BOK' },
-    ],
-  },
-  {
-    category: '시 장',
-    count: '28편',
-    items: [
-      { num: '01', title: 'DART 5월 1주차 분기보고서 632건 — 코스닥 412', meta: '05.05 · DART' },
-      { num: '02', title: 'KRX 공매도 잔고 상위 종목 변화', meta: '05.04 · KRX' },
-      { num: '03', title: '자산운용사 4월 신규 ETF 12개 상장', meta: '05.02 · KRX' },
-    ],
-  },
-  {
-    category: '통 계',
-    count: '19편',
-    items: [
-      { num: '01', title: 'KOSIS 1분기 가계금융복지 — 자산 5.2억', meta: '05.05 · 통계청' },
-      { num: '02', title: 'data.go.kr 신규 개방 데이터 4월 87건', meta: '05.03 · 행안부' },
-      { num: '03', title: '3월 인구 동향 — 출생 1.9만, 사망 3.2만', meta: '05.01 · 통계청' },
-    ],
-  },
-  {
-    category: 'A I · 기 술',
-    count: '12편',
-    items: [
-      { num: '01', title: 'NIPA 1인사업자 AI 바우처 2차 모집 개시', meta: '05.05 · NIPA' },
-      { num: '02', title: '과기정통부 K-AI 인프라 1조 예산 배정안', meta: '05.04 · 과기정통부' },
-      { num: '03', title: '국내 LLM 4월 활성 기업 사용자 218만', meta: '05.02 · 자사 집계' },
-    ],
-  },
-];
+// 섹션 03 — 카테고리별 최신 (콘텐츠 컬렉션 기반)
+//
+// 편집 무결성 리팩토링 (Critical 3): 기존엔 5개 카테고리 × 3건 = 15건이
+// 모두 가공된 헤드라인이었다 ("청년월세 특별지원 6월 마감, 잔여 예산 38%"
+// 등). 사이트가 검수 전 디자인 샘플 단계라는 것을 독자에게 알리기 위해서는
+// 홈에서도 실제 펄스 컬렉션의 글만 노출해야 한다. 카테고리에 글이 0건이면
+// 빈 컬럼을 그대로 표시 — 그것 자체가 "아직 다루지 않은 분야"라는 정직한
+// 신호다.
+const CATEGORY_ORDER: Category[] = ['policy', 'tax-finance', 'market', 'stats', 'ai-tech'];
+const groupedByCategory: Record<Category, typeof allPulses> = {
+  policy: [],
+  'tax-finance': [],
+  market: [],
+  stats: [],
+  'ai-tech': [],
+};
+for (const e of allPulses) {
+  groupedByCategory[e.data.category].push(e);
+}
+
+// 카테고리별 출처 라벨 — 펄스 첫 sources[0].name 에서 핵심 키워드 추출.
+// 예: "통계청 4월 소비자물가동향" → "통계청"
+function shortSourceName(fullName: string | undefined): string {
+  if (!fullName) return '';
+  const m = fullName.match(/^([^\s,(『「⌜]+)/);
+  return m ? m[1] : fullName.slice(0, 8);
+}
+
+const categories = CATEGORY_ORDER.map((cat) => {
+  const entriesInCat = groupedByCategory[cat]
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+    );
+  const items = entriesInCat.slice(0, 3).map((e, i) => {
+    const { month, day } = pulseDateParts(e.data.publishedAt);
+    const src = shortSourceName(e.data.sources[0]?.name);
+    return {
+      num: String(i + 1).padStart(2, '0'),
+      title: e.data.title,
+      meta: src ? `${month}.${day} · ${src}` : `${month}.${day}`,
+      href: pulseUrl(e.slug, e.data.publishedAt),
+    };
+  });
+  return {
+    category: categoryToKorean(cat),
+    count: `${entriesInCat.length}편`,
+    items,
+  };
+});
 
 // 섹션 04 — 진행 중인 가이드북
 const guidebooks = [
@@ -124,34 +131,38 @@ const sisters = [
     name: '계산기 호스트',
     persona: '즉답형 · 전 카테고리 횡단',
     latest: '종소세 환급액 계산기 — 모두채움 대비',
+    baseUrl: 'https://calculatorhost.com',
   },
   {
     domain: 'awoo.or.kr',
     name: '아우',
     persona: '지원금 수령자',
     latest: '청년월세 특별지원 잔여 예산 38%',
+    baseUrl: 'https://awoo.or.kr',
   },
   {
     domain: 'asiatop.co.kr',
     name: '머니룩',
     persona: '사회초년생 · 직장인',
     latest: '신혼부부 디딤돌 vs 보금자리론 비교',
+    baseUrl: 'https://asiatop.co.kr',
   },
   {
     domain: 'iknowhowinfo.com',
     name: '아이노하우',
     persona: '투자자',
     latest: 'KOSPI200 ETF 4월 순유입 3.2조',
+    baseUrl: 'https://iknowhowinfo.com',
   },
 ];
 ---
 
-<BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD()]}>
+<BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
   <Header activeNav="daily" />
   <Masthead vol="I" no="89" todayCount={5} totalCount={127} />
 
   <main id="main" role="main">
-  <Hero href={pulseUrl(latest.slug, latest.data.publishedAt)} />
+  <Hero entry={latest} />
 
   <!-- Section 02: 오늘의 펄스 -->
   <section class="section" data-screen-label="02 최신 펄스">

@@ -1,0 +1,56 @@
+# 에이전트 #2 — Data Scout
+# 매시 정각마다 외부 데이터 소스를 폴링하여 data-queue/ 에 후보 적재
+name: agent-scout
+
+on:
+  schedule:
+    # 매시 정각 (UTC 기준 = KST 기준에서도 매시 정각)
+    - cron: '0 * * * *'
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+# 동시 실행 방지 — 직전 실행이 끝나기 전엔 새 잡을 큐잉
+concurrency:
+  group: agent-scout
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    permissions:
+      # 수집 결과를 같은 브랜치에 커밋하기 위해 쓰기 권한 필요
+      contents: write
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치 (lockfile 기반 정확한 설치)
+      - name: Install deps
+        run: npm ci
+
+      # 데이터 스카우트 스텁 실행 — M1+에서 실제 Claude 호출로 대체
+      - name: Run Data Scout
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/agents/scout.mjs
+
+      # 변경분이 있을 때에만 data-scout-bot 명의로 자동 커밋
+      - name: Commit results if changed
+        run: |
+          git config user.name "data-scout-bot"
+          git config user.email "data-scout-bot@users.noreply.github.com"
+          git add data-queue/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(scout): hourly data sweep $(date -u +%FT%TZ)"
+            git push
+          else
+            echo "No changes to commit."
+          fi

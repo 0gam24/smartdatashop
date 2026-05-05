@@ -1,6 +1,10 @@
 ---
+import { tagUrl, type TagGroup, type TagValue } from '../lib/tags';
+
 interface PulseTag {
   label: string;
+  /** 태그 그룹 — 지정되면 /tag/{group}/{label}/ 링크가 된다. 없으면 단순 span. */
+  group?: TagGroup;
   action?: boolean;
 }
 
@@ -17,15 +21,35 @@ const { category, time, title, tldr, tags, href } = Astro.props;
 ---
 
 <article class="pulse-card" data-href={href}>
-  <div class="pulse-card-meta">
-    <span class="cat-label">{category}</span>
-    <span class="pulse-time">{time}</span>
-  </div>
-  <h3 class="pulse-title">{title}</h3>
-  <p class="pulse-tldr">{tldr}</p>
+  {href ? (
+    <a class="card-link" href={href}>
+      <div class="pulse-card-meta">
+        <span class="cat-label">{category}</span>
+        <span class="pulse-time">{time}</span>
+      </div>
+      <h3 class="pulse-title">{title}</h3>
+      <p class="pulse-tldr">{tldr}</p>
+    </a>
+  ) : (
+    <div class="card-link">
+      <div class="pulse-card-meta">
+        <span class="cat-label">{category}</span>
+        <span class="pulse-time">{time}</span>
+      </div>
+      <h3 class="pulse-title">{title}</h3>
+      <p class="pulse-tldr">{tldr}</p>
+    </div>
+  )}
   <div class="pulse-card-foot">
     {tags.map((tag) => (
-      <span class={tag.action ? 'tag-chip action' : 'tag-chip'}>{tag.label}</span>
+      tag.group ? (
+        <a
+          class={tag.action ? 'tag-chip action' : 'tag-chip'}
+          href={tagUrl(tag.group, tag.label as TagValue)}
+        >{tag.label}</a>
+      ) : (
+        <span class={tag.action ? 'tag-chip action' : 'tag-chip'}>{tag.label}</span>
+      )
     ))}
   </div>
 </article>
@@ -42,6 +66,16 @@ const { category, time, title, tldr, tags, href } = Astro.props;
   }
   .pulse-card:hover .pulse-title {
     color: var(--color-accent);
+  }
+
+  /* 카드 본문 링크 — 시각적으로는 보이지 않는 wrapper. 기존 레이아웃을
+     보존하기 위해 자식 요소들을 그대로 이어받게 둔다. */
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: inherit;
+    text-decoration: none;
   }
 
   .pulse-card-meta {
@@ -85,8 +119,14 @@ const { category, time, title, tldr, tags, href } = Astro.props;
     border: 0.5px solid var(--color-ink-quat);
     padding: 2px 8px;
     border-radius: 1px;
+    text-decoration: none;
+    display: inline-block;
   }
   .tag-chip.action {
+    color: var(--color-accent);
+    border-color: var(--color-accent-soft);
+  }
+  a.tag-chip:hover {
     color: var(--color-accent);
     border-color: var(--color-accent-soft);
   }

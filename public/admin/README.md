@@ -2,14 +2,22 @@
 
 ## (a) 이 폴더가 뭔가요?
 `/admin/`은 Decap CMS(오픈소스 헤드리스 CMS)가 마운트되는 정적 SPA입니다.
-`index.html`이 CDN에서 Decap을 불러오고, 같은 폴더의 `config.yml`을 읽어
+`index.html`이 CDN에서 Decap을 불러오고, `/admin/config.yml`을 읽어
 `src/content/*` 아래 마크다운/JSON 파일을 GitHub에 직접 커밋합니다.
 
+> **중요**: `config.yml`은 더 이상 정적 파일이 아니라 Astro 엔드포인트에서
+> 빌드 시점에 생성됩니다 (`src/pages/admin/config.yml.ts`).
+> 컬렉션 스키마를 수정하려면 그 TS 파일을 편집하세요. 이렇게 한 이유는
+> `local_backend: true`가 프로덕션에 노출되어 운영 의도와 GitHub 저장소
+> 경로를 그대로 광고하는 보안/SEO 이슈를 막기 위함입니다.
+> 엔드포인트는 `import.meta.env.DEV`가 true일 때만 `local_backend`를 포함합니다.
+
 ## (b) 로컬 테스트 (인증 없음)
-1. `config.yml`에서 `# local_backend: true` 줄의 `#`을 제거합니다.
+1. `npm run dev` 실행 — 엔드포인트가 자동으로 `local_backend: true`를 포함합니다.
 2. 새 터미널에서 `npx decap-server`를 실행합니다 (8081 포트).
-3. `npm run dev` 후 http://localhost:4321/admin/ 접속.
-4. 테스트가 끝나면 `local_backend: true`를 다시 주석 처리해 푸시하세요.
+3. http://localhost:4321/admin/ 접속.
+4. 운영자가 따로 토글할 일이 없습니다 — 프로덕션 빌드(`npm run build`)에서는
+   `local_backend` 줄이 자동으로 제거됩니다.
    참고: https://decapcms.org/docs/working-with-a-local-git-repository/
 
 ## (c) 프로덕션: GitHub OAuth 설정
@@ -23,15 +31,16 @@
    상세: https://decapcms.org/docs/github-backend/
 
 ## (d) 컬렉션 추가/수정
-편집할 파일: `public/admin/config.yml`. `src/content/config.ts`의 Zod 스키마와
-필드 이름·타입이 일치해야 빌드가 깨지지 않습니다.
+편집할 파일: `src/pages/admin/config.yml.ts` (TypeScript에 YAML이 템플릿
+리터럴로 들어 있음). `src/content/config.ts`의 Zod 스키마와 필드 이름·타입이
+일치해야 빌드가 깨지지 않습니다.
 
 ## 로컬 테스트 검증 결과 (2026-05-05)
 
 검증 절차에서 다음을 확인했습니다.
 
-- `public/admin/config.yml`은 YAML 파서로 정상 파싱됨 (5개 컬렉션 모두 존재).
-- 백엔드: `0gam24/smartdatashop@main`, `local_backend: true` 활성, `media_folder=public/uploads`, `public_folder=/uploads`.
+- `src/pages/admin/config.yml.ts`는 YAML로 정상 출력됨 (5개 컬렉션 모두 존재).
+- 백엔드: `0gam24/smartdatashop@main`, dev 모드에서만 `local_backend: true`, `media_folder=public/uploads`, `public_folder=/uploads`.
 - Astro dev 서버는 `/admin/index.html`(200), `/admin/config.yml`(200)을 정상 제공.
   - 참고: `/admin/`(디렉터리 인덱스)은 dev 모드에서 404가 정상이며, 빌드/프로덕션에서는 어댑터/호스팅이 인덱스를 처리합니다. 브라우저 접속 시에는 `/admin/index.html`로 자동 리다이렉트되거나 직접 접근하세요.
 - `npx decap-server`는 8081 포트에 즉시 바인딩되며 `POST /api/v1 {action:"info"}`로 `{"repo":"...","publish_modes":["simple"],"type":"local_fs"}` 응답 확인됨.

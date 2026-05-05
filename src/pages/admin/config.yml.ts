@@ -1,19 +1,25 @@
-# Decap CMS 설정 — 스마트데이터샵
-# 백엔드 연동(GitHub OAuth) 가이드: https://decapcms.org/docs/github-backend/
-# 1) GitHub에서 이 저장소를 만들고 origin으로 푸시한 뒤
-# 2) 아래 PLACEHOLDER_OWNER/PLACEHOLDER_REPO를 실제 owner/repo로 교체하세요.
-# 3) Netlify Identity 또는 자체 OAuth 게이트웨이를 설정해야 /admin/이 동작합니다.
-backend:
+/**
+ * Decap CMS 설정 — 빌드 시점에 환경에 맞게 생성한다.
+ *
+ * 정적 `public/admin/config.yml`을 그대로 배포하면 `local_backend: true`가
+ * 프로덕션에 노출되어 운영 의도를 드러내고 저장소 경로를 그대로 알려준다.
+ * 이 엔드포인트는 dev 모드에서만 `local_backend: true`를 포함시키고,
+ * 프로덕션 빌드(`npm run build`)에서는 이 줄을 제거한다.
+ *
+ * 산출 경로: `/admin/config.yml` (정적 파일과 동일하므로 `public/admin/index.html`
+ * 의 Decap 로더가 변경 없이 그대로 동작한다).
+ */
+import type { APIRoute } from 'astro';
+
+const HEADER = `# Decap CMS 설정 — 스마트데이터샵
+# 백엔드 연동(GitHub OAuth) 가이드: https://decapcms.org/docs/github-backend/`;
+
+const BACKEND = `backend:
   name: github
   repo: 0gam24/smartdatashop
-  branch: main
+  branch: main`;
 
-# 로컬 테스트 모드 — 별도 터미널에서 `npx decap-server`를 실행한 뒤
-# /admin/에 접속하면 인증 없이 컨텐츠를 편집·커밋할 수 있다.
-# 운영(Cloudflare Pages 빌드) 시에는 이 줄을 주석 처리할 것.
-local_backend: true
-
-site_url: https://smartdatashop.kr
+const REST = `site_url: https://smartdatashop.kr
 display_url: https://smartdatashop.kr
 
 media_folder: "public/uploads"
@@ -242,4 +248,20 @@ collections:
           - { name: "note", label: "비고", widget: "string", required: false }
       - { name: "chartConfig", label: "차트 설정 (JSON 등)", widget: "text", required: false }
       - { name: "description", label: "설명", widget: "text", required: true }
-      - { name: "body", label: "본문", widget: "markdown", required: true }
+      - { name: "body", label: "본문", widget: "markdown", required: true }`;
+
+export const GET: APIRoute = () => {
+  // dev 모드에서만 local_backend를 활성화 — `npx decap-server`(8081)와 통신.
+  // 프로덕션 빌드에서는 줄 자체를 제거해 저장소/포트 정보 노출을 줄인다.
+  const isDev = import.meta.env.DEV;
+  const localBackend = isDev ? '\nlocal_backend: true\n' : '\n';
+
+  const yaml = `${HEADER}\n\n${BACKEND}\n${localBackend}\n${REST}\n`;
+
+  return new Response(yaml, {
+    headers: {
+      'Content-Type': 'text/yaml; charset=utf-8',
+      'Cache-Control': 'no-cache',
+    },
+  });
+};

@@ -1,0 +1,55 @@
+# 에이전트 #1 — Editor-in-Chief
+# 매일 06:00 KST (= 21:00 UTC 전날) 에 실행, 그날의 편집 큐를 daily-queue/ 에 작성
+name: agent-editor
+
+on:
+  schedule:
+    # 21:00 UTC = 06:00 KST (다음날)
+    - cron: '0 21 * * *'
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+concurrency:
+  group: agent-editor
+  cancel-in-progress: false
+
+jobs:
+  editor:
+    runs-on: ubuntu-latest
+    permissions:
+      # daily-queue/YYYY-MM-DD.json 커밋용
+      contents: write
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치
+      - name: Install deps
+        run: npm ci
+
+      # Editor-in-Chief 스텁 실행 — M1+에서 실제 Claude 호출로 대체
+      - name: Run Editor-in-Chief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/agents/editor.mjs
+
+      # daily-queue/ 변경분 자동 커밋
+      - name: Commit daily queue
+        run: |
+          git config user.name "editor-in-chief-bot"
+          git config user.email "editor-in-chief-bot@users.noreply.github.com"
+          git add daily-queue/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(editor): daily queue $(date -u +%F)"
+            git push
+          else
+            echo "No daily queue changes."
+          fi

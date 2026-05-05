@@ -20,6 +20,11 @@ import {
   formatKoreanDate,
   insightUrl,
 } from '../../lib/korean';
+import {
+  buildBreadcrumbLD,
+  buildCollectionPageLD,
+  buildItemListLD,
+} from '../../lib/jsonld';
 
 const entries = await getCollection('insight');
 const sorted = entries.sort(
@@ -37,9 +42,25 @@ const items = sorted.map((entry) => ({
 }));
 
 const tagline = '인사이트 — 깊이 있는 데이터 분석, 매주 1~2편 갱신';
+
+// JSON-LD: 모음 페이지 + 게시물 ItemList + 브레드크럼.
+// 펄스 카테고리 인덱스와 동일 패턴 — 인사이트 아카이브도 evergreen 모음이므로
+// 검색엔진이 캐러셀/리치 결과 후보로 인지할 수 있도록 세 블록을 함께 발행한다.
+const pageTitle = '인사이트 아카이브 — 스마트데이터샵';
+const pageDescription =
+  '한국 데이터를 깊이 있게 다룬 에버그린 인사이트 모음. 매주 1~2편씩 갱신되며 가이드북과 함께 진행합니다.';
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, '/insight/');
+const itemListLd = buildItemListLD(
+  items.map((it) => ({ name: it.title, url: it.href })),
+);
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '인사이트', url: '/insight/' },
+]);
+const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
 ---
 
-<BaseLayout title="인사이트 아카이브 — 스마트데이터샵">
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
   <Header activeNav="insight" />
   <Masthead vol="I" no="89" todayCount={items.length} totalCount={items.length} tagline={tagline} />
 

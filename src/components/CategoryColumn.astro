@@ -3,6 +3,8 @@ interface CategoryItem {
   num: string;
   title: string;
   meta: string;
+  /** 펄스 글 URL — 있으면 .cat-item을 <a>로, 없으면 비링크 <div>로 렌더한다. */
+  href?: string;
 }
 
 interface Props {
@@ -20,11 +22,19 @@ const { category, count, items } = Astro.props;
     <span class="cat-col-count">{count}</span>
   </div>
   {items.map((item) => (
-    <div class="cat-item">
-      <span class="cat-item-num">{item.num}</span>
-      <span class="cat-item-title">{item.title}</span>
-      <span class="cat-item-meta">{item.meta}</span>
-    </div>
+    item.href ? (
+      <a class="cat-item" href={item.href}>
+        <span class="cat-item-num">{item.num}</span>
+        <span class="cat-item-title">{item.title}</span>
+        <span class="cat-item-meta">{item.meta}</span>
+      </a>
+    ) : (
+      <div class="cat-item">
+        <span class="cat-item-num">{item.num}</span>
+        <span class="cat-item-title">{item.title}</span>
+        <span class="cat-item-meta">{item.meta}</span>
+      </div>
+    )
   ))}
 </div>
 
@@ -59,9 +69,12 @@ const { category, count, items } = Astro.props;
     color: var(--color-ink-tertiary);
   }
   .cat-item {
+    display: block;
     padding: 10px 0;
     border-bottom: 0.5px solid var(--color-ink-quat);
     cursor: pointer;
+    color: inherit;
+    text-decoration: none;
   }
   .cat-item:last-child {
     border-bottom: 0;

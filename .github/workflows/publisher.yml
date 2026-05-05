@@ -1,0 +1,50 @@
+# 에이전트 #6 — Publisher
+# 머지 후 main 브랜치의 콘텐츠 변경 시 색인/뉴스레터 등 외부 채널 푸시
+name: agent-publisher
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # pulse / insight 콘텐츠 변경 시에만 발행 트리거
+      - 'src/content/pulse/**'
+      - 'src/content/insight/**'
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+concurrency:
+  group: agent-publisher
+  cancel-in-progress: false
+
+jobs:
+  publisher:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치
+      - name: Install deps
+        run: npm ci
+
+      # Publisher 스텁 실행 — M1+에서 실제 색인 핑/뉴스레터 발송으로 대체
+      - name: Run Publisher
+        env:
+          # Google Indexing API 서비스 계정 키 (JSON)
+          GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
+          # 네이버 검색광고 / 서치어드바이저 키
+          NAVER_SA_KEY: ${{ secrets.NAVER_SA_KEY }}
+          # Stibee 뉴스레터 발송 API 키
+          STIBEE_API_KEY: ${{ secrets.STIBEE_API_KEY }}
+        run: node scripts/agents/publisher.mjs

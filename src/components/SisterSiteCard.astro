@@ -4,19 +4,24 @@ interface Props {
   name: string;
   persona: string;
   latest: string;
+  /** 자매 사이트 외부 링크. 없으면 도메인 앞에 https://를 붙여 사용. */
+  baseUrl?: string;
 }
 
-const { domain, name, persona, latest } = Astro.props;
+const { domain, name, persona, latest, baseUrl } = Astro.props;
+const href = baseUrl ?? `https://${domain}`;
 ---
 
 <article class="sister-card">
-  <div class="sister-domain">{domain}</div>
-  <div class="sister-name">{name}</div>
-  <div class="sister-persona">{persona}</div>
-  <div class="sister-latest">
-    <span class="latest-label">최신 글</span>
-    {latest}
-  </div>
+  <a class="card-link" href={href} rel="noopener noreferrer" target="_blank">
+    <div class="sister-domain">{domain}</div>
+    <div class="sister-name">{name}</div>
+    <div class="sister-persona">{persona}</div>
+    <div class="sister-latest">
+      <span class="latest-label">최신 글</span>
+      {latest}
+    </div>
+  </a>
 </article>
 
 <style>
@@ -39,6 +44,14 @@ const { domain, name, persona, latest } = Astro.props;
     .sister-card:nth-child(2n) {
       border-right: 0;
     }
+  }
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    color: inherit;
+    text-decoration: none;
   }
   .sister-domain {
     font-family: var(--font-mono);

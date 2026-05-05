@@ -3,12 +3,14 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import BreadcrumbMasthead from '../components/BreadcrumbMasthead.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
+import ArticlePreviewWarning from '../components/ArticlePreviewWarning.astro';
 import SourceList from '../components/SourceList.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import CorrectionsBlock from '../components/CorrectionsBlock.astro';
 import Footer from '../components/Footer.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
-import { formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
+import { categoryToKorean, formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
+import { buildBreadcrumbLD } from '../lib/jsonld';
 
 interface Source {
   name: string;
@@ -73,6 +75,30 @@ const breadcrumbDate = `${bcY}/${bcM}/${bcD}`;
 const headerDate = formatKoreanDate(publishedAt);
 
 const pageTitle = `${title} — 스마트데이터샵`;
+
+// ── BreadcrumbList JSON-LD 구성 ─────────────────────────────────────
+// BreadcrumbMasthead의 시각적 트레일과 동일한 4단계:
+//   홈 › 데일리 › {카테고리} › {YYYY/MM/DD}(현재)
+// 검색엔진 위치 신호로 BreadcrumbList LD를 함께 발행한다.
+// (NewsArticle LD 옆에 별도 블록으로 추가 — base layout이 배열을 받도록 정규화돼 있음)
+const articleUrl = Astro.url.pathname; // /YYYY/MM/DD/slug/
+const categoryLabel = categoryToKorean(category).replace(/ /g, '');
+const breadcrumbItems = [
+  { name: '홈', url: '/' },
+  { name: '데일리', url: '/' },
+  { name: categoryLabel, url: `/category/${category}/` },
+  { name: breadcrumbDate, url: articleUrl },
+];
+const breadcrumbLd = buildBreadcrumbLD(breadcrumbItems);
+
+// 호출자(jsonld prop)가 단일 객체 또는 배열을 줄 수 있다 — BreadcrumbList를
+// 항상 추가해 BaseLayout으로 통합 전달.
+const incomingJsonld = jsonld
+  ? Array.isArray(jsonld)
+    ? jsonld
+    : [jsonld]
+  : [];
+const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
 ---
 
 <BaseLayout
@@ -82,7 +108,7 @@ const pageTitle = `${title} — 스마트데이터샵`;
   ogType="article"
   ogPublishedAt={publishedAt}
   ogModifiedAt={updatedAt ?? publishedAt}
-  jsonld={jsonld}
+  jsonld={mergedJsonld}
 >
   <ReadingProgress />
   <Header activeNav="daily" date={headerDate} />
@@ -103,6 +129,7 @@ const pageTitle = `${title} — 스마트데이터샵`;
     />
 
     <div class="article-body">
+      <ArticlePreviewWarning previewMode={previewMode} />
       <slot />
       <AuthorCard name={author} />
       <CorrectionsBlock corrections={corrections} />

@@ -14,6 +14,9 @@ const target = sorted[0] ? pulseUrl(sorted[0].slug, sorted[0].data.publishedAt) 
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
+    <!-- /article은 단순 리디렉트 셸이므로 검색엔진에 색인되면 안 된다.
+         (Cloudflare가 200으로 서빙해 sitemap-0.xml에 들어가는 것도 차단한다.) -->
+    <meta name="robots" content="noindex, nofollow" />
     <meta http-equiv="refresh" content={`0; url=${target}`} />
     <link rel="canonical" href={target} />
     <title>이동 중… — 스마트데이터샵</title>

@@ -1,0 +1,45 @@
+# 에이전트 #7 — Network Orchestrator
+# 매일 23:00 KST (= 14:00 UTC) — 외부 네트워크/사이트 동기화 + 일일 리포트
+name: agent-network
+
+on:
+  schedule:
+    # 14:00 UTC = 23:00 KST
+    - cron: '0 14 * * *'
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+concurrency:
+  group: agent-network
+  cancel-in-progress: false
+
+jobs:
+  network:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치
+      - name: Install deps
+        run: npm ci
+
+      # Network Orchestrator 스텁 실행 — M1+에서 실제 다중 사이트 동기화로 대체
+      - name: Run Network Orchestrator
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 다른 리포지토리 dispatch / 이슈 코멘트용 토큰
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          # 슬랙 알림 — 미설정 시 스텁이 그냥 스킵
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: node scripts/agents/network-orchestrator.mjs

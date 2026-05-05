@@ -1,0 +1,66 @@
+# 에이전트 #3 — Pulse Writer
+# Editor-in-Chief가 daily-queue/ 에 신규 큐를 푸시하면 트리거되어 초안 MDX 생성 → PR
+name: agent-writer
+
+on:
+  push:
+    paths:
+      # daily-queue/ 하위가 변경된 푸시에만 반응
+      - 'daily-queue/**'
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+concurrency:
+  group: agent-writer-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  writer:
+    runs-on: ubuntu-latest
+    permissions:
+      # PR 생성과 브랜치 푸시를 위해 권한 필요
+      contents: write
+      pull-requests: write
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치
+      - name: Install deps
+        run: npm ci
+
+      # Pulse Writer 스텁 실행 — M1+에서 실제 MDX 초안 생성으로 대체
+      - name: Run Pulse Writer
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/agents/writer.mjs
+
+      # 생성된 초안을 PR로 자동 제출
+      - name: Open draft PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          # 새 브랜치 — run id로 충돌 회피
+          branch: drafts/${{ github.run_id }}
+          base: main
+          commit-message: 'feat(draft): pulse writer 자동 초안 ${{ github.run_id }}'
+          title: '[draft] Pulse Writer 자동 초안 #${{ github.run_id }}'
+          body: |
+            Pulse Writer 에이전트가 자동 생성한 초안입니다.
+
+            - 트리거 커밋: ${{ github.sha }}
+            - 워크플로우 런: ${{ github.run_id }}
+
+            데스크 리뷰어(#5)의 자동 코멘트를 확인한 뒤 사람이 최종 머지하세요.
+          # 자동 라벨 — peter-evans/create-pull-request@v6 은 labels 입력으로 라벨을 지원
+          labels: |
+            ai-draft
+            agent:pulse-writer
+          delete-branch: true

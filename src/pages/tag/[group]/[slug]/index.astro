@@ -27,7 +27,11 @@ import {
   pulseUrl,
   insightUrl,
 } from '../../../../lib/korean';
-import { buildWebPageLD } from '../../../../lib/jsonld';
+import {
+  buildBreadcrumbLD,
+  buildCollectionPageLD,
+  buildItemListLD,
+} from '../../../../lib/jsonld';
 import {
   GROUP_LABEL,
   GROUP_VALUES,
@@ -114,7 +118,23 @@ const peers = GROUP_VALUES[group].filter((v) => v !== value);
 const pageTitle = `${tagLabel} — 태그 아카이브 — 스마트데이터샵`;
 const pageDescription = `${groupLabel} · ${tagLabel} 태그가 붙은 펄스(${pulseCount}편) + 인사이트(${insightCount}편) 모음.`;
 const masTagline = `${tagLabel} 태그 아카이브`;
-const jsonld = buildWebPageLD(pageTitle, pageDescription);
+// JSON-LD: CollectionPage + ItemList + BreadcrumbList (카테고리 페이지와 동일 패턴)
+// 태그 아카이브 역시 모음 페이지이고, BreadcrumbList의 위계는
+// "홈 › 태그 › {그룹 라벨} › {태그값}" 4단계.
+const pageUrl = tagUrl(group, value);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+const listEntries: { name: string; url: string }[] = [
+  ...pulseCards.map((p) => ({ name: p.title, url: p.href })),
+  ...insightItems.map((it) => ({ name: it.title, url: it.href })),
+];
+const itemListLd = buildItemListLD(listEntries);
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '태그', url: '/tag/' },
+  { name: groupLabel, url: '/tag/' },
+  { name: tagLabel, url: pageUrl },
+]);
+const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>

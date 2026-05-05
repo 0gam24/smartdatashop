@@ -31,6 +31,10 @@ const { data } = entry;
 // 본문 텍스트 길이로 읽기 시간 추정
 const readingTime = estimateReadingTime(entry.body);
 
+// SERP description은 Google 약 160자 제한 — tldr이 길면 잘라서 ellipsis 부착.
+const description =
+  data.tldr.length > 155 ? data.tldr.slice(0, 152).trim() + '…' : data.tldr;
+
 // ToollGate (자매 사이트 라우팅) — PLANNING.md §12
 const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
 
@@ -66,7 +70,7 @@ const related = allEntries
   readingTime={readingTime}
   sources={data.sources}
   aiAssisted={data.aiAssisted}
-  description={data.tldr}
+  description={description}
   ogImage={ogImage}
   jsonld={articleJsonLd}
   previewMode={data.previewMode}

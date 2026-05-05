@@ -31,7 +31,11 @@ import {
   insightUrl,
   type Category,
 } from '../../../lib/korean';
-import { buildWebPageLD } from '../../../lib/jsonld';
+import {
+  buildBreadcrumbLD,
+  buildCollectionPageLD,
+  buildItemListLD,
+} from '../../../lib/jsonld';
 
 const CATEGORIES: Category[] = ['policy', 'tax-finance', 'market', 'stats', 'ai-tech'];
 
@@ -103,7 +107,24 @@ const pageTitle = `${categoryLabel} — 스마트데이터샵`;
 const pageDescription = `${categoryLabel} 카테고리의 최신 펄스와 인사이트 모음.`;
 const masTagline = `${categoryLabel} 카테고리 아카이브`;
 
-const jsonld = buildWebPageLD(pageTitle, pageDescription);
+// JSON-LD: CollectionPage + ItemList + BreadcrumbList
+// 카테고리 인덱스는 (1) 자체로 모음 페이지이고, (2) 발행 글 목록을
+// 보유하며, (3) 사이트 위계 안에서 "홈 › 카테고리 › {라벨}" 위치를 가진다.
+// 세 LD 블록을 함께 발행하면 Google이 캐러셀/리치 결과 후보로 판단할 가능성을 높인다.
+const pageUrl = `/category/${category}/`;
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+// 펄스 + 인사이트(있으면)를 합쳐 최신순 단일 ItemList — 시각적 순서와 일치
+const listEntries: { name: string; url: string }[] = [
+  ...pulseCards.map((p) => ({ name: p.title, url: p.href })),
+  ...insightItems.map((it) => ({ name: it.title, url: it.href })),
+];
+const itemListLd = buildItemListLD(listEntries);
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '카테고리', url: '/' },
+  { name: categoryLabel.replace(/ /g, ''), url: pageUrl },
+]);
+const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>

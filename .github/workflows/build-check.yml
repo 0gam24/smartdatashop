@@ -1,0 +1,48 @@
+# 빌드 사전 검증 — Cloudflare Pages 빌드 실패를 사전에 차단
+# AGENTS.md 명세에는 없으나, 비-main 브랜치 푸시와 모든 PR에서 astro check + build 를 검사
+name: build-check
+
+on:
+  pull_request:
+    # 모든 PR에서 검사
+    branches:
+      - '**'
+  push:
+    # main 이외 브랜치의 푸시에서만 검사 (main은 Cloudflare Pages가 직접 빌드)
+    branches-ignore:
+      - main
+  # 수동 실행 트리거
+  workflow_dispatch:
+
+concurrency:
+  group: build-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      # 저장소 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Node 20 환경 설정 (astro 권장)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 의존성 설치
+      - name: Install deps
+        run: npm ci
+
+      # 타입/콘텐츠 스키마 검사
+      - name: Astro check
+        run: npx astro check
+
+      # 정적 사이트 빌드 — 실패하면 Cloudflare Pages도 실패할 것
+      - name: Astro build
+        run: npm run build

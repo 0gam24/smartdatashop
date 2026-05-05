@@ -22,7 +22,7 @@ const breadcrumbCategoryLabel = categoryLabel.replace(/ /g, '');
       <span class="dot">›</span>
       <a href="/" class="no-underline crumb-link">데일리</a>
       <span class="dot">›</span>
-      <a href="#" class="no-underline crumb-link">{breadcrumbCategoryLabel}</a>
+      <a href={`/category/${category}/`} class="no-underline crumb-link">{breadcrumbCategoryLabel}</a>
       <span class="dot">›</span>
       <span class="crumb-current">{dateText}</span>
     </div>
