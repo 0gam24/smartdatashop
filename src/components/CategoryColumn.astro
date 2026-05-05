@@ -1,0 +1,95 @@
+---
+interface CategoryItem {
+  num: string;
+  title: string;
+  meta: string;
+}
+
+interface Props {
+  category: string;
+  count: string;
+  items: CategoryItem[];
+}
+
+const { category, count, items } = Astro.props;
+---
+
+<div class="cat-col">
+  <div class="cat-col-head">
+    <span class="cat-label">{category}</span>
+    <span class="cat-col-count">{count}</span>
+  </div>
+  {items.map((item) => (
+    <div class="cat-item">
+      <span class="cat-item-num">{item.num}</span>
+      <span class="cat-item-title">{item.title}</span>
+      <span class="cat-item-meta">{item.meta}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .cat-col {
+    padding: 24px 20px;
+    border-right: 0.5px solid var(--color-ink-quat);
+    min-height: 280px;
+  }
+  .cat-col:last-child {
+    border-right: 0;
+  }
+  @media (max-width: 980px) {
+    .cat-col {
+      border-bottom: 0.5px solid var(--color-ink-quat);
+    }
+    .cat-col:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+  .cat-col-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .cat-col-count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+  }
+  .cat-item {
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    cursor: pointer;
+  }
+  .cat-item:last-child {
+    border-bottom: 0;
+  }
+  .cat-item-num {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-right: 8px;
+    vertical-align: 2px;
+  }
+  .cat-item-title {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--color-ink);
+    display: inline;
+  }
+  .cat-item:hover .cat-item-title {
+    color: var(--color-accent);
+  }
+  .cat-item-meta {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+</style>

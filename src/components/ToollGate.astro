@@ -1,0 +1,57 @@
+---
+interface Props {
+  primaryText: string;
+  primaryDomain: string;
+  primaryHref: string;
+  secondary?: string;
+}
+
+const { primaryText, primaryDomain, primaryHref, secondary } = Astro.props;
+---
+
+<aside class="tollgate">
+  <div class="label"><span class="arrow">↳</span> 더 깊이</div>
+  <a href={primaryHref} class="primary">
+    {primaryText}
+    <span class="dot">·</span>
+    <span class="domain">{primaryDomain} →</span>
+  </a>
+  {secondary && <div class="secondary">{secondary}</div>}
+</aside>
+
+<style>
+  .tollgate {
+    border-top: 0.5px solid var(--color-ink-quat);
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 16px 0;
+    margin: 32px 0;
+  }
+  .tollgate .label {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .tollgate .arrow {
+    color: var(--color-accent);
+    margin-right: 4px;
+  }
+  .tollgate .primary {
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink);
+    display: block;
+  }
+  .tollgate .primary :global(.domain) {
+    color: var(--color-accent);
+    margin-left: 4px;
+  }
+  .tollgate .secondary {
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+    font-style: italic;
+    margin-top: 4px;
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+import Tldr from '../../../../components/Tldr.astro';
+import RelatedList from '../../../../components/RelatedList.astro';
+import { estimateReadingTime, pulseUrl } from '../../../../lib/korean';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('pulse');
+  return entries.map((entry) => {
+    const d = new Date(entry.data.publishedAt);
+    const year = String(d.getFullYear());
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return {
+      params: { year, month, day, slug: entry.slug },
+      props: { entry },
+    };
+  });
+}
+
+interface Props {
+  entry: CollectionEntry<'pulse'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { data } = entry;
+
+// 본문 텍스트 길이로 읽기 시간 추정
+const readingTime = estimateReadingTime(entry.body);
+
+// 관련 글 — 같은 카테고리 다른 펄스 최근 3건
+const allEntries = await getCollection('pulse');
+const related = allEntries
+  .filter((e) => e.slug !== entry.slug && e.data.category === entry.data.category)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3)
+  .map((e) => {
+    const d = new Date(e.data.publishedAt);
+    const when = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+    return {
+      when,
+      title: e.data.title,
+      href: pulseUrl(e.slug, e.data.publishedAt),
+    };
+  });
+---
+
+<ArticleLayout
+  category={data.category}
+  publishedAt={data.publishedAt}
+  updatedAt={data.updatedAt}
+  title={data.title}
+  readingTime={readingTime}
+  sources={data.sources}
+  aiAssisted={data.aiAssisted}
+>
+  <Tldr>{data.tldr}</Tldr>
+  <Content />
+
+  {related.length > 0 && (
+    <Fragment slot="related">
+      <RelatedList items={related} />
+    </Fragment>
+  )}
+</ArticleLayout>

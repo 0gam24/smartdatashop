@@ -1,0 +1,186 @@
+---
+interface Props {
+  category?: string;
+  publishedAt?: string;
+  href?: string;
+  chartLabel?: string;
+  chartTitle?: string;
+  chartValue?: string;
+  chartUnit?: string;
+  chartDelta?: string;
+  chartSource?: string;
+}
+
+const {
+  category = '세 금 · 금 융',
+  publishedAt = '2026년 5월 5일 화 · 07:32 발행',
+  href = '/article',
+  chartLabel = '오늘의 지표',
+  chartTitle = '홈택스 일평균 접속자 (5월 1~4일)',
+  chartValue = '312',
+  chartUnit = '만',
+  chartDelta = '▼ 전년 대비 −5.2%',
+  chartSource = '출처: 국세청 홈택스 접속 통계 · 접근일 2026-05-05',
+} = Astro.props;
+---
+
+<section class="hero" data-screen-label="01 Hero">
+  <div class="page-width hero-grid">
+    <div>
+      <div class="hero-meta">
+        <span class="cat-label">{category}</span>
+        <span class="meta">{publishedAt}</span>
+      </div>
+      <h1 class="hero-headline">
+        <a href={href} class="no-underline headline-link">
+          5월 종합소득세 신고 첫 주, <br />홈택스 접속 지연 32% 줄었다<sup class="fn">[1]</sup>
+        </a>
+      </h1>
+      <p class="hero-tldr">
+        국세청이 작년 대비 서버 용량을 1.5배 확충하면서 신고 첫 주(5월 1~4일) 평균 응답시간이 0.8초로 단축됐다. 모바일 손택스 비중은 처음으로 41%를 넘었다.<sup class="fn">[2]</sup>
+      </p>
+      <div class="hero-byline">
+        <span>김준혁</span><span class="dot">·</span>
+        <span>5분 읽기</span><span class="dot">·</span>
+        <span>1차 출처 3건</span>
+        <span class="ai-badge">AI 보조</span>
+      </div>
+    </div>
+
+    <aside class="hero-chart">
+      <div class="hero-chart-label">{chartLabel}</div>
+      <div class="hero-chart-title">{chartTitle}</div>
+      <div class="hero-chart-value">
+        <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
+        <span class="delta down">{chartDelta}</span>
+      </div>
+      <svg class="sparkline" viewBox="0 0 280 80" preserveAspectRatio="none">
+        <polyline
+          fill="none"
+          stroke="#8b1538"
+          stroke-width="1.2"
+          points="0,55 28,48 56,52 84,40 112,44 140,30 168,26 196,32 224,22 252,18 280,24"
+        />
+        <polyline
+          fill="none"
+          stroke="#a5a5a5"
+          stroke-width="0.8"
+          stroke-dasharray="2,3"
+          points="0,40 28,42 56,38 84,46 112,42 140,48 168,44 196,52 224,48 252,56 280,52"
+        />
+      </svg>
+      <div class="hero-chart-source">{chartSource}</div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 56px 0 48px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 32px 0; }
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 18px;
+    cursor: pointer;
+  }
+  .hero-headline .headline-link {
+    color: inherit;
+  }
+  @media (max-width: 880px) {
+    .hero-headline { font-size: 30px; }
+  }
+  .hero-tldr {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+  .hero-byline {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .hero-chart {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 20px 22px;
+    background: var(--color-paper);
+  }
+  .hero-chart-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .hero-chart-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: var(--color-ink);
+  }
+  .hero-chart-value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .hero-chart-value .num {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .hero-chart-value .num-unit {
+    font-size: 18px;
+    color: var(--color-ink-secondary);
+    font-family: var(--font-sans);
+  }
+  .hero-chart-value .delta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-accent);
+  }
+  .hero-chart-value .delta.down {
+    color: #1f4d8a;
+  }
+  .sparkline {
+    width: 100%;
+    height: 80px;
+    display: block;
+  }
+  .hero-chart-source {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+  }
+</style>

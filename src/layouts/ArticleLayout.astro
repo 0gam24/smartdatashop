@@ -1,0 +1,135 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import BreadcrumbMasthead from '../components/BreadcrumbMasthead.astro';
+import ArticleHeader from '../components/ArticleHeader.astro';
+import SourceList from '../components/SourceList.astro';
+import Footer from '../components/Footer.astro';
+import { formatKoreanDate, type Category } from '../lib/korean';
+
+interface Source {
+  name: string;
+  url?: string;
+  date?: string;
+  accessedAt?: string;
+  note?: string;
+}
+
+interface Props {
+  category: Category;
+  publishedAt: string;
+  updatedAt?: string;
+  title: string;
+  author?: string;
+  readingTime: number;
+  sources: Source[];
+  aiAssisted: boolean;
+  vol?: string;
+  no?: string;
+}
+
+const {
+  category,
+  publishedAt,
+  updatedAt,
+  title,
+  author = '김준혁',
+  readingTime,
+  sources,
+  aiAssisted,
+  vol = 'I',
+  no = '89',
+} = Astro.props;
+
+// 브레드크럼 표시용 날짜 (YYYY/MM/DD)
+const pubDate = new Date(publishedAt);
+const breadcrumbDate = `${pubDate.getFullYear()}/${String(pubDate.getMonth() + 1).padStart(2, '0')}/${String(pubDate.getDate()).padStart(2, '0')}`;
+
+// 헤더 우측 한국식 날짜
+const headerDate = formatKoreanDate(publishedAt);
+
+const pageTitle = `${title} — 스마트데이터샵`;
+---
+
+<BaseLayout title={pageTitle}>
+  <Header activeNav="daily" date={headerDate} />
+  <BreadcrumbMasthead category={category} dateText={breadcrumbDate} vol={vol} no={no} />
+
+  <main class="article-wrap" data-screen-label="펄스 글">
+    <ArticleHeader
+      category={category}
+      publishedAt={publishedAt}
+      title={title}
+      author={author}
+      readingTime={readingTime}
+      sourceCount={sources.length}
+      aiAssisted={aiAssisted}
+      updatedAt={updatedAt}
+    />
+
+    <div class="article-body">
+      <slot />
+      <hr />
+      <SourceList sources={sources} />
+    </div>
+
+    <slot name="related" />
+  </main>
+
+  <Footer vol={vol} no={no} date={headerDate} />
+</BaseLayout>
+
+<style>
+  .article-wrap {
+    padding: 48px 0 64px;
+  }
+  .article-body {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--width-gutter);
+  }
+  .article-body :global(p) {
+    margin-bottom: 1.4rem;
+  }
+  .article-body :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .article-body :global(hr) {
+    border: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin: 2rem 0;
+  }
+</style>
+
+<!--
+  MDX 각주 스타일링 결정 (작업 지시서 §"src/content/config.ts" 참조):
+  remark-plugin을 추가하는 대신, Astro/MDX가 자동 생성하는
+  `<sup>` (data-footnote-ref) 와 `<a>` 노드를 직접 셀렉터로 잡아
+  `.fn` 글로벌 클래스의 시각적 효과를 재현한다. 이유는 (1) plugin 추가 없이
+  설정 변경 없이 가능하고, (2) global.css 수정 금지 제약 안에서
+  is:global 스타일 블록 하나로 해결되기 때문.
+-->
+<style is:global>
+  /* MDX가 생성하는 각주 마커 — 스타일은 .fn 글로벌 클래스를 따라간다 */
+  .article-body sup[data-footnote-ref],
+  .article-body sup.footnote-ref {
+    font-size: 10px;
+    vertical-align: super;
+    line-height: 0;
+    margin: 0 1px;
+  }
+  .article-body sup[data-footnote-ref] a,
+  .article-body sup.footnote-ref a {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    text-decoration: none;
+  }
+
+  /* MDX는 본문 끝에 <section data-footnotes>로 각주 정의 리스트를 자동 추가하는데,
+     우리는 frontmatter sources를 SourceList로 따로 렌더하므로 자동 생성 섹션은 숨긴다. */
+  .article-body section[data-footnotes] {
+    display: none;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+interface Source {
+  name: string;
+  url?: string;
+  date?: string;
+  accessedAt?: string;
+  note?: string;
+}
+
+interface Props {
+  sources: Source[];
+}
+
+const { sources } = Astro.props;
+---
+
+<footer class="sources">
+  <div class="label">출처</div>
+  {sources.map((s, i) => {
+    const num = i + 1;
+    return (
+      <p class="source-entry">
+        <span class="source-num">[{num}]</span>{s.name}{s.date ? `, ${s.date}` : ''}.
+        {s.url && (
+          <>
+            {' '}<a href={s.url} class="source-link" target="_blank" rel="noopener">원문 →</a>
+          </>
+        )}
+        {s.note && <> {s.note}</>}
+      </p>
+    );
+  })}
+</footer>
+
+<style>
+  .sources {
+    border-top: 0.5px solid var(--color-ink-quat);
+    padding-top: 18px;
+    margin-top: 36px;
+    font-size: 12px;
+    line-height: 1.85;
+    color: var(--color-ink-secondary);
+  }
+  .sources .label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .source-entry {
+    margin: 0 0 4px;
+  }
+  .source-num {
+    color: var(--color-accent);
+    margin-right: 6px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+  }
+  .source-link {
+    color: var(--color-link);
+    margin-left: 4px;
+  }
+</style>

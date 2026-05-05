@@ -1,0 +1,72 @@
+---
+import { categoryToKorean, type Category } from '../lib/korean';
+
+interface Props {
+  category: Category;
+  /** 표시용 날짜 텍스트 (예: "2026/05/05") */
+  dateText: string;
+  vol?: string;
+  no?: string;
+}
+
+const { category, dateText, vol = 'I', no = '89' } = Astro.props;
+const categoryLabel = categoryToKorean(category);
+// 브레드크럼 라벨은 활자 라벨이 아닌 일반 표기를 사용 — letter-spacing 제거된 형태
+const breadcrumbCategoryLabel = categoryLabel.replace(/ /g, '');
+---
+
+<div class="masthead">
+  <div class="page-width masthead-inner">
+    <div class="masthead-tagline">
+      <a href="/" class="no-underline crumb-link">홈</a>
+      <span class="dot">›</span>
+      <a href="/" class="no-underline crumb-link">데일리</a>
+      <span class="dot">›</span>
+      <a href="#" class="no-underline crumb-link">{breadcrumbCategoryLabel}</a>
+      <span class="dot">›</span>
+      <span class="crumb-current">{dateText}</span>
+    </div>
+    <div class="masthead-counter">
+      <span>VOL <strong>{vol}</strong>·NO <strong>{no}</strong></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .masthead {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 14px 0;
+    background: var(--color-paper);
+  }
+  .masthead-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .masthead-tagline {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-secondary);
+  }
+  .crumb-link {
+    color: var(--color-ink-secondary);
+  }
+  .crumb-current {
+    color: var(--color-ink);
+  }
+  .masthead-counter {
+    display: flex;
+    gap: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .masthead-counter span :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+// 외부 링크 안전망 — /article → 최신 펄스로 meta-refresh 리디렉트.
+// 정적 빌드 호환을 위해 Astro.redirect 대신 meta-refresh를 사용한다.
+import { getCollection } from 'astro:content';
+import { pulseUrl } from '../lib/korean';
+
+const entries = await getCollection('pulse');
+const sorted = entries.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+);
+const target = sorted[0] ? pulseUrl(sorted[0].slug, sorted[0].data.publishedAt) : '/';
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>이동 중… — 스마트데이터샵</title>
+  </head>
+  <body>
+    <p>최신 글로 이동 중… <a href={target}>{target}</a></p>
+  </body>
+</html>

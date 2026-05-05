@@ -1,0 +1,131 @@
+---
+interface Props {
+  coverNum: string;
+  coverTitle: string;
+  title: string;
+  description: string;
+  progressPct: number;
+  progressMeta: string;
+  nextChapter: string;
+  nextDate: string;
+}
+
+const {
+  coverNum,
+  coverTitle,
+  title,
+  description,
+  progressPct,
+  progressMeta,
+  nextChapter,
+  nextDate,
+} = Astro.props;
+---
+
+<div class="gb-card">
+  <div class="gb-cover">
+    <div class="gb-cover-num">{coverNum}</div>
+    <div class="gb-cover-title" set:html={coverTitle} />
+    <div class="gb-cover-foot">SDS GUIDEBOOK</div>
+  </div>
+  <div class="gb-info">
+    <h3>{title}</h3>
+    <p class="gb-desc">{description}</p>
+    <div class="gb-progress"><div class="gb-progress-fill" style={`width:${progressPct}%`} /></div>
+    <div class="gb-progress-meta">{progressMeta}</div>
+    <div class="gb-next"><span class="arrow">↳</span> 다음 챕터: <em>「{nextChapter}」</em> · {nextDate} 발행</div>
+  </div>
+</div>
+
+<style>
+  .gb-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .gb-cover {
+    aspect-ratio: 5/7;
+    background: var(--color-paper-deep);
+    border: 0.5px solid var(--color-ink-quat);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px 12px;
+    overflow: hidden;
+  }
+  .gb-cover::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 0.5px solid var(--color-ink-quat);
+    pointer-events: none;
+  }
+  .gb-cover-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+  .gb-cover-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.3;
+    color: var(--color-ink);
+    font-weight: 500;
+    position: relative;
+  }
+  .gb-cover-foot {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.08em;
+    position: relative;
+  }
+  .gb-info :global(h3) {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  .gb-desc {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    line-height: 1.65;
+    margin: 0 0 12px;
+  }
+  .gb-progress {
+    height: 1px;
+    background: var(--color-ink-quat);
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .gb-progress-fill {
+    position: absolute;
+    height: 1.5px;
+    background: var(--color-accent);
+    top: -0.25px;
+    left: 0;
+  }
+  .gb-progress-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .gb-next {
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .gb-next .arrow {
+    color: var(--color-accent);
+    margin-right: 4px;
+  }
+</style>

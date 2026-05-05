@@ -1,0 +1,93 @@
+---
+interface PulseTag {
+  label: string;
+  action?: boolean;
+}
+
+interface Props {
+  category: string;
+  time: string;
+  title: string;
+  tldr: string;
+  tags: PulseTag[];
+  href?: string;
+}
+
+const { category, time, title, tldr, tags, href } = Astro.props;
+---
+
+<article class="pulse-card" data-href={href}>
+  <div class="pulse-card-meta">
+    <span class="cat-label">{category}</span>
+    <span class="pulse-time">{time}</span>
+  </div>
+  <h3 class="pulse-title">{title}</h3>
+  <p class="pulse-tldr">{tldr}</p>
+  <div class="pulse-card-foot">
+    {tags.map((tag) => (
+      <span class={tag.action ? 'tag-chip action' : 'tag-chip'}>{tag.label}</span>
+    ))}
+  </div>
+</article>
+
+<style>
+  .pulse-card {
+    padding: 24px 28px 24px 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .pulse-card:hover .pulse-title {
+    color: var(--color-accent);
+  }
+
+  .pulse-card-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 12px;
+  }
+  .pulse-time {
+    font-family: var(--font-mono);
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+    font-size: 11px;
+  }
+  .pulse-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0;
+    transition: color 0.15s ease;
+  }
+  .pulse-tldr {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+  .pulse-card-foot {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .tag-chip {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-tertiary);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 2px 8px;
+    border-radius: 1px;
+  }
+  .tag-chip.action {
+    color: var(--color-accent);
+    border-color: var(--color-accent-soft);
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  sub: string;
+  source: string;
+}
+
+const { title, sub, source } = Astro.props;
+---
+
+<figure class="article-figure">
+  <div class="article-figure-title">{title}</div>
+  <div class="article-figure-sub">{sub}</div>
+  <slot />
+  <div class="article-figure-source">{source}</div>
+</figure>
+
+<style>
+  .article-figure {
+    margin: 32px 0;
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 20px 24px 16px;
+  }
+  .article-figure-title {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--color-ink);
+    margin-bottom: 4px;
+  }
+  .article-figure-sub {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+  }
+  .article-figure :global(svg.line-chart) {
+    height: 200px;
+    width: 100%;
+    display: block;
+  }
+  .article-figure-source {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+</style>

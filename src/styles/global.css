@@ -1,0 +1,182 @@
+/* ============================================
+   smartdatashop.kr global.css
+   tokens + reset + base typography + universal utilities
+   component-specific styles live in each .astro file
+   ============================================ */
+
+/* === Tokens === */
+:root {
+  color-scheme: light;
+
+  --color-paper: #faf7f0;
+  --color-paper-soft: #f4f0e6;
+  --color-paper-deep: #ede8d8;
+
+  --color-ink: #1a1a1a;
+  --color-ink-secondary: #6b6b6b;
+  --color-ink-tertiary: #a5a5a5;
+  --color-ink-quat: #e0ddd0;
+
+  --color-accent: #8b1538;
+  --color-accent-soft: #f3e1e6;
+
+  --color-link: #1f4d8a;
+  --color-link-visited: #5a3d7a;
+
+  --font-serif: 'Noto Serif KR', 'Source Serif Pro', serif;
+  --font-sans: 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  --width-prose: 680px;
+  --width-page: 1180px;
+  --width-gutter: 24px;
+}
+
+/* Dark mode tokens are documented in DESIGN.md v1.0 §2.2 but ship in v1.2 (M3+).
+   v1.0 is light-only — do not auto-switch on OS preference. */
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Base === */
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.85;
+  font-weight: 400;
+  font-feature-settings: 'kern', 'liga', 'calt';
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+}
+
+/* === Headings === */
+h1, h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+h1 { font-size: 32px; line-height: 1.35; letter-spacing: -0.01em; }
+h2 { font-size: 22px; line-height: 1.4; letter-spacing: -0.005em; }
+h3 {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 17px; }
+}
+
+p { margin: 0 0 1.25rem; }
+p:last-child { margin-bottom: 0; }
+
+/* === Links === */
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+  transition: text-decoration-thickness 0.15s ease;
+}
+a:hover { text-decoration-thickness: 1px; }
+a:visited { color: var(--color-link-visited); }
+
+nav a, footer a, .no-underline a, a.no-underline { text-decoration: none; }
+nav a:hover, footer a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}
+
+hr { border: 0; border-top: 0.5px solid var(--color-ink-quat); margin: 2rem 0; }
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+/* === Universal utilities === */
+.page-width {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding-left: var(--width-gutter);
+  padding-right: var(--width-gutter);
+}
+.prose-width {
+  max-width: var(--width-prose);
+  margin: 0 auto;
+  padding-left: var(--width-gutter);
+  padding-right: var(--width-gutter);
+}
+
+.cat-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--color-ink-secondary);
+  text-transform: none;
+}
+
+.small-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-ink-tertiary);
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--color-ink-secondary);
+}
+
+.dot { color: var(--color-ink-tertiary); margin: 0 6px; }
+
+/* Section wrapper — 홈/카테고리/태그 페이지 공통 */
+.section {
+  padding: 56px 0;
+  border-bottom: 0.5px solid var(--color-ink-quat);
+}
+@media (max-width: 640px) {
+  .section { padding: 40px 0; }
+}
+
+/* footnote (미주) — 본문 [N] 참조 */
+.fn {
+  font-size: 10px;
+  color: var(--color-accent);
+  margin: 0 1px;
+  text-decoration: none;
+  vertical-align: super;
+  font-weight: 500;
+  font-family: var(--font-sans);
+}
+
+/* AI 보조 배지 — hero/article 헤더에서 공유 */
+.ai-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 0.5px solid var(--color-ink-quat);
+  border-radius: 2px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin-left: 4px;
+}

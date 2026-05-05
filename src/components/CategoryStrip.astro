@@ -1,0 +1,27 @@
+---
+// 5열 카테고리 그리드 래퍼. 자식으로 CategoryColumn들을 받음.
+---
+
+<div class="cat-grid">
+  <slot />
+</div>
+
+<style>
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  @media (max-width: 980px) {
+    .cat-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .cat-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

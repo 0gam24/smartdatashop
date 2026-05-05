@@ -1,0 +1,75 @@
+---
+interface Props {
+  domain: string;
+  name: string;
+  persona: string;
+  latest: string;
+}
+
+const { domain, name, persona, latest } = Astro.props;
+---
+
+<article class="sister-card">
+  <div class="sister-domain">{domain}</div>
+  <div class="sister-name">{name}</div>
+  <div class="sister-persona">{persona}</div>
+  <div class="sister-latest">
+    <span class="latest-label">최신 글</span>
+    {latest}
+  </div>
+</article>
+
+<style>
+  .sister-card {
+    padding: 24px 20px;
+    border-right: 0.5px solid var(--color-ink-quat);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 200px;
+    cursor: pointer;
+  }
+  .sister-card:last-child {
+    border-right: 0;
+  }
+  @media (max-width: 980px) {
+    .sister-card {
+      border-bottom: 0.5px solid var(--color-ink-quat);
+    }
+    .sister-card:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+  .sister-domain {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+  }
+  .sister-name {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .sister-persona {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+  }
+  .sister-latest {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+  .sister-latest .latest-label {
+    display: block;
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+</style>

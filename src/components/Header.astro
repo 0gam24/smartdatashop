@@ -1,0 +1,131 @@
+---
+interface Props {
+  date?: string;
+  activeNav?: 'daily' | 'insight' | 'guidebook' | 'data' | 'network';
+}
+
+const { date = '2026년 5월 5일 화', activeNav = 'daily' } = Astro.props;
+
+const navItems: Array<{ key: NonNullable<Props['activeNav']>; label: string; href: string }> = [
+  { key: 'daily', label: '데일리', href: '/' },
+  { key: 'insight', label: '인사이트', href: '#insight' },
+  { key: 'guidebook', label: '가이드북', href: '#guidebook' },
+  { key: 'data', label: '데이터', href: '#data' },
+  { key: 'network', label: '자매 사이트', href: '#network' },
+];
+---
+
+<header class="site-header" data-screen-label="Header">
+  <div class="page-width header-inner">
+    <a href="/" class="logo no-underline">
+      스마트데이터샵 <span class="tld">.kr</span>
+    </a>
+    <nav class="nav-primary">
+      {navItems.map((item) => (
+        <a href={item.href} class={item.key === activeNav ? 'active' : ''}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="header-right">
+      <span class="header-date">{date}</span>
+      <button class="search-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        검색
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    background: rgba(250, 247, 240, 0.92);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(6px);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 32px;
+  }
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .logo :global(.tld) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+  .nav-primary {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+  .nav-primary a {
+    color: var(--color-ink);
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-primary a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -22px;
+    height: 1.5px;
+    background: var(--color-accent);
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-date {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+  .search-btn {
+    background: none;
+    border: 0.5px solid var(--color-ink-quat);
+    color: var(--color-ink-secondary);
+    padding: 6px 10px;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.05em;
+  }
+  .search-btn:hover {
+    border-color: var(--color-ink-secondary);
+    color: var(--color-ink);
+  }
+  .search-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  @media (max-width: 880px) {
+    .nav-primary { display: none; }
+    .header-date { display: none; }
+  }
+</style>

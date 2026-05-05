@@ -1,0 +1,134 @@
+---
+interface Props {
+  vol?: string;
+  no?: string;
+  date?: string;
+}
+
+const { vol = 'I', no = '89', date = '2026년 5월 5일 화' } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          스마트데이터샵<span class="footer-tld">.kr</span>
+        </div>
+        <div class="footer-meta-line">
+          대표 김준혁 · 사업자등록번호 406-06-34485<br />
+          인천광역시 계양구 새벌로 88, 302동 1007호<br />
+          editor@smartdatashop.kr
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">콘 텐 츠</div>
+        <ul>
+          <li><a href="#">데일리 펄스</a></li>
+          <li><a href="#">인사이트</a></li>
+          <li><a href="#">가이드북</a></li>
+          <li><a href="#">데이터</a></li>
+          <li><a href="#">네트워크</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">정 책</div>
+        <ul>
+          <li><a href="#">소개</a></li>
+          <li><a href="#">편집정책</a></li>
+          <li><a href="#">AI 정책</a></li>
+          <li><a href="#">정정 이력</a></li>
+          <li><a href="#">제휴 공시</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">자 매 사 이 트</div>
+        <ul>
+          <li><a href="#">calculatorhost.com</a></li>
+          <li><a href="#">awoo.or.kr</a></li>
+          <li><a href="#">asiatop.co.kr</a></li>
+          <li><a href="#">iknowhowinfo.com</a></li>
+          <li><a href="#">RSS · /feed/</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 스마트데이터샵 — 본문 콘텐츠 CC BY-NC 4.0</span>
+      <span>VOL {vol} · NO {no} · {date}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 48px 0 32px;
+    background: var(--color-paper);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 880px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--color-ink);
+  }
+  .footer-tld {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  .footer-meta-line {
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+    line-height: 1.7;
+  }
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-col li {
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .footer-col a {
+    color: var(--color-ink-secondary);
+  }
+  .footer-col a:hover {
+    color: var(--color-ink);
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    flex-wrap: wrap;
+    gap: 12px;
+    letter-spacing: 0.02em;
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import { categoryToKorean, formatKoreanDate, formatKoreanTime, type Category } from '../lib/korean';
+
+interface Props {
+  category: Category;
+  publishedAt: string;
+  title: string;
+  author: string;
+  readingTime: number;
+  sourceCount: number;
+  aiAssisted: boolean;
+  updatedAt?: string;
+}
+
+const {
+  category,
+  publishedAt,
+  title,
+  author,
+  readingTime,
+  sourceCount,
+  aiAssisted,
+  updatedAt,
+} = Astro.props;
+
+const categoryLabel = categoryToKorean(category);
+const dateLine = `${formatKoreanDate(publishedAt)} · ${formatKoreanTime(publishedAt)}`;
+
+// 디자인 결정: H1은 평문 그대로 — 시안의 "[1]" sup은 데코레이션 마커이며,
+// 본문 각주가 진짜 ref이므로 헤드라인을 단순화해 source-list 아키텍처와 일관성 유지.
+// (작업 지시서 §11 참조)
+---
+
+<header class="article-header">
+  <div class="article-meta-row">
+    <span class="cat-label">{categoryLabel}</span>
+    <time class="meta meta-time">{dateLine}</time>
+  </div>
+  <h1 class="article-headline">{title}</h1>
+  <div class="article-byline">
+    <span>{author}</span><span class="dot">·</span>
+    <span>{readingTime}분 읽기</span><span class="dot">·</span>
+    <span>1차 출처 {sourceCount}건</span>
+    {updatedAt && (
+      <>
+        <span class="dot">·</span>
+        <span>최종 갱신 {formatKoreanDate(updatedAt)}</span>
+      </>
+    )}
+    {aiAssisted && <span class="ai-badge">AI 보조</span>}
+  </div>
+</header>
+
+<style>
+  .article-header {
+    max-width: var(--width-prose);
+    margin: 0 auto 32px;
+    padding: 0 var(--width-gutter);
+  }
+  .article-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .meta-time {
+    font-family: var(--font-serif);
+  }
+  .article-headline {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 640px) {
+    .article-headline { font-size: 26px; }
+  }
+  .article-byline {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+</style>

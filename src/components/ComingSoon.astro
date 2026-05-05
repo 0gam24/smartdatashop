@@ -1,0 +1,53 @@
+---
+interface Props {
+  domains?: string[];
+  note?: string;
+}
+
+const {
+  domains = ['homedata.kr', 'bizdata.kr', 'familydata.kr', 'retiredata.kr', 'aidata.kr'],
+  note = 'M3~M12 단계적 합류 — 뉴스레터 구독 시 알림',
+} = Astro.props;
+---
+
+<div class="coming-soon">
+  <div>
+    <span class="label">곧 합류</span>
+    <span class="coming-list">
+      {domains.map((d) => <span>{d}</span>)}
+    </span>
+  </div>
+  <span class="meta">{note}</span>
+</div>
+
+<style>
+  .coming-soon {
+    margin-top: 24px;
+    padding: 18px 0;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .coming-soon .label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-right: 12px;
+  }
+  .coming-list :global(span) {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink);
+    margin-right: 14px;
+    letter-spacing: 0.02em;
+  }
+  .coming-list :global(span)::before {
+    content: '◦';
+    color: var(--color-ink-tertiary);
+    margin-right: 4px;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+interface RelatedItem {
+  when: string;
+  title: string;
+  href: string;
+}
+
+interface Props {
+  items: RelatedItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="related">
+  <div class="label">관 련 글</div>
+  <div class="related-list">
+    {items.map((item) => (
+      <a href={item.href} class="related-item no-underline">
+        <span class="when">{item.when}</span>
+        <span class="ttl">{item.title}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .related {
+    max-width: var(--width-prose);
+    margin: 48px auto 0;
+    padding: 24px var(--width-gutter) 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .related .label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .related-list {
+    display: grid;
+    gap: 14px;
+  }
+  .related-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    font-size: 14px;
+    align-items: baseline;
+    color: inherit;
+  }
+  .related-item .when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .related-item .ttl {
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    line-height: 1.4;
+    cursor: pointer;
+  }
+  .related-item:hover .ttl {
+    color: var(--color-accent);
+  }
+</style>

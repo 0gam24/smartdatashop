@@ -1,0 +1,38 @@
+---
+// 짝홀수에 따라 좌우 패딩·세로선이 다른 2열 그리드
+// 자식으로 PulseCard들을 슬롯에 받음
+---
+
+<div class="pulse-list">
+  <slot />
+</div>
+
+<style is:global>
+  /* PulseList의 자식 .pulse-card는 PulseCard.astro 컴포넌트에서 생성된
+     스코프된 클래스이므로, :nth-child 좌우 패딩/보더만 글로벌로 추가한다. */
+  .pulse-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .pulse-list { grid-template-columns: 1fr; }
+  }
+  .pulse-list > .pulse-card-wrap:nth-child(odd),
+  .pulse-list > article:nth-child(odd) {
+    padding-right: 40px;
+  }
+  .pulse-list > .pulse-card-wrap:nth-child(even),
+  .pulse-list > article:nth-child(even) {
+    padding-left: 40px;
+    border-left: 0.5px solid var(--color-ink-quat);
+  }
+  @media (max-width: 720px) {
+    .pulse-list > article:nth-child(odd),
+    .pulse-list > article:nth-child(even) {
+      padding-left: 0;
+      padding-right: 0;
+      border-left: 0;
+    }
+  }
+</style>

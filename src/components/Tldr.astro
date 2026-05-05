@@ -1,0 +1,28 @@
+---
+// 한 줄 요약 박스 — 좌측 룰 + 18px 패딩
+---
+
+<aside class="tldr">
+  <div class="label">한 줄 요약</div>
+  <div class="content"><slot /></div>
+</aside>
+
+<style>
+  .tldr {
+    border-left: 2px solid var(--color-ink-tertiary);
+    padding: 4px 0 4px 18px;
+    margin: 28px 0;
+  }
+  .tldr .label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .tldr .content {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-ink);
+  }
+</style>

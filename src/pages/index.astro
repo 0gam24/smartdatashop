@@ -1,0 +1,220 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Masthead from '../components/Masthead.astro';
+import Hero from '../components/Hero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import PulseList from '../components/PulseList.astro';
+import PulseCard from '../components/PulseCard.astro';
+import CategoryStrip from '../components/CategoryStrip.astro';
+import CategoryColumn from '../components/CategoryColumn.astro';
+import GuidebookCard from '../components/GuidebookCard.astro';
+import ChartFigure from '../components/ChartFigure.astro';
+import SisterSiteGrid from '../components/SisterSiteGrid.astro';
+import SisterSiteCard from '../components/SisterSiteCard.astro';
+import ComingSoon from '../components/ComingSoon.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+import Footer from '../components/Footer.astro';
+import { categoryToKorean, formatKoreanTime, pulseUrl } from '../lib/korean';
+
+// 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
+const allPulses = await getCollection('pulse');
+const sortedPulses = allPulses.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+);
+const latest = sortedPulses[0];
+const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
+  const { personas, dataTypes, actions } = entry.data.tags;
+  const tags = [
+    ...personas.map((label) => ({ label })),
+    ...dataTypes.map((label) => ({ label })),
+    ...actions.map((label) => ({ label, action: true })),
+  ].slice(0, 3);
+  return {
+    category: categoryToKorean(entry.data.category),
+    time: formatKoreanTime(entry.data.publishedAt),
+    title: entry.data.title,
+    tldr: entry.data.tldr,
+    href: pulseUrl(entry.slug, entry.data.publishedAt),
+    tags,
+  };
+});
+
+// 섹션 03 — 카테고리별 최신
+const categories = [
+  {
+    category: '정 책',
+    count: '23편',
+    items: [
+      { num: '01', title: '청년월세 특별지원 6월 마감, 잔여 예산 38%', meta: '05.05 · 복지로' },
+      { num: '02', title: '법제처 5월 시행 법령 23건 — 핵심 5개', meta: '05.04 · 법제처' },
+      { num: '03', title: '육아휴직 6+6 부모제 신청률 34%', meta: '05.03 · 고용부' },
+    ],
+  },
+  {
+    category: '세 금 · 금 융',
+    count: '31편',
+    items: [
+      { num: '01', title: '5월 종소세 모두채움 신고서 발송 1,142만 명', meta: '05.05 · 국세청' },
+      { num: '02', title: '금감원 5월 가계부채 동향, 변동금리 비중 41%', meta: '05.04 · 금감원' },
+      { num: '03', title: 'BOK ECOS 4월 단기자금시장 콜금리 평균 3.49%', meta: '05.03 · BOK' },
+    ],
+  },
+  {
+    category: '시 장',
+    count: '28편',
+    items: [
+      { num: '01', title: 'DART 5월 1주차 분기보고서 632건 — 코스닥 412', meta: '05.05 · DART' },
+      { num: '02', title: 'KRX 공매도 잔고 상위 종목 변화', meta: '05.04 · KRX' },
+      { num: '03', title: '자산운용사 4월 신규 ETF 12개 상장', meta: '05.02 · KRX' },
+    ],
+  },
+  {
+    category: '통 계',
+    count: '19편',
+    items: [
+      { num: '01', title: 'KOSIS 1분기 가계금융복지 — 자산 5.2억', meta: '05.05 · 통계청' },
+      { num: '02', title: 'data.go.kr 신규 개방 데이터 4월 87건', meta: '05.03 · 행안부' },
+      { num: '03', title: '3월 인구 동향 — 출생 1.9만, 사망 3.2만', meta: '05.01 · 통계청' },
+    ],
+  },
+  {
+    category: 'A I · 기 술',
+    count: '12편',
+    items: [
+      { num: '01', title: 'NIPA 1인사업자 AI 바우처 2차 모집 개시', meta: '05.05 · NIPA' },
+      { num: '02', title: '과기정통부 K-AI 인프라 1조 예산 배정안', meta: '05.04 · 과기정통부' },
+      { num: '03', title: '국내 LLM 4월 활성 기업 사용자 218만', meta: '05.02 · 자사 집계' },
+    ],
+  },
+];
+
+// 섹션 04 — 진행 중인 가이드북
+const guidebooks = [
+  {
+    coverNum: '1권 · 2026',
+    coverTitle: '5월 종소세<br>완전 가이드',
+    title: '5월 종합소득세 완전 가이드',
+    description:
+      '신고 대상 판단부터 모두채움·홈택스 단계별 캡처, 1인사업자 절세 전략까지. 1차 출처는 국세청 고시·해석례.',
+    progressPct: 33,
+    progressMeta: 'CHAPTER 4 / 12 · 완료율 33%',
+    nextChapter: '인적공제 — 부양가족 판정 12가지',
+    nextDate: '5월 8일',
+  },
+  {
+    coverNum: '2권 · 2026 (예고)',
+    coverTitle: '한국의<br>ETF 지도',
+    title: '한국의 ETF 지도 — 시장·전략·세금',
+    description:
+      'KRX 상장 ETF 800종을 자산군·전략·과세체계 3축으로 분류. 자매 사이트 iknowhowinfo와 공동 기획.',
+    progressPct: 8,
+    progressMeta: 'CHAPTER 1 / 14 · 완료율 8%',
+    nextChapter: 'ETF 분류의 3축',
+    nextDate: '5월 12일',
+  },
+];
+
+// 섹션 06 — 자매 사이트
+const sisters = [
+  {
+    domain: 'calculatorhost.com',
+    name: '계산기 호스트',
+    persona: '즉답형 · 전 카테고리 횡단',
+    latest: '종소세 환급액 계산기 — 모두채움 대비',
+  },
+  {
+    domain: 'awoo.or.kr',
+    name: '아우',
+    persona: '지원금 수령자',
+    latest: '청년월세 특별지원 잔여 예산 38%',
+  },
+  {
+    domain: 'asiatop.co.kr',
+    name: '머니룩',
+    persona: '사회초년생 · 직장인',
+    latest: '신혼부부 디딤돌 vs 보금자리론 비교',
+  },
+  {
+    domain: 'iknowhowinfo.com',
+    name: '아이노하우',
+    persona: '투자자',
+    latest: 'KOSPI200 ETF 4월 순유입 3.2조',
+  },
+];
+---
+
+<BaseLayout>
+  <Header activeNav="daily" />
+  <Masthead vol="I" no="89" todayCount={5} totalCount={127} />
+
+  <Hero href={pulseUrl(latest.slug, latest.data.publishedAt)} />
+
+  <!-- Section 02: 오늘의 펄스 -->
+  <section class="section" data-screen-label="02 최신 펄스">
+    <div class="page-width">
+      <SectionHead num="02" title="오늘의 펄스" moreHref="#" moreLabel="데일리 전체 →" />
+      <PulseList>
+        {pulseCards.map((p) => <PulseCard {...p} />)}
+      </PulseList>
+    </div>
+  </section>
+
+  <!-- Section 03: 분야별 최신 -->
+  <section class="section" data-screen-label="03 카테고리">
+    <div class="page-width">
+      <SectionHead num="03" title="분야별 최신" moreLabel="5개 카테고리 · 활자 라벨로만 구분" />
+      <CategoryStrip>
+        {categories.map((c) => <CategoryColumn {...c} />)}
+      </CategoryStrip>
+    </div>
+  </section>
+
+  <!-- Section 04: 진행 중인 가이드북 -->
+  <section class="section" id="guidebook" data-screen-label="04 가이드북">
+    <div class="page-width">
+      <SectionHead num="04" title="진행 중인 가이드북" moreHref="#" moreLabel="전체 가이드북 →" />
+      <div class="guidebook-grid">
+        {guidebooks.map((g) => <GuidebookCard {...g} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 05: 오늘의 추천 차트 -->
+  <section class="section" id="data" data-screen-label="05 추천 차트">
+    <div class="page-width">
+      <SectionHead num="05" title="오늘의 추천 차트" moreHref="#" moreLabel="데이터 전체 →" />
+      <ChartFigure />
+    </div>
+  </section>
+
+  <!-- Section 06: 자매 사이트 네트워크 -->
+  <section class="section" id="network" data-screen-label="06 자매 사이트">
+    <div class="page-width">
+      <SectionHead num="06" title="자매 사이트 네트워크" moreLabel="현재 4개 · 곧 합류 5개" />
+      <SisterSiteGrid>
+        {sisters.map((s) => <SisterSiteCard {...s} />)}
+      </SisterSiteGrid>
+      <ComingSoon />
+    </div>
+  </section>
+
+  <NewsletterCTA />
+
+  <Footer vol="I" no="89" date="2026년 5월 5일 화" />
+</BaseLayout>
+
+<style>
+  .guidebook-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width: 720px) {
+    .guidebook-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

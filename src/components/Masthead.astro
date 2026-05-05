@@ -1,0 +1,63 @@
+---
+interface Props {
+  vol?: string;
+  no?: string;
+  todayCount?: number;
+  totalCount?: number;
+  tagline?: string;
+}
+
+const {
+  vol = 'I',
+  no = '89',
+  todayCount = 5,
+  totalCount = 127,
+  tagline = '한국의 데이터를 매일 5분으로 — 1차 출처 데이터 저널',
+} = Astro.props;
+---
+
+<div class="masthead">
+  <div class="page-width masthead-inner">
+    <div class="masthead-tagline">{tagline}</div>
+    <div class="masthead-counter">
+      <span>VOL <strong>{vol}</strong>·NO <strong>{no}</strong></span>
+      <span>오늘의 글 <strong>{todayCount}</strong>편</span>
+      <span>누적 <strong>{totalCount}</strong>편</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .masthead {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 14px 0;
+    background: var(--color-paper);
+  }
+  .masthead-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .masthead-tagline {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--color-ink-secondary);
+  }
+  .masthead-counter {
+    display: flex;
+    gap: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .masthead-counter span :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  @media (max-width: 640px) {
+    .masthead-counter { display: none; }
+  }
+</style>
