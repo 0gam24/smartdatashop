@@ -20,12 +20,18 @@ export async function GET(context: APIContext) {
   ]);
 
   // pulse 와 insight 를 통일된 항목 모양으로 정규화한다.
+  // Naver SearchAdvisor는 RSS의 본문(전문) 포함을 권장하므로 entry.body(원본 MDX
+  // 마크다운)를 그대로 content:encoded 슬롯에 싣는다. RSS 리더는 마크다운을
+  // 텍스트로 표시하지만, 검색엔진/색인 시점에서는 description(tldr)만 있을 때보다
+  // 본문 신호가 풍부해진다. HTML 살균이 필요하면 sanitize-html 도입을 검토하되,
+  // 원본 MDX는 사이트 내부에서만 작성되므로 추가 살균 없이 신뢰한다.
   type FeedItem = {
     title: string;
     pubDate: Date;
     description: string;
     link: string;
     categories: string[];
+    content: string;
   };
 
   const items: FeedItem[] = [
@@ -35,6 +41,7 @@ export async function GET(context: APIContext) {
       description: entry.data.tldr,
       link: pulseUrl(entry.slug, entry.data.publishedAt),
       categories: [categoryToKorean(entry.data.category as Category)],
+      content: entry.body,
     })),
     ...insights.map((entry) => ({
       title: entry.data.title,
@@ -42,6 +49,7 @@ export async function GET(context: APIContext) {
       description: entry.data.tldr,
       link: `/insight/${entry.slug}/`,
       categories: [categoryToKorean(entry.data.category as Category)],
+      content: entry.body,
     })),
   ];
 

@@ -135,9 +135,12 @@ const breadcrumbLd = buildBreadcrumbLD([
   { name: tagLabel, url: pageUrl },
 ]);
 const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
+
+// 페이지 keywords meta — 태그값 + 그룹 라벨.
+const keywords = [tagLabel, groupLabel];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld} keywords={keywords}>
   <Header activeNav="daily" />
   <Masthead
     vol="I"
@@ -148,6 +151,7 @@ const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
   />
 
   <main>
+    <h1 class="visually-hidden">{tagLabel} 태그 — 1차 출처 데이터 모음</h1>
     <!-- 헤더 + 카운터 + 관련 태그 strip -->
     <section class="section" data-screen-label={`${group}/${value} 태그 아카이브`}>
       <div class="page-width">

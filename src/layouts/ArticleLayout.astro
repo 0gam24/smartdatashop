@@ -40,6 +40,8 @@ interface Props {
   description?: string;
   ogImage?: string;
   jsonld?: object | object[];
+  /** 페이지 keywords meta — 페르소나/데이터유형/액션 태그 등에서 도출. */
+  keywords?: string[];
   /** 디자인 프리뷰 여부 (ArticleHeader VerifiedBadge 결정용) */
   previewMode?: boolean;
   /** 검수 책임 운영자 아이디 목록 */
@@ -62,6 +64,7 @@ const {
   description,
   ogImage,
   jsonld,
+  keywords,
   previewMode = true,
   verifiedBy = [],
   corrections = [],
@@ -109,6 +112,7 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
   ogPublishedAt={publishedAt}
   ogModifiedAt={updatedAt ?? publishedAt}
   jsonld={mergedJsonld}
+  keywords={keywords}
 >
   <ReadingProgress />
   <Header activeNav="daily" date={headerDate} />

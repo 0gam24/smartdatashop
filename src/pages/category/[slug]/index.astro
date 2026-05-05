@@ -125,9 +125,13 @@ const breadcrumbLd = buildBreadcrumbLD([
   { name: categoryLabel.replace(/ /g, ''), url: pageUrl },
 ]);
 const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
+
+// 페이지 keywords meta — 카테고리 라벨(공백 제거) + 사이트 보편 키워드 2개.
+const categorySlugLabel = categoryLabel.replace(/ /g, '');
+const keywords = [categorySlugLabel, '데이터 저널', '1차 출처'];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld} keywords={keywords}>
   <Header activeNav="daily" />
   <Masthead
     vol="I"
@@ -138,6 +142,7 @@ const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
   />
 
   <main>
+    <h1 class="visually-hidden">{categoryLabel} 카테고리 — 1차 출처 데이터 아카이브</h1>
     <!-- 펄스 섹션 -->
     <section class="section" data-screen-label={`${category} 펄스 아카이브`}>
       <div class="page-width">

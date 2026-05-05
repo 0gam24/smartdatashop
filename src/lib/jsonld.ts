@@ -236,6 +236,41 @@ export function buildCollectionPageLD(
 }
 
 /**
+ * Dataset JSON-LD — 향후 /data/ 페이지가 추가되면 1차 출처 데이터셋의
+ * 메타데이터를 명시적으로 발행하기 위한 helper. 현재는 사용처가 없지만
+ * 구조 규약을 미리 고정해 둔다 (Google Dataset Search 적격성).
+ *
+ * 라이선스 기본값은 사이트 전체 정책(CC BY-NC 4.0)과 동일.
+ * isBasedOn을 통해 1차 출처 URL을 표시 — schema.org/Dataset의 isBasedOn은
+ * 데이터셋이 도출된 원본 자료를 연결하는 표준 속성이다.
+ */
+export interface DatasetInput {
+  name: string;
+  description: string;
+  url: string;
+  sourceUrl?: string;
+  sourceName?: string;
+  license?: string;
+  temporalCoverage?: string;
+  spatialCoverage?: string;
+}
+
+export function buildDatasetLD(input: DatasetInput): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: input.name,
+    description: input.description,
+    url: input.url.startsWith('http') ? input.url : `${SITE_URL}${input.url}`,
+    creator: { '@type': 'Organization', name: SITE_NAME },
+    license: input.license ?? 'https://creativecommons.org/licenses/by-nc/4.0/',
+    ...(input.sourceUrl && { isBasedOn: input.sourceUrl }),
+    ...(input.temporalCoverage && { temporalCoverage: input.temporalCoverage }),
+    ...(input.spatialCoverage && { spatialCoverage: input.spatialCoverage }),
+  };
+}
+
+/**
  * WebSite + SearchAction (sitelinks search box) JSON-LD.
  *
  * 구글 sitelinks search box 사양은 target에 `?q=` 쿼리 패턴이 있는

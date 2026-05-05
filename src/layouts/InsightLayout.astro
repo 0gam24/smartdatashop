@@ -52,6 +52,8 @@ interface Props {
   verifiedBy?: string[];
   /** 정정 이력 — 비어 있으면 CorrectionsBlock은 렌더되지 않는다 */
   corrections?: Correction[];
+  /** 페이지 keywords meta — 페르소나/데이터유형/액션 태그 등에서 도출. */
+  keywords?: string[];
 }
 
 const {
@@ -68,6 +70,7 @@ const {
   previewMode = true,
   verifiedBy = [],
   corrections = [],
+  keywords,
 } = Astro.props;
 
 const headerDate = formatKoreanDate(publishedAt);
@@ -78,7 +81,7 @@ const pageTitle = `${title} — 스마트데이터샵 인사이트`;
 const categoryLabel = categoryToKorean(category).replace(/ /g, '');
 ---
 
-<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt}>
+<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords}>
   <Header activeNav="insight" date={headerDate} />
 
   <div class="masthead">

@@ -23,6 +23,16 @@ interface Props {
    * 단일 객체 또는 객체 배열 — 호출자가 필요할 때만 전달, 없으면 head에 아무 것도 주입하지 않는다.
    */
   jsonld?: object | object[];
+  /**
+   * 페이지별 키워드 메타. 미지정 시 meta keywords를 렌더하지 않는다.
+   * Naver C-Rank/D.I.A. 신호용으로 카테고리·태그·인사이트 페이지에서만 채운다.
+   */
+  keywords?: string[];
+  /**
+   * BaseLayout이 기본 robots 메타(index,follow,max-image-preview:large)를
+   * 출력하지 않도록 막는다. /article 같이 자체 noindex가 필요한 페이지에서 사용.
+   */
+  noBaseRobots?: boolean;
 }
 
 const {
@@ -33,10 +43,36 @@ const {
   ogPublishedAt,
   ogModifiedAt,
   jsonld,
+  keywords,
+  noBaseRobots = false,
 } = Astro.props;
 
 // 정규 URL — Astro.url은 빌드 시 site origin 기준 절대 URL을 만들어준다.
 const canonicalUrl = Astro.url.toString();
+
+/**
+ * 검색엔진 사이트 소유권 확인 메타.
+ *
+ * - PUBLIC_NAVER_SITE_VERIFICATION: 네이버 서치어드바이저(https://searchadvisor.naver.com)
+ *   에서 도메인 등록 후 발급되는 토큰. 미지정 시 메타가 출력되지 않는다.
+ * - PUBLIC_GOOGLE_SITE_VERIFICATION: 구글 서치 콘솔(https://search.google.com/search-console)
+ *   에서 도메인 등록 후 발급되는 토큰. 미지정 시 메타가 출력되지 않는다.
+ *
+ * 토큰은 Cloudflare Pages 환경변수에 그대로 넣어 PR/preview 빌드는 비워둔 채
+ * 운영 빌드에서만 메타가 노출되도록 한다.
+ */
+const naverSiteVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION as
+  | string
+  | undefined;
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION as
+  | string
+  | undefined;
+
+// og:image MIME 추정 — SVG 확장자는 image/svg+xml, 그 외(.png/.jpg/.webp 등)는 image/png 기본.
+// 사이트의 모든 OG 이미지는 1200x630 표준이므로 width/height는 고정값으로 둔다.
+const ogImageMime = ogImage.toLowerCase().endsWith('.svg')
+  ? 'image/svg+xml'
+  : 'image/png';
 
 // JSON-LD 배열 정규화 (단일 객체도 배열로 통일)
 const jsonldArray: object[] = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld]) : [];
@@ -65,6 +101,19 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && keywords.length > 0 && (
+      <meta name="keywords" content={keywords.join(',')} />
+    )}
+    <meta name="author" content="김준혁" />
+    {!noBaseRobots && (
+      <meta name="robots" content="index,follow,max-image-preview:large" />
+    )}
+    {naverSiteVerification && (
+      <meta name="naver-site-verification" content={naverSiteVerification} />
+    )}
+    {googleSiteVerification && (
+      <meta name="google-site-verification" content={googleSiteVerification} />
+    )}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
@@ -75,6 +124,9 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content={ogImageMime} />
     {ogType === 'article' && ogPublishedAt && (
       <meta property="article:published_time" content={ogPublishedAt} />
     )}

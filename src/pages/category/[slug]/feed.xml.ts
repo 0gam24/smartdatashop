@@ -32,12 +32,15 @@ export async function GET(context: APIContext) {
     getCollection('insight', (e) => e.data.category === category),
   ]);
 
+  // Naver SearchAdvisor는 RSS의 본문(전문) 포함을 권장하므로 entry.body(원본 MDX
+  // 마크다운)를 그대로 content:encoded 슬롯에 싣는다. (사이트 전체 feed.xml.ts와 동일 패턴)
   type FeedItem = {
     title: string;
     pubDate: Date;
     description: string;
     link: string;
     categories: string[];
+    content: string;
   };
 
   const items: FeedItem[] = [
@@ -47,6 +50,7 @@ export async function GET(context: APIContext) {
       description: entry.data.tldr,
       link: pulseUrl(entry.slug, entry.data.publishedAt),
       categories: [categoryToKorean(entry.data.category as Category)],
+      content: entry.body,
     })),
     ...insights.map((entry) => ({
       title: entry.data.title,
@@ -54,6 +58,7 @@ export async function GET(context: APIContext) {
       description: entry.data.tldr,
       link: `/insight/${entry.slug}/`,
       categories: [categoryToKorean(entry.data.category as Category)],
+      content: entry.body,
     })),
   ];
 

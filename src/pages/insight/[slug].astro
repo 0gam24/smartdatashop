@@ -55,6 +55,13 @@ const related = relatedEntries.map((e) => {
     href: insightUrl(e.slug),
   };
 });
+
+// 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그를 합쳐 노출.
+const keywords = [
+  ...data.tags.personas,
+  ...data.tags.dataTypes,
+  ...data.tags.actions,
+];
 ---
 
 <InsightLayout
@@ -68,6 +75,7 @@ const related = relatedEntries.map((e) => {
   previewMode={data.previewMode}
   verifiedBy={data.verifiedBy}
   corrections={data.correctionLog}
+  keywords={keywords}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />

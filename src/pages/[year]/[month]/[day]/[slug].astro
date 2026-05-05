@@ -46,6 +46,13 @@ const ogImage = data.coverImage
     : `https://smartdatashop.kr${data.coverImage}`
   : undefined;
 
+// 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그를 합쳐 노출.
+const keywords = [
+  ...data.tags.personas,
+  ...data.tags.dataTypes,
+  ...data.tags.actions,
+];
+
 // 관련 글 — 같은 카테고리 다른 펄스 최근 3건
 const allEntries = await getCollection('pulse');
 const related = allEntries
@@ -73,6 +80,7 @@ const related = allEntries
   description={description}
   ogImage={ogImage}
   jsonld={articleJsonLd}
+  keywords={keywords}
   previewMode={data.previewMode}
   verifiedBy={data.verifiedBy}
   corrections={data.correctionLog}
