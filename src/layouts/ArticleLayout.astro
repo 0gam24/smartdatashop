@@ -26,6 +26,10 @@ interface Props {
   aiAssisted: boolean;
   vol?: string;
   no?: string;
+  /** SEO/SNS 카드용 — 호출자가 전달하면 BaseLayout으로 그대로 전달된다. */
+  description?: string;
+  ogImage?: string;
+  jsonld?: object | object[];
 }
 
 const {
@@ -39,6 +43,9 @@ const {
   aiAssisted,
   vol = 'I',
   no = '89',
+  description,
+  ogImage,
+  jsonld,
 } = Astro.props;
 
 // 브레드크럼 표시용 날짜 (YYYY/MM/DD)
@@ -51,7 +58,15 @@ const headerDate = formatKoreanDate(publishedAt);
 const pageTitle = `${title} — 스마트데이터샵`;
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout
+  title={pageTitle}
+  description={description}
+  ogImage={ogImage}
+  ogType="article"
+  ogPublishedAt={publishedAt}
+  ogModifiedAt={updatedAt ?? publishedAt}
+  jsonld={jsonld}
+>
   <Header activeNav="daily" date={headerDate} />
   <BreadcrumbMasthead category={category} dateText={breadcrumbDate} vol={vol} no={no} />
 

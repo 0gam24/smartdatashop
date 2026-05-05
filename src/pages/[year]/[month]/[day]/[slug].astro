@@ -3,7 +3,11 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
 import Tldr from '../../../../components/Tldr.astro';
 import RelatedList from '../../../../components/RelatedList.astro';
+import ToollGate from '../../../../components/ToollGate.astro';
 import { estimateReadingTime, pulseUrl } from '../../../../lib/korean';
+import { buildNewsArticleLD } from '../../../../lib/jsonld';
+import { resolveToollGate } from '../../../../data/toll-gate-matrix';
+import { SISTER_SITES } from '../../../../data/sister-sites';
 
 export async function getStaticPaths() {
   const entries = await getCollection('pulse');
@@ -30,6 +34,17 @@ const { data } = entry;
 // 본문 텍스트 길이로 읽기 시간 추정
 const readingTime = estimateReadingTime(entry.body);
 
+// ToollGate (자매 사이트 라우팅) — PLANNING.md §12
+const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
+
+// SEO — JSON-LD NewsArticle / OG description / OG image
+const articleJsonLd = buildNewsArticleLD(entry);
+const ogImage = data.coverImage
+  ? data.coverImage.startsWith('http')
+    ? data.coverImage
+    : `https://smartdatashop.kr${data.coverImage}`
+  : undefined;
+
 // 관련 글 — 같은 카테고리 다른 펄스 최근 3건
 const allEntries = await getCollection('pulse');
 const related = allEntries
@@ -55,9 +70,25 @@ const related = allEntries
   readingTime={readingTime}
   sources={data.sources}
   aiAssisted={data.aiAssisted}
+  description={data.tldr}
+  ogImage={ogImage}
+  jsonld={articleJsonLd}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />
+
+  {tollGateDecision.kind === 'route' ? (
+    <ToollGate
+      primaryText={tollGateDecision.primaryHint}
+      primaryDomain={SISTER_SITES[tollGateDecision.primary].domain}
+      primaryHref={SISTER_SITES[tollGateDecision.primary].baseUrl}
+      secondary={tollGateDecision.secondary
+        ? `보조: ${SISTER_SITES[tollGateDecision.secondary].name} · ${SISTER_SITES[tollGateDecision.secondary].domain}`
+        : undefined}
+    />
+  ) : (
+    <ToollGate mode="main-terminal" message={tollGateDecision.message} />
+  )}
 
   {related.length > 0 && (
     <Fragment slot="related">

@@ -1,0 +1,149 @@
+---
+/**
+ * 인사이트 아카이브 — /insight/
+ * 발행 인사이트의 단일 컬럼 연대순(최신 우선) 목록.
+ *
+ * 스타일 결정: CategoryColumn의 cat-item 패턴은 좁은 컬럼(여러 카테고리 병치)에 최적화돼 있어
+ * 단일 컬럼·넓은 폭 아카이브에는 RelatedList의 .related-item 그리드(80px meta + 1fr title)가
+ * 더 자연스럽다. 단, 인사이트는 tldr/카테고리/읽기시간이 추가로 노출돼야 하므로
+ * .related-item을 그대로 쓰지 않고 비슷한 mono-meta + serif-title 골격을 단일-컬럼용으로
+ * 살짝 확장해 인라인 스타일링한다.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Masthead from '../../components/Masthead.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Footer from '../../components/Footer.astro';
+import {
+  categoryToKorean,
+  formatKoreanDate,
+  insightUrl,
+} from '../../lib/korean';
+
+const entries = await getCollection('insight');
+const sorted = entries.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+);
+
+const items = sorted.map((entry) => ({
+  slug: entry.slug,
+  href: insightUrl(entry.slug),
+  category: categoryToKorean(entry.data.category).replace(/ /g, ''),
+  publishedAt: formatKoreanDate(entry.data.publishedAt),
+  title: entry.data.title,
+  tldr: entry.data.tldr,
+  readingTime: entry.data.estimatedReadingTime,
+}));
+
+const tagline = '인사이트 — 깊이 있는 데이터 분석, 매주 1~2편 갱신';
+---
+
+<BaseLayout title="인사이트 아카이브 — 스마트데이터샵">
+  <Header activeNav="insight" />
+  <Masthead vol="I" no="89" todayCount={items.length} totalCount={items.length} tagline={tagline} />
+
+  <main>
+    <section class="section" data-screen-label="인사이트 아카이브">
+      <div class="page-width">
+        <SectionHead num="·" title="인사이트 아카이브" moreLabel={`총 ${items.length}편`} />
+
+        {items.length === 0 ? (
+          <div class="empty">
+            첫 인사이트가 곧 발행됩니다 — 깊이 있는 데이터 분석은 가이드북과 함께
+            매주 1~2편 갱신됩니다.
+          </div>
+        ) : (
+          <ol class="ins-list">
+            {items.map((it) => (
+              <li class="ins-item">
+                <a href={it.href} class="ins-link no-underline">
+                  <div class="ins-meta-row">
+                    <span class="cat-label">{it.category}</span>
+                    <span class="ins-pubdate">{it.publishedAt}</span>
+                    <span class="ins-rt">{it.readingTime}분 읽기</span>
+                  </div>
+                  <h3 class="ins-title">{it.title}</h3>
+                  <p class="ins-tldr">{it.tldr}</p>
+                </a>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer vol="I" no="89" />
+</BaseLayout>
+
+<style>
+  .empty {
+    border: 0.5px dashed var(--color-ink-quat);
+    padding: 36px 24px;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    text-align: center;
+  }
+
+  .ins-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-link {
+    display: block;
+    padding: 22px 0;
+    color: inherit;
+  }
+
+  .ins-meta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .ins-pubdate {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .ins-rt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+
+  .ins-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .ins-link:hover .ins-title {
+    color: var(--color-accent);
+  }
+  .ins-tldr {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .ins-title { font-size: 18px; }
+  }
+</style>

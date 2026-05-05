@@ -68,3 +68,12 @@ export function estimateReadingTime(text: string): number {
   const charCount = text.replace(/\s/g, '').length;
   return Math.max(1, Math.round(charCount / 350));
 }
+
+/**
+ * 인사이트 글 URL: /insight/[slug]/ (PLANNING.md §9.2)
+ * 펄스와 달리 날짜를 path에 포함하지 않는다 — evergreen 성격이라
+ * 발행일이 URL 식별자로 의미 있지 않기 때문.
+ */
+export function insightUrl(slug: string): string {
+  return `/insight/${slug}/`;
+}

@@ -1,0 +1,187 @@
+---
+/**
+ * InsightLayout — 인사이트(에버그린 심층분석) 전용 레이아웃.
+ *
+ * ArticleLayout과의 차이:
+ *   1. Header activeNav="insight" (펄스는 "daily")
+ *   2. 브레드크럼: 홈 › 인사이트 › 카테고리 (펄스는 데일리 › 카테고리 › 날짜)
+ *   3. 펄스의 ToollGate "원문 →" 의례가 본문 외부 강제 슬롯에 없음 — 인사이트는
+ *      본문 자체가 심층 분석이므로 페이로드 안에서 필요시 호출자가 직접 사용.
+ *
+ * 동일하게 유지:
+ *   - var(--width-prose) prose 폭, ArticleHeader, SourceList, related slot, MDX 각주 처리.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ArticleHeader from '../components/ArticleHeader.astro';
+import SourceList from '../components/SourceList.astro';
+import Footer from '../components/Footer.astro';
+import { categoryToKorean, formatKoreanDate, type Category } from '../lib/korean';
+
+interface Source {
+  name: string;
+  url?: string;
+  date?: string;
+  accessedAt?: string;
+  note?: string;
+}
+
+interface Props {
+  category: Category;
+  publishedAt: string;
+  updatedAt?: string;
+  title: string;
+  author?: string;
+  /** 인사이트는 frontmatter의 estimatedReadingTime을 그대로 사용 */
+  readingTime: number;
+  sources: Source[];
+  aiAssisted: boolean;
+  vol?: string;
+  no?: string;
+}
+
+const {
+  category,
+  publishedAt,
+  updatedAt,
+  title,
+  author = '김준혁',
+  readingTime,
+  sources,
+  aiAssisted,
+  vol = 'I',
+  no = '89',
+} = Astro.props;
+
+const headerDate = formatKoreanDate(publishedAt);
+const pageTitle = `${title} — 스마트데이터샵 인사이트`;
+
+// 인사이트 브레드크럼: 홈 › 인사이트 › 카테고리
+// BreadcrumbMasthead는 "데일리"가 하드코딩돼 있어 인라인으로 별도 구성.
+const categoryLabel = categoryToKorean(category).replace(/ /g, '');
+---
+
+<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt}>
+  <Header activeNav="insight" date={headerDate} />
+
+  <div class="masthead">
+    <div class="page-width masthead-inner">
+      <div class="masthead-tagline">
+        <a href="/" class="no-underline crumb-link">홈</a>
+        <span class="dot">›</span>
+        <a href="/insight/" class="no-underline crumb-link">인사이트</a>
+        <span class="dot">›</span>
+        <span class="crumb-current">{categoryLabel}</span>
+      </div>
+      <div class="masthead-counter">
+        <span>VOL <strong>{vol}</strong>·NO <strong>{no}</strong></span>
+        <span>인사이트 · 에버그린</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="article-wrap" data-screen-label="인사이트 글">
+    <ArticleHeader
+      category={category}
+      publishedAt={publishedAt}
+      title={title}
+      author={author}
+      readingTime={readingTime}
+      sourceCount={sources.length}
+      aiAssisted={aiAssisted}
+      updatedAt={updatedAt}
+    />
+
+    <div class="article-body">
+      <slot />
+      <hr />
+      <SourceList sources={sources} />
+    </div>
+
+    <slot name="related" />
+  </main>
+
+  <Footer vol={vol} no={no} date={headerDate} />
+</BaseLayout>
+
+<style>
+  .masthead {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 14px 0;
+    background: var(--color-paper);
+  }
+  .masthead-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .masthead-tagline {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-secondary);
+  }
+  .crumb-link {
+    color: var(--color-ink-secondary);
+  }
+  .crumb-current {
+    color: var(--color-ink);
+  }
+  .masthead-counter {
+    display: flex;
+    gap: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .masthead-counter span :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .article-wrap {
+    padding: 48px 0 64px;
+  }
+  .article-body {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 0 var(--width-gutter);
+  }
+  .article-body :global(p) {
+    margin-bottom: 1.4rem;
+  }
+  .article-body :global(h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .article-body :global(hr) {
+    border: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin: 2rem 0;
+  }
+</style>
+
+<!--
+  MDX 각주 스타일링 — ArticleLayout과 동일한 처리(사유 동일).
+-->
+<style is:global>
+  .article-body sup[data-footnote-ref],
+  .article-body sup.footnote-ref {
+    font-size: 10px;
+    vertical-align: super;
+    line-height: 0;
+    margin: 0 1px;
+  }
+  .article-body sup[data-footnote-ref] a,
+  .article-body sup.footnote-ref a {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    text-decoration: none;
+  }
+  .article-body section[data-footnotes] {
+    display: none;
+  }
+</style>

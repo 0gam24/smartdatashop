@@ -1,23 +1,50 @@
 ---
-interface Props {
+/**
+ * ToollGate (자매 사이트 라우팅 매트릭스 — PLANNING.md §12).
+ *
+ * 두 가지 모드:
+ *  - 'route'         : 기존 동작 — primary 자매 사이트 라우팅 + 선택적 secondary 보조 라인.
+ *  - 'main-terminal' : 별도 사이트 미런칭 카테고리 — 뉴스레터 구독 CTA 로 안내.
+ *
+ * 'route' 모드의 DOM/클래스 구조는 픽셀 매칭 시안 그대로 유지한다 (refactor 시 변경 금지).
+ * 'main-terminal' 모드는 동일한 .tollgate 외곽을 재사용하되 내부만 교체한다.
+ */
+
+interface RouteProps {
+  mode?: 'route';
   primaryText: string;
   primaryDomain: string;
   primaryHref: string;
   secondary?: string;
 }
 
-const { primaryText, primaryDomain, primaryHref, secondary } = Astro.props;
+interface MainTerminalProps {
+  mode: 'main-terminal';
+  message: string;
+}
+
+type Props = RouteProps | MainTerminalProps;
+
+const props = Astro.props as Props;
 ---
 
-<aside class="tollgate">
-  <div class="label"><span class="arrow">↳</span> 더 깊이</div>
-  <a href={primaryHref} class="primary">
-    {primaryText}
-    <span class="dot">·</span>
-    <span class="domain">{primaryDomain} →</span>
-  </a>
-  {secondary && <div class="secondary">{secondary}</div>}
-</aside>
+{props.mode === 'main-terminal' ? (
+  <aside class="tollgate tollgate--terminal">
+    <div class="label"><span class="arrow">↳</span> 더 깊이</div>
+    <div class="terminal-message">{props.message}</div>
+    <a href="/#newsletter" class="terminal-cta">뉴스레터 구독하기 →</a>
+  </aside>
+) : (
+  <aside class="tollgate">
+    <div class="label"><span class="arrow">↳</span> 더 깊이</div>
+    <a href={props.primaryHref} class="primary">
+      {props.primaryText}
+      <span class="dot">·</span>
+      <span class="domain">{props.primaryDomain} →</span>
+    </a>
+    {props.secondary && <div class="secondary">{props.secondary}</div>}
+  </aside>
+)}
 
 <style>
   .tollgate {
@@ -53,5 +80,18 @@ const { primaryText, primaryDomain, primaryHref, secondary } = Astro.props;
     color: var(--color-ink-secondary);
     font-style: italic;
     margin-top: 4px;
+  }
+  /* main-terminal 모드 — 동일한 .tollgate 외곽 + 내부만 교체 */
+  .tollgate--terminal .terminal-message {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+  .tollgate--terminal .terminal-cta {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--color-accent);
+    text-decoration: none;
   }
 </style>
