@@ -1,0 +1,117 @@
+---
+/**
+ * BookmarkToggle — 기사 저장/해제 버튼 (순수 클라이언트 사이드).
+ *
+ * localStorage 키 `bookmarks` 에 URL 배열을 저장한다. 토글 동작:
+ *   - 버튼 클릭 시 현재 페이지 경로(pathname+search)를 저장 또는 제거.
+ *   - 저장된 상태에서는 aria-pressed="true" + 텍스트 "저장됨"으로 전환.
+ *
+ * 다른 컴포넌트(예: MobileBottomTabs)에서 카운트를 읽으려면 동일한 키를 참조하고,
+ * 본 컴포넌트가 발화하는 `bookmarks:changed` CustomEvent를 listen하면 된다.
+ *
+ * 서버 의존성 없음 — 자바스크립트 비활성 환경에서는 단순한 비활성 버튼으로 보인다.
+ */
+---
+
+<button
+  type="button"
+  class="bookmark-toggle"
+  data-bookmark-toggle
+  aria-pressed="false"
+  aria-label="이 글을 저장 목록에 추가"
+>
+  <span class="bookmark-icon" aria-hidden="true">☆</span>
+  <span class="bookmark-label">저장</span>
+</button>
+
+<script is:inline>
+  (function () {
+    var KEY = 'bookmarks';
+    function readList() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch (_) {
+        return [];
+      }
+    }
+    function writeList(list) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(list));
+        try {
+          window.dispatchEvent(
+            new CustomEvent('bookmarks:changed', { detail: { count: list.length } }),
+          );
+        } catch (_) {
+          /* IE 등 비지원 환경 — 조용히 통과 */
+        }
+      } catch (_) {
+        /* 저장 실패 — 사용자에게 알리지 않고 통과 */
+      }
+    }
+    function currentPath() {
+      return window.location.pathname + window.location.search;
+    }
+    function setState(btn, saved) {
+      btn.setAttribute('aria-pressed', saved ? 'true' : 'false');
+      btn.setAttribute(
+        'aria-label',
+        saved ? '저장 목록에서 제거' : '이 글을 저장 목록에 추가',
+      );
+      var iconEl = btn.querySelector('.bookmark-icon');
+      var labelEl = btn.querySelector('.bookmark-label');
+      if (iconEl) iconEl.textContent = saved ? '★' : '☆';
+      if (labelEl) labelEl.textContent = saved ? '저장됨' : '저장';
+      btn.classList.toggle('is-saved', saved);
+    }
+    var buttons = document.querySelectorAll('[data-bookmark-toggle]');
+    buttons.forEach(function (btn) {
+      var path = currentPath();
+      var list = readList();
+      setState(btn, list.indexOf(path) !== -1);
+      btn.addEventListener('click', function () {
+        var current = readList();
+        var here = currentPath();
+        var idx = current.indexOf(here);
+        if (idx === -1) {
+          current.push(here);
+        } else {
+          current.splice(idx, 1);
+        }
+        writeList(current);
+        setState(btn, current.indexOf(here) !== -1);
+      });
+    });
+  })();
+</script>
+
+<style>
+  .bookmark-toggle {
+    appearance: none;
+    background: transparent;
+    border: 0.5px solid var(--color-ink-quat);
+    color: var(--color-ink-secondary);
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .bookmark-toggle:hover {
+    color: var(--color-ink);
+    border-color: var(--color-ink-tertiary, var(--color-ink-secondary));
+  }
+  .bookmark-toggle.is-saved {
+    color: var(--color-accent, var(--color-ink));
+    border-color: var(--color-accent, var(--color-ink));
+  }
+  .bookmark-icon {
+    font-size: 12px;
+  }
+</style>

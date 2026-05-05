@@ -1,4 +1,18 @@
 ---
+/**
+ * 뉴스레터 구독 CTA — Stibee 공개 구독 엔드포인트와 실제 연동.
+ *
+ * 환경 변수: PUBLIC_STIBEE_LIST_ID
+ *   .env에 설정하면 빌드 시 클라이언트 JS에 인라이닝되어 fetch 호출.
+ *   미설정 시 fallback (로컬 성공 메시지만 표시) — 빌드 경고 출력.
+ *
+ * 엔드포인트: https://lite.stibee.com/api/v1.0/lists/{LIST_ID}/public/subscribers
+ *   - Stibee Lite/Pro 모두 인증 키 없이 사용 가능
+ *   - body: { subscriber: { email }, groupIds: [], _subscribe_form_email: '' }
+ *
+ * 봇 차단: hidden honeypot 인풋 (_subscribe_form_email) — 채워져 있으면 거부.
+ */
+
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -16,6 +30,17 @@ const {
   submitLabel = '구독하기',
   footnote = '언제든 한 번의 클릭으로 해지 · 개인정보 KISA 표준 양식 준수',
 } = Astro.props;
+
+// PUBLIC_ 접두사 환경변수는 Astro에서 클라이언트 JS로 인라이닝됨.
+const stibeeListId = import.meta.env.PUBLIC_STIBEE_LIST_ID ?? '';
+
+if (!stibeeListId) {
+  // 빌드 시 (Astro dev/build 콘솔) 경고 — 컴포넌트가 fallback 모드로 동작함을 알림.
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[NewsletterCTA] PUBLIC_STIBEE_LIST_ID 미설정 — 구독 폼은 fallback 모드(실제 API 호출 없음)로 동작합니다.',
+  );
+}
 ---
 
 <section class="newsletter" data-screen-label="07 뉴스레터">
@@ -23,24 +48,130 @@ const {
     <div class="newsletter-eyebrow">{eyebrow}</div>
     <h2 class="newsletter-title">{title}</h2>
     <p class="newsletter-desc">{description}</p>
-    <form class="newsletter-form" id="newsletter-form">
-      <input type="email" placeholder={placeholder} required />
-      <button type="submit">{submitLabel}</button>
+    <form
+      class="newsletter-form"
+      id="newsletter-form"
+      data-stibee-list={stibeeListId}
+      novalidate>
+      <input
+        type="email"
+        name="email"
+        placeholder={placeholder}
+        autocomplete="email"
+        required
+        aria-label="이메일 주소"
+      />
+      {/* Honeypot — 사람에게는 보이지 않으나 봇은 채움. tabindex/aria로 접근성 차단. */}
+      <input
+        type="text"
+        name="_subscribe_form_email"
+        class="newsletter-honeypot"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+      <button type="submit" data-default-label={submitLabel}>{submitLabel}</button>
     </form>
+    <div class="newsletter-status" id="newsletter-status" role="status" aria-live="polite"></div>
     <div class="newsletter-foot">{footnote}</div>
   </div>
 </section>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('newsletter-form');
-    if (!form) return;
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button');
-      if (btn) btn.textContent = '구독 완료';
+  (function () {
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('newsletter-form');
+      if (!form) return;
+      const btn = form.querySelector('button[type="submit"]');
+      const emailInput = form.querySelector('input[type="email"]');
+      const honeypotInput = form.querySelector('input[name="_subscribe_form_email"]');
+      const statusEl = document.getElementById('newsletter-status');
+      const listId = form.getAttribute('data-stibee-list') || '';
+      const defaultLabel = btn ? btn.getAttribute('data-default-label') || '구독하기' : '구독하기';
+
+      function setStatus(text, kind) {
+        if (!statusEl) return;
+        statusEl.textContent = text || '';
+        statusEl.dataset.kind = kind || '';
+      }
+
+      async function subscribe(email, honeypot) {
+        // honeypot 채워졌으면 조용히 성공 표시 (봇 차단)
+        if (honeypot && honeypot.trim().length > 0) {
+          return { ok: true, message: '구독 완료 ✓' };
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          return { ok: false, message: '올바른 이메일 주소를 입력해주세요.' };
+        }
+        // listId 없으면 fallback (빌드 환경 미설정)
+        if (!listId) {
+          return { ok: true, message: '구독 완료 ✓' };
+        }
+        try {
+          const res = await fetch(
+            'https://lite.stibee.com/api/v1.0/lists/' + listId + '/public/subscribers',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              mode: 'cors',
+              body: JSON.stringify({
+                subscriber: { email: email },
+                groupIds: [],
+                _subscribe_form_email: '',
+              }),
+            },
+          );
+          if (res.ok) {
+            return { ok: true, message: '구독 완료 ✓' };
+          }
+          let msg = '';
+          try {
+            const data = await res.json();
+            msg = (data && (data.message || data.error)) || '';
+          } catch (_) {}
+          return {
+            ok: false,
+            message: msg || '구독 처리에 실패했습니다. 잠시 후 다시 시도해주세요.',
+          };
+        } catch (_) {
+          return { ok: false, message: '네트워크 오류로 구독 요청을 보내지 못했습니다.' };
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!btn || !emailInput) return;
+        if (btn.disabled) return;
+
+        const email = (emailInput.value || '').trim();
+        const honeypot = honeypotInput ? honeypotInput.value || '' : '';
+
+        // HTML5 validity (required + email)
+        if (!emailInput.checkValidity()) {
+          setStatus('올바른 이메일 주소를 입력해주세요.', 'error');
+          emailInput.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = '구독 처리 중…';
+        setStatus('', '');
+
+        const result = await subscribe(email, honeypot);
+
+        if (result.ok) {
+          btn.textContent = result.message;
+          setStatus('', 'success');
+          emailInput.value = '';
+          // 성공 후 버튼 라벨은 유지 (재구독 시도 차단 효과)
+        } else {
+          btn.disabled = false;
+          btn.textContent = defaultLabel;
+          setStatus(result.message, 'error');
+        }
+      });
     });
-  });
+  })();
 </script>
 
 <style>
@@ -86,8 +217,9 @@ const {
     margin: 0 auto;
     border: 0.5px solid var(--color-ink-quat);
     background: var(--color-paper);
+    position: relative;
   }
-  .newsletter-form input {
+  .newsletter-form input[type="email"] {
     flex: 1;
     border: 0;
     background: transparent;
@@ -97,8 +229,20 @@ const {
     color: var(--color-ink);
     outline: none;
   }
-  .newsletter-form input::placeholder {
+  .newsletter-form input[type="email"]::placeholder {
     color: var(--color-ink-tertiary);
+  }
+  /* Honeypot — 시각적/접근성 모두 숨김. CSS display:none은 일부 봇이 우회하므로
+     절대 위치+오프스크린 사용. */
+  .newsletter-honeypot {
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   .newsletter-form button {
     border: 0;
@@ -110,10 +254,28 @@ const {
     letter-spacing: 0.1em;
     color: var(--color-ink);
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, opacity 0.15s ease;
   }
-  .newsletter-form button:hover {
+  .newsletter-form button:hover:not(:disabled) {
     background: var(--color-paper-deep);
+  }
+  .newsletter-form button:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+  .newsletter-status {
+    margin-top: 12px;
+    min-height: 16px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-secondary);
+  }
+  .newsletter-status[data-kind="error"] {
+    color: var(--color-accent);
+  }
+  .newsletter-status[data-kind="success"] {
+    color: var(--color-ink-secondary);
   }
   .newsletter-foot {
     margin-top: 14px;

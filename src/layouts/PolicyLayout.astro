@@ -18,7 +18,7 @@ const { title, description, eyebrow = '정 책', updatedAt } = Astro.props;
 <BaseLayout title={`${title} — 스마트데이터샵`} description={description ?? title}>
   <Header />
 
-  <main class="policy-wrap">
+  <main id="main" role="main" class="policy-wrap">
     <header class="policy-header">
       <div class="policy-eyebrow">{eyebrow}</div>
       <h1 class="policy-title">{title}</h1>

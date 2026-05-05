@@ -1,0 +1,23 @@
+---
+/**
+ * ReducedMotion — prefers-reduced-motion 사용자에게 트랜지션/애니메이션 거의 제거.
+ *
+ * 왜 여기에 두었나:
+ *   - global.css는 다른 에이전트 소유라 직접 수정 불가.
+ *   - is:global 인라인 <style>로 페이지 전역에 단 한 번만 주입한다.
+ *   - BaseLayout이 한 번 마운트하므로 모든 페이지에 자동 적용.
+ */
+---
+
+<style is:global>
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

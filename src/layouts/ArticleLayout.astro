@@ -4,7 +4,10 @@ import Header from '../components/Header.astro';
 import BreadcrumbMasthead from '../components/BreadcrumbMasthead.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
 import SourceList from '../components/SourceList.astro';
+import AuthorCard from '../components/AuthorCard.astro';
+import CorrectionsBlock from '../components/CorrectionsBlock.astro';
 import Footer from '../components/Footer.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
 import { formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
 
 interface Source {
@@ -13,6 +16,11 @@ interface Source {
   date?: string;
   accessedAt?: string;
   note?: string;
+}
+
+interface Correction {
+  date: string;
+  description: string;
 }
 
 interface Props {
@@ -30,6 +38,12 @@ interface Props {
   description?: string;
   ogImage?: string;
   jsonld?: object | object[];
+  /** 디자인 프리뷰 여부 (ArticleHeader VerifiedBadge 결정용) */
+  previewMode?: boolean;
+  /** 검수 책임 운영자 아이디 목록 */
+  verifiedBy?: string[];
+  /** 정정 이력 — 비어 있으면 CorrectionsBlock은 렌더되지 않는다 */
+  corrections?: Correction[];
 }
 
 const {
@@ -46,6 +60,9 @@ const {
   description,
   ogImage,
   jsonld,
+  previewMode = true,
+  verifiedBy = [],
+  corrections = [],
 } = Astro.props;
 
 // 브레드크럼 표시용 날짜 (YYYY/MM/DD) — KST 기준
@@ -67,10 +84,11 @@ const pageTitle = `${title} — 스마트데이터샵`;
   ogModifiedAt={updatedAt ?? publishedAt}
   jsonld={jsonld}
 >
+  <ReadingProgress />
   <Header activeNav="daily" date={headerDate} />
   <BreadcrumbMasthead category={category} dateText={breadcrumbDate} vol={vol} no={no} />
 
-  <main class="article-wrap" data-screen-label="펄스 글">
+  <main id="main" role="main" class="article-wrap" data-screen-label="펄스 글">
     <ArticleHeader
       category={category}
       publishedAt={publishedAt}
@@ -80,10 +98,14 @@ const pageTitle = `${title} — 스마트데이터샵`;
       sourceCount={sources.length}
       aiAssisted={aiAssisted}
       updatedAt={updatedAt}
+      previewMode={previewMode}
+      verifiedBy={verifiedBy}
     />
 
     <div class="article-body">
       <slot />
+      <AuthorCard name={author} />
+      <CorrectionsBlock corrections={corrections} />
       <hr />
       <SourceList sources={sources} />
     </div>

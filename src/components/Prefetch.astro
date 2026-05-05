@@ -1,0 +1,111 @@
+---
+/**
+ * Prefetch.astro — hover-intent link prefetcher.
+ *
+ * Listens for `mouseenter` on internal `<a>` tags. After 100 ms of sustained
+ * hover (cancelled if the cursor leaves earlier) it injects a
+ * `<link rel="prefetch">` for the destination so navigation is near-instant.
+ *
+ * Skipped:
+ *  - external URLs (anything that isn't same-origin / root-relative)
+ *  - in-page anchors (`#…`)
+ *  - the current page (avoids redundant prefetch)
+ *  - `/admin/*` (CMS, never want to warm those bundles)
+ *  - links the user has already prefetched once
+ *  - users who've signalled `prefers-reduced-data` or saveData
+ *
+ * Mounted once globally from BaseLayout.
+ */
+---
+<script is:inline>
+  (() => {
+    if (typeof window === 'undefined') return;
+
+    // Respect data-saver / reduced-data preferences.
+    const conn =
+      navigator.connection ||
+      navigator.mozConnection ||
+      navigator.webkitConnection;
+    if (conn && (conn.saveData === true || /2g/.test(conn.effectiveType || ''))) {
+      return;
+    }
+
+    const HOVER_DELAY = 100;
+    const seen = new Set();
+    const here = location.pathname.replace(/\/$/, '') || '/';
+
+    function shouldPrefetch(href) {
+      if (!href) return false;
+      if (href.startsWith('#')) return false;
+      if (href.startsWith('mailto:') || href.startsWith('tel:')) return false;
+      let url;
+      try {
+        url = new URL(href, location.href);
+      } catch {
+        return false;
+      }
+      if (url.origin !== location.origin) return false;
+      if (url.pathname.startsWith('/admin/')) return false;
+      const target = url.pathname.replace(/\/$/, '') || '/';
+      if (target === here) return false;
+      if (seen.has(url.pathname + url.search)) return false;
+      return true;
+    }
+
+    function prefetch(url) {
+      const key = url.pathname + url.search;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url.pathname + url.search;
+      link.as = 'document';
+      document.head.appendChild(link);
+    }
+
+    function bind(a) {
+      if (a.dataset.prefetchBound) return;
+      a.dataset.prefetchBound = '1';
+      let timer = null;
+      const start = () => {
+        const href = a.getAttribute('href');
+        if (!shouldPrefetch(href)) return;
+        const url = new URL(href, location.href);
+        timer = window.setTimeout(() => prefetch(url), HOVER_DELAY);
+      };
+      const cancel = () => {
+        if (timer != null) {
+          clearTimeout(timer);
+          timer = null;
+        }
+      };
+      a.addEventListener('mouseenter', start, { passive: true });
+      a.addEventListener('focus', start);
+      a.addEventListener('mouseleave', cancel, { passive: true });
+      a.addEventListener('blur', cancel);
+    }
+
+    function scan(root) {
+      const anchors = (root || document).querySelectorAll('a[href]');
+      anchors.forEach(bind);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => scan(document));
+    } else {
+      scan(document);
+    }
+
+    // Catch links injected later (search modal, view transitions, etc.).
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        m.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.tagName === 'A') bind(node);
+          else scan(node);
+        });
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  })();
+</script>

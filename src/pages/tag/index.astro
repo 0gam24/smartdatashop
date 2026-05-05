@@ -1,0 +1,175 @@
+---
+/**
+ * 태그 인덱스 — /tag/
+ *
+ * 14개 태그(페르소나 5 · 데이터 유형 5 · 액션 4)를 한 화면에서 조망.
+ * 각 그룹 별로 chip wrap 레이아웃, chip 안에 라벨 + mono 카운터.
+ * PLANNING.md §17: 페르소나 30편 누적 시 분리 후보가 되므로
+ * 본 페이지는 누적 진행률을 한눈에 보는 대시보드 역할도 한다.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Masthead from '../../components/Masthead.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Footer from '../../components/Footer.astro';
+import { buildWebPageLD } from '../../lib/jsonld';
+import {
+  GROUP_LABEL,
+  GROUP_VALUES,
+  countEntries,
+  tagUrl,
+  type TagGroup,
+  type TagValue,
+} from '../../lib/tags';
+
+const allPulses = await getCollection('pulse');
+const allInsights = await getCollection('insight');
+const all = [...allPulses, ...allInsights];
+
+const GROUPS: TagGroup[] = ['persona', 'data-type', 'action'];
+
+// 그룹 → 칩 데이터(라벨 + 카운트 + URL + spinoff 표시 여부)
+interface ChipData {
+  value: TagValue;
+  count: number;
+  href: string;
+  pulseCount: number;
+  /** 페르소나 한정: 30편 누적 시 자매 사이트 분리 후보 */
+  spinoffCandidate: boolean;
+}
+
+const groupedChips: Record<TagGroup, ChipData[]> = {
+  persona: [],
+  'data-type': [],
+  action: [],
+};
+for (const group of GROUPS) {
+  for (const value of GROUP_VALUES[group]) {
+    const count = countEntries(group, value, all);
+    const pulseCount = countEntries(group, value, allPulses);
+    groupedChips[group].push({
+      value,
+      count,
+      pulseCount,
+      href: tagUrl(group, value),
+      spinoffCandidate: group === 'persona' && pulseCount >= 30,
+    });
+  }
+}
+
+const tagTotal =
+  GROUP_VALUES.persona.length +
+  GROUP_VALUES['data-type'].length +
+  GROUP_VALUES.action.length;
+const totalEntries = all.length;
+
+const pageTitle = '태그 — 스마트데이터샵';
+const pageDescription =
+  '페르소나 · 데이터 유형 · 액션 — 14개 태그로 펄스와 인사이트 아카이브를 탐색합니다.';
+const masTagline = '태그 아카이브 인덱스';
+const jsonld = buildWebPageLD(pageTitle, pageDescription);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+  <Header activeNav="daily" />
+  <Masthead
+    vol="I"
+    no="89"
+    todayCount={tagTotal}
+    totalCount={totalEntries}
+    tagline={masTagline}
+  />
+
+  <main>
+    {GROUPS.map((group, idx) => (
+      <section class="section" data-screen-label={`태그 — ${group}`}>
+        <div class="page-width">
+          <SectionHead
+            num={String(idx + 1).padStart(2, '0')}
+            title={GROUP_LABEL[group]}
+            moreLabel={`${GROUP_VALUES[group].length}개 태그`}
+          />
+          <div class="chip-wrap">
+            {groupedChips[group].map((chip) => (
+              <a
+                href={chip.href}
+                class={
+                  group === 'action'
+                    ? 'tag-card action no-underline'
+                    : 'tag-card no-underline'
+                }
+                data-spinoff={chip.spinoffCandidate ? 'true' : undefined}
+              >
+                <span class="tag-card-label">{chip.value}</span>
+                <span class="tag-card-count">{chip.count}</span>
+                {chip.spinoffCandidate && (
+                  <span class="tag-card-flag">분리 후보</span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <Footer vol="I" no="89" />
+</BaseLayout>
+
+<style>
+  .chip-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tag-card {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 0.5px solid var(--color-ink-quat);
+    border-radius: 1px;
+    color: var(--color-ink);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .tag-card:hover {
+    border-color: var(--color-ink-tertiary);
+  }
+  .tag-card:hover .tag-card-label {
+    color: var(--color-accent);
+  }
+  .tag-card.action {
+    border-color: var(--color-accent-soft);
+  }
+  .tag-card.action .tag-card-label {
+    color: var(--color-accent);
+  }
+  .tag-card.action:hover {
+    border-color: var(--color-accent);
+  }
+
+  .tag-card-label {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    letter-spacing: -0.005em;
+    color: var(--color-ink);
+    transition: color 0.15s ease;
+  }
+  .tag-card-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.05em;
+  }
+  .tag-card-flag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    border-left: 0.5px solid var(--color-accent-soft);
+    padding-left: 8px;
+    margin-left: 2px;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+/**
+ * VerifiedBadge — 운영자 검수가 끝난 글에만 표시되는 작은 배지.
+ *
+ * AGENTS.md §7 정의: `previewMode === false && verifiedBy.length >= 1` 인 경우에만
+ * 정식 발행으로 간주된다. 본 컴포넌트는 호출자(ArticleHeader)가 props로 그 boolean을
+ * 미리 계산해 넘기는 방식으로 단순화한다 — 본 컴포넌트는 표시 여부만 결정한다.
+ */
+interface Props {
+  /** 검수 완료 여부 (호출자가 previewMode + verifiedBy를 합쳐서 결정) */
+  verified: boolean;
+  /** 마우스오버 툴팁용 운영자 아이디 목록 */
+  verifiedBy?: string[];
+}
+
+const { verified, verifiedBy = [] } = Astro.props;
+const tooltip = verifiedBy.length > 0
+  ? `검수: ${verifiedBy.join(', ')}`
+  : '운영자 검수 완료';
+---
+
+{verified && (
+  <span class="verified-badge" title={tooltip} aria-label={tooltip}>
+    <span aria-hidden="true">✓</span>
+    <span>운영자 검수</span>
+  </span>
+)}
+
+<style>
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 2px;
+    background: var(--color-paper-deep);
+    color: var(--color-ink);
+    border: 0.5px solid var(--color-ink-quat);
+    font-family: var(--font-mono, var(--font-sans));
+    letter-spacing: 0.02em;
+  }
+</style>

@@ -150,6 +150,7 @@ const sisters = [
   <Header activeNav="daily" />
   <Masthead vol="I" no="89" todayCount={5} totalCount={127} />
 
+  <main id="main" role="main">
   <Hero href={pulseUrl(latest.slug, latest.data.publishedAt)} />
 
   <!-- Section 02: 오늘의 펄스 -->
@@ -202,6 +203,7 @@ const sisters = [
   </section>
 
   <NewsletterCTA />
+  </main>
 
   <Footer vol="I" no="89" date="2026년 5월 5일 화" />
 </BaseLayout>

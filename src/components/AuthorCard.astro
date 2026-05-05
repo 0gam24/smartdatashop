@@ -1,0 +1,90 @@
+---
+/**
+ * AuthorCard — 본문 하단에 노출되는 저자 마이크로 카드.
+ *
+ * Google News E-E-A-T 신호 강화 목적: 모든 펄스/인사이트 기사 본문 끝에 저자
+ * 신원·역할·전용 페이지 링크를 노출한다. 저자 페이지는 /authors/junhyuk-kim/.
+ * 사진은 운영자가 실물 이미지를 추가하기 전이므로 모노그램 placeholder를 사용한다.
+ */
+interface Props {
+  /** 저자 표시명. 기본값 김준혁 (운영자) */
+  name?: string;
+  /** 직함/역할 표시 */
+  jobTitle?: string;
+  /** 저자 페이지 URL */
+  href?: string;
+  /** 모노그램 폴백용 한 글자 */
+  initial?: string;
+}
+
+const {
+  name = '김준혁',
+  jobTitle = '운영자 · 데이터 검증 책임자',
+  href = '/authors/junhyuk-kim/',
+  initial = '김',
+} = Astro.props;
+---
+
+<aside class="author-card" aria-label={`저자 ${name}`}>
+  <a href={href} class="author-card-link">
+    <span class="author-photo" aria-hidden="true">{initial}</span>
+    <span class="author-meta">
+      <span class="author-name">{name}</span>
+      <span class="author-title">{jobTitle}</span>
+    </span>
+    <span class="author-arrow" aria-hidden="true">→</span>
+  </a>
+</aside>
+
+<style>
+  .author-card {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .author-card-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 0;
+  }
+  .author-card-link:hover .author-name {
+    text-decoration: underline;
+  }
+  .author-photo {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-paper-deep);
+    border: 0.5px solid var(--color-ink-quat);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--color-ink-secondary);
+  }
+  .author-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+  }
+  .author-name {
+    font-size: 14px;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .author-title {
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .author-arrow {
+    flex: 0 0 auto;
+    font-size: 14px;
+    color: var(--color-ink-tertiary, var(--color-ink-secondary));
+  }
+</style>

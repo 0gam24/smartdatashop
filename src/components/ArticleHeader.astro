@@ -1,5 +1,7 @@
 ---
 import { categoryToKorean, formatKoreanDate, formatKoreanTime, type Category } from '../lib/korean';
+import VerifiedBadge from './VerifiedBadge.astro';
+import BookmarkToggle from './BookmarkToggle.astro';
 
 interface Props {
   category: Category;
@@ -10,6 +12,10 @@ interface Props {
   sourceCount: number;
   aiAssisted: boolean;
   updatedAt?: string;
+  /** 디자인 프리뷰 여부 — 검수 배지 표시 결정에 사용 */
+  previewMode?: boolean;
+  /** 검수 책임 운영자 아이디 목록 */
+  verifiedBy?: string[];
 }
 
 const {
@@ -21,7 +27,12 @@ const {
   sourceCount,
   aiAssisted,
   updatedAt,
+  previewMode = true,
+  verifiedBy = [],
 } = Astro.props;
+
+// 정식 발행 = 명시적으로 previewMode가 꺼졌고, 검수 책임자가 1명 이상 등록된 경우
+const isVerified = previewMode === false && verifiedBy.length >= 1;
 
 const categoryLabel = categoryToKorean(category);
 const dateLine = `${formatKoreanDate(publishedAt)} · ${formatKoreanTime(publishedAt)}`;
@@ -48,6 +59,9 @@ const dateLine = `${formatKoreanDate(publishedAt)} · ${formatKoreanTime(publish
       </>
     )}
     {aiAssisted && <span class="ai-badge">AI 보조</span>}
+    <VerifiedBadge verified={isVerified} verifiedBy={verifiedBy} />
+    <span class="byline-spacer"></span>
+    <BookmarkToggle />
   </div>
 </header>
 
@@ -86,5 +100,9 @@ const dateLine = `${formatKoreanDate(publishedAt)} · ${formatKoreanTime(publish
     align-items: center;
     gap: 4px;
     flex-wrap: wrap;
+  }
+  .byline-spacer {
+    flex: 1 1 auto;
+    min-width: 4px;
   }
 </style>

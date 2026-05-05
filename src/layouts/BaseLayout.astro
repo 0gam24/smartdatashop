@@ -1,6 +1,11 @@
 ---
 import '../styles/global.css';
 import SearchModal from '../components/SearchModal.astro';
+import Prefetch from '../components/Prefetch.astro';
+import SkipToContent from '../components/SkipToContent.astro';
+import MobileBottomTabs from '../components/MobileBottomTabs.astro';
+import ReducedMotion from '../components/ReducedMotion.astro';
+import PreviewBanner from '../components/PreviewBanner.astro';
 
 interface Props {
   title?: string;
@@ -35,6 +40,21 @@ const canonicalUrl = Astro.url.toString();
 
 // JSON-LD 배열 정규화 (단일 객체도 배열로 통일)
 const jsonldArray: object[] = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld]) : [];
+
+/**
+ * Cloudflare Web Analytics — privacy-friendly, cookieless beacon.
+ *
+ * Enable by setting `PUBLIC_CF_ANALYTICS_TOKEN` in the Cloudflare Pages
+ * environment (Settings → Environment variables) to the site token shown
+ * in the Cloudflare dashboard under Web Analytics → your site → Manage Site.
+ * If the variable is unset, no script is rendered (prevents broken beacons
+ * on local builds and PR previews without the secret).
+ *
+ * The beacon is also suppressed during `astro dev` so analytics never
+ * counts developer page views.
+ */
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN as string | undefined;
+const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
 ---
 
 <!doctype html>
@@ -72,8 +92,27 @@ const jsonldArray: object[] = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld
     <link rel="alternate" type="application/rss+xml" title="스마트데이터샵 RSS" href="/feed.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    <!-- Same-page Korean alternate (helps crawlers confirm primary language) -->
+    <link rel="alternate" hreflang="ko" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+    <!-- PWA + theming -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#faf7f0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="스마트데이터샵" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Performance: preconnect / dns-prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
@@ -88,9 +127,28 @@ const jsonldArray: object[] = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld
     {jsonldArray.map((data) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />
     ))}
+
+    {enableCfAnalytics && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}
+      />
+    )}
   </head>
-  <body>
+  <!--
+    id="main-body" 는 SkipToContent의 secondary fallback 식별자.
+    1차 점프 타깃은 소비 레이아웃의 <main id="main">. (Article/Policy/Insight)
+    main 요소가 없는 페이지(index 등)에서는 해당 페이지에서 <main id="main"> 래퍼를 추가한다.
+  -->
+  <body id="main-body">
+    <ReducedMotion />
+    <PreviewBanner />
+    <SkipToContent />
     <SearchModal />
     <slot />
+    <MobileBottomTabs />
+    <Prefetch />
   </body>
 </html>

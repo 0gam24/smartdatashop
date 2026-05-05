@@ -25,6 +25,32 @@ const tagGroupsSchema = z.object({
     .default([]),
 });
 
+/**
+ * Editorial verification protocol — AGENTS.md §7
+ *
+ * 본 사이트의 펄스/인사이트 글은 두 단계로 분리된 발행 모델을 따른다.
+ *
+ *   1) `previewMode: true` (기본값)
+ *      - 디자인·레이아웃 검수용 샘플로 간주된다.
+ *      - 본문에 등장하는 수치·인용·기관 발표 일자 등은 운영자(편집·검증 책임자)
+ *        손에 의해 1차 출처와 일대일 대조되기 전이다.
+ *      - 사이트 상단에 "디자인 프리뷰" 배너가 노출되어, 독자가 정식 데이터
+ *        저널리즘이 아님을 즉시 인지하도록 한다.
+ *
+ *   2) `previewMode: false` + `verifiedBy: ['<operator-id>', ...]`
+ *      - 운영자가 1차 출처(원문 PDF·기관 통계 DB·공식 보도자료)와 본문을
+ *        직접 대조해 검수를 끝냈음을 명시적으로 선언한다.
+ *      - `verifiedBy` 배열에는 검수에 책임을 진 운영자 아이디가 1개 이상
+ *        포함되어야 한다(예: 'junhyuk-kim'). 빈 배열 + previewMode:false 조합은
+ *        규약 위반이며, 사이트는 안전을 위해 디자인 프리뷰 배너를 계속 노출한다.
+ *
+ * 즉 — 정식 발행으로 간주되는 글의 정의는 다음과 같다:
+ *   `previewMode === false && verifiedBy.length >= 1`
+ *
+ * 이 규약은 "AI가 그럴듯하게 만들어낸 정부 통계 인용"이 운영자 검증 없이
+ * 사이트의 권위로 발행되는 사고를 구조적으로 차단하기 위한 장치다.
+ */
+
 // 8.1 펄스 (일일)
 const pulse = defineCollection({
   type: 'content',
@@ -40,6 +66,10 @@ const pulse = defineCollection({
     aiAssisted: z.boolean().default(false),
     correctionLog: z.array(correctionSchema).default([]),
     tags: tagGroupsSchema.default({ personas: [], dataTypes: [], actions: [] }),
+    /** 디자인 프리뷰 여부 — 기본 true (검수 전 안전망). 위 § "Editorial verification protocol" 참조. */
+    previewMode: z.boolean().default(true),
+    /** 검수 책임 운영자 아이디 목록. 빈 배열이면 미검수로 간주. */
+    verifiedBy: z.array(z.string()).default([]),
   }),
 });
 
@@ -58,6 +88,10 @@ const insight = defineCollection({
     aiAssisted: z.boolean().default(false),
     correctionLog: z.array(correctionSchema).default([]),
     tags: tagGroupsSchema.default({ personas: [], dataTypes: [], actions: [] }),
+    /** 디자인 프리뷰 여부 — 기본 true. 위 § "Editorial verification protocol" 참조. */
+    previewMode: z.boolean().default(true),
+    /** 검수 책임 운영자 아이디 목록. 빈 배열이면 미검수로 간주. */
+    verifiedBy: z.array(z.string()).default([]),
   }),
 });
 

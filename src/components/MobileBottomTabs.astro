@@ -1,0 +1,175 @@
+---
+/**
+ * MobileBottomTabs — 모바일(≤640px) 전용 sticky 하단 5탭 내비.
+ *
+ * 사양 (PLANNING.md §11.10):
+ *   - 위치: position: fixed; bottom: 0; left/right: 0; z-index: 40
+ *   - 높이: 56px + iOS safe-area-inset-bottom
+ *   - 상단 hairline (0.5px) + paper-soft 배경 + backdrop blur
+ *   - 5탭: 홈 / 검색 / 데일리 / 인사이트 / 자매
+ *   - 검색 탭은 [data-search-trigger]로 SearchModal 발동 (별도 핸들러 불필요)
+ *   - z-index 40 → 헤더(50)와 SearchModal(200)보다 아래
+ *
+ * 본문 padding-bottom 처리:
+ *   - 모바일에서 컨텐츠가 탭바 뒤로 가려지지 않도록 body에 56px 하단 패딩.
+ *   - global.css는 수정 불가하므로 이 컴포넌트가 is:global 스타일로 직접 주입.
+ *   - 데스크톱(≥641px)에서는 탭바 자체를 display:none, body 패딩도 0.
+ */
+
+interface TabDef {
+  href: string;
+  label: string;
+  /** SearchModal 트리거(검색 탭) */
+  search?: boolean;
+  /** 12px 라인 SVG path (stroke="currentColor", fill="none") */
+  path: string;
+  active?: boolean;
+}
+
+// 활성 탭 판정 — Astro.url.pathname 기준
+const path = Astro.url.pathname;
+const isHome = path === '/' || path === '';
+const isInsight = path.startsWith('/insight');
+
+const tabs: TabDef[] = [
+  {
+    href: '/',
+    label: '홈',
+    active: isHome,
+    path: 'M3 12 12 4l9 8M5 10v10h5v-6h4v6h5V10',
+  },
+  {
+    href: '#',
+    label: '검색',
+    search: true,
+    path: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14ZM20 20l-3.5-3.5',
+  },
+  {
+    href: '/',
+    label: '데일리',
+    active: false,
+    path: 'M4 6h16M4 12h16M4 18h10',
+  },
+  {
+    href: '/insight/',
+    label: '인사이트',
+    active: isInsight,
+    path: 'M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4M9 12a3 3 0 1 1 6 0c0 1.5-1 2-1.5 2.5S13 16 13 17h-2c0-1-.5-1.5-1-2.5S9 13.5 9 12Z',
+  },
+  {
+    href: '/#network',
+    label: '자매',
+    path: 'M6 4h12v6H6zM6 14h12v6H6zM12 10v4',
+  },
+];
+---
+
+<nav class="bottom-tabs" aria-label="하단 탭" data-mobile-tabs>
+  {tabs.map((t) => (
+    t.search ? (
+      <button
+        type="button"
+        class:list={['tab', { active: t.active }]}
+        data-search-trigger
+        aria-label={`${t.label} 열기`}
+      >
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d={t.path} />
+        </svg>
+        <span class="tab-label">{t.label}</span>
+        {t.active && <span class="tab-dot" aria-hidden="true" />}
+      </button>
+    ) : (
+      <a
+        href={t.href}
+        class:list={['tab', { active: t.active }]}
+        aria-current={t.active ? 'page' : undefined}
+      >
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d={t.path} />
+        </svg>
+        <span class="tab-label">{t.label}</span>
+        {t.active && <span class="tab-dot" aria-hidden="true" />}
+      </a>
+    )
+  ))}
+</nav>
+
+<style>
+  .bottom-tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: none; /* 데스크톱 기본 숨김 */
+    grid-template-columns: repeat(5, 1fr);
+    align-items: stretch;
+    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border-top: 0.5px solid var(--color-ink-quat);
+    background: rgba(250, 247, 240, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 640px) {
+    .bottom-tabs {
+      display: grid;
+    }
+  }
+
+  .tab {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px 2px;
+    background: transparent;
+    border: 0;
+    color: var(--color-ink-secondary);
+    font-family: var(--font-sans);
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -3px;
+  }
+  .tab.active {
+    color: var(--color-ink);
+  }
+  .tab-icon {
+    width: 22px;
+    height: 22px;
+    /* 명세는 12px stroke-2 라인 — 22px 컨테이너 안에서 stroke-width 2가 자연스러움 */
+  }
+  .tab-label {
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .tab-dot {
+    position: absolute;
+    bottom: 4px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+</style>
+
+<!--
+  body 하단 패딩 — 모바일 탭바와 컨텐츠 충돌 방지.
+  global.css 직접 수정 금지 제약하에, 컴포넌트 자체 is:global로 주입.
+-->
+<style is:global>
+  @media (max-width: 640px) {
+    body {
+      padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+</style>

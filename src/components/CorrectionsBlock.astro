@@ -1,0 +1,72 @@
+---
+/**
+ * CorrectionsBlock — 기사 본문 하단의 정정 이력 블록.
+ *
+ * 데이터 저널리즘에서 정정 이력의 가시성은 신뢰의 핵심 신호다. 본 컴포넌트는
+ * frontmatter `correctionLog`에 항목이 1개 이상 있을 때만 렌더되며, 빈 배열이면
+ * 아무것도 출력하지 않는다(빈 박스 노이즈 회피).
+ *
+ * 표기 형식: [YYYY-MM-DD] description
+ *   예) [2026-05-06] 오타 수정: "1.5배" → "1.5배 (서버 용량 기준)"
+ */
+interface Correction {
+  date: string;
+  description: string;
+}
+
+interface Props {
+  corrections: Correction[];
+}
+
+const { corrections } = Astro.props;
+const hasCorrections = Array.isArray(corrections) && corrections.length > 0;
+---
+
+{hasCorrections && (
+  <aside class="corrections" aria-label="정정 이력">
+    <div class="corrections-label">정정 이력</div>
+    <ul class="corrections-list">
+      {corrections.map((c) => (
+        <li class="correction-entry">
+          <span class="correction-date">[{c.date}]</span>
+          <span class="correction-desc">{c.description}</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .corrections {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .corrections-label {
+    font-family: var(--font-mono, var(--font-sans));
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--color-ink-secondary);
+    margin-bottom: 8px;
+  }
+  .corrections-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .correction-entry {
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+  .correction-date {
+    font-family: var(--font-mono, var(--font-sans));
+    color: var(--color-ink-tertiary, var(--color-ink-secondary));
+    margin-right: 6px;
+  }
+  .correction-desc {
+    color: var(--color-ink);
+  }
+</style>

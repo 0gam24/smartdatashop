@@ -1,0 +1,325 @@
+---
+/**
+ * 태그 아카이브 — /tag/{group}/{slug}/
+ *
+ * 14개 태그(페르소나 5 · 데이터 유형 5 · 액션 4)별 펄스 + 인사이트 모음.
+ * PLANNING.md §17: 페르소나 태그가 30편 이상 누적되면 자매 사이트
+ * 분리 후보가 되므로, 본 페이지는 누적 추적의 시각적 단서이기도 하다.
+ *
+ * 라우트 파라미터:
+ *  - group: 'persona' | 'data-type' | 'action'
+ *  - slug:  태그 한글 값 그대로 (예: '사회초년생'). Astro는 다국어 path
+ *           세그먼트를 그대로 받아주며, 브라우저는 wire 상에서 percent-encode 한다.
+ *           로마자 슬러그를 만들지 않는 이유 = 한국어 독자에게 직관적이기 때문.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Masthead from '../../../../components/Masthead.astro';
+import SectionHead from '../../../../components/SectionHead.astro';
+import PulseList from '../../../../components/PulseList.astro';
+import PulseCard from '../../../../components/PulseCard.astro';
+import Footer from '../../../../components/Footer.astro';
+import {
+  categoryToKorean,
+  formatKoreanTime,
+  pulseDateParts,
+  pulseUrl,
+  insightUrl,
+} from '../../../../lib/korean';
+import { buildWebPageLD } from '../../../../lib/jsonld';
+import {
+  GROUP_LABEL,
+  GROUP_VALUES,
+  entryHasTag,
+  tagUrl,
+  type TagGroup,
+  type TagValue,
+} from '../../../../lib/tags';
+
+export async function getStaticPaths() {
+  const groups: TagGroup[] = ['persona', 'data-type', 'action'];
+  return groups.flatMap((group) =>
+    GROUP_VALUES[group].map((value) => ({
+      params: { group, slug: value },
+      props: { group, value },
+    })),
+  );
+}
+
+interface Props {
+  group: TagGroup;
+  value: TagValue;
+}
+
+const { group, value } = Astro.props as Props;
+
+const tagLabel = value;
+const groupLabel = GROUP_LABEL[group];
+
+// ── 펄스 / 인사이트: 해당 태그가 붙은 항목만, 최신 우선 ────────────
+const allPulses = await getCollection('pulse');
+const taggedPulses = allPulses
+  .filter((e) => entryHasTag(e, group, value))
+  .sort(
+    (a, b) =>
+      new Date(b.data.publishedAt).getTime() -
+      new Date(a.data.publishedAt).getTime(),
+  );
+
+const allInsights = await getCollection('insight');
+const taggedInsights = allInsights
+  .filter((e) => entryHasTag(e, group, value))
+  .sort(
+    (a, b) =>
+      new Date(b.data.publishedAt).getTime() -
+      new Date(a.data.publishedAt).getTime(),
+  );
+
+// 홈(index.astro 섹션 02)와 동일한 PulseCard 매핑
+const pulseCards = taggedPulses.map((entry: CollectionEntry<'pulse'>) => {
+  const { personas, dataTypes, actions } = entry.data.tags;
+  const tags = [
+    ...personas.map((label) => ({ label })),
+    ...dataTypes.map((label) => ({ label })),
+    ...actions.map((label) => ({ label, action: true })),
+  ].slice(0, 3);
+  return {
+    category: categoryToKorean(entry.data.category),
+    time: formatKoreanTime(entry.data.publishedAt),
+    title: entry.data.title,
+    tldr: entry.data.tldr,
+    href: pulseUrl(entry.slug, entry.data.publishedAt),
+    tags,
+  };
+});
+
+const insightItems = taggedInsights.map((entry) => {
+  const { year, month, day } = pulseDateParts(entry.data.publishedAt);
+  return {
+    when: `${year}.${month}.${day}`,
+    title: entry.data.title,
+    href: insightUrl(entry.slug),
+  };
+});
+
+const pulseCount = pulseCards.length;
+const insightCount = insightItems.length;
+const totalCount = pulseCount + insightCount;
+
+// 관련 태그: 같은 그룹 안의 다른 태그(현재 태그 자신은 제외)
+const peers = GROUP_VALUES[group].filter((v) => v !== value);
+
+// SEO
+const pageTitle = `${tagLabel} — 태그 아카이브 — 스마트데이터샵`;
+const pageDescription = `${groupLabel} · ${tagLabel} 태그가 붙은 펄스(${pulseCount}편) + 인사이트(${insightCount}편) 모음.`;
+const masTagline = `${tagLabel} 태그 아카이브`;
+const jsonld = buildWebPageLD(pageTitle, pageDescription);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+  <Header activeNav="daily" />
+  <Masthead
+    vol="I"
+    no="89"
+    todayCount={pulseCount}
+    totalCount={totalCount}
+    tagline={masTagline}
+  />
+
+  <main>
+    <!-- 헤더 + 카운터 + 관련 태그 strip -->
+    <section class="section" data-screen-label={`${group}/${value} 태그 아카이브`}>
+      <div class="page-width">
+        <SectionHead
+          num="·"
+          title={tagLabel}
+          moreLabel={`${pulseCount}편 + ${insightCount}편`}
+        />
+
+        <div class="tag-meta">
+          <span class="tag-meta-group">{groupLabel}</span>
+          <span class="tag-meta-sep">·</span>
+          <a href="/tag/" class="tag-meta-back no-underline">전체 태그 →</a>
+        </div>
+
+        {peers.length > 0 && (
+          <div class="peer-strip">
+            <span class="peer-label">관련 태그</span>
+            <div class="peer-chips">
+              {peers.map((p) => (
+                <a
+                  href={tagUrl(group, p)}
+                  class={group === 'action' ? 'tag-chip action no-underline' : 'tag-chip no-underline'}
+                >
+                  {p}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {totalCount === 0 ? (
+          <div class="empty">
+            아직 <strong>{tagLabel}</strong> 태그에 발행된 글이 없습니다 — 30편 누적 시 별도 사이트 분리를 검토합니다.
+          </div>
+        ) : pulseCount > 0 ? (
+          <PulseList>
+            {pulseCards.map((p) => <PulseCard {...p} />)}
+          </PulseList>
+        ) : null}
+      </div>
+    </section>
+
+    <!-- 인사이트 섹션 (해당 태그에 인사이트가 있을 때만) -->
+    {insightCount > 0 && (
+      <section class="section" data-screen-label={`${group}/${value} 인사이트`}>
+        <div class="page-width">
+          <SectionHead
+            num="·"
+            title={`${tagLabel} 인사이트`}
+            moreLabel={`${insightCount}편`}
+          />
+          <ol class="ins-list">
+            {insightItems.map((it) => (
+              <li class="ins-item">
+                <a href={it.href} class="ins-link no-underline">
+                  <span class="ins-when">{it.when}</span>
+                  <span class="ins-ttl">{it.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer vol="I" no="89" />
+</BaseLayout>
+
+<style>
+  .tag-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: -16px 0 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-tertiary);
+  }
+  .tag-meta-group {
+    color: var(--color-ink-secondary);
+  }
+  .tag-meta-sep {
+    color: var(--color-ink-quat);
+  }
+  .tag-meta-back {
+    color: var(--color-ink-secondary);
+  }
+  .tag-meta-back:hover {
+    color: var(--color-accent);
+  }
+
+  .peer-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0 22px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    margin-bottom: 28px;
+  }
+  .peer-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+  }
+  .peer-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  /* PulseCard와 동일한 .tag-chip 톤을 본 페이지 한정으로 재현 (전역 CSS 수정 금지) */
+  .peer-chips :global(.tag-chip) {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-tertiary);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 2px 8px;
+    border-radius: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .peer-chips :global(.tag-chip:hover) {
+    color: var(--color-ink);
+    border-color: var(--color-ink-tertiary);
+  }
+  .peer-chips :global(.tag-chip.action) {
+    color: var(--color-accent);
+    border-color: var(--color-accent-soft);
+  }
+  .peer-chips :global(.tag-chip.action:hover) {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .empty {
+    border: 0.5px dashed var(--color-ink-quat);
+    padding: 36px 24px;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    text-align: center;
+  }
+  .empty strong {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  /* 인사이트 리스트 — category/[slug]와 동일한 골격 */
+  .ins-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-link {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding: 18px 0;
+    color: inherit;
+  }
+  .ins-when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .ins-ttl {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .ins-link:hover .ins-ttl {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 640px) {
+    .ins-link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .ins-ttl { font-size: 16px; }
+  }
+</style>

@@ -65,6 +65,9 @@ const related = relatedEntries.map((e) => {
   readingTime={data.estimatedReadingTime}
   sources={data.sources}
   aiAssisted={data.aiAssisted}
+  previewMode={data.previewMode}
+  verifiedBy={data.verifiedBy}
+  corrections={data.correctionLog}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />

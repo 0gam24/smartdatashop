@@ -1,0 +1,42 @@
+---
+/**
+ * SkipToContent — 키보드 접근성 표준.
+ *
+ * 동작:
+ *   - 평소엔 화면 밖에 숨겨져 있다가, 탭 키로 첫 포커스를 받으면 좌상단에 노출된다.
+ *   - 클릭/엔터하면 페이지의 <main id="main"> 으로 점프.
+ *   - main 요소는 ArticleLayout/PolicyLayout/InsightLayout 등 소비 레이아웃이 표시한다.
+ *     (BaseLayout 자체는 main을 렌더하지 않으므로, 호출자가 id를 부여한다.)
+ *
+ * 마운트 위치: BaseLayout body의 최상단(첫 번째 포커스 가능 요소).
+ */
+---
+
+<a href="#main" class="skip-link">본문으로 건너뛰기</a>
+
+<style>
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 300;
+    padding: 10px 16px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: 2px;
+    /* 시각적으로 화면 밖으로 보내되, 스크린리더/키보드 포커스는 유지 */
+    transform: translateY(-200%);
+    transition: transform 0.15s ease-out;
+  }
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
