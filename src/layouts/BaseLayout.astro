@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SearchModal from '../components/SearchModal.astro';
 
 interface Props {
   title?: string;
@@ -89,6 +90,7 @@ const jsonldArray: object[] = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld
     ))}
   </head>
   <body>
+    <SearchModal />
     <slot />
   </body>
 </html>

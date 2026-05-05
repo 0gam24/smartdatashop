@@ -25,3 +25,37 @@
 ## (d) 컬렉션 추가/수정
 편집할 파일: `public/admin/config.yml`. `src/content/config.ts`의 Zod 스키마와
 필드 이름·타입이 일치해야 빌드가 깨지지 않습니다.
+
+## 로컬 테스트 검증 결과 (2026-05-05)
+
+검증 절차에서 다음을 확인했습니다.
+
+- `public/admin/config.yml`은 YAML 파서로 정상 파싱됨 (5개 컬렉션 모두 존재).
+- 백엔드: `0gam24/smartdatashop@main`, `local_backend: true` 활성, `media_folder=public/uploads`, `public_folder=/uploads`.
+- Astro dev 서버는 `/admin/index.html`(200), `/admin/config.yml`(200)을 정상 제공.
+  - 참고: `/admin/`(디렉터리 인덱스)은 dev 모드에서 404가 정상이며, 빌드/프로덕션에서는 어댑터/호스팅이 인덱스를 처리합니다. 브라우저 접속 시에는 `/admin/index.html`로 자동 리다이렉트되거나 직접 접근하세요.
+- `npx decap-server`는 8081 포트에 즉시 바인딩되며 `POST /api/v1 {action:"info"}`로 `{"repo":"...","publish_modes":["simple"],"type":"local_fs"}` 응답 확인됨.
+
+### 알려진 스키마 드리프트 (Decap UI ↔ Zod)
+
+빌드를 깨뜨리지 않는 누락된 선택적 필드(편집기에서 입력 불가, 파일에 직접 추가해야 함):
+
+- `pulse`: `chartUrl?`, `coverImage?`, `correctionLog[]` 없음
+- `insight`: `coverImage?`, `correctionLog[]` 없음
+
+`guidebook`, `guidebookChapter`, `dataPage`는 일치. `body`는 MDX 본문이므로 Zod 프런트매터 스키마에 없는 것이 정상입니다.
+
+### 운영자용 표준 실행 순서
+
+```
+# Terminal 1 (already done by Astro dev or build)
+npm run dev
+
+# Terminal 2 — decap-server only needed for /admin/ to authenticate locally
+npx decap-server
+
+# Then visit:
+http://localhost:4321/admin/
+```
+
+`decap-server`는 `--no-save`로 즉시 받아 실행되며 별도 설정이 필요 없습니다.

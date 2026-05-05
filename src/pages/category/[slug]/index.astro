@@ -1,0 +1,221 @@
+---
+/**
+ * 카테고리 아카이브 — /category/{slug}/
+ *
+ * 5개 카테고리(policy / tax-finance / market / stats / ai-tech)별 펄스 + 인사이트 모음.
+ * /category/{slug}/feed.xml(RSS)와 짝을 이루는 HTML 인덱스 페이지.
+ *
+ * 구성:
+ *  - 펄스 섹션: 홈(섹션 02)과 동일한 PulseList + PulseCard 그리드 (전체, 최신순)
+ *  - 인사이트 섹션: 해당 카테고리에 인사이트 엔트리가 1편 이상 있을 때만 노출,
+ *    related-list 패턴(YYYY.MM.DD + 제목 링크)
+ *
+ * 시각 언어:
+ *  - 박스/그림자 없음, hairline(0.5px)만 사용
+ *  - mono = 시간/날짜, serif = 제목 (DESIGN.md §2.1 활자 시스템)
+ *  - .page-width 컨테이너 내부 (홈 섹션과 정렬 동일)
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Masthead from '../../../components/Masthead.astro';
+import SectionHead from '../../../components/SectionHead.astro';
+import PulseList from '../../../components/PulseList.astro';
+import PulseCard from '../../../components/PulseCard.astro';
+import Footer from '../../../components/Footer.astro';
+import {
+  categoryToKorean,
+  formatKoreanTime,
+  pulseDateParts,
+  pulseUrl,
+  insightUrl,
+  type Category,
+} from '../../../lib/korean';
+import { buildWebPageLD } from '../../../lib/jsonld';
+
+const CATEGORIES: Category[] = ['policy', 'tax-finance', 'market', 'stats', 'ai-tech'];
+
+export async function getStaticPaths() {
+  const cats: Category[] = ['policy', 'tax-finance', 'market', 'stats', 'ai-tech'];
+  return cats.map((cat) => ({
+    params: { slug: cat },
+    props: { category: cat },
+  }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props as Props;
+
+// 안전 가드: getStaticPaths가 5개로 제한해도 타입 좁히기 차원에서 검증
+if (!CATEGORIES.includes(category)) {
+  throw new Error(`Unknown category slug: ${category}`);
+}
+
+const categoryLabel = categoryToKorean(category);
+
+// ── 펄스: 해당 카테고리만, 최신 우선 ───────────────────────────────
+const allPulses = await getCollection('pulse', (e) => e.data.category === category);
+const sortedPulses = allPulses.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+);
+
+// 홈(index.astro 섹션 02)와 정확히 동일한 매핑 — 태그는 persona+dataType+action 합치고 slice(0,3)
+const pulseCards = sortedPulses.map((entry) => {
+  const { personas, dataTypes, actions } = entry.data.tags;
+  const tags = [
+    ...personas.map((label) => ({ label })),
+    ...dataTypes.map((label) => ({ label })),
+    ...actions.map((label) => ({ label, action: true })),
+  ].slice(0, 3);
+  return {
+    category: categoryToKorean(entry.data.category),
+    time: formatKoreanTime(entry.data.publishedAt),
+    title: entry.data.title,
+    tldr: entry.data.tldr,
+    href: pulseUrl(entry.slug, entry.data.publishedAt),
+    tags,
+  };
+});
+
+// ── 인사이트: 해당 카테고리만, 최신 우선 ───────────────────────────
+const allInsights = await getCollection('insight', (e) => e.data.category === category);
+const sortedInsights = allInsights.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
+);
+const insightItems = sortedInsights.map((entry) => {
+  const { year, month, day } = pulseDateParts(entry.data.publishedAt);
+  return {
+    when: `${year}.${month}.${day}`,
+    title: entry.data.title,
+    href: insightUrl(entry.slug),
+  };
+});
+
+const pulseCount = pulseCards.length;
+const insightCount = insightItems.length;
+const totalCount = pulseCount + insightCount;
+
+// SEO 메타 — categoryLabel은 "정 책"처럼 글자 사이 공백을 포함, 제목/설명에서도 그대로 유지
+const pageTitle = `${categoryLabel} — 스마트데이터샵`;
+const pageDescription = `${categoryLabel} 카테고리의 최신 펄스와 인사이트 모음.`;
+const masTagline = `${categoryLabel} 카테고리 아카이브`;
+
+const jsonld = buildWebPageLD(pageTitle, pageDescription);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+  <Header activeNav="daily" />
+  <Masthead
+    vol="I"
+    no="89"
+    todayCount={pulseCount}
+    totalCount={totalCount}
+    tagline={masTagline}
+  />
+
+  <main>
+    <!-- 펄스 섹션 -->
+    <section class="section" data-screen-label={`${category} 펄스 아카이브`}>
+      <div class="page-width">
+        <SectionHead num="·" title={categoryLabel} moreLabel={`${pulseCount}편`} />
+
+        {pulseCount === 0 ? (
+          <div class="empty">
+            아직 <strong>{categoryLabel}</strong> 카테고리에 발행된 펄스가 없습니다 — 곧 첫 글이 올라옵니다.
+          </div>
+        ) : (
+          <PulseList>
+            {pulseCards.map((p) => <PulseCard {...p} />)}
+          </PulseList>
+        )}
+      </div>
+    </section>
+
+    <!-- 인사이트 섹션 (해당 카테고리에 인사이트가 있을 때만) -->
+    {insightCount > 0 && (
+      <section class="section" data-screen-label={`${category} 인사이트`}>
+        <div class="page-width">
+          <SectionHead
+            num="·"
+            title={`${categoryLabel} 인사이트`}
+            moreLabel={`${insightCount}편`}
+          />
+          <ol class="ins-list">
+            {insightItems.map((it) => (
+              <li class="ins-item">
+                <a href={it.href} class="ins-link no-underline">
+                  <span class="ins-when">{it.when}</span>
+                  <span class="ins-ttl">{it.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer vol="I" no="89" />
+</BaseLayout>
+
+<style>
+  .empty {
+    border: 0.5px dashed var(--color-ink-quat);
+    padding: 36px 24px;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    text-align: center;
+  }
+  .empty strong {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  /* 인사이트 리스트: RelatedList의 mono-when + serif-title 골격을 단일-컬럼·풀폭에 맞춤 */
+  .ins-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .ins-link {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding: 18px 0;
+    color: inherit;
+  }
+  .ins-when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .ins-ttl {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .ins-link:hover .ins-ttl {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 640px) {
+    .ins-link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .ins-ttl { font-size: 16px; }
+  }
+</style>

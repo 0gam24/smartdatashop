@@ -1,0 +1,359 @@
+---
+/*
+ * SearchModal — Pagefind static search overlay.
+ *
+ * Search index is generated at build time. Run `npm run build && npm run preview`
+ * to test search locally — Pagefind assets at /pagefind/* won't exist during `astro dev`.
+ *
+ * Activation: window.openSearch() or click on any element with [data-search-trigger].
+ * Closes on: ESC, backdrop click, or after navigating to a result.
+ */
+---
+
+<div id="search-modal" class="search-modal" hidden role="dialog" aria-modal="true" aria-label="기사 검색">
+  <div class="search-backdrop" data-search-close></div>
+  <div class="search-panel" role="document">
+    <div class="search-input-row">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <input
+        id="search-input"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="기사·인사이트 검색…"
+        aria-label="검색어"
+      />
+      <button type="button" class="search-close" data-search-close aria-label="검색 닫기">×</button>
+    </div>
+    <div id="search-results" class="search-results" aria-live="polite"></div>
+    <div class="search-hint">ESC 닫기 · ↑↓ 이동 · ↵ 열기</div>
+  </div>
+</div>
+
+<script>
+  // Lazy-load Pagefind only when modal opens to avoid downloading the WASM on every page.
+  type PagefindResultData = {
+    url: string;
+    content: string;
+    excerpt: string;
+    meta?: { title?: string; [k: string]: unknown };
+  };
+  type PagefindResult = { id: string; data: () => Promise<PagefindResultData> };
+  type PagefindModule = {
+    options: (opts: Record<string, unknown>) => Promise<void>;
+    search: (query: string) => Promise<{ results: PagefindResult[] }>;
+  };
+
+  let pagefind: PagefindModule | null = null;
+  let pagefindLoadFailed = false;
+  let debounceTimer: number | null = null;
+  let activeIndex = -1;
+  let currentResults: HTMLAnchorElement[] = [];
+
+  const MAX_RESULTS = 8;
+  const DEBOUNCE_MS = 200;
+
+  async function ensurePagefind(): Promise<PagefindModule | null> {
+    if (pagefind) return pagefind;
+    if (pagefindLoadFailed) return null;
+    try {
+      // Use a variable + new Function() trick so Vite/Rollup don't try to resolve
+      // /pagefind/pagefind.js at build time — it's emitted by the postbuild step.
+      const pagefindUrl = '/pagefind/pagefind.js';
+      const dynamicImport = new Function('u', 'return import(u)') as (u: string) => Promise<PagefindModule>;
+      pagefind = await dynamicImport(pagefindUrl);
+      await pagefind.options({ excerptLength: 35 });
+      return pagefind;
+    } catch (err) {
+      pagefindLoadFailed = true;
+      console.warn('[SearchModal] Failed to load Pagefind. Did you run `npm run build`?', err);
+      return null;
+    }
+  }
+
+  const modal = document.getElementById('search-modal') as HTMLDivElement | null;
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  const resultsEl = document.getElementById('search-results') as HTMLDivElement | null;
+
+  function openSearch() {
+    if (!modal || !input) return;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    // Focus on next frame so the dialog is paintable first.
+    requestAnimationFrame(() => input.focus());
+  }
+
+  function closeSearch() {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+    if (resultsEl) resultsEl.innerHTML = '';
+    activeIndex = -1;
+    currentResults = [];
+  }
+
+  // Expose openSearch globally so other components (Header) can call it.
+  (window as unknown as { openSearch: () => void }).openSearch = openSearch;
+
+  // Trigger via [data-search-trigger]
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    const trigger = target?.closest('[data-search-trigger]');
+    if (trigger) {
+      e.preventDefault();
+      openSearch();
+      return;
+    }
+    const closer = target?.closest('[data-search-close]');
+    if (closer) {
+      e.preventDefault();
+      closeSearch();
+    }
+  });
+
+  // ESC to close, arrow keys to navigate results
+  document.addEventListener('keydown', (e) => {
+    if (!modal || modal.hidden) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeSearch();
+      return;
+    }
+    if (e.key === 'ArrowDown' && currentResults.length) {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, currentResults.length - 1);
+      updateActiveResult();
+      return;
+    }
+    if (e.key === 'ArrowUp' && currentResults.length) {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      updateActiveResult();
+      return;
+    }
+    if (e.key === 'Enter' && activeIndex >= 0 && currentResults[activeIndex]) {
+      e.preventDefault();
+      currentResults[activeIndex].click();
+    }
+  });
+
+  function updateActiveResult() {
+    currentResults.forEach((el, i) => {
+      if (i === activeIndex) {
+        el.classList.add('is-active');
+        el.scrollIntoView({ block: 'nearest' });
+      } else {
+        el.classList.remove('is-active');
+      }
+    });
+  }
+
+  // Input → debounced search
+  input?.addEventListener('input', () => {
+    if (debounceTimer !== null) {
+      window.clearTimeout(debounceTimer);
+    }
+    debounceTimer = window.setTimeout(runSearch, DEBOUNCE_MS);
+  });
+
+  async function runSearch() {
+    if (!input || !resultsEl) return;
+    const query = input.value.trim();
+    if (!query) {
+      resultsEl.innerHTML = '';
+      currentResults = [];
+      activeIndex = -1;
+      return;
+    }
+    const pf = await ensurePagefind();
+    if (!pf) {
+      resultsEl.innerHTML = '<p class="search-empty">검색 인덱스를 불러올 수 없습니다. (빌드 후 미리보기에서만 동작합니다.)</p>';
+      currentResults = [];
+      activeIndex = -1;
+      return;
+    }
+    const search = await pf.search(query);
+    const top = search.results.slice(0, MAX_RESULTS);
+    if (top.length === 0) {
+      resultsEl.innerHTML = '<p class="search-empty">결과가 없습니다.</p>';
+      currentResults = [];
+      activeIndex = -1;
+      return;
+    }
+    const datas = await Promise.all(top.map((r) => r.data()));
+    resultsEl.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    datas.forEach((d) => {
+      const a = document.createElement('a');
+      a.className = 'search-result';
+      a.href = d.url;
+      const title = (d.meta && d.meta.title) ? d.meta.title : d.url;
+      const titleEl = document.createElement('div');
+      titleEl.className = 'search-result-title';
+      titleEl.textContent = title;
+      const excerptEl = document.createElement('div');
+      excerptEl.className = 'search-result-excerpt';
+      // Pagefind excerpts include <mark> tags — safe to inject as HTML.
+      excerptEl.innerHTML = d.excerpt;
+      const urlEl = document.createElement('div');
+      urlEl.className = 'search-result-url';
+      urlEl.textContent = d.url;
+      a.appendChild(titleEl);
+      a.appendChild(excerptEl);
+      a.appendChild(urlEl);
+      a.addEventListener('click', () => {
+        // Close after a tick so navigation kicks in first.
+        setTimeout(closeSearch, 0);
+      });
+      frag.appendChild(a);
+    });
+    resultsEl.appendChild(frag);
+    currentResults = Array.from(resultsEl.querySelectorAll<HTMLAnchorElement>('a.search-result'));
+    activeIndex = currentResults.length ? 0 : -1;
+    updateActiveResult();
+  }
+</script>
+
+<style>
+  .search-modal[hidden] { display: none; }
+  .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .search-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(244, 240, 230, 0.5); /* var(--color-paper-soft) at 50% */
+    cursor: pointer;
+  }
+  .search-panel {
+    position: relative;
+    width: min(680px, calc(100% - 32px));
+    margin-top: 80px;
+    background: var(--color-paper);
+    border: 0.5px solid var(--color-ink-quat);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 120px);
+  }
+  .search-input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ink-tertiary);
+    flex-shrink: 0;
+  }
+  #search-input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    color: var(--color-ink);
+    padding: 4px 0;
+  }
+  #search-input::placeholder {
+    color: var(--color-ink-tertiary);
+  }
+  .search-close {
+    background: none;
+    border: 0;
+    color: var(--color-ink-tertiary);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    font-family: var(--font-sans);
+  }
+  .search-close:hover { color: var(--color-ink); }
+  .search-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+  .search-results :global(.search-result) {
+    display: block;
+    padding: 14px 18px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .search-results :global(.search-result:last-child) {
+    border-bottom: 0;
+  }
+  .search-results :global(.search-result.is-active),
+  .search-results :global(.search-result:hover) {
+    background: var(--color-paper-soft);
+  }
+  .search-results :global(.search-result-title) {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .search-results :global(.search-result-excerpt) {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .search-results :global(.search-result-excerpt mark) {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+    padding: 0 2px;
+  }
+  .search-results :global(.search-result-url) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.02em;
+    word-break: break-all;
+  }
+  .search-results :global(.search-empty) {
+    padding: 20px 18px;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    text-align: center;
+  }
+  .search-hint {
+    padding: 10px 18px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .search-panel {
+      margin-top: 0;
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+      border: 0;
+    }
+  }
+</style>
