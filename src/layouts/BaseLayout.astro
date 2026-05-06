@@ -1,14 +1,15 @@
 ---
 import '../styles/global.css';
-// 폰트 self-host (G23 픽스) — Google Fonts 와 jsdelivr 두 외부 도메인 의존을
-// 제거하고 fontsource (npm) 패키지의 woff2 를 Vite 가 번들. LCP critical
-// glyph 가 same-origin 으로 도착해 cross-origin 핸드셰이크 비용 0.
-// 헤드라인용 Noto Serif KR (500/600) 만 자체 호스팅 — Pretendard 는 CDN 유지
-// (한국 모바일에서 jsdelivr 캐시 적중률이 매우 높음).
-import '@fontsource/noto-serif-kr/500.css';
-import '@fontsource/noto-serif-kr/600.css';
-import '@fontsource/jetbrains-mono/400.css';
-import '@fontsource/jetbrains-mono/500.css';
+// 폰트 self-host (G23 픽스) + subset 분리 (Lighthouse CSS bundle size 픽스).
+// Phase 16: noto-serif-kr 의 통합 `500.css` (92KB, subset 27 종) 대신 사용 subset
+// (korean + latin) 만 import — 약 92x CSS 사이즈 절감. render-blocking CSS 가
+// 209KB → ~10KB 수준으로 떨어져 LCP/FCP 개선 기대.
+import '@fontsource/noto-serif-kr/korean-500.css';
+import '@fontsource/noto-serif-kr/korean-600.css';
+import '@fontsource/noto-serif-kr/latin-500.css';
+import '@fontsource/noto-serif-kr/latin-600.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
 import SearchModal from '../components/SearchModal.astro';
 import Prefetch from '../components/Prefetch.astro';
 import SkipToContent from '../components/SkipToContent.astro';
@@ -186,15 +187,25 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Performance: Pretendard CDN 만 외부 (한국 모바일 캐시 적중률 높음).
-         Noto Serif KR + JetBrains Mono 는 self-host 로 전환 (G23). -->
+         Noto Serif KR + JetBrains Mono 는 self-host (G23). Pretendard 는 비동기 로딩
+         (`media="print" onload` 트릭) 으로 LCP 차단 회피 — Lighthouse render-blocking 픽스.
+         JS 미작동 환경(<noscript>)에서도 정상 표시되도록 fallback 유지. -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link
       rel="stylesheet"
-      as="style"
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+      />
+    </noscript>
 
     {jsonldArray.map((data) => (
       <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />

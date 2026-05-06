@@ -12,10 +12,10 @@
   --color-paper-soft: #f4f0e6;
   --color-paper-deep: #ede8d8;
 
-  --color-ink: #1a1a1a;
-  --color-ink-secondary: #6b6b6b;
-  --color-ink-tertiary: #a5a5a5;
-  --color-ink-quat: #e0ddd0;
+  --color-ink: #1a1a1a;        /* contrast vs paper ≈ 16.8 : 1  (AAA) */
+  --color-ink-secondary: #6b6b6b; /* contrast vs paper ≈ 5.4 : 1  (AA) */
+  --color-ink-tertiary: #707070;  /* contrast vs paper ≈ 5.0 : 1  (AA) — Lighthouse 색상대비 픽스 */
+  --color-ink-quat: #cccccc;       /* hairline 용 — 텍스트 미사용 */
 
   --color-accent: #8b1538;
   --color-accent-soft: #f3e1e6;
