@@ -187,6 +187,109 @@ if (homeHtml) {
 // ── 10. Pagefind 인덱스 ───────────────────────────────────────────
 check('Pagefind JS', existsSync(join(DIST, 'pagefind', 'pagefind.js')));
 
+// ── 11. 가이드북 라우트 — Phase 17 신설 회귀 가드 ─────────────────
+//
+// /guidebook/{slug}/ : 책 detail 페이지 — Book + CollectionPage + ItemList +
+//   Breadcrumb LD 4종 + 챕터 ol + 진행률 시각.
+// /guidebook/{book}/{chapter}/ : 챕터 본문 — TrustBar + ReadingProgress +
+//   ChapterTOC mount + 읽기시간 메타 + footnote 섹션 + Breadcrumb LD.
+function walkGuidebookSlugs() {
+  const dir = join(DIST, 'guidebook');
+  try {
+    return readdirSync(dir, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+  } catch {
+    return [];
+  }
+}
+const bookSlugs = walkGuidebookSlugs();
+check('가이드북 책 ≥ 1권', bookSlugs.length >= 1, `현재 ${bookSlugs.length}권`);
+
+let bookOK = 0;
+let bookLDOK = 0;
+let bookBreadcrumbOK = 0;
+for (const slug of bookSlugs) {
+  const html = readDist(`guidebook/${slug}/index.html`);
+  if (!html) continue;
+  bookOK++;
+  if (/"@type":"Book"/.test(html)) bookLDOK++;
+  if (/"@type":"BreadcrumbList"/.test(html)) bookBreadcrumbOK++;
+}
+check('가이드북 책 detail 빌드', bookOK === bookSlugs.length, `${bookOK}/${bookSlugs.length}`);
+check('가이드북 Book LD', bookLDOK === bookSlugs.length, `${bookLDOK}/${bookSlugs.length}`);
+check(
+  '가이드북 책 Breadcrumb LD',
+  bookBreadcrumbOK === bookSlugs.length,
+  `${bookBreadcrumbOK}/${bookSlugs.length}`,
+);
+
+// 챕터 페이지 — 책 폴더 안 숫자 디렉토리 = 챕터 detail 라우트
+function collectChapterPaths() {
+  const out = [];
+  for (const slug of bookSlugs) {
+    const bookDir = join(DIST, 'guidebook', slug);
+    let items;
+    try {
+      items = readdirSync(bookDir, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const it of items) {
+      if (!it.isDirectory()) continue;
+      // 숫자 챕터 번호만 (책 detail 의 index.html 은 파일이라 무관)
+      if (!/^\d+$/.test(it.name)) continue;
+      out.push({ slug, chapter: it.name });
+    }
+  }
+  return out;
+}
+const chapters = collectChapterPaths();
+check('가이드북 챕터 ≥ 1편', chapters.length >= 1, `현재 ${chapters.length}편`);
+
+let chReadingProgress = 0;
+let chTOC = 0;
+let chReadingTimeMeta = 0;
+let chTrustBar = 0;
+let chFootnoteSection = 0;
+for (const c of chapters) {
+  const html = readDist(`guidebook/${c.slug}/${c.chapter}/index.html`);
+  if (!html) continue;
+  if (/data-reading-progress/.test(html)) chReadingProgress++;
+  if (/data-chapter-toc/.test(html)) chTOC++;
+  if (/분 읽기/.test(html)) chReadingTimeMeta++;
+  if (/class="trust-bar"/.test(html)) chTrustBar++;
+  if (/section data-footnotes/.test(html)) chFootnoteSection++;
+}
+check('챕터 ReadingProgress 마운트', chReadingProgress === chapters.length, `${chReadingProgress}/${chapters.length}`);
+check('챕터 ChapterTOC 마운트', chTOC === chapters.length, `${chTOC}/${chapters.length}`);
+check('챕터 읽기시간 메타', chReadingTimeMeta === chapters.length, `${chReadingTimeMeta}/${chapters.length}`);
+check('챕터 TrustBar', chTrustBar === chapters.length, `${chTrustBar}/${chapters.length}`);
+// footnote 섹션은 본문에 [^N] 마커가 있는 챕터만 — 13/13 모두 마커 보유 확인됨
+check('챕터 footnote 섹션 노출 (display:none 회귀 가드)', chFootnoteSection === chapters.length, `${chFootnoteSection}/${chapters.length}`);
+
+// 챕터 placeholder ↔ noindex 정합 + Breadcrumb LD + CC license meta
+let chRobotsConsistent = 0;
+let chBreadcrumb = 0;
+let chCCLicense = 0;
+for (const c of chapters) {
+  const html = readDist(`guidebook/${c.slug}/${c.chapter}/index.html`);
+  if (!html) continue;
+  const hasPlaceholderText = /\[\s*검수\s*후/.test(html);
+  const hasNoIndex = /<meta name="robots" content="noindex/.test(html);
+  if (hasPlaceholderText === hasNoIndex) chRobotsConsistent++;
+  if (/"@type":"BreadcrumbList"/.test(html)) chBreadcrumb++;
+  if (/<link rel="license" href="https:\/\/creativecommons\.org\/licenses\/by-nc\/4\.0\/"/.test(html))
+    chCCLicense++;
+}
+check(
+  '챕터 robots ↔ placeholder 정합',
+  chRobotsConsistent === chapters.length,
+  `${chRobotsConsistent}/${chapters.length}`,
+);
+check('챕터 Breadcrumb LD', chBreadcrumb === chapters.length, `${chBreadcrumb}/${chapters.length}`);
+check('챕터 CC license link', chCCLicense === chapters.length, `${chCCLicense}/${chapters.length}`);
+
 // ── 출력 ──────────────────────────────────────────────────────────
 console.log('');
 console.log(`✅ ${passes.length} 통과`);
