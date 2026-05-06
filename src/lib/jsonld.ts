@@ -17,7 +17,64 @@ const FOUNDING_DATE = '2026-01-01';
 const LOGO_URL = `${SITE_URL}/og-default.png`;
 
 /**
+ * 동적 OG 라우트 (Phase 1 v2 라우트, D9=N 1개월 병행).
+ * NewsArticle/Article 의 image fallback 으로 사용 — Discover/SNS 카드 품질 결정적.
+ */
+function dynamicOgUrl(type: 'pulse' | 'insight', slug: string): string {
+  return `${SITE_URL}/og/v2/${type}/${slug}.png`;
+}
+
+/**
+ * JSON-LD `image` 다중 비율 배열 (Eng #1, ADR 0005).
+ *
+ * Google 권고: NewsArticle.image 는 16:9, 4:3, 1:1 세 비율 모두 제공 시 Discover
+ * 캐러셀 노출률 향상. 현재는 16:9 단일 동적 OG 만 자체 생성하므로 같은 URL 을
+ * `ImageObject` 로 wrap 해 width/height 를 명시 — Google 이 다른 비율 자산이
+ * 없음을 명시적으로 인지. 향후 1:1 / 4:3 자산 추가 시 본 헬퍼만 확장.
+ */
+function buildImageArray(primaryUrl: string): Array<Record<string, unknown>> {
+  return [
+    {
+      '@type': 'ImageObject',
+      url: primaryUrl,
+      width: 1200,
+      height: 630,
+    },
+  ];
+}
+
+/**
+ * 운영자 외부 프로필 — sameAs 발행용. 비어 있으면 LD 의 sameAs 가 빈 배열로 발행.
+ * 환경변수로 주입해 운영자가 새 프로필 추가 시 코드 변경 없이 반영.
+ *
+ * Cloudflare Pages env 예:
+ *   PUBLIC_AUTHOR_SAMEAS="https://www.linkedin.com/in/junhyuk-kim,https://blog.naver.com/junhyuk"
+ *   PUBLIC_ORG_SAMEAS="https://twitter.com/smartdatashop"
+ */
+const AUTHOR_SAMEAS: string[] = (
+  (import.meta.env.PUBLIC_AUTHOR_SAMEAS as string | undefined) ?? ''
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const ORG_SAMEAS: string[] = (
+  (import.meta.env.PUBLIC_ORG_SAMEAS as string | undefined) ?? ''
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+/** 카테고리 라벨에서 디자인용 자간 공백을 제거 — JSON-LD 는 평문 사용. */
+function plainCategoryLabel(category: Parameters<typeof categoryToKorean>[0]): string {
+  return categoryToKorean(category).replace(/ /g, '');
+}
+
+/**
  * NewsMediaOrganization (홈/푸터에서 사용)
+ *
+ * sameAs 는 PUBLIC_ORG_SAMEAS 환경변수에서 콤마 구분 URL 목록을 읽는다 (E-E-A-T 신호).
+ * 미설정 시 빈 배열 — 발행되긴 하지만 외부 코로보레이션 0.
  */
 export function buildOrganizationLD(): Record<string, unknown> {
   return {
@@ -36,19 +93,38 @@ export function buildOrganizationLD(): Record<string, unknown> {
     },
     email: AUTHOR_EMAIL,
     inLanguage: 'ko',
-    sameAs: [],
+    sameAs: ORG_SAMEAS,
   };
 }
 
 /**
- * Person — 김준혁 (대표/저자) JSON-LD
+ * Person — 김준혁 (대표/저자) JSON-LD.
+ *
+ * sameAs (외부 프로필 — LinkedIn/네이버 블로그/X 등) 는
+ * PUBLIC_AUTHOR_SAMEAS 환경변수의 콤마 구분 URL 목록에서 가져온다.
+ * YMYL 사이트의 E-E-A-T 평가에서 외부 프로필 cross-link 는 결정적.
+ *
+ * knowsAbout / hasOccupation 은 Phase 5 추가 — Discover/Search 의 author entity
+ * 신호를 강화. 정부·공공기관 1차 출처 데이터 저널리즘 영역의 전문성을 명시.
  */
+export const AUTHOR_KNOWS_ABOUT: ReadonlyArray<string> = [
+  '한국 정부·공공기관 1차 출처 데이터',
+  '국세청 종합소득세',
+  '한국은행 ECOS 통계',
+  '통계청 KOSIS',
+  'KRX 시장 데이터',
+  '1인사업자 정책·세금·금융',
+  '데이터 시각화 및 비전문가용 해설',
+  'AI-보조 데이터 저널리즘',
+];
+
 export function buildPersonLD(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: AUTHOR_NAME,
-    jobTitle: '대표 · 데이터 저널리스트',
+    alternateName: 'Junhyuk Kim',
+    jobTitle: '대표 · 편집장 · 데이터 검증 책임자',
     email: AUTHOR_EMAIL,
     url: `${SITE_URL}/authors/${AUTHOR_SLUG}/`,
     worksFor: {
@@ -56,19 +132,39 @@ export function buildPersonLD(): Record<string, unknown> {
       name: SITE_NAME,
       url: SITE_URL,
     },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: '데이터 저널리스트',
+      occupationLocation: {
+        '@type': 'Country',
+        name: '대한민국',
+      },
+      occupationalCategory: 'Data Journalism / Editorial',
+      skills: AUTHOR_KNOWS_ABOUT.join(', '),
+    },
+    knowsAbout: AUTHOR_KNOWS_ABOUT,
+    knowsLanguage: ['ko', 'en'],
+    sameAs: AUTHOR_SAMEAS,
   };
 }
 
 /**
- * 펄스(일일 뉴스) 기사용 NewsArticle JSON-LD
+ * 펄스(일일 뉴스) 기사용 NewsArticle JSON-LD.
+ *
+ * image 폴백은 동적 OG v2 라우트 — 사이트 로고 카드(LOGO_URL)가 아니라
+ * 글마다 고유한 1200×630 시그니처 카드. Discover 가 LD image 를 강한 신호로
+ * 사용하므로 글당 고유 이미지가 결정적 (G10).
+ *
+ * image 는 단일 string 이 아닌 array — Google 권고대로 다중 비율 슬롯에 16:9
+ * 단일 자산을 등록 (1:1, 4:3 변형은 향후 이미지 에이전트에서 추가).
  */
 export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<string, unknown> {
   const url = `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt)}`;
-  const image = entry.data.coverImage
+  const primaryImage = entry.data.coverImage
     ? entry.data.coverImage.startsWith('http')
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
-    : LOGO_URL;
+    : dynamicOgUrl('pulse', entry.slug);
 
   return {
     '@context': 'https://schema.org',
@@ -82,9 +178,9 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
     description: entry.data.tldr,
     datePublished: entry.data.publishedAt,
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
-    articleSection: categoryToKorean(entry.data.category),
+    articleSection: plainCategoryLabel(entry.data.category),
     inLanguage: 'ko',
-    image,
+    image: buildImageArray(primaryImage),
     author: {
       '@type': 'Person',
       name: AUTHOR_NAME,
@@ -103,15 +199,16 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
 }
 
 /**
- * 인사이트(에버그린) 기사용 Article JSON-LD
+ * 인사이트(에버그린) 기사용 Article JSON-LD.
+ * 동적 OG v2 폴백 + image array + 평문 articleSection (NewsArticle 와 동일 정책).
  */
 export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string, unknown> {
   const url = `${SITE_URL}/insight/${entry.slug}/`;
-  const image = entry.data.coverImage
+  const primaryImage = entry.data.coverImage
     ? entry.data.coverImage.startsWith('http')
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
-    : LOGO_URL;
+    : dynamicOgUrl('insight', entry.slug);
 
   return {
     '@context': 'https://schema.org',
@@ -125,9 +222,9 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
     description: entry.data.tldr,
     datePublished: entry.data.publishedAt,
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
-    articleSection: categoryToKorean(entry.data.category),
+    articleSection: plainCategoryLabel(entry.data.category),
     inLanguage: 'ko',
-    image,
+    image: buildImageArray(primaryImage),
     author: {
       '@type': 'Person',
       name: AUTHOR_NAME,
@@ -267,6 +364,169 @@ export function buildDatasetLD(input: DatasetInput): Record<string, unknown> {
     ...(input.sourceUrl && { isBasedOn: input.sourceUrl }),
     ...(input.temporalCoverage && { temporalCoverage: input.temporalCoverage }),
     ...(input.spatialCoverage && { spatialCoverage: input.spatialCoverage }),
+  };
+}
+
+/**
+ * pulse/insight 의 frontmatter sources 배열로부터 Dataset LD 를 자동 생성.
+ *
+ * **데이터 저널 차별화의 핵심 무기** (사용자 명시 우선순위):
+ *   일반 매체는 거의 사용하지 않는 schema.org/Dataset 을 1차 출처 글마다 발행해
+ *   Google 의 "데이터 발행처" 색인 풀에 진입한다. Discover/Search 양쪽에서
+ *   일반 NewsArticle 과 분리된 가중치를 받음.
+ *
+ * isBasedOn 에 sources[].url 을 array 로 노출 — 데이터셋이 어떤 1차 자료에서
+ * 도출되었는지 명시. url 이 없는 source 는 자동 제외.
+ *
+ * @returns Dataset LD 객체. sources 가 url 없이 비어 있으면 null (호출측에서 필터).
+ */
+export function buildDatasetLDFromArticle(
+  entry: CollectionEntry<'pulse'> | CollectionEntry<'insight'>,
+  type: 'pulse' | 'insight',
+): Record<string, unknown> | null {
+  const sourceUrls = entry.data.sources
+    .map((s: { url?: string }) => s.url)
+    .filter((u: string | undefined): u is string => !!u);
+  if (sourceUrls.length === 0) return null;
+
+  const articleUrl =
+    type === 'pulse'
+      ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt)}`
+      : `${SITE_URL}/insight/${entry.slug}/`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: entry.data.title,
+    description: entry.data.tldr,
+    url: articleUrl,
+    creator: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    license: 'https://creativecommons.org/licenses/by-nc/4.0/',
+    isBasedOn: sourceUrls,
+    inLanguage: 'ko',
+    datePublished: entry.data.publishedAt,
+    dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
+    keywords: plainCategoryLabel(entry.data.category),
+  };
+}
+
+/**
+ * ClaimReview LD — 정부 발표/통계 검증 글에 사용 (Layer 4 fact-checker 자동 흐름과 결합).
+ *
+ * 운영자가 명시적으로 검증한 주장(예: "정부 X% 발표가 실제 데이터에 부합?")에만
+ * 사용. 자동 생성 금지 — 검증 없이 ClaimReview 발행은 Google 가이드라인 위반.
+ *
+ * 사용:
+ *   const ld = buildClaimReviewLD({
+ *     claimReviewed: '정부 발표 청년월세 잔여 예산 38%',
+ *     itemReviewedAuthor: '국토교통부',
+ *     ratingValue: 4,         // 1=거짓, 5=참
+ *     ratingExplanation: '...',
+ *     articleUrl: '...'
+ *   });
+ */
+export interface ClaimReviewInput {
+  claimReviewed: string;
+  itemReviewedAuthor: string;
+  ratingValue: 1 | 2 | 3 | 4 | 5;
+  ratingExplanation: string;
+  articleUrl: string;
+}
+
+export function buildClaimReviewLD(input: ClaimReviewInput): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ClaimReview',
+    url: input.articleUrl,
+    claimReviewed: input.claimReviewed,
+    itemReviewed: {
+      '@type': 'Claim',
+      author: { '@type': 'Organization', name: input.itemReviewedAuthor },
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: input.ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+      alternateName: input.ratingExplanation,
+    },
+    author: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
+/**
+ * HowTo LD — 단계형 가이드북 챕터에 사용 (예: "5월 종소세 신고 7단계").
+ * 호출자가 steps 를 명시 전달.
+ */
+export interface HowToInput {
+  name: string;
+  description: string;
+  url: string;
+  totalTime?: string; // ISO 8601 duration (예: "PT15M")
+  steps: { name: string; text: string }[];
+}
+
+export function buildHowToLD(input: HowToInput): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: input.name,
+    description: input.description,
+    url: input.url,
+    inLanguage: 'ko',
+    ...(input.totalTime && { totalTime: input.totalTime }),
+    step: input.steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
+/**
+ * Book LD — 가이드북 시리즈 메타데이터 (guidebook 컬렉션).
+ * Discover 의 BookCarousel 후보 + 데이터 저널 차별화.
+ */
+export interface BookInput {
+  name: string;
+  description: string;
+  url: string;
+  numberOfPages?: number;
+  inLanguage?: string;
+  license?: string;
+  datePublished?: string;
+}
+
+export function buildBookLD(input: BookInput): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: input.name,
+    description: input.description,
+    url: input.url,
+    inLanguage: input.inLanguage ?? 'ko',
+    author: {
+      '@type': 'Person',
+      name: AUTHOR_NAME,
+      url: `${SITE_URL}/authors/${AUTHOR_SLUG}/`,
+    },
+    publisher: {
+      '@type': 'NewsMediaOrganization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    license: input.license ?? 'https://creativecommons.org/licenses/by-nc/4.0/',
+    ...(input.numberOfPages && { numberOfPages: input.numberOfPages }),
+    ...(input.datePublished && { datePublished: input.datePublished }),
   };
 }
 

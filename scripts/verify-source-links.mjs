@@ -7,9 +7,9 @@
  * 보고서 형태로 출력해 운영자가 "기관 루트는 살아 있는데 deep link는 끊김"
  * 같은 상황을 발견할 수 있게 한다.
  *
- * 본 스크립트는 AI가 합법적으로 수행 가능한 영역의 검증이다 — 단순 링크
- * 가용성 체크일 뿐, 본문 수치·발표일을 1차 출처와 대조하지 않는다. 본문 검수는
- * 반드시 운영자(verifiedBy 등록자)가 직접 수행해야 한다. (docs/verification-queue.md 참조)
+ * 본 스크립트는 자동 안전장치 Layer 3 의 일부 (ADR 0005). 단순 링크 가용성
+ * 체크일 뿐, 본문 수치·발표일을 1차 출처와 대조하지 않는다. 출처-vs-주장
+ * 대조는 Layer 4 (사후 fact-checker, Phase 4+) 또는 운영자가 수행한다.
  *
  * 사용:
  *   node scripts/verify-source-links.mjs
@@ -71,25 +71,48 @@ async function checkFile(collection, filename) {
   return { collection, filename, results };
 }
 
-/** HTTP HEAD (실패 시 GET fallback) */
+// 일부 한국 정부 사이트(nts.go.kr 등)는 HEAD 를 거부하고 400/403/405 를 반환한다.
+// 일반 데스크톱 브라우저 UA 와 함께 GET 으로 fallback 해야 정상 응답을 받는다.
+const BROWSER_UA =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
+  '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 smartdatashop-link-checker/1.0';
+const HEAD_FALLBACK_STATUSES = new Set([400, 401, 403, 405, 501]);
+
+/** HTTP HEAD (실패 응답 코드/네트워크 에러 시 GET fallback) */
 async function headCheck(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-  try {
-    let res = await fetch(url, {
-      method: 'HEAD',
+  const baseHeaders = {
+    'User-Agent': BROWSER_UA,
+    Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'ko,en;q=0.8',
+  };
+  async function tryRequest(method) {
+    return fetch(url, {
+      method,
       signal: controller.signal,
       redirect: 'follow',
-      headers: { 'User-Agent': 'smartdatashop-link-checker/1.0' },
+      headers: baseHeaders,
     });
-    // 일부 서버는 HEAD 405. GET으로 fallback (응답 본문은 무시)
-    if (res.status === 405) {
-      res = await fetch(url, {
-        method: 'GET',
-        signal: controller.signal,
-        redirect: 'follow',
-        headers: { 'User-Agent': 'smartdatashop-link-checker/1.0' },
-      });
+  }
+  try {
+    let res;
+    try {
+      res = await tryRequest('HEAD');
+    } catch (e) {
+      // HEAD 자체가 네트워크 단계에서 실패하는 경우(드물지만 fetch failed) GET 으로 재시도
+      res = await tryRequest('GET');
+      return {
+        status: res.status,
+        ok: res.ok,
+        finalUrl: res.url,
+        redirected: res.redirected,
+        method: 'GET-after-HEAD-network-fail',
+      };
+    }
+    // 일부 서버는 HEAD 를 거부하고 400/403/405 류 코드를 돌려준다 — GET 으로 재시도.
+    if (HEAD_FALLBACK_STATUSES.has(res.status)) {
+      res = await tryRequest('GET');
     }
     return {
       status: res.status,
@@ -144,7 +167,7 @@ async function main() {
   }
 
   console.log(`\n총 ${total}개 링크 중 ${total - failed}개 정상, ${failed}개 실패.`);
-  console.log('상세 검수는 docs/verification-queue.md 참조.');
+  console.log('출처-vs-주장 대조는 Layer 4 fact-checker (Phase 4+) 또는 운영자가 수행.');
 
   if (strict && failed > 0) {
     process.exit(1);

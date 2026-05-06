@@ -1,16 +1,20 @@
 # 스마트데이터샵 대시보드
 
-> 마지막 갱신: 2026-05-05 (이 문서 수정 시 자동 갱신할 hook은 추후 검토)
+> 마지막 갱신: 2026-05-06
 > 출처 패턴: book 19307 P5 (1 page 메타). 30초 스캔으로 작업 재개 가능해야 함.
 
 ---
 
 ## 현재 상태
 
-- **Phase**: 프로덕션 라이브 (M1 시작 준비)
-- **마지막 commit**: `e0cb955` — fix(critical+major): editorial integrity, navigation, security, SEO
-- **마지막 큰 변경**: editorial integrity fix (Phase B+C) — PulseCard 클릭 가능화 / Decap config endpoint 분리 / KST 타임존 락
-- **다음 할 일 ★**: 정책 9페이지 본문 작성 (TODO 마킹 해소)
+- **Phase**: 프로덕션 라이브 / **검수 게이트 → 자동 안전장치 전환 완료** (ADR 0005)
+- **전략 피벗**: Google News (Publisher Center 신청 모델) → **Google Discover** (자동 적격, 별도 신청 없음)
+- **마지막 큰 변경 (2026-05-06)**:
+  - Phase 0: placeholder 자동 noindex / Hero 하드코딩 통계 제거 / Footer href="#" 정리
+  - Phase 1: `previewMode`/`verifiedBy` 스키마+8 .mdx 정리, 3개 컴포넌트(ArticlePreviewWarning/PreviewBanner/VerifiedBadge) 삭제, desk-review 워크플로우+스크립트 삭제, TrustBar 도입, Satori OG v2 라우트 (`/og/v2/{pulse|insight}/<slug>.png`) 도입
+  - Phase 2: Dataset/ClaimReview/HowTo/Book LD 빌더 추가, 자동 Dataset LD (sources url 1개 이상 시), InsightLayout JSON-LD 누락 픽스 (G10), Person/Org `sameAs` 환경변수 기반 (`PUBLIC_AUTHOR_SAMEAS` / `PUBLIC_ORG_SAMEAS`)
+  - Phase 3: home/category/author 동적 OG 카드 (G17), PulseCard `<img>` 옵셔널, 저자 페이지 강화
+- **다음 할 일 ★**: GSC URL 제거 요청 (placeholder 7개) → `PUBLIC_AUTHOR_SAMEAS`/`PUBLIC_ORG_SAMEAS` Cloudflare 환경변수 채우기 → 정책 9페이지 본문 작성
 
 ---
 
@@ -24,21 +28,25 @@
 
 ## 운영 메트릭 (수동 갱신)
 
-- 발행된 펄스: **6편** (전부 `previewMode: true`)
-- 발행된 인사이트: **1편** (`previewMode: true`)
+- 발행된 펄스: **6편** (placeholder 검출로 자동 noindex)
+- 발행된 인사이트: **1편** (placeholder 검출로 자동 noindex)
 - 발행된 가이드북: **0권**
-- Google News: **미신청** (정식 발행 30~50편 이후)
+- Google Discover: **자동 적격** (Search Console 첫 노출 후 24~48h 내 Discover 보고서 활성)
+- Google News: **후순위** (Discover 안정 후 검토)
 - Cloudflare Analytics: 토큰 미발급 (`PUBLIC_CF_ANALYTICS_TOKEN` 빈 값)
 
 ---
 
 ## 운영자 액션 대기 항목
 
+- [ ] **24h 내**: GSC + Bing Webmaster Tools 에서 placeholder URL 7개 제거 요청 (Risk 에이전트 권고)
+- [ ] **즉시**: `PUBLIC_AUTHOR_SAMEAS` 환경변수에 LinkedIn / 네이버 블로그 / X 등 외부 프로필 URL 콤마 구분으로 입력 → Person LD `sameAs` + 저자 페이지 자동 반영
+- [ ] **즉시**: `PUBLIC_ORG_SAMEAS` 환경변수에 사이트 SNS 계정 URL 입력 → Org LD `sameAs` 자동 반영
+- [ ] 1개월 후 (~2026-06-06): 구 OG 라우트 (`/og/{pulse,insight}/[slug].png.ts`) 삭제 (D9=N 합의)
 - [ ] 정책 9페이지 본문 작성 (TODO 마킹됨)
-- [ ] 정식 발행 펄스 30~50편 (Google News 신청 전제)
+- [ ] 7개 글 placeholder 점진 정리 — 본문을 1차 출처 기반 explanatory framing 으로 재작성 시 자동 색인 복귀
 - [ ] Stibee API 키 (`PUBLIC_STIBEE_LIST_ID`)
 - [ ] Cloudflare Analytics 토큰 (`PUBLIC_CF_ANALYTICS_TOKEN`)
-- [ ] OG 카드 운영자 검토 후 picsum.photos 등으로 교체 검토
 - [ ] error-log.md 누적 모니터링 (같은 에러 두 번째 = Hook으로 영구 차단 검토)
 
 ---

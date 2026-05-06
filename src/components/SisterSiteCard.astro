@@ -3,13 +3,15 @@ interface Props {
   domain: string;
   name: string;
   persona: string;
-  latest: string;
+  /** 자매 사이트 최신 글 제목. 미지정 시 "최신 글" 섹션 자체를 숨김 (정직 신호 — 가짜 stale 텍스트 회피). */
+  latest?: string;
   /** 자매 사이트 외부 링크. 없으면 도메인 앞에 https://를 붙여 사용. */
   baseUrl?: string;
 }
 
 const { domain, name, persona, latest, baseUrl } = Astro.props;
 const href = baseUrl ?? `https://${domain}`;
+const hasLatest = !!latest && latest.trim().length > 0;
 ---
 
 <article class="sister-card">
@@ -17,10 +19,12 @@ const href = baseUrl ?? `https://${domain}`;
     <div class="sister-domain">{domain}</div>
     <div class="sister-name">{name}</div>
     <div class="sister-persona">{persona}</div>
-    <div class="sister-latest">
-      <span class="latest-label">최신 글</span>
-      {latest}
-    </div>
+    {hasLatest && (
+      <div class="sister-latest">
+        <span class="latest-label">최신 글</span>
+        {latest}
+      </div>
+    )}
   </a>
 </article>
 

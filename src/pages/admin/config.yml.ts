@@ -54,6 +54,23 @@ collections:
           - { label: "통계", value: "stats" }
           - { label: "AI·기술", value: "ai-tech" }
       - { name: "tldr", label: "한 줄 요약 (TLDR)", widget: "text", required: true, hint: "최대 200자, 한 줄 요약" }
+      - { name: "coverImage", label: "표지 이미지 URL", widget: "string", required: false, hint: "1200×630 16:9 권장. 미지정 시 동적 OG v2 카드 자동 사용." }
+      - name: "chartData"
+        label: "차트 데이터 (선택)"
+        widget: "object"
+        required: false
+        collapsed: true
+        hint: "OG 카드에 sparkline 오버레이를 베이크. values 2개 이상 시에만 노출."
+        fields:
+          - name: "type"
+            label: "차트 유형"
+            widget: "select"
+            required: false
+            default: "sparkline"
+            options: ["line", "bar", "sparkline"]
+          - { name: "values", label: "값 (콤마 구분 숫자)", widget: "list", required: false, hint: "예: 3.2, 3.4, 3.1, 3.6" }
+          - { name: "label", label: "차트 라벨", widget: "string", required: false, hint: "최대 80자" }
+          - { name: "unit", label: "단위 (선택)", widget: "string", required: false }
       - { name: "aiAssisted", label: "AI 보조 작성", widget: "boolean", default: false, required: false }
       - name: "sources"
         label: "1차 출처"
@@ -61,10 +78,10 @@ collections:
         widget: "list"
         required: true
         min: 1
-        hint: "1차 출처 1개 이상 필수"
+        hint: "1차 출처 1개 이상 필수. URL 필수 (Risk #3 — 표시광고법 §3 회피)."
         fields:
           - { name: "name", label: "출처명", widget: "string", required: true }
-          - { name: "url", label: "URL", widget: "string", required: false }
+          - { name: "url", label: "URL", widget: "string", required: true, hint: "검증 가능한 URL — root 또는 deep link" }
           - { name: "date", label: "발표일", widget: "string", required: false }
           - { name: "accessedAt", label: "확인일", widget: "string", required: false }
           - { name: "note", label: "비고", widget: "string", required: false }
@@ -124,6 +141,23 @@ collections:
           - { label: "AI·기술", value: "ai-tech" }
       - { name: "tldr", label: "한 줄 요약 (TLDR)", widget: "text", required: true, hint: "최대 300자" }
       - { name: "estimatedReadingTime", label: "예상 독서 시간 (분)", widget: "number", required: true, value_type: "int", min: 1 }
+      - { name: "coverImage", label: "표지 이미지 URL", widget: "string", required: false, hint: "1200×630 16:9 권장. 미지정 시 동적 OG v2 카드 자동 사용." }
+      - name: "chartData"
+        label: "차트 데이터 (선택)"
+        widget: "object"
+        required: false
+        collapsed: true
+        hint: "OG 카드에 sparkline 오버레이. values 2개 이상 시에만 노출."
+        fields:
+          - name: "type"
+            label: "차트 유형"
+            widget: "select"
+            required: false
+            default: "sparkline"
+            options: ["line", "bar", "sparkline"]
+          - { name: "values", label: "값 (콤마 구분 숫자)", widget: "list", required: false }
+          - { name: "label", label: "차트 라벨", widget: "string", required: false }
+          - { name: "unit", label: "단위", widget: "string", required: false }
       - { name: "aiAssisted", label: "AI 보조 작성", widget: "boolean", default: false, required: false }
       - name: "sources"
         label: "1차 출처"
@@ -131,10 +165,10 @@ collections:
         widget: "list"
         required: true
         min: 2
-        hint: "인사이트는 1차 출처 2개 이상"
+        hint: "인사이트는 1차 출처 2개 이상. URL 필수 (Risk #3)."
         fields:
           - { name: "name", label: "출처명", widget: "string", required: true }
-          - { name: "url", label: "URL", widget: "string", required: false }
+          - { name: "url", label: "URL", widget: "string", required: true }
           - { name: "date", label: "발표일", widget: "string", required: false }
           - { name: "accessedAt", label: "확인일", widget: "string", required: false }
           - { name: "note", label: "비고", widget: "string", required: false }

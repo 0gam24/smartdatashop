@@ -1,18 +1,27 @@
 ---
 import PolicyLayout from '../layouts/PolicyLayout.astro';
+import { buildOrganizationLD, buildPersonLD } from '../lib/jsonld';
+
+const jsonld = [buildOrganizationLD(), buildPersonLD()];
 ---
 
 <PolicyLayout
   title="소개"
   eyebrow="정 책 · A B O U T"
-  description="스마트데이터샵 운영자 김준혁 소개와 사업자 정보."
+  description="스마트데이터샵 소개와 운영자 김준혁 정보, 사업자 등록 정보."
+  jsonld={jsonld}
 >
-  <p class="todo">[TODO: 운영자 작성] — 운영자 본인 신원·이력은 운영자 직접 작성 (Google News 권장 신호이므로 허위 생성 금지).</p>
+  <h2>스마트데이터샵</h2>
+  <p>
+    <strong>한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 매일 5분으로 정리하는 데이터 저널 허브.</strong>
+    국세청·한국은행·통계청·KRX·금감원 등 공공기관 1차 출처 자료를 사람이 읽기 쉬운 분량으로
+    재구성해 발행합니다. 발표 즉시 → 핵심 정리 → 1차 출처 deep link 의 3단계 구조.
+  </p>
 
   <h2>운영자</h2>
   <table class="meta-table">
-    <tr><th>대표</th><td>김준혁 (Junhyuk Kim)</td></tr>
-    <tr><th>이메일</th><td>editor@smartdatashop.kr</td></tr>
+    <tr><th>대표</th><td>김준혁 (Junhyuk Kim) — <a href="/authors/junhyuk-kim/">저자 페이지</a></td></tr>
+    <tr><th>이메일</th><td><a href="mailto:editor@smartdatashop.kr">editor@smartdatashop.kr</a></td></tr>
     <tr><th>역할</th><td>1차 출처 검증 · 편집 · 발행 책임자</td></tr>
   </table>
 
@@ -25,12 +34,22 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
     <tr><th>업태 / 종목</th><td>도매업 / 전자상거래 소매·해외직구대행 등</td></tr>
   </table>
 
-  <h2>미션</h2>
-  <p class="todo">[TODO: 운영자 작성] — 미션 문구. PLANNING.md §1.2의 슬로건 "한국의 데이터를 매일 5분으로"를 어떻게 풀어쓸지 운영자 본인 표현.</p>
+  <h2>발행 원칙</h2>
+  <ul>
+    <li><strong>1차 출처 우선</strong> — 모든 본문은 정부·공공기관 1차 발표 자료를 deep link 로 연결합니다.</li>
+    <li><strong>AI 보조 + 인간 검토</strong> — AI 가 작성한 부분은 본문 상단 Trust Bar 에 명시됩니다 (<a href="/ai-policy/">/ai-policy/</a>).</li>
+    <li><strong>정정 투명성</strong> — 사실 오류 발견 시 본문에 정정 이력을 공개 기록합니다 (<a href="/corrections/">/corrections/</a>).</li>
+    <li><strong>편집 정책 공개</strong> — <a href="/editorial-policy/">/editorial-policy/</a> 에 검증 절차와 발행 기준을 명시합니다.</li>
+  </ul>
 
-  <h2>연혁</h2>
-  <p class="todo">[TODO: 운영자 작성] — 사업체 연혁 / 본 사이트 출시일 / 자매 사이트 합류 시점.</p>
+  <h2>자매 사이트 네트워크</h2>
+  <ul>
+    <li><a href="https://calculatorhost.com" rel="noopener noreferrer" target="_blank">calculatorhost.com</a> — 즉답형 계산기 (전 카테고리)</li>
+    <li><a href="https://awoo.or.kr" rel="noopener noreferrer" target="_blank">awoo.or.kr</a> — 지원금 수령자 페르소나</li>
+    <li><a href="https://asiatop.co.kr" rel="noopener noreferrer" target="_blank">asiatop.co.kr (머니룩)</a> — 사회초년생·직장인</li>
+    <li><a href="https://iknowhowinfo.com" rel="noopener noreferrer" target="_blank">iknowhowinfo.com (아이노하우)</a> — 투자자</li>
+  </ul>
 
-  <h2>연락처</h2>
-  <p>제보·정정·제휴 문의는 <a href="/contact/">/contact/</a> 또는 editor@smartdatashop.kr 로 보내주세요.</p>
+  <h2>연락</h2>
+  <p>제보·정정·인터뷰·제휴 문의: <a href="mailto:editor@smartdatashop.kr">editor@smartdatashop.kr</a> 또는 <a href="/contact/">/contact/</a> 양식.</p>
 </PolicyLayout>

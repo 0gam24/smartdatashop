@@ -43,6 +43,7 @@ const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
     tldr: entry.data.tldr,
     href: pulseUrl(entry.slug, entry.data.publishedAt),
     tags,
+    coverImage: entry.data.coverImage,
   };
 });
 
@@ -98,63 +99,45 @@ const categories = CATEGORY_ORDER.map((cat) => {
   };
 });
 
-// 섹션 04 — 진행 중인 가이드북
-const guidebooks = [
-  {
-    coverNum: '1권 · 2026',
-    coverTitle: '5월 종소세<br>완전 가이드',
-    title: '5월 종합소득세 완전 가이드',
-    description:
-      '신고 대상 판단부터 모두채움·홈택스 단계별 캡처, 1인사업자 절세 전략까지. 1차 출처는 국세청 고시·해석례.',
-    progressPct: 33,
-    progressMeta: 'CHAPTER 4 / 12 · 완료율 33%',
-    nextChapter: '인적공제 — 부양가족 판정 12가지',
-    nextDate: '5월 8일',
-  },
-  {
-    coverNum: '2권 · 2026 (예고)',
-    coverTitle: '한국의<br>ETF 지도',
-    title: '한국의 ETF 지도 — 시장·전략·세금',
-    description:
-      'KRX 상장 ETF 800종을 자산군·전략·과세체계 3축으로 분류. 자매 사이트 iknowhowinfo와 공동 기획.',
-    progressPct: 8,
-    progressMeta: 'CHAPTER 1 / 14 · 완료율 8%',
-    nextChapter: 'ETF 분류의 3축',
-    nextDate: '5월 12일',
-  },
-];
+// 섹션 04 — 진행 중인 가이드북 (컬렉션 기반).
+// guidebook 컬렉션이 비어 있는 동안에는 섹션 자체를 렌더하지 않음.
+// "준비 중" 정직 신호 — 운영자가 첫 가이드북 추가 시 자동 노출.
+// (Eng #2, ADR 0005 — 편집 무결성: index.astro 에 가짜 데이터 박지 않는다)
+const guidebooksCollection = await getCollection('guidebook').catch(() => []);
+const guidebooks = guidebooksCollection
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 2)
+  .map((entry) => {
+    const totalCh = entry.data.totalChapters;
+    const doneCh = entry.data.completedChapters;
+    const pct = totalCh > 0 ? Math.round((doneCh / totalCh) * 100) : 0;
+    return {
+      coverNum: entry.data.title.split(/\s+/)[0] ?? '·',
+      coverTitle: entry.data.title,
+      title: entry.data.title,
+      description: entry.data.description,
+      progressPct: pct,
+      progressMeta: `CHAPTER ${doneCh} / ${totalCh} · 완료율 ${pct}%`,
+      nextChapter: '',
+      nextDate: '',
+    };
+  });
 
-// 섹션 06 — 자매 사이트
-const sisters = [
-  {
-    domain: 'calculatorhost.com',
-    name: '계산기 호스트',
-    persona: '즉답형 · 전 카테고리 횡단',
-    latest: '종소세 환급액 계산기 — 모두채움 대비',
-    baseUrl: 'https://calculatorhost.com',
-  },
-  {
-    domain: 'awoo.or.kr',
-    name: '아우',
-    persona: '지원금 수령자',
-    latest: '청년월세 특별지원 잔여 예산 38%',
-    baseUrl: 'https://awoo.or.kr',
-  },
-  {
-    domain: 'asiatop.co.kr',
-    name: '머니룩',
-    persona: '사회초년생 · 직장인',
-    latest: '신혼부부 디딤돌 vs 보금자리론 비교',
-    baseUrl: 'https://asiatop.co.kr',
-  },
-  {
-    domain: 'iknowhowinfo.com',
-    name: '아이노하우',
-    persona: '투자자',
-    latest: 'KOSPI200 ETF 4월 순유입 3.2조',
-    baseUrl: 'https://iknowhowinfo.com',
-  },
-];
+// 섹션 06 — 자매 사이트 (정적 데이터, src/data/sister-sites.ts 권위 출처).
+// 하드코딩 latest 문구는 검수 불가능한 실시간 데이터라 제거 — 운영자가 수동
+// 갱신 시 stale 위험. 향후 IndexNow + 자매 사이트 RSS fetch 로 자동화.
+import { SISTER_SITES, type SisterSiteKey } from '../data/sister-sites';
+const sisterOrder: SisterSiteKey[] = ['calculatorhost', 'awoo', 'moneylook', 'iknowhowinfo'];
+const sisters = sisterOrder.map((key) => {
+  const meta = SISTER_SITES[key];
+  return {
+    domain: meta.domain,
+    name: meta.name,
+    persona: meta.persona,
+    latest: '', // 컴포넌트가 빈 값을 graceful 처리
+    baseUrl: meta.baseUrl,
+  };
+});
 ---
 
 <BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
@@ -184,15 +167,17 @@ const sisters = [
     </div>
   </section>
 
-  <!-- Section 04: 진행 중인 가이드북 -->
-  <section class="section" id="guidebook" data-screen-label="04 가이드북">
-    <div class="page-width">
-      <SectionHead num="04" title="진행 중인 가이드북" moreHref="#" moreLabel="전체 가이드북 →" />
-      <div class="guidebook-grid">
-        {guidebooks.map((g) => <GuidebookCard {...g} />)}
+  <!-- Section 04: 진행 중인 가이드북 — 컬렉션 비어 있으면 섹션 자체 미렌더 (Eng #2) -->
+  {guidebooks.length > 0 && (
+    <section class="section" id="guidebook" data-screen-label="04 가이드북">
+      <div class="page-width">
+        <SectionHead num="04" title="진행 중인 가이드북" moreLabel={`${guidebooks.length}권`} />
+        <div class="guidebook-grid">
+          {guidebooks.map((g) => <GuidebookCard {...g} />)}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Section 05: 오늘의 추천 차트 -->
   <section class="section" id="data" data-screen-label="05 추천 차트">

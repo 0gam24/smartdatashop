@@ -24,7 +24,9 @@
 ## 매주 (15분)
 
 - [ ] `docs/error-log.md`에 새 에러 자산화 (5분 이상 디버깅한 것)
-- [ ] 인덱스 상태 확인 (Search Console)
+- [ ] **`npm run verify`** — 1차 출처 링크 헬스 + 수치 주장 페어링 감사 (Layer 3)
+- [ ] **Search Console Discover 보고서** — Discover 노출 / 클릭 / 페이지별 인사이트 확인
+- [ ] **GSC URL 제거 요청 큐** — `[검수 후 입력]` 토큰 잔존 글이 색인 시도된 흔적 있으면 제거
 - [ ] 자매 사이트 4개 최신 글 RSS 점검
 - [ ] 펄스 발행 빈도 확인 (운영자 작성 대기 카운트)
 - [ ] dashboard.md "운영 메트릭" 수동 갱신
@@ -59,6 +61,22 @@
 | ADR 발자국 | 30초 | 복잡하면 별도 문서로 분리 |
 | 새 자매 사이트 시작 | 1주 (5단계 × 8시간) | book 19303 P1 로드맵 |
 | 하네스 정기 리뷰 | 30분/월 | book 19470 P7 |
+
+---
+
+## 환경변수 운영자 액션 (1회 입력)
+
+ADR 0005 의 자동 안전장치는 일부 동적 신호를 환경변수로 받는다. Cloudflare Pages
+Settings → Environment variables 에 한 번 입력하면 코드 변경 없이 즉시 LD/UI 반영.
+
+| 변수 | 용도 | 형식 |
+|---|---|---|
+| `PUBLIC_AUTHOR_SAMEAS` | 김준혁 외부 프로필 (Person LD `sameAs` + 저자 페이지) | 콤마 구분 URL — `https://linkedin.com/in/...,https://blog.naver.com/...` |
+| `PUBLIC_ORG_SAMEAS` | 사이트 SNS (Organization LD `sameAs`) | 동상 |
+| `PUBLIC_NAVER_SITE_VERIFICATION` | 네이버 서치어드바이저 토큰 | 토큰 문자열 |
+| `PUBLIC_GOOGLE_SITE_VERIFICATION` | 구글 서치 콘솔 토큰 | 토큰 문자열 |
+| `PUBLIC_CF_ANALYTICS_TOKEN` | Cloudflare Web Analytics | 토큰 (미설정 시 beacon 미발행) |
+| `PUBLIC_STIBEE_LIST_ID` | Stibee 뉴스레터 폼 | 리스트 ID (미설정 시 fallback 모드) |
 
 ---
 

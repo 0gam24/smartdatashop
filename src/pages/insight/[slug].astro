@@ -16,7 +16,13 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import InsightLayout from '../../layouts/InsightLayout.astro';
 import Tldr from '../../components/Tldr.astro';
 import RelatedList from '../../components/RelatedList.astro';
-import { insightUrl, pulseDateParts } from '../../lib/korean';
+import { categoryToKorean, insightUrl, pulseDateParts } from '../../lib/korean';
+import { entryHasPlaceholder } from '../../lib/placeholder';
+import {
+  buildArticleLD,
+  buildBreadcrumbLD,
+  buildDatasetLDFromArticle,
+} from '../../lib/jsonld';
 
 export async function getStaticPaths() {
   const entries = await getCollection('insight');
@@ -63,12 +69,35 @@ const keywords = [
   ...data.tags.actions,
 ];
 
-// 명시적 coverImage 가 없으면 동적 OG 카드(/og/insight/<slug>.png)로 자동 폴백.
+// 명시적 coverImage 가 없으면 동적 OG v2(Satori) 폴백.
+// 구 librsvg 라우트는 D9=N 합의로 1개월 병행 후 제거.
 const ogImage = data.coverImage
   ? data.coverImage.startsWith('http')
     ? data.coverImage
     : `https://smartdatashop.kr${data.coverImage}`
-  : `https://smartdatashop.kr/og/insight/${entry.slug}.png`;
+  : `https://smartdatashop.kr/og/v2/insight/${entry.slug}.png`;
+
+// placeholder 검출 시 noindex 자동 부여 (펄스 라우트와 동일 정책).
+const hasPlaceholder = entryHasPlaceholder({
+  title: data.title,
+  tldr: data.tldr,
+  body: entry.body,
+});
+
+// JSON-LD 누락 픽스 (G10): Article + BreadcrumbList + Dataset (sources url 있을 때).
+// 인사이트 라우트는 그동안 LD 0개였음 — Discover 진입 자격 손실의 직접 원인.
+const insightUrlAbs = `https://smartdatashop.kr/insight/${entry.slug}/`;
+const categoryLabel = categoryToKorean(data.category).replace(/ /g, '');
+const breadcrumb = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '인사이트', url: '/insight/' },
+  { name: categoryLabel, url: `/category/${data.category}/` },
+  { name: data.title, url: insightUrlAbs },
+]);
+
+const insightJsonLd: object[] = [buildArticleLD(entry), breadcrumb];
+const datasetLd = buildDatasetLDFromArticle(entry, 'insight');
+if (datasetLd) insightJsonLd.push(datasetLd);
 ---
 
 <InsightLayout
@@ -79,11 +108,11 @@ const ogImage = data.coverImage
   readingTime={data.estimatedReadingTime}
   sources={data.sources}
   aiAssisted={data.aiAssisted}
-  previewMode={data.previewMode}
-  verifiedBy={data.verifiedBy}
   corrections={data.correctionLog}
   keywords={keywords}
   ogImage={ogImage}
+  noindex={hasPlaceholder}
+  jsonld={insightJsonLd}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />

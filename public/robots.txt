@@ -1,8 +1,19 @@
+# smartdatashop.kr robots.txt
+#
+# 정책:
+#   - 일반 검색 봇 (Google, Bing, Yeti/NaverBot, DuckDuckBot 등) 전체 허용
+#   - /admin/ , /uploads/ 비공개
+#   - AI 학습 크롤러 차단 (Risk #5, ADR 0005) — 한국 1차 출처 데이터 큐레이션
+#     자산이 무상 학습 데이터로 흡수되는 것을 방지. 향후 라이선싱 협상력 보존.
+#     (Googlebot-News, Yeti 등 검색 색인 봇은 별도 Allow.)
+
+# 일반 검색 봇 — 전체 허용 (단 /admin, /uploads 제외)
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /uploads/
 
+# 한국 검색 — 명시적 Allow
 User-agent: Yeti
 Allow: /
 
@@ -12,5 +23,53 @@ Allow: /
 User-agent: Googlebot-News
 Allow: /
 
+# AI 학습 크롤러 — 차단 (Risk #5)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Sitemaps
 Sitemap: https://smartdatashop.kr/sitemap-index.xml
 Sitemap: https://smartdatashop.kr/news-sitemap.xml
+Sitemap: https://smartdatashop.kr/image-sitemap.xml

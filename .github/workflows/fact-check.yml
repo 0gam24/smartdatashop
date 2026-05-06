@@ -1,0 +1,56 @@
+# 에이전트 #6 — Fact-Checker (Layer 4 사후 감사, ADR 0005)
+# 02:00 KST 매일 (= 17:00 UTC 전날) 14일 윈도우 글의 출처 vs 본문 fuzzy match 감사
+name: agent-fact-check
+
+on:
+  schedule:
+    # KST 02:00 = UTC 17:00 (전날). KST = UTC+9.
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+
+# 동시 실행 방지 — 동일 윈도우의 중복 감사 회피
+concurrency:
+  group: agent-fact-check
+  cancel-in-progress: false
+
+jobs:
+  fact-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # 불일치 발견 시 정정 PR 자동 오픈 (M1+ 활성 시)
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      # M0 stub 모드 — Claude 호출 없음, 14일 윈도우 글 카운트만 산출.
+      # M1+ 활성 절차: scripts/agents/fact-checker.mjs 의 STUB_MODE = false 변경 +
+      #   shared/claude-client.mjs throw 가드 제거 + ANTHROPIC_API_KEY 등록
+      - name: Run Fact-Checker (Layer 4)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/agents/fact-checker.mjs
+
+      # fact-check-queue/ 변경분이 있을 때만 fact-checker-bot 명의 자동 커밋.
+      # M1+ 에서는 commit 외에 정정 PR 도 별도 생성 (peter-evans/create-pull-request 등 사용)
+      - name: Commit fact-check results if changed
+        run: |
+          git config user.name "fact-checker-bot"
+          git config user.email "fact-checker-bot@users.noreply.github.com"
+          git add fact-check-queue/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(fact-check): daily audit $(date -u +%F)"
+            git push
+          else
+            echo "No fact-check changes to commit."
+          fi

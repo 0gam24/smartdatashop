@@ -2,7 +2,10 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
-  darkMode: 'media',
+  // v1.0 의 의도는 light-only — 다크 모드는 v1.2 예정 (DESIGN.md). 'media' 는
+  // OS 다크 모드 자동 감지로 토큰 없이 활성될 위험이 있어 'class' 로 명시.
+  // 'class' = `<html class="dark">` 가 명시될 때만 다크 적용. v1.2 도입 시 토글 컴포넌트 추가.
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

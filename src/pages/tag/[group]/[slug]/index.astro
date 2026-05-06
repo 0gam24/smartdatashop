@@ -138,9 +138,13 @@ const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
 
 // 페이지 keywords meta — 태그값 + 그룹 라벨.
 const keywords = [tagLabel, groupLabel];
+
+// 동적 OG (Satori, Phase 7) — 한글 태그값은 percent-encoding.
+// 태그 슬러그 자체가 URL path 의 일부라 라우트 매칭이 변환 처리 — Astro 동일 패턴.
+const ogImage = `https://smartdatashop.kr/og/v2/tag/${group}/${encodeURIComponent(value)}.png`;
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld} keywords={keywords}>
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" ogImage={ogImage} jsonld={jsonld} keywords={keywords}>
   <Header activeNav="daily" />
   <Masthead
     vol="I"

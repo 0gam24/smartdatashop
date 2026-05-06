@@ -5,30 +5,68 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
 <PolicyLayout
   title="AI 정책"
   eyebrow="정 책 · A I  P O L I C Y"
-  description="AI 보조의 범위·검증 절차·운영자 최종 책임. aiAssisted 배지의 의미."
+  description="스마트데이터샵 AI 활용 등급(4단계), 1차 출처 검증 절차, 운영자 최종 책임. Trust Bar 등급별 라벨 의미."
 >
-  <p class="todo">[TODO: 운영자 작성] — AI 정책은 신뢰도 신호로 작용하므로 운영자 본인이 직접 작성. 본 골격은 PLANNING.md §3.4 / §20 항목을 옮겨놓은 것.</p>
+  <p>
+    스마트데이터샵은 AI 도구(Anthropic Claude 4.x 계열) 를 보조 작성 수단으로 활용하지만,
+    1차 출처 검증과 최종 발행 결정은 항상 운영자(김준혁) 가 수행합니다. 본 정책은 그 활용
+    범위와 등급을 명시화하여 독자가 본문의 신뢰도를 한눈에 파악할 수 있게 합니다.
+  </p>
 
-  <h2>AI 보조의 범위</h2>
+  <h2>AI 활용 4 등급 (ADR 0006)</h2>
+  <p>모든 글의 frontmatter <code>aiAssisted</code> 는 다음 4 단계 중 하나입니다. 본문 상단 Trust Bar 에 등급별 라벨이 자동 노출됩니다.</p>
+  <table class="meta-table">
+    <tr><th><code>false</code></th><td>운영자 단독 작성. AI 도구 미사용.</td></tr>
+    <tr><th><code>'edit'</code></th><td>✏️ AI 편집 보조 — 운영자가 초안을 작성하고 AI 가 표현·문법만 다듬음.</td></tr>
+    <tr><th><code>'draft'</code></th><td>🤖 AI-보조 — AI 가 초안을 작성하고 운영자가 1차 출처와 본문을 1:1 대조하여 사실 확인.</td></tr>
+    <tr><th><code>'fact-check'</code></th><td>🔍 AI 감사 통과 — Layer 4 fact-checker 가 1차 출처 본문과 fuzzy match 하여 검증 (M1+ 본격 가동 시).</td></tr>
+  </table>
+
+  <h2>AI 보조의 허용 범위</h2>
   <ul>
-    <li>1차 출처 자료의 1차 요약·정리</li>
+    <li>1차 출처 자료(PDF·통계 DB) 의 1차 요약·정리</li>
     <li>차트 데이터 추출·구조화</li>
-    <li>맞춤법·가독성 다듬기</li>
+    <li>한국어 맞춤법·가독성 다듬기</li>
+    <li>OG 이미지 자동 생성 (Satori 차트 카드)</li>
+    <li>placeholder 검출·footnote 페어링 감사</li>
   </ul>
 
-  <h2>AI가 하지 않는 것</h2>
+  <h2>AI 가 하지 않는 것</h2>
   <ul>
-    <li>1차 출처 검증 — <strong>운영자</strong>가 한다</li>
-    <li>사실 확인 — <strong>운영자</strong>가 한다</li>
-    <li>최종 편집·발행 결정 — <strong>운영자</strong>가 한다</li>
+    <li><strong>1차 출처 검증</strong> — 운영자가 직접 WebFetch / PDF 다운로드로 수행</li>
+    <li><strong>구체 수치 환각 금지</strong> — CLAUDE.md 절대 금지 룰. 검증 못 한 수치는 본문에 등장 금지 (ADR 0006 4 기준).</li>
+    <li><strong>최종 편집·발행 결정</strong> — 운영자가 PR 머지 (auto-merge 영구 금지, ADR 0005 D2=ii)</li>
+    <li><strong>정정 응대</strong> — 24시간 내 운영자 직접 답변</li>
   </ul>
-
-  <h2>aiAssisted 배지의 의미</h2>
-  <p>본문 우측 또는 헤더에 표시되는 "AI 보조" 배지는 그 글이 위 "AI 보조의 범위" 단계에서 AI의 도움을 받았음을 명시합니다. 배지가 있더라도 1차 출처 검증과 최종 판단은 운영자가 했음을 의미합니다.</p>
 
   <h2>사용 모델 공시</h2>
-  <p class="todo">[TODO: 운영자 작성] — 사용 중인 AI 모델군 (Claude Sonnet/Opus/Haiku 등) 공시 여부와 갱신 주기.</p>
+  <ul>
+    <li>본 사이트 운영에 사용되는 AI 도구: Anthropic Claude 4.x (Opus·Sonnet·Haiku) 계열.</li>
+    <li>Layer 4 fact-checker (M1+ 가동 시): Anthropic API (Haiku 또는 Sonnet 등급, 비용 정책 별도).</li>
+    <li>OG 이미지 생성: Satori (Vercel) + @resvg/resvg-js. AI 이미지 모델(DALL-E 등) 미사용.</li>
+    <li>모델 변경 시 본 페이지 갱신.</li>
+  </ul>
+
+  <h2>5계층 자동 안전장치 (ADR 0005)</h2>
+  <p>AI 보조의 위험을 사람의 검수 게이트가 아니라 자동화된 5계층 구조로 차단합니다.</p>
+  <ol>
+    <li><strong>L1</strong> writer 프롬프트 룰 — 환각 패턴 사전 차단</li>
+    <li><strong>L2</strong> Zod 스키마 — 1차 출처 URL 필수, 구체 수치 페어링 강제</li>
+    <li><strong>L3</strong> 빌드 게이트 — placeholder 자동 noindex + verify:strict CI 차단</li>
+    <li><strong>L4</strong> 사후 fact-checker — 매일 02:00 KST 1차 출처 vs 본문 fuzzy match (M0 stub, M1+ 본격 가동)</li>
+    <li><strong>L5</strong> 독자 UX — Trust Bar + 정정 신고 채널</li>
+  </ol>
 
   <h2>오류 시 책임</h2>
-  <p>AI 보조 사용 여부와 무관하게 본 사이트의 모든 콘텐츠 정확성에 대한 책임은 운영자 김준혁에게 있습니다. 정정 절차는 <a href="/editorial-policy/">/editorial-policy/</a> · <a href="/corrections/">/corrections/</a> 참조.</p>
+  <p>
+    AI 보조 사용 여부와 무관하게 본 사이트의 모든 콘텐츠 정확성에 대한 책임은
+    운영자 <strong>김준혁</strong> (editor@smartdatashop.kr) 에게 있습니다. 정정 절차는
+    <a href="/editorial-policy/">/editorial-policy/</a> · <a href="/corrections/">/corrections/</a> 참조.
+  </p>
+
+  <h2>관련 ADR</h2>
+  <ul>
+    <li><strong>ADR 0005</strong> — Compensating Controls (수동 검수 게이트 폐기 + 5 계층 안전장치)</li>
+    <li><strong>ADR 0006</strong> — 정식 발행 4대 기준</li>
+  </ul>
 </PolicyLayout>

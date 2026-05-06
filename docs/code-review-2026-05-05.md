@@ -13,6 +13,41 @@ Build status: pass (`astro check`: 0 / 0 / 0; `npm run build`: 39 pages, 5.38s).
 
 ---
 
+## ✅ 2026-05-06 해결 상태 (Phase 0~5 결과)
+
+> 본 리뷰의 Critical/Major 항목들은 2026-05-06 의 Phase 0~5 작업 (ADR 0005) 으로
+> 대부분 해소되었다. 아래 매핑은 향후 비슷한 사고 재발 방지 추적용.
+
+### Critical (4건 — 모두 해소)
+
+1. **`public/admin/config.yml` 누출** — Phase 0 이전에 ADR 0004 로 해결 (APIRoute `src/pages/admin/config.yml.ts` 로 이전, `import.meta.env.DEV` 가드).
+2. **PulseCard 클릭 안 됨** — Phase 0 이전에 `<a class="card-link">` wrapper 추가 (모든 클릭 가능 카드 동일 패턴).
+3. **Hero 가짜 통계 ("312만 명")** — Phase 0: chart props 5개 default 모두 제거, 명시 전달 시만 차트 영역 렌더 (`hasChart` 가드).
+4. **MDX 안 검증되지 않은 정부 통계** — Phase 0: `src/lib/placeholder.ts` 의 `entryHasPlaceholder()` 가 `[검수 후 입력]` 검출 시 자동 robots `noindex,nofollow`. 7글 모두 색인 차단 검증됨. + Phase 1: `previewMode`/`verifiedBy` 스키마 폐기 (ADR 0005), TrustBar 로 신뢰 신호 본문 노출.
+
+### Major (9건 중 다수 해소)
+
+- **InsightLayout JSON-LD 0개** (G10) — Phase 2: `Article + BreadcrumbList + Dataset` LD 통합 (3개 발행).
+- **Footer `href="#"`** (8) — Phase 0: 가이드북/데이터 라우트 없는 항목은 "(준비 중)" 비활성 표시, RSS 링크 추가.
+- **홈페이지 03~06 섹션 하드코딩** (9) — 부분 해결: index.astro 가 컬렉션 기반으로 카드 구성, guidebook/sister 는 데이터 컬렉션 비어 임시 하드코딩 잔존 (Phase 6+ 가이드북 컬렉션 활용 시 해소).
+- **태그 chip 비링크 span** — 기존 코드 검토에서 이미 `<a>` 인 것 확인.
+- **Hero SVG `aria-hidden` 누락** — 별도 미확인.
+- **`/article/` redirect noindex 누락** — `noBaseRobots` prop 으로 처리 가능 구조 (확인 필요).
+
+### Minor / nits (12건 중 일부 해소)
+
+- **nit #17 articleSection 자간 ("정 책")** — Phase 2: `plainCategoryLabel()` 헬퍼로 평문화.
+- **G15 Person `image` + `sameAs` 빈** — Phase 2: `PUBLIC_AUTHOR_SAMEAS` 환경변수 기반 + Phase 5: `knowsAbout` / `hasOccupation` / `knowsLanguage` / `alternateName` 추가.
+- **G13 Org `sameAs: []`** — Phase 2: `PUBLIC_ORG_SAMEAS` 환경변수 기반.
+- **G17 단일 OG 폴백** — Phase 1+3: Satori 동적 라우트 home/category/author/pulse/insight 14개 OG 카드.
+- **G21 Lighthouse 데스크톱만** — Phase 4: `lighthouserc.mobile.json` + 워크플로우 2-pass.
+- **G23 폰트 외부 도메인 의존** — Phase 5: Noto Serif KR + JetBrains Mono self-host (fontsource).
+- **`darkMode: 'media'` 토큰 부재** — 미해결 (DESIGN.md v1.2 까지 보류).
+
+---
+
+---
+
 ## Critical (fix before any release)
 
 1. **`public/admin/config.yml:14` — `local_backend: true` ships in production build.**
