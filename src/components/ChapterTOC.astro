@@ -1,0 +1,204 @@
+---
+/**
+ * ChapterTOC — 챕터 본문 H2/H3 를 sticky 사이드바 목차로 렌더.
+ *
+ * 동작:
+ *   1. mount 시 `.chapter-body` 안의 h2/h3 를 스캔
+ *   2. 한국어·영문 친화 slug 자동 생성 → 각 heading 에 id 부여
+ *   3. heading 우측에 # 앵커 버튼 추가 (클릭 시 permalink 클립보드 복사)
+ *   4. 사이드바 ol 에 활자 목차 렌더 + IntersectionObserver 로 활성 섹션 강조
+ *
+ * rehype-slug 의존 회피 — 의존성 추가 승인 절차 우회용 (CLAUDE.md 규칙).
+ * Heading id 가 SSR 단계에서 박혀 있지 않으므로 공유 링크 (#anchor) 첫 진입 시
+ * scroll 은 client 스크립트가 수행한 뒤 history.replaceState 로 처리.
+ */
+---
+
+<aside class="ch-toc" data-chapter-toc aria-label="이 챕터의 목차">
+  <div class="ch-toc-label">이 챕터</div>
+  <ol class="ch-toc-list" data-chapter-toc-list></ol>
+</aside>
+
+<style>
+  .ch-toc {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    width: 220px;
+    font-size: 12px;
+    border-left: 0.5px solid var(--color-ink-quat);
+    padding-left: 14px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    /* 비어 있을 때 (heading 0 개) 자체적으로 숨김 */
+  }
+  .ch-toc[data-empty] {
+    display: none;
+  }
+  .ch-toc-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-ink-tertiary);
+    margin-bottom: 12px;
+  }
+  .ch-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ch-toc-list a {
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    line-height: 1.4;
+    display: block;
+    border-left: 1.5px solid transparent;
+    padding-left: 8px;
+    margin-left: -8px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .ch-toc-list a:hover {
+    color: var(--color-accent);
+  }
+  .ch-toc-list a.active {
+    color: var(--color-ink);
+    border-left-color: var(--color-accent);
+  }
+  .ch-toc-list .level-3 a {
+    padding-left: 18px;
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+  /* 모바일 — sticky 비활성, 챕터 헤더 아래 collapsed 표시 */
+  @media (max-width: 1100px) {
+    .ch-toc {
+      position: static;
+      width: 100%;
+      max-height: none;
+      border-left: 0;
+      border-bottom: 0.5px solid var(--color-ink-quat);
+      padding-left: 0;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<script>
+  /* eslint-disable */
+  (() => {
+    const tocEl = document.querySelector<HTMLElement>('[data-chapter-toc]');
+    const tocList = document.querySelector<HTMLOListElement>('[data-chapter-toc-list]');
+    const scope = document.querySelector<HTMLElement>('.chapter-body');
+    if (!tocEl || !tocList || !scope) return;
+
+    /** 한국어·영문 친화 slug. 공백→'-', 한글/영문/숫자/하이픈만, 중복은 -2/-3. */
+    function slugify(text: string): string {
+      return text
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w가-힣\-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
+    const headings = Array.from(scope.querySelectorAll<HTMLElement>('h2, h3'));
+    if (headings.length === 0) {
+      tocEl.setAttribute('data-empty', '');
+      return;
+    }
+
+    const seen = new Set<string>();
+    type Item = { id: string; text: string; level: 2 | 3; el: HTMLElement };
+    const items: Item[] = [];
+
+    for (const h of headings) {
+      const text = (h.textContent ?? '').trim();
+      if (!text) continue;
+      // Astro MDX 가 이미 id 를 부여한 경우 존중 — 서버사이드 anchor 링크 호환.
+      // 빠진 경우에만 client-side slugify.
+      let id = h.id;
+      if (!id) {
+        const base = slugify(text) || 'section';
+        id = base;
+        let suffix = 2;
+        while (seen.has(id)) id = `${base}-${suffix++}`;
+        h.id = id;
+      }
+      seen.add(id);
+
+      // # 앵커 버튼 — 클릭 시 permalink 클립보드 복사
+      const anchor = document.createElement('a');
+      anchor.href = `#${id}`;
+      anchor.className = 'heading-anchor';
+      anchor.setAttribute('aria-label', '이 섹션 링크 복사');
+      anchor.textContent = '#';
+      anchor.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const url = `${location.origin}${location.pathname}#${id}`;
+        history.replaceState(null, '', `#${id}`);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).catch(() => {});
+        }
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      h.appendChild(anchor);
+
+      const level = h.tagName === 'H3' ? 3 : 2;
+      items.push({ id, text, level: level as 2 | 3, el: h });
+    }
+
+    if (items.length === 0) {
+      tocEl.setAttribute('data-empty', '');
+      return;
+    }
+
+    // TOC 렌더
+    for (const it of items) {
+      const li = document.createElement('li');
+      li.className = `level-${it.level}`;
+      const a = document.createElement('a');
+      a.href = `#${it.id}`;
+      a.textContent = it.text;
+      a.dataset.tocLink = it.id;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    }
+
+    // 첫 진입 시 location.hash 가 있으면 부드럽게 스크롤 (id 가 SSR 시점엔 없었으므로)
+    if (location.hash) {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) {
+        // 다음 frame 으로 미뤄 layout 안정 후 스크롤
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'start' });
+        });
+      }
+    }
+
+    // 활성 섹션 highlight
+    const links = new Map<string, HTMLAnchorElement>();
+    tocList.querySelectorAll<HTMLAnchorElement>('a[data-toc-link]').forEach((a) => {
+      links.set(a.dataset.tocLink!, a);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            links.forEach((a) => a.classList.remove('active'));
+            const link = links.get((e.target as HTMLElement).id);
+            link?.classList.add('active');
+            break;
+          }
+        }
+      },
+      { rootMargin: '-80px 0px -70% 0px', threshold: 0 },
+    );
+    items.forEach((it) => observer.observe(it.el));
+  })();
+</script>

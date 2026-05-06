@@ -11,6 +11,8 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import TrustBar from '../../../components/TrustBar.astro';
 import SourceList from '../../../components/SourceList.astro';
+import ReadingProgress from '../../../components/ReadingProgress.astro';
+import ChapterTOC from '../../../components/ChapterTOC.astro';
 import { entryHasPlaceholder } from '../../../lib/placeholder';
 import { buildBreadcrumbLD } from '../../../lib/jsonld';
 import { formatKoreanDate } from '../../../lib/korean';
@@ -54,6 +56,11 @@ const hasPlaceholder = entryHasPlaceholder({
   body: entry.body,
 });
 
+// 읽기 시간 추정 — 한국어 기술/세무 본문 ≈ 400자/분 (보수적).
+// entry.body 는 raw markdown 이므로 백틱·각주·링크 마크업이 포함되지만
+// 추정용으로는 충분. 최소 1분 보장.
+const estReadingMinutes = Math.max(1, Math.round((entry.body?.length ?? 0) / 400));
+
 const SITE = 'https://smartdatashop.kr';
 const pageUrl = `/guidebook/${data.bookSlug}/${data.chapterNumber}/`;
 
@@ -79,6 +86,7 @@ const breadcrumbLd = buildBreadcrumbLD([
   noindex={hasPlaceholder}
 >
   <Header activeNav="guidebook" />
+  <ReadingProgress />
 
   <main id="main" role="main" class="chapter-wrap">
     <nav class="crumb" aria-label="breadcrumb">
@@ -96,19 +104,24 @@ const breadcrumbLd = buildBreadcrumbLD([
         <span>{formatKoreanDate(data.publishedAt)}</span>
         <span class="dot">·</span>
         <span>1차 출처 {data.sources.length}건</span>
+        <span class="dot">·</span>
+        <span>{estReadingMinutes}분 읽기</span>
       </div>
     </header>
 
-    <article class="chapter-body">
-      <TrustBar
-        aiAssisted={data.aiAssisted}
-        sourceCount={data.sources.length}
-        updatedAt={data.publishedAt}
-      />
-      <Content />
-      <hr />
-      <SourceList sources={data.sources} />
-    </article>
+    <div class="chapter-layout">
+      <article class="chapter-body">
+        <TrustBar
+          aiAssisted={data.aiAssisted}
+          sourceCount={data.sources.length}
+          updatedAt={data.publishedAt}
+        />
+        <Content />
+        <hr />
+        <SourceList sources={data.sources} />
+      </article>
+      <ChapterTOC />
+    </div>
 
     <nav class="chapter-nav" aria-label="이전·다음 챕터">
       {prev ? (
@@ -138,10 +151,28 @@ const breadcrumbLd = buildBreadcrumbLD([
 
 <style>
   .chapter-wrap {
-    max-width: var(--width-prose);
+    max-width: var(--width-page);
     margin: 0 auto;
     padding: 36px var(--width-gutter) 64px;
   }
+  /* 데스크톱: 본문(prose 폭) + 우측 sticky TOC. 모바일은 단일 컬럼. */
+  .chapter-layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--width-prose)) 240px;
+    gap: 56px;
+    align-items: start;
+    margin: 0 auto;
+    max-width: calc(var(--width-prose) + 240px + 56px);
+  }
+  @media (max-width: 1100px) {
+    .chapter-layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+      max-width: var(--width-prose);
+    }
+  }
+  /* 챕터 본문은 좁은 prose 폭 안에 머무르되, layout grid 가 폭 제어 */
+  .chapter-body { min-width: 0; }
   .crumb {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -252,14 +283,56 @@ const breadcrumbLd = buildBreadcrumbLD([
     .chapter-nav-next { text-align: left; }
   }
 
-  /* MDX 각주 — ArticleLayout 과 동일 */
+  /* MDX 각주 — ArticleLayout 과 동일하나 가이드북에서는 각주 섹션을 노출 */
   .chapter-body :global(sup[data-footnote-ref] a) {
     color: var(--color-accent);
     font-weight: 500;
     font-family: var(--font-sans);
     text-decoration: none;
   }
+  /* 본문 끝 footnotes 섹션 — 위키독스 대비 차별화 자산 (1차 출처 직접 인용) */
   .chapter-body :global(section[data-footnotes]) {
-    display: none;
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--color-ink-secondary);
+  }
+  .chapter-body :global(section[data-footnotes] h2) {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--color-ink-tertiary);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+  }
+  .chapter-body :global(section[data-footnotes] ol) {
+    padding-left: 1.4rem;
+    margin: 0;
+  }
+  .chapter-body :global(section[data-footnotes] li) {
+    margin-bottom: 0.4rem;
+  }
+
+  /* heading-anchor — ChapterTOC 가 client-side 로 부착하는 # 버튼 */
+  .chapter-body :global(.heading-anchor) {
+    display: inline-block;
+    margin-left: 8px;
+    color: var(--color-ink-quat);
+    text-decoration: none;
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease;
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+  }
+  .chapter-body :global(h2:hover .heading-anchor),
+  .chapter-body :global(h3:hover .heading-anchor),
+  .chapter-body :global(.heading-anchor:focus) {
+    opacity: 1;
+    color: var(--color-accent);
   }
 </style>
