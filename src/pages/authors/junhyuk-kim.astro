@@ -1,6 +1,9 @@
 ---
 import PolicyLayout from '../../layouts/PolicyLayout.astro';
+import KpiTile from '../../components/viz/KpiTile.astro';
 import { AUTHOR_KNOWS_ABOUT, buildPersonLD, buildBreadcrumbLD } from '../../lib/jsonld';
+import { getCollection } from 'astro:content';
+import { pulseUrl, insightUrl, formatKoreanDate } from '../../lib/korean';
 
 // 저자 페이지 LD: Person + Breadcrumb (홈 › 저자 › 김준혁).
 // PUBLIC_AUTHOR_SAMEAS 환경변수로 외부 프로필 URL 자동 주입 (LinkedIn/네이버블로그/X 등) —
@@ -26,6 +29,62 @@ function hostnameOf(url: string): string {
     return url;
   }
 }
+
+// === 자동 발행 통계 (E-E-A-T premium 신호) ===
+// 모든 데이터는 collection 에서 직접 집계 — fabrication 위험 0.
+const [pulses, insights, books, chapters] = await Promise.all([
+  getCollection('pulse'),
+  getCollection('insight'),
+  getCollection('guidebook'),
+  getCollection('guidebookChapter'),
+]);
+
+const articleCount = pulses.length + insights.length + chapters.length;
+const allSourceUrls = new Set<string>();
+for (const e of pulses) e.data.sources.forEach((s) => allSourceUrls.add(s.url));
+for (const e of insights) e.data.sources.forEach((s) => allSourceUrls.add(s.url));
+for (const e of chapters) e.data.sources.forEach((s) => allSourceUrls.add(s.url));
+
+// 도메인 분류 — 정부 (.go.kr) / 공공기관 (.or.kr) / 거래소·법령 / 기타
+function classifyHost(url: string): '정부' | '공공기관' | '거래소·법령' | '언론·기타' {
+  try {
+    const host = new URL(url).hostname;
+    if (host.endsWith('.go.kr')) return '정부';
+    if (host.endsWith('.or.kr')) return '공공기관';
+    if (host === 'krx.co.kr' || host === 'www.krx.co.kr' || host === 'law.go.kr') return '거래소·법령';
+    return '언론·기타';
+  } catch {
+    return '언론·기타';
+  }
+}
+const hostBuckets = { 정부: 0, 공공기관: 0, '거래소·법령': 0, '언론·기타': 0 };
+for (const url of allSourceUrls) hostBuckets[classifyHost(url)]++;
+
+// 가장 최근 발행 글 5건 (펄스 + 인사이트, 챕터 제외)
+type RecentItem = { title: string; href: string; publishedAt: string; collection: 'pulse' | 'insight' };
+const recent: RecentItem[] = [
+  ...pulses.map<RecentItem>((e) => ({
+    title: e.data.title,
+    href: pulseUrl(e.slug, e.data.publishedAt),
+    publishedAt: e.data.publishedAt,
+    collection: 'pulse',
+  })),
+  ...insights.map<RecentItem>((e) => ({
+    title: e.data.title,
+    href: insightUrl(e.slug),
+    publishedAt: e.data.publishedAt,
+    collection: 'insight',
+  })),
+]
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  .slice(0, 5);
+
+// 가장 큰 도메인 분포 — 막대 비율 계산
+const totalSrc = allSourceUrls.size || 1;
+const distRows = (Object.entries(hostBuckets) as Array<[keyof typeof hostBuckets, number]>)
+  .filter(([, n]) => n > 0)
+  .sort((a, b) => b[1] - a[1])
+  .map(([label, n]) => ({ label, n, pct: Math.round((n / totalSrc) * 100) }));
 ---
 
 <PolicyLayout
@@ -35,6 +94,52 @@ function hostnameOf(url: string): string {
   ogImage="https://smartdatashop.kr/og/v2/author/junhyuk-kim.png"
   jsonld={[personLd, breadcrumbLd]}
 >
+  <h2>발행 활동 (자동 집계)</h2>
+  <p class="meta-note">아래 수치는 컬렉션에서 매 빌드 시점에 자동 집계 — 운영자 수동 입력 0.</p>
+  <div class="author-kpis">
+    <KpiTile title="발행 글" n={articleCount} unit="편" change={`${pulses.length} 펄스 · ${insights.length} 인사이트 · ${chapters.length} 가이드북 챕터`} />
+    <KpiTile title="인용 1차 출처" n={allSourceUrls.size} unit="건" change="중복 제거" />
+    <KpiTile title="가이드북" n={books.length} unit="권" />
+  </div>
+
+  {recent.length > 0 && (
+    <>
+      <h2>최근 발행</h2>
+      <ul class="recent-list">
+        {recent.map((r) => (
+          <li>
+            <a href={r.href} class="no-underline">
+              <span class="r-title">{r.title}</span>
+              <span class="r-meta">
+                {formatKoreanDate(r.publishedAt)} · {r.collection === 'pulse' ? '펄스' : '인사이트'}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {distRows.length > 0 && (
+    <>
+      <h2>인용 출처 도메인 분포</h2>
+      <p class="meta-note">
+        본 사이트가 인용한 1차 출처 {allSourceUrls.size} 건의 발행 기관 분류.
+        정부 / 공공기관 비율이 높을수록 데이터 저널의 신뢰도 신호.
+        전체 데이터는 <a href="/data/">/data/</a> 에서 다운로드.
+      </p>
+      <ul class="dist-list">
+        {distRows.map((r) => (
+          <li>
+            <span class="d-label">{r.label}</span>
+            <span class="d-bar"><span class="d-fill" style={`width:${r.pct}%`}></span></span>
+            <span class="d-num">{r.n}건 · {r.pct}%</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
   <h2>역할</h2>
   <table class="meta-table">
     <tr><th>이름</th><td>김준혁 (Junhyuk Kim)</td></tr>
@@ -88,6 +193,91 @@ function hostnameOf(url: string): string {
 </PolicyLayout>
 
 <style>
+  .author-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 1rem 0 2rem;
+  }
+  @media (max-width: 720px) {
+    .author-kpis { grid-template-columns: 1fr; }
+  }
+  .recent-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+  }
+  .recent-list li {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .recent-list li:first-child { border-top: 0.5px solid var(--color-ink-quat); }
+  .recent-list a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    color: inherit;
+    gap: 4px;
+    transition: background 0.15s ease;
+  }
+  .recent-list a:hover { background: var(--color-paper-soft); }
+  .recent-list a:hover .r-title { color: var(--color-accent); }
+  .r-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-ink);
+    transition: color 0.15s ease;
+  }
+  .r-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .dist-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dist-list li {
+    display: grid;
+    grid-template-columns: 100px 1fr 110px;
+    align-items: center;
+    gap: 12px;
+  }
+  .d-label {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    font-weight: 500;
+  }
+  .d-bar {
+    height: 8px;
+    background: var(--color-paper-soft);
+    border: 0.5px solid var(--color-ink-quat);
+    position: relative;
+  }
+  .d-fill {
+    display: block;
+    height: 100%;
+    background: var(--color-accent);
+  }
+  .d-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    text-align: right;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 560px) {
+    .dist-list li {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .d-num { text-align: left; }
+  }
   .profile-list {
     list-style: none;
     padding: 0;

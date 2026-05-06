@@ -263,6 +263,20 @@ check('Topic 페이지 ≥ 3', topicOK === topicSlugs.length, `${topicOK}/${topi
 check('Topic CollectionPage LD', topicLD === topicSlugs.length, `${topicLD}/${topicSlugs.length}`);
 check('Topic ItemList LD', topicItemList === topicSlugs.length, `${topicItemList}/${topicSlugs.length}`);
 
+// ── 15. Author profile premium — Ralph 회차 13 ────────────────────
+const authorPremiumHtml = readDist('authors/junhyuk-kim/index.html');
+if (authorPremiumHtml) {
+  check('저자 KPI 자동 집계', /class="author-kpis"/.test(authorPremiumHtml));
+  check('저자 최근 발행 목록', /class="recent-list"/.test(authorPremiumHtml));
+  check('저자 도메인 분포', /class="dist-list"/.test(authorPremiumHtml));
+  // KpiTile 의 발행 글 수가 0 이면 데이터 회귀 — 1 이상 보장
+  const kpiNumMatch = authorPremiumHtml.match(/<span class="kpi-num"[^>]*>(\d+)<\/span>/);
+  const articleN = kpiNumMatch ? Number(kpiNumMatch[1]) : 0;
+  check('저자 발행 글 수 ≥ 1', articleN >= 1, `현재 ${articleN}`);
+}
+
+// (회차 14·15 는 §13 뒤로 이동 — chapters 변수 의존성 때문에)
+
 let bookOK = 0;
 let bookLDOK = 0;
 let bookBreadcrumbOK = 0;
@@ -440,6 +454,66 @@ check(
   '챕터 h2 id 부여 ≥ 3 (ChapterTOC 회귀 가드)',
   chHeadingIdOK === chapters.length,
   `${chHeadingIdOK}/${chapters.length}`,
+);
+
+// ── 16. 챕터 prev/next 양방향성 — Ralph 회차 14 ──────────────────
+//
+// 첫 챕터 (chapterNumber === 1): prev=null → "이전 챕터" 링크 없음
+// 마지막 챕터: next=null → "목록으로" 링크 (chapter-nav-next 가 책 detail 로)
+let firstChapNoPrev = 0;
+let lastChapHasListLink = 0;
+const chaptersByBookV14 = new Map();
+for (const c of chapters) {
+  if (!chaptersByBookV14.has(c.slug)) chaptersByBookV14.set(c.slug, []);
+  chaptersByBookV14.get(c.slug).push(c);
+}
+for (const [bookSlug, chs] of chaptersByBookV14) {
+  const sorted = chs.slice().sort((a, b) => Number(a.chapter) - Number(b.chapter));
+  const first = sorted[0];
+  const last = sorted[sorted.length - 1];
+  const firstHtml = readDist(`guidebook/${bookSlug}/${first.chapter}/index.html`);
+  const lastHtml = readDist(`guidebook/${bookSlug}/${last.chapter}/index.html`);
+  if (firstHtml && !/chapter-nav-prev/.test(firstHtml)) firstChapNoPrev++;
+  if (lastHtml && /목록으로/.test(lastHtml)) lastChapHasListLink++;
+}
+const bookCountV14 = chaptersByBookV14.size;
+check(
+  '첫 챕터 prev 링크 없음 (양방향성)',
+  firstChapNoPrev === bookCountV14,
+  `${firstChapNoPrev}/${bookCountV14}`,
+);
+check(
+  '마지막 챕터 "목록으로" 링크',
+  lastChapHasListLink === bookCountV14,
+  `${lastChapHasListLink}/${bookCountV14}`,
+);
+
+// ── 17. 책 detail ItemList ↔ 빌드된 챕터 수 정합 — Ralph 회차 15 ─
+let bookListConsistent = 0;
+for (const slug of bookSlugs) {
+  const html = readDist(`guidebook/${slug}/index.html`);
+  if (!html) continue;
+  // ItemList LD JSON 추출 — script 블록을 모두 가져와 @type ItemList 인 것 찾기
+  const allLds = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  let itemList = null;
+  for (const m of allLds) {
+    try {
+      const parsed = JSON.parse(m[1]);
+      if (parsed['@type'] === 'ItemList') {
+        itemList = parsed;
+        break;
+      }
+    } catch {}
+  }
+  if (!itemList) continue;
+  const itemCount = Array.isArray(itemList.itemListElement) ? itemList.itemListElement.length : 0;
+  const builtChCount = chaptersByBookV14.get(slug)?.length ?? 0;
+  if (itemCount === builtChCount) bookListConsistent++;
+}
+check(
+  '책 ItemList LD ↔ 빌드된 챕터 정합',
+  bookListConsistent === bookSlugs.length,
+  `${bookListConsistent}/${bookSlugs.length}`,
 );
 
 // ── 출력 ──────────────────────────────────────────────────────────

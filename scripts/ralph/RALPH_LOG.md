@@ -132,12 +132,47 @@ citations.csv (1) + topic ×3 (3) + 인덱스 페이지 (1) = +13.
 
 ---
 
-## 다음 후보 (post-회차 12)
+---
 
-1. 챕터 prev/next 네비게이션 양방향성 — 첫 챕터 prev=null, 마지막은 "목록으로"
-2. 책 detail 의 ItemList LD 챕터 수 ↔ 컬렉션 totalChapters 정합
-3. 챕터 sources[] 수 ↔ TrustBar "1차 출처 N건" 정합
-4. 모든 정책 페이지 jsonld 출력 ≥ 1개 (CollectionPage 또는 WebPage)
-5. 카테고리 페이지 5개 — Article LD 자동 발행 회귀 가드
-6. citations.json 의 source_url 호스트 분포 통계 (운영자 dashboard 용)
+## 2026-05-07T09:30Z — Tier 2 + 회차 13~15: Author premium + prev/next + ItemList 정합
+
+**작업 (Tier 2 — 운영자 작업):**
+- src/pages/authors/junhyuk-kim.astro — KpiTile ×3 (발행 글·1차 출처·가이드북)
+  자동 집계 + 최근 발행 5건 + 인용 출처 도메인 분포 (정부/공공/거래소·법령/언론).
+  모든 데이터 collection 에서 자동 — fabrication 위험 0. E-E-A-T 강화.
+
+**작업 (Ralph 회차 13~15 — smoke 가드):**
+- 회차 13 — Author KPI / recent-list / dist-list 회귀 가드 (4 검증).
+- 회차 14 — 첫 챕터 prev 링크 없음 + 마지막 챕터 "목록으로" 링크.
+- 회차 15 — 책 detail ItemList LD 의 itemListElement 수 ↔ 빌드된 챕터 디렉토리
+  수 정합 (ItemList script 블록 정확 매칭으로 첫 시도 fail 후 다중 LD 파싱 로직
+  교정). 변수 충돌 (chapters TDZ) 발견 후 §16-17 을 §13 뒤로 이동.
+
+**파일**: src/pages/authors/junhyuk-kim.astro, scripts/smoke-test.mjs.
+**결과**: smoke 63 → 70 통과 (+7). 회귀 0.
+**scope-guard**: PASS (콘텐츠/ADR/하네스 0줄).
+
+---
+
+## 누적 (회차 1~15 + Tier 1·2)
+
+- smoke-test 통과: 25 → 70 (+45)
+- 라우트 신설: 7 page + 2 endpoint + author 페이지 premium upgrade
+- viz 컴포넌트: 6종 (DataNumber/Sparkline/BarSpark/ChangeBadge/KpiTile/SourceCount)
+- 콘텐츠 컬렉션 수정: 0
+- ADR · 하네스 수정: 0
+- 새 의존성 추가: 0
+
+---
+
+## 다음 후보 (post-회차 15)
+
+1. 챕터 sources[] 수 ↔ TrustBar "1차 출처 N건" 정합 (UI ↔ frontmatter 동기화)
+2. 모든 정책 페이지 jsonld 출력 ≥ 1개 (현재 /editorial-policy/, /ai-policy/ 등 미보장)
+3. 카테고리 페이지 5개 (/category/policy/ 등) — Article LD 자동 발행 회귀 가드
+4. citations.json 의 source_url 호스트 분포 통계 (운영자 dashboard 용)
+5. Topic 페이지 KPI 가 0 일 때 fallback 처리 (현재 0편이면 빈 page 렌더)
+6. /data/ 인덱스의 KPI 가 author 페이지의 KPI 와 동일 산식인지 정합 검증
+7. Layer 4 fact-checker 의 부분 활성 — fetch 없는 정적 audit (numerical-claims)
+   결과를 fact-check-queue/ 에 dump
 
