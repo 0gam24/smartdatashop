@@ -1,0 +1,247 @@
+---
+/**
+ * 가이드북 상세 — /guidebook/{slug}/
+ *
+ * 가이드북 한 권의 메타데이터(제목·설명·진척률) + 챕터 목록.
+ * 모든 챕터는 `/guidebook/{bookSlug}/{chapter}` 형식의 자식 라우트로 연결.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import {
+  buildBookLD,
+  buildBreadcrumbLD,
+  buildItemListLD,
+  buildCollectionPageLD,
+} from '../../lib/jsonld';
+import { formatKoreanDate } from '../../lib/korean';
+
+export async function getStaticPaths() {
+  const books = await getCollection('guidebook').catch(() => []);
+  return books.map((book) => ({
+    params: { slug: book.id.replace(/\.json$/, '') },
+    props: { book },
+  }));
+}
+
+interface Props {
+  book: CollectionEntry<'guidebook'>;
+}
+
+const { book } = Astro.props as Props;
+const bookSlug = book.id.replace(/\.json$/, '');
+const data = book.data;
+
+// 해당 가이드북에 속한 모든 챕터 — 챕터 번호 오름차순
+const allChapters = await getCollection('guidebookChapter').catch(() => []);
+const chapters = allChapters
+  .filter((ch) => ch.data.bookSlug === bookSlug)
+  .sort((a, b) => a.data.chapterNumber - b.data.chapterNumber);
+
+const pct = data.totalChapters > 0
+  ? Math.round((data.completedChapters / data.totalChapters) * 100)
+  : 0;
+
+const SITE = 'https://smartdatashop.kr';
+const pageUrl = `/guidebook/${bookSlug}/`;
+const pageUrlAbs = `${SITE}${pageUrl}`;
+
+const pageTitle = `${data.title} — 스마트데이터샵 가이드북`;
+const pageDescription = data.description;
+const ogImage = data.coverImage
+  ? data.coverImage.startsWith('http')
+    ? data.coverImage
+    : `${SITE}${data.coverImage}`
+  : `${SITE}/og/v2/home.png`;
+
+// JSON-LD: Book + CollectionPage + ItemList(챕터) + Breadcrumb
+const bookLd = buildBookLD({
+  name: data.title,
+  description: data.description,
+  url: pageUrlAbs,
+  numberOfPages: data.totalChapters,
+  datePublished: data.publishedAt,
+  license: data.license,
+});
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+const chapterListLd = buildItemListLD(
+  chapters.map((ch) => ({
+    name: ch.data.title,
+    url: `/guidebook/${bookSlug}/${ch.data.chapterNumber}/`,
+  })),
+);
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '가이드북', url: '/' },
+  { name: data.title, url: pageUrl },
+]);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="article"
+  ogImage={ogImage}
+  jsonld={[bookLd, collectionLd, chapterListLd, breadcrumbLd]}
+>
+  <Header activeNav="guidebook" />
+
+  <main id="main" role="main" class="book-wrap">
+    <header class="book-header">
+      <div class="book-eyebrow">가 이 드 북</div>
+      <h1 class="book-title">{data.title}</h1>
+      <p class="book-desc">{data.description}</p>
+      <div class="book-meta">
+        <span>발행 시작: {formatKoreanDate(data.publishedAt)}</span>
+        <span class="dot">·</span>
+        <span>총 {data.totalChapters} 챕터</span>
+        <span class="dot">·</span>
+        <span>완료율 {pct}%</span>
+        <span class="dot">·</span>
+        <span>라이선스 {data.license}</span>
+      </div>
+      <div class="book-progress"><div class="book-progress-fill" style={`width:${pct}%`} /></div>
+    </header>
+
+    <section class="chapter-list">
+      <h2 class="visually-hidden">챕터 목록</h2>
+      {chapters.length === 0 ? (
+        <p class="empty">아직 발행된 챕터가 없습니다.</p>
+      ) : (
+        <ol class="chapters">
+          {chapters.map((ch) => (
+            <li class="chapter">
+              <a class="chapter-link no-underline" href={`/guidebook/${bookSlug}/${ch.data.chapterNumber}/`}>
+                <span class="chapter-num">CH {String(ch.data.chapterNumber).padStart(2, '0')}</span>
+                <span class="chapter-info">
+                  <span class="chapter-title">{ch.data.title}</span>
+                  <span class="chapter-when">{formatKoreanDate(ch.data.publishedAt)}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .book-wrap {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .book-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+  .book-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+  .book-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .book-title { font-size: 26px; }
+  }
+  .book-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 18px;
+  }
+  .book-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+  }
+  .book-meta .dot { margin: 0 6px; }
+  .book-progress {
+    width: 100%;
+    height: 3px;
+    background: var(--color-paper-soft);
+    overflow: hidden;
+  }
+  .book-progress-fill {
+    height: 100%;
+    background: var(--color-accent);
+  }
+
+  .empty {
+    color: var(--color-ink-secondary);
+    font-style: normal;
+  }
+  .chapters {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .chapter {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .chapter-link {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 18px;
+    align-items: baseline;
+    padding: 18px 0;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+  .chapter-link:hover {
+    background: var(--color-paper-soft);
+  }
+  .chapter-link:hover .chapter-title {
+    color: var(--color-accent);
+  }
+  .chapter-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.06em;
+  }
+  .chapter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .chapter-title {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--color-ink);
+    transition: color 0.15s ease;
+  }
+  .chapter-when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 560px) {
+    .chapter-link {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

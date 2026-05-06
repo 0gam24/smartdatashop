@@ -1,0 +1,265 @@
+---
+/**
+ * 가이드북 챕터 상세 — /guidebook/{bookSlug}/{chapterNumber}/
+ *
+ * 챕터 본문 + 해당 책으로의 breadcrumb + 이전/다음 챕터 네비게이션.
+ * placeholder 검출 시 자동 noindex (Layer 3, ADR 0005).
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import TrustBar from '../../../components/TrustBar.astro';
+import SourceList from '../../../components/SourceList.astro';
+import { entryHasPlaceholder } from '../../../lib/placeholder';
+import { buildBreadcrumbLD } from '../../../lib/jsonld';
+import { formatKoreanDate } from '../../../lib/korean';
+
+export async function getStaticPaths() {
+  const chapters = await getCollection('guidebookChapter').catch(() => []);
+  return chapters.map((entry) => ({
+    params: {
+      book: entry.data.bookSlug,
+      chapter: String(entry.data.chapterNumber),
+    },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'guidebookChapter'>;
+}
+
+const { entry } = Astro.props as Props;
+const { Content } = await entry.render();
+const data = entry.data;
+
+// 같은 책의 모든 챕터 — prev/next 네비게이션용
+const all = await getCollection('guidebookChapter').catch(() => []);
+const siblings = all
+  .filter((ch) => ch.data.bookSlug === data.bookSlug)
+  .sort((a, b) => a.data.chapterNumber - b.data.chapterNumber);
+const idx = siblings.findIndex((ch) => ch.data.chapterNumber === data.chapterNumber);
+const prev = idx > 0 ? siblings[idx - 1] : null;
+const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
+
+// 책 메타 (제목 표시용)
+const books = await getCollection('guidebook').catch(() => []);
+const book = books.find((b) => b.id.replace(/\.json$/, '') === data.bookSlug);
+const bookTitle = book?.data.title ?? data.bookSlug;
+
+// placeholder 검출 → 자동 noindex
+const hasPlaceholder = entryHasPlaceholder({
+  title: data.title,
+  body: entry.body,
+});
+
+const SITE = 'https://smartdatashop.kr';
+const pageUrl = `/guidebook/${data.bookSlug}/${data.chapterNumber}/`;
+
+const pageTitle = `${data.title} — ${bookTitle} — 스마트데이터샵`;
+const pageDescription = `${bookTitle} ${data.chapterNumber}장 — ${data.title}`;
+const ogImage = `${SITE}/og/v2/home.png`; // 향후 가이드북 챕터 전용 OG 추가 시 변경
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '가이드북', url: '/' },
+  { name: bookTitle, url: `/guidebook/${data.bookSlug}/` },
+  { name: data.title, url: pageUrl },
+]);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="article"
+  ogImage={ogImage}
+  ogPublishedAt={data.publishedAt}
+  jsonld={breadcrumbLd}
+  noindex={hasPlaceholder}
+>
+  <Header activeNav="guidebook" />
+
+  <main id="main" role="main" class="chapter-wrap">
+    <nav class="crumb" aria-label="breadcrumb">
+      <a href="/" class="no-underline">홈</a>
+      <span class="sep">›</span>
+      <a href={`/guidebook/${data.bookSlug}/`} class="no-underline">{bookTitle}</a>
+      <span class="sep">›</span>
+      <span class="crumb-current">제 {data.chapterNumber} 장</span>
+    </nav>
+
+    <header class="chapter-header">
+      <div class="chapter-eyebrow">CHAPTER {data.chapterNumber}</div>
+      <h1 class="chapter-title">{data.title}</h1>
+      <div class="chapter-meta">
+        <span>{formatKoreanDate(data.publishedAt)}</span>
+        <span class="dot">·</span>
+        <span>1차 출처 {data.sources.length}건</span>
+      </div>
+    </header>
+
+    <article class="chapter-body">
+      <TrustBar
+        aiAssisted={data.aiAssisted}
+        sourceCount={data.sources.length}
+        updatedAt={data.publishedAt}
+      />
+      <Content />
+      <hr />
+      <SourceList sources={data.sources} />
+    </article>
+
+    <nav class="chapter-nav" aria-label="이전·다음 챕터">
+      {prev ? (
+        <a class="chapter-nav-prev no-underline" href={`/guidebook/${data.bookSlug}/${prev.data.chapterNumber}/`}>
+          <span class="dir">← 이전 챕터</span>
+          <span class="ttl">{prev.data.title}</span>
+        </a>
+      ) : (
+        <span class="chapter-nav-empty"></span>
+      )}
+      {next ? (
+        <a class="chapter-nav-next no-underline" href={`/guidebook/${data.bookSlug}/${next.data.chapterNumber}/`}>
+          <span class="dir">다음 챕터 →</span>
+          <span class="ttl">{next.data.title}</span>
+        </a>
+      ) : (
+        <a class="chapter-nav-next no-underline" href={`/guidebook/${data.bookSlug}/`}>
+          <span class="dir">목록으로 →</span>
+          <span class="ttl">{bookTitle}</span>
+        </a>
+      )}
+    </nav>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .chapter-wrap {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 36px var(--width-gutter) 64px;
+  }
+  .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+  .crumb a { color: var(--color-ink-secondary); }
+  .crumb a:hover { color: var(--color-accent); }
+  .crumb .sep { margin: 0 6px; }
+  .crumb-current { color: var(--color-ink); }
+
+  .chapter-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 18px;
+    margin-bottom: 32px;
+  }
+  .chapter-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+  .chapter-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .chapter-title { font-size: 24px; }
+  }
+  .chapter-meta {
+    display: flex;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+  }
+
+  .chapter-body :global(p) { margin-bottom: 1.4rem; }
+  .chapter-body :global(h2) { margin-top: 2.2rem; margin-bottom: 1rem; }
+  .chapter-body :global(h3) { margin-top: 1.8rem; margin-bottom: 0.6rem; }
+  .chapter-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0 1.6rem;
+    font-size: 14px;
+  }
+  .chapter-body :global(th),
+  .chapter-body :global(td) {
+    padding: 8px 10px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    text-align: left;
+    vertical-align: top;
+  }
+  .chapter-body :global(th) {
+    font-weight: 500;
+    color: var(--color-ink-secondary);
+  }
+  .chapter-body :global(hr) {
+    border: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin: 2rem 0;
+  }
+
+  .chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .chapter-nav a {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 18px;
+    border: 0.5px solid var(--color-ink-quat);
+    color: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .chapter-nav a:hover {
+    border-color: var(--color-accent-soft);
+    background: var(--color-paper-soft);
+  }
+  .chapter-nav a:hover .ttl { color: var(--color-accent); }
+  .chapter-nav-next { text-align: right; }
+  .chapter-nav-empty { display: block; }
+  .chapter-nav .dir {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.06em;
+  }
+  .chapter-nav .ttl {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--color-ink);
+    line-height: 1.4;
+  }
+  @media (max-width: 560px) {
+    .chapter-nav { grid-template-columns: 1fr; }
+    .chapter-nav-next { text-align: left; }
+  }
+
+  /* MDX 각주 — ArticleLayout 과 동일 */
+  .chapter-body :global(sup[data-footnote-ref] a) {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    text-decoration: none;
+  }
+  .chapter-body :global(section[data-footnotes]) {
+    display: none;
+  }
+</style>

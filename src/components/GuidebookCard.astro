@@ -8,6 +8,8 @@ interface Props {
   progressMeta: string;
   nextChapter: string;
   nextDate: string;
+  /** 가이드북 상세 라우트 — `/guidebook/{slug}/`. 미지정 시 카드는 비클릭 div. */
+  href?: string;
 }
 
 const {
@@ -19,23 +21,45 @@ const {
   progressMeta,
   nextChapter,
   nextDate,
+  href,
 } = Astro.props;
 ---
 
-<div class="gb-card">
-  <div class="gb-cover">
-    <div class="gb-cover-num">{coverNum}</div>
-    <div class="gb-cover-title" set:html={coverTitle} />
-    <div class="gb-cover-foot">SDS GUIDEBOOK</div>
+{href ? (
+  <a class="gb-card gb-card-link no-underline" href={href}>
+    <div class="gb-cover">
+      <div class="gb-cover-num">{coverNum}</div>
+      <div class="gb-cover-title" set:html={coverTitle} />
+      <div class="gb-cover-foot">SDS GUIDEBOOK</div>
+    </div>
+    <div class="gb-info">
+      <h3>{title}</h3>
+      <p class="gb-desc">{description}</p>
+      <div class="gb-progress"><div class="gb-progress-fill" style={`width:${progressPct}%`} /></div>
+      <div class="gb-progress-meta">{progressMeta}</div>
+      {nextChapter && (
+        <div class="gb-next"><span class="arrow">↳</span> 다음 챕터: <em>「{nextChapter}」</em>{nextDate && ` · ${nextDate} 발행`}</div>
+      )}
+    </div>
+  </a>
+) : (
+  <div class="gb-card">
+    <div class="gb-cover">
+      <div class="gb-cover-num">{coverNum}</div>
+      <div class="gb-cover-title" set:html={coverTitle} />
+      <div class="gb-cover-foot">SDS GUIDEBOOK</div>
+    </div>
+    <div class="gb-info">
+      <h3>{title}</h3>
+      <p class="gb-desc">{description}</p>
+      <div class="gb-progress"><div class="gb-progress-fill" style={`width:${progressPct}%`} /></div>
+      <div class="gb-progress-meta">{progressMeta}</div>
+      {nextChapter && (
+        <div class="gb-next"><span class="arrow">↳</span> 다음 챕터: <em>「{nextChapter}」</em>{nextDate && ` · ${nextDate} 발행`}</div>
+      )}
+    </div>
   </div>
-  <div class="gb-info">
-    <h3>{title}</h3>
-    <p class="gb-desc">{description}</p>
-    <div class="gb-progress"><div class="gb-progress-fill" style={`width:${progressPct}%`} /></div>
-    <div class="gb-progress-meta">{progressMeta}</div>
-    <div class="gb-next"><span class="arrow">↳</span> 다음 챕터: <em>「{nextChapter}」</em> · {nextDate} 발행</div>
-  </div>
-</div>
+)}
 
 <style>
   .gb-card {
@@ -43,6 +67,21 @@ const {
     grid-template-columns: 110px 1fr;
     gap: 24px;
     align-items: start;
+  }
+  /* 클릭 가능 wrapper 일 때 — 카드 전체가 a 태그라 색상 상속 + hover 효과 */
+  a.gb-card-link {
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  a.gb-card-link:hover {
+    background: var(--color-paper-soft);
+  }
+  a.gb-card-link:hover h3 {
+    color: var(--color-accent);
+  }
+  a.gb-card-link h3 {
+    transition: color 0.15s ease;
   }
   .gb-cover {
     aspect-ratio: 5/7;
