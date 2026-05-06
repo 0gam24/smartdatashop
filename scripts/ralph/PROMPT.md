@@ -13,6 +13,9 @@
 
 1. **콘텐츠 컬렉션 수정 금지** — `src/content/` 하위 어떤 파일도 추가·수정·삭제 X.
    (편집 무결성, ADR 0005/0006)
+   *예외*: ADR 0007 의 SourceWriter 워크플로우 — 운영자가 명시 지시한 세션에서
+   source-cache + source-verifier 검증 통과한 draft 만 가능. 이 경로는 Ralph 와
+   별도이며 본 PROMPT.md 의 절대 금지에 영향 없음 (운영자 책임).
 2. **ADR · 하네스 수정 금지** — `docs/decisions/`, `CLAUDE.md`, `**/CLAUDE.md`,
    `.claude/` 어떤 파일도 수정 X.
 3. **새 의존성 설치 금지** — `npm install` 신규 패키지 X. 기존 import 만 사용.

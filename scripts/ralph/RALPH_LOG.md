@@ -225,14 +225,69 @@ src/pages/data/citations.json.ts.
 
 ---
 
-## 다음 후보 (post-회차 22)
+---
 
-1. fact-check-queue/ 의 medium-risk 5편 — 운영자가 수동 검토 후 footnote 보강
-   (Ralph 가 못 함 — 콘텐츠 영역)
-2. Newsletter Stibee 활성화 — 운영자가 PUBLIC_STIBEE_LIST_ID 환경변수 설정
-3. PWA offline 페이지 캐싱 — service worker 추가 (보류 — 새 의존성 검토 필요)
-4. /og/v2/ 카드 디자인에 KpiTile 패턴 통합 (Satori 템플릿 강화)
-5. Lighthouse 성능 점수 0.85 → 0.95 — 이미지 최적화 (loading=lazy 보강)
-6. RSS feed 에 author / category / image 보강 (현재 minimal)
-7. 카테고리 페이지에 viz (BarSpark / KpiTile) 활용 (구조적 — 콘텐츠 X)
+## 2026-05-07T10:30Z — ADR 0007 채택: SourceWriter 워크플로우
+
+**작업 (Ralph 영역 X — 운영자/AI 협업 워크플로우 정의):**
+
+ADR 0007 신설 — *콘텐츠 컬렉션 수정이 가장 중요* + *1인 관리 + 공신력 자료 only*
+정체성을 코드로 인코딩. Ralph (코드 refactor) 와 분리된 5단계 콘텐츠 워크플로우.
+
+**신규 인프라:**
+- scripts/agents/source-cache.mjs — 권위 host 화이트리스트 (`.go.kr` / `.or.kr` /
+  krx / kosis / law / `PUBLIC_TRUSTED_HOSTS`) 검증 + Node fetch + sha256 캐시.
+- scripts/agents/source-verifier.mjs — draft MDX 의 모든 수치 토큰을 `.cache/
+  sources/*.txt` 에서 verbatim substring 매칭. 미일치 1건 → exit 1 → reject.
+- docs/decisions/0007-sourced-content-writing.md — 5단계 워크플로우 공식화.
+- scripts/ralph/PROMPT.md — Ralph 의 콘텐츠 차단 *예외* 로 SourceWriter 명시.
+
+**실증 (live test):**
+- nts.go.kr cntntsId=7668 (가산세 안내) 페이지 fetch 성공 — 165,989 bytes.
+  단, navigation 위주라 핵심 수치 부재.
+- 기존 ch10-가산세 MDX 에 verifier 실행 → 37 수치 중 25 미검증 (40% 60%
+  0.022% 등 — law.go.kr 국세기본법 본문 추가 캐시 필요).
+- 이것이 *워크플로우의 정확한 작동* — 단일 출처로 충분치 않으면 reject.
+
+**Ralph 와의 관계:**
+- Ralph 의 "콘텐츠 절대 금지" 그대로 유지 — 무인 루프는 콘텐츠 안 만짐.
+- SourceWriter 는 *명시 운영자 지시* 세션에서만 가동. scope-guard 무관.
+- ADR 0007 §안전 보장 §Ralph 와의 분리 참조.
+
+**향후 연결:**
+- M3+ 단계: scripts/agents/source-writer.mjs (Claude SDK 통합) — 운영자 결재 필요.
+- 일일 cadence: GitHub Actions 또는 Cloudflare Cron 에서 SourceWriter 호출.
+- 운영자는 매일 1~3 편 발행 가능 (1차 출처 검증된 글만).
+
+---
+
+## 누적 (회차 1~22 + ADR 0006 LITE + ADR 0007)
+
+- smoke-test 통과: 25 → 82 (+57)
+- 라우트 신설: 7 page + 2 endpoint + author premium
+- 컴포넌트 신설: ChapterTOC + viz 6종
+- Layer 4: STUB → LITE 가동
+- ADR 0007: SourceWriter 워크플로우 정의 + 인프라 (cache + verifier)
+- 콘텐츠 컬렉션 수정: 0 (이번 commit 까지) — SourceWriter 통한 향후 작성 가능
+- ADR · 하네스 수정: ADR 0007 신설 + Ralph PROMPT.md 의 §1 예외 추가만
+- 새 의존성: 0
+
+---
+
+## 다음 후보 (post-회차 22 + ADR 0007)
+
+**SourceWriter 즉시 활용 (운영자 지시 시):**
+1. 운영자가 주제 + 후보 출처 URL 2~5 개 지정 → 본 세션이 Stage 2~4 자동 실행
+2. 첫 시도 후보:
+   - 종소세 환급 일정 펄스 (nts.go.kr 보도자료 + hometax 안내)
+   - KOSPI 4월 결산 인사이트 (krx 결제자료 + ecos.bok.or.kr)
+   - law.go.kr 국세기본법 §47의2 추가 캐시 후 ch10 verifier 재검증
+
+**Ralph 추가 회차 (운영자 결정):**
+3. fact-check-queue/ 의 medium-risk 5편 — 콘텐츠 보강 (SourceWriter 영역)
+4. PWA offline 캐싱 (보류 — 의존성 검토)
+5. /og/v2/ 카드에 KpiTile 패턴 통합
+6. Lighthouse 0.85 → 0.95 — 이미지 lazy/srcset 보강
+7. RSS feed author/category/image 보강
+8. 카테고리 페이지 viz (BarSpark/KpiTile) 활용
 
