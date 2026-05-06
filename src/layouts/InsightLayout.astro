@@ -14,7 +14,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
-import ArticlePreviewWarning from '../components/ArticlePreviewWarning.astro';
+import TrustBar from '../components/TrustBar.astro';
 import SourceList from '../components/SourceList.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import CorrectionsBlock from '../components/CorrectionsBlock.astro';
@@ -45,19 +45,26 @@ interface Props {
   /** 인사이트는 frontmatter의 estimatedReadingTime을 그대로 사용 */
   readingTime: number;
   sources: Source[];
-  aiAssisted: boolean;
+  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   vol?: string;
   no?: string;
-  /** 디자인 프리뷰 여부 (ArticleHeader VerifiedBadge 결정용) */
-  previewMode?: boolean;
-  /** 검수 책임 운영자 아이디 목록 */
-  verifiedBy?: string[];
   /** 정정 이력 — 비어 있으면 CorrectionsBlock은 렌더되지 않는다 */
   corrections?: Correction[];
   /** 페이지 keywords meta — 페르소나/데이터유형/액션 태그 등에서 도출. */
   keywords?: string[];
   /** OG 이미지 절대 URL. 미지정 시 BaseLayout의 og-default.png 사용. */
   ogImage?: string;
+  /**
+   * true 일 때 robots noindex,nofollow 메타가 출력된다.
+   * 동적 라우트가 placeholder 텍스트를 검출했을 때 색인 자동 차단용.
+   */
+  noindex?: boolean;
+  /**
+   * 호출자가 JSON-LD 객체(배열) 를 직접 전달 — Article + Breadcrumb + Dataset 등을
+   * 라우트에서 미리 빌드해 BaseLayout 으로 통합 발행한다.
+   * G10 픽스: 그동안 인사이트 페이지 LD 가 0개여서 Discover 진입 자격 손실.
+   */
+  jsonld?: object | object[];
 }
 
 const {
@@ -71,11 +78,11 @@ const {
   aiAssisted,
   vol = 'I',
   no = '89',
-  previewMode = true,
-  verifiedBy = [],
   corrections = [],
   keywords,
   ogImage,
+  noindex = false,
+  jsonld,
 } = Astro.props;
 
 const headerDate = formatKoreanDate(publishedAt);
@@ -86,7 +93,7 @@ const pageTitle = `${title} — 스마트데이터샵 인사이트`;
 const categoryLabel = categoryToKorean(category).replace(/ /g, '');
 ---
 
-<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage}>
+<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage} noindex={noindex} jsonld={jsonld}>
   <Header activeNav="insight" date={headerDate} />
 
   <div class="masthead">
@@ -117,12 +124,15 @@ const categoryLabel = categoryToKorean(category).replace(/ /g, '');
       sourceCount={sources.length}
       aiAssisted={aiAssisted}
       updatedAt={updatedAt}
-      previewMode={previewMode}
-      verifiedBy={verifiedBy}
     />
 
     <div class="article-body">
-      <ArticlePreviewWarning previewMode={previewMode} />
+      <TrustBar
+        aiAssisted={aiAssisted}
+        sourceCount={sources.length}
+        updatedAt={updatedAt ?? publishedAt}
+        correctionsCount={corrections.length}
+      />
       <slot />
       <AuthorCard name={author} />
       <CitationExport

@@ -81,6 +81,7 @@ const pulseCards = sortedPulses.map((entry) => {
     tldr: entry.data.tldr,
     href: pulseUrl(entry.slug, entry.data.publishedAt),
     tags,
+    coverImage: entry.data.coverImage,
   };
 });
 
@@ -131,7 +132,14 @@ const categorySlugLabel = categoryLabel.replace(/ /g, '');
 const keywords = [categorySlugLabel, '데이터 저널', '1차 출처'];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld} keywords={keywords}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="website"
+  ogImage={`https://smartdatashop.kr/og/v2/category/${category}.png`}
+  jsonld={jsonld}
+  keywords={keywords}
+>
   <Header activeNav="daily" />
   <Masthead
     vol="I"

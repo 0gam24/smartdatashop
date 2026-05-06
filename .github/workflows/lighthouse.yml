@@ -15,7 +15,10 @@
 ##  block. Switching to preview URLs requires a Cloudflare API token and is
 ##  intentionally deferred.)
 ##
-## Budgets: lighthouserc.json (perf ≥ 0.90, a11y ≥ 0.95, BP ≥ 0.95, SEO ≥ 0.95).
+## Budgets:
+##   - lighthouserc.json (desktop: perf ≥ 0.90, a11y ≥ 0.95, BP ≥ 0.95, SEO ≥ 0.95).
+##   - lighthouserc.mobile.json (mobile: perf ≥ 0.85, a11y ≥ 0.95, BP ≥ 0.95, SEO ≥ 0.95).
+##   Discover 는 모바일 우선 — 두 프리셋 모두 통과해야 ship 가능. (G21)
 name: Lighthouse CI
 
 on:
@@ -44,7 +47,7 @@ jobs:
       - name: Wait for Cloudflare Pages deploy
         run: sleep 90
 
-      - name: Run Lighthouse CI
+      - name: Run Lighthouse CI (desktop)
         id: lhci
         uses: treosh/lighthouse-ci-action@v12
         with:
@@ -57,6 +60,23 @@ jobs:
           temporaryPublicStorage: true
           configPath: ./lighthouserc.json
           runs: 1
+
+      # Discover 는 모바일 우선 — 데스크톱 점수가 좋아도 모바일이 무너지면 노출 0.
+      # G21 픽스: 같은 4 URL 을 모바일 프리셋(throttling 4× CPU + slow 3G) 으로 재측정.
+      - name: Run Lighthouse CI (mobile)
+        id: lhci_mobile
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://smartdatashop.kr/
+            https://smartdatashop.kr/2026/05/05/2026-05-05-jongseong-server/
+            https://smartdatashop.kr/insight/
+            https://smartdatashop.kr/about/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: ./lighthouserc.mobile.json
+          runs: 1
+          artifactName: lhci-mobile
 
       # PR 코멘트로 점수 표 게시.
       # treosh action 은 manifest.json 을 .lighthouseci/ 디렉토리에 남긴다.

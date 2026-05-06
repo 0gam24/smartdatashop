@@ -2,30 +2,24 @@
 /**
  * Hero — 홈 최상단 섹션 01.
  *
- * 편집 무결성 리팩토링 (Critical 3 대응):
- *   기존엔 헤드라인·tldr·카테고리·발행시각·href 가 모두 컴포넌트 내부에
- *   하드코딩돼 있어, 펄스 콘텐츠 컬렉션과 무관하게 가공된 수치를
- *   "오늘의 기사"처럼 보여주는 구조였다. 이제는 콘텐츠 컬렉션의 최신
- *   pulse 엔트리를 prop 으로 받아, 같은 한 글의 메타를 단일 소스로 사용한다.
+ * 편집 무결성:
+ *   헤드라인·tldr·카테고리·발행시각·href 는 모두 콘텐츠 컬렉션의 최신
+ *   pulse 엔트리에서 추출. 컴포넌트 내부에 어떤 수치도 하드코딩하지 않는다.
  *
- * 사용 패턴(index.astro):
- *   const latest = sortedPulses[0];
- *   <Hero entry={latest} />
+ * 차트 어사이드("오늘의 지표"):
+ *   chartTitle/chartValue/chartUnit/chartDelta/chartSource 5종이 모두
+ *   명시적으로 전달될 때만 렌더된다. 기본값 0 정책 — 운영자가 1차 출처에서
+ *   직접 가져온 수치만 노출되도록 하는 것이 의도이며, 미검증 수치가
+ *   "오늘의 지표"로 보이는 사고를 차단한다.
  *
- * 안전장치:
- *   - entry === undefined  →  hero 섹션을 렌더하지 않는다 (펄스 0건이면
- *     깨진 hero 가 표시되는 것보다 빈 공간이 낫다).
- *   - entry.data.previewMode === true  →  hero-grid 위에 ArticlePreviewWarning
- *     을 함께 렌더해 홈 진입 즉시 "수치 미검증" 라벨을 보여준다.
- *
- * 챠트 어사이드("오늘의 지표")는 의도적으로 props 로 남겨두었다 —
- * 본 글의 차트가 아니라 별도 위젯이고, 운영자가 1차 출처 검증 후 직접
- * 입력한 값으로 교체될 자리이기 때문이다. 단 기본값(312만 등)은 미검증
- * 수치이므로, 기본값 사용 시에도 페이지 상단 ArticlePreviewWarning 이
- * 함께 노출된다.
+ * 사용:
+ *   <Hero entry={latest} />                     ← 차트 미표시 (안전 기본)
+ *   <Hero entry={latest}
+ *         chartTitle="..." chartValue="..."
+ *         chartUnit="..."  chartDelta="..."
+ *         chartSource="..." />                  ← 운영자 명시 전달 시만 차트 표시
  */
 import type { CollectionEntry } from 'astro:content';
-import ArticlePreviewWarning from './ArticlePreviewWarning.astro';
 import { categoryToKorean, formatKoreanDateTime, pulseUrl } from '../lib/korean';
 
 interface Props {
@@ -41,12 +35,17 @@ interface Props {
 const {
   entry,
   chartLabel = '오늘의 지표',
-  chartTitle = '홈택스 일평균 접속자 (5월 1~4일)',
-  chartValue = '312',
-  chartUnit = '만',
-  chartDelta = '▼ 전년 대비 −5.2%',
-  chartSource = '출처: 국세청 홈택스 접속 통계 · 접근일 2026-05-05',
+  chartTitle,
+  chartValue,
+  chartUnit,
+  chartDelta,
+  chartSource,
 } = Astro.props;
+
+// 차트는 핵심 5종(title/value/unit/delta/source)이 모두 명시 전달될 때만 그린다.
+// 어느 하나라도 비어 있으면 차트 어사이드 자체를 숨겨, 미검증 수치가 노출되는 사고 차단.
+const hasChart =
+  !!chartTitle && !!chartValue && !!chartUnit && !!chartDelta && !!chartSource;
 
 // 펄스가 0건이면 hero 자체를 그리지 않는다 (graceful)
 const hasEntry = entry !== undefined;
@@ -56,19 +55,12 @@ const href = hasEntry ? pulseUrl(entry!.slug, entry!.data.publishedAt) : '#';
 const title = hasEntry ? entry!.data.title : '';
 const tldr = hasEntry ? entry!.data.tldr : '';
 const aiAssisted = hasEntry ? entry!.data.aiAssisted : false;
-const previewMode = hasEntry ? entry!.data.previewMode === true : false;
-const sourceCount = hasEntry ? entry!.data.sources.length : 0;
 ---
 
 {hasEntry && (
   <section class="hero" data-screen-label="01 Hero">
     <div class="page-width">
-      {previewMode && (
-        <div class="hero-warning-wrap">
-          <ArticlePreviewWarning previewMode={true} />
-        </div>
-      )}
-      <div class="hero-grid">
+      <div class={hasChart ? 'hero-grid' : 'hero-grid hero-grid-single'}>
         <div>
           <div class="hero-meta">
             <span class="cat-label">{category}</span>
@@ -80,36 +72,22 @@ const sourceCount = hasEntry ? entry!.data.sources.length : 0;
           <p class="hero-tldr">{tldr}</p>
           <div class="hero-byline">
             <span>김준혁</span><span class="dot">·</span>
-            <span>5분 읽기</span><span class="dot">·</span>
-            <span>1차 출처 {sourceCount}건</span>
+            <span>5분 읽기</span>
             {aiAssisted && <span class="ai-badge">AI 보조</span>}
           </div>
         </div>
 
-        <aside class="hero-chart">
-          <div class="hero-chart-label">{chartLabel}</div>
-          <div class="hero-chart-title">{chartTitle}</div>
-          <div class="hero-chart-value">
-            <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
-            <span class="delta down">{chartDelta}</span>
-          </div>
-          <svg class="sparkline" viewBox="0 0 280 80" preserveAspectRatio="none">
-            <polyline
-              fill="none"
-              stroke="#8b1538"
-              stroke-width="1.2"
-              points="0,55 28,48 56,52 84,40 112,44 140,30 168,26 196,32 224,22 252,18 280,24"
-            />
-            <polyline
-              fill="none"
-              stroke="#a5a5a5"
-              stroke-width="0.8"
-              stroke-dasharray="2,3"
-              points="0,40 28,42 56,38 84,46 112,42 140,48 168,44 196,52 224,48 252,56 280,52"
-            />
-          </svg>
-          <div class="hero-chart-source">{chartSource}</div>
-        </aside>
+        {hasChart && (
+          <aside class="hero-chart">
+            <div class="hero-chart-label">{chartLabel}</div>
+            <div class="hero-chart-title">{chartTitle}</div>
+            <div class="hero-chart-value">
+              <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
+              <span class="delta">{chartDelta}</span>
+            </div>
+            <div class="hero-chart-source">{chartSource}</div>
+          </aside>
+        )}
       </div>
     </div>
   </section>
@@ -120,19 +98,19 @@ const sourceCount = hasEntry ? entry!.data.sources.length : 0;
     padding: 56px 0 48px;
     border-bottom: 0.5px solid var(--color-ink-quat);
   }
-  .hero-warning-wrap {
-    margin-bottom: 32px;
-  }
   .hero-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     gap: 56px;
     align-items: start;
   }
+  /* 차트 어사이드 미표시 시 단일 컬럼 — 헤드라인이 prose 폭을 차지 */
+  .hero-grid.hero-grid-single {
+    grid-template-columns: 1fr;
+  }
   @media (max-width: 880px) {
     .hero-grid { grid-template-columns: 1fr; gap: 32px; }
     .hero { padding: 32px 0; }
-    .hero-warning-wrap { margin-bottom: 24px; }
   }
 
   .hero-meta {
@@ -212,15 +190,7 @@ const sourceCount = hasEntry ? entry!.data.sources.length : 0;
   .hero-chart-value .delta {
     font-family: var(--font-mono);
     font-size: 12px;
-    color: var(--color-accent);
-  }
-  .hero-chart-value .delta.down {
-    color: #1f4d8a;
-  }
-  .sparkline {
-    width: 100%;
-    height: 80px;
-    display: block;
+    color: var(--color-ink-secondary);
   }
   .hero-chart-source {
     margin-top: 10px;

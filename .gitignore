@@ -34,6 +34,11 @@ Thumbs.db
 # Claude Code internal state (never commit)
 .claude/
 
+# Auto-generated operator inbox (postbuild) — local-only signal
+OPERATOR_INBOX.md
+
 # Agent runtime scratch (heartbeats, review reports) — keep dir via .gitkeep
 tmp/
 !tmp/.gitkeep
+
+# fact-check-queue/ 의 *.json 은 워크플로우가 commit (data-queue/ 와 동일 패턴) — gitignore 하지 않는다.

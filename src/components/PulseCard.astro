@@ -15,29 +15,63 @@ interface Props {
   tldr: string;
   tags: PulseTag[];
   href?: string;
+  /**
+   * 옵셔널 coverImage URL (절대/상대 모두 허용). 전달되면 카드 좌측에 16:9
+   * 썸네일 렌더링 — Discover 가 사이트 내부 시각 신호도 보기 때문에 site-self
+   * visual hierarchy 강화 (G6).
+   */
+  coverImage?: string;
+  /** 접근성용 alt — coverImage 가 있을 때만 의미 */
+  coverImageAlt?: string;
 }
 
-const { category, time, title, tldr, tags, href } = Astro.props;
+const { category, time, title, tldr, tags, href, coverImage, coverImageAlt } = Astro.props;
 ---
 
-<article class="pulse-card" data-href={href}>
+<article class={coverImage ? 'pulse-card has-cover' : 'pulse-card'} data-href={href}>
   {href ? (
     <a class="card-link" href={href}>
-      <div class="pulse-card-meta">
-        <span class="cat-label">{category}</span>
-        <span class="pulse-time">{time}</span>
+      {coverImage && (
+        <img
+          class="pulse-cover"
+          src={coverImage}
+          alt={coverImageAlt ?? ''}
+          width="320"
+          height="180"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <div class="pulse-card-text">
+        <div class="pulse-card-meta">
+          <span class="cat-label">{category}</span>
+          <span class="pulse-time">{time}</span>
+        </div>
+        <h3 class="pulse-title">{title}</h3>
+        <p class="pulse-tldr">{tldr}</p>
       </div>
-      <h3 class="pulse-title">{title}</h3>
-      <p class="pulse-tldr">{tldr}</p>
     </a>
   ) : (
     <div class="card-link">
-      <div class="pulse-card-meta">
-        <span class="cat-label">{category}</span>
-        <span class="pulse-time">{time}</span>
+      {coverImage && (
+        <img
+          class="pulse-cover"
+          src={coverImage}
+          alt={coverImageAlt ?? ''}
+          width="320"
+          height="180"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <div class="pulse-card-text">
+        <div class="pulse-card-meta">
+          <span class="cat-label">{category}</span>
+          <span class="pulse-time">{time}</span>
+        </div>
+        <h3 class="pulse-title">{title}</h3>
+        <p class="pulse-tldr">{tldr}</p>
       </div>
-      <h3 class="pulse-title">{title}</h3>
-      <p class="pulse-tldr">{tldr}</p>
     </div>
   )}
   <div class="pulse-card-foot">
@@ -68,14 +102,45 @@ const { category, time, title, tldr, tags, href } = Astro.props;
     color: var(--color-accent);
   }
 
-  /* 카드 본문 링크 — 시각적으로는 보이지 않는 wrapper. 기존 레이아웃을
-     보존하기 위해 자식 요소들을 그대로 이어받게 둔다. */
+  /* 카드 본문 링크 — 시각적으로는 보이지 않는 wrapper. coverImage 가 없으면
+     단일 컬럼, 있으면 16:9 썸네일 좌측 + 텍스트 우측. */
   .card-link {
     display: flex;
     flex-direction: column;
     gap: 10px;
     color: inherit;
     text-decoration: none;
+  }
+  .pulse-card.has-cover .card-link {
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .pulse-card.has-cover .pulse-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .pulse-cover {
+    flex: 0 0 auto;
+    width: 240px;
+    height: 135px; /* 16:9 */
+    object-fit: cover;
+    border: 0.5px solid var(--color-ink-quat);
+    background: var(--color-paper);
+  }
+  @media (max-width: 640px) {
+    .pulse-card.has-cover .card-link {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pulse-cover {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
   }
 
   .pulse-card-meta {

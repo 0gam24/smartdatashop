@@ -5,9 +5,10 @@ import Tldr from '../../../../components/Tldr.astro';
 import RelatedList from '../../../../components/RelatedList.astro';
 import ToollGate from '../../../../components/ToollGate.astro';
 import { estimateReadingTime, pulseUrl, pulseDateParts } from '../../../../lib/korean';
-import { buildNewsArticleLD } from '../../../../lib/jsonld';
+import { buildNewsArticleLD, buildDatasetLDFromArticle } from '../../../../lib/jsonld';
 import { resolveToollGate } from '../../../../data/toll-gate-matrix';
 import { SISTER_SITES } from '../../../../data/sister-sites';
+import { entryHasPlaceholder } from '../../../../lib/placeholder';
 
 export async function getStaticPaths() {
   const entries = await getCollection('pulse');
@@ -31,6 +32,15 @@ const { data } = entry;
 // 본문 텍스트 길이로 읽기 시간 추정
 const readingTime = estimateReadingTime(entry.body);
 
+// 미완성 placeholder(`[검수 후 입력]` 등) 검출 시 robots noindex,nofollow 자동 부여.
+// 검수 게이트 제거(2026-05) 이후 라이터 에이전트의 미완성 출력이 색인되는 사고를
+// 빌드 시점에 자동으로 차단하기 위한 보조 안전망 — Layer 1.
+const hasPlaceholder = entryHasPlaceholder({
+  title: data.title,
+  tldr: data.tldr,
+  body: entry.body,
+});
+
 // SERP description은 Google 약 160자 제한 — tldr이 길면 잘라서 ellipsis 부착.
 const description =
   data.tldr.length > 155 ? data.tldr.slice(0, 152).trim() + '…' : data.tldr;
@@ -38,15 +48,18 @@ const description =
 // ToollGate (자매 사이트 라우팅) — PLANNING.md §12
 const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
 
-// SEO — JSON-LD NewsArticle / OG description / OG image
-const articleJsonLd = buildNewsArticleLD(entry);
-// 명시적 coverImage 가 없으면 동적 OG 카드(/og/pulse/<slug>.png)로 자동 폴백.
-// 동적 OG는 기사별 제목·카테고리·날짜를 베이크해 SNS 공유 카드 품질을 올린다.
+// SEO — JSON-LD NewsArticle + Dataset (1차 출처 데이터 저널 차별화)
+// Dataset 은 sources[].url 이 1개 이상 있을 때만 발행 (없으면 null 반환).
+const articleJsonLd: object[] = [buildNewsArticleLD(entry)];
+const datasetLd = buildDatasetLDFromArticle(entry, 'pulse');
+if (datasetLd) articleJsonLd.push(datasetLd);
+// 명시적 coverImage 가 없으면 동적 OG v2(Satori, Reuters/Bloomberg 스타일)로 폴백.
+// 구 librsvg 라우트(/og/pulse/<slug>.png) 는 D9=N 합의에 따라 1개월 병행 후 제거.
 const ogImage = data.coverImage
   ? data.coverImage.startsWith('http')
     ? data.coverImage
     : `https://smartdatashop.kr${data.coverImage}`
-  : `https://smartdatashop.kr/og/pulse/${entry.slug}.png`;
+  : `https://smartdatashop.kr/og/v2/pulse/${entry.slug}.png`;
 
 // 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그를 합쳐 노출.
 const keywords = [
@@ -83,9 +96,8 @@ const related = allEntries
   ogImage={ogImage}
   jsonld={articleJsonLd}
   keywords={keywords}
-  previewMode={data.previewMode}
-  verifiedBy={data.verifiedBy}
   corrections={data.correctionLog}
+  noindex={hasPlaceholder}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />

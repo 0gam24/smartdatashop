@@ -5,41 +5,76 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
 <PolicyLayout
   title="개인정보처리방침"
   eyebrow="정 책 · P R I V A C Y"
-  description="스마트데이터샵 개인정보 수집·이용·보관·제공 처리 방침."
+  description="스마트데이터샵 개인정보 수집·이용·보관·제공 처리 방침. 개인정보보호법(PIPA) 준수."
 >
-  <p class="todo">[TODO: 운영자 작성] — KISA(한국인터넷진흥원) 개인정보처리방침 표준 양식 기반으로 본인이 직접 작성. 본 골격은 항목 구조만 잡아둔 것.</p>
+  <p>
+    본 방침은 「개인정보보호법(PIPA)」 및 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 에
+    근거합니다. 본 사이트(smartdatashop.kr) 는 개인정보 수집을 최소화하며, 수집된 정보는
+    명시된 목적 외에 사용하지 않습니다.
+  </p>
 
   <h2>1. 수집·이용 목적</h2>
-  <p class="todo">[TODO: 운영자 작성] — 뉴스레터 구독, 제보 접수, 광고 식별자 등 수집 항목·목적 명시.</p>
+  <ul>
+    <li><strong>뉴스레터 구독</strong> — 발행 글 알림 발송 (Stibee 위탁)</li>
+    <li><strong>방문 분석</strong> — 사이트 운영·개선 (IP 비저장 / 쿠키 비사용)</li>
+    <li><strong>제보·정정 응대</strong> — 이메일 회신 (단, 운영자 본인이 직접 처리)</li>
+  </ul>
 
   <h2>2. 수집 항목</h2>
   <ul>
-    <li>뉴스레터 구독: 이메일 주소 (Stibee 발송 대행)</li>
-    <li>방문 분석: Cloudflare Web Analytics — IP 비저장, 쿠키 비사용</li>
-    <li>광고 식별자: <span class="todo">[TODO: 운영자 작성]</span> — Google AdSense 사용 시 명시</li>
+    <li><strong>뉴스레터 구독</strong>: 이메일 주소 (Stibee 발송 대행)</li>
+    <li><strong>방문 분석</strong>: Cloudflare Web Analytics — IP 비저장, 쿠키 비사용 (privacy-friendly beacon)</li>
+    <li><strong>제보·정정</strong>: 제보자가 자발적으로 본문에 포함시킨 정보 (이메일/이름)</li>
   </ul>
 
   <h2>3. 보관 기간</h2>
-  <p class="todo">[TODO: 운영자 작성] — 항목별 보관 기간. 뉴스레터 해지 시 즉시 삭제 등.</p>
+  <ul>
+    <li><strong>뉴스레터 구독 이메일</strong>: 구독 유지 기간 + 해지 시 즉시 삭제</li>
+    <li><strong>방문 분석 비식별 통계</strong>: Cloudflare 정책에 따른 12개월 (집계 데이터)</li>
+    <li><strong>제보·정정 이메일</strong>: 응대 종료 후 3년 (관련 법령에 따른 보관 의무) — 이후 자동 삭제</li>
+  </ul>
 
-  <h2>4. 제3자 제공</h2>
-  <p class="todo">[TODO: 운영자 작성] — Stibee, Cloudflare 등 처리위탁 업체 명시.</p>
+  <h2>4. 제3자 제공·처리위탁</h2>
+  <ul>
+    <li><strong>Stibee</strong> (㈜스티비) — 뉴스레터 발송 대행. 이메일 주소만 위탁.</li>
+    <li><strong>Cloudflare, Inc.</strong> — 사이트 호스팅·CDN·privacy-friendly 분석 (IP 비저장).</li>
+    <li>위 처리위탁 업체 외 제3자에게 개인정보를 제공하지 않습니다.</li>
+  </ul>
 
   <h2>5. 이용자 권리</h2>
   <ul>
-    <li>열람·정정·삭제·처리정지 요청: editor@smartdatashop.kr</li>
-    <li>뉴스레터 해지: 발송 메일 하단 1-click 해지</li>
+    <li><strong>열람·정정·삭제·처리정지 요청</strong>: <a href="mailto:editor@smartdatashop.kr">editor@smartdatashop.kr</a></li>
+    <li><strong>뉴스레터 해지</strong>: 발송 메일 하단 1-click 해지 또는 위 이메일</li>
+    <li><strong>개인정보 분쟁 조정</strong>: 개인정보분쟁조정위원회 (국번없이 1833-6972, kopico.go.kr)</li>
   </ul>
 
   <h2>6. 쿠키 정책</h2>
-  <p>본 사이트는 분석 목적의 쿠키를 사용하지 않습니다 (Cloudflare Web Analytics 채택). 광고 도입 시 별도 공시.</p>
+  <p>
+    본 사이트는 <strong>분석 목적의 쿠키를 사용하지 않습니다</strong> (Cloudflare Web Analytics 채택,
+    cookieless beacon). 향후 광고 도입 시 별도 쿠키 동의 배너 + 본 페이지 갱신.
+  </p>
 
-  <h2>7. 책임자</h2>
+  <h2>7. 개인정보 안전 조치</h2>
+  <ul>
+    <li>처리위탁 업체(Stibee·Cloudflare) 모두 SSL/TLS 암호화 통신 사용</li>
+    <li>운영자(김준혁) 만 처리위탁 업체 관리 콘솔 접근 권한 보유</li>
+    <li>구독 이메일 주소는 Stibee 의 자체 보안 정책에 따라 저장</li>
+  </ul>
+
+  <h2>8. 책임자</h2>
   <table class="meta-table">
-    <tr><th>책임자</th><td>김준혁 (대표)</td></tr>
-    <tr><th>이메일</th><td>editor@smartdatashop.kr</td></tr>
+    <tr><th>개인정보 보호 책임자</th><td>김준혁 (대표)</td></tr>
+    <tr><th>이메일</th><td><a href="mailto:editor@smartdatashop.kr">editor@smartdatashop.kr</a></td></tr>
+    <tr><th>전화</th><td>이메일 우선 (1인 운영)</td></tr>
   </table>
 
-  <h2>8. 변경 이력</h2>
-  <p class="todo">[TODO: 운영자 작성] — 본 방침의 시행일·개정일 기록.</p>
+  <h2>9. 변경 이력</h2>
+  <ul>
+    <li><strong>2026-05-06</strong> — 시행. 정식 발행 4대 기준(ADR 0006) 도입과 함께 보관·위탁 절차 명시화.</li>
+    <li>변경 발생 시 본 항목과 사이트 공지를 통해 알립니다.</li>
+  </ul>
+
+  <p>
+    본 처리방침은 <strong>2026-05-06</strong> 부터 시행됩니다.
+  </p>
 </PolicyLayout>

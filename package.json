@@ -7,16 +7,29 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "postbuild": "pagefind --site dist",
+    "postbuild": "pagefind --site dist && node scripts/operator-inbox.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "verify:links": "node scripts/verify-source-links.mjs",
+    "verify:claims": "node scripts/extract-numerical-claims.mjs",
+    "verify": "node scripts/verify-source-links.mjs && node scripts/extract-numerical-claims.mjs",
+    "verify:strict": "node scripts/verify-source-links.mjs --strict && node scripts/extract-numerical-claims.mjs --strict",
+    "weekly": "node scripts/weekly-report.mjs",
+    "auto-cover": "node scripts/auto-cover.mjs",
+    "prebuild": "node scripts/auto-cover.mjs",
+    "smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/tailwind": "^5.1.4",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/noto-sans-kr": "^5.2.9",
+    "@fontsource/noto-serif-kr": "^5.2.9",
+    "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.0.0",
+    "satori": "^0.26.0",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {

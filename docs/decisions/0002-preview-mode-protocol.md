@@ -1,8 +1,12 @@
 # 0002 — previewMode / verifiedBy 편집 프로토콜
 
 > **날짜**: 2026-05-05
-> **상태**: 채택
+> **상태**: **Superseded by [0005-compensating-controls.md](./0005-compensating-controls.md) (2026-05-06)**
 > **결정자**: junhyuk-kim
+>
+> ⚠ 이 ADR 은 폐기되었다. 1인 운영자 검수 게이트가 2026-05-06 에 자동 안전장치
+> (build-time placeholder noindex / Trust Bar UX / writer 프롬프트 룰 / Layer 3 빌드 게이트)
+> 로 대체되었다. 하위 호환을 위해 본 문서는 보존하되, 모든 신규 작업은 ADR 0005 를 참조한다.
 
 ## 컨텍스트
 

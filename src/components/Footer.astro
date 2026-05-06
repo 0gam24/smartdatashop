@@ -26,9 +26,9 @@ const { vol = 'I', no = '89', date = '2026년 5월 5일 화' } = Astro.props;
         <ul>
           <li><a href="/">데일리 펄스</a></li>
           <li><a href="/insight/">인사이트</a></li>
-          <li><a href="#" data-todo="guidebook">가이드북</a></li>
-          <li><a href="#" data-todo="data">데이터</a></li>
-          <li><a href="#network">네트워크</a></li>
+          <li><span class="footer-link-pending" aria-disabled="true">가이드북 (준비 중)</span></li>
+          <li><span class="footer-link-pending" aria-disabled="true">데이터 (준비 중)</span></li>
+          <li><a href="/feed.xml">RSS</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -48,12 +48,15 @@ const { vol = 'I', no = '89', date = '2026년 5월 5일 화' } = Astro.props;
           <li><a href="https://awoo.or.kr" rel="noopener noreferrer" target="_blank">awoo.or.kr</a></li>
           <li><a href="https://asiatop.co.kr" rel="noopener noreferrer" target="_blank">asiatop.co.kr</a></li>
           <li><a href="https://iknowhowinfo.com" rel="noopener noreferrer" target="_blank">iknowhowinfo.com</a></li>
-          <li><a href="/feed.xml">RSS · /feed/</a></li>
+          <li><a href="#network">네트워크 안내</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 스마트데이터샵 — 본문 콘텐츠 CC BY-NC 4.0</span>
+      <span>
+        © 2026 스마트데이터샵 — 본문 콘텐츠
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a>
+      </span>
       <span>VOL {vol} · NO {no} · {date}</span>
     </div>
   </div>
@@ -118,6 +121,11 @@ const { vol = 'I', no = '89', date = '2026년 5월 5일 화' } = Astro.props;
   }
   .footer-col a:hover {
     color: var(--color-ink);
+  }
+  /* 비활성 링크 — 콘텐츠 컬렉션이 비어 있어 라우트가 없는 경우 정직하게 표시 */
+  .footer-col .footer-link-pending {
+    color: var(--color-ink-tertiary);
+    cursor: default;
   }
 
   .footer-bottom {

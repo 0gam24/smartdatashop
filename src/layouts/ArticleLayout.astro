@@ -3,7 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import BreadcrumbMasthead from '../components/BreadcrumbMasthead.astro';
 import ArticleHeader from '../components/ArticleHeader.astro';
-import ArticlePreviewWarning from '../components/ArticlePreviewWarning.astro';
+import TrustBar from '../components/TrustBar.astro';
 import SourceList from '../components/SourceList.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import CorrectionsBlock from '../components/CorrectionsBlock.astro';
@@ -35,7 +35,7 @@ interface Props {
   author?: string;
   readingTime: number;
   sources: Source[];
-  aiAssisted: boolean;
+  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   vol?: string;
   no?: string;
   /** SEO/SNS 카드용 — 호출자가 전달하면 BaseLayout으로 그대로 전달된다. */
@@ -44,12 +44,14 @@ interface Props {
   jsonld?: object | object[];
   /** 페이지 keywords meta — 페르소나/데이터유형/액션 태그 등에서 도출. */
   keywords?: string[];
-  /** 디자인 프리뷰 여부 (ArticleHeader VerifiedBadge 결정용) */
-  previewMode?: boolean;
-  /** 검수 책임 운영자 아이디 목록 */
-  verifiedBy?: string[];
   /** 정정 이력 — 비어 있으면 CorrectionsBlock은 렌더되지 않는다 */
   corrections?: Correction[];
+  /**
+   * true 일 때 robots noindex,nofollow 메타가 출력된다.
+   * 동적 라우트가 placeholder 텍스트(`[검수 후 입력]` 등)를 검출했을 때
+   * 색인 자동 차단용 — Layer 1 안전망. BaseLayout.noindex 로 그대로 전달.
+   */
+  noindex?: boolean;
 }
 
 const {
@@ -67,9 +69,8 @@ const {
   ogImage,
   jsonld,
   keywords,
-  previewMode = true,
-  verifiedBy = [],
   corrections = [],
+  noindex = false,
 } = Astro.props;
 
 // 브레드크럼 표시용 날짜 (YYYY/MM/DD) — KST 기준
@@ -115,6 +116,7 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
   ogModifiedAt={updatedAt ?? publishedAt}
   jsonld={mergedJsonld}
   keywords={keywords}
+  noindex={noindex}
 >
   <ReadingProgress />
   <Header activeNav="daily" date={headerDate} />
@@ -132,12 +134,15 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
       sourceCount={sources.length}
       aiAssisted={aiAssisted}
       updatedAt={updatedAt}
-      previewMode={previewMode}
-      verifiedBy={verifiedBy}
     />
 
     <div class="article-body">
-      <ArticlePreviewWarning previewMode={previewMode} />
+      <TrustBar
+        aiAssisted={aiAssisted}
+        sourceCount={sources.length}
+        updatedAt={updatedAt ?? publishedAt}
+        correctionsCount={corrections.length}
+      />
       <slot />
       <AuthorCard name={author} />
       <CitationExport

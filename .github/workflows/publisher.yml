@@ -38,13 +38,18 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # Publisher 스텁 실행 — M1+에서 실제 색인 핑/뉴스레터 발송으로 대체
+      # Publisher 실행 (Phase 12, ADR 0005):
+      #   - IndexNow: 무료/키 불필요 — `PUBLISHER_LIVE_INDEXNOW=true` 로 즉시 활성
+      #     (안전한 기본값은 stub. vars 에서 활성 토글)
+      #   - Google Indexing API / Naver SA / Stibee: M1+ stub
       - name: Run Publisher
         env:
-          # Google Indexing API 서비스 계정 키 (JSON)
+          # IndexNow 활성 토글 — Repository Variables 에 PUBLISHER_LIVE_INDEXNOW=true 설정
+          PUBLISHER_LIVE_INDEXNOW: ${{ vars.PUBLISHER_LIVE_INDEXNOW }}
+          # Google Indexing API 서비스 계정 키 (JSON, M1+)
           GOOGLE_INDEXING_KEY: ${{ secrets.GOOGLE_INDEXING_KEY }}
-          # 네이버 검색광고 / 서치어드바이저 키
+          # 네이버 검색광고 / 서치어드바이저 키 (M1+)
           NAVER_SA_KEY: ${{ secrets.NAVER_SA_KEY }}
-          # Stibee 뉴스레터 발송 API 키
+          # Stibee 뉴스레터 발송 API 키 (M1+)
           STIBEE_API_KEY: ${{ secrets.STIBEE_API_KEY }}
         run: node scripts/agents/publisher.mjs

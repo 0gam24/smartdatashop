@@ -1,11 +1,19 @@
 ---
 import '../styles/global.css';
+// 폰트 self-host (G23 픽스) — Google Fonts 와 jsdelivr 두 외부 도메인 의존을
+// 제거하고 fontsource (npm) 패키지의 woff2 를 Vite 가 번들. LCP critical
+// glyph 가 same-origin 으로 도착해 cross-origin 핸드셰이크 비용 0.
+// 헤드라인용 Noto Serif KR (500/600) 만 자체 호스팅 — Pretendard 는 CDN 유지
+// (한국 모바일에서 jsdelivr 캐시 적중률이 매우 높음).
+import '@fontsource/noto-serif-kr/500.css';
+import '@fontsource/noto-serif-kr/600.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
 import SearchModal from '../components/SearchModal.astro';
 import Prefetch from '../components/Prefetch.astro';
 import SkipToContent from '../components/SkipToContent.astro';
 import MobileBottomTabs from '../components/MobileBottomTabs.astro';
 import ReducedMotion from '../components/ReducedMotion.astro';
-import PreviewBanner from '../components/PreviewBanner.astro';
 
 interface Props {
   title?: string;
@@ -33,18 +41,28 @@ interface Props {
    * 출력하지 않도록 막는다. /article 같이 자체 noindex가 필요한 페이지에서 사용.
    */
   noBaseRobots?: boolean;
+  /**
+   * true 일 때 robots 메타를 `noindex,nofollow,max-image-preview:large` 로
+   * 출력한다. `noBaseRobots` 보다 우선순위가 높다 — 동적 라우트에서
+   * placeholder 미완성 글을 자동으로 색인 차단할 때 사용.
+   * Layer 1 안전망 (검수 게이트 제거에 따른 보조 차단).
+   */
+  noindex?: boolean;
 }
 
 const {
   title = '스마트데이터샵 — 한국의 데이터를 매일 5분으로',
   description = '한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 매일 5분 안에. 1차 출처 데이터 저널.',
-  ogImage = 'https://smartdatashop.kr/og-default.png',
+  // 기본 OG 는 동적 home 카드 (Satori v2). 글마다 고유 이미지 정책 (G17 픽스) —
+  // og-default.png 는 PWA manifest 등 정적 자산 폴백 용도로만 잔존.
+  ogImage = 'https://smartdatashop.kr/og/v2/home.png',
   ogType = 'website',
   ogPublishedAt,
   ogModifiedAt,
   jsonld,
   keywords,
   noBaseRobots = false,
+  noindex = false,
 } = Astro.props;
 
 // 정규 URL — Astro.url은 빌드 시 site origin 기준 절대 URL을 만들어준다.
@@ -105,8 +123,12 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
       <meta name="keywords" content={keywords.join(',')} />
     )}
     <meta name="author" content="김준혁" />
-    {!noBaseRobots && (
-      <meta name="robots" content="index,follow,max-image-preview:large" />
+    {noindex ? (
+      <meta name="robots" content="noindex,nofollow,max-image-preview:large" />
+    ) : (
+      !noBaseRobots && (
+        <meta name="robots" content="index,follow,max-image-preview:large" />
+      )
     )}
     {naverSiteVerification && (
       <meta name="naver-site-verification" content={naverSiteVerification} />
@@ -144,6 +166,9 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <link rel="alternate" type="application/rss+xml" title="스마트데이터샵 RSS" href="/feed.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    <!-- 라이선스 머신-가독 (Risk #4): CC BY-NC 4.0 — Dataset LD 의 license 와 일치. -->
+    <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/" />
+
     <!-- Same-page Korean alternate (helps crawlers confirm primary language) -->
     <link rel="alternate" hreflang="ko" href={canonicalUrl} />
     <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
@@ -160,15 +185,10 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Performance: preconnect / dns-prefetch -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Performance: Pretendard CDN 만 외부 (한국 모바일 캐시 적중률 높음).
+         Noto Serif KR + JetBrains Mono 는 self-host 로 전환 (G23). -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
     <link
       rel="stylesheet"
       as="style"
@@ -196,7 +216,6 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
   -->
   <body id="main-body">
     <ReducedMotion />
-    <PreviewBanner />
     <SkipToContent />
     <SearchModal />
     <slot />

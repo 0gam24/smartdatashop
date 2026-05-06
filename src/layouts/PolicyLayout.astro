@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { containsUnresolvedToken } from '../lib/placeholder';
 
 interface Props {
   title: string;
@@ -10,12 +11,39 @@ interface Props {
   eyebrow?: string;
   /** 마지막 갱신일 — 문자열 그대로 노출 */
   updatedAt?: string;
+  /** OG 이미지 절대 URL — author 페이지처럼 페이지별 카드를 쓸 때 명시 */
+  ogImage?: string;
+  /** JSON-LD (단일/배열) — 정책/저자 페이지의 LD 누락(G15) 픽스용 */
+  jsonld?: object | object[];
+  /** 명시적 noindex 강제 (자동 검출과 OR). 페이지가 의도적으로 비공개일 때 사용. */
+  noindex?: boolean;
 }
 
-const { title, description, eyebrow = '정 책', updatedAt } = Astro.props;
+const {
+  title,
+  description,
+  eyebrow = '정 책',
+  updatedAt,
+  ogImage,
+  jsonld,
+  noindex: forceNoindex = false,
+} = Astro.props;
+
+// Layer 3 자동 noindex (Risk #1, ADR 0005):
+// 본문 슬롯에 `[TODO: 운영자 작성]` / `[검수 후 ...]` 류 미완성 토큰이 존재하면
+// Discover/Search 색인 차단. 운영자가 본문을 채우면 자동 색인 복귀.
+const slotHtml = await Astro.slots.render('default');
+const autoNoindex = containsUnresolvedToken(slotHtml);
+const noindex = forceNoindex || autoNoindex;
 ---
 
-<BaseLayout title={`${title} — 스마트데이터샵`} description={description ?? title}>
+<BaseLayout
+  title={`${title} — 스마트데이터샵`}
+  description={description ?? title}
+  ogImage={ogImage}
+  jsonld={jsonld}
+  noindex={noindex}
+>
   <Header />
 
   <main id="main" role="main" class="policy-wrap">
@@ -25,9 +53,7 @@ const { title, description, eyebrow = '정 책', updatedAt } = Astro.props;
       {updatedAt && <p class="policy-updated">마지막 갱신: {updatedAt}</p>}
     </header>
 
-    <article class="policy-body">
-      <slot />
-    </article>
+    <article class="policy-body" set:html={slotHtml}></article>
   </main>
 
   <Footer vol="I" no="89" date="2026년 5월 5일 화" />
