@@ -9,7 +9,7 @@ const { date = '2026년 5월 5일 화', activeNav = 'daily' } = Astro.props;
 const navItems: Array<{ key: NonNullable<Props['activeNav']>; label: string; href: string }> = [
   { key: 'daily', label: '데일리', href: '/' },
   { key: 'insight', label: '인사이트', href: '/insight/' },
-  { key: 'guidebook', label: '가이드북', href: '/#guidebook' },
+  { key: 'guidebook', label: '가이드북', href: '/guidebook/' },
   { key: 'data', label: '데이터', href: '/#data' },
   { key: 'network', label: '자매 사이트', href: '/#network' },
 ];

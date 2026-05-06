@@ -206,6 +206,15 @@ function walkGuidebookSlugs() {
 const bookSlugs = walkGuidebookSlugs();
 check('가이드북 책 ≥ 1권', bookSlugs.length >= 1, `현재 ${bookSlugs.length}권`);
 
+// 가이드북 인덱스 페이지 — Ralph 회차 10 신설
+const gbIndex = readDist('guidebook/index.html');
+check('가이드북 인덱스 페이지', !!gbIndex);
+if (gbIndex) {
+  check('가이드북 인덱스 CollectionPage LD', /"@type":"CollectionPage"/.test(gbIndex));
+  check('가이드북 인덱스 ItemList LD', /"@type":"ItemList"/.test(gbIndex));
+  check('가이드북 인덱스 Breadcrumb LD', /"@type":"BreadcrumbList"/.test(gbIndex));
+}
+
 let bookOK = 0;
 let bookLDOK = 0;
 let bookBreadcrumbOK = 0;
@@ -289,6 +298,101 @@ check(
 );
 check('챕터 Breadcrumb LD', chBreadcrumb === chapters.length, `${chBreadcrumb}/${chapters.length}`);
 check('챕터 CC license link', chCCLicense === chapters.length, `${chCCLicense}/${chapters.length}`);
+
+// ── 12. 사이트맵 정합성 — Ralph 회차 4~6 ──────────────────────────
+//
+// (a) sitemap-0.xml URL 들이 dist/ 에 실제로 빌드돼 있는지 (404 회귀 가드)
+// (b) news-sitemap.xml 도 동일
+// (c) image-sitemap.xml 의 image:loc 가 dist 에 PNG 로 존재
+function urlToDistPath(url) {
+  // https://smartdatashop.kr/foo/bar/  →  foo/bar/index.html
+  // 한국어 태그 라우트는 URL-encoded — dist 파일 시스템은 UTF-8 이라 decode 필요.
+  let path = url.replace(/^https?:\/\/[^/]+/, '').replace(/^\//, '');
+  try {
+    path = decodeURIComponent(path);
+  } catch {
+    // 복원 불가하면 원본 사용 (실패 검출은 다음 existsSync 가 처리)
+  }
+  if (path === '' || path.endsWith('/')) return `${path}index.html`;
+  return path;
+}
+function extractLocs(xml, tag = 'loc') {
+  const re = new RegExp(`<${tag}>([^<]+)</${tag}>`, 'g');
+  const out = [];
+  let m;
+  while ((m = re.exec(xml))) out.push(m[1]);
+  return out;
+}
+const mainSitemap = readDist('sitemap-0.xml') ?? '';
+const mainUrls = extractLocs(mainSitemap, 'loc');
+let mainExists = 0;
+for (const u of mainUrls) {
+  if (existsSync(join(DIST, urlToDistPath(u)))) mainExists++;
+}
+check('sitemap-0 URL ↔ dist 정합', mainExists === mainUrls.length, `${mainExists}/${mainUrls.length}`);
+
+const newsSitemap = readDist('news-sitemap.xml') ?? '';
+const newsUrls = extractLocs(newsSitemap, 'loc');
+let newsExists = 0;
+for (const u of newsUrls) {
+  if (existsSync(join(DIST, urlToDistPath(u)))) newsExists++;
+}
+check('news-sitemap URL ↔ dist 정합', newsExists === newsUrls.length, `${newsExists}/${newsUrls.length}`);
+
+const imgSitemap = readDist('image-sitemap.xml') ?? '';
+const imgLocs = extractLocs(imgSitemap, 'image:loc');
+let imgExists = 0;
+for (const u of imgLocs) {
+  const p = u.replace(/^https?:\/\/[^/]+/, '').replace(/^\//, '');
+  if (existsSync(join(DIST, p))) imgExists++;
+}
+check('image-sitemap image ↔ dist 정합', imgExists === imgLocs.length, `${imgExists}/${imgLocs.length}`);
+
+// ── 13. 챕터 무결성 추가 — Ralph 회차 7~9 ────────────────────────
+//
+// (d) footnote 마커 [^N] ↔ footnote 정의 매칭 — MDX 가 모든 마커를
+//     <sup data-footnote-ref> 로, 정의를 <li id="user-content-fn-N"> 로 변환.
+//     마커 수 = 정의 수 여야 한다 (MDX 자동 처리지만 회귀 가드).
+// (e) source-link href 가 https:// + 도메인 형태 — 1차 출처 fabrication 방지.
+// (f) chapter h2 에 id 속성 부여 — ChapterTOC 가 의존하는 회귀 가드.
+let chFootnoteBalanced = 0;
+let chSourceLinksValid = 0;
+let chHeadingIdOK = 0;
+const httpsDomain = /^https:\/\/(?!\.)[a-z0-9.-]+\.[a-z]{2,}\b/i;
+for (const c of chapters) {
+  const html = readDist(`guidebook/${c.slug}/${c.chapter}/index.html`);
+  if (!html) continue;
+  // footnote balance — 마커 href #user-content-fn-N 의 distinct ID set 이
+  // 정의 <li id="user-content-fn-N"> 의 set 과 일치해야 한다.
+  // (한 footnote 가 본문에서 N 번 인용돼도 정의는 1개 — 단순 카운트 비교는 X)
+  const markerIds = new Set(
+    [...html.matchAll(/href="#user-content-fn-([a-z0-9_-]+)"/gi)].map((m) => m[1]),
+  );
+  const defIds = new Set(
+    [...html.matchAll(/<li id="user-content-fn-([a-z0-9_-]+)"/gi)].map((m) => m[1]),
+  );
+  const balanced =
+    markerIds.size === defIds.size && [...markerIds].every((id) => defIds.has(id));
+  if (balanced) chFootnoteBalanced++;
+  // source-link 호스트
+  const srcLinks = [...html.matchAll(/href="([^"]+)"\s+class="source-link/g)].map((m) => m[1]);
+  const allValid = srcLinks.length === 0 || srcLinks.every((u) => httpsDomain.test(u));
+  if (allValid) chSourceLinksValid++;
+  // h2 id (ChapterTOC 의존)
+  const h2WithId = (html.match(/<h2[^>]*\sid="[^"]+"/g) || []).length;
+  if (h2WithId >= 3) chHeadingIdOK++;
+}
+check('챕터 footnote 마커 ↔ 정의 정합', chFootnoteBalanced === chapters.length, `${chFootnoteBalanced}/${chapters.length}`);
+check(
+  '챕터 source-link 호스트 baseline (HTTPS + 도메인)',
+  chSourceLinksValid === chapters.length,
+  `${chSourceLinksValid}/${chapters.length}`,
+);
+check(
+  '챕터 h2 id 부여 ≥ 3 (ChapterTOC 회귀 가드)',
+  chHeadingIdOK === chapters.length,
+  `${chHeadingIdOK}/${chapters.length}`,
+);
 
 // ── 출력 ──────────────────────────────────────────────────────────
 console.log('');

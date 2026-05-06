@@ -70,7 +70,7 @@ const ogImage = `${SITE}/og/v2/home.png`; // 향후 가이드북 챕터 전용 O
 
 const breadcrumbLd = buildBreadcrumbLD([
   { name: '홈', url: '/' },
-  { name: '가이드북', url: '/' },
+  { name: '가이드북', url: '/guidebook/' },
   { name: bookTitle, url: `/guidebook/${data.bookSlug}/` },
   { name: data.title, url: pageUrl },
 ]);
@@ -91,6 +91,8 @@ const breadcrumbLd = buildBreadcrumbLD([
   <main id="main" role="main" class="chapter-wrap">
     <nav class="crumb" aria-label="breadcrumb">
       <a href="/" class="no-underline">홈</a>
+      <span class="sep">›</span>
+      <a href="/guidebook/" class="no-underline">가이드북</a>
       <span class="sep">›</span>
       <a href={`/guidebook/${data.bookSlug}/`} class="no-underline">{bookTitle}</a>
       <span class="sep">›</span>
