@@ -516,6 +516,123 @@ check(
   `${bookListConsistent}/${bookSlugs.length}`,
 );
 
+// ── 18. 챕터 sources ↔ TrustBar 표기 정합 — Ralph 회차 16 ────────
+//
+// chapter HTML 의 SourceList 가 렌더한 source-link 갯수 ↔ TrustBar 의 "1차 출처
+// N건" 텍스트의 N. 둘 다 entry.data.sources.length 에서 나오므로 항상 일치해야 함.
+let chSourceTrustConsistent = 0;
+for (const c of chapters) {
+  const html = readDist(`guidebook/${c.slug}/${c.chapter}/index.html`);
+  if (!html) continue;
+  const srcLinkCount = (html.match(/class="source-link"/g) || []).length;
+  const trustMatch = html.match(/1차 출처 (\d+)건/);
+  const trustN = trustMatch ? Number(trustMatch[1]) : -1;
+  if (trustN === srcLinkCount && trustN > 0) chSourceTrustConsistent++;
+}
+check(
+  '챕터 sources ↔ TrustBar 정합',
+  chSourceTrustConsistent === chapters.length,
+  `${chSourceTrustConsistent}/${chapters.length}`,
+);
+
+// ── 19. 정책 페이지 jsonld 출력 보장 — Ralph 회차 17 ──────────────
+const policyPagesWithLD = [
+  'about',
+  'editorial-policy',
+  'ai-policy',
+  'terms',
+  'privacy',
+  'contact',
+  'affiliate-disclosure',
+  'corrections',
+  'methodology',
+];
+let policyLDCount = 0;
+for (const slug of policyPagesWithLD) {
+  const html = readDist(`${slug}/index.html`);
+  if (!html) continue;
+  if (/<script type="application\/ld\+json"/.test(html)) policyLDCount++;
+}
+check(
+  '정책 페이지 jsonld ≥ 1',
+  policyLDCount === policyPagesWithLD.length,
+  `${policyLDCount}/${policyPagesWithLD.length}`,
+);
+
+// ── 20. 카테고리 페이지 5개 회귀 가드 — Ralph 회차 18 ────────────
+const categories = ['policy', 'tax-finance', 'market', 'stats', 'ai-tech'];
+let categoryOK = 0;
+let categoryLD = 0;
+for (const cat of categories) {
+  const html = readDist(`category/${cat}/index.html`);
+  if (!html) continue;
+  categoryOK++;
+  if (/"@type":"(CollectionPage|ItemList|BreadcrumbList)"/.test(html)) categoryLD++;
+}
+check('카테고리 페이지 5개', categoryOK === categories.length, `${categoryOK}/${categories.length}`);
+check('카테고리 LD', categoryLD === categories.length, `${categoryLD}/${categories.length}`);
+
+// ── 21. citations.json host_distribution — Ralph 회차 19 ─────────
+if (citationsJson) {
+  let parsed;
+  try {
+    parsed = JSON.parse(citationsJson);
+  } catch {}
+  if (parsed) {
+    check('citations.json host_distribution', !!parsed.host_distribution);
+    check('citations.json top_hosts', Array.isArray(parsed.top_hosts) && parsed.top_hosts.length > 0);
+    // 정부+공공+거래소·법령 비중 ≥ 50% — 데이터 저널 신뢰도 baseline
+    const trustyHosts =
+      (parsed.host_distribution?.['정부'] ?? 0) +
+      (parsed.host_distribution?.['공공기관'] ?? 0) +
+      (parsed.host_distribution?.['거래소·법령'] ?? 0);
+    const totalHosts = parsed.unique_source_urls ?? 0;
+    const trustyPct = totalHosts > 0 ? trustyHosts / totalHosts : 0;
+    check(
+      '권위 출처 비중 ≥ 50%',
+      trustyPct >= 0.5,
+      `현재 ${(trustyPct * 100).toFixed(1)}% (${trustyHosts}/${totalHosts})`,
+    );
+  }
+}
+
+// ── 22. /data/ ↔ author KPI 정합 — Ralph 회차 21 ─────────────────
+//
+// 두 페이지 모두 같은 산식으로 발행 글 수 / 1차 출처 수 KPI 노출 — 둘이 다르면
+// 코드 중복 동기화 깨짐 회귀.
+function extractKpiNumByLabel(html, label) {
+  const re = new RegExp(
+    `<figcaption class="kpi-title"[^>]*>${label}</figcaption>\\s*<div class="kpi-row"[^>]*>\\s*<span class="kpi-num"[^>]*>(\\d+)</span>`,
+  );
+  const m = html.match(re);
+  return m ? Number(m[1]) : null;
+}
+const dataKpi = dataIndexHtml ? extractKpiNumByLabel(dataIndexHtml, '전체 발행 글') : null;
+const authorKpi = authorPremiumHtml ? extractKpiNumByLabel(authorPremiumHtml, '발행 글') : null;
+check(
+  '/data/ ↔ /authors/ 발행 글 수 정합',
+  dataKpi !== null && authorKpi !== null && dataKpi === authorKpi,
+  `data=${dataKpi} author=${authorKpi}`,
+);
+
+// ── 23. fact-check-queue Layer 4 LITE 산출물 — Ralph 회차 22 ─────
+const factQueueDir = join(ROOT, 'fact-check-queue');
+let latestAudit = null;
+try {
+  const items = readdirSync(factQueueDir).filter((f) => f.endsWith('.json')).sort();
+  if (items.length > 0) {
+    const text = readFileSync(join(factQueueDir, items[items.length - 1]), 'utf8');
+    latestAudit = JSON.parse(text);
+  }
+} catch {}
+check('Layer 4 fact-check-queue 산출물', !!latestAudit);
+if (latestAudit) {
+  check('Layer 4 LITE 모드', latestAudit.mode === 'lite');
+  check('Layer 4 audit ≥ 1 article', latestAudit.auditedCount >= 1, `${latestAudit.auditedCount}`);
+  check('Layer 4 high-risk = 0', (latestAudit.summary?.risk?.high ?? 1) === 0,
+    `현재 ${latestAudit.summary?.risk?.high} high-risk`);
+}
+
 // ── 출력 ──────────────────────────────────────────────────────────
 console.log('');
 console.log(`✅ ${passes.length} 통과`);

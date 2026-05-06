@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { containsUnresolvedToken } from '../lib/placeholder';
+import { buildWebPageLD, buildBreadcrumbLD } from '../lib/jsonld';
 
 interface Props {
   title: string;
@@ -13,7 +14,7 @@ interface Props {
   updatedAt?: string;
   /** OG 이미지 절대 URL — author 페이지처럼 페이지별 카드를 쓸 때 명시 */
   ogImage?: string;
-  /** JSON-LD (단일/배열) — 정책/저자 페이지의 LD 누락(G15) 픽스용 */
+  /** JSON-LD (단일/배열) — 미지정 시 자동 WebPage + Breadcrumb LD fallback */
   jsonld?: object | object[];
   /** 명시적 noindex 강제 (자동 검출과 OR). 페이지가 의도적으로 비공개일 때 사용. */
   noindex?: boolean;
@@ -29,6 +30,19 @@ const {
   noindex: forceNoindex = false,
 } = Astro.props;
 
+// 모든 정책 페이지에 baseline LD 보장 — 호출자가 jsonld 명시 안 했을 때만 자동 적용.
+// (편집/AI/약관/개인정보/연락처/제휴/정정 등 — Ralph 회차 17 회귀 가드 fallback)
+const pagePath = Astro.url.pathname;
+const fallbackLd = jsonld
+  ? jsonld
+  : [
+      buildWebPageLD(title, description ?? title),
+      buildBreadcrumbLD([
+        { name: '홈', url: '/' },
+        { name: title, url: pagePath },
+      ]),
+    ];
+
 // Layer 3 자동 noindex (Risk #1, ADR 0005):
 // 본문 슬롯에 `[TODO: 운영자 작성]` / `[검수 후 ...]` 류 미완성 토큰이 존재하면
 // Discover/Search 색인 차단. 운영자가 본문을 채우면 자동 색인 복귀.
@@ -41,7 +55,7 @@ const noindex = forceNoindex || autoNoindex;
   title={`${title} — 스마트데이터샵`}
   description={description ?? title}
   ogImage={ogImage}
-  jsonld={jsonld}
+  jsonld={fallbackLd}
   noindex={noindex}
 >
   <Header />

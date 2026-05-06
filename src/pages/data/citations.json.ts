@@ -81,6 +81,39 @@ export async function GET() {
     });
   }
 
+  // 호스트 분포 — 본 사이트의 신뢰도 신호 (정부·공공 비중)
+  function classifyHost(url: string): '정부' | '공공기관' | '거래소·법령' | '언론·기타' {
+    try {
+      const host = new URL(url).hostname;
+      if (host.endsWith('.go.kr')) return '정부';
+      if (host.endsWith('.or.kr')) return '공공기관';
+      if (host === 'krx.co.kr' || host === 'www.krx.co.kr' || host === 'law.go.kr')
+        return '거래소·법령';
+      return '언론·기타';
+    } catch {
+      return '언론·기타';
+    }
+  }
+  const uniqueUrls = new Set(rows.map((r) => r.source_url));
+  const hostDistribution = { 정부: 0, 공공기관: 0, '거래소·법령': 0, '언론·기타': 0 };
+  for (const url of uniqueUrls) hostDistribution[classifyHost(url)]++;
+
+  // 가장 자주 인용된 호스트 top 10 — 운영자 dashboard 용
+  const hostCount = new Map<string, number>();
+  for (const url of uniqueUrls) {
+    let host: string;
+    try {
+      host = new URL(url).hostname.replace(/^www\./, '');
+    } catch {
+      host = '__invalid__';
+    }
+    hostCount.set(host, (hostCount.get(host) ?? 0) + 1);
+  }
+  const topHosts = [...hostCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([host, n]) => ({ host, unique_urls: n }));
+
   const payload = {
     name: '스마트데이터샵 Citation Dataset',
     description: '본 사이트 모든 발행 글의 1차 출처 인용 그래프',
@@ -89,6 +122,9 @@ export async function GET() {
     publisher: 'smartdatashop.kr',
     record_count: rows.length,
     article_count: pulses.length + insights.length + chapters.length,
+    unique_source_urls: uniqueUrls.size,
+    host_distribution: hostDistribution,
+    top_hosts: topHosts,
     columns: [
       'article_url',
       'article_title',

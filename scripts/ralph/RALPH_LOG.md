@@ -165,14 +165,74 @@ citations.csv (1) + topic ×3 (3) + 인덱스 페이지 (1) = +13.
 
 ---
 
-## 다음 후보 (post-회차 15)
+---
 
-1. 챕터 sources[] 수 ↔ TrustBar "1차 출처 N건" 정합 (UI ↔ frontmatter 동기화)
-2. 모든 정책 페이지 jsonld 출력 ≥ 1개 (현재 /editorial-policy/, /ai-policy/ 등 미보장)
-3. 카테고리 페이지 5개 (/category/policy/ 등) — Article LD 자동 발행 회귀 가드
-4. citations.json 의 source_url 호스트 분포 통계 (운영자 dashboard 용)
-5. Topic 페이지 KPI 가 0 일 때 fallback 처리 (현재 0편이면 빈 page 렌더)
-6. /data/ 인덱스의 KPI 가 author 페이지의 KPI 와 동일 산식인지 정합 검증
-7. Layer 4 fact-checker 의 부분 활성 — fetch 없는 정적 audit (numerical-claims)
-   결과를 fact-check-queue/ 에 dump
+## 2026-05-07T10:00Z — 회차 16~22: 후보 7건 일괄 + Layer 4 LITE 가동
+
+**작업 (Tier 2 + Ralph 회차 16~22):**
+
+회차 16 — 챕터 sources ↔ TrustBar 정합:
+- chapter HTML 의 source-link 갯수 ↔ TrustBar "1차 출처 N건" 텍스트 N 비교.
+- 둘 다 entry.data.sources.length 에서 나오므로 항상 일치해야.
+
+회차 17 — 정책 페이지 jsonld 보장 (실제 회귀 발견 + fix):
+- 9 정책 페이지 중 7건이 LD 미출력 — Ralph 게이트가 첫 fail 보고.
+- PolicyLayout.astro 에 fallback WebPage + Breadcrumb LD 자동 주입 (호출자가
+  명시 jsonld 없을 때만). 이전에는 about / methodology 만 LD, 이제 9/9.
+
+회차 18 — 카테고리 페이지 5개 LD 가드:
+- /category/{policy|tax-finance|market|stats|ai-tech}/ 모두 빌드 + LD 보유.
+
+회차 19 — citations.json host_distribution + top_hosts:
+- citations.json.ts 에 호스트 분류 (정부/공공/거래소·법령/언론·기타) 자동 집계.
+- top_hosts 10개 — 가장 자주 인용된 host 별 unique URL 수.
+- smoke: 권위 출처 비중 ≥ 50% 임계 (데이터 저널 신뢰도 baseline).
+
+회차 21 — /data/ ↔ author KPI 정합:
+- 두 페이지 같은 산식으로 발행 글 수 노출. 정규식으로 KPI num 추출 후 비교.
+
+회차 22 — Layer 4 fact-checker LITE 가동 (M1+ 진군):
+- scripts/agents/fact-checker.mjs 의 STUB_MODE = false, LITE_MODE = true.
+- 정적 audit — 수치 주장·footnote·sources 비율 산출. 네트워크 X, SDK X, API 키 X.
+- 가이드북 챕터까지 audit 대상 확장 (기존 pulse/insight 만).
+- 위험도 분류 (low/medium/high) — claims=0 → low, claims>0 footnote=0 → high,
+  footnote*3≥claims → low, else medium.
+- 첫 가동 결과: 20편 audit, low 15 / medium 5 / high 0. 평균 수치 14.9건,
+  각주 6.65건, 출처 2.55건/article.
+- fact-check-queue/{date}.json 산출 — 운영자 dashboard 용. M3+ 시 Claude SDK
+  통합 예정.
+- smoke: queue 산출물 + LITE 모드 + high-risk = 0 검증.
+
+**파일**: scripts/agents/fact-checker.mjs, scripts/smoke-test.mjs,
+scripts/ralph/RALPH_LOG.md, src/layouts/PolicyLayout.astro,
+src/pages/data/citations.json.ts.
+**결과**: smoke 70 → 82 통과 (+12). 회귀 0.
+**scope-guard**: PASS.
+
+---
+
+## 누적 (회차 1~22 + Tier 1·2)
+
+- smoke-test 통과: 25 → 82 (+57)
+- 라우트 신설 (이번 세션 시작 후): /guidebook/, /methodology/, /data/,
+  /data/citations.{json,csv}, /topic/jongseong/, /topic/etf/, /topic/ai-support/
+- 컴포넌트: ChapterTOC + viz 6종 (DataNumber/Sparkline/BarSpark/ChangeBadge/
+  KpiTile/SourceCount)
+- Layer 4: STUB → LITE (정적 audit 가동)
+- 콘텐츠 컬렉션 수정: 0
+- ADR · 하네스 수정: 0
+- 새 의존성 추가: 0
+
+---
+
+## 다음 후보 (post-회차 22)
+
+1. fact-check-queue/ 의 medium-risk 5편 — 운영자가 수동 검토 후 footnote 보강
+   (Ralph 가 못 함 — 콘텐츠 영역)
+2. Newsletter Stibee 활성화 — 운영자가 PUBLIC_STIBEE_LIST_ID 환경변수 설정
+3. PWA offline 페이지 캐싱 — service worker 추가 (보류 — 새 의존성 검토 필요)
+4. /og/v2/ 카드 디자인에 KpiTile 패턴 통합 (Satori 템플릿 강화)
+5. Lighthouse 성능 점수 0.85 → 0.95 — 이미지 최적화 (loading=lazy 보강)
+6. RSS feed 에 author / category / image 보강 (현재 minimal)
+7. 카테고리 페이지에 viz (BarSpark / KpiTile) 활용 (구조적 — 콘텐츠 X)
 
