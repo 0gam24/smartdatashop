@@ -1,0 +1,80 @@
+---
+/**
+ * BarSpark — 카테고리별 비교용 미니 막대 차트. 의존성 0.
+ *
+ * 사용 예:
+ *   <BarSpark values={[12, 18, 7, 22]} labels={['1월','2월','3월','4월']} ariaLabel="월별 발행 건수" />
+ */
+interface Props {
+  values: number[];
+  labels?: string[];
+  width?: number;
+  height?: number;
+  /** values 의 max 대신 외부 max (정규화 비교용) */
+  max?: number;
+  ariaLabel: string;
+}
+
+const {
+  values,
+  labels,
+  width = 160,
+  height = 36,
+  max,
+  ariaLabel,
+} = Astro.props;
+
+const peak = max ?? Math.max(...values, 1);
+const gap = 2;
+const barW = (width - gap * (values.length - 1)) / values.length;
+const bars = values.map((v, i) => {
+  const h = (v / peak) * height;
+  return {
+    x: i * (barW + gap),
+    y: height - h,
+    w: barW,
+    h,
+    v,
+    label: labels?.[i] ?? String(v),
+  };
+});
+---
+
+<div class="barspark-wrap">
+  <svg
+    class="barspark"
+    width={width}
+    height={height}
+    viewBox={`0 0 ${width} ${height}`}
+    role="img"
+    aria-label={ariaLabel}
+  >
+    {bars.map((b) => (
+      <rect x={b.x} y={b.y} width={b.w} height={b.h} fill="var(--color-accent)" />
+    ))}
+  </svg>
+  {labels && labels.length === values.length && (
+    <div class="barspark-labels" style={`width:${width}px`}>
+      {labels.map((l) => <span>{l}</span>)}
+    </div>
+  )}
+</div>
+
+<style>
+  .barspark-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .barspark {
+    display: block;
+  }
+  .barspark-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+</style>

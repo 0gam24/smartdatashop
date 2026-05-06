@@ -1,0 +1,251 @@
+---
+/**
+ * 데이터셋 인덱스 — /data/
+ *
+ * 본 사이트가 공개하는 머신-가독 데이터셋 색인. 첫 데이터셋은 Citation Dataset
+ * (인용 그래프). 향후 dataPage 컬렉션이 채워지면 차트별 dataset 도 노출.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import KpiTile from '../../components/viz/KpiTile.astro';
+import { getCollection } from 'astro:content';
+import { buildBreadcrumbLD, buildDatasetLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+// 메타: 글·출처 통계 — Citation Dataset 의 record count 미리 노출
+const [pulses, insights, chapters] = await Promise.all([
+  getCollection('pulse'),
+  getCollection('insight'),
+  getCollection('guidebookChapter'),
+]);
+const articleCount = pulses.length + insights.length + chapters.length;
+const sourceCount =
+  pulses.reduce((a, e) => a + e.data.sources.length, 0) +
+  insights.reduce((a, e) => a + e.data.sources.length, 0) +
+  chapters.reduce((a, e) => a + e.data.sources.length, 0);
+
+const SITE = 'https://smartdatashop.kr';
+const pageTitle = '데이터셋 — 스마트데이터샵';
+const pageDescription =
+  '본 사이트가 공개하는 머신-가독 데이터셋 색인. 인용 그래프 (Citation Dataset) 첫 공개.';
+const pageUrl = '/data/';
+
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터셋', url: pageUrl },
+]);
+
+// 첫 공식 데이터셋 — Citation Graph
+const citationDatasetLd = buildDatasetLD({
+  name: '스마트데이터샵 Citation Dataset',
+  description: `본 사이트의 모든 발행 글에서 인용된 1차 출처 ${sourceCount}건의 인용 그래프. 학술/저널리즘 연구용.`,
+  url: `${SITE}/data/`,
+  license: 'https://creativecommons.org/licenses/by-nc/4.0/',
+  publisher: '스마트데이터샵',
+  datePublished: '2026-05-07',
+  distribution: [
+    {
+      contentUrl: `${SITE}/data/citations.json`,
+      encodingFormat: 'application/json',
+    },
+    {
+      contentUrl: `${SITE}/data/citations.csv`,
+      encodingFormat: 'text/csv',
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd, citationDatasetLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="data-wrap">
+    <header class="data-header">
+      <div class="data-eyebrow">데 이 터 셋 · O P E N D A T A</div>
+      <h1 class="data-title">머신-가독 데이터셋</h1>
+      <p class="data-desc">
+        본 사이트가 발행한 모든 글의 1차 출처 인용 그래프 + 향후 추가될 데이터셋
+        색인. 모든 자료는 CC BY-NC 4.0 — 인용·재배포 자유, 상업적 이용 별도 문의.
+      </p>
+    </header>
+
+    <section class="data-stats">
+      <KpiTile title="전체 발행 글" n={articleCount} unit="편" />
+      <KpiTile title="인용된 1차 출처" n={sourceCount} unit="건" />
+      <KpiTile title="공개 데이터셋" n={1} unit="종" change="2026-05-07 첫 공개" />
+    </section>
+
+    <section class="data-list">
+      <article class="dataset-card">
+        <header>
+          <h2>Citation Dataset — 인용 그래프</h2>
+          <p class="meta">
+            발행 일자 2026-05-07 · 갱신 매 빌드 · CC BY-NC 4.0
+          </p>
+        </header>
+        <p>
+          본 사이트의 펄스·인사이트·가이드북 챕터 모든 글의 frontmatter
+          <code>sources[]</code> 를 단일 표로 집계. 컬럼: 글 URL / 글 제목 /
+          컬렉션 / 출처 인덱스 / 출처 이름 / 출처 URL / 출처 일자 / 접근 일자 /
+          비고. 행 수는 매 빌드 갱신.
+        </p>
+        <ul class="downloads">
+          <li>
+            <a href="/data/citations.json" target="_blank" rel="noopener">
+              citations.json
+            </a>
+            <span class="fmt">JSON · UTF-8</span>
+          </li>
+          <li>
+            <a href="/data/citations.csv" target="_blank" rel="noopener">
+              citations.csv
+            </a>
+            <span class="fmt">CSV · UTF-8 · BOM 없음</span>
+          </li>
+        </ul>
+        <p class="usage">
+          <strong>이용 예</strong>: pandas 로 import 후 <code>article_url</code> 별
+          출처 수 집계, <code>source_url</code> 도메인별 빈도 (정부/학계/언론 분포),
+          시간순 누적 출처 다양성 추적 등.
+        </p>
+      </article>
+
+      <article class="dataset-card placeholder">
+        <header>
+          <h2>차트 Dataset — 준비 중</h2>
+          <p class="meta">발행 예정: 핵심 인사이트의 차트 시계열 5종</p>
+        </header>
+        <p class="todo">
+          본 사이트의 펄스·인사이트 frontmatter 에 <code>chartData</code> 가
+          채워지면 차트별 데이터셋이 자동 발행됩니다. 현재 차트 데이터는 운영자
+          검증 단계 — 발표 시점 갱신.
+        </p>
+      </article>
+    </section>
+
+    <p class="data-license">
+      모든 데이터셋은 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+      하에 자유롭게 인용·재배포 가능합니다. 출처 표기 의무 — "Source: smartdatashop.kr" + 데이터셋 URL.
+      편집 방법론은 <a href="/methodology/">/methodology/</a> 참조.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .data-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .data-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .data-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .data-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .data-title { font-size: 26px; }
+  }
+  .data-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+  .data-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .data-stats { grid-template-columns: 1fr; }
+  }
+  .data-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .dataset-card {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 24px 28px;
+  }
+  .dataset-card.placeholder {
+    background: var(--color-paper-soft);
+    color: var(--color-ink-secondary);
+  }
+  .dataset-card h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    margin: 0 0 8px;
+  }
+  .dataset-card .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin: 0 0 14px;
+  }
+  .dataset-card p { margin: 0 0 12px; line-height: 1.7; font-size: 14px; }
+  .downloads {
+    list-style: none;
+    margin: 14px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .downloads a {
+    color: var(--color-link);
+    margin-right: 12px;
+  }
+  .downloads .fmt {
+    color: var(--color-ink-tertiary);
+    font-size: 11px;
+  }
+  .usage {
+    border-top: 0.5px solid var(--color-ink-quat);
+    padding-top: 12px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+  .todo {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+  }
+  .data-license {
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+    border-top: 0.5px solid var(--color-ink-quat);
+    padding-top: 18px;
+  }
+</style>

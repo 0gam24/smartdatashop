@@ -1,0 +1,107 @@
+---
+/**
+ * DataNumber — Reuters/FT 식 거대 tabular 숫자.
+ *
+ * 사용 예:
+ *   <DataNumber n="1,333" unit="만 명" label="신고 대상" delta="+38" deltaDirection="up" size="lg" />
+ *
+ * tabular-nums + serif → 신문 표지 느낌. delta 는 +/- 부호 그대로 표시
+ * (절대 polarity 판단 X — direction 명시 prop 으로).
+ */
+interface Props {
+  n: string | number;
+  unit?: string;
+  delta?: string;
+  deltaDirection?: 'up' | 'down' | 'neutral';
+  label?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const {
+  n,
+  unit,
+  delta,
+  deltaDirection = 'neutral',
+  label,
+  size = 'md',
+} = Astro.props;
+---
+
+<div class={`dn dn-${size}`}>
+  {label && <div class="dn-label">{label}</div>}
+  <div class="dn-row">
+    <span class="dn-figure">{n}</span>
+    {unit && <span class="dn-unit">{unit}</span>}
+    {delta && (
+      <span class={`dn-delta dn-delta-${deltaDirection}`}>
+        {deltaDirection === 'up' ? '▲' : deltaDirection === 'down' ? '▼' : '·'}
+        <span class="dn-delta-text">{delta}</span>
+      </span>
+    )}
+  </div>
+</div>
+
+<style>
+  .dn {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dn-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+  .dn-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .dn-figure {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .dn-unit {
+    font-family: var(--font-sans);
+    color: var(--color-ink-secondary);
+    font-weight: 400;
+  }
+  .dn-delta {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    margin-left: 4px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .dn-delta-up { color: #1a7e3a; }
+  .dn-delta-down { color: var(--color-accent); }
+  .dn-delta-neutral { color: var(--color-ink-tertiary); }
+
+  .dn-sm .dn-figure { font-size: 22px; }
+  .dn-sm .dn-unit { font-size: 12px; }
+  .dn-sm .dn-delta { font-size: 11px; }
+
+  .dn-md .dn-figure { font-size: 36px; }
+  .dn-md .dn-unit { font-size: 14px; }
+  .dn-md .dn-delta { font-size: 12px; }
+
+  .dn-lg .dn-figure { font-size: 56px; }
+  .dn-lg .dn-unit { font-size: 16px; }
+  .dn-lg .dn-delta { font-size: 13px; }
+
+  .dn-xl .dn-figure { font-size: 84px; }
+  .dn-xl .dn-unit { font-size: 18px; }
+  .dn-xl .dn-delta { font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .dn-xl .dn-figure { font-size: 60px; }
+    .dn-lg .dn-figure { font-size: 44px; }
+  }
+</style>

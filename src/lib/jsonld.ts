@@ -350,6 +350,15 @@ export interface DatasetInput {
   license?: string;
   temporalCoverage?: string;
   spatialCoverage?: string;
+  /** 발행 기관 — 미지정 시 SITE_NAME 으로 자동 설정 */
+  publisher?: string;
+  /** ISO 발행 일자 — Discover/Dataset 색인 신호 */
+  datePublished?: string;
+  /**
+   * 다운로드 가능한 분포 (CSV/JSON 등) — schema.org DataDownload 배열.
+   * /data/ 인덱스 같이 실제 파일 URL 을 노출하는 페이지에서 사용.
+   */
+  distribution?: Array<{ contentUrl: string; encodingFormat: string }>;
 }
 
 export function buildDatasetLD(input: DatasetInput): Record<string, unknown> {
@@ -360,10 +369,19 @@ export function buildDatasetLD(input: DatasetInput): Record<string, unknown> {
     description: input.description,
     url: input.url.startsWith('http') ? input.url : `${SITE_URL}${input.url}`,
     creator: { '@type': 'Organization', name: SITE_NAME },
+    publisher: { '@type': 'Organization', name: input.publisher ?? SITE_NAME },
     license: input.license ?? 'https://creativecommons.org/licenses/by-nc/4.0/',
+    ...(input.datePublished && { datePublished: input.datePublished }),
     ...(input.sourceUrl && { isBasedOn: input.sourceUrl }),
     ...(input.temporalCoverage && { temporalCoverage: input.temporalCoverage }),
     ...(input.spatialCoverage && { spatialCoverage: input.spatialCoverage }),
+    ...(input.distribution && input.distribution.length > 0 && {
+      distribution: input.distribution.map((d) => ({
+        '@type': 'DataDownload',
+        contentUrl: d.contentUrl,
+        encodingFormat: d.encodingFormat,
+      })),
+    }),
   };
 }
 

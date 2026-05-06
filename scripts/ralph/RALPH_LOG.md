@@ -106,11 +106,38 @@ CollectionPage + ItemList + Breadcrumb LD.
 
 ---
 
-## 다음 후보 (post-회차 11)
+---
+
+## 2026-05-07T09:00Z — 회차 12: 고급화 Tier 1 라우트 회귀 가드
+
+**작업**: 고급화 Tier 1 (viz 컴포넌트 6개 + methodology + data + topic ×3) 신설 후
+신규 라우트 16건 회귀 가드 추가.
+**파일**: scripts/smoke-test.mjs §14.
+**검증 추가**: methodology (3) + data 인덱스 (2) + citations.json (3) +
+citations.csv (1) + topic ×3 (3) + 인덱스 페이지 (1) = +13.
+**결과**: smoke 48 → 63 통과. 회귀 0.
+**scope-guard**: PASS (smoke 만 staged — 정합).
+
+---
+
+## 누적 (회차 1~12)
+
+- smoke-test 통과: 25 → 63 (+38)
+- 라우트 신설: /guidebook/, /methodology/, /data/, /data/citations.{json,csv},
+  /topic/jongseong/, /topic/etf/, /topic/ai-support/ — 7 page + 2 endpoint
+- viz 컴포넌트: DataNumber, Sparkline, BarSpark, ChangeBadge, KpiTile, SourceCount
+- 콘텐츠 컬렉션 수정: 0
+- ADR · 하네스 수정: 0
+- 새 의존성 추가: 0
+
+---
+
+## 다음 후보 (post-회차 12)
 
 1. 챕터 prev/next 네비게이션 양방향성 — 첫 챕터 prev=null, 마지막은 "목록으로"
 2. 책 detail 의 ItemList LD 챕터 수 ↔ 컬렉션 totalChapters 정합
 3. 챕터 sources[] 수 ↔ TrustBar "1차 출처 N건" 정합
 4. 모든 정책 페이지 jsonld 출력 ≥ 1개 (CollectionPage 또는 WebPage)
 5. 카테고리 페이지 5개 — Article LD 자동 발행 회귀 가드
+6. citations.json 의 source_url 호스트 분포 통계 (운영자 dashboard 용)
 

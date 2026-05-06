@@ -1,0 +1,102 @@
+---
+/**
+ * KpiTile — Bloomberg Terminal 식 KPI 박스.
+ *   - 작은 라벨 (mono, uppercase)
+ *   - 큰 숫자 (serif, tabular)
+ *   - 단위 + 변화량 줄
+ *   - 출처 한 줄 (작은 mono, 클릭 시 외부)
+ *
+ * 사용 예:
+ *   <KpiTile
+ *     title="신고 대상"
+ *     n="1,333"
+ *     unit="만 명"
+ *     change="2025년 +38만"
+ *     source="국세청 보도자료"
+ *     sourceHref="https://www.nts.go.kr/..."
+ *   />
+ */
+interface Props {
+  title: string;
+  n: string | number;
+  unit?: string;
+  change?: string;
+  source?: string;
+  sourceHref?: string;
+}
+
+const { title, n, unit, change, source, sourceHref } = Astro.props;
+---
+
+<figure class="kpi">
+  <figcaption class="kpi-title">{title}</figcaption>
+  <div class="kpi-row">
+    <span class="kpi-num">{n}</span>
+    {unit && <span class="kpi-unit">{unit}</span>}
+  </div>
+  {change && <div class="kpi-change">{change}</div>}
+  {source && (
+    <div class="kpi-source">
+      {sourceHref ? (
+        <a href={sourceHref} target="_blank" rel="noopener">{source}</a>
+      ) : (
+        source
+      )}
+    </div>
+  )}
+</figure>
+
+<style>
+  .kpi {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 16px 18px;
+    margin: 0;
+    background: var(--color-paper-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .kpi-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+  .kpi-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .kpi-num {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .kpi-unit {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+  .kpi-change {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-secondary);
+    letter-spacing: 0.04em;
+  }
+  .kpi-source {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+  .kpi-source a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  .kpi-source a:hover { text-decoration: underline; }
+</style>

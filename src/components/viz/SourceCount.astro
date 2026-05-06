@@ -1,0 +1,43 @@
+---
+/**
+ * SourceCount — "1차 출처 N건" 미니 pill.
+ *
+ * TrustBar 의 축약 inline 버전. 본문 중 사실 강조구 옆에 배치.
+ * 사용 예: 산출세액 × 20%[^1] <SourceCount n={3} /> ← 이 인용은 3건 출처
+ */
+interface Props {
+  n: number;
+  emphasis?: boolean;
+}
+
+const { n, emphasis = false } = Astro.props;
+---
+
+<span class={`src-cnt${emphasis ? ' src-cnt-emphasis' : ''}`} aria-label={`1차 출처 ${n}건`}>
+  <span class="src-cnt-icon" aria-hidden="true">📊</span>
+  <span class="src-cnt-num">{n}</span>
+  <span class="src-cnt-label">출처</span>
+</span>
+
+<style>
+  .src-cnt {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 6px;
+    border: 0.5px solid var(--color-ink-quat);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-secondary);
+    vertical-align: 0.05em;
+  }
+  .src-cnt-emphasis {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .src-cnt-icon { font-size: 9px; }
+  .src-cnt-num { font-weight: 500; }
+  .src-cnt-label { color: var(--color-ink-tertiary); }
+</style>

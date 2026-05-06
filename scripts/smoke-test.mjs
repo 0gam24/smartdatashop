@@ -215,6 +215,54 @@ if (gbIndex) {
   check('가이드북 인덱스 Breadcrumb LD', /"@type":"BreadcrumbList"/.test(gbIndex));
 }
 
+// ── 14. 고급화 라우트 — Ralph 회차 12 ─────────────────────────────
+//
+// methodology / data 인덱스 / topic ×3 — 모두 신설 라우트 회귀 가드.
+// 운영자가 이 페이지 중 하나라도 깨면 즉시 검출.
+const methodologyHtml = readDist('methodology/index.html');
+check('methodology 페이지', !!methodologyHtml);
+if (methodologyHtml) {
+  check('methodology Breadcrumb LD', /"@type":"BreadcrumbList"/.test(methodologyHtml));
+  check('methodology WebPage LD', /"@type":"WebPage"/.test(methodologyHtml));
+  check('methodology 발행 4기준 본문', /발행 4 기준/.test(methodologyHtml));
+}
+
+const dataIndexHtml = readDist('data/index.html');
+check('데이터셋 인덱스', !!dataIndexHtml);
+if (dataIndexHtml) {
+  check('데이터셋 인덱스 Dataset LD', /"@type":"Dataset"/.test(dataIndexHtml));
+  check('데이터셋 인덱스 distribution', /"@type":"DataDownload"/.test(dataIndexHtml));
+}
+check('citations.json', existsSync(join(DIST, 'data', 'citations.json')));
+check('citations.csv', existsSync(join(DIST, 'data', 'citations.csv')));
+const citationsJson = readDist('data/citations.json');
+if (citationsJson) {
+  let parsed;
+  try {
+    parsed = JSON.parse(citationsJson);
+  } catch {}
+  check('citations.json 유효 JSON', !!parsed);
+  if (parsed) {
+    check('citations.json record 수 > 0', parsed.record_count > 0, `현재 ${parsed.record_count}`);
+    check('citations.json 9 컬럼', parsed.columns?.length === 9, `현재 ${parsed.columns?.length}`);
+  }
+}
+
+const topicSlugs = ['jongseong', 'etf', 'ai-support'];
+let topicOK = 0;
+let topicLD = 0;
+let topicItemList = 0;
+for (const t of topicSlugs) {
+  const html = readDist(`topic/${t}/index.html`);
+  if (!html) continue;
+  topicOK++;
+  if (/"@type":"CollectionPage"/.test(html)) topicLD++;
+  if (/"@type":"ItemList"/.test(html)) topicItemList++;
+}
+check('Topic 페이지 ≥ 3', topicOK === topicSlugs.length, `${topicOK}/${topicSlugs.length}`);
+check('Topic CollectionPage LD', topicLD === topicSlugs.length, `${topicLD}/${topicSlugs.length}`);
+check('Topic ItemList LD', topicItemList === topicSlugs.length, `${topicItemList}/${topicSlugs.length}`);
+
 let bookOK = 0;
 let bookLDOK = 0;
 let bookBreadcrumbOK = 0;

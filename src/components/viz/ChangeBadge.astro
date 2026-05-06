@@ -1,0 +1,73 @@
+---
+/**
+ * ChangeBadge — ▲ +2.6% 류 변화량 인디케이터.
+ *
+ * polarity 가 핵심 — "more is good" (매출 증가) vs "more is bad" (실업률 증가)
+ * 같은 도메인 의존 색상을 명시적으로 옵션화.
+ *
+ * 사용 예:
+ *   <ChangeBadge prev={120} curr={123.1} unit="조" polarity="up-good" />
+ */
+interface Props {
+  prev: number;
+  curr: number;
+  unit?: string;
+  /** up-good = 증가가 좋음 (녹색), up-bad = 증가가 나쁨 (적색), neutral = 회색 */
+  polarity?: 'up-good' | 'up-bad' | 'neutral';
+  /** percent 모드: 기본 절대값 차이, 'pct' 면 (curr-prev)/prev*100 */
+  mode?: 'absolute' | 'pct';
+  digits?: number;
+}
+
+const {
+  prev,
+  curr,
+  unit,
+  polarity = 'neutral',
+  mode = 'pct',
+  digits = 1,
+} = Astro.props;
+
+const diff = curr - prev;
+const pctDiff = prev !== 0 ? (diff / prev) * 100 : 0;
+const value = mode === 'pct' ? pctDiff : diff;
+const sign = value > 0 ? '+' : value < 0 ? '-' : '';
+const arrow = value > 0 ? '▲' : value < 0 ? '▼' : '·';
+const formatted = `${sign}${Math.abs(value).toFixed(digits)}${mode === 'pct' ? '%' : ''}`;
+
+let colorClass: string;
+if (polarity === 'neutral' || value === 0) {
+  colorClass = 'cb-neutral';
+} else if ((value > 0 && polarity === 'up-good') || (value < 0 && polarity === 'up-bad')) {
+  colorClass = 'cb-positive';
+} else {
+  colorClass = 'cb-negative';
+}
+---
+
+<span class={`cb ${colorClass}`} aria-label={`${prev} 에서 ${curr} 로 ${formatted} 변화`}>
+  <span class="cb-arrow" aria-hidden="true">{arrow}</span>
+  <span class="cb-value">{formatted}</span>
+  {unit && <span class="cb-unit">{unit}</span>}
+</span>
+
+<style>
+  .cb {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .cb-positive { color: #1a7e3a; }
+  .cb-negative { color: var(--color-accent); }
+  .cb-neutral { color: var(--color-ink-tertiary); }
+  .cb-arrow { font-size: 0.8em; }
+  .cb-unit {
+    color: var(--color-ink-tertiary);
+    font-weight: 400;
+    margin-left: 1px;
+  }
+</style>
