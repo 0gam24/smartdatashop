@@ -5,15 +5,33 @@ interface Props {
   todayCount?: number;
   totalCount?: number;
   tagline?: string;
+  /**
+   * 가장 최근 발행 글의 publishedAt (ISO 8601). 오늘의 글 0편일 때
+   * "마지막 발행 X시간 전" freshness 신호 표시.
+   */
+  lastPublishedAt?: string;
 }
 
 const {
   vol = 'I',
   no = '89',
-  todayCount = 5,
-  totalCount = 127,
+  todayCount = 0,
+  totalCount = 0,
   tagline = '한국의 데이터를 매일 5분으로 — 1차 출처 데이터 저널',
+  lastPublishedAt,
 } = Astro.props;
+
+/** 마지막 발행 후 경과 시간 — "23시간 전" / "2일 전" 류. 24h 미만은 시간, 이상은 일. */
+function formatElapsed(isoString: string): string {
+  const elapsed = Date.now() - new Date(isoString).getTime();
+  const hours = Math.floor(elapsed / (1000 * 60 * 60));
+  if (hours < 1) return '방금';
+  if (hours < 24) return `${hours}시간 전`;
+  const days = Math.floor(hours / 24);
+  return `${days}일 전`;
+}
+
+const elapsedLabel = todayCount === 0 && lastPublishedAt ? formatElapsed(lastPublishedAt) : null;
 ---
 
 <div class="masthead">
@@ -21,7 +39,10 @@ const {
     <div class="masthead-tagline">{tagline}</div>
     <div class="masthead-counter">
       <span>VOL <strong>{vol}</strong>·NO <strong>{no}</strong></span>
-      <span>오늘의 글 <strong>{todayCount}</strong>편</span>
+      <span>
+        오늘의 글 <strong>{todayCount}</strong>편
+        {elapsedLabel && <span class="masthead-elapsed"> · 최근 <strong>{elapsedLabel}</strong></span>}
+      </span>
       <span>누적 <strong>{totalCount}</strong>편</span>
     </div>
   </div>
@@ -56,6 +77,9 @@ const {
   .masthead-counter span :global(strong) {
     color: var(--color-ink);
     font-weight: 600;
+  }
+  .masthead-elapsed {
+    color: var(--color-accent);
   }
   @media (max-width: 640px) {
     .masthead-counter { display: none; }

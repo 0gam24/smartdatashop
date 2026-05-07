@@ -73,6 +73,27 @@ export function formatKoreanDateTime(input: Date | string): string {
   return `${formatKoreanDate(input)} · ${formatKoreanTime(input)} 발행`;
 }
 
+/**
+ * 빌드 시점의 KST 오늘 날짜 — "2026년 5월 7일 목" 류.
+ * Header / Footer / PolicyLayout 의 *오늘 날짜* 표시에 사용. 빌드 환경
+ * (Cloudflare Pages = UTC) 의 타임존과 무관하게 KST 기준.
+ *
+ * 사이트가 hourly scout bot 으로 매시간 rebuild 되므로 사용자가 보는 날짜는
+ * 항상 *최근 1시간 이내* 빌드 시점의 KST 날짜. 자정 직후 ~1시간 전후로만
+ * 어제 표시 가능.
+ */
+export function formatKoreanToday(): string {
+  return formatKoreanDate(new Date());
+}
+
+/**
+ * 빌드 시점의 KST 오늘 YYYY-MM-DD — pulse publishedAt 비교용 (오늘의 글 카운트).
+ */
+export function kstTodayIso(): string {
+  const { year, month, day } = kstParts(new Date());
+  return `${year}-${month}-${day}`;
+}
+
 export type Category = 'policy' | 'tax-finance' | 'market' | 'stats' | 'ai-tech';
 
 /**

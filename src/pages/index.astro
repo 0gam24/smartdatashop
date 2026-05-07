@@ -16,7 +16,7 @@ import SisterSiteCard from '../components/SisterSiteCard.astro';
 import ComingSoon from '../components/ComingSoon.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import Footer from '../components/Footer.astro';
-import { categoryToKorean, formatKoreanTime, pulseUrl, pulseDateParts, type Category } from '../lib/korean';
+import { categoryToKorean, formatKoreanTime, pulseUrl, pulseDateParts, kstTodayIso, type Category } from '../lib/korean';
 import {
   buildOrganizationLD,
   buildPersonLD,
@@ -25,10 +25,26 @@ import {
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
+const allInsights = await getCollection('insight');
+const allChapters = await getCollection('guidebookChapter');
 const sortedPulses = allPulses.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
 );
 const latest = sortedPulses[0];
+
+// Masthead 자동 집계 — 오늘의 글 (KST 기준 publishedAt 가 오늘) + 누적
+const todayIso = kstTodayIso();
+const todayPulseCount = allPulses.filter((e) =>
+  e.data.publishedAt.startsWith(todayIso),
+).length;
+const todayInsightCount = allInsights.filter((e) =>
+  e.data.publishedAt.startsWith(todayIso),
+).length;
+const todayChapterCount = allChapters.filter((e) =>
+  e.data.publishedAt.startsWith(todayIso),
+).length;
+const todayCount = todayPulseCount + todayInsightCount + todayChapterCount;
+const totalCount = allPulses.length + allInsights.length + allChapters.length;
 const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   const { personas, dataTypes, actions } = entry.data.tags;
   const tags = [
@@ -144,7 +160,7 @@ const sisters = sisterOrder.map((key) => {
 
 <BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
   <Header activeNav="daily" />
-  <Masthead vol="I" no="89" todayCount={5} totalCount={127} />
+  <Masthead vol="I" no="89" todayCount={todayCount} totalCount={totalCount} lastPublishedAt={latest?.data.publishedAt} />
 
   <main id="main" role="main">
   <Hero entry={latest} />
@@ -203,7 +219,7 @@ const sisters = sisterOrder.map((key) => {
   <NewsletterCTA />
   </main>
 
-  <Footer vol="I" no="89" date="2026년 5월 5일 화" />
+  <Footer vol="I" no="89" />
 </BaseLayout>
 
 <style>

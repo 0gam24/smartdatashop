@@ -1,11 +1,14 @@
 ---
+import { formatKoreanToday } from '../lib/korean';
+
 interface Props {
   vol?: string;
   no?: string;
   date?: string;
 }
 
-const { vol = 'I', no = '89', date = '2026년 5월 5일 화' } = Astro.props;
+// 기본값은 빌드 시점의 KST 오늘 — hourly scout bot 으로 매시간 자동 갱신.
+const { vol = 'I', no = '89', date = formatKoreanToday() } = Astro.props;
 ---
 
 <footer class="site-footer">
