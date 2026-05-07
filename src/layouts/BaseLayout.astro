@@ -163,8 +163,9 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- RSS / Sitemap discovery -->
+    <!-- Feed / Sitemap discovery -->
     <link rel="alternate" type="application/rss+xml" title="스마트데이터샵 RSS" href="/feed.xml" />
+    <link rel="alternate" type="application/feed+json" title="스마트데이터샵 JSON Feed" href="/feed.json" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- 라이선스 머신-가독 (Risk #4): CC BY-NC 4.0 — Dataset LD 의 license 와 일치. -->

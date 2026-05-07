@@ -32,35 +32,70 @@ export async function GET(context: APIContext) {
     link: string;
     categories: string[];
     content: string;
+    /** RFC 3339 author 필드 — 본 사이트는 단일 저자 */
+    author?: string;
+    /** dc:creator + media:thumbnail per-item customData */
+    customData?: string;
   };
 
+  const AUTHOR_EMAIL_NAME = 'editor@smartdatashop.kr (김준혁)';
+
+  /** 펄스/인사이트 entry → 풍부한 RSS 항목.
+   *  per-item customData 에 dc:creator + media:thumbnail (coverImage 있을 때) 추가.
+   *  Naver/Google 의 feed crawler 가 동영상·이미지·저자 모두 신호로 사용. */
+  function richItem(entry: { data: any; slug: string; body?: string }, link: string): FeedItem {
+    const cover = entry.data.coverImage as string | undefined;
+    const customParts: string[] = [
+      `<dc:creator><![CDATA[${AUTHOR_EMAIL_NAME}]]></dc:creator>`,
+    ];
+    if (cover) {
+      const absImg = cover.startsWith('http')
+        ? cover
+        : `https://smartdatashop.kr${cover.startsWith('/') ? cover : '/' + cover}`;
+      customParts.push(`<media:thumbnail url="${absImg}" />`);
+      customParts.push(`<media:content url="${absImg}" medium="image" />`);
+    }
+    return {
+      title: entry.data.title,
+      pubDate: new Date(entry.data.publishedAt),
+      description: entry.data.tldr,
+      link,
+      categories: [categoryToKorean(entry.data.category as Category)],
+      content: entry.body ?? '',
+      author: AUTHOR_EMAIL_NAME,
+      customData: customParts.join(''),
+    };
+  }
+
   const items: FeedItem[] = [
-    ...pulses.map((entry) => ({
-      title: entry.data.title,
-      pubDate: new Date(entry.data.publishedAt),
-      description: entry.data.tldr,
-      link: pulseUrl(entry.slug, entry.data.publishedAt),
-      categories: [categoryToKorean(entry.data.category as Category)],
-      content: entry.body,
-    })),
-    ...insights.map((entry) => ({
-      title: entry.data.title,
-      pubDate: new Date(entry.data.publishedAt),
-      description: entry.data.tldr,
-      link: `/insight/${entry.slug}/`,
-      categories: [categoryToKorean(entry.data.category as Category)],
-      content: entry.body,
-    })),
+    ...pulses.map((entry) => richItem(entry, pulseUrl(entry.slug, entry.data.publishedAt))),
+    ...insights.map((entry) => richItem(entry, `/insight/${entry.slug}/`)),
   ];
 
   items.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
   const top = items.slice(0, FEED_LIMIT);
+
+  // 채널 customData — language, copyright, atom:link self, dc 네임스페이스, lastBuildDate
+  const lastBuild = top[0]?.pubDate.toUTCString() ?? new Date().toUTCString();
+  const channelCustom = [
+    '<language>ko-kr</language>',
+    '<copyright>CC BY-NC 4.0 · 김준혁</copyright>',
+    `<lastBuildDate>${lastBuild}</lastBuildDate>`,
+    `<managingEditor>${AUTHOR_EMAIL_NAME}</managingEditor>`,
+    `<webMaster>${AUTHOR_EMAIL_NAME}</webMaster>`,
+    '<atom:link href="https://smartdatashop.kr/feed.xml" rel="self" type="application/rss+xml" />',
+  ].join('');
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESC,
     site: context.site ?? 'https://smartdatashop.kr',
     items: top,
-    customData: '<language>ko-kr</language><copyright>CC BY-NC 4.0 · 김준혁</copyright>',
+    customData: channelCustom,
+    xmlns: {
+      atom: 'http://www.w3.org/2005/Atom',
+      dc: 'http://purl.org/dc/elements/1.1/',
+      media: 'http://search.yahoo.com/mrss/',
+    },
   });
 }

@@ -456,6 +456,47 @@ check(
   `${chHeadingIdOK}/${chapters.length}`,
 );
 
+// ── 24. 고급화 Tier 2 라우트/피드 — Ralph 회차 23 ─────────────────
+//
+// (a) JSON Feed /feed.json — JSONFeed v1.1 spec
+// (b) RSS feed.xml 의 dc:creator / media:thumbnail / atom:link self
+// (c) NewsMediaOrganization 의 정책 URL 메타데이터 (ethics/corrections/...)
+// (d) 카테고리 페이지 KpiTile + BarSpark viz 마운트
+const jsonFeed = readDist('feed.json');
+check('JSON Feed /feed.json', !!jsonFeed);
+if (jsonFeed) {
+  let parsed;
+  try { parsed = JSON.parse(jsonFeed); } catch {}
+  check('JSON Feed 유효', !!parsed);
+  if (parsed) {
+    check('JSON Feed v1.1', parsed.version === 'https://jsonfeed.org/version/1.1');
+    check('JSON Feed authors', Array.isArray(parsed.authors) && parsed.authors.length >= 1);
+    check('JSON Feed items ≥ 1', Array.isArray(parsed.items) && parsed.items.length >= 1);
+  }
+}
+
+const rssXml = readDist('feed.xml');
+if (rssXml) {
+  check('RSS dc:creator per-item', /<dc:creator>/.test(rssXml));
+  check('RSS atom:link self', /<atom:link[^>]+rel="self"/.test(rssXml));
+  check('RSS managingEditor', /<managingEditor>/.test(rssXml));
+}
+
+if (homeHtml) {
+  check('Org LD ethicsPolicy', /"ethicsPolicy":/.test(homeHtml));
+  check('Org LD correctionsPolicy', /"correctionsPolicy":/.test(homeHtml));
+  check('Org LD masthead', /"masthead":/.test(homeHtml));
+  check('Org LD publishingPrinciples', /"publishingPrinciples":/.test(homeHtml));
+}
+
+let categoryVizCount = 0;
+for (const cat of ['policy', 'tax-finance', 'market', 'stats', 'ai-tech']) {
+  const html = readDist(`category/${cat}/index.html`);
+  if (!html) continue;
+  if (/class="cat-stats"/.test(html)) categoryVizCount++;
+}
+check('카테고리 페이지 KPI viz', categoryVizCount === 5, `${categoryVizCount}/5`);
+
 // ── 16. 챕터 prev/next 양방향성 — Ralph 회차 14 ──────────────────
 //
 // 첫 챕터 (chapterNumber === 1): prev=null → "이전 챕터" 링크 없음

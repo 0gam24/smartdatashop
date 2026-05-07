@@ -274,20 +274,80 @@ ADR 0007 신설 — *콘텐츠 컬렉션 수정이 가장 중요* + *1인 관리
 
 ---
 
-## 다음 후보 (post-회차 22 + ADR 0007)
+---
 
-**SourceWriter 즉시 활용 (운영자 지시 시):**
-1. 운영자가 주제 + 후보 출처 URL 2~5 개 지정 → 본 세션이 Stage 2~4 자동 실행
-2. 첫 시도 후보:
-   - 종소세 환급 일정 펄스 (nts.go.kr 보도자료 + hometax 안내)
-   - KOSPI 4월 결산 인사이트 (krx 결제자료 + ecos.bok.or.kr)
-   - law.go.kr 국세기본법 §47의2 추가 캐시 후 ch10 verifier 재검증
+## 2026-05-07T11:00Z — 고급화 Tier 2 일괄 + 회차 23
 
-**Ralph 추가 회차 (운영자 결정):**
-3. fact-check-queue/ 의 medium-risk 5편 — 콘텐츠 보강 (SourceWriter 영역)
-4. PWA offline 캐싱 (보류 — 의존성 검토)
-5. /og/v2/ 카드에 KpiTile 패턴 통합
-6. Lighthouse 0.85 → 0.95 — 이미지 lazy/srcset 보강
-7. RSS feed author/category/image 보강
-8. 카테고리 페이지 viz (BarSpark/KpiTile) 활용
+**작업 (운영자 지시 — 환경변수/검색등록 제외 모두 진행):**
+
+SourceWriter 데모 (Phase 1):
+- law.go.kr 국세기본법 추가 fetch 시도. 단, 페이지가 SPA 라 동적 컨텐츠 부족.
+- ch10 verifier 재실행 — 여전히 25/37 미검증 (workflow 정확 작동 확인).
+- 운영자 향후 보도자료 deep link 시도 시 verifier 가 갱신 검증.
+
+NewsMediaOrganization LD 강화 (Phase 2 — Google News 신호):
+- src/lib/jsonld.ts buildOrganizationLD 에 ethicsPolicy / correctionsPolicy /
+  actionableFeedbackPolicy / verificationFactCheckingPolicy / masthead /
+  diversityPolicy / publishingPrinciples / knowsAbout / areaServed 추가.
+- 기존 6 필드 → 16 필드. Google News 의 Publisher Center 평가 기준 충족.
+
+카테고리 페이지 viz 마운트 (Phase 3):
+- 5 카테고리 페이지 모두 — KpiTile (발행 글·1차 출처) + BarSpark (최근 12개월
+  월별 발행 분포) 자동 집계. 빈 카테고리는 viz 미렌더 (graceful).
+
+RSS feed 보강 (Phase 4):
+- per-item dc:creator, media:thumbnail, media:content (coverImage 있을 때).
+- 채널 atom:link self, managingEditor, webMaster, lastBuildDate.
+- xmlns: atom + dc + media 추가.
+
+JSON Feed 신설 (Phase 5):
+- /feed.json — JSONFeed v1.1 spec. authors / icon / favicon / items 풍부.
+- BaseLayout 의 link rel="alternate" type="application/feed+json" discovery.
+
+이미지 lazy loading (Phase 6):
+- 감사 결과 모든 <img> 이미 loading="lazy" 적용. 추가 작업 불필요.
+
+회차 23 — 고급화 회귀 가드 (smoke +13):
+- JSON Feed 유효 + v1.1 + authors + items.
+- RSS dc:creator + atom:link self + managingEditor.
+- Org LD 4 정책 URL (ethics/corrections/masthead/publishingPrinciples).
+- 카테고리 viz 마운트 5/5.
+
+**파일**: scripts/agents/source-cache.mjs (no change), scripts/smoke-test.mjs,
+src/lib/jsonld.ts, src/layouts/BaseLayout.astro, src/pages/feed.xml.ts,
+src/pages/feed.json.ts (신규), src/pages/category/[slug]/index.astro.
+
+**결과**: smoke 82 → 95 통과 (+13). 회귀 0.
+**scope-guard**: 운영자 commit (콘텐츠 컬렉션 0줄, ADR 수정 0).
+
+---
+
+## 누적 (전체 세션)
+
+- smoke-test 통과: 25 → 95 (+70)
+- 라우트 신설: 8 page + 3 endpoint (guidebook + methodology + data + topic ×3 + feed.json)
+- 컴포넌트: ChapterTOC + viz 6종
+- Layer 4: STUB → LITE 가동
+- ADR: 0007 채택 + SourceWriter 인프라 (cache + verifier)
+- NewsMediaOrganization LD: 6 → 16 필드 (Google News 신호)
+- RSS: minimal → dc/media/atom 강화
+- JSON Feed: 미존재 → v1.1 spec
+- 카테고리 페이지: PulseList only → KpiTile + BarSpark + PulseList
+- 새 의존성: 0
+
+---
+
+## 다음 후보 (post-회차 23)
+
+**아직 ship 안 한 premium 옵션:**
+1. /og/v2/ Satori 템플릿 — KpiTile 패턴 통합 (visual premium)
+2. Homepage Hero — DataNumber + Sparkline 활용 강화
+3. fact-check-queue/ medium-risk 5편 — SourceWriter 워크플로우로 footnote 보강
+
+**SourceWriter 운영자 지시 대기:**
+4. 운영자 주제 + 출처 URL 지정 → 본 세션이 Stage 2~4 실행
+
+**운영자 직접 작업 (이번 세션 외):**
+5. 환경변수 (PUBLIC_STIBEE_LIST_ID / PUBLIC_AUTHOR_SAMEAS / PUBLIC_*_SITE_VERIFICATION)
+6. Naver/Google/Bing 검색 등록
 

@@ -94,6 +94,20 @@ export function buildOrganizationLD(): Record<string, unknown> {
     email: AUTHOR_EMAIL,
     inLanguage: 'ko',
     sameAs: ORG_SAMEAS,
+    // Google News 평가 신호 — NewsMediaOrganization 의 정책 URL 메타데이터.
+    // 운영자의 책임·투명성을 schema.org 표준으로 노출.
+    ethicsPolicy: `${SITE_URL}/editorial-policy/`,
+    correctionsPolicy: `${SITE_URL}/corrections/`,
+    actionableFeedbackPolicy: `${SITE_URL}/contact/`,
+    verificationFactCheckingPolicy: `${SITE_URL}/methodology/`,
+    masthead: `${SITE_URL}/authors/${AUTHOR_SLUG}/`,
+    diversityPolicy: `${SITE_URL}/about/`,
+    knowsLanguage: ['ko', 'en'],
+    publishingPrinciples: `${SITE_URL}/methodology/`,
+    // 발행 영역 — Discover 의 topical authority 신호
+    knowsAbout: AUTHOR_KNOWS_ABOUT,
+    // 운영 지역 — Korean Discover 분배 신호
+    areaServed: { '@type': 'Country', name: 'South Korea' },
   };
 }
 

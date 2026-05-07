@@ -23,6 +23,8 @@ import SectionHead from '../../../components/SectionHead.astro';
 import PulseList from '../../../components/PulseList.astro';
 import PulseCard from '../../../components/PulseCard.astro';
 import Footer from '../../../components/Footer.astro';
+import KpiTile from '../../../components/viz/KpiTile.astro';
+import BarSpark from '../../../components/viz/BarSpark.astro';
 import {
   categoryToKorean,
   formatKoreanTime,
@@ -103,6 +105,35 @@ const pulseCount = pulseCards.length;
 const insightCount = insightItems.length;
 const totalCount = pulseCount + insightCount;
 
+// 카테고리 통계 — KpiTile + BarSpark 시각화용 (자동 집계, fabrication 0)
+const uniqueSourceUrls = new Set<string>();
+for (const e of allPulses) e.data.sources.forEach((s) => uniqueSourceUrls.add(s.url));
+for (const e of allInsights) e.data.sources.forEach((s) => uniqueSourceUrls.add(s.url));
+
+// 월별 발행 분포 — 최근 12개월 (BarSpark 입력)
+const now = new Date();
+const monthBuckets: number[] = new Array(12).fill(0);
+const monthLabels: string[] = [];
+for (let i = 11; i >= 0; i--) {
+  const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+  monthLabels.push(`${(d.getMonth() + 1).toString().padStart(2, '0')}`);
+}
+function bucketIndex(publishedAt: string): number {
+  const d = new Date(publishedAt);
+  const monthsAgo = (now.getFullYear() - d.getFullYear()) * 12 + (now.getMonth() - d.getMonth());
+  return monthsAgo >= 0 && monthsAgo < 12 ? 11 - monthsAgo : -1;
+}
+for (const e of allPulses) {
+  const idx = bucketIndex(e.data.publishedAt);
+  if (idx >= 0) monthBuckets[idx]++;
+}
+for (const e of allInsights) {
+  const idx = bucketIndex(e.data.publishedAt);
+  if (idx >= 0) monthBuckets[idx]++;
+}
+const monthlyMax = Math.max(...monthBuckets, 1);
+const hasAnyPublished = monthBuckets.some((n) => n > 0);
+
 // SEO 메타 — categoryLabel은 "정 책"처럼 글자 사이 공백을 포함, 제목/설명에서도 그대로 유지
 const pageTitle = `${categoryLabel} — 스마트데이터샵`;
 const pageDescription = `${categoryLabel} 카테고리의 최신 펄스와 인사이트 모음.`;
@@ -151,6 +182,31 @@ const keywords = [categorySlugLabel, '데이터 저널', '1차 출처'];
 
   <main>
     <h1 class="visually-hidden">{categoryLabel} 카테고리 — 1차 출처 데이터 아카이브</h1>
+
+    {totalCount > 0 && (
+      <section class="section cat-stats-section" data-screen-label={`${category} 통계`}>
+        <div class="page-width">
+          <div class="cat-stats">
+            <KpiTile title="발행 글" n={totalCount} unit="편" change={`${pulseCount} 펄스 · ${insightCount} 인사이트`} />
+            <KpiTile title="인용 1차 출처" n={uniqueSourceUrls.size} unit="건" change="중복 제거" />
+            {hasAnyPublished && (
+              <figure class="cat-monthly">
+                <figcaption class="cat-monthly-title">최근 12개월 발행 분포</figcaption>
+                <BarSpark
+                  values={monthBuckets}
+                  labels={monthLabels}
+                  max={monthlyMax}
+                  width={240}
+                  height={40}
+                  ariaLabel={`${categoryLabel} 카테고리의 최근 12개월 월별 발행 건수`}
+                />
+              </figure>
+            )}
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- 펄스 섹션 -->
     <section class="section" data-screen-label={`${category} 펄스 아카이브`}>
       <div class="page-width">
@@ -196,6 +252,36 @@ const keywords = [categorySlugLabel, '데이터 저널', '1차 출처'];
 </BaseLayout>
 
 <style>
+  .cat-stats-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .cat-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  @media (max-width: 720px) {
+    .cat-stats { grid-template-columns: 1fr; }
+  }
+  .cat-monthly {
+    border: 0.5px solid var(--color-ink-quat);
+    background: var(--color-paper-soft);
+    padding: 16px 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cat-monthly-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
   .empty {
     border: 0.5px dashed var(--color-ink-quat);
     padding: 36px 24px;
