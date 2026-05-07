@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": 2,
+  "description": "Scout LITE 가 매시 polling 하는 RSS/feed 목록. 한국 정부 사이트 다수가 RSS 미공개 — Google News RSS 로 *신호 (signal)* 만 수집. 1차 출처 자체는 아니므로 source-cache 직접 입력은 X. 운영자가 후보 보고 → 1차 출처 URL 수동 발견 → source-cache.",
+  "feeds": [
+    {
+      "name": "Google News — 정책 (정부발표·보도자료)",
+      "host": "news.google.com",
+      "category": "policy",
+      "url": "https://news.google.com/rss/search?q=%EC%A0%95%EB%B6%80%20%EB%B0%9C%ED%91%9C%20OR%20%EB%B3%B4%EB%8F%84%EC%9E%90%EB%A3%8C&hl=ko&gl=KR&ceid=KR:ko",
+      "is_signal_only": true
+    },
+    {
+      "name": "Google News — 세금·금융 (국세청·종소세·세제)",
+      "host": "news.google.com",
+      "category": "tax-finance",
+      "url": "https://news.google.com/rss/search?q=%EA%B5%AD%EC%84%B8%EC%B2%AD%20OR%20%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20OR%20%EC%84%B8%EC%A0%9C%20%EA%B0%9C%ED%8E%B8&hl=ko&gl=KR&ceid=KR:ko",
+      "is_signal_only": true
+    },
+    {
+      "name": "Google News — 시장 (KOSPI·KRX·한국은행)",
+      "host": "news.google.com",
+      "category": "market",
+      "url": "https://news.google.com/rss/search?q=KOSPI%20OR%20%EC%BD%94%EC%8A%A4%ED%94%BC%20OR%20KRX%20OR%20%ED%95%9C%EA%B5%AD%EC%9D%80%ED%96%89%20%EA%B8%B0%EC%A4%80%EA%B8%88%EB%A6%AC&hl=ko&gl=KR&ceid=KR:ko",
+      "is_signal_only": true
+    },
+    {
+      "name": "Google News — 통계 (통계청 KOSIS)",
+      "host": "news.google.com",
+      "category": "stats",
+      "url": "https://news.google.com/rss/search?q=%ED%86%B5%EA%B3%84%EC%B2%AD%20%EB%B0%9C%ED%91%9C%20OR%20KOSIS%20OR%20%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%BC%EA%B0%80%20OR%20%EA%B2%BD%EC%A0%9C%ED%99%9C%EB%8F%99&hl=ko&gl=KR&ceid=KR:ko",
+      "is_signal_only": true
+    },
+    {
+      "name": "Google News — AI·기술 (과기정통부·NIPA)",
+      "host": "news.google.com",
+      "category": "ai-tech",
+      "url": "https://news.google.com/rss/search?q=%EA%B3%BC%EA%B8%B0%EC%A0%95%ED%86%B5%EB%B6%80%20OR%20NIPA%20OR%20AI%20%EC%A0%95%EC%B1%85%20OR%20%EB%94%94%EC%A7%80%ED%84%B8%20%EB%B3%B4%EC%9D%B4%EC%B2%98&hl=ko&gl=KR&ceid=KR:ko",
+      "is_signal_only": true
+    }
+  ],
+  "fallback_html_hosts": [
+    "nts.go.kr",
+    "krx.co.kr",
+    "kostat.go.kr"
+  ],
+  "operator_note": [
+    "각 feed 는 *signal only* — 신호 수집용. 작성 직전 운영자가 후보 보고 1차 출처(.go.kr 등) URL 을 수동으로 발견 → source-cache.mjs 입력.",
+    "추가 RSS 발견 시 본 파일에 push (vibe coding 영역, OPERATOR.md 외부작업 X).",
+    "is_signal_only=false 인 feed (정부 직접 RSS) 발견되면 우선순위 ↑."
+  ]
+}
