@@ -38,7 +38,7 @@ export async function GET(context: APIContext) {
     customData?: string;
   };
 
-  const AUTHOR_EMAIL_NAME = 'editor@smartdatashop.kr (김준혁)';
+  const AUTHOR_EMAIL_NAME = 'smartdatashop@gmail.com (김준혁)';
 
   /** 펄스/인사이트 entry → 풍부한 RSS 항목.
    *  per-item customData 에 dc:creator + media:thumbnail (coverImage 있을 때) 추가.

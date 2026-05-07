@@ -12,7 +12,7 @@ const SITE_URL = 'https://smartdatashop.kr';
 const SITE_NAME = '스마트데이터샵';
 const AUTHOR_NAME = '김준혁';
 const AUTHOR_SLUG = 'junhyuk-kim';
-const AUTHOR_EMAIL = 'editor@smartdatashop.kr';
+const AUTHOR_EMAIL = 'smartdatashop@gmail.com';
 const FOUNDING_DATE = '2026-01-01';
 const LOGO_URL = `${SITE_URL}/og-default.png`;
 

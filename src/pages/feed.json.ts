@@ -33,7 +33,7 @@ export async function GET(_context: APIContext) {
 
   const author = {
     name: '김준혁',
-    email: 'editor@smartdatashop.kr',
+    email: 'smartdatashop@gmail.com',
     url: `${SITE_URL}/authors/junhyuk-kim/`,
   };
 

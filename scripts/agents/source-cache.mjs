@@ -86,7 +86,7 @@ for (const url of urls) {
     const res = await fetch(url, {
       headers: {
         'user-agent':
-          'smartdatashop-source-cache/0.1 (+https://smartdatashop.kr; editor@smartdatashop.kr)',
+          'smartdatashop-source-cache/0.1 (+https://smartdatashop.kr; smartdatashop@gmail.com)',
         accept: 'text/html,application/xhtml+xml,application/json,text/plain',
         'accept-language': 'ko-KR,ko;q=0.9,en;q=0.5',
       },
