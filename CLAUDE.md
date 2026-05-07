@@ -6,6 +6,46 @@
 ## 프로젝트 한 줄
 한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 매일 5분으로 정리하는 데이터 저널 허브.
 
+## 프로젝트 목적 (확장 — 2026-05-07 ADR 0008 합의)
+
+> 본 사이트는 *확장형 네트워크* 의 **메인 hub** 다. 단독 운영 X.
+
+**최상위 목적**: 메인 + 자매 (현재 4 → 최대 9, 총 최대 10 사이트) 의 *합산 트래픽* 으로 **AdSense 수익화**.
+
+**역할 분담**:
+1. **메인 (smartdatashop.kr)** — Google Discover / Naver 진입 엔진. 1차 출처 NewsArticle 매일 발행. 자매 funnel hub. *고정 단일*.
+2. **자매 사이트 (확장형, 현재 4 → 최대 9)** — 페르소나별 *독립 콘텐츠* + 자체 SEO + 메인 backref. 합류 시 NETWORK.md paste 만으로 룰 적용.
+
+   현재 가동 (4):
+   - `calculatorhost.com` — 인터랙티브 계산기·시뮬레이터
+   - `awoo.or.kr` — 정부 지원금 신청 가이드
+   - `asiatop.co.kr (moneylook)` — 사회초년생·신혼부부 재무 가이드
+   - `iknowhowinfo.com` — ETF·종목·시장 분석
+
+   확장 슬롯 (5 추가 가능 — 페르소나/도메인 미정):
+   - 신규 자매 추가 시 본 항목에 도메인·페르소나 추가
+   - 부트스트랩 절차: NETWORK.md paste + BRAND.md 신규 작성 + PLAYBOOK.md 시드 task
+
+**양방향 cross-link funnel**:
+- 메인 → 자매: 펄스 본문 톨게이트 + 카테고리/페르소나 매핑 (forward) — 자매 수 증가에 따라 매핑 표 자동 확장
+- 자매 → 메인: 메인 홈 "네트워크 최신" 섹션 + 자매 페이지 backref (reverse)
+- 메인이 자매 RSS *제목·URL·요약* 만 fetch — 본문 복제 절대 금지 (중복 콘텐츠 AdSense 차단 회피)
+- 메인의 "네트워크 최신" 섹션은 자매 N 개 모두 자동 fetch — 신규 자매 합류 시 코드 수정 0 (config 갱신만)
+
+**AdSense 안전 — 모든 콘텐츠 작업의 1순위 제약**:
+- **fabrication 1건 = 네트워크 전체 영구 AdSense 차단 위험** — ADR 0006 4기준 모든 사이트 (메인 + 자매 N) 균일 적용
+- 모든 사이트 각자 *고유* 콘텐츠 — 사이트간 본문 복제 금지 (canonical chain 으로 link 만 cross)
+- YMYL 신뢰성 — `.go.kr` / `.or.kr` 1차 출처 우선
+- NewsMediaOrganization LD + ethics/corrections/methodology 정책 URL 모든 사이트 의무
+
+**네트워크 헌법**: 본 repo 의 `NETWORK.md` (작성 예정) 가 모든 사이트 공통 표준. 자매 추가 시 NETWORK.md paste 만으로 합류 — 1 → 9 자매 동일 패턴.
+
+**확장 안전 (신규 자매 합류 시)**:
+- 1인 운영 부담 한계 고려 — 동시 부트스트랩 자매 ≤ 1, 안정화 후 다음
+- 자매당 자체 verifier·fact-checker·smoke 게이트 의무 (네트워크 신뢰도 분산 위험 방지)
+- 신규 자매 도메인 등록 + Cloudflare Pages 연결은 운영자 외부 작업 (OPERATOR.md)
+- 자매 수 증가에 따라 메인 → 자매 매핑 충돌 가능 — 페르소나 중복 회피 의무
+
 ## 첫 작업 진입 시 반드시 읽을 파일 (우선순위 순)
 1. `docs/dashboard.md` — 현재 상태 (30초)
 2. `docs/architecture.md` — 폴더 구조 / 어디에 무엇을 둘지
