@@ -38,7 +38,7 @@
 - YMYL 신뢰성 — `.go.kr` / `.or.kr` 1차 출처 우선
 - NewsMediaOrganization LD + ethics/corrections/methodology 정책 URL 모든 사이트 의무
 
-**네트워크 헌법**: 본 repo 의 `NETWORK.md` (작성 예정) 가 모든 사이트 공통 표준. 자매 추가 시 NETWORK.md paste 만으로 합류 — 1 → 9 자매 동일 패턴.
+**네트워크 헌법**: 본 repo 의 `docs/NETWORK.md` v0.6 (2026-05-07 동기화) 가 모든 사이트 공통 표준. 자매 추가 시 NETWORK.md paste 만으로 합류 — 1 → 9 자매 동일 패턴. 본 4 문서 (PURPOSE / PROJECT_DEFINITION / NETWORK / CATEGORY_MAP) 가 본 repo 의 헌법 anchor (아래 §네트워크 헌법 참조).
 
 **확장 안전 (신규 자매 합류 시)**:
 - 1인 운영 부담 한계 고려 — 동시 부트스트랩 자매 ≤ 1, 안정화 후 다음
@@ -46,12 +46,25 @@
 - 신규 자매 도메인 등록 + Cloudflare Pages 연결은 운영자 외부 작업 (OPERATOR.md)
 - 자매 수 증가에 따라 메인 → 자매 매핑 충돌 가능 — 페르소나 중복 회피 의무
 
+## 네트워크 헌법
+
+본 repo 는 smartdata network HQ 의 헌법을 따른다 (2026-05-07 동기화).
+
+- `docs/PURPOSE.md` — 사업·운영·콘텐츠 목적 (최상위 anchor)
+- `docs/PROJECT_DEFINITION.md` v1.0 — 5~9 사이트 네트워크 전체 그림
+- `docs/NETWORK.md` v0.6 — 5~9 사이트 공통 헌법 (multi-stack + dual-brand 인정)
+- `docs/CATEGORY_MAP.md` v1.0 — 5 사이트 카테고리 매핑 (Dispatcher 가동의 단일 진실)
+
+위 4 문서와 충돌하는 코드·콘텐츠 작성 금지.
+위계: PURPOSE > PROJECT_DEFINITION > NETWORK > CATEGORY_MAP > 본 CLAUDE.md > ADR > STRUCTURE.
+
 ## 첫 작업 진입 시 반드시 읽을 파일 (우선순위 순)
-1. `docs/dashboard.md` — 현재 상태 (30초)
-2. `docs/architecture.md` — 폴더 구조 / 어디에 무엇을 둘지
-3. `docs/AGENTS.md` — 7 자동화 에이전트 운영 모델
-4. `docs/PLANNING.md` — 12개월 KPI / 자매 사이트 합류 일정
-5. `docs/DESIGN.md` — 디자인 토큰 / 활자 시스템
+1. `docs/PURPOSE.md` — 최상위 anchor (5분)
+2. `docs/dashboard.md` — 현재 상태 (30초)
+3. `docs/architecture.md` — 폴더 구조 / 어디에 무엇을 둘지
+4. `docs/AGENTS.md` — 7 자동화 에이전트 운영 모델
+5. `docs/PLANNING.md` — 12개월 KPI / 자매 사이트 합류 일정
+6. `docs/DESIGN.md` — 디자인 토큰 / 활자 시스템
 
 ## 디렉토리별 추가 규칙 (자동 상속)
 - `src/components/CLAUDE.md` — 컴포넌트 작성 규칙
