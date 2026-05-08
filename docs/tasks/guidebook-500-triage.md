@@ -1,34 +1,90 @@
-# guidebook 500 triage — 다음 세션 task
+# static-page 500 triage — 다음 세션 task
 
-> 큐잉 사유: 본 이슈는 PR #5 (Phase B SisterDeepDive) / PR #6 (awoo 매칭 정정) 와 무관.
-> 이전 commit `9f4dfa9` 또는 그 이전에서 시작된 별개 routing/deploy 이슈.
+> 큐잉 사유: 본 이슈는 PR #5~#7 (Phase B SisterDeepDive / awoo 정정 / triage 메모) 와 무관.
+> 이전 commit 어딘가에서 시작된 별개 CF Pages deploy 이슈.
 > 별도 task 로 분리해 본 세션 마무리.
 >
-> 발견 시점: 2026-05-08 (PR #6 머지 직후 운영자 시각 확인 중)
-> 큐잉 commit: `1d8ef21` (PR #6 merge)
+> 발견 시점: 2026-05-08
+>   - 1차: guidebook 500 (PR #6 머지 직후)
+>   - 2차: 정적 페이지 14종 + 동적 일부 500 (PR #7 머지 직후 추가 보고)
+> 큐잉 commit: `cc5b42a` (PR #7 merge)
 
-## 증상
+## 증상 (2026-05-08 14:00 KST 기준 — PR #7 머지 후 전수 health check)
 
-| URL 패턴 | local dist | production |
-|---|---|---|
-| `/guidebook/` (인덱스) | ✅ 24KB HTML | ❌ 500 |
-| `/guidebook/{book-slug}/` (책 detail — etf-map-2026, jongseong-2026) | ✅ 24~32KB | ❌ 500 |
-| `/guidebook/{book-slug}/{number}/` (chapter number) | ✅ 32~34KB | ❌ 500 |
-| `/guidebook/{book-slug}/{chapter-slug}/` (chapter slug — `ch1-shingo-daesang`) | ❌ 빌드 안 됨 | ✅ 200 |
+### 500 페이지 list (총 17개)
 
-production 응답 특징:
+**정적 페이지 14종** (모두 PolicyLayout 또는 BaseLayout 직접 사용):
+- `/about/`, `/contact/`, `/methodology/`, `/corrections/`
+- `/editorial-policy/`, `/ai-policy/`, `/affiliate-disclosure/`, `/privacy/`, `/terms/`
+- `/insight/`, `/tag/`, `/data/`, `/guidebook/` (4종 인덱스)
+- `/authors/junhyuk-kim/`
+
+**동적 일부 3종**:
+- `/topic/jongseong/` (topic 동적 라우트)
+- `/guidebook/jongseong-2026/`, `/guidebook/etf-map-2026/` (책 detail)
+- `/guidebook/{book}/{number}/` (chapter number 라우트)
+
+### 200 페이지 (정상)
+
+- `/` (홈)
+- `/{year}/{month}/{day}/{slug}/` (펄스 6편 — ArticleLayout)
+- `/insight/{slug}/` (인사이트 detail — InsightLayout)
+- `/category/{slug}/` (5 카테고리)
+- `/tag/{group}/{slug}/` (태그 detail)
+- `/guidebook/{book}/{chapter-slug}/` (chapter slug 라우트)
+- 모든 API endpoints (feed.xml/json, sitemap, news-sitemap, image-sitemap, citations.csv)
+
+### Production 응답 특징
+
 - `cf-cache-status: DYNAMIC`
 - response body 0 byte
 - → static asset 매칭 실패 후 Functions fallback fail
 
-## 원인 가설
+### 사실 확인 (2026-05-08)
 
-`getStaticPaths` 가 number 기반으로 변경됐으나, production 은 이전 slug 기반 빌드의 chapter 페이지가 200 서빙 중. 책 detail / 인덱스 / number-chapter 는 일부 페이지 deploy 누락 가능성.
+| 항목 | 결과 |
+|---|---|
+| Local `npm run build` dist | ✅ 모든 파일 정상 생성 (208 files / 6.3MB / about/index.html 25KB) |
+| CF Pages 모든 deploy GitHub check | ✅ success / completed |
+| CF Pages preview alias URL 동일 500 | ✅ — caching 아님, deploy 자체 누락 |
+| dist 안 _worker.js / _routes.json / functions/ | ❌ 없음 — pure static |
+| CF Pages free tier 한도 (20K files / 25MB per file) | ✅ 한참 안 됨 |
+| 본 작업 (PR #2~#7) 정적 페이지 코드 변경 | ❌ 0 변경 |
 
-근거:
-- production chapter URL 패턴 = entry.slug (`ch1-shingo-daesang`)
-- local 의 `src/pages/guidebook/[book]/[chapter].astro` getStaticPaths = `chapter: String(entry.data.chapterNumber)` ("1", "2", ...)
-- 두 패턴이 동일 코드에서 동시 빌드될 수 없음 → 빌드 시점 차이 (production stale 또는 코드 회귀)
+## 원인 (확정 — 2026-05-08 14:30 KST 빌드 로그 분석)
+
+**CF Pages 의 incremental upload cache 가 stale/corrupt** — 새 빌드 시 hash 동일 파일을 "already uploaded" 로 skip 하면서, 이전에 누락 또는 corrupt deploy 된 파일이 영구 stale 상태.
+
+PR #7 (`cc5b42a`) deploy 빌드 로그 (운영자 paste, 2026-05-08T04:32:30Z):
+
+```
+Uploading... (203/208)
+Uploading... (205/208)
+Uploading... (206/208)
+Uploading... (208/208)
+✨ Success! Uploaded 5 files (203 already uploaded) (1.12 sec)
+```
+
+→ 208 파일 중 5개만 fresh upload (PR #7 의 docs/ 추가). 203개 "already uploaded" 로 cache 신뢰. 만약 이전 deploy (PR #5 또는 PR #6 직후) 에서 정적 페이지가 정상 업로드 안 됐고 그 (corrupt) hash 가 cache 에 박힌 상태라면, 이후 모든 deploy 가 그 stale cache 신뢰 → **영구 500**.
+
+빌드 자체는 정상:
+- `[build] 60 page(s) built in 6.71s`
+- 모든 정적 페이지 ✓ (about/contact/insight/guidebook/tag/data/privacy/terms/...)
+- chapter URL 패턴 = number ("1", "2", ..., "12") — 코드 정합
+- chapter slug 라우트 (`ch1-shingo-daesang`) 는 코드에 없는데 production 에 살아있음 = **이전 deploy 의 stale cache**
+
+결론: chapter slug 200 = stale cache 잔존 / 정적 페이지 500 = 같은 cache 가 corrupt.
+
+## 작업 순서 (확정 진단 후 권장 fix)
+
+### Fix 옵션
+
+1. **CF Pages dashboard → "Retry deployment"** (운영자 직접) — 가장 안전. fresh full upload 시도.
+2. **CF Pages dashboard → 프로젝트 설정 → "Purge cache"** (있다면) — Pages cache 강제 무효화.
+3. **모든 정적 페이지의 hash 강제 변경** — BaseLayout 에 build timestamp 또는 1회 cache-bust 토큰 추가 → 모든 .html hash 변경 → CF Pages 강제 재업로드 → cache 정상화.
+   - PR 분리 필수
+   - 다음 PR 에서 cache-bust 토큰 제거 (선택)
+4. **CF Pages 프로젝트 재생성** — 운영자 외부 작업 (삭제 + 재연결) — destructive 마지막 수단.
 
 ## 주의
 
@@ -36,15 +92,48 @@ production 응답 특징:
 - slug → number 전환 시 기존 production URL (`ch1-shingo-daesang` 등) 404 → 색인 손실 위험
 - redirect 또는 코드 통일이 선행되어야 안전
 
-## 작업 순서 (권장)
+## 현재 진행 상태 (2026-05-08 기준)
 
-1. **CF Pages 빌드 로그 확인** — 운영자가 빌드 ID 캡처해둠
-   - https://dash.cloudflare.com/?to=/7e4ec5d0713002f29bbc8a133c15b2cd/pages/view/smartdatashop/4c1a2412-8e8d-475c-b436-9f1fe5429b05
-   - "Build log" 탭 → guidebook 관련 누락/에러 확인
-2. **`[chapter].astro` 의 params 를 entry.slug 기반으로 통일** — production 매칭 보존
-   - 또는 number → slug 마이그레이션 + 301 redirect 박힘
-3. **로컬 `dist/` 에 인덱스/책 detail HTML 정상 출력 확인** — npm run build 결과 grep
-4. **단독 PR 로 분리** — 본 작업 (PR #5/#6) 와 머지 충돌 없도록 격리
+- ✅ 빌드 로그 확보 + 원인 확정 (위 §원인 — CF Pages incremental cache stale)
+- ❌ **옵션 1 (Retry deployment) 실패** — 운영자 retry 후에도 동일 500
+  - `/guidebook/` → 500 (운영자 스크린샷 확보)
+  - `/guidebook/jongseong-2026/` → 500 (운영자 스크린샷 확보)
+  - retry 후에도 동일 → CF Pages 가 retry 시에도 동일 incremental cache 재사용 추정
+- ⏳ **옵션 2 (Purge build cache) 운영자 직접 진행 중** — CF Pages dashboard 에서 cache 무효화 시도
+- 🔧 **옵션 3 (BaseLayout cache-bust 코드 PR) 사전 작성 + push 완료, 머지 대기** — 옵션 2 실패 시 즉시 머지
+
+## 결과 확인 URL (옵션 1 재배포 후 운영자 시각 검증)
+
+운영자 retry 완료 후 다음 4개 URL 시각/HTTP 확인:
+
+| URL | 옵션 1 후 기대 |
+|---|---|
+| https://smartdatashop.kr/about/ | ✅ 200 — 정적 페이지 (PolicyLayout) 대표 |
+| https://smartdatashop.kr/insight/ | ✅ 200 — 인덱스 페이지 (PolicyLayout 류) 대표 |
+| https://smartdatashop.kr/guidebook/jongseong-2026/ | ✅ 200 — 책 detail (`[slug].astro`) |
+| https://smartdatashop.kr/guidebook/jongseong-2026/ch1-shingo-daesang/ | ❌ **404 expected** — 이전 stale cache 의 chapter slug 라우트. fresh deploy 시 코드에 없으므로 사라짐 (정상 정정) |
+
+→ 4 URL 모두 기대대로면 **cache stale 정정 완료 + 양방향 funnel 정상 가동**.
+
+## Fallback 순서 (옵션 1 실패 시)
+
+| 순서 | 옵션 | 진행 주체 | 시간 |
+|---|---|---|---|
+| 1 | Retry deployment | 운영자 (CF dashboard) | 1분 |
+| 2 | Purge build cache | 운영자 (CF dashboard) | 1분 |
+| 3 | BaseLayout cache-bust 코드 (모든 페이지 hash 강제 변경) | 본 세션 (PR) | 5분 |
+| 4 | Pages 프로젝트 재생성 | 운영자 외부 | 30분+ |
+
+## 전제 — 옵션 1/2/3 실행 안전성 근거
+
+본 시점 (2026-05-08) 다음 전제로 fresh deploy 시 stale URL (chapter slug 라우트 등) **404 수용 가능**:
+
+- ✅ Search Console 미등록 — 색인 손실 0
+- ✅ 자매 사이트 5개 신규 도메인 M3~M12 합류 예정 — 현재 외부 인입 0 (cross-link 의존 0)
+- ✅ slug URL 색인/외부 링크 0건 → fresh deploy 후 404 수용 가능
+- ⚠ 향후 (Search Console 등록 후 / 자매 합류 후) 동일 cache stale 발생 시 — 본 전제 깨짐. 그때는 옵션 3 (cache-bust 코드) 보다 옵션 2 (Purge cache) 우선, 옵션 4 (재생성) 는 색인 영향 평가 후.
+
+본 전제는 재발 시 동일 판단 근거로 활용.
 
 ## 영향 범위
 
