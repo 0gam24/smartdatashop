@@ -46,6 +46,19 @@ jobs:
           node scripts/fetch-ecos-key100.mjs
         continue-on-error: true
 
+      - name: Fetch ECOS 시계열 (기준금리·환율·CPI)
+        id: fetch-ecos-ts
+        env:
+          ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
+          NODE_ENV: production
+        run: |
+          if [ -z "$ECOS_API_KEY" ]; then
+            echo "::warning::ECOS_API_KEY secret 미설정 — 본 단계 스킵"
+            exit 0
+          fi
+          node scripts/fetch-ecos-timeseries.mjs
+        continue-on-error: true
+
       - name: Fetch KOSIS 100대 지표 (지표정보 조회)
         id: fetch-kosis-indicator
         env:

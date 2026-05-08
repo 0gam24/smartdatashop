@@ -58,6 +58,36 @@ if (existsSync(ecosPath)) {
 }
 
 // ───────────────────────────────────────────────────────────────────
+// (1c) ECOS 시계열 json 로드
+// ───────────────────────────────────────────────────────────────────
+
+const ecosTsPath = resolve(process.cwd(), 'data/economy/ecos-timeseries.json');
+let ecosTsRow: SourceRow | null = null;
+if (existsSync(ecosTsPath)) {
+  try {
+    const j = JSON.parse(readFileSync(ecosTsPath, 'utf8'));
+    const okCount = (j.series ?? []).filter((s: any) => s.status === 'ok').length;
+    const totalCount = j.seriesCount ?? 0;
+    const totalPoints = (j.series ?? []).reduce((a: number, s: any) => a + (s.pointCount ?? 0), 0);
+    const st: Status = okCount === totalCount ? 'ok' : okCount > 0 ? 'fail' : 'fail';
+    ecosTsRow = {
+      id: 'ecos-timeseries',
+      name: '한국은행 ECOS 시계열',
+      kind: 'API',
+      category: '시계열',
+      tier: 1,
+      status: st,
+      fetchedAt: j.fetchedAt ?? null,
+      elapsedMs: typeof j.elapsedMs === 'number' ? j.elapsedMs : null,
+      itemCount: totalPoints,
+      detailUrl: '/data/timeseries/',
+      sourceUrl: j.sourceUrl ?? 'https://ecos.bok.or.kr/api/StatisticSearch',
+      note: `${okCount}/${totalCount} 시계열 정상 (총 ${totalPoints} 데이터 점)`,
+    };
+  } catch {}
+}
+
+// ───────────────────────────────────────────────────────────────────
 // (1b) KOSIS indicator json 로드
 // ───────────────────────────────────────────────────────────────────
 
@@ -170,6 +200,7 @@ const PENDING_SOURCES: SourceRow[] = [
 
 const allRows: SourceRow[] = [
   ...(ecosRow ? [ecosRow] : []),
+  ...(ecosTsRow ? [ecosTsRow] : []),
   ...(kosisIndicatorRow ? [kosisIndicatorRow] : []),
   ...rssRows,
   ...PENDING_SOURCES,
