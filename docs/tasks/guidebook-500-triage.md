@@ -92,15 +92,44 @@ Uploading... (208/208)
 - slug → number 전환 시 기존 production URL (`ch1-shingo-daesang` 등) 404 → 색인 손실 위험
 - redirect 또는 코드 통일이 선행되어야 안전
 
-## 작업 순서 (권장)
+## 현재 진행 상태 (2026-05-08 기준)
 
-1. **CF Pages 빌드 로그 확인** — 운영자가 빌드 ID 캡처해둠
-   - https://dash.cloudflare.com/?to=/7e4ec5d0713002f29bbc8a133c15b2cd/pages/view/smartdatashop/4c1a2412-8e8d-475c-b436-9f1fe5429b05
-   - "Build log" 탭 → guidebook 관련 누락/에러 확인
-2. **`[chapter].astro` 의 params 를 entry.slug 기반으로 통일** — production 매칭 보존
-   - 또는 number → slug 마이그레이션 + 301 redirect 박힘
-3. **로컬 `dist/` 에 인덱스/책 detail HTML 정상 출력 확인** — npm run build 결과 grep
-4. **단독 PR 로 분리** — 본 작업 (PR #5/#6) 와 머지 충돌 없도록 격리
+- ✅ 빌드 로그 확보 + 원인 확정 (위 §원인 — CF Pages incremental cache stale)
+- ⏳ **옵션 1 (Retry deployment) 운영자 직접 진행 중** — CF Pages dashboard 에서 retry 버튼 클릭
+- 본 세션 옵션 3 (cache-bust 코드 PR) **보류** — 옵션 1 결과 확인 후 fallback
+
+## 결과 확인 URL (옵션 1 재배포 후 운영자 시각 검증)
+
+운영자 retry 완료 후 다음 4개 URL 시각/HTTP 확인:
+
+| URL | 옵션 1 후 기대 |
+|---|---|
+| https://smartdatashop.kr/about/ | ✅ 200 — 정적 페이지 (PolicyLayout) 대표 |
+| https://smartdatashop.kr/insight/ | ✅ 200 — 인덱스 페이지 (PolicyLayout 류) 대표 |
+| https://smartdatashop.kr/guidebook/jongseong-2026/ | ✅ 200 — 책 detail (`[slug].astro`) |
+| https://smartdatashop.kr/guidebook/jongseong-2026/ch1-shingo-daesang/ | ❌ **404 expected** — 이전 stale cache 의 chapter slug 라우트. fresh deploy 시 코드에 없으므로 사라짐 (정상 정정) |
+
+→ 4 URL 모두 기대대로면 **cache stale 정정 완료 + 양방향 funnel 정상 가동**.
+
+## Fallback 순서 (옵션 1 실패 시)
+
+| 순서 | 옵션 | 진행 주체 | 시간 |
+|---|---|---|---|
+| 1 | Retry deployment | 운영자 (CF dashboard) | 1분 |
+| 2 | Purge build cache | 운영자 (CF dashboard) | 1분 |
+| 3 | BaseLayout cache-bust 코드 (모든 페이지 hash 강제 변경) | 본 세션 (PR) | 5분 |
+| 4 | Pages 프로젝트 재생성 | 운영자 외부 | 30분+ |
+
+## 전제 — 옵션 1/2/3 실행 안전성 근거
+
+본 시점 (2026-05-08) 다음 전제로 fresh deploy 시 stale URL (chapter slug 라우트 등) **404 수용 가능**:
+
+- ✅ Search Console 미등록 — 색인 손실 0
+- ✅ 자매 사이트 5개 신규 도메인 M3~M12 합류 예정 — 현재 외부 인입 0 (cross-link 의존 0)
+- ✅ slug URL 색인/외부 링크 0건 → fresh deploy 후 404 수용 가능
+- ⚠ 향후 (Search Console 등록 후 / 자매 합류 후) 동일 cache stale 발생 시 — 본 전제 깨짐. 그때는 옵션 3 (cache-bust 코드) 보다 옵션 2 (Purge cache) 우선, 옵션 4 (재생성) 는 색인 영향 평가 후.
+
+본 전제는 재발 시 동일 판단 근거로 활용.
 
 ## 영향 범위
 
