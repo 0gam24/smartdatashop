@@ -1,0 +1,364 @@
+---
+/**
+ * /data/notice/ — 정부 발표 모음 (14개 RSS 통합)
+ *
+ * 출처: 정책브리핑(korea.kr) + 정부24(gov.kr) RSS 14피드
+ * 데이터: data/rss/government.json (scripts/fetch-rss-government.mjs)
+ * 표시: 시간 역순 통합 + 출처별 카드 (사이드)
+ *
+ * 운영자 가공 0 — 정부 원문 제목·요약 그대로. 출처 클릭 → 원본 페이지.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Item = {
+  title: string | null;
+  link: string | null;
+  pubDate: string | null;
+  pubDateISO: string | null;
+  description: string | null;
+  guid: string | null;
+  category: string | null;
+  sourceId: string;
+  sourceName: string;
+  sourceCategory: string;
+};
+
+type Source = {
+  id: string;
+  name: string;
+  url: string;
+  category: string;
+  tier: number;
+  status: 'ok' | 'fail';
+  itemCount: number;
+};
+
+type Payload = {
+  fetchedAt: string;
+  sourceTotal: number;
+  sourceSuccess: number;
+  sourceFail: number;
+  aggregateTotal: number;
+  sources: Source[];
+  aggregateItems: Item[];
+};
+
+let payload: Payload | null = null;
+const dataPath = resolve(process.cwd(), 'data/rss/government.json');
+if (existsSync(dataPath)) {
+  try {
+    payload = JSON.parse(readFileSync(dataPath, 'utf8')) as Payload;
+  } catch (err) {
+    console.warn('[/data/notice] data parse fail:', (err as Error).message);
+    payload = null;
+  }
+}
+
+const pageTitle = '정부 발표 — 스마트데이터샵';
+const pageDescription =
+  '정책브리핑 + 정부24 RSS 14개 피드를 매일 자동 수집한 정부 발표 모음. 운영자 가공 0, 원문 제목·요약 그대로.';
+const pageUrl = '/data/notice/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: '정부 발표', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+
+function formatFetchedAtKST(iso: string): string {
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const Y = kst.getUTCFullYear();
+  const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(kst.getUTCDate()).padStart(2, '0');
+  const h = String(kst.getUTCHours()).padStart(2, '0');
+  const m = String(kst.getUTCMinutes()).padStart(2, '0');
+  return `${Y}-${M}-${D} ${h}:${m} KST`;
+}
+
+function formatPubDateKST(iso: string | null): string {
+  if (!iso) return '—';
+  try {
+    const d = new Date(iso);
+    const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+    const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+    const D = String(kst.getUTCDate()).padStart(2, '0');
+    const h = String(kst.getUTCHours()).padStart(2, '0');
+    const m = String(kst.getUTCMinutes()).padStart(2, '0');
+    return `${M}-${D} ${h}:${m}`;
+  } catch {
+    return '—';
+  }
+}
+
+// 표시할 항목 — 통합 최신 50개 (페이지 로드 적정량)
+const items = payload?.aggregateItems.slice(0, 50) ?? [];
+const sourcesOk = (payload?.sources ?? []).filter((s) => s.status === 'ok');
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="notice-wrap">
+    <header class="notice-header">
+      <div class="notice-eyebrow">정 부 · N O T I C E · F E E D</div>
+      <h1 class="notice-title">정부 발표 모음</h1>
+      <p class="notice-desc">
+        정책브리핑(korea.kr) + 정부24(gov.kr) 의 RSS 14개 피드를 매일 자동 수집.
+        운영자는 원문을 가공하지 않으며, 모든 항목은 발표 기관 페이지로 직접 연결된다.
+      </p>
+      {payload && (
+        <p class="notice-meta">
+          마지막 갱신 {formatFetchedAtKST(payload.fetchedAt)} ·
+          {' '}활성 출처 {payload.sourceSuccess}/{payload.sourceTotal} ·
+          {' '}수집 항목 {payload.aggregateTotal}건 (최신 50건 표시)
+        </p>
+      )}
+    </header>
+
+    {!payload && (
+      <section class="notice-empty">
+        <p>데이터 미수집 상태. 운영자는 다음 명령으로 최초 수집을 실행한다.</p>
+        <pre><code>npm run fetch:rss:government</code></pre>
+      </section>
+    )}
+
+    {payload && (
+      <div class="notice-layout">
+        <section class="notice-feed">
+          <h2 class="notice-section-title">최근 발표 (시간 역순)</h2>
+          <ol class="notice-items">
+            {items.map((it) => (
+              <li class="notice-item">
+                <div class="item-meta">
+                  <span class="item-time">{formatPubDateKST(it.pubDateISO)}</span>
+                  <span class="item-source">{it.sourceName}</span>
+                  <span class="item-cat">{it.sourceCategory}</span>
+                </div>
+                <h3 class="item-title">
+                  {it.link ? (
+                    <a href={it.link} target="_blank" rel="noopener noreferrer">{it.title ?? '—'}</a>
+                  ) : (
+                    it.title ?? '—'
+                  )}
+                </h3>
+                {it.description && (
+                  <p class="item-desc">{it.description}</p>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <aside class="notice-sources">
+          <h2 class="notice-section-title">출처 목록 ({sourcesOk.length})</h2>
+          <ul class="src-list">
+            {sourcesOk.map((s) => (
+              <li class="src-item">
+                <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name}</a>
+                <span class="src-meta">{s.category} · {s.itemCount}건</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    )}
+
+    <p class="notice-foot">
+      모든 항목은 발표 기관 (정책브리핑 / 정부24) 의 RSS 원문을 그대로 인용한 것이며,
+      운영자의 해석·재가공은 추가하지 않는다. 정정 정책{' '}
+      <a href="/corrections/">/corrections/</a>, 편집 방법론{' '}
+      <a href="/methodology/">/methodology/</a> 참조.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .notice-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .notice-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .notice-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .notice-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .notice-title { font-size: 26px; }
+  }
+  .notice-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
+  }
+  .notice-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+  }
+  .notice-empty {
+    padding: 24px 28px;
+    border: 0.5px dashed var(--color-ink-quat);
+    color: var(--color-ink-secondary);
+    font-size: 14px;
+  }
+  .notice-empty pre {
+    margin: 12px 0 0;
+    background: var(--color-paper-soft);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .notice-layout {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .notice-layout { grid-template-columns: 1fr; }
+  }
+
+  .notice-section-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 16px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+
+  .notice-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .notice-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 18px 0;
+  }
+  .notice-item:last-child { border-bottom: 0; }
+
+  .item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .item-source {
+    color: var(--color-ink-secondary);
+  }
+  .item-cat {
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+  .item-title {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+  }
+  .item-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .item-title a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 2px;
+  }
+  .item-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  .notice-sources {
+    position: sticky;
+    top: 80px;
+  }
+  @media (max-width: 880px) {
+    .notice-sources {
+      position: static;
+      margin-top: 36px;
+    }
+  }
+  .src-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+  }
+  .src-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 10px 0;
+    line-height: 1.4;
+  }
+  .src-item:last-child { border-bottom: 0; }
+  .src-item a {
+    color: var(--color-ink);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .src-item a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 2px;
+  }
+  .src-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+
+  .notice-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .notice-foot a { color: var(--color-link); }
+</style>
