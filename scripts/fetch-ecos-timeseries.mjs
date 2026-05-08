@@ -40,6 +40,16 @@ function recentDaysRange(days) {
   return { start: fmt(start), end: fmt(end) };
 }
 
+function recentQuartersRange(quarters) {
+  const now = new Date();
+  const m = now.getMonth();
+  const endQ = Math.floor(m / 3) + 1;
+  const endY = now.getFullYear();
+  let startY = endY, startQ = endQ - quarters + 1;
+  while (startQ <= 0) { startQ += 4; startY -= 1; }
+  return { start: `${startY}Q${startQ}`, end: `${endY}Q${endQ}` };
+}
+
 const SERIES = [
   {
     id: 'base-rate',
@@ -73,6 +83,28 @@ const SERIES = [
     cycle: 'M',
     unit: '2020=100',
     range: recentMonthsRange(36),
+  },
+  {
+    id: 'kospi',
+    label: 'KOSPI 종합지수',
+    short: 'KOSPI',
+    category: '시장',
+    statCode: '802Y001',
+    itemCode: '0001000',
+    cycle: 'D',
+    unit: '1980.01.04=100',
+    range: recentDaysRange(180),
+  },
+  {
+    id: 'household-debt',
+    label: '가계신용 (예금취급기관, 분기)',
+    short: '가계부채',
+    category: '가계',
+    statCode: '151Y005',
+    itemCode: '1110000',
+    cycle: 'Q',
+    unit: '십억원',
+    range: recentQuartersRange(12),
   },
 ];
 
