@@ -1,5 +1,5 @@
 ---
-import { formatKoreanToday } from '../lib/korean';
+import { formatKoreanToday, mastheadIssueNumber } from '../lib/korean';
 
 interface Props {
   vol?: string;
@@ -7,8 +7,9 @@ interface Props {
   date?: string;
 }
 
-// 기본값은 빌드 시점의 KST 오늘 — hourly scout bot 으로 매시간 자동 갱신.
-const { vol = 'I', no = '89', date = formatKoreanToday() } = Astro.props;
+// 기본값은 KST 오늘 기준 자동 계산 — Masthead 와 동일 helper 사용.
+const _auto = mastheadIssueNumber();
+const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.props;
 ---
 
 <footer class="site-footer">

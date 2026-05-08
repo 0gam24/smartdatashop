@@ -62,7 +62,7 @@ const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
 
 <BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
   <Header activeNav="insight" />
-  <Masthead vol="I" no="89" todayCount={items.length} totalCount={items.length} tagline={tagline} />
+  <Masthead todayCount={items.length} totalCount={items.length} tagline={tagline} />
 
   <main id="main" role="main">
     <h1 class="visually-hidden">인사이트 아카이브 — 깊이 있는 데이터 분석</h1>
@@ -96,7 +96,7 @@ const jsonld: object[] = [collectionLd, itemListLd, breadcrumbLd];
     </section>
   </main>
 
-  <Footer vol="I" no="89" />
+  <Footer />
 </BaseLayout>
 
 <style>

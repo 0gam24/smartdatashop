@@ -74,8 +74,6 @@ const jsonld = buildWebPageLD(pageTitle, pageDescription);
 <BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
   <Header activeNav="daily" />
   <Masthead
-    vol="I"
-    no="89"
     todayCount={tagTotal}
     totalCount={totalEntries}
     tagline={masTagline}
@@ -115,7 +113,7 @@ const jsonld = buildWebPageLD(pageTitle, pageDescription);
     ))}
   </main>
 
-  <Footer vol="I" no="89" />
+  <Footer />
 </BaseLayout>
 
 <style>

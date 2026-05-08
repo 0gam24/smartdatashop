@@ -1,4 +1,6 @@
 ---
+import { mastheadIssueNumber } from '../lib/korean';
+
 interface Props {
   vol?: string;
   no?: string;
@@ -12,9 +14,12 @@ interface Props {
   lastPublishedAt?: string;
 }
 
+// 기본값은 KST 오늘 기준 자동 계산 — 창간일 (2026-01-01) 부터 일수 + 1.
+// 매시간 scout cron 빌드로 자연 갱신. props 명시 시 그 값 우선.
+const _auto = mastheadIssueNumber();
 const {
-  vol = 'I',
-  no = '89',
+  vol = _auto.vol,
+  no = _auto.no,
   todayCount = 0,
   totalCount = 0,
   tagline = '한국의 데이터를 매일 5분으로 — 1차 출처 데이터 저널',
