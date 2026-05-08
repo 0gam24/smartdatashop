@@ -26,6 +26,11 @@ export interface TopicConfig {
   match: TopicMatch;
   /** 페이지 lead 단락 — 1~2 문단 */
   lead?: string;
+  /**
+   * data/economy/ecos-timeseries.json 의 series.id 와 매칭 — 토픽 페이지 상단에
+   * 시계열 차트 자동 임베드. 미지정 시 차트 없음 (기존 토픽 구조 유지).
+   */
+  ecosSeriesId?: 'base-rate' | 'usd-krw' | 'cpi';
 }
 
 export const TOPICS: TopicConfig[] = [
@@ -69,6 +74,48 @@ export const TOPICS: TopicConfig[] = [
       insightCategory: ['ai-tech', 'policy'],
       titleIncludes: /AI|인공지능|NIPA|바우처|디지털/i,
     },
+  },
+  {
+    slug: 'base-rate',
+    title: '한국은행 기준금리',
+    description:
+      '한국은행 기준금리 추이 (월별 36개월) + 관련 펄스·인사이트. 통화정책 1차 출처 ECOS.',
+    eyebrow: '주 제 · 기 준 금 리',
+    lead: '한국은행 ECOS 1차 자료를 매일 자동 갱신한 기준금리 시계열. 동결·인상·인하 결정 시점과 시장 반응을 함께 추적. 1인사업자·신혼부부 대출 의사결정 보조.',
+    match: {
+      pulseCategory: ['market', 'tax-finance'],
+      insightCategory: ['market', 'tax-finance'],
+      titleIncludes: /기준금리|한국은행 금리|BOK\s*rate|통화정책/i,
+    },
+    ecosSeriesId: 'base-rate',
+  },
+  {
+    slug: 'usd-krw',
+    title: '원/달러 환율',
+    description:
+      '원/달러 환율 추이 (일별 180일) + 관련 펄스·인사이트. 한국은행 매매기준율 1차 출처.',
+    eyebrow: '주 제 · 원 / 달 러 환 율',
+    lead: '한국은행 매매기준율 일별 시계열을 매일 자동 갱신. FOMC·BOK 결정·중동 정세 등 외부 충격 시점과 환율 반응을 함께 추적. 해외 ETF·여행·수입 의사결정 보조.',
+    match: {
+      pulseCategory: ['market'],
+      insightCategory: ['market'],
+      titleIncludes: /환율|원달러|원\/달러|USD\/KRW|FOMC/i,
+    },
+    ecosSeriesId: 'usd-krw',
+  },
+  {
+    slug: 'cpi',
+    title: '소비자물가지수 (CPI)',
+    description:
+      '소비자물가지수 (CPI 총지수, 2020=100) 월별 36개월 추이 + 관련 펄스·인사이트. 한국은행 ECOS.',
+    eyebrow: '주 제 · 소 비 자 물 가',
+    lead: 'CPI (소비자물가지수) 총지수 월별 시계열. 인플레이션 추세와 가계 실질소득 변화 추적. 가이드북 1권 종합소득세 의사결정 + 신혼부부 가계 계획 + 1인사업자 비용 관리 보조.',
+    match: {
+      pulseCategory: ['stats', 'tax-finance'],
+      insightCategory: ['stats', 'tax-finance'],
+      titleIncludes: /물가|CPI|소비자물가|인플레/i,
+    },
+    ecosSeriesId: 'cpi',
   },
 ];
 
