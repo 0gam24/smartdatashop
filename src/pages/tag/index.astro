@@ -81,7 +81,7 @@ const jsonld = buildWebPageLD(pageTitle, pageDescription);
     tagline={masTagline}
   />
 
-  <main>
+  <main id="main" role="main">
     <h1 class="visually-hidden">태그 — 페르소나·데이터 유형·액션 분류</h1>
     {GROUPS.map((group, idx) => (
       <section class="section" data-screen-label={`태그 — ${group}`}>

@@ -13,8 +13,8 @@
   --color-paper-deep: #ede8d8;
 
   --color-ink: #1a1a1a;        /* contrast vs paper ≈ 16.8 : 1  (AAA) */
-  --color-ink-secondary: #6b6b6b; /* contrast vs paper ≈ 5.4 : 1  (AA) */
-  --color-ink-tertiary: #707070;  /* contrast vs paper ≈ 5.0 : 1  (AA) — Lighthouse 색상대비 픽스 */
+  --color-ink-secondary: #595959; /* contrast vs paper ≈ 7.0 : 1  (AAA, 모든 크기 텍스트 안전) */
+  --color-ink-tertiary: #5d5d5d;  /* contrast vs paper ≈ 6.7 : 1  (AAA, 작은 메타 텍스트 안전) */
   --color-ink-quat: #cccccc;       /* hairline 용 — 텍스트 미사용 */
 
   --color-accent: #8b1538;
@@ -105,6 +105,19 @@ nav a:hover, footer a:hover {
   text-decoration: underline;
   text-decoration-thickness: 0.5px;
   text-underline-offset: 2px;
+}
+
+/* link-in-text-block 안전망 (Lighthouse axe 4.10):
+   본문 단락(<p>) 내부 링크는 항상 밑줄 유지 — .no-underline 영향 받지 않음.
+   카드 wrapper (PulseCard 등) 의 .no-underline 은 카드 전체 클릭 영역이라
+   본 룰에 영향 안 받음 (단락 내부에 링크가 들어있지 않음). */
+p a, .article-body a, .topic-lead a, .ts-foot a, .ec-foot a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}
+p a:hover, .article-body a:hover {
+  text-decoration-thickness: 1px;
 }
 
 hr { border: 0; border-top: 0.5px solid var(--color-ink-quat); margin: 2rem 0; }
