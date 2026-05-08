@@ -1,0 +1,432 @@
+---
+/**
+ * /data/timeseries/ — 한국 거시 시계열 차트 모음
+ *
+ * 데이터: data/economy/ecos-timeseries.json (scripts/fetch-ecos-timeseries.mjs)
+ * 출처: 한국은행 ECOS StatisticSearch (실측 + 가공 0)
+ * 시각화: Chart.js (CDN, ChartLib 컴포넌트로 1회 로드)
+ *
+ * 사용처: 펄스 본문 차트 / 토픽 hub / 가이드북 챕터 — 본 페이지 데이터 재사용.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ChartLib from '../../components/ChartLib.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Point = { time: string | null; value: number | null; raw: string };
+type ChangeRow = { abs: number; pct: number } | null;
+type Series = {
+  id: string;
+  label: string;
+  short: string;
+  category: string;
+  statCode: string;
+  itemCode: string;
+  cycle: 'M' | 'D' | 'Q' | 'Y';
+  unit: string;
+  status: 'ok' | 'fail';
+  pointCount: number;
+  meta: { statName: string | null; itemName: string | null; unitName: string | null } | null;
+  latest: Point | null;
+  change: ChangeRow;
+  yoyChange: ChangeRow;
+  points: Point[];
+  error?: string;
+};
+
+type Payload = {
+  fetchedAt: string;
+  status: 'ok' | 'warn' | 'fail';
+  source: string;
+  sourceUrl: string;
+  publisher: string;
+  seriesCount: number;
+  seriesSuccess: number;
+  series: Series[];
+};
+
+let payload: Payload | null = null;
+const dataPath = resolve(process.cwd(), 'data/economy/ecos-timeseries.json');
+if (existsSync(dataPath)) {
+  try {
+    payload = JSON.parse(readFileSync(dataPath, 'utf8')) as Payload;
+  } catch (err) {
+    console.warn('[/data/timeseries] data parse fail:', (err as Error).message);
+    payload = null;
+  }
+}
+
+const pageTitle = '한국 거시 시계열 — 스마트데이터샵';
+const pageDescription =
+  '한국은행 ECOS 1차 자료 시계열 차트 — 기준금리 / 원-달러 환율 / 소비자물가지수 추이. 매일 자동 갱신, 운영자 가공 0.';
+const pageUrl = '/data/timeseries/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: '거시 시계열', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+
+function fmtKST(iso: string | null): string {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const Y = kst.getUTCFullYear();
+  const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(kst.getUTCDate()).padStart(2, '0');
+  const h = String(kst.getUTCHours()).padStart(2, '0');
+  const m = String(kst.getUTCMinutes()).padStart(2, '0');
+  return `${Y}-${M}-${D} ${h}:${m} KST`;
+}
+
+function fmtTime(t: string | null, cycle: string): string {
+  if (!t) return '—';
+  if (cycle === 'D' && t.length === 8) return `${t.slice(4, 6)}.${t.slice(6, 8)}`;
+  if (cycle === 'M' && t.length === 6) return `${t.slice(0, 4)}.${t.slice(4, 6)}`;
+  return t;
+}
+
+function fmtNum(n: number | null | undefined, decimals = 2): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  return n.toLocaleString('ko-KR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function fmtPct(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  const sign = n > 0 ? '+' : '';
+  return `${sign}${n.toFixed(2)}%`;
+}
+
+const seriesOk = payload?.series.filter((s) => s.status === 'ok') ?? [];
+
+// 차트용 데이터 직렬화 (script 내 inline)
+const chartData = seriesOk.map((s) => ({
+  id: s.id,
+  label: s.short,
+  cycle: s.cycle,
+  unit: s.meta?.unitName ?? s.unit,
+  labels: s.points.map((p) => fmtTime(p.time, s.cycle)),
+  values: s.points.map((p) => p.value),
+}));
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+  <ChartLib />
+
+  <main id="main" role="main" class="ts-wrap">
+    <header class="ts-header">
+      <div class="ts-eyebrow">한 국 · 거 시 · 시 계 열</div>
+      <h1 class="ts-title">한국 거시 시계열</h1>
+      <p class="ts-desc">
+        한국은행 ECOS 1차 자료를 매일 자동 fetch 한 시계열 차트. 운영자는 데이터를 가공하지 않고
+        실측값 그대로 시각화한다. 본 페이지의 데이터는 펄스 본문 차트 / 토픽 hub / 가이드북 챕터에서
+        재사용된다.
+      </p>
+      {payload && (
+        <p class="ts-meta">
+          마지막 갱신 {fmtKST(payload.fetchedAt)} · 출처{' '}
+          <a href={payload.sourceUrl} target="_blank" rel="noopener noreferrer">한국은행 ECOS</a> ·
+          {' '}활성 시계열 {payload.seriesSuccess}/{payload.seriesCount}
+        </p>
+      )}
+    </header>
+
+    {!payload && (
+      <section class="ts-empty">
+        <p>데이터가 아직 수집되지 않았습니다. 운영자 명령:</p>
+        <pre><code>npm run fetch:ecos:timeseries</code></pre>
+      </section>
+    )}
+
+    {payload && seriesOk.map((s) => (
+      <section class="ts-card" id={`ts-${s.id}`}>
+        <div class="ts-card-head">
+          <div>
+            <h2 class="ts-card-title">{s.label}</h2>
+            <p class="ts-card-meta">
+              {s.meta?.statName ?? '—'} · 통계코드 {s.statCode} · 항목 {s.itemCode} ·
+              {' '}주기 {s.cycle === 'M' ? '월' : s.cycle === 'D' ? '일' : s.cycle === 'Q' ? '분기' : '연'}
+            </p>
+          </div>
+          <div class="ts-stats">
+            <div class="ts-stat">
+              <div class="ts-stat-label">최신</div>
+              <div class="ts-stat-value">
+                {fmtNum(s.latest?.value, 2)}<span class="ts-stat-unit">{s.meta?.unitName ?? s.unit}</span>
+              </div>
+              <div class="ts-stat-meta">{fmtTime(s.latest?.time ?? null, s.cycle)}</div>
+            </div>
+            {s.change && (
+              <div class="ts-stat">
+                <div class="ts-stat-label">{s.cycle === 'D' ? '전일대비' : '전월대비'}</div>
+                <div class={`ts-stat-value ts-delta-${s.change.abs > 0 ? 'up' : s.change.abs < 0 ? 'down' : 'flat'}`}>
+                  {s.change.abs > 0 ? '▲' : s.change.abs < 0 ? '▼' : '·'}
+                  {' '}{fmtNum(Math.abs(s.change.abs), 2)}
+                </div>
+                <div class="ts-stat-meta">{fmtPct(s.change.pct)}</div>
+              </div>
+            )}
+            {s.yoyChange && (
+              <div class="ts-stat">
+                <div class="ts-stat-label">전년동기대비</div>
+                <div class={`ts-stat-value ts-delta-${s.yoyChange.abs > 0 ? 'up' : s.yoyChange.abs < 0 ? 'down' : 'flat'}`}>
+                  {fmtPct(s.yoyChange.pct)}
+                </div>
+                <div class="ts-stat-meta">{fmtNum(s.yoyChange.abs, 2)}</div>
+              </div>
+            )}
+            <div class="ts-stat">
+              <div class="ts-stat-label">데이터 점</div>
+              <div class="ts-stat-value">{s.pointCount}</div>
+              <div class="ts-stat-meta">{s.cycle === 'D' ? '일' : s.cycle === 'M' ? '월' : '기간'}</div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-chart-wrap">
+          <canvas id={`ts-canvas-${s.id}`} aria-label={`${s.label} 추이 차트`} role="img"></canvas>
+        </div>
+      </section>
+    ))}
+
+    {payload && payload.series.filter((s) => s.status === 'fail').map((s) => (
+      <section class="ts-card ts-fail">
+        <h2 class="ts-card-title">{s.label}</h2>
+        <p class="ts-fail-msg">수집 실패: {s.error}</p>
+      </section>
+    ))}
+
+    <p class="ts-foot">
+      모든 수치는 한국은행 ECOS 1차 자료 실측값이며, 운영자의 가공·해설은 추가하지 않는다. 본 페이지의
+      시계열은 매일 자동 갱신되며, 본 사이트의 펄스·인사이트·가이드북에서 재사용된다. 정정 정책{' '}
+      <a href="/corrections/">/corrections/</a>, 편집 방법론{' '}
+      <a href="/methodology/">/methodology/</a> 참조.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline define:vars={{ chartData }}>
+  // Chart.js 가 ChartLib 의 defer 로드라 폴링하여 초기화
+  function ready() {
+    return typeof window !== 'undefined' && typeof window.Chart !== 'undefined';
+  }
+  function init() {
+    const ACCENT = '#8b1538';
+    const INK = '#1a1a1a';
+    const INK_MUTE = '#707070';
+    const PAPER_SOFT = '#f4f0e6';
+
+    Chart.defaults.font.family = "'Pretendard Variable','Pretendard',system-ui,sans-serif";
+    Chart.defaults.color = INK_MUTE;
+    Chart.defaults.borderColor = '#cccccc';
+
+    for (const s of chartData) {
+      const canvas = document.getElementById(`ts-canvas-${s.id}`);
+      if (!canvas) continue;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) continue;
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: s.labels,
+          datasets: [
+            {
+              label: s.label,
+              data: s.values,
+              borderColor: ACCENT,
+              backgroundColor: 'rgba(139, 21, 56, 0.08)',
+              borderWidth: 1.5,
+              pointRadius: 0,
+              pointHoverRadius: 4,
+              fill: true,
+              tension: 0.18,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              titleFont: { size: 11 },
+              bodyFont: { size: 12 },
+              padding: 8,
+              callbacks: {
+                title: function (items) { return items[0].label; },
+                label: function (item) {
+                  return s.label + ': ' + Number(item.parsed.y).toLocaleString('ko-KR') + ' ' + s.unit;
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 10 }, maxTicksLimit: 8 },
+            },
+            y: {
+              grid: { color: '#eaeaea', lineWidth: 0.5 },
+              ticks: { font: { size: 10 } },
+            },
+          },
+        },
+      });
+    }
+  }
+
+  if (ready()) {
+    init();
+  } else {
+    let attempts = 0;
+    const t = setInterval(() => {
+      if (ready() || attempts++ > 60) {
+        clearInterval(t);
+        if (ready()) init();
+      }
+    }, 100);
+  }
+</script>
+
+<style>
+  .ts-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .ts-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .ts-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .ts-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) { .ts-title { font-size: 26px; } }
+  .ts-desc { font-size: 15px; line-height: 1.7; color: var(--color-ink-secondary); margin: 0 0 12px; }
+  .ts-meta { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-tertiary); margin: 0; }
+  .ts-meta a { color: var(--color-link); }
+
+  .ts-empty { padding: 24px 28px; border: 0.5px dashed var(--color-ink-quat); }
+  .ts-empty pre {
+    margin: 12px 0 0;
+    background: var(--color-paper-soft);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .ts-card {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 22px 24px;
+    margin-bottom: 32px;
+  }
+  .ts-card-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .ts-card-head { grid-template-columns: 1fr; }
+  }
+  .ts-card-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .ts-card-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .ts-stats {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  @media (max-width: 720px) {
+    .ts-stats { justify-content: flex-start; }
+  }
+  .ts-stat { min-width: 80px; }
+  .ts-stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .ts-stat-value {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+  .ts-stat-unit {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin-left: 3px;
+    font-weight: 400;
+  }
+  .ts-stat-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    margin-top: 2px;
+  }
+  .ts-delta-up { color: #a83a3a; }
+  .ts-delta-down { color: #2a7a3a; }
+  .ts-delta-flat { color: var(--color-ink-tertiary); }
+  .ts-chart-wrap { height: 260px; position: relative; }
+  @media (max-width: 640px) { .ts-chart-wrap { height: 220px; } }
+
+  .ts-fail .ts-card-title { color: #a83a3a; }
+  .ts-fail-msg { font-size: 13px; color: var(--color-ink-secondary); margin: 0; }
+
+  .ts-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .ts-foot a { color: var(--color-link); }
+</style>
