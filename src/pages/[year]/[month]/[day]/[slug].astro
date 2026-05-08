@@ -4,7 +4,7 @@ import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
 import Tldr from '../../../../components/Tldr.astro';
 import RelatedList from '../../../../components/RelatedList.astro';
 import ToollGate from '../../../../components/ToollGate.astro';
-import { estimateReadingTime, pulseUrl, pulseDateParts } from '../../../../lib/korean';
+import { estimateReadingTime, pulseUrl, pulseDateParts, categoryToKorean } from '../../../../lib/korean';
 import { buildNewsArticleLD, buildDatasetLDFromArticle } from '../../../../lib/jsonld';
 import { resolveToollGate } from '../../../../data/toll-gate-matrix';
 import { SISTER_SITES } from '../../../../data/sister-sites';
@@ -61,12 +61,23 @@ const ogImage = data.coverImage
     : `https://smartdatashop.kr${data.coverImage}`
   : `https://smartdatashop.kr/og/v2/pulse/${entry.slug}.png`;
 
-// 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그를 합쳐 노출.
-const keywords = [
-  ...data.tags.personas,
-  ...data.tags.dataTypes,
-  ...data.tags.actions,
-];
+// 페이지 keywords meta — Naver C-Rank/D.I.A. 신호로 페르소나·데이터유형·액션 태그 +
+// 1차 출처 기관명 + 카테고리 라벨을 합쳐 노출 (07 §3 D.I.A. 핵심·보조 키워드 시그널 / 06 §5.3).
+const sourceNames = (data.sources ?? [])
+  .map((s) => s.name)
+  .filter((n): n is string => typeof n === 'string' && n.length > 0)
+  .slice(0, 5);
+const keywords = Array.from(
+  new Set([
+    categoryToKorean(data.category),
+    ...data.tags.personas,
+    ...data.tags.dataTypes,
+    ...data.tags.actions,
+    ...sourceNames,
+    '1차 출처',
+    '데이터 저널',
+  ]),
+).filter(Boolean);
 
 // 관련 글 — 같은 카테고리 다른 펄스 최근 3건
 const allEntries = await getCollection('pulse');
