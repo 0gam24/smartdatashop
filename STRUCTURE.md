@@ -176,6 +176,7 @@
 | `publisher.yml` | push main `src/content/{pulse,insight}/**` + manual | 에이전트 #6 Publisher — IndexNow / Google Indexing API / Naver SA / Stibee 발행 (M0: IndexNow stub 활성 토글) |
 | `fact-check.yml` | cron `0 17 * * *` (02:00 KST) + manual | 에이전트 #6 Fact-Checker (Layer 4) — 14일 윈도우 글 fuzzy match 감사 → fact-check-queue/ (fact-checker-bot) |
 | `network.yml` | cron `0 14 * * *` (23:00 KST) + manual | 에이전트 #7 Network Orchestrator — 자매 사이트 동기화 + 일일 리포트 (Slack/이메일) |
+| `sync-sisters.yml` | cron `0 17 * * *` (02:00 KST) + manual | 자매 4 `network-mirror.json` fetch → `sister-mirrors/{자매}/posts.json` + `data/network-index.json` 통합 (github-actions[bot]) |
 | `lighthouse.yml` | PR main + push main + manual | Lighthouse CI desktop+mobile 4 URL 검증 (perf≥85m/90d, a11y/BP/SEO≥95) + PR 코멘트 |
 
 ## 11. scripts
@@ -199,6 +200,7 @@
 - `auto-cover.mjs` — prebuild. `public/uploads/covers/<slug>.{webp,jpg,png}` → frontmatter `coverImage` 자동 주입
 - `operator-inbox.mjs` — postbuild. 운영자 펜딩 액션 자동 집계 → 루트 `OPERATOR_INBOX.md` (gitignored)
 - `weekly-report.mjs` — 주간 운영자 헬스 리포트 (`npm run weekly`)
+- `sync-sister-mirrors.mjs` — `npm run sync:sisters`. 자매 4 (`calculatorhost / iknowhowinfo / awoo / moneylook`) 의 `network-mirror.json` 동시 fetch (native, 외부 의존 0) → `sister-mirrors/{자매}/posts.json` + `data/network-index.json` (메인 "더 깊이 →" 박스 데이터 기반). cron 02:00 KST 매일 (`sync-sisters.yml`)
 - `_gen-icons.mjs` — 아이콘 생성 (1회성)
 - `ralph/scope-guard.mjs` — Ralph 회차 commit 전 금지 경로 터치 검사
 - `ralph/PROMPT.md` + `ralph/RALPH_LOG.md` — Ralph 회차 누적 로그
@@ -214,6 +216,7 @@
 - `npm run verify:claims` — 본문 수치 ↔ footnote 페어링
 - `npm run weekly` — 주간 운영자 리포트
 - `npm run auto-cover` — 표지 이미지 자동 매핑
+- `npm run sync:sisters` — 자매 4 `network-mirror.json` fetch + 통합 `data/network-index.json` 생성 (cron 또는 수동)
 
 ## 13. 환경변수 의존 (PUBLIC_* — 키 이름만)
 - `PUBLIC_NAVER_SITE_VERIFICATION` — 네이버 서치어드바이저 토큰 (BaseLayout meta)
@@ -286,3 +289,11 @@ GitHub Actions secrets/vars (코드 내 참조 — 키만):
   - §1.5 신설 (네트워크 헌법 link 4종 + 위계 명시)
   - 5 사이트 한 덩어리 운영의 메인 사이트 측 헌법 박힘 시점
   - CLAUDE.md 가 본 4 문서를 anchor 로 따름 (§네트워크 헌법 신설)
+- 2026-05-08 — feat(network): sister-mirrors sync 메커니즘 박힘
+  - `.github/workflows/sync-sisters.yml` 신설 (cron 02:00 KST 매일 + workflow_dispatch)
+  - `scripts/sync-sister-mirrors.mjs` 신설 (자매 4 fetch + 통합, native fetch 외부 의존 0)
+  - `sister-mirrors/{자매}/posts.json` 자동 생성 (calc / iknowhowinfo / awoo / moneylook)
+  - `data/network-index.json` 통합 인덱스 (sisters meta + aggregatePosts)
+  - `package.json` `sync:sisters` 스크립트 등록 (수동 실행: `npm run sync:sisters`)
+  - 첫 sync 결과: 3/4 성공 (calc HTTP 404 — mirror.json 미발행), aggregate 248
+  - 다음 단계 (B): 메인 "더 깊이 →" 박스가 본 데이터 활용

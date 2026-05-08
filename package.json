@@ -17,7 +17,8 @@
     "weekly": "node scripts/weekly-report.mjs",
     "auto-cover": "node scripts/auto-cover.mjs",
     "prebuild": "node scripts/auto-cover.mjs",
-    "smoke": "node scripts/smoke-test.mjs"
+    "smoke": "node scripts/smoke-test.mjs",
+    "sync:sisters": "node scripts/sync-sister-mirrors.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
