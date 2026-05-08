@@ -40,10 +40,23 @@ jobs:
           NODE_ENV: production
         run: |
           if [ -z "$ECOS_API_KEY" ]; then
-            echo "::warning::ECOS_API_KEY secret 미설정 — 본 단계 스킵 (RSS 는 계속)"
+            echo "::warning::ECOS_API_KEY secret 미설정 — 본 단계 스킵"
             exit 0
           fi
           node scripts/fetch-ecos-key100.mjs
+        continue-on-error: true
+
+      - name: Fetch KOSIS 100대 지표 (지표정보 조회)
+        id: fetch-kosis-indicator
+        env:
+          KOSIS_INDICATOR_KEY: ${{ secrets.KOSIS_INDICATOR_KEY }}
+          NODE_ENV: production
+        run: |
+          if [ -z "$KOSIS_INDICATOR_KEY" ]; then
+            echo "::warning::KOSIS_INDICATOR_KEY secret 미설정 — 본 단계 스킵"
+            exit 0
+          fi
+          node scripts/fetch-kosis-indicator.mjs
         continue-on-error: true
 
       - name: Fetch 정부 RSS 14피드 (66 sources)
@@ -62,8 +75,9 @@ jobs:
             echo "No data changes — skip commit"
           else
             ECOS_STATUS="${{ steps.fetch-ecos.outcome }}"
+            KOSIS_I_STATUS="${{ steps.fetch-kosis-indicator.outcome }}"
             RSS_STATUS="${{ steps.fetch-rss.outcome }}"
-            git commit -m "chore(data): 자동 갱신 $(date -u +%Y-%m-%dT%H:%M:%SZ) [ecos=$ECOS_STATUS rss=$RSS_STATUS] [skip ci]"
+            git commit -m "chore(data): 자동 갱신 $(date -u +%Y-%m-%dT%H:%M:%SZ) [ecos=$ECOS_STATUS kosis=$KOSIS_I_STATUS rss=$RSS_STATUS] [skip ci]"
             git push
             echo "Committed + pushed."
           fi
@@ -71,9 +85,10 @@ jobs:
       - name: Report aggregate status
         if: always()
         run: |
-          echo "ECOS fetch: ${{ steps.fetch-ecos.outcome }}"
-          echo "RSS fetch:  ${{ steps.fetch-rss.outcome }}"
-          if [ "${{ steps.fetch-ecos.outcome }}" = "failure" ] && [ "${{ steps.fetch-rss.outcome }}" = "failure" ]; then
-            echo "::error::Both fetch steps failed — investigate"
+          echo "ECOS fetch:           ${{ steps.fetch-ecos.outcome }}"
+          echo "KOSIS indicator fetch:${{ steps.fetch-kosis-indicator.outcome }}"
+          echo "RSS fetch:            ${{ steps.fetch-rss.outcome }}"
+          if [ "${{ steps.fetch-ecos.outcome }}" = "failure" ] && [ "${{ steps.fetch-rss.outcome }}" = "failure" ] && [ "${{ steps.fetch-kosis-indicator.outcome }}" = "failure" ]; then
+            echo "::error::All 3 fetch steps failed — investigate"
             exit 1
           fi

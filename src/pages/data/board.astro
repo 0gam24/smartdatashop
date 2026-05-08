@@ -58,6 +58,33 @@ if (existsSync(ecosPath)) {
 }
 
 // ───────────────────────────────────────────────────────────────────
+// (1b) KOSIS indicator json 로드
+// ───────────────────────────────────────────────────────────────────
+
+const kosisIndicatorPath = resolve(process.cwd(), 'data/economy/kosis-indicator.json');
+let kosisIndicatorRow: SourceRow | null = null;
+if (existsSync(kosisIndicatorPath)) {
+  try {
+    const j = JSON.parse(readFileSync(kosisIndicatorPath, 'utf8'));
+    const st: Status = j.status === 'ok' ? 'ok' : j.status === 'fail' ? 'fail' : 'pending';
+    kosisIndicatorRow = {
+      id: 'kosis-indicator',
+      name: '통계청 KOSIS 지표정보',
+      kind: 'API',
+      category: '통계',
+      tier: 1,
+      status: st,
+      fetchedAt: j.fetchedAt ?? null,
+      elapsedMs: typeof j.elapsedMs === 'number' ? j.elapsedMs : null,
+      itemCount: j.totalCount ?? 0,
+      detailUrl: '/data/kosis-100/',
+      sourceUrl: j.sourceUrl ?? 'https://apis.data.go.kr/1240000/IndicatorListService',
+      note: j.note,
+    };
+  } catch {}
+}
+
+// ───────────────────────────────────────────────────────────────────
 // (2) RSS government json 로드
 // ───────────────────────────────────────────────────────────────────
 
@@ -94,20 +121,6 @@ if (existsSync(rssPath)) {
 
 const PENDING_SOURCES: SourceRow[] = [
   {
-    id: 'kosis-indicator',
-    name: '통계청 KOSIS 지표정보',
-    kind: 'API',
-    category: '통계',
-    tier: 1,
-    status: 'pending',
-    fetchedAt: null,
-    elapsedMs: null,
-    itemCount: 0,
-    detailUrl: null,
-    sourceUrl: 'https://www.data.go.kr',
-    note: '활용신청 → 승인 1~2 영업일 대기',
-  },
-  {
     id: 'kosis-timeseries',
     name: '통계청 KOSIS 통계자료',
     kind: 'API',
@@ -119,7 +132,7 @@ const PENDING_SOURCES: SourceRow[] = [
     itemCount: 0,
     detailUrl: null,
     sourceUrl: 'https://www.data.go.kr',
-    note: '활용신청 → 승인 1~2 영업일 대기',
+    note: '키 등록 완료 — 시계열 fetch 스크립트 작성 예정 (P1)',
   },
   {
     id: 'krx-api',
@@ -157,6 +170,7 @@ const PENDING_SOURCES: SourceRow[] = [
 
 const allRows: SourceRow[] = [
   ...(ecosRow ? [ecosRow] : []),
+  ...(kosisIndicatorRow ? [kosisIndicatorRow] : []),
   ...rssRows,
   ...PENDING_SOURCES,
 ];
@@ -319,17 +333,20 @@ const quotas: QuotaRow[] = [
   },
   {
     name: 'KOSIS 지표정보 API',
-    usage: 0,
-    total: null,
-    status: 'pending',
-    note: 'data.go.kr 활용신청 승인 대기 (1~2 영업일)',
+    usage: kosisIndicatorRow?.status === 'ok' ? 1 : 0,
+    total: 10000,
+    status: kosisIndicatorRow?.status === 'ok' ? 'ok' : 'pending',
+    note:
+      kosisIndicatorRow?.status === 'ok'
+        ? '일일 한도 10,000회 / 매일 1회 fetch'
+        : (kosisIndicatorRow?.note ?? '활용신청 승인 후 propagation 대기 (보통 1~24시간)'),
   },
   {
     name: 'KOSIS 통계자료 API',
     usage: 0,
     total: null,
     status: 'pending',
-    note: 'data.go.kr 활용신청 승인 대기 (1~2 영업일)',
+    note: '키 등록 완료 — 시계열 fetch 스크립트 P1 단계 작성 예정',
   },
   {
     name: '정부 RSS 14피드',

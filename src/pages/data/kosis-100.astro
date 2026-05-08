@@ -1,0 +1,296 @@
+---
+/**
+ * /data/kosis-100/ — 통계청 KOSIS 지표정보 (100대 지표 + 부문 주요지표)
+ *
+ * 데이터: data/economy/kosis-indicator.json (scripts/fetch-kosis-indicator.mjs)
+ * 빌드 시 fs 로 읽어 표/카드 렌더. status='pending' 시 안내 패널.
+ *
+ * ECOS 100대 지표 (한국은행) 와 나란히 — 출처 다양화로 신뢰 자산 ↑.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Item = {
+  raw?: unknown;
+  indicatorId: string | null;
+  indicatorName: string | null;
+  classification: string | null;
+  dataValue: string | null;
+  unitName: string | null;
+  cycle: string | null;
+  time: string | null;
+};
+
+type Payload = {
+  fetchedAt: string;
+  status: 'ok' | 'pending' | 'fail';
+  kind: 'API';
+  source: string;
+  sourceUrl: string;
+  publisher: string;
+  totalCount: number;
+  note?: string;
+  items: Item[];
+};
+
+let payload: Payload | null = null;
+const dataPath = resolve(process.cwd(), 'data/economy/kosis-indicator.json');
+if (existsSync(dataPath)) {
+  try {
+    payload = JSON.parse(readFileSync(dataPath, 'utf8')) as Payload;
+  } catch (err) {
+    console.warn('[/data/kosis-100] data parse fail:', (err as Error).message);
+    payload = null;
+  }
+}
+
+const pageTitle = '통계청 KOSIS 100대 지표 — 스마트데이터샵';
+const pageDescription =
+  '통계청·국가데이터처가 운영하는 KOSIS 의 지표정보 조회 서비스 1차 자료. ' +
+  '한국은행 ECOS 와 나란히 — 매일 자동 갱신, 운영자 가공 0.';
+const pageUrl = '/data/kosis-100/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: 'KOSIS 100대 지표', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+
+function fmtKST(iso: string | null): string {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const Y = kst.getUTCFullYear();
+  const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(kst.getUTCDate()).padStart(2, '0');
+  const h = String(kst.getUTCHours()).padStart(2, '0');
+  const m = String(kst.getUTCMinutes()).padStart(2, '0');
+  return `${Y}-${M}-${D} ${h}:${m} KST`;
+}
+
+const grouped: Array<[string, Item[]]> = payload && payload.status === 'ok'
+  ? Object.entries(
+      payload.items.reduce<Record<string, Item[]>>((acc, it) => {
+        const key = it.classification || '기타';
+        (acc[key] ||= []).push(it);
+        return acc;
+      }, {})
+    )
+  : [];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="econ-wrap">
+    <header class="econ-header">
+      <div class="econ-eyebrow">통 계 청 · K O S I S · 1 0 0</div>
+      <h1 class="econ-title">통계청 KOSIS 100대 지표</h1>
+      <p class="econ-desc">
+        통계청·국가데이터처가 운영하는 KOSIS 지표정보 조회 서비스 1차 자료. 한국은행 ECOS 와
+        나란히 출처를 다양화하여 신뢰 자산을 강화한다. 운영자 가공 0.
+      </p>
+      {payload?.status === 'ok' && (
+        <p class="econ-meta">
+          마지막 갱신 {fmtKST(payload.fetchedAt)} · 출처{' '}
+          <a href={payload.sourceUrl} target="_blank" rel="noopener noreferrer">data.go.kr KOSIS</a>
+          {' '}· 전체 {payload.totalCount}건
+        </p>
+      )}
+      {payload?.status !== 'ok' && (
+        <p class="econ-meta econ-meta-pending">
+          상태: <strong>대기중</strong> · API 첫 수집 후 자동 표시
+        </p>
+      )}
+    </header>
+
+    {(!payload || payload.status === 'pending') && (
+      <section class="econ-empty">
+        <h2 class="empty-title">데이터 첫 수집 대기 중</h2>
+        <p>
+          {payload?.note ??
+            'data/economy/kosis-indicator.json 데이터 부재. fetch 스크립트가 아직 실행되지 않았습니다.'}
+        </p>
+        <p class="empty-detail">
+          data.go.kr 활용신청 승인 직후의 키 propagation 지연이 흔합니다 (1~24시간). 자동 cron 이
+          매일 00:30 KST 시도하므로, 활성화되는 즉시 본 페이지에 데이터가 표시됩니다.
+        </p>
+        <p class="empty-detail">
+          운영자가 즉시 재시도하려면:
+        </p>
+        <pre><code>npm run fetch:kosis:indicator</code></pre>
+        <p class="empty-detail">
+          또는 GitHub Actions 탭 → fetch-data → "Run workflow" 수동 trigger.
+        </p>
+      </section>
+    )}
+
+    {payload?.status === 'fail' && (
+      <section class="econ-empty">
+        <h2 class="empty-title">수집 실패</h2>
+        <p>{payload.note ?? '알 수 없는 오류'}</p>
+      </section>
+    )}
+
+    {payload?.status === 'ok' && grouped.map(([category, rows]) => (
+      <section class="econ-group">
+        <h2 class="econ-group-title">{category}</h2>
+        <table class="econ-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-name">지표</th>
+              <th scope="col" class="col-value">값</th>
+              <th scope="col" class="col-unit">단위</th>
+              <th scope="col" class="col-time">시점</th>
+              <th scope="col" class="col-cycle">주기</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((it) => (
+              <tr>
+                <td class="col-name">{it.indicatorName ?? '—'}</td>
+                <td class="col-value">{it.dataValue ?? '—'}</td>
+                <td class="col-unit">{it.unitName ?? '—'}</td>
+                <td class="col-time">{it.time ?? '—'}</td>
+                <td class="col-cycle">{it.cycle ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+
+    <p class="econ-foot">
+      모든 수치는 통계청·국가데이터처 KOSIS 1차 자료를 자동 표시한 것이며, 운영자의 가공·해설은
+      추가하지 않는다. 정정 정책 <a href="/corrections/">/corrections/</a>, 편집 방법론{' '}
+      <a href="/methodology/">/methodology/</a> 참조.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .econ-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .econ-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .econ-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .econ-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .econ-title { font-size: 26px; }
+  }
+  .econ-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
+  }
+  .econ-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+  }
+  .econ-meta-pending strong { color: #8a6d1a; }
+  .econ-meta a { color: var(--color-link); }
+
+  .econ-empty {
+    padding: 28px 32px;
+    border: 0.5px dashed var(--color-ink-quat);
+    background: var(--color-paper-soft);
+  }
+  .empty-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 12px;
+    color: var(--color-ink);
+  }
+  .econ-empty p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 8px;
+  }
+  .empty-detail { font-size: 13px; color: var(--color-ink-tertiary); }
+  .econ-empty pre {
+    margin: 8px 0;
+    background: var(--color-paper);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .econ-group { margin-bottom: 36px; }
+  .econ-group-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .econ-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .econ-table th,
+  .econ-table td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    vertical-align: top;
+  }
+  .econ-table th {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+  .col-value, .col-unit, .col-time, .col-cycle { font-family: var(--font-mono); }
+  .col-value { font-weight: 500; text-align: right; white-space: nowrap; }
+  .col-unit, .col-time, .col-cycle { color: var(--color-ink-secondary); white-space: nowrap; }
+  @media (max-width: 720px) {
+    .econ-table th, .econ-table td { padding: 8px 4px; font-size: 12px; }
+    .col-cycle { display: none; }
+  }
+  .econ-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .econ-foot a { color: var(--color-link); }
+</style>
