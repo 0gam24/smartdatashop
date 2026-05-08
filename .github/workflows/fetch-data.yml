@@ -86,11 +86,18 @@ jobs:
         run: node scripts/fetch-news-keywords.mjs
         continue-on-error: true
 
+      - name: Generate 펄스 초안 (RSS 1차 출처 기반 / 운영자 검수용)
+        id: draft-pulse
+        env:
+          NODE_ENV: production
+        run: node scripts/draft-pulse-from-rss.mjs
+        continue-on-error: true
+
       - name: Commit + push if data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/economy/ data/rss/ data/news/ 2>/dev/null || true
+          git add data/economy/ data/rss/ data/news/ daily-queue/drafts/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data changes — skip commit"
           else
