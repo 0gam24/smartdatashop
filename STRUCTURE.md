@@ -131,6 +131,9 @@
 - `NewsletterCTA` — Stibee 뉴스레터 구독 폼 (`PUBLIC_STIBEE_LIST_ID` 미설정 시 fallback)
 - `ComingSoon` — 빈 페이지 안내
 
+#### 7.1.1 network (`src/components/network/`)
+- `SisterDeepDive` — "더 깊 이 →" 박스. 메인 카테고리 → 자매 매칭 자동 link (CATEGORY_MAP §2 + §6 한도). props: `mainCategory / persona? / maxLinks=3 / variant=inline|category-page|sidebar`. ArticleLayout / InsightLayout / 카테고리 페이지에 자동 박힘. 매칭 자매 0건 시 박스 미렌더 (정직 신호)
+
 ### 7.2 viz (data visualization)
 - `DataNumber` — Reuters/FT 식 거대 tabular 숫자. props: `n / unit? / delta? / deltaDirection? / label? / size?`
 - `KpiTile` — Bloomberg Terminal 식 KPI 박스. props: `title / n / unit? / change? / source? / sourceHref?`
@@ -164,6 +167,7 @@
 - `og/fonts.ts` — OG 폰트 버퍼 로더 (`OG_FONTS`)
 - `og/templates/default.ts` — 기사용 OG 템플릿 (Reuters/Bloomberg 스타일 1200×630, 차트 오버레이)
 - `og/templates/section.ts` — home/category/tag/author 비-기사 페이지 OG 템플릿 (1200×630)
+- `network/sister-matching.ts` — 메인 카테고리 → 자매 매칭 (CATEGORY_MAP §2 점수 표 박힘 + 임계 8 강력 매칭). `data/network-index.json` import. `findMatchingSisters / getLastSyncedAt` export
 
 ## 10. GitHub Actions
 
@@ -296,4 +300,10 @@ GitHub Actions secrets/vars (코드 내 참조 — 키만):
   - `data/network-index.json` 통합 인덱스 (sisters meta + aggregatePosts)
   - `package.json` `sync:sisters` 스크립트 등록 (수동 실행: `npm run sync:sisters`)
   - 첫 sync 결과: 3/4 성공 (calc HTTP 404 — mirror.json 미발행), aggregate 248
-  - 다음 단계 (B): 메인 "더 깊이 →" 박스가 본 데이터 활용
+  - 첫 production sync (workflow_dispatch): 4/4 성공 / aggregate 323 (calc 합류)
+- 2026-05-08 — feat(network): 메인 → 자매 "더 깊 이 →" 박스 (Phase B)
+  - `src/lib/network/sister-matching.ts` 신설 — CATEGORY_MAP §2 점수 표 박힘 + 자매별 mirror schema 분기 (calc 'category' / ikhi 'category' / awoo 'persona' 배열 / moneylook 'mainCategory') + 임계 8 강력 매칭만 표시 (CATEGORY_MAP §4 + §6 한도 3)
+  - `src/components/network/SisterDeepDive.astro` 신설 — DESIGN.md v1.0 hairline 패턴 + 디자인 토큰만 (var(--color-*) / var(--font-*) / var(--width-*)) + scoped style + 카테고리 컬러 코딩 X
+  - `ArticleLayout` + `InsightLayout` + `category/[slug]/index.astro` 에 자동 박힘 (메인 펄스 6 + 인사이트 1 + 카테고리 4 = 11 페이지)
+  - 매칭 결과 (카테고리별): policy → awoo+moneylook / tax-finance → calc+moneylook+awoo / market → ikhi+calc / stats → calc / ai-tech → 0건 (fallback 박스 미렌더)
+  - 5 사이트 한 덩어리 양방향 funnel 완성 (자매 → 메인 backref + 메인 → 자매 deep-dive)

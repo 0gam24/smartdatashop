@@ -1,0 +1,200 @@
+---
+/**
+ * SisterDeepDive — 메인 카테고리별 자매 사이트 추천 박스 ("더 깊이 →").
+ *
+ * data/network-index.json (cron 02:00 KST 갱신) 의 자매별 posts 에서
+ * docs/CATEGORY_MAP.md §2 매핑을 따라 자매 link 자동 추출.
+ *
+ * 위계:
+ *   - CATEGORY_MAP §4: 매칭 점수 ≥ 6 만 표시
+ *   - CATEGORY_MAP §6: 메인 펄스 1편당 최대 분배 자매 = 3
+ *   - 자매당 표시 글 = 2 (cannibalization 방지 + UI 압박 회피)
+ *
+ * 디자인:
+ *   - DESIGN.md v1.0 — hairline 0.5px / 박스/그림자 없음 / 카테고리 컬러 코딩 X
+ *   - 디자인 토큰만 사용 (var(--color-*), var(--font-*), var(--width-*))
+ *   - font-weight max 500
+ *
+ * fallback:
+ *   - 매칭 자매 0건 → 박스 자체 미렌더 (정직 신호 — 빈 박스 회피)
+ */
+import { findMatchingSisters, type MainCategory } from '../../lib/network/sister-matching';
+
+interface Props {
+  mainCategory: MainCategory;
+  /** 페르소나 hint — 자매 persona 일치 시 매칭 점수 +1 (선택) */
+  persona?: string;
+  /** 최대 표시 자매 수 (CATEGORY_MAP §6 한도 = 3) */
+  maxLinks?: number;
+  /** 변형 — 본문 inline / 카테고리 페이지 / 사이드바 */
+  variant?: 'inline' | 'category-page' | 'sidebar';
+}
+
+const {
+  mainCategory,
+  persona,
+  maxLinks = 3,
+  variant = 'inline',
+} = Astro.props;
+
+const matches = findMatchingSisters(mainCategory, {
+  persona,
+  maxResults: maxLinks,
+});
+
+const hasMatches = matches.length > 0;
+---
+
+{hasMatches && (
+  <aside
+    class:list={['deep-dive', `variant-${variant}`]}
+    aria-label="자매 사이트 — 더 깊이"
+  >
+    <div class="label">더 깊 이 →</div>
+    <ul class="match-list">
+      {matches.map((match) => (
+        <li class="match-item">
+          <div class="sister-name">
+            <span class="sister-domain">{match.sisterDomain.replace(/^https?:\/\//, '')}</span>
+            <span class="sister-title">{match.sisterName}</span>
+          </div>
+          <ul class="post-list">
+            {match.matchedPosts.map((post) => (
+              <li class="post-item">
+                <a
+                  href={post.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="post-link no-underline"
+                >
+                  {post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+    <p class="footnote">
+      smartdata network 의 자매 사이트에서 더 깊은 분석·도구·가이드를 찾아보세요.
+    </p>
+  </aside>
+)}
+
+<style>
+  .deep-dive {
+    border-top: 0.5px solid var(--color-ink-quat);
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding: 28px 0;
+  }
+  .deep-dive.variant-inline {
+    max-width: var(--width-prose);
+    margin: 48px auto 0;
+    padding-left: var(--width-gutter);
+    padding-right: var(--width-gutter);
+  }
+  .deep-dive.variant-category-page {
+    max-width: var(--width-page);
+    margin: 64px auto 0;
+    padding-left: var(--width-gutter);
+    padding-right: var(--width-gutter);
+  }
+  .deep-dive.variant-sidebar {
+    margin: 0;
+    padding: 20px 16px;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .match-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+  }
+
+  .match-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    align-items: baseline;
+  }
+
+  .sister-name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sister-domain {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+  }
+  .sister-title {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--color-ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .post-item {
+    line-height: 1.5;
+  }
+  .post-link {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--color-ink);
+    line-height: 1.4;
+  }
+  .post-link:hover {
+    color: var(--color-accent);
+  }
+  /* 외부 링크 시각 단서 — 카테고리 컬러 코딩이 아니라 "외부" 활자 마커 */
+  .post-link::after {
+    content: ' ↗';
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin-left: 2px;
+  }
+
+  .footnote {
+    margin: 20px 0 0;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .match-item {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .sister-name {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .sister-domain {
+      flex-shrink: 0;
+    }
+  }
+</style>
