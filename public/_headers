@@ -1,0 +1,68 @@
+# Cloudflare Pages 캐시 정책
+#
+# Lighthouse `uses-long-cache-ttl` / `cache-insight` 워닝 해결.
+# 자산 종류별 TTL — 해시 처리된 자산은 1년, 콘텐츠 자산은 짧게.
+#
+# 형식: 경로 (좌측 정렬) → 들여쓴 헤더 라인. 섹션은 빈 줄로 구분.
+# 도큐먼트: https://developers.cloudflare.com/pages/configuration/headers/
+
+# ──────────────────────────────────────────
+# Astro 빌드 자산 — 해시 처리되어 immutable
+# ──────────────────────────────────────────
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ──────────────────────────────────────────
+# OG 이미지 (Satori 동적 생성)
+# 슬러그별 고정이므로 1일 TTL 적정 (수정 시 재빌드로 갱신)
+# ──────────────────────────────────────────
+/og/*
+  Cache-Control: public, max-age=86400
+
+# ──────────────────────────────────────────
+# Favicon / 아이콘 / PWA manifest
+# ──────────────────────────────────────────
+/favicon.svg
+  Cache-Control: public, max-age=2592000
+/icon-192.png
+  Cache-Control: public, max-age=2592000
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000
+/og-default.png
+  Cache-Control: public, max-age=2592000
+/manifest.webmanifest
+  Cache-Control: public, max-age=86400
+
+# ──────────────────────────────────────────
+# Feed / Sitemap — 매일 cron 갱신 가능하므로 1시간
+# ──────────────────────────────────────────
+/feed.xml
+  Cache-Control: public, max-age=3600
+/feed.json
+  Cache-Control: public, max-age=3600
+/sitemap-index.xml
+  Cache-Control: public, max-age=3600
+/sitemap-0.xml
+  Cache-Control: public, max-age=3600
+/news-sitemap.xml
+  Cache-Control: public, max-age=3600
+/image-sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# ──────────────────────────────────────────
+# 데이터셋 다운로드 (CC BY-NC 4.0)
+# ──────────────────────────────────────────
+/data/citations.json
+  Cache-Control: public, max-age=3600
+/data/citations.csv
+  Cache-Control: public, max-age=3600
+
+# ──────────────────────────────────────────
+# 보안 헤더 — 모든 페이지 공통
+# ──────────────────────────────────────────
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
