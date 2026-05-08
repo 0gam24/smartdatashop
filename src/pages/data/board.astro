@@ -526,7 +526,7 @@ const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
     <section class="src-section">
       <div class="src-section-head">
         <h2 class="src-section-title">데이터 소스 상태</h2>
-        <span class="src-section-meta">매일 cron 자동 수집 (P1 적용 예정 — 현재 수동)</span>
+        <span class="src-section-meta">매일 00:30 KST cron 자동 수집 (활성)</span>
       </div>
 
       <div class="table-wrap">
@@ -624,7 +624,7 @@ const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
     <section class="card">
       <div class="card-head">
         <h2 class="card-title">최근 알림 이벤트</h2>
-        <span class="card-meta">cron 자동화 도입 후 실 이벤트 기록 (현재 = 마지막 fetch 합성)</span>
+        <span class="card-meta">cron 활성 (매일 00:30 KST) — 실 이벤트 기록 (P2 알림 시스템 도입 시 누적)</span>
       </div>
       <ul class="events">
         {events.map((e) => (
@@ -643,7 +643,7 @@ const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
       <div class="card">
         <div class="card-head">
           <h2 class="card-title">API 한도 사용률</h2>
-          <span class="card-meta">P1 cron 도입 후 누적 측정</span>
+          <span class="card-meta">cron 활성 — 매일 1회 호출 누적</span>
         </div>
         <ul class="quota-bars">
           {quotas.map((q) => {
@@ -694,8 +694,8 @@ const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
       모든 수치는 fetch 스크립트가 직접 측정한 값이며 가공되지 않는다. 준비중 / 예시 표시 항목은
       해당 단계 도입 후 실데이터로 전환된다. 출처 정책은{' '}
       <a href="/methodology/">/methodology/</a>, 정정 정책은{' '}
-      <a href="/corrections/">/corrections/</a> 참조. 자동 갱신 cron 도입 후 "24h 수집" 은 실제
-      24시간 누적 수치로 전환된다 (현재는 마지막 fetch 의 항목 수).
+      <a href="/corrections/">/corrections/</a> 참조. cron 활성 (매일 00:30 KST) — "24h 수집"
+      은 마지막 fetch 의 항목 수 기준 (cron 1회 = 24h 1 사이클).
     </p>
   </main>
 
