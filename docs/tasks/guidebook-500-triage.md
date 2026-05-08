@@ -95,8 +95,12 @@ Uploading... (208/208)
 ## 현재 진행 상태 (2026-05-08 기준)
 
 - ✅ 빌드 로그 확보 + 원인 확정 (위 §원인 — CF Pages incremental cache stale)
-- ⏳ **옵션 1 (Retry deployment) 운영자 직접 진행 중** — CF Pages dashboard 에서 retry 버튼 클릭
-- 본 세션 옵션 3 (cache-bust 코드 PR) **보류** — 옵션 1 결과 확인 후 fallback
+- ❌ **옵션 1 (Retry deployment) 실패** — 운영자 retry 후에도 동일 500
+  - `/guidebook/` → 500 (운영자 스크린샷 확보)
+  - `/guidebook/jongseong-2026/` → 500 (운영자 스크린샷 확보)
+  - retry 후에도 동일 → CF Pages 가 retry 시에도 동일 incremental cache 재사용 추정
+- ⏳ **옵션 2 (Purge build cache) 운영자 직접 진행 중** — CF Pages dashboard 에서 cache 무효화 시도
+- 🔧 **옵션 3 (BaseLayout cache-bust 코드 PR) 사전 작성 + push 완료, 머지 대기** — 옵션 2 실패 시 즉시 머지
 
 ## 결과 확인 URL (옵션 1 재배포 후 운영자 시각 검증)
 
