@@ -1,20 +1,53 @@
 # 스마트데이터샵 대시보드
 
-> 마지막 갱신: 2026-05-06
+> 마지막 갱신: 2026-05-09
 > 출처 패턴: book 19307 P5 (1 page 메타). 30초 스캔으로 작업 재개 가능해야 함.
 
 ---
 
 ## 현재 상태
 
-- **Phase**: 프로덕션 라이브 / **검수 게이트 → 자동 안전장치 전환 완료** (ADR 0005)
-- **전략 피벗**: Google News (Publisher Center 신청 모델) → **Google Discover** (자동 적격, 별도 신청 없음)
-- **마지막 큰 변경 (2026-05-06)**:
-  - Phase 0: placeholder 자동 noindex / Hero 하드코딩 통계 제거 / Footer href="#" 정리
-  - Phase 1: `previewMode`/`verifiedBy` 스키마+8 .mdx 정리, 3개 컴포넌트(ArticlePreviewWarning/PreviewBanner/VerifiedBadge) 삭제, desk-review 워크플로우+스크립트 삭제, TrustBar 도입, Satori OG v2 라우트 (`/og/v2/{pulse|insight}/<slug>.png`) 도입
-  - Phase 2: Dataset/ClaimReview/HowTo/Book LD 빌더 추가, 자동 Dataset LD (sources url 1개 이상 시), InsightLayout JSON-LD 누락 픽스 (G10), Person/Org `sameAs` 환경변수 기반 (`PUBLIC_AUTHOR_SAMEAS` / `PUBLIC_ORG_SAMEAS`)
-  - Phase 3: home/category/author 동적 OG 카드 (G17), PulseCard `<img>` 옵셔널, 저자 페이지 강화
-- **다음 할 일 ★**: GSC URL 제거 요청 (placeholder 7개) → `PUBLIC_AUTHOR_SAMEAS`/`PUBLIC_ORG_SAMEAS` Cloudflare 환경변수 채우기 → 정책 9페이지 본문 작성
+- **Phase**: **자동화 정체성 100% 도달** (2026-05-08~09 30 PR 머지) — 데이터 fetch / 시각화 / 콘텐츠 차트 / SSOT 완성
+- **자동 운영 사이클**: 매일 00:30 KST cron → ECOS + KOSIS + 정부 RSS 14 + 뉴스 RSS 7 → JSON 자동 commit → CF Pages 자동 빌드 → 22+ 페이지 갱신
+- **Masthead VOL/NO 자동 계산** (PR #30) — 창간일 기준 일수 +1, 매일 자정 KST 자연 갱신
+
+### 2026-05-08~09 누적 변경 (30 PR)
+
+**자동화 인프라 (PR #11~16)**:
+- ECOS Open API 통합 (`/data/100-key/`, `/data/kosis-100/`)
+- CLAUDE.md "푸쉬" 단축어 룰 (push + PR + merge 자동화)
+- 정부 RSS 14피드 (66 출처) 통합 (`/data/notice/`)
+- 운영 보드 (`/data/board/` — 8 섹션 실측 KPI + 정직 표기)
+- GitHub Actions cron 자동화 (`fetch-data.yml` 매일 00:30 KST)
+- KOSIS API 통합 (propagation 대기 중 — graceful 처리)
+
+**시각화 인프라 (PR #17~19)**:
+- ECOS 시계열 5종 (`기준금리·환율·CPI·KOSPI·가계부채`)
+- 토픽 hub 7개 (`/topic/{base-rate,usd-krw,cpi,kospi,household-debt,jongseong,etf,ai-support}/`)
+- `<EconomyChart>` 재사용 컴포넌트 (Chart.js + ChartLib)
+
+**품질·콘텐츠·SEO (PR #20~30)**:
+- Lighthouse a11y v1+v2 fix (skip-link / color-contrast / link-in-text-block)
+- 가이드북 1권 7 챕터 차트 임베드 (ch1, 4, 6, 8, 10, 11, 12)
+- 가이드북 2권 ch1 + 인사이트 + 펄스 4건 차트
+- 뉴스 키워드 트렌드 (`/data/trends/` — 7 언론사 다중 소스)
+- stopwords 30+ 보강 (정규식 노이즈 제거)
+- Masthead VOL/NO 자동 계산
+
+### 데이터 흐름 (SSOT 검증)
+
+```
+data/economy/ecos-timeseries.json (1 파일, 매일 cron)
+  → /data/timeseries/ + /topic/{5}/ + 홈 hero
+  → 가이드북 1권 7챕터 + 가이드북 2권 ch1 + 인사이트 1 + 펄스 4
+  = 22+ 페이지
+```
+
+- **다음 할 일 ★**:
+  - KOSIS API propagation 비정상 (24h+) → data.go.kr 1566-0025 헬프데스크 escalation
+  - KOSIS 통계자료 (#3) 표 코드 → kosis.kr OpenAPI URL 추출 (운영자 외부)
+  - Lighthouse 성능 부채 (total-byte-weight / forced-reflow / unused-js — 이미지·폰트 최적화)
+  - 신규 펄스 발행 (운영자 콘텐츠 결정)
 
 ---
 
@@ -28,26 +61,43 @@
 
 ## 운영 메트릭 (수동 갱신)
 
-- 발행된 펄스: **6편** (placeholder 검출로 자동 noindex)
-- 발행된 인사이트: **1편** (placeholder 검출로 자동 noindex)
-- 발행된 가이드북: **0권**
-- Google Discover: **자동 적격** (Search Console 첫 노출 후 24~48h 내 Discover 보고서 활성)
-- Google News: **후순위** (Discover 안정 후 검토)
-- Cloudflare Analytics: 토큰 미발급 (`PUBLIC_CF_ANALYTICS_TOKEN` 빈 값)
+- 발행된 펄스: **6편** (4건 차트 임베드)
+- 발행된 인사이트: **1편** (차트 임베드)
+- 발행된 가이드북: **2권** (1권 12챕터 / 7챕터 차트, 2권 1챕터 / 1챕터 차트)
+- 데이터 페이지: **6** (timeseries / 100-key / kosis-100 / notice / board / trends)
+- 토픽 hub: **8** (jongseong, etf, ai-support, base-rate, usd-krw, cpi, kospi, household-debt)
+- 자동 cron 출처: **4** (ECOS + KOSIS + 정부 RSS 14피드 + 뉴스 RSS 7)
+- Sitemap 색인: **70 URL**
+- Google Discover: **자동 적격**
+- Cloudflare Analytics: 토큰 미발급
 
 ---
 
-## 운영자 액션 대기 항목
+## 운영자 액션 대기 항목 (2026-05-09 갱신)
 
-- [ ] **24h 내**: GSC + Bing Webmaster Tools 에서 placeholder URL 7개 제거 요청 (Risk 에이전트 권고)
-- [ ] **즉시**: `PUBLIC_AUTHOR_SAMEAS` 환경변수에 LinkedIn / 네이버 블로그 / X 등 외부 프로필 URL 콤마 구분으로 입력 → Person LD `sameAs` + 저자 페이지 자동 반영
-- [ ] **즉시**: `PUBLIC_ORG_SAMEAS` 환경변수에 사이트 SNS 계정 URL 입력 → Org LD `sameAs` 자동 반영
-- [ ] 1개월 후 (~2026-06-06): 구 OG 라우트 (`/og/{pulse,insight}/[slug].png.ts`) 삭제 (D9=N 합의)
-- [ ] 정책 9페이지 본문 작성 (TODO 마킹됨)
-- [ ] 7개 글 placeholder 점진 정리 — 본문을 1차 출처 기반 explanatory framing 으로 재작성 시 자동 색인 복귀
-- [ ] Stibee API 키 (`PUBLIC_STIBEE_LIST_ID`)
-- [ ] Cloudflare Analytics 토큰 (`PUBLIC_CF_ANALYTICS_TOKEN`)
-- [ ] error-log.md 누적 모니터링 (같은 에러 두 번째 = Hook으로 영구 차단 검토)
+**즉시 가능**:
+- [ ] data.go.kr 1566-0025 헬프데스크 — KOSIS API propagation 비정상 (24h+) escalation
+- [ ] kosis.kr 에서 원하는 통계의 OpenAPI URL 추출 (CPI / 실업률 / GDP 등) → KOSIS 통계자료 (#3) 통합 활성화
+
+**환경변수**:
+- [ ] `PUBLIC_AUTHOR_SAMEAS` / `PUBLIC_ORG_SAMEAS` (Cloudflare Pages env)
+- [ ] `PUBLIC_STIBEE_LIST_ID` (뉴스레터)
+- [ ] `PUBLIC_CF_ANALYTICS_TOKEN` (분석)
+
+**콘텐츠**:
+- [ ] 신규 펄스 발행 (매일 1차 출처 데이터 저널 정체성)
+- [ ] 가이드북 1권 ch2/3/5/7/9 거시 차트 임베드 검토 (현재 부적합 판단 — 절차 중심 챕터)
+- [ ] 정책 9페이지 본문 보강
+
+**P2 인프라 (선택)**:
+- [ ] 한국어 NLP 도입 (KoNLPy/Mecab) — 트렌드 키워드 정확도 ↑
+- [ ] Supabase Postgres 도입 — 시간 윈도우 필터
+- [ ] Lighthouse 성능 부채 (이미지 / 폰트 / DOM)
+
+**자동 처리 (운영자 무관)**:
+- ✓ 매일 00:30 KST cron → 데이터 4 출처 자동 갱신
+- ✓ 매시간 scout cron → Header 날짜 자동 갱신
+- ✓ Masthead VOL/NO → 매일 자정 +1 자동 갱신
 
 ---
 
