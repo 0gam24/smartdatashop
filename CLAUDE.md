@@ -148,7 +148,17 @@
 
 ## 권한
 - Git 커밋: 명시 사용자 요청 시만
-- Push to main: 명시 사용자 요청 시만
+- **"푸쉬" / "push" 단축어 (1인 운영자 룰, 2026-05-08 추인)** — 운영자가 "푸쉬" / "push" 라고 말하면 다음 단계 모두 자동 실행:
+  1. 변경분 commit (아직 안 됐다면)
+  2. 현재 브랜치를 origin 으로 push (필요 시 `-u` 로 upstream 설정)
+  3. `gh pr create` 로 PR 생성 (base 기본 = `main`, 명시적 stack 시 parent 브랜치)
+  4. `gh pr merge --merge --delete-branch` 로 머지 + 브랜치 삭제
+  5. 결과 (PR 번호 / merge SHA / 자동 trigger 된 Cloudflare Pages 배포 안내) 운영자에게 보고
+- "푸쉬" 단축어 예외:
+  - CI required checks fail → 머지 보류 후 운영자에게 fail 사유 + 다음 액션 제안
+  - PR 본문은 변경 요약 자동 생성 (운영자가 별도 paste 한 본문 있으면 그것 우선)
+  - "PR만" / "push만" / "merge만" 부분 명령은 그 단계만 실행
+- main 직접 push (브랜치 거치지 않고): 명시 요청 시만 (위험)
 - 새 GitHub repo / Cloudflare project 생성: 사용자에 의뢰
 - npm install: 사용자 승인 후
 
