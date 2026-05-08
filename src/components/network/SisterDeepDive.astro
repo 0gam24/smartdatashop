@@ -82,34 +82,33 @@ const hasMatches = matches.length > 0;
 )}
 
 <style>
+  /* 시각 컨테이너 — 자매 → 메인 backref 박스와 디자인 일관성:
+     좌측 4px accent line + paper-soft 배경 (메인 디자인 룰: shadow X / radius X). */
   .deep-dive {
-    border-top: 0.5px solid var(--color-ink-quat);
-    border-bottom: 0.5px solid var(--color-ink-quat);
-    padding: 28px 0;
+    border-left: 4px solid var(--color-accent);
+    background: var(--color-paper-soft);
+    padding: 24px 28px;
   }
   .deep-dive.variant-inline {
     max-width: var(--width-prose);
     margin: 48px auto 0;
-    padding-left: var(--width-gutter);
-    padding-right: var(--width-gutter);
   }
   .deep-dive.variant-category-page {
     max-width: var(--width-page);
     margin: 64px auto 0;
-    padding-left: var(--width-gutter);
-    padding-right: var(--width-gutter);
   }
   .deep-dive.variant-sidebar {
     margin: 0;
-    padding: 20px 16px;
+    padding: 20px 18px;
   }
 
   .label {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.14em;
-    color: var(--color-ink-tertiary);
+    color: var(--color-accent);
     text-transform: uppercase;
+    font-weight: 500;
     margin-bottom: 20px;
   }
 
@@ -135,9 +134,10 @@ const hasMatches = matches.length > 0;
   }
   .sister-domain {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--color-accent);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    font-weight: 500;
   }
   .sister-title {
     font-family: var(--font-serif);
