@@ -109,20 +109,20 @@ function matchMoneylook(post: AggregatePost, mainCat: MainCategory): boolean {
   return post.mainCategory === mainCat;
 }
 
-/** awoo — 모든 posts 가 정책/지원금 콘텐츠. tax-finance 는 self-employed 페르소나만 */
+/** awoo — 모든 posts 가 정책/지원금 콘텐츠. 메인 카테고리별 좁힘:
+ *   - policy: 모든 글 매칭 (지원금/정책 = policy 정합)
+ *   - tax-finance: self-employed persona + 카테고리 '자산' (재정 관련) only.
+ *     '창업/주거/복지/교육' 매칭 시 "조기재취업수당" 류 취업/구직 글이 tax-finance
+ *     박스에 들어가는 부적절 매칭이 됨 (운영자 보고 사례, 2026-05-08).
+ *   - ai-tech: 의미 있는 매칭 부족 — false (CATEGORY_MAP §2.5 6점 자체가 임계 미달)
+ */
 function matchAwoo(post: AggregatePost, mainCat: MainCategory): boolean {
   if (mainCat === 'policy') return true;          // §2.1 awoo gov-support 페르소나별 (10)
   if (mainCat === 'tax-finance') {
     const personas = Array.isArray(post.persona)
       ? post.persona
       : post.persona ? [post.persona] : [];
-    return personas.includes('self-employed');    // §2.2 awoo self-employed (7)
-  }
-  if (mainCat === 'ai-tech') {
-    const personas = Array.isArray(post.persona)
-      ? post.persona
-      : post.persona ? [post.persona] : [];
-    return personas.includes('self-employed');    // §2.5 awoo self-employed AI 도구 (6)
+    return personas.includes('self-employed') && post.category === '자산'; // §2.2 awoo (7), 자산만
   }
   return false;
 }
