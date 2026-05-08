@@ -1,0 +1,271 @@
+---
+/**
+ * EconomyChart — ECOS 시계열 차트 재사용 컴포넌트.
+ *
+ * data/economy/ecos-timeseries.json 단일 소스에서 series 를 id 로 추출하여
+ * Chart.js 라인 차트 + 최신값 + 전기/전년 변동 KPI 를 1 카드로 렌더.
+ *
+ * 사용 예 (.mdx 본문 내에서도 사용 가능):
+ *
+ *   <EconomyChart ecosId="cpi" />               기본 (220px 높이, 최근 36개 포인트)
+ *   <EconomyChart ecosId="base-rate" compact /> 컴팩트 (140px 높이, 헤더 미니화)
+ *   <EconomyChart ecosId="usd-krw" height={180} />
+ *
+ * 컴포넌트 내부에 어떤 수치도 하드코딩하지 않음 — 모든 값은 fetch 스크립트가
+ * 측정한 1차 자료 그대로. 데이터 부재 시 빈 placeholder 표시.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import ChartLib from './ChartLib.astro';
+
+interface Props {
+  ecosId: 'base-rate' | 'usd-krw' | 'cpi';
+  /** 컴팩트 모드 — Hero/사이드바용 미니 차트 */
+  compact?: boolean;
+  /** 차트 영역 높이 (px) */
+  height?: number;
+  /** 토픽 페이지 link 노출 여부 (기본 true) */
+  showTopicLink?: boolean;
+}
+
+const { ecosId, compact = false, height: heightProp, showTopicLink = true } = Astro.props;
+const height = heightProp ?? (compact ? 110 : 220);
+
+type EcosPoint = { time: string | null; value: number | null };
+type EcosSeries = {
+  id: string;
+  label: string;
+  short: string;
+  cycle: 'M' | 'D' | 'Q' | 'Y';
+  unit: string;
+  status: 'ok' | 'fail';
+  pointCount: number;
+  meta: { statName: string | null; itemName: string | null; unitName: string | null } | null;
+  latest: EcosPoint | null;
+  change: { abs: number; pct: number } | null;
+  yoyChange: { abs: number; pct: number } | null;
+  points: EcosPoint[];
+};
+
+let series: EcosSeries | null = null;
+let fetchedAt: string | null = null;
+const tsPath = resolve(process.cwd(), 'data/economy/ecos-timeseries.json');
+if (existsSync(tsPath)) {
+  try {
+    const j = JSON.parse(readFileSync(tsPath, 'utf8'));
+    fetchedAt = j.fetchedAt ?? null;
+    const found = (j.series ?? []).find((s: any) => s.id === ecosId);
+    if (found && found.status === 'ok') series = found as EcosSeries;
+  } catch {}
+}
+
+function fmtTimeShort(t: string | null, cycle: string): string {
+  if (!t) return '—';
+  if (cycle === 'D' && t.length === 8) return `${t.slice(4, 6)}.${t.slice(6, 8)}`;
+  if (cycle === 'M' && t.length === 6) return `${t.slice(0, 4)}.${t.slice(4, 6)}`;
+  return t;
+}
+function fmtNum(n: number | null | undefined, decimals = 2): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  return n.toLocaleString('ko-KR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+function fmtPct(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  const sign = n > 0 ? '+' : '';
+  return `${sign}${n.toFixed(2)}%`;
+}
+
+// 다중 인스턴스 안전 — 페이지에 같은 ecosId 가 여러 번 있어도 충돌 0
+const canvasId = `econ-chart-${ecosId}-${Math.random().toString(36).slice(2, 8)}`;
+
+const chartPayload = series
+  ? {
+      canvasId,
+      label: series.short,
+      cycle: series.cycle,
+      unit: series.meta?.unitName ?? series.unit,
+      labels: series.points.map((p) => fmtTimeShort(p.time, series.cycle)),
+      values: series.points.map((p) => p.value),
+    }
+  : null;
+---
+
+<ChartLib />
+
+{!series && (
+  <aside class={`ec-empty ${compact ? 'compact' : ''}`}>
+    <p class="ec-empty-msg">{ecosId} 시계열 데이터 수집 대기 중</p>
+  </aside>
+)}
+
+{series && (
+  <aside class={`ec-card ${compact ? 'compact' : ''}`}>
+    <header class="ec-head">
+      <div class="ec-label">
+        {compact ? series.short : series.label}
+      </div>
+      <div class="ec-latest">
+        <span class="ec-value">{fmtNum(series.latest?.value ?? null, 2)}</span>
+        <span class="ec-unit">{series.meta?.unitName ?? series.unit}</span>
+      </div>
+      {series.change && (
+        <div class={`ec-delta ec-delta-${series.change.abs > 0 ? 'up' : series.change.abs < 0 ? 'down' : 'flat'}`}>
+          {series.change.abs > 0 ? '▲' : series.change.abs < 0 ? '▼' : '·'}{' '}{fmtPct(series.change.pct)}
+        </div>
+      )}
+    </header>
+    <div class="ec-canvas-wrap" style={`height:${height}px`}>
+      <canvas id={canvasId} role="img" aria-label={`${series.label} 추이 차트`}></canvas>
+    </div>
+    {!compact && (
+      <footer class="ec-foot">
+        <span>출처 한국은행 ECOS · 매일 자동 갱신</span>
+        {showTopicLink && (
+          <a href={`/topic/${series.id}/`}>관련 펄스·인사이트 →</a>
+        )}
+      </footer>
+    )}
+  </aside>
+)}
+
+{chartPayload && (
+  <script is:inline define:vars={{ chartPayload, isCompact: compact }}>
+    function ready() { return typeof window !== 'undefined' && typeof window.Chart !== 'undefined'; }
+    function init() {
+      const canvas = document.getElementById(chartPayload.canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      Chart.defaults.font.family = "'Pretendard Variable','Pretendard',system-ui,sans-serif";
+      Chart.defaults.color = '#707070';
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartPayload.labels,
+          datasets: [{
+            label: chartPayload.label,
+            data: chartPayload.values,
+            borderColor: '#8b1538',
+            backgroundColor: 'rgba(139, 21, 56, 0.08)',
+            borderWidth: 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            fill: true,
+            tension: 0.18,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              titleFont: { size: 11 },
+              bodyFont: { size: 12 },
+              padding: 8,
+              callbacks: {
+                label: function (item) {
+                  return chartPayload.label + ': ' + Number(item.parsed.y).toLocaleString('ko-KR') + ' ' + chartPayload.unit;
+                },
+              },
+            },
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { size: isCompact ? 9 : 10 }, maxTicksLimit: isCompact ? 5 : 8 } },
+            y: { grid: { color: '#eaeaea', lineWidth: 0.5 }, ticks: { font: { size: isCompact ? 9 : 10 } } },
+          },
+        },
+      });
+    }
+    if (ready()) init();
+    else {
+      let attempts = 0;
+      const t = setInterval(() => {
+        if (ready() || attempts++ > 60) { clearInterval(t); if (ready()) init(); }
+      }, 100);
+    }
+  </script>
+)}
+
+<style>
+  .ec-card {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 16px 18px;
+    margin: 24px 0;
+    background: var(--color-paper);
+  }
+  .ec-card.compact { padding: 12px 14px; margin: 12px 0; }
+  .ec-empty {
+    border: 0.5px dashed var(--color-ink-quat);
+    padding: 16px 18px;
+    margin: 24px 0;
+  }
+  .ec-empty-msg {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+  }
+  .ec-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .ec-card.compact .ec-head {
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    gap: 8px;
+  }
+  .ec-label {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    flex: 1;
+    line-height: 1.35;
+  }
+  .ec-card.compact .ec-label { font-size: 13px; }
+  .ec-latest {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-ink);
+    line-height: 1;
+  }
+  .ec-card.compact .ec-latest { font-size: 15px; }
+  .ec-unit {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin-left: 3px;
+    font-weight: 400;
+  }
+  .ec-delta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .ec-card.compact .ec-delta { font-size: 11px; }
+  .ec-delta-up { color: #a83a3a; }
+  .ec-delta-down { color: #2a7a3a; }
+  .ec-delta-flat { color: var(--color-ink-tertiary); }
+  .ec-canvas-wrap { position: relative; width: 100%; }
+  .ec-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    margin-top: 8px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+  .ec-foot a { color: var(--color-link); }
+</style>
