@@ -107,17 +107,23 @@ nav a:hover, footer a:hover {
   text-underline-offset: 2px;
 }
 
-/* link-in-text-block 안전망 (Lighthouse axe 4.10):
-   본문 단락(<p>) 내부 링크는 항상 밑줄 유지 — .no-underline 영향 받지 않음.
-   카드 wrapper (PulseCard 등) 의 .no-underline 은 카드 전체 클릭 영역이라
-   본 룰에 영향 안 받음 (단락 내부에 링크가 들어있지 않음). */
-p a, .article-body a, .topic-lead a, .ts-foot a, .ec-foot a {
+/* link-in-text-block 안전망 (Lighthouse axe 4.10) — 보강 v2:
+   text-block 컨테이너 (<p>, <li>, <dd>, <blockquote>, <figcaption>, <td>, <th>) 안의
+   인라인 링크는 항상 밑줄 유지. 카드 wrapper / 토픽 타이틀 링크는 예외.
+   :where() 로 0 specificity 적용 + !important 로 .no-underline 캐스케이드 차단. */
+:where(p, li, dd, blockquote, figcaption, td, th) a:not(.no-underline):not(.card-link):not(.ts-title-link):not(.card-link-title) {
   text-decoration: underline !important;
   text-decoration-thickness: 0.5px;
   text-underline-offset: 2px;
 }
-p a:hover, .article-body a:hover {
+:where(p, li, dd, blockquote, figcaption, td, th) a:not(.no-underline):not(.card-link):not(.ts-title-link):not(.card-link-title):hover {
   text-decoration-thickness: 1px;
+}
+/* 명시적 컨테이너 클래스 안 링크도 동일 처리 */
+.article-body a, .topic-lead a, .ts-foot a, .ec-foot a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
 }
 
 hr { border: 0; border-top: 0.5px solid var(--color-ink-quat); margin: 2rem 0; }
