@@ -82,6 +82,34 @@ export function formatKoreanDateTime(input: Date | string): string {
  * 항상 *최근 1시간 이내* 빌드 시점의 KST 날짜. 자정 직후 ~1시간 전후로만
  * 어제 표시 가능.
  */
+/**
+ * Masthead 호 번호 자동 계산 — KST 기준 사이트 창간일 (2026-01-01) 부터 오늘까지 일수 + 1.
+ *
+ * 사용처: Masthead / Footer 의 `vol` / `no` 자동 갱신 (이전: 'I' / '89' 하드코딩으로 stale).
+ * 매일 자정 KST 에 자연스럽게 +1. 매시간 scout cron 빌드로 즉시 반영.
+ *
+ * @returns { vol: 'I', no: string }  — vol 은 첫 해 'I' 고정, 다음 해 'II' 등 (간단 매핑)
+ */
+export function mastheadIssueNumber(now: Date = new Date()): { vol: string; no: string } {
+  const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
+  const FOUNDING_KST = new Date(Date.UTC(2026, 0, 1, 0, 0, 0)); // 2026-01-01 00:00 KST
+  const kstNow = new Date(now.getTime() + KST_OFFSET_MS);
+  const kstFounding = new Date(FOUNDING_KST.getTime() + KST_OFFSET_MS);
+  // 일자 단위 (날짜만 비교)
+  const dayMs = 24 * 60 * 60 * 1000;
+  const dayDiff = Math.floor(
+    (Date.UTC(kstNow.getUTCFullYear(), kstNow.getUTCMonth(), kstNow.getUTCDate()) -
+      Date.UTC(kstFounding.getUTCFullYear(), kstFounding.getUTCMonth(), kstFounding.getUTCDate())) /
+      dayMs,
+  );
+  const no = String(Math.max(1, dayDiff + 1));
+  // 첫 해는 'I', 다음 해 'II', ... (간단 로마자 매핑)
+  const yearOffset = kstNow.getUTCFullYear() - kstFounding.getUTCFullYear();
+  const VOL_ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  const vol = VOL_ROMAN[yearOffset] ?? `${yearOffset + 1}`;
+  return { vol, no };
+}
+
 export function formatKoreanToday(): string {
   return formatKoreanDate(new Date());
 }

@@ -161,7 +161,7 @@ const sisters = sisterOrder.map((key) => {
 
 <BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
   <Header activeNav="daily" />
-  <Masthead vol="I" no="89" todayCount={todayCount} totalCount={totalCount} lastPublishedAt={latest?.data.publishedAt} />
+  <Masthead todayCount={todayCount} totalCount={totalCount} lastPublishedAt={latest?.data.publishedAt} />
 
   <main id="main" role="main">
   <Hero entry={latest} />
@@ -235,7 +235,7 @@ const sisters = sisterOrder.map((key) => {
   <NewsletterCTA />
   </main>
 
-  <Footer vol="I" no="89" />
+  <Footer />
 </BaseLayout>
 
 <style>
