@@ -77,13 +77,15 @@ import EconomyChart from '../../components/EconomyChart.astro';
 
 ## ETF 의 거시 환경 (시계열 자동 갱신)
 
-ETF 자산군 결정에 영향 주는 거시 환경 — 환율 (해외형 ETF) + 기준금리 (채권형/배당형 ETF). 한국은행 ECOS 1차 자료 매일 자동 갱신.
+ETF 자산군 결정에 영향 주는 거시 환경 — KOSPI (국내 주식형 ETF) + 환율 (해외형 ETF) + 기준금리 (채권형/배당형 ETF). 한국은행 ECOS 1차 자료 매일 자동 갱신.
+
+<EconomyChart ecosId="kospi" />
 
 <EconomyChart ecosId="usd-krw" />
 
 <EconomyChart ecosId="base-rate" />
 
-시계열·관련 글은 [/topic/usd-krw/](/topic/usd-krw/) · [/topic/base-rate/](/topic/base-rate/) 참조.
+시계열·관련 글은 [/topic/kospi/](/topic/kospi/) · [/topic/usd-krw/](/topic/usd-krw/) · [/topic/base-rate/](/topic/base-rate/) 참조.
 
 ## 다음 챕터
 

@@ -63,13 +63,15 @@ import EconomyChart from '../../components/EconomyChart.astro';
 
 ## ETF 시장의 거시 환경
 
-ETF 의 자금흐름은 거시 환경에 영향 받는다. 환율은 해외형 ETF (S&P500·나스닥 등) 자금흐름과 직결되고, 기준금리는 채권형 ETF 와 배당형 ETF 의 상대 매력에 직결된다. 한국은행 ECOS 1차 자료 매일 자동 갱신.
+ETF 의 자금흐름은 거시 환경에 영향 받는다. 환율은 해외형 ETF (S&P500·나스닥 등) 자금흐름과 직결되고, 기준금리는 채권형 ETF 와 배당형 ETF 의 상대 매력에 직결된다. KOSPI 종합지수는 국내 주식형 ETF 의 기준선이다. 한국은행 ECOS 1차 자료 매일 자동 갱신.
+
+<EconomyChart ecosId="kospi" />
 
 <EconomyChart ecosId="usd-krw" />
 
 <EconomyChart ecosId="base-rate" />
 
-시계열·관련 글은 [/topic/usd-krw/](/topic/usd-krw/) · [/topic/base-rate/](/topic/base-rate/) 참조.
+시계열·관련 글은 [/topic/kospi/](/topic/kospi/) · [/topic/usd-krw/](/topic/usd-krw/) · [/topic/base-rate/](/topic/base-rate/) 참조.
 
 [^1]: 한국거래소(KRX) Data Marketplace, ETF 시가총액·종목 수 (2026-04-15 기준)
 [^2]: 키움증권 ETF Issue Brief 2026-04, 2026-04-07 발행
