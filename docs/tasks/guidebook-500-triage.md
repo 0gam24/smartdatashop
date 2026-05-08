@@ -1,34 +1,90 @@
-# guidebook 500 triage — 다음 세션 task
+# static-page 500 triage — 다음 세션 task
 
-> 큐잉 사유: 본 이슈는 PR #5 (Phase B SisterDeepDive) / PR #6 (awoo 매칭 정정) 와 무관.
-> 이전 commit `9f4dfa9` 또는 그 이전에서 시작된 별개 routing/deploy 이슈.
+> 큐잉 사유: 본 이슈는 PR #5~#7 (Phase B SisterDeepDive / awoo 정정 / triage 메모) 와 무관.
+> 이전 commit 어딘가에서 시작된 별개 CF Pages deploy 이슈.
 > 별도 task 로 분리해 본 세션 마무리.
 >
-> 발견 시점: 2026-05-08 (PR #6 머지 직후 운영자 시각 확인 중)
-> 큐잉 commit: `1d8ef21` (PR #6 merge)
+> 발견 시점: 2026-05-08
+>   - 1차: guidebook 500 (PR #6 머지 직후)
+>   - 2차: 정적 페이지 14종 + 동적 일부 500 (PR #7 머지 직후 추가 보고)
+> 큐잉 commit: `cc5b42a` (PR #7 merge)
 
-## 증상
+## 증상 (2026-05-08 14:00 KST 기준 — PR #7 머지 후 전수 health check)
 
-| URL 패턴 | local dist | production |
-|---|---|---|
-| `/guidebook/` (인덱스) | ✅ 24KB HTML | ❌ 500 |
-| `/guidebook/{book-slug}/` (책 detail — etf-map-2026, jongseong-2026) | ✅ 24~32KB | ❌ 500 |
-| `/guidebook/{book-slug}/{number}/` (chapter number) | ✅ 32~34KB | ❌ 500 |
-| `/guidebook/{book-slug}/{chapter-slug}/` (chapter slug — `ch1-shingo-daesang`) | ❌ 빌드 안 됨 | ✅ 200 |
+### 500 페이지 list (총 17개)
 
-production 응답 특징:
+**정적 페이지 14종** (모두 PolicyLayout 또는 BaseLayout 직접 사용):
+- `/about/`, `/contact/`, `/methodology/`, `/corrections/`
+- `/editorial-policy/`, `/ai-policy/`, `/affiliate-disclosure/`, `/privacy/`, `/terms/`
+- `/insight/`, `/tag/`, `/data/`, `/guidebook/` (4종 인덱스)
+- `/authors/junhyuk-kim/`
+
+**동적 일부 3종**:
+- `/topic/jongseong/` (topic 동적 라우트)
+- `/guidebook/jongseong-2026/`, `/guidebook/etf-map-2026/` (책 detail)
+- `/guidebook/{book}/{number}/` (chapter number 라우트)
+
+### 200 페이지 (정상)
+
+- `/` (홈)
+- `/{year}/{month}/{day}/{slug}/` (펄스 6편 — ArticleLayout)
+- `/insight/{slug}/` (인사이트 detail — InsightLayout)
+- `/category/{slug}/` (5 카테고리)
+- `/tag/{group}/{slug}/` (태그 detail)
+- `/guidebook/{book}/{chapter-slug}/` (chapter slug 라우트)
+- 모든 API endpoints (feed.xml/json, sitemap, news-sitemap, image-sitemap, citations.csv)
+
+### Production 응답 특징
+
 - `cf-cache-status: DYNAMIC`
 - response body 0 byte
 - → static asset 매칭 실패 후 Functions fallback fail
 
-## 원인 가설
+### 사실 확인 (2026-05-08)
 
-`getStaticPaths` 가 number 기반으로 변경됐으나, production 은 이전 slug 기반 빌드의 chapter 페이지가 200 서빙 중. 책 detail / 인덱스 / number-chapter 는 일부 페이지 deploy 누락 가능성.
+| 항목 | 결과 |
+|---|---|
+| Local `npm run build` dist | ✅ 모든 파일 정상 생성 (208 files / 6.3MB / about/index.html 25KB) |
+| CF Pages 모든 deploy GitHub check | ✅ success / completed |
+| CF Pages preview alias URL 동일 500 | ✅ — caching 아님, deploy 자체 누락 |
+| dist 안 _worker.js / _routes.json / functions/ | ❌ 없음 — pure static |
+| CF Pages free tier 한도 (20K files / 25MB per file) | ✅ 한참 안 됨 |
+| 본 작업 (PR #2~#7) 정적 페이지 코드 변경 | ❌ 0 변경 |
 
-근거:
-- production chapter URL 패턴 = entry.slug (`ch1-shingo-daesang`)
-- local 의 `src/pages/guidebook/[book]/[chapter].astro` getStaticPaths = `chapter: String(entry.data.chapterNumber)` ("1", "2", ...)
-- 두 패턴이 동일 코드에서 동시 빌드될 수 없음 → 빌드 시점 차이 (production stale 또는 코드 회귀)
+## 원인 (확정 — 2026-05-08 14:30 KST 빌드 로그 분석)
+
+**CF Pages 의 incremental upload cache 가 stale/corrupt** — 새 빌드 시 hash 동일 파일을 "already uploaded" 로 skip 하면서, 이전에 누락 또는 corrupt deploy 된 파일이 영구 stale 상태.
+
+PR #7 (`cc5b42a`) deploy 빌드 로그 (운영자 paste, 2026-05-08T04:32:30Z):
+
+```
+Uploading... (203/208)
+Uploading... (205/208)
+Uploading... (206/208)
+Uploading... (208/208)
+✨ Success! Uploaded 5 files (203 already uploaded) (1.12 sec)
+```
+
+→ 208 파일 중 5개만 fresh upload (PR #7 의 docs/ 추가). 203개 "already uploaded" 로 cache 신뢰. 만약 이전 deploy (PR #5 또는 PR #6 직후) 에서 정적 페이지가 정상 업로드 안 됐고 그 (corrupt) hash 가 cache 에 박힌 상태라면, 이후 모든 deploy 가 그 stale cache 신뢰 → **영구 500**.
+
+빌드 자체는 정상:
+- `[build] 60 page(s) built in 6.71s`
+- 모든 정적 페이지 ✓ (about/contact/insight/guidebook/tag/data/privacy/terms/...)
+- chapter URL 패턴 = number ("1", "2", ..., "12") — 코드 정합
+- chapter slug 라우트 (`ch1-shingo-daesang`) 는 코드에 없는데 production 에 살아있음 = **이전 deploy 의 stale cache**
+
+결론: chapter slug 200 = stale cache 잔존 / 정적 페이지 500 = 같은 cache 가 corrupt.
+
+## 작업 순서 (확정 진단 후 권장 fix)
+
+### Fix 옵션
+
+1. **CF Pages dashboard → "Retry deployment"** (운영자 직접) — 가장 안전. fresh full upload 시도.
+2. **CF Pages dashboard → 프로젝트 설정 → "Purge cache"** (있다면) — Pages cache 강제 무효화.
+3. **모든 정적 페이지의 hash 강제 변경** — BaseLayout 에 build timestamp 또는 1회 cache-bust 토큰 추가 → 모든 .html hash 변경 → CF Pages 강제 재업로드 → cache 정상화.
+   - PR 분리 필수
+   - 다음 PR 에서 cache-bust 토큰 제거 (선택)
+4. **CF Pages 프로젝트 재생성** — 운영자 외부 작업 (삭제 + 재연결) — destructive 마지막 수단.
 
 ## 주의
 
