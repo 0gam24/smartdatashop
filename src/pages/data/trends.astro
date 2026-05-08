@@ -1,0 +1,393 @@
+---
+/**
+ * /data/trends/ — 한국 뉴스 다중 소스 키워드 트렌드
+ *
+ * 데이터: data/news/keywords.json (scripts/fetch-news-keywords.mjs)
+ * 출처: 한국 7 언론사 RSS (SBS·연합·동아·경향·매경·국민·한겨레)
+ * 메서드: 헤드라인에서 한글 키워드 정규식 추출 + 다중 소스 동시 등장 빈도
+ *
+ * 운영자 가공 0 — 정규식 추출 + 빈도 집계만. NLP 도입 시 정확도 ↑ (P2).
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Keyword = {
+  term: string;
+  total: number;
+  sourceCount: number;
+  sources: string[];
+  examples: Array<{ source: string; title: string }>;
+};
+
+type Source = {
+  id: string;
+  name: string;
+  url: string;
+  status: 'ok' | 'fail';
+  itemCount: number;
+  elapsedMs: number;
+};
+
+type Payload = {
+  fetchedAt: string;
+  sourceTotal: number;
+  sourceSuccess: number;
+  sourceFail: number;
+  totalHeadlines: number;
+  uniqueKeywords: number;
+  multiSourceCount: number;
+  sources: Source[];
+  multiSourceKeywords: Keyword[];
+  singleSourceTop: Keyword[];
+};
+
+let payload: Payload | null = null;
+const dataPath = resolve(process.cwd(), 'data/news/keywords.json');
+if (existsSync(dataPath)) {
+  try {
+    payload = JSON.parse(readFileSync(dataPath, 'utf8')) as Payload;
+  } catch (err) {
+    console.warn('[/data/trends] data parse fail:', (err as Error).message);
+    payload = null;
+  }
+}
+
+const pageTitle = '뉴스 키워드 트렌드 — 스마트데이터샵';
+const pageDescription =
+  '한국 주요 7 언론사 RSS 헤드라인에서 다중 소스 동시 등장 키워드를 매일 자동 집계. 운영자 가공 0, 정규식 추출 + 빈도 집계.';
+const pageUrl = '/data/trends/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: '뉴스 키워드 트렌드', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+
+function fmtKST(iso: string | null): string {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const Y = kst.getUTCFullYear();
+  const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(kst.getUTCDate()).padStart(2, '0');
+  const h = String(kst.getUTCHours()).padStart(2, '0');
+  const m = String(kst.getUTCMinutes()).padStart(2, '0');
+  return `${Y}-${M}-${D} ${h}:${m} KST`;
+}
+
+const sourceNameById: Record<string, string> = {};
+for (const s of payload?.sources ?? []) sourceNameById[s.id] = s.name;
+
+const top30Multi = payload?.multiSourceKeywords.slice(0, 30) ?? [];
+const top20Single = payload?.singleSourceTop.slice(0, 20) ?? [];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="trends-wrap">
+    <header class="trends-header">
+      <div class="trends-eyebrow">뉴 스 · 키 워 드 · 트 렌 드</div>
+      <h1 class="trends-title">뉴스 키워드 트렌드</h1>
+      <p class="trends-desc">
+        한국 주요 7 언론사 (SBS·연합·동아·경향·매경·국민·한겨레) RSS 헤드라인에서 한글 키워드를
+        정규식으로 추출, 다중 소스 동시 등장 빈도를 집계. 운영자 가공 0, NLP 미사용 (정확도는 MVP
+        수준 — P2 한국어 형태소 분석 도입 예정).
+      </p>
+      {payload && (
+        <p class="trends-meta">
+          마지막 갱신 {fmtKST(payload.fetchedAt)} · 활성 출처 {payload.sourceSuccess}/{payload.sourceTotal} ·
+          {' '}수집 헤드라인 {payload.totalHeadlines}건 · 고유 키워드 {payload.uniqueKeywords}개 ·
+          {' '}다중 소스 {payload.multiSourceCount}개
+        </p>
+      )}
+    </header>
+
+    {!payload && (
+      <section class="trends-empty">
+        <p>데이터 미수집 상태. 운영자는 다음 명령으로 최초 수집을 실행한다.</p>
+        <pre><code>npm run fetch:news:keywords</code></pre>
+      </section>
+    )}
+
+    {payload && (
+      <>
+        <section class="trends-grid">
+          <article class="trends-main">
+            <h2 class="trends-section-title">🔥 다중 소스 트렌드 (TOP 30)</h2>
+            <p class="trends-section-meta">2개 이상 언론사에 동시 등장한 키워드. 소스 수 → 총 등장 횟수 순 정렬.</p>
+            <ol class="kw-list">
+              {top30Multi.map((k, i) => (
+                <li class="kw-item">
+                  <span class="kw-rank">{i + 1}</span>
+                  <div class="kw-body">
+                    <div class="kw-row">
+                      <span class="kw-term">{k.term}</span>
+                      <span class="kw-count">소스 <strong>{k.sourceCount}</strong> · 총 <strong>{k.total}</strong>회</span>
+                    </div>
+                    <div class="kw-sources">
+                      {k.sources.map((sid) => (
+                        <span class="kw-src-tag">{sourceNameById[sid] ?? sid}</span>
+                      ))}
+                    </div>
+                    {k.examples.length > 0 && (
+                      <p class="kw-example">
+                        예: [{sourceNameById[k.examples[0].source] ?? k.examples[0].source}]{' '}
+                        {k.examples[0].title}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </article>
+
+          <aside class="trends-side">
+            <h2 class="trends-section-title">단일 소스 인기 (TOP 20)</h2>
+            <p class="trends-section-meta">한 언론사에서만 다회 등장 — 단독 보도 또는 매체별 관심도.</p>
+            <ol class="kw-list-mini">
+              {top20Single.map((k) => (
+                <li class="kw-item-mini">
+                  <span class="kw-term-mini">{k.term}</span>
+                  <span class="kw-count-mini">{k.total}회 · {sourceNameById[k.sources[0]] ?? k.sources[0]}</span>
+                </li>
+              ))}
+            </ol>
+
+            <h2 class="trends-section-title trends-side-title-2">출처 상태</h2>
+            <ul class="src-status">
+              {payload.sources.map((s) => (
+                <li class={`src-row src-${s.status}`}>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name}</a>
+                  <span class="src-meta">{s.itemCount}건 · {s.elapsedMs}ms</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </section>
+
+        <p class="trends-foot">
+          모든 헤드라인은 각 언론사 RSS 의 원문이며 운영자는 본 페이지에서 가공·재배포하지 않는다.
+          키워드 추출은 한글 명사 후보를 정규식으로 단순 추출 + stopwords 필터링한 결과 — 동사
+          활용형 ("보인" 등) 의 일부 노이즈 가능성이 있다. P2 단계에서 한국어 형태소 분석기
+          (KoNLPy/Mecab) 도입 예정. 정정 정책{' '}
+          <a href="/corrections/">/corrections/</a>, 편집 방법론{' '}
+          <a href="/methodology/">/methodology/</a> 참조.
+        </p>
+      </>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .trends-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .trends-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .trends-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .trends-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) { .trends-title { font-size: 26px; } }
+  .trends-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
+  }
+  .trends-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+  }
+
+  .trends-empty {
+    padding: 24px 28px;
+    border: 0.5px dashed var(--color-ink-quat);
+  }
+  .trends-empty pre {
+    margin: 12px 0 0;
+    background: var(--color-paper-soft);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .trends-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 36px;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .trends-grid { grid-template-columns: 1fr; }
+  }
+
+  .trends-section-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .trends-side-title-2 { margin-top: 28px; }
+  .trends-section-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin: 0 0 12px;
+  }
+
+  .kw-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .kw-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    align-items: start;
+  }
+  .kw-item:last-child { border-bottom: 0; }
+  .kw-rank {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-ink-tertiary);
+    text-align: right;
+    padding-top: 2px;
+  }
+  .kw-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .kw-term {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+  .kw-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .kw-count strong { color: var(--color-ink-secondary); }
+  .kw-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .kw-src-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-secondary);
+    background: var(--color-paper-soft);
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+  .kw-example {
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 4px 0 0;
+    line-height: 1.5;
+  }
+
+  .kw-list-mini {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .kw-item-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    font-size: 13px;
+  }
+  .kw-item-mini:last-child { border-bottom: 0; }
+  .kw-term-mini { color: var(--color-ink); }
+  .kw-count-mini {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+
+  .src-status {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+  }
+  .src-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .src-row:last-child { border-bottom: 0; }
+  .src-row a { color: var(--color-ink); text-decoration: none; }
+  .src-row a:hover { text-decoration: underline; text-decoration-thickness: 0.5px; }
+  .src-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+  }
+  .src-fail a { color: #a83a3a; }
+
+  .trends-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .trends-foot a { color: var(--color-link); }
+</style>

@@ -134,6 +134,23 @@ const citationDatasetLd = buildDatasetLD({
 
       <article class="dataset-card">
         <header>
+          <h2><a href="/data/trends/" class="card-link">뉴스 키워드 트렌드</a></h2>
+          <p class="meta">
+            7 언론사 RSS · 다중 소스 동시 등장 키워드 · 매일 자동 집계
+          </p>
+        </header>
+        <p>
+          SBS · 연합 · 동아 · 경향 · 매경 · 국민 · 한겨레 7 언론사 RSS 헤드라인에서 한글 키워드를
+          정규식으로 추출 + 다중 소스 동시 등장 빈도 집계. 운영자 가공 0, NLP 미사용 (MVP 정확도).
+          P2 단계에서 한국어 형태소 분석기 (KoNLPy/Mecab) 도입 예정.
+        </p>
+        <p class="card-cta">
+          <a href="/data/trends/">→ 뉴스 키워드 트렌드</a>
+        </p>
+      </article>
+
+      <article class="dataset-card">
+        <header>
           <h2><a href="/data/timeseries/" class="card-link">한국 거시 시계열</a></h2>
           <p class="meta">
             한국은행 ECOS 1차 자료 · 매일 자동 갱신 · 차트 시각화

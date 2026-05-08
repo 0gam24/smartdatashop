@@ -79,11 +79,18 @@ jobs:
         run: node scripts/fetch-rss-government.mjs
         continue-on-error: true
 
+      - name: Fetch 뉴스 키워드 트렌드 (7 언론사)
+        id: fetch-news
+        env:
+          NODE_ENV: production
+        run: node scripts/fetch-news-keywords.mjs
+        continue-on-error: true
+
       - name: Commit + push if data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/economy/ data/rss/ 2>/dev/null || true
+          git add data/economy/ data/rss/ data/news/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data changes — skip commit"
           else
