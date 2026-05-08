@@ -1,0 +1,267 @@
+---
+/**
+ * /data/100-key/ — 한국 경제 100대 지표 (한국은행 공식 큐레이션)
+ *
+ * 데이터 출처: data/economy/key-100.json (scripts/fetch-ecos-key100.mjs 갱신)
+ * 빌드 시 fs 로 읽어 표/카드 렌더. 데이터 부재 시 안내 패널.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Item = {
+  className: string | null;
+  keyName: string | null;
+  dataValue: string | null;
+  unitName: string | null;
+  cycle: string | null;
+  time: string | null;
+};
+
+type Payload = {
+  fetchedAt: string;
+  source: string;
+  sourceUrl: string;
+  publisher: string;
+  totalCount: number;
+  items: Item[];
+};
+
+let payload: Payload | null = null;
+const dataPath = resolve(process.cwd(), 'data/economy/key-100.json');
+if (existsSync(dataPath)) {
+  try {
+    payload = JSON.parse(readFileSync(dataPath, 'utf8')) as Payload;
+  } catch (err) {
+    console.warn('[/economy/100-key] data parse fail:', (err as Error).message);
+    payload = null;
+  }
+}
+
+const pageTitle = '한국 경제 100대 지표 — 스마트데이터샵';
+const pageDescription =
+  '한국은행이 공식 선정한 한국 경제 100대 통계지표. ECOS Open API 1차 자료를 매일 자동 갱신.';
+const pageUrl = '/data/100-key/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: '100대 지표', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+
+function formatFetchedAtKST(iso: string): string {
+  const d = new Date(iso);
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const Y = kst.getUTCFullYear();
+  const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(kst.getUTCDate()).padStart(2, '0');
+  const h = String(kst.getUTCHours()).padStart(2, '0');
+  const m = String(kst.getUTCMinutes()).padStart(2, '0');
+  return `${Y}-${M}-${D} ${h}:${m} KST`;
+}
+
+const grouped: Array<[string, Item[]]> = payload
+  ? Object.entries(
+      payload.items.reduce<Record<string, Item[]>>((acc, it) => {
+        const key = it.className || '기타';
+        (acc[key] ||= []).push(it);
+        return acc;
+      }, {})
+    )
+  : [];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="econ-wrap">
+    <header class="econ-header">
+      <div class="econ-eyebrow">경 제 · K E Y · 1 0 0</div>
+      <h1 class="econ-title">한국 경제 100대 지표</h1>
+      <p class="econ-desc">
+        한국은행이 공식 선정한 한국 경제 핵심 100개 통계. 본 페이지는 ECOS Open API
+        를 통해 자동 갱신되며, 운영자는 데이터를 수정·재가공하지 않는다.
+      </p>
+      {payload && (
+        <p class="econ-meta">
+          마지막 갱신 {formatFetchedAtKST(payload.fetchedAt)} · 출처{' '}
+          <a href={payload.sourceUrl} target="_blank" rel="noopener noreferrer">한국은행 ECOS</a>
+          {' '}· 전체 {payload.totalCount}건
+        </p>
+      )}
+    </header>
+
+    {!payload && (
+      <section class="econ-empty">
+        <p>
+          데이터가 아직 수집되지 않았습니다. 운영자는 다음 명령으로 최초 데이터를 생성합니다.
+        </p>
+        <pre><code>npm run fetch:ecos:key100</code></pre>
+      </section>
+    )}
+
+    {payload && grouped.map(([category, rows]) => (
+      <section class="econ-group">
+        <h2 class="econ-group-title">{category}</h2>
+        <table class="econ-table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-name">지표</th>
+              <th scope="col" class="col-value">값</th>
+              <th scope="col" class="col-unit">단위</th>
+              <th scope="col" class="col-time">시점</th>
+              <th scope="col" class="col-cycle">주기</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((it) => (
+              <tr>
+                <td class="col-name">{it.keyName ?? '—'}</td>
+                <td class="col-value">{it.dataValue ?? '—'}</td>
+                <td class="col-unit">{it.unitName ?? '—'}</td>
+                <td class="col-time">{it.time ?? '—'}</td>
+                <td class="col-cycle">{it.cycle ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+
+    <p class="econ-foot">
+      모든 수치는 한국은행 ECOS 1차 자료를 자동 표시한 것이며, 운영자의 가공·해설은
+      추가하지 않는다. 정정 정책 <a href="/corrections/">/corrections/</a>, 편집
+      방법론 <a href="/methodology/">/methodology/</a> 참조.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .econ-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+  .econ-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    max-width: var(--width-prose);
+  }
+  .econ-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .econ-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 640px) {
+    .econ-title { font-size: 26px; }
+  }
+  .econ-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
+  }
+  .econ-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+  }
+  .econ-meta a { color: var(--color-link); }
+  .econ-empty {
+    padding: 24px 28px;
+    border: 0.5px dashed var(--color-ink-quat);
+    color: var(--color-ink-secondary);
+    font-size: 14px;
+  }
+  .econ-empty pre {
+    margin: 12px 0 0;
+    background: var(--color-paper-soft);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    overflow-x: auto;
+  }
+  .econ-group { margin-bottom: 36px; }
+  .econ-group-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .econ-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .econ-table th,
+  .econ-table td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    vertical-align: top;
+  }
+  .econ-table th {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+  .col-value,
+  .col-unit,
+  .col-time,
+  .col-cycle {
+    font-family: var(--font-mono);
+  }
+  .col-value {
+    font-weight: 500;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .col-unit,
+  .col-time,
+  .col-cycle {
+    color: var(--color-ink-secondary);
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .econ-table th,
+    .econ-table td { padding: 8px 4px; font-size: 12px; }
+    .col-cycle { display: none; }
+  }
+  .econ-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .econ-foot a { color: var(--color-link); }
+</style>
