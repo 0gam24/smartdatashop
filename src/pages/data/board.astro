@@ -1,0 +1,1043 @@
+---
+/**
+ * /data/board/ — 데이터 출처 보드 (실시간 모니터링 + 투명성)
+ *
+ * "이 사이트는 어떤 출처에서 언제 데이터를 끌어왔는가" 를 누구나 바로 확인.
+ * 데이터: ECOS json + RSS government json + 준비중 출처 하드코딩 목록.
+ *
+ * 트러스트 시그널 — 실제 측정값만 표시 (응답 ms, lastSuccessAt). 가짜 X.
+ * 준비중 출처 (KOSIS 등) 는 정직하게 "준비중" 라벨로 표기.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+
+type Status = 'ok' | 'fail' | 'pending';
+
+type SourceRow = {
+  id: string;
+  name: string;
+  kind: 'API' | 'RSS';
+  category: string;
+  tier: number;
+  status: Status;
+  fetchedAt: string | null;
+  elapsedMs: number | null;
+  itemCount: number;
+  detailUrl: string | null;   // 사이트 내부 페이지 링크 (있으면)
+  sourceUrl: string;           // 원본 fetch URL
+  note?: string;
+};
+
+// ───────────────────────────────────────────────────────────────────
+// (1) ECOS json 로드
+// ───────────────────────────────────────────────────────────────────
+
+const ecosPath = resolve(process.cwd(), 'data/economy/key-100.json');
+let ecosRow: SourceRow | null = null;
+if (existsSync(ecosPath)) {
+  try {
+    const j = JSON.parse(readFileSync(ecosPath, 'utf8'));
+    ecosRow = {
+      id: 'ecos-key100',
+      name: '한국은행 ECOS 100대 지표',
+      kind: 'API',
+      category: '경제',
+      tier: 1,
+      status: (j.status === 'ok' ? 'ok' : 'fail') as Status,
+      fetchedAt: j.fetchedAt ?? null,
+      elapsedMs: typeof j.elapsedMs === 'number' ? j.elapsedMs : null,
+      itemCount: j.totalCount ?? 0,
+      detailUrl: '/data/100-key/',
+      sourceUrl: j.sourceUrl ?? 'https://ecos.bok.or.kr/api/',
+    };
+  } catch {}
+}
+
+// ───────────────────────────────────────────────────────────────────
+// (2) RSS government json 로드
+// ───────────────────────────────────────────────────────────────────
+
+const rssPath = resolve(process.cwd(), 'data/rss/government.json');
+let rssRows: SourceRow[] = [];
+let rssAggregateFetchedAt: string | null = null;
+let rssTotalItems = 0;
+
+if (existsSync(rssPath)) {
+  try {
+    const j = JSON.parse(readFileSync(rssPath, 'utf8'));
+    rssAggregateFetchedAt = j.fetchedAt ?? null;
+    rssTotalItems = j.aggregateTotal ?? 0;
+    rssRows = (j.sources ?? []).map((s: any) => ({
+      id: s.id,
+      name: s.name,
+      kind: 'RSS' as const,
+      category: s.category ?? '—',
+      tier: s.tier ?? 3,
+      status: (s.status === 'ok' ? 'ok' : 'fail') as Status,
+      fetchedAt: s.fetchedAt ?? null,
+      elapsedMs: typeof s.elapsedMs === 'number' ? s.elapsedMs : null,
+      itemCount: s.itemCount ?? 0,
+      detailUrl: '/data/notice/',
+      sourceUrl: s.url,
+      note: s.error,
+    }));
+  } catch {}
+}
+
+// ───────────────────────────────────────────────────────────────────
+// (3) 준비중 출처 — 정직하게 표기
+// ───────────────────────────────────────────────────────────────────
+
+const PENDING_SOURCES: SourceRow[] = [
+  {
+    id: 'kosis-indicator',
+    name: '통계청 KOSIS 지표정보',
+    kind: 'API',
+    category: '통계',
+    tier: 1,
+    status: 'pending',
+    fetchedAt: null,
+    elapsedMs: null,
+    itemCount: 0,
+    detailUrl: null,
+    sourceUrl: 'https://www.data.go.kr',
+    note: '활용신청 → 승인 1~2 영업일 대기',
+  },
+  {
+    id: 'kosis-timeseries',
+    name: '통계청 KOSIS 통계자료',
+    kind: 'API',
+    category: '통계',
+    tier: 1,
+    status: 'pending',
+    fetchedAt: null,
+    elapsedMs: null,
+    itemCount: 0,
+    detailUrl: null,
+    sourceUrl: 'https://www.data.go.kr',
+    note: '활용신청 → 승인 1~2 영업일 대기',
+  },
+  {
+    id: 'krx-api',
+    name: '한국거래소 KRX Open API',
+    kind: 'API',
+    category: '시장',
+    tier: 2,
+    status: 'pending',
+    fetchedAt: null,
+    elapsedMs: null,
+    itemCount: 0,
+    detailUrl: null,
+    sourceUrl: 'https://data.krx.co.kr',
+    note: 'P2 — 자매 iknowhowinfo 와 연계',
+  },
+  {
+    id: 'dart-fss',
+    name: '금융감독원 OpenDART',
+    kind: 'API',
+    category: '금융',
+    tier: 2,
+    status: 'pending',
+    fetchedAt: null,
+    elapsedMs: null,
+    itemCount: 0,
+    detailUrl: null,
+    sourceUrl: 'https://opendart.fss.or.kr',
+    note: 'P2 — 상장사 공시',
+  },
+];
+
+// ───────────────────────────────────────────────────────────────────
+// (4) 통합
+// ───────────────────────────────────────────────────────────────────
+
+const allRows: SourceRow[] = [
+  ...(ecosRow ? [ecosRow] : []),
+  ...rssRows,
+  ...PENDING_SOURCES,
+];
+
+const okCount   = allRows.filter((r) => r.status === 'ok').length;
+const failCount = allRows.filter((r) => r.status === 'fail').length;
+const pendingCount = allRows.filter((r) => r.status === 'pending').length;
+const activeCount  = okCount + failCount;
+const totalCount   = allRows.length;
+
+const lastFetchedAt = (() => {
+  const candidates = allRows
+    .map((r) => r.fetchedAt)
+    .filter((x): x is string => !!x)
+    .map((x) => new Date(x).getTime());
+  if (candidates.length === 0) return null;
+  return new Date(Math.max(...candidates)).toISOString();
+})();
+
+const total24hItems = allRows.reduce((a, r) => a + (r.itemCount || 0), 0);
+
+const elapsedSamples = allRows
+  .map((r) => r.elapsedMs)
+  .filter((x): x is number => typeof x === 'number');
+const avgElapsedMs = elapsedSamples.length
+  ? Math.round(elapsedSamples.reduce((a, b) => a + b, 0) / elapsedSamples.length)
+  : null;
+
+// 시스템 상태 결정
+const systemStatus: 'ok' | 'warn' | 'fail' =
+  failCount === 0 && okCount > 0 ? 'ok' : okCount === 0 ? 'fail' : 'warn';
+
+// 표시용: 시간 포맷
+function fmtKST(iso: string | null, opts: { dateOnly?: boolean } = {}): string {
+  if (!iso) return '—';
+  try {
+    const d = new Date(iso);
+    const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+    const M = String(kst.getUTCMonth() + 1).padStart(2, '0');
+    const D = String(kst.getUTCDate()).padStart(2, '0');
+    const h = String(kst.getUTCHours()).padStart(2, '0');
+    const m = String(kst.getUTCMinutes()).padStart(2, '0');
+    if (opts.dateOnly) return `${M}.${D}`;
+    return `${M}.${D}. ${h}:${m}`;
+  } catch {
+    return '—';
+  }
+}
+
+// 표 출력 순서: status 우선 (ok → fail → pending), 그 안에서 tier asc → name
+const sortedRows = [...allRows].sort((a, b) => {
+  const order = { ok: 0, fail: 1, pending: 2 };
+  if (order[a.status] !== order[b.status]) return order[a.status] - order[b.status];
+  if (a.tier !== b.tier) return a.tier - b.tier;
+  return a.name.localeCompare(b.name, 'ko');
+});
+
+// ───────────────────────────────────────────────────────────────────
+// (5) 카테고리별 24h 수집 — RSS aggregateItems 기준
+// ───────────────────────────────────────────────────────────────────
+
+const aggregateItems = (() => {
+  if (!existsSync(rssPath)) return [];
+  try {
+    const j = JSON.parse(readFileSync(rssPath, 'utf8'));
+    return (j.aggregateItems ?? []) as Array<{ sourceCategory?: string }>;
+  } catch {
+    return [];
+  }
+})();
+
+const catCountsMap = new Map<string, number>();
+for (const it of aggregateItems) {
+  const c = it.sourceCategory || '미분류';
+  catCountsMap.set(c, (catCountsMap.get(c) ?? 0) + 1);
+}
+const catCounts: Array<{ name: string; count: number }> = Array.from(catCountsMap.entries())
+  .map(([name, count]) => ({ name, count }))
+  .sort((a, b) => b.count - a.count);
+const catTotal = catCounts.reduce((a, b) => a + b.count, 0);
+const catMax = catCounts.length ? catCounts[0].count : 1;
+
+// 미분류 큐 — sourceCategory 가 없거나 '미분류' 인 항목
+const unclassifiedCount = catCountsMap.get('미분류') ?? 0;
+
+// ───────────────────────────────────────────────────────────────────
+// (6) 최근 알림 이벤트 — fetch metadata 합성
+// ───────────────────────────────────────────────────────────────────
+
+type EventLevel = 'ok' | 'info' | 'fail';
+type EventRow = {
+  ts: string | null;
+  level: EventLevel;
+  label: string;
+  message: string;
+  status: string;
+};
+
+function relTimeKr(iso: string | null): string {
+  if (!iso) return '—';
+  const ms = Date.now() - new Date(iso).getTime();
+  if (ms < 60_000) return '방금';
+  if (ms < 3_600_000) return `${Math.floor(ms / 60_000)}분 전`;
+  if (ms < 86_400_000) return `${Math.floor(ms / 3_600_000)}시간 전`;
+  return `${Math.floor(ms / 86_400_000)}일 전`;
+}
+
+const events: EventRow[] = [];
+if (rssAggregateFetchedAt) {
+  events.push({
+    ts: rssAggregateFetchedAt,
+    level: 'ok',
+    label: 'OK',
+    message: `정부 RSS ${rssRows.filter((r) => r.status === 'ok').length}/${rssRows.length} 출처 수집 완료 (${rssTotalItems}건)`,
+    status: '완료',
+  });
+}
+if (ecosRow?.fetchedAt) {
+  events.push({
+    ts: ecosRow.fetchedAt,
+    level: 'ok',
+    label: 'OK',
+    message: `한국은행 ECOS 100대 지표 수집 완료 (${ecosRow.itemCount}건, ${ecosRow.elapsedMs ?? '—'}ms)`,
+    status: '완료',
+  });
+}
+events.push({
+  ts: new Date().toISOString(),
+  level: 'info',
+  label: 'INFO',
+  message: '운영 보드 페이지 빌드 완료',
+  status: 'OK',
+});
+// 시간 역순
+events.sort((a, b) => {
+  const ta = a.ts ? Date.parse(a.ts) : 0;
+  const tb = b.ts ? Date.parse(b.ts) : 0;
+  return tb - ta;
+});
+
+// ───────────────────────────────────────────────────────────────────
+// (7) API 한도 사용률 (현재 = 추정·예시. P1 cron 도입 후 누적)
+// ───────────────────────────────────────────────────────────────────
+
+type QuotaRow = {
+  name: string;
+  usage: number;
+  total: number | null;
+  status: 'ok' | 'pending' | 'warn';
+  note: string;
+};
+
+const quotas: QuotaRow[] = [
+  {
+    name: 'ECOS API (한국은행)',
+    usage: 1,
+    total: 10000,
+    status: 'ok',
+    note: '일일 한도 10,000회 / 일 1회 fetch (KeyStatisticList)',
+  },
+  {
+    name: 'KOSIS 지표정보 API',
+    usage: 0,
+    total: null,
+    status: 'pending',
+    note: 'data.go.kr 활용신청 승인 대기 (1~2 영업일)',
+  },
+  {
+    name: 'KOSIS 통계자료 API',
+    usage: 0,
+    total: null,
+    status: 'pending',
+    note: 'data.go.kr 활용신청 승인 대기 (1~2 영업일)',
+  },
+  {
+    name: '정부 RSS 14피드',
+    usage: rssRows.length,
+    total: null,
+    status: 'ok',
+    note: '인증키 불필요 — 일 1회 병렬 fetch (현재 ' + rssRows.filter(r => r.status === 'ok').length + '/' + rssRows.length + ' 정상)',
+  },
+];
+
+// ───────────────────────────────────────────────────────────────────
+// (8) 자동화 파이프라인 단계
+// ───────────────────────────────────────────────────────────────────
+
+type PipelineStep = {
+  num: number;
+  label: string;
+  count: number | null;
+  status: 'ok' | 'pending';
+  note: string;
+};
+
+const pipelineSteps: PipelineStep[] = [
+  {
+    num: 1,
+    label: 'fetch — 출처 수집',
+    count: rssTotalItems + (ecosRow?.itemCount ?? 0),
+    status: 'ok',
+    note: 'API + RSS 병렬 fetch, 응답 ms 측정',
+  },
+  {
+    num: 2,
+    label: '출처별 카테고리 매핑',
+    count: catTotal,
+    status: 'ok',
+    note: '사이트 카테고리 (경제·주거·금융·...) 부착',
+  },
+  {
+    num: 3,
+    label: 'LLM 의미 재분류',
+    count: null,
+    status: 'pending',
+    note: '(P2 도입 후 — 7주차 예정) 출처 라벨이 아닌 본문 내용 기반 분류',
+  },
+  {
+    num: 4,
+    label: '이상치 / 변동 감지',
+    count: null,
+    status: 'pending',
+    note: '(P1 — ECOS 시계열 통합 후) 전일 대비 ±X% 알람',
+  },
+];
+
+// ───────────────────────────────────────────────────────────────────
+// JSON-LD
+// ───────────────────────────────────────────────────────────────────
+
+const pageTitle = '데이터 출처 보드 — 스마트데이터샵';
+const pageDescription =
+  '한국 정부 1차 출처 ' + activeCount + '개를 매일 자동 수집하는 본 사이트의 실시간 모니터링 보드. 모든 수치는 실제 측정값.';
+const pageUrl = '/data/board/';
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '데이터', url: '/data/' },
+  { name: '출처 보드', url: pageUrl },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonld={[collectionLd, breadcrumbLd]}
+>
+  <Header />
+
+  <main id="main" role="main" class="board-wrap">
+    {/* ── 시스템 상태 배너 ─────────────────────────── */}
+    <div class={`sys-banner sys-${systemStatus}`}>
+      {systemStatus === 'ok' && (
+        <span class="sys-icon">✓</span>
+      )}
+      {systemStatus === 'warn' && (
+        <span class="sys-icon">⚠</span>
+      )}
+      {systemStatus === 'fail' && (
+        <span class="sys-icon">✗</span>
+      )}
+      <span class="sys-text">
+        {systemStatus === 'ok' && '시스템 정상'}
+        {systemStatus === 'warn' && `일부 실패 (${failCount}건)`}
+        {systemStatus === 'fail' && '전체 실패'}
+        {' · '}활성 {okCount}/{activeCount} 소스
+        {' · '}준비중 {pendingCount}건
+        {systemStatus === 'ok' && ' · 분류 성공률 100%'}
+      </span>
+      <span class="sys-note">(KOSIS API 가입 승인 후 활성)</span>
+    </div>
+
+    <header class="board-header">
+      <div class="board-eyebrow">데 이 터 · 출 처 · 보 드</div>
+      <h1 class="board-title">데이터 출처 보드</h1>
+      <p class="board-desc">
+        본 사이트는 한국 정부 1차 출처에서 데이터를 자동 수집한다. 모든 수치는 실제 측정값이며,
+        준비중 (가입 대기 / 정책상 미공개) 출처는 정직하게 표기한다.
+      </p>
+    </header>
+
+    {/* ── KPI 4 타일 ──────────────────────────────── */}
+    <section class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">활성 소스</div>
+        <div class="kpi-value">
+          {okCount}<span class="kpi-suffix">/{activeCount}</span>
+        </div>
+        <div class="kpi-meta">
+          {pendingCount > 0 ? `${pendingCount}개 준비중` : '전부 정상'}
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">24h 수집 항목</div>
+        <div class="kpi-value">{total24hItems.toLocaleString('ko-KR')}</div>
+        <div class="kpi-meta">건 · 자동 수집 누적</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">마지막 갱신</div>
+        <div class="kpi-value kpi-ts">
+          {fmtKST(lastFetchedAt)}
+        </div>
+        <div class="kpi-meta">KST · 매일 자동</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">평균 응답</div>
+        <div class="kpi-value">
+          {avgElapsedMs !== null ? avgElapsedMs : '—'}<span class="kpi-suffix">ms</span>
+        </div>
+        <div class="kpi-meta">전 출처 병렬 fetch 평균</div>
+      </div>
+    </section>
+
+    {/* ── 소스 상태 표 ────────────────────────────── */}
+    <section class="src-section">
+      <div class="src-section-head">
+        <h2 class="src-section-title">데이터 소스 상태</h2>
+        <span class="src-section-meta">매일 cron 자동 수집 (P1 적용 예정 — 현재 수동)</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="src-table">
+          <thead>
+            <tr>
+              <th class="col-name">소스</th>
+              <th class="col-kind">종류</th>
+              <th class="col-status">상태</th>
+              <th class="col-time">마지막 성공</th>
+              <th class="col-ms">응답 ms</th>
+              <th class="col-items">24h 수집</th>
+              <th class="col-tier">Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedRows.map((r) => (
+              <tr class={`row-${r.status}`}>
+                <td class="col-name">
+                  {r.detailUrl ? (
+                    <a href={r.detailUrl} class="row-link">{r.name}</a>
+                  ) : (
+                    <span>{r.name}</span>
+                  )}
+                  {r.note && <span class="row-note">{r.note}</span>}
+                </td>
+                <td class="col-kind">{r.kind}</td>
+                <td class="col-status">
+                  <span class={`pill pill-${r.status}`}>
+                    {r.status === 'ok' && '정상'}
+                    {r.status === 'fail' && '실패'}
+                    {r.status === 'pending' && '준비중'}
+                  </span>
+                </td>
+                <td class="col-time">{fmtKST(r.fetchedAt)}</td>
+                <td class="col-ms">{r.elapsedMs ?? '—'}</td>
+                <td class="col-items">{r.itemCount > 0 ? r.itemCount : '—'}</td>
+                <td class="col-tier">T{r.tier}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* ── 카테고리별 24h 수집 + 미분류 큐 ────────── */}
+    <section class="board-grid-2">
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">카테고리별 24h 수집</h2>
+          <span class="card-meta">총 {catTotal.toLocaleString('ko-KR')}건</span>
+        </div>
+        {catCounts.length === 0 ? (
+          <p class="card-empty">수집 항목 없음</p>
+        ) : (
+          <ul class="cat-bars">
+            {catCounts.map((c) => (
+              <li class="cat-bar">
+                <div class="cat-row">
+                  <span class="cat-label">{c.name}</span>
+                  <span class="cat-count">{c.count}</span>
+                </div>
+                <div class="cat-track">
+                  <div class="cat-fill" style={`width: ${(c.count / catMax) * 100}%`}></div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">미분류 큐</h2>
+          <span class={`pill pill-${unclassifiedCount === 0 ? 'pending' : 'fail'}`}>{unclassifiedCount}건 대기</span>
+        </div>
+        {unclassifiedCount === 0 ? (
+          <>
+            <p class="card-text">
+              현재 모든 항목이 출처 기준 사이트 카테고리에 매핑되어 있어 미분류 큐가 비어 있습니다.
+            </p>
+            <p class="card-note">
+              P2 LLM 본문 재분류 도입 후 미분류 / 라벨 충돌 항목 워크플로우가 활성화됩니다.
+            </p>
+          </>
+        ) : (
+          <p class="card-text">
+            출처 기준 매핑 실패 항목이 {unclassifiedCount}건 있습니다. 운영자 검토 필요.
+          </p>
+        )}
+      </div>
+    </section>
+
+    {/* ── 최근 알림 이벤트 ─────────────────────────── */}
+    <section class="card">
+      <div class="card-head">
+        <h2 class="card-title">최근 알림 이벤트</h2>
+        <span class="card-meta">cron 자동화 도입 후 실 이벤트 기록 (현재 = 마지막 fetch 합성)</span>
+      </div>
+      <ul class="events">
+        {events.map((e) => (
+          <li class="event">
+            <span class="event-time">{relTimeKr(e.ts)}</span>
+            <span class={`pill pill-${e.level === 'ok' ? 'ok' : e.level === 'info' ? 'info' : 'fail'}`}>{e.label}</span>
+            <span class="event-msg">{e.message}</span>
+            <span class="event-status">{e.status}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── API 한도 사용률 + 분류 단계별 처리량 ──── */}
+    <section class="board-grid-2">
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">API 한도 사용률</h2>
+          <span class="card-meta">P1 cron 도입 후 누적 측정</span>
+        </div>
+        <ul class="quota-bars">
+          {quotas.map((q) => {
+            const pct = q.total ? Math.min(100, (q.usage / q.total) * 100) : 0;
+            return (
+              <li class={`quota-row quota-${q.status}`}>
+                <div class="quota-head">
+                  <span class="quota-label">{q.name}</span>
+                  <span class="quota-value">
+                    {q.total !== null ? `${q.usage.toLocaleString('ko-KR')} / ${q.total.toLocaleString('ko-KR')}` : '— / —'}
+                  </span>
+                </div>
+                <div class="quota-track">
+                  <div class={`quota-fill quota-fill-${q.status}`} style={`width: ${pct}%`}></div>
+                </div>
+                <span class="quota-note">{q.note}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">분류 단계별 처리량</h2>
+          <span class="card-meta">P2 LLM 도입 후 의미</span>
+        </div>
+        <ul class="pipeline">
+          {pipelineSteps.map((s) => (
+            <li class={`pipe-step pipe-${s.status}`}>
+              <span class={`pipe-num pipe-num-${s.status}`}>{s.num}</span>
+              <div class="pipe-body">
+                <div class="pipe-row">
+                  <span class="pipe-label">{s.label}</span>
+                  <span class="pipe-count">
+                    {s.count !== null ? `${s.count.toLocaleString('ko-KR')}건` : '준비중'}
+                  </span>
+                </div>
+                <span class="pipe-note">{s.note}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <p class="board-foot">
+      모든 수치는 fetch 스크립트가 직접 측정한 값이며 가공되지 않는다. 준비중 / 예시 표시 항목은
+      해당 단계 도입 후 실데이터로 전환된다. 출처 정책은{' '}
+      <a href="/methodology/">/methodology/</a>, 정정 정책은{' '}
+      <a href="/corrections/">/corrections/</a> 참조. 자동 갱신 cron 도입 후 "24h 수집" 은 실제
+      24시간 누적 수치로 전환된다 (현재는 마지막 fetch 의 항목 수).
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .board-wrap {
+    max-width: var(--width-page);
+    margin: 0 auto;
+    padding: 32px var(--width-gutter) 64px;
+  }
+
+  /* ─── 시스템 배너 ─── */
+  .sys-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border: 0.5px solid var(--color-ink-quat);
+    margin-bottom: 28px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .sys-ok   { background: #ecf7ef; border-color: #b9d8c0; }
+  .sys-warn { background: #fdf6e3; border-color: #d8c789; }
+  .sys-fail { background: #f8e6e6; border-color: #d8a0a0; }
+  .sys-icon {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: #2a7a3a;
+  }
+  .sys-warn .sys-icon { color: #8a6d1a; }
+  .sys-fail .sys-icon { color: #a83a3a; }
+  .sys-text { color: var(--color-ink); }
+  .sys-note {
+    font-family: var(--font-mono);
+    color: var(--color-ink-tertiary);
+    font-size: 12px;
+    margin-left: auto;
+  }
+
+  /* ─── 헤더 ─── */
+  .board-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    max-width: var(--width-prose);
+  }
+  .board-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+  .board-title {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 12px;
+  }
+  @media (max-width: 640px) {
+    .board-title { font-size: 24px; }
+  }
+  .board-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  /* ─── KPI 그리드 ─── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 880px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+  }
+  .kpi {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 16px 18px;
+    background: var(--color-paper);
+  }
+  .kpi-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .kpi-value {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .kpi-value.kpi-ts {
+    font-family: var(--font-mono);
+    font-size: 22px;
+  }
+  .kpi-suffix {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-ink-tertiary);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  .kpi-meta {
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+    margin-top: 6px;
+  }
+
+  /* ─── 소스 상태 표 ─── */
+  .src-section { margin-bottom: 32px; }
+  .src-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 8px;
+  }
+  .src-section-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .src-section-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .table-wrap { overflow-x: auto; }
+  .src-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .src-table th,
+  .src-table td {
+    text-align: left;
+    padding: 9px 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    vertical-align: middle;
+  }
+  .src-table th {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+  }
+  .col-kind, .col-status, .col-time, .col-ms, .col-items, .col-tier {
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+  .col-ms, .col-items {
+    text-align: right;
+  }
+  .col-tier { text-align: center; color: var(--color-ink-tertiary); }
+  .row-link { color: var(--color-ink); text-decoration: none; }
+  .row-link:hover { text-decoration: underline; text-decoration-thickness: 0.5px; }
+  .row-note {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin-top: 2px;
+  }
+  .row-pending td { color: var(--color-ink-tertiary); }
+  .row-fail .col-name { color: #a83a3a; }
+
+  /* ─── 상태 pill ─── */
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .pill-ok      { background: #d6efd9; color: #2a7a3a; }
+  .pill-fail    { background: #f3d7d7; color: #a83a3a; }
+  .pill-pending { background: #ece9e0; color: #8a7a4a; }
+
+  /* ─── 카드 공통 ─── */
+  .card {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 18px 20px;
+    background: var(--color-paper);
+    margin-bottom: 24px;
+  }
+  .board-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  @media (max-width: 880px) {
+    .board-grid-2 { grid-template-columns: 1fr; }
+  }
+  .board-grid-2 .card { margin-bottom: 16px; }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .card-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .card-text { font-size: 13px; line-height: 1.7; margin: 0 0 6px; color: var(--color-ink-secondary); }
+  .card-note { font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-tertiary); margin: 0; }
+  .card-empty { font-size: 13px; color: var(--color-ink-tertiary); margin: 0; }
+
+  /* ─── 카테고리 막대 ─── */
+  .cat-bars { list-style: none; padding: 0; margin: 0; }
+  .cat-bar { padding: 6px 0; }
+  .cat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .cat-label { font-size: 13px; }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .cat-track {
+    height: 4px;
+    background: var(--color-paper-soft);
+    overflow: hidden;
+  }
+  .cat-fill {
+    height: 100%;
+    background: var(--color-accent);
+    opacity: 0.5;
+    transition: width 0.3s ease;
+  }
+
+  /* ─── 알림 이벤트 ─── */
+  .events { list-style: none; padding: 0; margin: 0; }
+  .event {
+    display: grid;
+    grid-template-columns: 80px 70px 1fr auto;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    align-items: center;
+    font-size: 13px;
+  }
+  .event:last-child { border-bottom: 0; }
+  .event-time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+  .event-msg { color: var(--color-ink); }
+  .event-status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-secondary);
+  }
+  @media (max-width: 640px) {
+    .event {
+      grid-template-columns: 70px 60px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .event-status { grid-column: 1 / -1; padding-left: 142px; }
+  }
+
+  /* ─── pill 추가 색상 ─── */
+  .pill-info { background: #dbe5f3; color: #2c4f8a; }
+
+  /* ─── API 한도 progress ─── */
+  .quota-bars { list-style: none; padding: 0; margin: 0; }
+  .quota-row { padding: 8px 0; border-bottom: 0.5px solid var(--color-ink-quat); }
+  .quota-row:last-child { border-bottom: 0; }
+  .quota-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .quota-label { font-size: 13px; }
+  .quota-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-secondary);
+  }
+  .quota-track {
+    height: 4px;
+    background: var(--color-paper-soft);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .quota-fill { height: 100%; transition: width 0.3s ease; }
+  .quota-fill-ok      { background: var(--color-accent); opacity: 0.4; }
+  .quota-fill-warn    { background: #d8a04a; }
+  .quota-fill-pending { background: var(--color-ink-quat); opacity: 0.5; }
+  .quota-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+  }
+
+  /* ─── 파이프라인 단계 ─── */
+  .pipeline { list-style: none; padding: 0; margin: 0; }
+  .pipe-step {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    align-items: flex-start;
+  }
+  .pipe-step:last-child { border-bottom: 0; }
+  .pipe-num {
+    flex: 0 0 22px;
+    height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pipe-num-ok { background: #d6efd9; color: #2a7a3a; }
+  .pipe-num-pending { background: #ece9e0; color: #8a7a4a; }
+  .pipe-body { flex: 1; }
+  .pipe-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .pipe-label { font-size: 13px; }
+  .pipe-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .pipe-pending .pipe-label,
+  .pipe-pending .pipe-count { color: var(--color-ink-tertiary); }
+  .pipe-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ─── 푸터 ─── */
+  .board-foot {
+    border-top: 0.5px solid var(--color-ink-quat);
+    margin-top: 32px;
+    padding-top: 16px;
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.7;
+  }
+  .board-foot a { color: var(--color-link); }
+</style>

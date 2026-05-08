@@ -75,6 +75,8 @@ async function main() {
   const url = `${ENDPOINT_BASE}/${encodeURIComponent(key)}/json/kr/1/${PAGE_SIZE}`;
   console.log(`[fetch-ecos-key100] GET ${ENDPOINT_BASE}/[KEY]/json/kr/1/${PAGE_SIZE}`);
 
+  const startedAt = Date.now();
+  const fetchedAt = new Date().toISOString();
   let payload;
   try {
     payload = await fetchWithTimeout(url);
@@ -82,6 +84,7 @@ async function main() {
     console.error(`[fetch-ecos-key100] fetch 실패: ${err.message}`);
     process.exit(1);
   }
+  const elapsedMs = Date.now() - startedAt;
 
   // ECOS 표준 오류: { RESULT: { CODE: 'INFO-100', MESSAGE: '...' } }
   if (payload.RESULT) {
@@ -101,7 +104,11 @@ async function main() {
   const items = block.row.map(normalizeRow);
 
   const out = {
-    fetchedAt: new Date().toISOString(),
+    fetchedAt,
+    elapsedMs,
+    lastSuccessAt: fetchedAt,
+    status: 'ok',
+    kind: 'API',
     source: 'ECOS KeyStatisticList',
     sourceUrl: 'https://ecos.bok.or.kr/api/KeyStatisticList',
     publisher: '한국은행',
