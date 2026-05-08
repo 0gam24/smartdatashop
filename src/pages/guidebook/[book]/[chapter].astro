@@ -14,7 +14,7 @@ import SourceList from '../../../components/SourceList.astro';
 import ReadingProgress from '../../../components/ReadingProgress.astro';
 import ChapterTOC from '../../../components/ChapterTOC.astro';
 import { entryHasPlaceholder } from '../../../lib/placeholder';
-import { buildBreadcrumbLD } from '../../../lib/jsonld';
+import { buildBreadcrumbLD, buildPersonLD } from '../../../lib/jsonld';
 import { formatKoreanDate } from '../../../lib/korean';
 
 export async function getStaticPaths() {
@@ -74,6 +74,38 @@ const breadcrumbLd = buildBreadcrumbLD([
   { name: bookTitle, url: `/guidebook/${data.bookSlug}/` },
   { name: data.title, url: pageUrl },
 ]);
+
+// Article LD — 가이드북 챕터는 에버그린 심층 자료 (E-E-A-T 신호 강화).
+// 06 §3 E-E-A-T / 07 §3 D.I.A. — author·publisher·dateModified 명시.
+const chapterArticleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: pageDescription,
+  inLanguage: 'ko',
+  url: `${SITE}${pageUrl}`,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}${pageUrl}` },
+  datePublished: data.publishedAt,
+  dateModified: data.publishedAt,
+  isPartOf: {
+    '@type': 'Book',
+    name: bookTitle,
+    url: `${SITE}/guidebook/${data.bookSlug}/`,
+  },
+  author: {
+    '@type': 'Person',
+    name: '김준혁',
+    url: `${SITE}/authors/junhyuk-kim/`,
+  },
+  publisher: {
+    '@type': 'NewsMediaOrganization',
+    name: '스마트데이터샵',
+    url: SITE,
+  },
+  image: ogImage,
+};
+
+const chapterJsonld: object[] = [chapterArticleLd, breadcrumbLd, buildPersonLD()];
 ---
 
 <BaseLayout
@@ -82,7 +114,7 @@ const breadcrumbLd = buildBreadcrumbLD([
   ogType="article"
   ogImage={ogImage}
   ogPublishedAt={data.publishedAt}
-  jsonld={breadcrumbLd}
+  jsonld={chapterJsonld}
   noindex={hasPlaceholder}
 >
   <Header activeNav="guidebook" />

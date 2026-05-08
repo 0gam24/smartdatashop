@@ -23,6 +23,7 @@ import ArticleTOC from '../components/ArticleTOC.astro';
 import CitationExport from '../components/CitationExport.astro';
 import SisterDeepDive from '../components/network/SisterDeepDive.astro';
 import { categoryToKorean, formatKoreanDate, type Category } from '../lib/korean';
+import { buildBreadcrumbLD, buildPersonLD } from '../lib/jsonld';
 
 interface Source {
   name: string;
@@ -92,9 +93,24 @@ const pageTitle = `${title} — 스마트데이터샵 인사이트`;
 // 인사이트 브레드크럼: 홈 › 인사이트 › 카테고리
 // BreadcrumbMasthead는 "데일리"가 하드코딩돼 있어 인라인으로 별도 구성.
 const categoryLabel = categoryToKorean(category).replace(/ /g, '');
+
+// BreadcrumbList LD + Person LD 자동 병합 (호출자 jsonld + 자동 LD 통합)
+// 06 §3 E-E-A-T / 07 §3 D.I.A. 저자 신뢰성 / 06 §11 BreadcrumbList 리치결과
+const insightBreadcrumb = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '인사이트', url: '/insight/' },
+  { name: categoryLabel, url: `/insight/category/${category}/` },
+  { name: title, url: Astro.url.pathname },
+]);
+const incomingJsonld = jsonld
+  ? Array.isArray(jsonld)
+    ? jsonld
+    : [jsonld]
+  : [];
+const mergedJsonld: object[] = [...incomingJsonld, insightBreadcrumb, buildPersonLD()];
 ---
 
-<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage} noindex={noindex} jsonld={jsonld}>
+<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage} noindex={noindex} jsonld={mergedJsonld}>
   <Header activeNav="insight" date={headerDate} />
 
   <div class="masthead">

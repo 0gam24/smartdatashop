@@ -13,7 +13,7 @@ import ArticleTOC from '../components/ArticleTOC.astro';
 import CitationExport from '../components/CitationExport.astro';
 import SisterDeepDive from '../components/network/SisterDeepDive.astro';
 import { categoryToKorean, formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
-import { buildBreadcrumbLD } from '../lib/jsonld';
+import { buildBreadcrumbLD, buildPersonLD } from '../lib/jsonld';
 
 interface Source {
   name: string;
@@ -98,14 +98,15 @@ const breadcrumbItems = [
 ];
 const breadcrumbLd = buildBreadcrumbLD(breadcrumbItems);
 
-// 호출자(jsonld prop)가 단일 객체 또는 배열을 줄 수 있다 — BreadcrumbList를
-// 항상 추가해 BaseLayout으로 통합 전달.
+// 호출자(jsonld prop)가 단일 객체 또는 배열을 줄 수 있다 — BreadcrumbList +
+// Person LD (저자 E-E-A-T 신호) 를 항상 추가해 BaseLayout으로 통합 전달.
+// 06 §3 E-E-A-T 저자 신호 / 07 §3 D.I.A. 저자 신뢰성.
 const incomingJsonld = jsonld
   ? Array.isArray(jsonld)
     ? jsonld
     : [jsonld]
   : [];
-const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
+const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd, buildPersonLD()];
 ---
 
 <BaseLayout
