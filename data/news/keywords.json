@@ -1,6 +1,6 @@
 {
-  "fetchedAt": "2026-05-08T21:39:44.642Z",
-  "elapsedMs": 2386,
+  "fetchedAt": "2026-05-08T21:55:16.194Z",
+  "elapsedMs": 2066,
   "sourceTotal": 7,
   "sourceSuccess": 7,
   "sourceFail": 0,
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 2379
+      "elapsedMs": 321
     },
     {
       "id": "yna",
@@ -22,7 +22,7 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "ok",
       "itemCount": 120,
-      "elapsedMs": 66
+      "elapsedMs": 1372
     },
     {
       "id": "donga",
@@ -30,7 +30,7 @@
       "url": "https://rss.donga.com/total.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 48
+      "elapsedMs": 1229
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 78
+      "elapsedMs": 1776
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 45
+      "elapsedMs": 1889
     },
     {
       "id": "kmib",
@@ -54,7 +54,7 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 39
+      "elapsedMs": 1563
     },
     {
       "id": "hani",
@@ -62,7 +62,7 @@
       "url": "https://www.hani.co.kr/rss",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 166
+      "elapsedMs": 1992
     }
   ],
   "multiSourceKeywords": [
@@ -107,15 +107,15 @@
       "examples": [
         {
           "source": "yna",
+          "title": "이란 하르그섬 원유 해상유출 위성사진 포착…저장시설 포화?"
+        },
+        {
+          "source": "yna",
           "title": "미군 \"해상봉쇄 돌파시도한 이란 유조선 2척 오만만서 무력화\"(종합)"
         },
         {
           "source": "yna",
           "title": "\"미군, 對이란 해상봉쇄 뚫으려는 유조선 여러척 폭격\""
-        },
-        {
-          "source": "yna",
-          "title": "미 국무 \"8일 이란 답변 기대…진지한 제안 내놓길\""
         }
       ]
     },
@@ -422,27 +422,27 @@
       ]
     },
     {
-      "term": "보인",
+      "term": "원유",
       "total": 5,
       "sourceCount": 4,
       "sources": [
-        "sbs",
         "yna",
         "khan",
-        "mk"
+        "mk",
+        "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "눈물 보인 정청래 \"계엄 성공했다면 이 대통령도 저도 꽃게밥\""
+          "source": "yna",
+          "title": "이란 하르그섬 원유 해상유출 위성사진 포착…저장시설 포화?"
         },
         {
           "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+          "title": "이란 매체 \"원유 수출 방해하는 유조선 나포\""
         },
         {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
+          "source": "khan",
+          "title": "이란 매체 “원유 수출 방해하는 유조선 나포”"
         }
       ]
     },
@@ -522,6 +522,31 @@
       ]
     },
     {
+      "term": "보인",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "눈물 보인 정청래 \"계엄 성공했다면 이 대통령도 저도 꽃게밥\""
+        },
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        }
+      ]
+    },
+    {
       "term": "세무조사",
       "total": 4,
       "sourceCount": 4,
@@ -543,31 +568,6 @@
         {
           "source": "khan",
           "title": "국세청, 하나금융지주·하나은행 특별 세무조사 착수"
-        }
-      ]
-    },
-    {
-      "term": "원유",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 매체 \"원유 수출 방해하는 유조선 나포\""
-        },
-        {
-          "source": "khan",
-          "title": "이란 매체 “원유 수출 방해하는 유조선 나포”"
-        },
-        {
-          "source": "mk",
-          "title": "이란 매체 “원유 수출 방해하는 유조선 나포”"
         }
       ]
     },
@@ -1124,126 +1124,6 @@
       ]
     },
     {
-      "term": "송곳니",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
-        },
-        {
-          "source": "khan",
-          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
-        }
-      ]
-    },
-    {
-      "term": "사자가",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
-        },
-        {
-          "source": "khan",
-          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
-        }
-      ]
-    },
-    {
-      "term": "생각",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
-        },
-        {
-          "source": "khan",
-          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
-        }
-      ]
-    },
-    {
-      "term": "미국에",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
-        },
-        {
-          "source": "khan",
-          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
-        }
-      ]
-    },
-    {
-      "term": "경고",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?"
-        },
-        {
-          "source": "khan",
-          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
-        }
-      ]
-    },
-    {
       "term": "의혹",
       "total": 4,
       "sourceCount": 3,
@@ -1772,6 +1652,126 @@
       ]
     },
     {
+      "term": "송곳니",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        },
+        {
+          "source": "mk",
+          "title": "“송곳니 보인 사자가 웃는다고 생각 마라”…이란, 미국에 경고?"
+        }
+      ]
+    },
+    {
+      "term": "사자가",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        },
+        {
+          "source": "mk",
+          "title": "“송곳니 보인 사자가 웃는다고 생각 마라”…이란, 미국에 경고?"
+        }
+      ]
+    },
+    {
+      "term": "생각",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        },
+        {
+          "source": "mk",
+          "title": "“송곳니 보인 사자가 웃는다고 생각 마라”…이란, 미국에 경고?"
+        }
+      ]
+    },
+    {
+      "term": "미국에",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        },
+        {
+          "source": "mk",
+          "title": "“송곳니 보인 사자가 웃는다고 생각 마라”…이란, 미국에 경고?"
+        }
+      ]
+    },
+    {
+      "term": "경고",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"송곳니 보인 사자가 웃는다고 생각 마라\"…미국에 경고?(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “송곳니 보인 사자가 웃고 있다 생각 말라”…미국에 경고"
+        },
+        {
+          "source": "mk",
+          "title": "“송곳니 보인 사자가 웃는다고 생각 마라”…이란, 미국에 경고?"
+        }
+      ]
+    },
+    {
       "term": "주년",
       "total": 3,
       "sourceCount": 3,
@@ -2127,6 +2127,29 @@
       ]
     },
     {
+      "term": "포착",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 하르그섬 원유 해상유출 위성사진 포착…저장시설 포화?"
+        },
+        {
+          "source": "yna",
+          "title": "美, 'UFO 파일' 공개…아폴로 미션중 달 상공 미확인 물체 포착(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "美, 'UFO 파일' 공개…아폴로 미션중 달 상공 미확인 물체 포착"
+        }
+      ]
+    },
+    {
       "term": "부산",
       "total": 4,
       "sourceCount": 2,
@@ -2444,30 +2467,7 @@
         },
         {
           "source": "mk",
-          "title": "[속보] 美국제무역청 “한미 조선 협력 MOU 체결”"
-        }
-      ]
-    },
-    {
-      "term": "시작",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"美조지아주 현대車공장, 하이브리드 차량 생산 곧 시작\""
-        },
-        {
-          "source": "yna",
-          "title": "프로야구 LG 좌완 송승기, 경기 시작 후 6타자 연속 K 진기록"
-        },
-        {
-          "source": "donga",
-          "title": "“러브버그 올해도 대발생 가능성… 전쟁 시작”"
+          "title": "[속보] 美국제무역청 “한미 ‘조선파트너십 이니셔티브’ MOU 체결”"
         }
       ]
     }
@@ -2497,7 +2497,7 @@
     },
     {
       "term": "일교차",
-      "total": 5,
+      "total": 6,
       "sourceCount": 1,
       "sources": [
         "yna"
@@ -2505,15 +2505,15 @@
       "examples": [
         {
           "source": "yna",
+          "title": "전북 맑고 일교차 커…낮 기온 19∼23도"
+        },
+        {
+          "source": "yna",
           "title": "대구·경북 건조하고 맑아…일교차 15∼20도"
         },
         {
           "source": "yna",
           "title": "제주, 대체로 맑고 일교차 커…낮 최고 19∼20도"
-        },
-        {
-          "source": "yna",
-          "title": "충북 대체로 맑고 일교차 커…낮 최고 21~23도"
         }
       ]
     },
@@ -2606,6 +2606,28 @@
       ]
     },
     {
+      "term": "맑고",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "전북 맑고 일교차 커…낮 기온 19∼23도"
+        },
+        {
+          "source": "yna",
+          "title": "제주, 대체로 맑고 일교차 커…낮 최고 19∼20도"
+        },
+        {
+          "source": "yna",
+          "title": "충북 대체로 맑고 일교차 커…낮 최고 21~23도"
+        }
+      ]
+    },
+    {
       "term": "최고",
       "total": 4,
       "sourceCount": 1,
@@ -2624,28 +2646,6 @@
         {
           "source": "yna",
           "title": "충북 대체로 맑고 일교차 커…낮 최고 21~23도"
-        }
-      ]
-    },
-    {
-      "term": "맑고",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "제주, 대체로 맑고 일교차 커…낮 최고 19∼20도"
-        },
-        {
-          "source": "yna",
-          "title": "충북 대체로 맑고 일교차 커…낮 최고 21~23도"
-        },
-        {
-          "source": "yna",
-          "title": "[날씨] 내일 전국 대체로 맑고 일교차 커…경북권 대기 건조"
         }
       ]
     },
@@ -3254,24 +3254,6 @@
       ]
     },
     {
-      "term": "향연",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "해발 2240m서 펼쳐진 향연…하늘 끝까지 닿을 듯한 외침 \"BTS!\""
-        },
-        {
-          "source": "yna",
-          "title": "제22회 울산쇠부리축제 개막…사흘간 전통 제철문화 향연"
-        }
-      ]
-    },
-    {
       "term": "김태흠",
       "total": 2,
       "sourceCount": 1,
@@ -3322,24 +3304,6 @@
         {
           "source": "yna",
           "title": "트럼프 행정부, 美무역법원 '10% 글로벌 관세' 제동에 항소"
-        }
-      ]
-    },
-    {
-      "term": "사흘간",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[속보] 트럼프 \"러시아-우크라이나, 9∼11일 사흘간 휴전\""
-        },
-        {
-          "source": "yna",
-          "title": "제22회 울산쇠부리축제 개막…사흘간 전통 제철문화 향연"
         }
       ]
     },
@@ -3430,6 +3394,42 @@
         {
           "source": "yna",
           "title": "美, 'UFO 파일' 공개…아폴로 미션중 달 상공 미확인 물체 포착"
+        }
+      ]
+    },
+    {
+      "term": "버지니아주",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "美민주 유리한 버지니아주 선거구개편 무효화…트럼프 \"큰 승리\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "美버지니아주 대법, 선거구 개편안에 제동…민주당 타격"
+        }
+      ]
+    },
+    {
+      "term": "독일",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "독일 가정폭력범도 전자발찌 채운다"
+        },
+        {
+          "source": "yna",
+          "title": "'나치 패망일'에 독일 Z세대 징병제 부활 반대 시위"
         }
       ]
     }
