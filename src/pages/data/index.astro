@@ -115,6 +115,23 @@ const citationDatasetLd = buildDatasetLD({
         </p>
       </article>
 
+      <article class="dataset-card">
+        <header>
+          <h2><a href="/data/100-key/" class="card-link">한국 경제 100대 지표</a></h2>
+          <p class="meta">
+            한국은행 ECOS 1차 자료 · 매일 자동 갱신 · 출처 표시 의무
+          </p>
+        </header>
+        <p>
+          한국은행이 공식 선정한 한국 경제 100대 통계지표. 시장금리·환율·통화량·주식·GDP·물가 등
+          29개 분야 약 100건을 ECOS Open API 로 매일 자동 fetch — 운영자는 가공하지 않고 원본
+          그대로 표시한다.
+        </p>
+        <p class="card-cta">
+          <a href="/data/100-key/">→ 100대 지표 페이지</a>
+        </p>
+      </article>
+
       <article class="dataset-card placeholder">
         <header>
           <h2>차트 Dataset — 준비 중</h2>
@@ -247,5 +264,22 @@ const citationDatasetLd = buildDatasetLD({
     line-height: 1.7;
     border-top: 0.5px solid var(--color-ink-quat);
     padding-top: 18px;
+  }
+  .card-link {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .card-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 2px;
+  }
+  .card-cta {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .card-cta a {
+    color: var(--color-link);
   }
 </style>
