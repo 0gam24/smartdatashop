@@ -11,6 +11,7 @@ import Footer from '../components/Footer.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import ArticleTOC from '../components/ArticleTOC.astro';
 import CitationExport from '../components/CitationExport.astro';
+import SisterDeepDive from '../components/network/SisterDeepDive.astro';
 import { categoryToKorean, formatKoreanDate, pulseDateParts, type Category } from '../lib/korean';
 import { buildBreadcrumbLD } from '../lib/jsonld';
 
@@ -155,6 +156,8 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd];
       <hr />
       <SourceList sources={sources} />
     </div>
+
+    <SisterDeepDive mainCategory={category} variant="inline" />
 
     <slot name="related" />
   </main>

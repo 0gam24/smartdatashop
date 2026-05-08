@@ -21,6 +21,7 @@ import CorrectionsBlock from '../components/CorrectionsBlock.astro';
 import Footer from '../components/Footer.astro';
 import ArticleTOC from '../components/ArticleTOC.astro';
 import CitationExport from '../components/CitationExport.astro';
+import SisterDeepDive from '../components/network/SisterDeepDive.astro';
 import { categoryToKorean, formatKoreanDate, type Category } from '../lib/korean';
 
 interface Source {
@@ -145,6 +146,8 @@ const categoryLabel = categoryToKorean(category).replace(/ /g, '');
       <hr />
       <SourceList sources={sources} />
     </div>
+
+    <SisterDeepDive mainCategory={category} variant="inline" />
 
     <slot name="related" />
   </main>
