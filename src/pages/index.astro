@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Masthead from '../components/Masthead.astro';
 import Hero from '../components/Hero.astro';
+import EconomyChart from '../components/EconomyChart.astro';
 import SectionHead from '../components/SectionHead.astro';
 import PulseList from '../components/PulseList.astro';
 import PulseCard from '../components/PulseCard.astro';
@@ -165,6 +166,21 @@ const sisters = sisterOrder.map((key) => {
   <main id="main" role="main">
   <Hero entry={latest} />
 
+  <!-- Section 01b: 오늘의 핵심 지표 (한국은행 ECOS 매일 자동 갱신) -->
+  <section class="section section-key-econ" data-screen-label="01b 핵심 지표">
+    <div class="page-width">
+      <div class="key-econ-head">
+        <div class="key-econ-eyebrow">오 늘 의 · 핵 심 지 표</div>
+        <a href="/data/timeseries/" class="key-econ-more">전체 시계열 →</a>
+      </div>
+      <div class="key-econ-grid">
+        <EconomyChart ecosId="base-rate" compact />
+        <EconomyChart ecosId="usd-krw" compact />
+        <EconomyChart ecosId="cpi" compact />
+      </div>
+    </div>
+  </section>
+
   <!-- Section 02: 오늘의 펄스 -->
   <section class="section" data-screen-label="02 최신 펄스">
     <div class="page-width">
@@ -234,4 +250,42 @@ const sisters = sisterOrder.map((key) => {
       gap: 32px;
     }
   }
+
+  /* 핵심 지표 섹션 (Section 01b) */
+  .section-key-econ { padding-top: 24px; padding-bottom: 24px; }
+  .key-econ-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .key-econ-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+  }
+  .key-econ-more {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-link);
+    letter-spacing: 0.04em;
+  }
+  .key-econ-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 880px) {
+    .key-econ-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .key-econ-grid { grid-template-columns: 1fr; }
+  }
+  /* EconomyChart 의 자체 .ec-card 마진과 충돌 회피 — 그리드 안에서는 0 */
+  .key-econ-grid :global(.ec-card),
+  .key-econ-grid :global(.ec-empty) { margin: 0; }
 </style>
