@@ -151,10 +151,13 @@ const chartData = seriesOk.map((s) => ({
       <section class="ts-card" id={`ts-${s.id}`}>
         <div class="ts-card-head">
           <div>
-            <h2 class="ts-card-title">{s.label}</h2>
+            <h2 class="ts-card-title">
+              <a href={`/topic/${s.id}/`} class="ts-title-link">{s.label} →</a>
+            </h2>
             <p class="ts-card-meta">
               {s.meta?.statName ?? '—'} · 통계코드 {s.statCode} · 항목 {s.itemCode} ·
-              {' '}주기 {s.cycle === 'M' ? '월' : s.cycle === 'D' ? '일' : s.cycle === 'Q' ? '분기' : '연'}
+              {' '}주기 {s.cycle === 'M' ? '월' : s.cycle === 'D' ? '일' : s.cycle === 'Q' ? '분기' : '연'} ·
+              {' '}<a href={`/topic/${s.id}/`}>관련 펄스·인사이트 보기</a>
             </p>
           </div>
           <div class="ts-stats">
@@ -374,6 +377,12 @@ const chartData = seriesOk.map((s) => ({
     margin: 0;
     letter-spacing: 0.04em;
   }
+  .ts-card-meta a { color: var(--color-link); }
+  .ts-title-link {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .ts-title-link:hover { color: var(--color-accent); }
   .ts-stats {
     display: flex;
     gap: 18px;

@@ -6,9 +6,12 @@
  * guidebookChapter) 에서 매칭 글을 수집하고 viz 컴포넌트로 한 페이지에 합성.
  */
 import { getCollection } from 'astro:content';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ChartLib from '../../components/ChartLib.astro';
 import KpiTile from '../../components/viz/KpiTile.astro';
 import {
   buildBreadcrumbLD,
@@ -33,6 +36,69 @@ const [pulses, insights, books, chapters] = await Promise.all([
   getCollection('guidebook'),
   getCollection('guidebookChapter'),
 ]);
+
+// ───────────────────────────────────────────────────────────────────
+// ECOS 시계열 (config.ecosSeriesId 가 있을 때만)
+// ───────────────────────────────────────────────────────────────────
+
+type EcosPoint = { time: string | null; value: number | null };
+type EcosSeries = {
+  id: string;
+  label: string;
+  short: string;
+  cycle: 'M' | 'D' | 'Q' | 'Y';
+  unit: string;
+  status: 'ok' | 'fail';
+  pointCount: number;
+  meta: { statName: string | null; itemName: string | null; unitName: string | null } | null;
+  latest: EcosPoint | null;
+  change: { abs: number; pct: number } | null;
+  yoyChange: { abs: number; pct: number } | null;
+  points: EcosPoint[];
+};
+
+let ecosSeries: EcosSeries | null = null;
+let ecosFetchedAt: string | null = null;
+if (config.ecosSeriesId) {
+  const tsPath = resolve(process.cwd(), 'data/economy/ecos-timeseries.json');
+  if (existsSync(tsPath)) {
+    try {
+      const j = JSON.parse(readFileSync(tsPath, 'utf8'));
+      ecosFetchedAt = j.fetchedAt ?? null;
+      const found = (j.series ?? []).find((s: any) => s.id === config.ecosSeriesId);
+      if (found && found.status === 'ok') ecosSeries = found as EcosSeries;
+    } catch {}
+  }
+}
+
+function fmtTimeShort(t: string | null, cycle: string): string {
+  if (!t) return '—';
+  if (cycle === 'D' && t.length === 8) return `${t.slice(4, 6)}.${t.slice(6, 8)}`;
+  if (cycle === 'M' && t.length === 6) return `${t.slice(0, 4)}.${t.slice(4, 6)}`;
+  return t;
+}
+
+function fmtNum(n: number | null | undefined, decimals = 2): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  return n.toLocaleString('ko-KR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function fmtPct(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n)) return '—';
+  const sign = n > 0 ? '+' : '';
+  return `${sign}${n.toFixed(2)}%`;
+}
+
+const chartPayload = ecosSeries
+  ? {
+      id: ecosSeries.id,
+      label: ecosSeries.short,
+      cycle: ecosSeries.cycle,
+      unit: ecosSeries.meta?.unitName ?? ecosSeries.unit,
+      labels: ecosSeries.points.map((p) => fmtTimeShort(p.time, ecosSeries.cycle)),
+      values: ecosSeries.points.map((p) => p.value),
+    }
+  : null;
 
 function matchByTitle(title: string): boolean {
   return config.match.titleIncludes ? config.match.titleIncludes.test(title) : false;
@@ -112,6 +178,7 @@ const totalItems = matchedPulses.length + matchedInsights.length + matchedChapte
   jsonld={[collectionLd, breadcrumbLd, itemListLd]}
 >
   <Header />
+  {ecosSeries && <ChartLib />}
 
   <main id="main" role="main" class="topic-wrap">
     <header class="topic-header">
@@ -119,6 +186,56 @@ const totalItems = matchedPulses.length + matchedInsights.length + matchedChapte
       <h1 class="topic-title">{config.title}</h1>
       {config.lead && <p class="topic-lead">{config.lead}</p>}
     </header>
+
+    {ecosSeries && (
+      <section class="topic-chart">
+        <div class="tc-head">
+          <div>
+            <h2 class="tc-title">{ecosSeries.label} — 실시간 추이</h2>
+            <p class="tc-meta">
+              {ecosSeries.meta?.statName ?? ''} · 한국은행 ECOS 1차 자료 · 매일 자동 갱신
+              {ecosFetchedAt && (
+                <> · 마지막 갱신 {new Date(ecosFetchedAt).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</>
+              )}
+            </p>
+          </div>
+          <div class="tc-stats">
+            <div class="tc-stat">
+              <div class="tc-stat-label">최신</div>
+              <div class="tc-stat-value">
+                {fmtNum(ecosSeries.latest?.value ?? null, 2)}<span class="tc-stat-unit">{ecosSeries.meta?.unitName ?? ecosSeries.unit}</span>
+              </div>
+              <div class="tc-stat-meta">{fmtTimeShort(ecosSeries.latest?.time ?? null, ecosSeries.cycle)}</div>
+            </div>
+            {ecosSeries.change && (
+              <div class="tc-stat">
+                <div class="tc-stat-label">{ecosSeries.cycle === 'D' ? '전일' : '전월'}</div>
+                <div class={`tc-stat-value tc-delta-${ecosSeries.change.abs > 0 ? 'up' : ecosSeries.change.abs < 0 ? 'down' : 'flat'}`}>
+                  {ecosSeries.change.abs > 0 ? '▲' : ecosSeries.change.abs < 0 ? '▼' : '·'}{' '}{fmtPct(ecosSeries.change.pct)}
+                </div>
+                <div class="tc-stat-meta">{fmtNum(Math.abs(ecosSeries.change.abs), 2)}</div>
+              </div>
+            )}
+            {ecosSeries.yoyChange && (
+              <div class="tc-stat">
+                <div class="tc-stat-label">전년 동기</div>
+                <div class={`tc-stat-value tc-delta-${ecosSeries.yoyChange.abs > 0 ? 'up' : ecosSeries.yoyChange.abs < 0 ? 'down' : 'flat'}`}>
+                  {fmtPct(ecosSeries.yoyChange.pct)}
+                </div>
+                <div class="tc-stat-meta">{fmtNum(ecosSeries.yoyChange.abs, 2)}</div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div class="tc-canvas-wrap">
+          <canvas id={`topic-chart-${ecosSeries.id}`} aria-label={`${ecosSeries.label} 추이 차트`} role="img"></canvas>
+        </div>
+        <p class="tc-foot">
+          전체 시계열·다른 지표는 <a href="/data/timeseries/">/data/timeseries/</a>,
+          출처 정책은 <a href="/methodology/">/methodology/</a> 참조.
+        </p>
+      </section>
+    )}
 
     <section class="topic-stats">
       <KpiTile title="발행 글" n={totalItems} unit="편" />
@@ -222,6 +339,72 @@ const totalItems = matchedPulses.length + matchedInsights.length + matchedChapte
   <Footer />
 </BaseLayout>
 
+{chartPayload && (
+  <script is:inline define:vars={{ chartPayload }}>
+    function ready() { return typeof window !== 'undefined' && typeof window.Chart !== 'undefined'; }
+    function init() {
+      const ACCENT = '#8b1538';
+      const INK_MUTE = '#707070';
+      Chart.defaults.font.family = "'Pretendard Variable','Pretendard',system-ui,sans-serif";
+      Chart.defaults.color = INK_MUTE;
+      Chart.defaults.borderColor = '#cccccc';
+
+      const canvas = document.getElementById(`topic-chart-${chartPayload.id}`);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartPayload.labels,
+          datasets: [{
+            label: chartPayload.label,
+            data: chartPayload.values,
+            borderColor: ACCENT,
+            backgroundColor: 'rgba(139, 21, 56, 0.08)',
+            borderWidth: 1.5,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+            fill: true,
+            tension: 0.18,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              titleFont: { size: 11 },
+              bodyFont: { size: 12 },
+              padding: 8,
+              callbacks: {
+                label: function(item) {
+                  return chartPayload.label + ': ' + Number(item.parsed.y).toLocaleString('ko-KR') + ' ' + chartPayload.unit;
+                },
+              },
+            },
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 }, maxTicksLimit: 8 } },
+            y: { grid: { color: '#eaeaea', lineWidth: 0.5 }, ticks: { font: { size: 10 } } },
+          },
+        },
+      });
+    }
+    if (ready()) init();
+    else {
+      let attempts = 0;
+      const t = setInterval(() => {
+        if (ready() || attempts++ > 60) { clearInterval(t); if (ready()) init(); }
+      }, 100);
+    }
+  </script>
+)}
+
 <style>
   .topic-wrap {
     max-width: var(--width-page);
@@ -259,6 +442,65 @@ const totalItems = matchedPulses.length + matchedInsights.length + matchedChapte
     color: var(--color-ink-secondary);
     margin: 0;
   }
+  /* ─── ECOS 시계열 차트 (ecosSeriesId 가 설정된 토픽) ─── */
+  .topic-chart {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 22px 24px;
+    margin-bottom: 36px;
+  }
+  .tc-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  @media (max-width: 720px) { .tc-head { grid-template-columns: 1fr; } }
+  .tc-title {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .tc-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin: 0;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+  .tc-stats { display: flex; gap: 18px; flex-wrap: wrap; }
+  .tc-stat { min-width: 80px; }
+  .tc-stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+  .tc-stat-value {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .tc-stat-unit { font-size: 11px; color: var(--color-ink-tertiary); margin-left: 3px; font-weight: 400; }
+  .tc-stat-meta { font-family: var(--font-mono); font-size: 10px; color: var(--color-ink-tertiary); margin-top: 2px; }
+  .tc-delta-up { color: #a83a3a; }
+  .tc-delta-down { color: #2a7a3a; }
+  .tc-delta-flat { color: var(--color-ink-tertiary); }
+  .tc-canvas-wrap { height: 220px; position: relative; }
+  .tc-foot {
+    margin: 12px 0 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+  .tc-foot a { color: var(--color-link); }
+
   .topic-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
