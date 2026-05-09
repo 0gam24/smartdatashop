@@ -244,6 +244,37 @@ export function getEcosHeroSpotlight(): EcosSpotlight | null {
   };
 }
 
+/** 자매 사이트별 가장 최근 글 1건 — sister-mirrors/{id}/posts.json 기반. */
+export interface SisterLatestPost {
+  title: string;
+  url: string;
+  publishedAt?: string;
+}
+
+export function getSisterLatest(siteId: string): SisterLatestPost | null {
+  type Post = { title: string; url: string; publishedAt?: string };
+  type MirrorFile = { posts?: Post[] };
+
+  const j = readJson<MirrorFile>(`sister-mirrors/${siteId}/posts.json`);
+  if (!j?.posts || j.posts.length === 0) return null;
+
+  // 최신순 — publishedAt 기준 내림차순. 동률이거나 미지정이면 배열 순서 유지.
+  const sorted = j.posts
+    .slice()
+    .sort((a, b) => {
+      const ta = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const tb = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return tb - ta;
+    });
+  const top = sorted[0];
+  if (!top || typeof top.title !== 'string' || typeof top.url !== 'string') return null;
+  return {
+    title: top.title,
+    url: top.url,
+    publishedAt: top.publishedAt,
+  };
+}
+
 /** 뉴스 multiSource 키워드 상위 N — 등장 출처 수 큰 순. */
 export interface NewsKeywordRow {
   term: string;

@@ -24,7 +24,7 @@ import {
   buildPersonLD,
   buildSearchActionLD,
 } from '../lib/jsonld';
-import { getTodaySignals, getEcosHeroSpotlight } from '../lib/today-signals';
+import { getTodaySignals, getEcosHeroSpotlight, getSisterLatest } from '../lib/today-signals';
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
@@ -159,18 +159,19 @@ const guidebooks = guidebooksCollection
     };
   });
 
-// 섹션 06 — 자매 사이트 (정적 데이터, src/data/sister-sites.ts 권위 출처).
-// 하드코딩 latest 문구는 검수 불가능한 실시간 데이터라 제거 — 운영자가 수동
-// 갱신 시 stale 위험. 향후 IndexNow + 자매 사이트 RSS fetch 로 자동화.
+// 섹션 06 — 자매 사이트 (정적 sister-sites.ts 메타 + 자동 fetch sister-mirrors/{id}/posts.json
+// 의 최신 글 1건). sync-sister-mirrors cron 이 매일 02:00 KST 갱신 → 자매 카드 latest 자동.
 import { SISTER_SITES, type SisterSiteKey } from '../data/sister-sites';
 const sisterOrder: SisterSiteKey[] = ['calculatorhost', 'awoo', 'moneylook', 'iknowhowinfo'];
 const sisters = sisterOrder.map((key) => {
   const meta = SISTER_SITES[key];
+  const latestPost = getSisterLatest(key);
   return {
     domain: meta.domain,
     name: meta.name,
     persona: meta.persona,
-    latest: '', // 컴포넌트가 빈 값을 graceful 처리
+    latest: latestPost?.title ?? '', // posts.json 없거나 비어있으면 빈 문자열 (컴포넌트 graceful)
+    latestUrl: latestPost?.url ?? '',
     baseUrl: meta.baseUrl,
   };
 });
