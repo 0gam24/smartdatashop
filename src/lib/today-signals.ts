@@ -174,6 +174,76 @@ export function getRecentRssItems(limit = 5): RssRecentRow[] {
     }));
 }
 
+/** Hero 우측 spotlight — ECOS |Δ%| 가장 큰 1종을 단일 카드 데이터로 변환. */
+export interface EcosSpotlight {
+  topicId: string;
+  title: string;
+  value: string;
+  unit: string;
+  delta: string;
+  source: string;
+}
+
+const STAT_LABEL: Record<string, string> = {
+  'base-rate': '한국은행 기준금리',
+  'usd-krw': '원/달러 환율',
+  cpi: '소비자물가지수',
+  kospi: 'KOSPI',
+  'household-debt': '가계대출 잔액',
+};
+
+/** YYYYMM / YYYYMMDD / YYYYQ 등 ECOS time 코드를 사람-가독 라벨로. */
+function formatEcosTime(time: string | null, cycle: string): string {
+  if (!time) return '';
+  if (cycle === 'D' && time.length === 8) {
+    return `${time.slice(0, 4)}.${time.slice(4, 6)}.${time.slice(6, 8)}`;
+  }
+  if (cycle === 'M' && time.length === 6) {
+    return `${time.slice(0, 4)}.${time.slice(4, 6)}`;
+  }
+  if (cycle === 'Q' && time.length === 5) {
+    return `${time.slice(0, 4)} Q${time.slice(4, 5)}`;
+  }
+  if (cycle === 'Y' && time.length === 4) return time;
+  return time;
+}
+
+/**
+ * Hero 우측 spotlight 단일 데이터 카드.
+ *
+ * 모든 시계열의 |Δ%| 중 최대 1종을 선택. 단, 변화가 0 이거나 ok 상태가 아니면 null.
+ * 매일 자동 갱신되는 ECOS 시계열을 hero 시야권에 자동 노출 — Discover 신선도 신호.
+ */
+export function getEcosHeroSpotlight(): EcosSpotlight | null {
+  const top = getEcosTopChanges(1)[0];
+  if (!top) return null;
+
+  // ECOS time 라벨 끌어내기 위해 원본 다시 읽음 (이미 캐시 가까움 — 빌드 시 1회)
+  type SeriesPoint = { time: string | null };
+  type Series = { id: string; cycle: string; latest: SeriesPoint | null };
+  type EcosFile = { series?: Series[] };
+  const j = readJson<EcosFile>('data/economy/ecos-timeseries.json');
+  const orig = j?.series?.find((s) => s.id === top.id);
+  const timeLabel = orig ? formatEcosTime(orig.latest?.time ?? null, orig.cycle) : '';
+
+  const fmtVal = (n: number, unit: string): string => {
+    if (Math.abs(n) >= 1000) return n.toLocaleString('ko-KR', { maximumFractionDigits: 0 });
+    if (unit === '%') return n.toFixed(2);
+    return n.toLocaleString('ko-KR', { maximumFractionDigits: 2 });
+  };
+  const sign = top.changePct > 0 ? '+' : '';
+  const cycleHint = top.cycleLabel === '직전' ? '' : ` (${top.cycleLabel} 대비)`;
+
+  return {
+    topicId: top.id,
+    title: STAT_LABEL[top.id] ?? top.short,
+    value: fmtVal(top.latestValue, top.unit),
+    unit: top.unit,
+    delta: `${sign}${top.changePct.toFixed(2)}%${cycleHint}`,
+    source: timeLabel ? `한국은행 ECOS · ${timeLabel}` : '한국은행 ECOS',
+  };
+}
+
 /** 뉴스 multiSource 키워드 상위 N — 등장 출처 수 큰 순. */
 export interface NewsKeywordRow {
   term: string;
