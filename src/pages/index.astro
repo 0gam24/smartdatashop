@@ -24,7 +24,7 @@ import {
   buildPersonLD,
   buildSearchActionLD,
 } from '../lib/jsonld';
-import { getTodaySignals } from '../lib/today-signals';
+import { getTodaySignals, getEcosHeroSpotlight } from '../lib/today-signals';
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
@@ -57,6 +57,12 @@ const todaySignals = getTodaySignals();
 // NETWORK.md §2.3: "메인은 자매 funnel hub" — 자매 트래픽 합산이 정체성.
 // 펄스 발행이 끊긴 날 자매 cross-link funnel 의 비중을 높여 메인 hub 역할 유지.
 const isQuietDay = todayCount === 0;
+
+// Hero 우측 spotlight — ECOS |Δ%| 가장 큰 1종 (Plan 안 P2 priority 4):
+// 펄스 hero + 데이터 spotlight 병기 = 발행 stale 한 날에도 신선도 신호 유지.
+// fail-soft: ecos-timeseries.json 없거나 |Δ| 0 이면 null → Hero 의 hasChart 가
+// 자동으로 차트 영역 미렌더 (안전 기본값).
+const ecosSpotlight = getEcosHeroSpotlight();
 const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   const { personas, dataTypes, actions } = entry.data.tags;
   const tags = [
@@ -181,7 +187,16 @@ const sisters = sisterOrder.map((key) => {
   />
 
   <main id="main" role="main">
-  <Hero entry={latest} />
+  <Hero
+    entry={latest}
+    chartLabel={ecosSpotlight ? '오늘의 지표' : undefined}
+    chartTitle={ecosSpotlight?.title}
+    chartValue={ecosSpotlight?.value}
+    chartUnit={ecosSpotlight?.unit}
+    chartDelta={ecosSpotlight?.delta}
+    chartSource={ecosSpotlight?.source}
+    chartHref={ecosSpotlight ? `/topic/${ecosSpotlight.topicId}/` : undefined}
+  />
 
   <!-- Section 01b: 오늘의 핵심 지표 (한국은행 ECOS 매일 자동 갱신) -->
   <section class="section section-key-econ" data-screen-label="01b 핵심 지표">

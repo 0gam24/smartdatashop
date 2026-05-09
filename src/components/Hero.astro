@@ -30,6 +30,8 @@ interface Props {
   chartUnit?: string;
   chartDelta?: string;
   chartSource?: string;
+  /** 차트 카드 클릭 시 이동할 내부 링크 (e.g. /topic/base-rate/). 미지정 시 비클릭. */
+  chartHref?: string;
 }
 
 const {
@@ -40,6 +42,7 @@ const {
   chartUnit,
   chartDelta,
   chartSource,
+  chartHref,
 } = Astro.props;
 
 // 차트는 핵심 5종(title/value/unit/delta/source)이 모두 명시 전달될 때만 그린다.
@@ -89,15 +92,27 @@ const staleLabel = hasEntry ? staleDayLabel(entry!.data.publishedAt) : null;
         </div>
 
         {hasChart && (
-          <aside class="hero-chart">
-            <div class="hero-chart-label">{chartLabel}</div>
-            <div class="hero-chart-title">{chartTitle}</div>
-            <div class="hero-chart-value">
-              <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
-              <span class="delta">{chartDelta}</span>
-            </div>
-            <div class="hero-chart-source">{chartSource}</div>
-          </aside>
+          chartHref ? (
+            <a href={chartHref} class="hero-chart hero-chart-link no-underline" aria-label={`${chartTitle} 토픽 상세`}>
+              <div class="hero-chart-label">{chartLabel}</div>
+              <div class="hero-chart-title">{chartTitle}</div>
+              <div class="hero-chart-value">
+                <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
+                <span class="delta">{chartDelta}</span>
+              </div>
+              <div class="hero-chart-source">{chartSource}</div>
+            </a>
+          ) : (
+            <aside class="hero-chart">
+              <div class="hero-chart-label">{chartLabel}</div>
+              <div class="hero-chart-title">{chartTitle}</div>
+              <div class="hero-chart-value">
+                <span class="num">{chartValue}<span class="num-unit">{chartUnit}</span></span>
+                <span class="delta">{chartDelta}</span>
+              </div>
+              <div class="hero-chart-source">{chartSource}</div>
+            </aside>
+          )
         )}
       </div>
     </div>
@@ -175,6 +190,22 @@ const staleLabel = hasEntry ? staleDayLabel(entry!.data.publishedAt) : null;
     border: 0.5px solid var(--color-ink-quat);
     padding: 20px 22px;
     background: var(--color-paper);
+  }
+  /* 토픽 페이지 링크 버전 — 색상 상속 + 호버 시 살짝 강조 */
+  a.hero-chart-link {
+    display: block;
+    color: inherit;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  a.hero-chart-link:hover {
+    background: var(--color-paper-soft);
+    border-color: var(--color-accent-soft);
+  }
+  a.hero-chart-link:hover .hero-chart-title {
+    color: var(--color-accent);
+  }
+  .hero-chart-title {
+    transition: color 0.15s ease;
   }
   .hero-chart-label {
     font-size: 11px;
