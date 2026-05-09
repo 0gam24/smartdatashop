@@ -244,6 +244,69 @@ export function getEcosHeroSpotlight(): EcosSpotlight | null {
   };
 }
 
+// ───────────────────────────────────────────────────────────────────
+// /this-week/ 주간 digest 페이지용 helpers — 직전 7일 데이터 집계.
+// ───────────────────────────────────────────────────────────────────
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
+/** "이번 주" 라벨 (KST 기준 ISO YYYY-MM-DD ~ YYYY-MM-DD). */
+export interface WeekRange {
+  startIso: string;
+  endIso: string;
+  label: string;
+}
+
+export function getCurrentWeekRange(now: Date = new Date()): WeekRange {
+  const KST_OFFSET = 9 * 60 * 60 * 1000;
+  const endKst = new Date(now.getTime() + KST_OFFSET);
+  const startKst = new Date(endKst.getTime() - WEEK_MS);
+  const startIso = startKst.toISOString().slice(0, 10);
+  const endIso = endKst.toISOString().slice(0, 10);
+  return {
+    startIso,
+    endIso,
+    label: `${startIso} ~ ${endIso}`,
+  };
+}
+
+/** 7일 윈도우 안 정부 RSS 신착 — pubDateISO 기준 정렬 + 중복 제거. */
+export function getWeekRssTop(limit = 8): RssRecentRow[] {
+  type AggItem = {
+    title: string;
+    link: string;
+    pubDateISO: string;
+    sourceName: string;
+    sourceCategory: string;
+  };
+  type RssFile = { aggregateItems?: AggItem[] };
+
+  const j = readJson<RssFile>('data/rss/government.json');
+  if (!j?.aggregateItems) return [];
+
+  const cutoff = Date.now() - WEEK_MS;
+  return j.aggregateItems
+    .filter(
+      (it) =>
+        typeof it.title === 'string' &&
+        typeof it.link === 'string' &&
+        typeof it.pubDateISO === 'string' &&
+        new Date(it.pubDateISO).getTime() >= cutoff,
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.pubDateISO).getTime() - new Date(a.pubDateISO).getTime(),
+    )
+    .slice(0, limit)
+    .map((it) => ({
+      title: it.title.replace(/&middot;/g, '·').replace(/&amp;/g, '&').replace(/&quot;/g, '"'),
+      link: it.link,
+      publishedIso: it.pubDateISO,
+      sourceName: it.sourceName ?? '',
+      sourceCategory: it.sourceCategory ?? '',
+    }));
+}
+
 /** 자매 사이트별 가장 최근 글 1건 — sister-mirrors/{id}/posts.json 기반. */
 export interface SisterLatestPost {
   title: string;

@@ -1,0 +1,482 @@
+---
+/**
+ * /this-week/ — 이번 주 한국 데이터 자동 종합 페이지.
+ *
+ * 매 빌드마다 직전 7일 윈도우로 자동 집계 — cron (매일 00:30 KST fetch + 02:00 sync)
+ * 이 push 마다 CF Pages 빌드 → 콘텐츠 자동 회전.
+ *
+ * URL 은 /this-week/ 1건 고정 (스냅샷 아카이브 X). C-Rank "Blog Activity"
+ * 신호로는 V1 — 발행 빈도 시그널 절반 정도. V2 가 매주 새 URL 스냅샷.
+ *
+ * 환각 위험 0:
+ *   - 발행된 펄스/인사이트/챕터 = 이미 ADR 0006 4기준 통과한 글의 링크만
+ *   - ECOS 시계열 = raw 1차 출처 그대로 (한국은행)
+ *   - 정부 RSS = 제목·링크·기관 (본문 복제 X)
+ *   - 자매 신착 = 제목·외부 링크 (본문 복제 X)
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import {
+  getEcosTopChanges,
+  getWeekRssTop,
+  getCurrentWeekRange,
+  getSisterLatest,
+} from '../lib/today-signals';
+import {
+  buildBreadcrumbLD,
+  buildCollectionPageLD,
+  buildItemListLD,
+} from '../lib/jsonld';
+import { categoryToKorean, formatKoreanDate, pulseUrl, insightUrl } from '../lib/korean';
+import { SISTER_SITES, type SisterSiteKey } from '../data/sister-sites';
+
+const SITE = 'https://smartdatashop.kr';
+const PAGE_PATH = '/this-week/';
+
+// ── 데이터 집계 ─────────────────────────────────────────────────
+const week = getCurrentWeekRange();
+const cutoffMs = new Date(`${week.startIso}T00:00:00Z`).getTime();
+
+const [pulses, insights, chapters] = await Promise.all([
+  getCollection('pulse'),
+  getCollection('insight'),
+  getCollection('guidebookChapter'),
+]);
+
+// 이번 주 발행 — publishedAt 이 startIso 이후 건만
+const weekPulses = pulses
+  .filter((e) => new Date(e.data.publishedAt).getTime() >= cutoffMs)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+const weekInsights = insights
+  .filter((e) => new Date(e.data.publishedAt).getTime() >= cutoffMs)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+const weekChapters = chapters
+  .filter((e) => new Date(e.data.publishedAt).getTime() >= cutoffMs)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const ecosChanges = getEcosTopChanges(5);
+const weekRss = getWeekRssTop(8);
+
+// 자매 4개 이번 주 신착 (publishedAt 이 startIso 이후 건만 — 없으면 가장 최신 1건)
+const sisterOrder: SisterSiteKey[] = ['calculatorhost', 'awoo', 'moneylook', 'iknowhowinfo'];
+const sisterRows = sisterOrder.map((key) => {
+  const meta = SISTER_SITES[key];
+  const top = getSisterLatest(key);
+  if (!top) return null;
+  const pubMs = top.publishedAt ? new Date(top.publishedAt).getTime() : 0;
+  const inWindow = pubMs >= cutoffMs;
+  return {
+    siteKey: key,
+    siteName: meta.name,
+    domain: meta.domain,
+    title: top.title,
+    url: top.url,
+    publishedAt: top.publishedAt ?? '',
+    inWindow,
+  };
+}).filter(Boolean) as Array<{
+  siteKey: SisterSiteKey;
+  siteName: string;
+  domain: string;
+  title: string;
+  url: string;
+  publishedAt: string;
+  inWindow: boolean;
+}>;
+
+const weekTotal = weekPulses.length + weekInsights.length + weekChapters.length;
+const hasContent = weekTotal > 0 || ecosChanges.length > 0 || weekRss.length > 0 || sisterRows.length > 0;
+
+// ── 메타 + LD ───────────────────────────────────────────────────
+const pageTitle = `이번 주 한국 데이터 — ${week.label}`;
+const pageDescription = `이번 주 (${week.label}) 한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터 종합. 발행 ${weekTotal}건 + 정부 발표 ${weekRss.length}건 + ECOS 변화 + 자매 사이트 신착.`;
+
+const breadcrumbLd = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '이번 주', url: PAGE_PATH },
+]);
+const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, PAGE_PATH);
+const itemListSrc = [
+  ...weekPulses.map((e) => ({ name: e.data.title, url: pulseUrl(e.slug, e.data.publishedAt) })),
+  ...weekInsights.map((e) => ({ name: e.data.title, url: insightUrl(e.slug) })),
+];
+const itemListLd = itemListSrc.length > 0 ? buildItemListLD(itemListSrc) : null;
+const jsonld: object[] = itemListLd
+  ? [collectionLd, itemListLd, breadcrumbLd]
+  : [collectionLd, breadcrumbLd];
+
+const keywords = ['이번 주', '한국 데이터', '주간 종합', '1차 출처', '데이터 저널', 'ECOS', '정부 발표'];
+
+function fmtPct(n: number): string {
+  if (!Number.isFinite(n)) return '—';
+  const sign = n > 0 ? '+' : '';
+  return `${sign}${n.toFixed(2)}%`;
+}
+function deltaCls(n: number): string {
+  if (!Number.isFinite(n) || n === 0) return 'flat';
+  return n > 0 ? 'up' : 'down';
+}
+function elapsedShort(iso: string): string {
+  const ms = Date.now() - new Date(iso).getTime();
+  if (!Number.isFinite(ms) || ms < 0) return '';
+  const hours = Math.floor(ms / (1000 * 60 * 60));
+  if (hours < 24) return `${hours}시간 전`;
+  const days = Math.floor(hours / 24);
+  return `${days}일 전`;
+}
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={keywords}
+  jsonld={jsonld}
+>
+  <Header activeNav="daily" />
+
+  <main id="main" role="main" class="tw-wrap">
+    <header class="tw-header">
+      <div class="tw-eyebrow">이 번 · 주 · 종 합</div>
+      <h1 class="tw-title">이번 주 한국 데이터</h1>
+      <div class="tw-range">{week.label} · KST</div>
+      <p class="tw-lead">
+        직전 7일 동안 한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 한 페이지에 종합했습니다.
+        매 빌드마다 자동 갱신 — 이미 발행된 글 + 한국은행 ECOS + 정부 RSS + 자매 사이트 mirror 데이터를 그대로 모아 보여줍니다.
+      </p>
+    </header>
+
+    {!hasContent && (
+      <p class="tw-empty">이번 주 집계 데이터가 아직 없습니다. cron 데이터 갱신 후 자동 채워집니다.</p>
+    )}
+
+    {weekTotal > 0 && (
+      <section class="tw-section">
+        <h2 class="tw-h2"><span class="num">01</span>이번 주 발행 <span class="tw-count">{weekTotal}건</span></h2>
+        <ul class="tw-list">
+          {weekPulses.map((e) => (
+            <li class="tw-row">
+              <div class="tw-row-meta">
+                <span class="tw-cat">{categoryToKorean(e.data.category)}</span>
+                <span class="dot">·</span>
+                <span class="tw-when">{formatKoreanDate(e.data.publishedAt)}</span>
+                <span class="tw-kind">펄스</span>
+              </div>
+              <a href={pulseUrl(e.slug, e.data.publishedAt)} class="tw-row-title no-underline">{e.data.title}</a>
+              {e.data.tldr && <p class="tw-row-tldr">{e.data.tldr}</p>}
+            </li>
+          ))}
+          {weekInsights.map((e) => (
+            <li class="tw-row">
+              <div class="tw-row-meta">
+                <span class="tw-cat">{categoryToKorean(e.data.category)}</span>
+                <span class="dot">·</span>
+                <span class="tw-when">{formatKoreanDate(e.data.publishedAt)}</span>
+                <span class="tw-kind">인사이트</span>
+              </div>
+              <a href={insightUrl(e.slug)} class="tw-row-title no-underline">{e.data.title}</a>
+              {e.data.tldr && <p class="tw-row-tldr">{e.data.tldr}</p>}
+            </li>
+          ))}
+          {weekChapters.map((e) => (
+            <li class="tw-row">
+              <div class="tw-row-meta">
+                <span class="tw-cat">가이드북</span>
+                <span class="dot">·</span>
+                <span class="tw-when">{formatKoreanDate(e.data.publishedAt)}</span>
+                <span class="tw-kind">챕터</span>
+              </div>
+              <a href={`/guidebook/${e.data.bookSlug}/${e.data.chapterNumber}/`} class="tw-row-title no-underline">{e.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {ecosChanges.length > 0 && (
+      <section class="tw-section">
+        <h2 class="tw-h2"><span class="num">02</span>이번 주 핵심 지표</h2>
+        <ul class="tw-grid">
+          {ecosChanges.map((row) => (
+            <li class="tw-cell">
+              <a href={`/topic/${row.id}/`} class="no-underline tw-cell-link">
+                <div class="tw-cell-name">{row.short}</div>
+                <div class="tw-cell-value">
+                  <span class="num">{row.latestValue.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}</span>
+                  <span class="unit">{row.unit}</span>
+                </div>
+                <div class={`tw-cell-delta delta-${deltaCls(row.changePct)}`}>{fmtPct(row.changePct)} ({row.cycleLabel} 대비)</div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="tw-foot">출처 — 한국은행 ECOS · 매일 00:30 KST 자동 갱신</p>
+      </section>
+    )}
+
+    {weekRss.length > 0 && (
+      <section class="tw-section">
+        <h2 class="tw-h2"><span class="num">03</span>이번 주 정부 발표</h2>
+        <ul class="tw-list">
+          {weekRss.map((row) => (
+            <li class="tw-rss-row">
+              <a href={row.link} rel="external noopener" class="no-underline tw-rss-link">
+                <div class="tw-rss-title">{row.title}</div>
+                <div class="tw-rss-meta">
+                  <span class="tw-rss-source">{row.sourceName}</span>
+                  {row.sourceCategory && (
+                    <>
+                      <span class="dot">·</span>
+                      <span class="tw-rss-cat">{row.sourceCategory}</span>
+                    </>
+                  )}
+                  <span class="dot">·</span>
+                  <span class="tw-rss-when">{elapsedShort(row.publishedIso)}</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="tw-foot">출처 — 정부24 · korea.kr 14 RSS 피드 / 66 sources · 매일 00:30 KST 자동 갱신</p>
+      </section>
+    )}
+
+    {sisterRows.length > 0 && (
+      <section class="tw-section">
+        <h2 class="tw-h2"><span class="num">04</span>자매 사이트 신착</h2>
+        <ul class="tw-list">
+          {sisterRows.map((s) => (
+            <li class="tw-sister-row">
+              <a href={s.url} rel="external noopener" class="no-underline tw-sister-link">
+                <div class="tw-sister-meta">
+                  <span class="tw-sister-domain">{s.domain}</span>
+                  {!s.inWindow && <span class="tw-sister-stale">7일 이전</span>}
+                </div>
+                <div class="tw-sister-title">{s.title}</div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="tw-foot">출처 — 자매 사이트 mirror · 매일 02:00 KST 자동 갱신</p>
+      </section>
+    )}
+
+    <p class="tw-policy">
+      본 페이지는 자동 집계 페이지입니다. 모든 항목은 1차 출처에서 그대로 가져온 메타데이터 (제목·링크·수치·발행일자) 만 표시합니다 — 본문 복제 0, 가공 수치 0.
+    </p>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tw-wrap {
+    max-width: var(--width-prose);
+    margin: 0 auto;
+    padding: 56px var(--width-gutter) 64px;
+  }
+
+  .tw-header {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+  }
+  .tw-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+  .tw-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  @media (max-width: 640px) {
+    .tw-title { font-size: 26px; }
+  }
+  .tw-range {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .tw-lead {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  .tw-empty {
+    text-align: center;
+    padding: 48px 0;
+    color: var(--color-ink-tertiary);
+    font-style: italic;
+  }
+
+  .tw-section {
+    margin-bottom: 40px;
+  }
+  .tw-h2 {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 16px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tw-h2 .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+  }
+  .tw-h2 .tw-count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin-left: auto;
+  }
+  .tw-foot {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    margin: 16px 0 0;
+    letter-spacing: 0.04em;
+  }
+  .tw-policy {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.6;
+  }
+
+  /* 발행 / 정부 / 자매 공통 리스트 */
+  .tw-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .tw-row, .tw-rss-row, .tw-sister-row {
+    padding-bottom: 14px;
+    border-bottom: 0.5px dashed var(--color-ink-quat);
+  }
+  .tw-row-meta, .tw-rss-meta, .tw-sister-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .tw-row-meta .dot, .tw-rss-meta .dot, .tw-sister-meta .dot { color: var(--color-ink-quat); }
+  .tw-cat { color: var(--color-ink-secondary); }
+  .tw-kind {
+    margin-left: auto;
+    color: var(--color-accent);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 1px 6px;
+  }
+  .tw-row-title, .tw-rss-title, .tw-sister-title {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    transition: color 0.15s ease;
+    display: block;
+  }
+  .tw-row-title:hover, .tw-rss-link:hover .tw-rss-title, .tw-sister-link:hover .tw-sister-title {
+    color: var(--color-accent);
+  }
+  .tw-row-tldr {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    line-height: 1.6;
+  }
+
+  /* ECOS 그리드 */
+  .tw-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .tw-cell {
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 14px 16px;
+    background: var(--color-paper);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .tw-cell:hover {
+    background: var(--color-paper-soft);
+    border-color: var(--color-accent-soft);
+  }
+  .tw-cell-link {
+    color: inherit;
+    display: block;
+  }
+  .tw-cell-name {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--color-ink-secondary);
+    margin-bottom: 8px;
+  }
+  .tw-cell-value {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .tw-cell-value .num {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .tw-cell-value .unit {
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+  }
+  .tw-cell-delta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .delta-up { color: #a83a3a; }
+  .delta-down { color: #2a7a3a; }
+  .delta-flat { color: var(--color-ink-tertiary); }
+
+  /* RSS / Sister */
+  .tw-rss-source { color: var(--color-ink-secondary); }
+  .tw-rss-cat { color: var(--color-ink-tertiary); }
+  .tw-sister-domain { color: var(--color-accent); }
+  .tw-sister-stale {
+    margin-left: 8px;
+    font-size: 10px;
+    color: var(--color-ink-tertiary);
+    border: 0.5px solid var(--color-ink-quat);
+    padding: 1px 5px;
+    background: var(--color-paper-soft);
+  }
+</style>
