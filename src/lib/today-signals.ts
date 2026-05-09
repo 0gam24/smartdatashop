@@ -72,3 +72,137 @@ export function getTodaySignals(): TodaySignals {
     draftsInQueue: countDraftsInQueue(),
   };
 }
+
+// ───────────────────────────────────────────────────────────────────
+// TodayDataDigest 섹션용 helpers — 메인 "오늘의 데이터" 3 레인 데이터.
+// 모두 fail-soft: 파일 없거나 파싱 실패 시 [] 반환.
+// ───────────────────────────────────────────────────────────────────
+
+function readJson<T>(relPath: string): T | null {
+  const abs = resolve(ROOT, relPath);
+  if (!existsSync(abs)) return null;
+  try {
+    return JSON.parse(readFileSync(abs, 'utf8')) as T;
+  } catch {
+    return null;
+  }
+}
+
+/** ECOS 시계열 |Δ%| 상위 N 종 — 값·단위·Δ + 토픽 링크. */
+export interface EcosChangeRow {
+  id: string;
+  short: string;
+  latestValue: number;
+  unit: string;
+  changePct: number;
+  changeAbs: number;
+  /** "전기 대비" / "전월 대비" / "전일 대비" 등 cycle 라벨 */
+  cycleLabel: string;
+}
+
+const CYCLE_LABEL: Record<string, string> = {
+  D: '전일',
+  M: '전월',
+  Q: '전기',
+  Y: '전년',
+};
+
+export function getEcosTopChanges(limit = 3): EcosChangeRow[] {
+  type SeriesPoint = { time: string | null; value: number | null };
+  type EcosSeries = {
+    id: string;
+    short: string;
+    cycle: 'D' | 'M' | 'Q' | 'Y';
+    unit: string;
+    status: string;
+    latest: SeriesPoint | null;
+    change: { abs: number; pct: number } | null;
+  };
+  type EcosFile = { series?: EcosSeries[] };
+
+  const j = readJson<EcosFile>('data/economy/ecos-timeseries.json');
+  if (!j?.series) return [];
+  return j.series
+    .filter((s) => s.status === 'ok' && s.latest && s.change && Number.isFinite(s.latest.value))
+    .map((s) => ({
+      id: s.id,
+      short: s.short,
+      latestValue: s.latest!.value as number,
+      unit: s.unit,
+      changePct: s.change!.pct,
+      changeAbs: s.change!.abs,
+      cycleLabel: CYCLE_LABEL[s.cycle] ?? '직전',
+    }))
+    .sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct))
+    .slice(0, limit);
+}
+
+/** 정부 RSS aggregateItems 최신 N 건 — 제목·링크·기관·발행시각. */
+export interface RssRecentRow {
+  title: string;
+  link: string;
+  publishedIso: string;
+  sourceName: string;
+  sourceCategory: string;
+}
+
+export function getRecentRssItems(limit = 5): RssRecentRow[] {
+  type AggItem = {
+    title: string;
+    link: string;
+    pubDateISO: string;
+    sourceName: string;
+    sourceCategory: string;
+  };
+  type RssFile = { aggregateItems?: AggItem[] };
+
+  const j = readJson<RssFile>('data/rss/government.json');
+  if (!j?.aggregateItems) return [];
+  return j.aggregateItems
+    .filter((it) => typeof it.title === 'string' && typeof it.link === 'string' && typeof it.pubDateISO === 'string')
+    .sort(
+      (a, b) =>
+        new Date(b.pubDateISO).getTime() - new Date(a.pubDateISO).getTime(),
+    )
+    .slice(0, limit)
+    .map((it) => ({
+      title: it.title.replace(/&middot;/g, '·').replace(/&amp;/g, '&').replace(/&quot;/g, '"'),
+      link: it.link,
+      publishedIso: it.pubDateISO,
+      sourceName: it.sourceName ?? '',
+      sourceCategory: it.sourceCategory ?? '',
+    }));
+}
+
+/** 뉴스 multiSource 키워드 상위 N — 등장 출처 수 큰 순. */
+export interface NewsKeywordRow {
+  term: string;
+  total: number;
+  sourceCount: number;
+  exampleTitle?: string;
+}
+
+export function getTopNewsKeywords(limit = 3): NewsKeywordRow[] {
+  type Example = { source: string; title: string };
+  type MultiKeyword = {
+    term: string;
+    total: number;
+    sourceCount: number;
+    sources: string[];
+    examples: Example[];
+  };
+  type NewsFile = { multiSourceKeywords?: MultiKeyword[] };
+
+  const j = readJson<NewsFile>('data/news/keywords.json');
+  if (!j?.multiSourceKeywords) return [];
+  return j.multiSourceKeywords
+    .slice()
+    .sort((a, b) => b.sourceCount - a.sourceCount || b.total - a.total)
+    .slice(0, limit)
+    .map((k) => ({
+      term: k.term,
+      total: k.total,
+      sourceCount: k.sourceCount,
+      exampleTitle: k.examples?.[0]?.title,
+    }));
+}

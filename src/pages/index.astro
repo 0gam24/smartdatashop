@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Masthead from '../components/Masthead.astro';
 import Hero from '../components/Hero.astro';
 import EconomyChart from '../components/EconomyChart.astro';
+import TodayDataDigest from '../components/TodayDataDigest.astro';
 import SectionHead from '../components/SectionHead.astro';
 import PulseList from '../components/PulseList.astro';
 import PulseCard from '../components/PulseCard.astro';
@@ -51,6 +52,11 @@ const totalCount = allPulses.length + allInsights.length + allChapters.length;
 // 발행 0편이어도 메인이 살아있음을 보이는 멀티시그널 — 24h 윈도우 SSOT 데이터 갱신 +
 // 검수 대기 펄스 초안 갯수 (Plan 안 P0-1 — Discover/D.I.A. 신선도 신호 보강).
 const todaySignals = getTodaySignals();
+
+// 발행 0편 day = 자매 섹션 prominence 자동 상승 (Plan 안 P1-2).
+// NETWORK.md §2.3: "메인은 자매 funnel hub" — 자매 트래픽 합산이 정체성.
+// 펄스 발행이 끊긴 날 자매 cross-link funnel 의 비중을 높여 메인 hub 역할 유지.
+const isQuietDay = todayCount === 0;
 const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   const { personas, dataTypes, actions } = entry.data.tags;
   const tags = [
@@ -192,6 +198,21 @@ const sisters = sisterOrder.map((key) => {
     </div>
   </section>
 
+  <!-- Section 01c: 오늘의 데이터 (3 레인 — ECOS Δ + 정부 RSS 신착 + 뉴스 키워드) -->
+  <TodayDataDigest />
+
+  {/* 발행 0편 day — 자매 섹션을 위로 promotion (메인 hub 정체성 유지) */}
+  {isQuietDay && (
+    <section class="section" id="network-promoted" data-screen-label="01d 자매 네트워크 (오늘 발행 0편)">
+      <div class="page-width">
+        <SectionHead num="01d" title="네트워크 최신" moreLabel={`자매 ${sisters.length}개 · 발행 0편 day 우선 노출`} />
+        <SisterSiteGrid>
+          {sisters.map((s) => <SisterSiteCard {...s} />)}
+        </SisterSiteGrid>
+      </div>
+    </section>
+  )}
+
   <!-- Section 02: 오늘의 펄스 -->
   <section class="section" data-screen-label="02 최신 펄스">
     <div class="page-width">
@@ -232,13 +253,19 @@ const sisters = sisterOrder.map((key) => {
     </div>
   </section>
 
-  <!-- Section 06: 자매 사이트 네트워크 -->
+  {/* Section 06: 자매 사이트 네트워크
+      isQuietDay 일 땐 위(01d)에서 이미 노출 — 여기선 ComingSoon 슬롯만 유지해
+      "곧 합류 5개" 메시지를 한 번만 보이게 한다 (자매 그리드 중복 회피). */}
   <section class="section" id="network" data-screen-label="06 자매 사이트">
     <div class="page-width">
-      <SectionHead num="06" title="자매 사이트 네트워크" moreLabel="현재 4개 · 곧 합류 5개" />
-      <SisterSiteGrid>
-        {sisters.map((s) => <SisterSiteCard {...s} />)}
-      </SisterSiteGrid>
+      {!isQuietDay && (
+        <>
+          <SectionHead num="06" title="자매 사이트 네트워크" moreLabel="현재 4개 · 곧 합류 5개" />
+          <SisterSiteGrid>
+            {sisters.map((s) => <SisterSiteCard {...s} />)}
+          </SisterSiteGrid>
+        </>
+      )}
       <ComingSoon />
     </div>
   </section>
