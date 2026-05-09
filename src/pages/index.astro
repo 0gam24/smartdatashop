@@ -23,6 +23,7 @@ import {
   buildPersonLD,
   buildSearchActionLD,
 } from '../lib/jsonld';
+import { getTodaySignals } from '../lib/today-signals';
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
@@ -46,6 +47,10 @@ const todayChapterCount = allChapters.filter((e) =>
 ).length;
 const todayCount = todayPulseCount + todayInsightCount + todayChapterCount;
 const totalCount = allPulses.length + allInsights.length + allChapters.length;
+
+// 발행 0편이어도 메인이 살아있음을 보이는 멀티시그널 — 24h 윈도우 SSOT 데이터 갱신 +
+// 검수 대기 펄스 초안 갯수 (Plan 안 P0-1 — Discover/D.I.A. 신선도 신호 보강).
+const todaySignals = getTodaySignals();
 const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
   const { personas, dataTypes, actions } = entry.data.tags;
   const tags = [
@@ -161,7 +166,13 @@ const sisters = sisterOrder.map((key) => {
 
 <BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
   <Header activeNav="daily" />
-  <Masthead todayCount={todayCount} totalCount={totalCount} lastPublishedAt={latest?.data.publishedAt} />
+  <Masthead
+    todayCount={todayCount}
+    totalCount={totalCount}
+    lastPublishedAt={latest?.data.publishedAt}
+    dataUpdatesToday={todaySignals.dataUpdatesToday}
+    draftsInQueue={todaySignals.draftsInQueue}
+  />
 
   <main id="main" role="main">
   <Hero entry={latest} />

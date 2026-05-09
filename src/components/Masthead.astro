@@ -12,6 +12,13 @@ interface Props {
    * "마지막 발행 X시간 전" freshness 신호 표시.
    */
   lastPublishedAt?: string;
+  /**
+   * 오늘 24h 안에 갱신된 자동 fetch SSOT 데이터 파일 수.
+   * "발행 0편" 인 날에도 메인이 살아있음을 보이는 멀티시그널의 핵심.
+   */
+  dataUpdatesToday?: number;
+  /** daily-queue/drafts/ 의 검수 대기 펄스 초안 수. */
+  draftsInQueue?: number;
 }
 
 // 기본값은 KST 오늘 기준 자동 계산 — 창간일 (2026-01-01) 부터 일수 + 1.
@@ -24,6 +31,8 @@ const {
   totalCount = 0,
   tagline = '한국의 데이터를 매일 5분으로 — 1차 출처 데이터 저널',
   lastPublishedAt,
+  dataUpdatesToday = 0,
+  draftsInQueue = 0,
 } = Astro.props;
 
 /** 마지막 발행 후 경과 시간 — "23시간 전" / "2일 전" 류. 24h 미만은 시간, 이상은 일. */
@@ -46,6 +55,12 @@ const elapsedLabel = todayCount === 0 && lastPublishedAt ? formatElapsed(lastPub
       <span>VOL <strong>{vol}</strong>·NO <strong>{no}</strong></span>
       <span>
         오늘의 글 <strong>{todayCount}</strong>편
+        {dataUpdatesToday > 0 && (
+          <span class="masthead-data-fresh"> · 데이터 <strong>{dataUpdatesToday}</strong>건 갱신</span>
+        )}
+        {todayCount === 0 && draftsInQueue > 0 && (
+          <span class="masthead-drafts"> · 검수중 <strong>{draftsInQueue}</strong></span>
+        )}
         {elapsedLabel && <span class="masthead-elapsed"> · 최근 <strong>{elapsedLabel}</strong></span>}
       </span>
       <span>누적 <strong>{totalCount}</strong>편</span>
@@ -85,6 +100,15 @@ const elapsedLabel = todayCount === 0 && lastPublishedAt ? formatElapsed(lastPub
   }
   .masthead-elapsed {
     color: var(--color-accent);
+  }
+  .masthead-data-fresh {
+    color: var(--color-ink-secondary);
+  }
+  .masthead-data-fresh :global(strong) {
+    color: var(--color-accent);
+  }
+  .masthead-drafts {
+    color: var(--color-ink-tertiary);
   }
   @media (max-width: 640px) {
     .masthead-counter { display: none; }
