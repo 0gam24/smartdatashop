@@ -95,11 +95,17 @@ jobs:
         run: node scripts/draft-pulse-from-rss.mjs --count 4
         continue-on-error: true
 
+      - name: Generate today.md (운영자 일일 시야)
+        # 매 cron 후 운영자가 한 페이지로 모든 자동화 결과 + 검수 큐 + 데이터 freshness 확인.
+        id: gen-today
+        run: node scripts/generate-today.mjs
+        continue-on-error: true
+
       - name: Commit + push if data changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/economy/ data/rss/ data/news/ daily-queue/drafts/ 2>/dev/null || true
+          git add data/economy/ data/rss/ data/news/ daily-queue/drafts/ today.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data changes — skip commit"
           else
