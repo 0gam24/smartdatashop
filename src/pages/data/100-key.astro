@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+import { buildBreadcrumbLD, buildCollectionPageLD, buildDatasetLD } from '../../lib/jsonld';
 
 type Item = {
   className: string | null;
@@ -53,6 +53,22 @@ const breadcrumbLd = buildBreadcrumbLD([
 ]);
 const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, pageUrl);
 
+// Dataset LD — 100대 지표는 한국은행 공식 큐레이션 (Google Dataset Search 색인 자격).
+const keyDatasetLd = payload && payload.totalCount > 0 ? buildDatasetLD({
+  name: '한국 경제 100대 통계지표 (한국은행 ECOS)',
+  description:
+    `한국은행이 공식 선정한 한국 경제 핵심 ${payload.totalCount}개 통계지표. ` +
+    'ECOS Open API 1차 자료 매일 자동 갱신.',
+  url: pageUrl,
+  sourceUrl: payload.sourceUrl,
+  sourceName: '한국은행 ECOS',
+  publisher: payload.publisher ?? '한국은행',
+  datePublished: payload.fetchedAt,
+}) : null;
+
+const keyJsonld: object[] = [collectionLd, breadcrumbLd];
+if (keyDatasetLd) keyJsonld.push(keyDatasetLd);
+
 function formatFetchedAtKST(iso: string): string {
   const d = new Date(iso);
   const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
@@ -78,7 +94,7 @@ const grouped: Array<[string, Item[]]> = payload
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  jsonld={[collectionLd, breadcrumbLd]}
+  jsonld={keyJsonld}
 >
   <Header />
 

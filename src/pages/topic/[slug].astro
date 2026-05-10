@@ -17,6 +17,7 @@ import {
   buildBreadcrumbLD,
   buildCollectionPageLD,
   buildItemListLD,
+  buildDatasetLD,
 } from '../../lib/jsonld';
 import { pulseUrl, insightUrl, formatKoreanDate } from '../../lib/korean';
 import { TOPICS, type TopicConfig } from '../../data/topics';
@@ -169,13 +170,34 @@ const itemListSrc: Item[] = [
 ];
 const itemListLd = buildItemListLD(itemListSrc);
 
+// ecosSeries 가 있는 토픽 페이지는 Dataset LD 추가 — Google Dataset Search 색인 자격.
+// 1차 출처 = 한국은행 ECOS, 본 페이지가 raw 시계열을 차트·표로 시각화한 큐레이션.
+// (07 §13 / 06 §12 — 데이터 저널 차별화 LD)
+const datasetLd = ecosSeries && config.ecosSeriesId
+  ? buildDatasetLD({
+      name: `${ecosSeries.label} 시계열 (한국은행 ECOS)`,
+      description:
+        `${ecosSeries.label} 의 한국은행 ECOS 1차 출처 시계열 데이터 — ` +
+        `${ecosSeries.pointCount}개 관측치, ${ecosSeries.cycle === 'D' ? '일별' : ecosSeries.cycle === 'M' ? '월별' : ecosSeries.cycle === 'Q' ? '분기별' : '연별'}, ` +
+        `단위 ${ecosSeries.meta?.unitName ?? ecosSeries.unit}.`,
+      url: pageUrl,
+      sourceUrl: 'https://ecos.bok.or.kr/',
+      sourceName: '한국은행 ECOS',
+      publisher: '한국은행',
+      datePublished: ecosSeries.latest?.time ?? undefined,
+    })
+  : null;
+
+const jsonldArray: object[] = [collectionLd, breadcrumbLd, itemListLd];
+if (datasetLd) jsonldArray.push(datasetLd);
+
 const totalItems = matchedPulses.length + matchedInsights.length + matchedChapters.length;
 ---
 
 <BaseLayout
   title={pageTitle}
   description={config.description}
-  jsonld={[collectionLd, breadcrumbLd, itemListLd]}
+  jsonld={jsonldArray}
 >
   <Header />
   {ecosSeries && <ChartLib />}
