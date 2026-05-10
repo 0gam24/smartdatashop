@@ -200,7 +200,11 @@ const enableCfAnalytics = import.meta.env.PROD && !!cfAnalyticsToken;
     <meta name="apple-mobile-web-app-title" content="스마트데이터샵" />
 
     <!-- Favicons -->
+    <!-- Favicons — SVG 우선 (모든 모던 브라우저), 32 PNG fallback (구형/Google SERP),
+         192 PNG (PWA), apple-touch-icon (iOS 홈 스크린). 모두 단일 SVG 에서 자동 생성:
+         scripts/generate-favicons.mjs (--rebuild). -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
