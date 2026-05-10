@@ -29,6 +29,35 @@ const asJson = args.has('--json');
 const strict = args.has('--strict');
 /** --strict-deep: root URL (1차 출처 deep link 미지정) 도 fail 처리. */
 const strictDeep = args.has('--strict-deep');
+/** --strict-host: PURPOSE.md 허용 host 외 (.go.kr/.or.kr/krx/kosis/law) sources 발견 시 fail. */
+const strictHost = args.has('--strict-host');
+
+/**
+ * PURPOSE.md §3 허용 1차 출처 host 화이트리스트.
+ * sources[].url 의 host 가 다음 중 하나에 매칭되어야 정책 부합.
+ * (보조 보도 — 상업 언론사 등 — 은 sources[] 에 넣지 말고 본문 footnote 로만 인용)
+ */
+const ALLOWED_HOST_PATTERNS = [
+  /\.go\.kr$/i,            // 정부 (.go.kr)
+  /\.or\.kr$/i,            // 공공기관 (.or.kr — bok, kotra, kisa 등 산하)
+  /(?:^|\.)krx\.co\.kr$/i, // 한국거래소
+  /(?:^|\.)kosis\.kr$/i,   // 통계청 KOSIS
+  /(?:^|\.)law\.go\.kr$/i, // 법령정보센터
+  /(?:^|\.)korea\.kr$/i,   // 정책브리핑
+  // 진흥원 — .kr 단독 (.or.kr 미사용) 인 quasi-gov 기관 화이트리스트
+  /(?:^|\.)nipa\.kr$/i,    // 정보통신산업진흥원
+  /(?:^|\.)nia\.kr$/i,     // 한국지능정보사회진흥원
+];
+
+function classifyHost(url) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.toLowerCase();
+    return ALLOWED_HOST_PATTERNS.some((p) => p.test(host)) ? 'allowed' : 'foreign';
+  } catch {
+    return 'foreign';
+  }
+}
 
 /**
  * 1차 출처 deep link 깊이 판정 (06 §8 / ADR 0006 §2):
@@ -97,7 +126,8 @@ async function checkFile(collection, filename) {
   for (const src of sources) {
     const result = await headCheck(src.url);
     const depth = classifyDepth(src.url);
-    results.push({ ...src, ...result, depth });
+    const host = classifyHost(src.url);
+    results.push({ ...src, ...result, depth, host });
   }
   return { collection, filename, results };
 }
@@ -185,16 +215,19 @@ async function main() {
   let total = 0;
   let failed = 0;
   let shallow = 0;
+  let foreign = 0;
   for (const file of allResults) {
     console.log(`\n📄 ${file.collection}/${file.filename}`);
     for (const r of file.results) {
       total += 1;
       const mark = r.ok ? '✅' : '❌';
       const depthMark = r.depth === 'deep' ? '' : (r.depth === 'shallow' ? ' ⚠ root' : ' ⚠ landing');
+      const hostMark = r.host === 'allowed' ? '' : ' ❌ foreign-host';
       const status = r.error ? `error: ${r.error}` : `${r.status}${r.redirected ? ` → ${r.finalUrl}` : ''}`;
       if (!r.ok) failed += 1;
       if (r.depth !== 'deep') shallow += 1;
-      console.log(`  ${mark} ${status}${depthMark}`);
+      if (r.host !== 'allowed') foreign += 1;
+      console.log(`  ${mark} ${status}${depthMark}${hostMark}`);
       console.log(`     ${r.name}`);
       console.log(`     ${r.url}`);
     }
@@ -205,6 +238,11 @@ async function main() {
     console.log(`⚠ root/landing URL ${shallow}건 — ADR 0006 §2 deep link 권장 (보도자료 PDF / 통계 DB 페이지).`);
     console.log('   --strict-deep 옵션으로 빌드 차단 가능.');
   }
+  if (foreign > 0) {
+    console.log(`❌ 비-1차 출처 host ${foreign}건 — PURPOSE.md §3 허용 host (.go.kr/.or.kr/krx/kosis/law/bok/korea/data.go.kr) 외.`);
+    console.log('   상업 언론사 등은 sources[] 가 아니라 본문 footnote 로만 인용해야 함.');
+    console.log('   --strict-host 옵션으로 빌드 차단 가능.');
+  }
   console.log('출처-vs-주장 대조는 Layer 4 fact-checker (Phase 4+) 또는 운영자가 수행.');
 
   if (strict && failed > 0) {
@@ -212,6 +250,10 @@ async function main() {
   }
   if (strictDeep && shallow > 0) {
     console.error(`\n[verify-source-links] --strict-deep FAIL — root/landing URL ${shallow}건.`);
+    process.exit(1);
+  }
+  if (strictHost && foreign > 0) {
+    console.error(`\n[verify-source-links] --strict-host FAIL — 비-1차 출처 host ${foreign}건.`);
     process.exit(1);
   }
 }

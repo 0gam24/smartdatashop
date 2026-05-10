@@ -82,6 +82,11 @@ async function syncSister(sister) {
     }
 
     // sister-mirrors/{자매}/posts.json 저장
+    // 자매가 network-mirror.json 에 parentSite 를 안 넣어 보내도 메인이 항상 주입.
+    // (NETWORK.md §7.2 메인 backref 의무 — sister → main canonical link 보강)
+    if (!mirror.parentSite) {
+      mirror.parentSite = 'https://smartdatashop.kr';
+    }
     const outDir = resolve(REPO_ROOT, 'sister-mirrors', sister.id);
     mkdirSync(outDir, { recursive: true });
     const outPath = resolve(outDir, 'posts.json');
