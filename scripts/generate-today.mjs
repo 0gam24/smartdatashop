@@ -77,9 +77,6 @@ function pulseUrl(slug, publishedAt) {
 }
 
 function urlEnc(s) { return encodeURIComponent(s); }
-function gscInspect(absUrl) {
-  return `https://search.google.com/search-console/inspect?resource_id=${urlEnc(SITE + '/')}&id=${urlEnc(absUrl)}`;
-}
 
 // ── 콘텐츠 수집 ─────────────────────────────────────
 function collectAll() {
@@ -166,7 +163,7 @@ if (todayItems.length === 0) {
 } else {
   P(`- 📝 발행 **${todayItems.length}건**:`);
   for (const e of todayItems) {
-    P(`  - [${e.title}](${e.url}) — ${shortLine(e.tldr, 60)}  · [색인](${gscInspect(e.url)})`);
+    P(`  - [${e.title}](${e.url}) — ${shortLine(e.tldr, 60)}`);
   }
 }
 if (freshToday.length > 0) {
