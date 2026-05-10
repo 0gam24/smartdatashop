@@ -14,7 +14,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ChartLib from '../../components/ChartLib.astro';
-import { buildBreadcrumbLD, buildCollectionPageLD } from '../../lib/jsonld';
+import { buildBreadcrumbLD, buildCollectionPageLD, buildDatasetLD } from '../../lib/jsonld';
 
 type Point = { time: string | null; value: number | null; raw: string };
 type ChangeRow = { abs: number; pct: number } | null;
@@ -103,6 +103,22 @@ function fmtPct(n: number | null | undefined): string {
 
 const seriesOk = payload?.series.filter((s) => s.status === 'ok') ?? [];
 
+// 페이지별 Dataset LD — 시계열 5종 모두 한 페이지에 모은 큐레이션 데이터셋.
+// Google Dataset Search 색인 자격 + 1차 출처 명시 (한국은행 ECOS).
+const tsDatasetLd = seriesOk.length > 0 ? buildDatasetLD({
+  name: '한국 거시 시계열 (한국은행 ECOS)',
+  description: `한국은행 ECOS 1차 출처 시계열 ${seriesOk.length}종 — ` +
+    seriesOk.map((s) => s.short).join(', ') + '. 매일 자동 갱신.',
+  url: '/data/timeseries/',
+  sourceUrl: 'https://ecos.bok.or.kr/',
+  sourceName: '한국은행 ECOS',
+  publisher: '한국은행',
+  datePublished: payload?.fetchedAt,
+}) : null;
+
+const tsJsonld: object[] = [collectionLd, breadcrumbLd];
+if (tsDatasetLd) tsJsonld.push(tsDatasetLd);
+
 // 차트용 데이터 직렬화 (script 내 inline)
 const chartData = seriesOk.map((s) => ({
   id: s.id,
@@ -117,7 +133,7 @@ const chartData = seriesOk.map((s) => ({
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  jsonld={[collectionLd, breadcrumbLd]}
+  jsonld={tsJsonld}
 >
   <Header />
   <ChartLib />

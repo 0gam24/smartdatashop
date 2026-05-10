@@ -27,6 +27,36 @@ const TIMEOUT_MS = 10_000;
 const args = new Set(process.argv.slice(2));
 const asJson = args.has('--json');
 const strict = args.has('--strict');
+/** --strict-deep: root URL (1차 출처 deep link 미지정) 도 fail 처리. */
+const strictDeep = args.has('--strict-deep');
+
+/**
+ * 1차 출처 deep link 깊이 판정 (06 §8 / ADR 0006 §2):
+ *   ✅ deep    — 보도자료 PDF / 통계 DB 페이지 / 발표 ID 가 URL 에 박힘
+ *   ⚠ shallow — 도메인 root 또는 /index.{do,html,jsp,php,asp}
+ *   ⚠ landing — /portal, /main, /home 같은 진입점
+ *
+ * shallow / landing 은 ADR 0006 §2 "정확한 출처 URL = deep link 우선" 위반.
+ * 본 스크립트는 기본 정보성 경고만 발행 — `--strict-deep` 시 fail 로 승격.
+ */
+function classifyDepth(url) {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.toLowerCase();
+    const hasQuery = u.search.length > 1;
+    // PDF / 통계 DB / 보도자료 ID — 무조건 deep
+    if (path.endsWith('.pdf') || path.endsWith('.xlsx') || path.endsWith('.csv')) return 'deep';
+    if (hasQuery && /(?:newsid|seq|idx|nttid|bbsid|mid|article|view)=/i.test(u.search)) return 'deep';
+    // 명시적 root patterns
+    if (path === '' || path === '/') return 'shallow';
+    if (/^\/(index|main|home)(\.[a-z]+)?\/?$/.test(path)) return 'shallow';
+    if (/^\/(portal|index)\/?$/.test(path)) return 'landing';
+    // 그 외는 deep 가정 (path segment 1+ 보유)
+    return 'deep';
+  } catch {
+    return 'deep'; // URL 파싱 실패 시 보수적으로 deep 가정 (fetch 단계에서 fail 검출)
+  }
+}
 
 /** 단일 MDX 파일에서 frontmatter sources의 url + name 짝을 추출.
  *  YAML 파서를 쓰지 않고 단순 텍스트 매칭 — frontmatter 안의 url: 라인 위
@@ -66,7 +96,8 @@ async function checkFile(collection, filename) {
   const results = [];
   for (const src of sources) {
     const result = await headCheck(src.url);
-    results.push({ ...src, ...result });
+    const depth = classifyDepth(src.url);
+    results.push({ ...src, ...result, depth });
   }
   return { collection, filename, results };
 }
@@ -153,23 +184,34 @@ async function main() {
   // 사람이 읽는 표 출력
   let total = 0;
   let failed = 0;
+  let shallow = 0;
   for (const file of allResults) {
     console.log(`\n📄 ${file.collection}/${file.filename}`);
     for (const r of file.results) {
       total += 1;
       const mark = r.ok ? '✅' : '❌';
+      const depthMark = r.depth === 'deep' ? '' : (r.depth === 'shallow' ? ' ⚠ root' : ' ⚠ landing');
       const status = r.error ? `error: ${r.error}` : `${r.status}${r.redirected ? ` → ${r.finalUrl}` : ''}`;
       if (!r.ok) failed += 1;
-      console.log(`  ${mark} ${status}`);
+      if (r.depth !== 'deep') shallow += 1;
+      console.log(`  ${mark} ${status}${depthMark}`);
       console.log(`     ${r.name}`);
       console.log(`     ${r.url}`);
     }
   }
 
   console.log(`\n총 ${total}개 링크 중 ${total - failed}개 정상, ${failed}개 실패.`);
+  if (shallow > 0) {
+    console.log(`⚠ root/landing URL ${shallow}건 — ADR 0006 §2 deep link 권장 (보도자료 PDF / 통계 DB 페이지).`);
+    console.log('   --strict-deep 옵션으로 빌드 차단 가능.');
+  }
   console.log('출처-vs-주장 대조는 Layer 4 fact-checker (Phase 4+) 또는 운영자가 수행.');
 
   if (strict && failed > 0) {
+    process.exit(1);
+  }
+  if (strictDeep && shallow > 0) {
+    console.error(`\n[verify-source-links] --strict-deep FAIL — root/landing URL ${shallow}건.`);
     process.exit(1);
   }
 }
