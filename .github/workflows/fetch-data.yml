@@ -87,10 +87,12 @@ jobs:
         continue-on-error: true
 
       - name: Generate 펄스 초안 (RSS 1차 출처 기반 / 운영자 검수용)
+        # Phase 9 — 발행 펌프 가속: 한 실행에서 4건 생성 (이전 1건 → 4건).
+        # 검수 통과율 40% 목표 시 = 1.6건/일 발행 → news-sitemap 48h 윈도우 유지.
         id: draft-pulse
         env:
           NODE_ENV: production
-        run: node scripts/draft-pulse-from-rss.mjs
+        run: node scripts/draft-pulse-from-rss.mjs --count 4
         continue-on-error: true
 
       - name: Commit + push if data changed

@@ -256,42 +256,113 @@ tags:
   return frontmatter;
 }
 
+/**
+ * --count N 플래그: 1회 실행에서 최대 N 건 draft 생성 (기본 1).
+ * Phase 9 — 발행 펌프 가속. cron 다중 스케줄 대신 한 실행에서 4건 생성.
+ */
+function parseArgs() {
+  const args = process.argv.slice(2);
+  let count = 1;
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--count' && args[i + 1]) {
+      const n = parseInt(args[i + 1], 10);
+      if (Number.isFinite(n) && n > 0 && n <= 10) count = n;
+      i++;
+    } else if (args[i].startsWith('--count=')) {
+      const n = parseInt(args[i].slice('--count='.length), 10);
+      if (Number.isFinite(n) && n > 0 && n <= 10) count = n;
+    }
+  }
+  return { count };
+}
+
 function main() {
   if (!existsSync(RSS_PATH)) {
     console.error('[draft-pulse] FATAL: data/rss/government.json 없음 — fetch-rss-government 먼저 실행');
     process.exit(1);
   }
+  const { count: targetCount } = parseArgs();
   const rssData = JSON.parse(readFileSync(RSS_PATH, 'utf8'));
   const coveredPulse = loadCoveredUrls();
   const coveredDraft = loadCoveredDrafts();
   const covered = new Set([...coveredPulse, ...coveredDraft]);
-  console.log(`[draft-pulse] 기존 펄스 ${coveredPulse.size}건 + 기존 draft ${coveredDraft.size}건 커버됨`);
+  console.log(`[draft-pulse] 기존 펄스 ${coveredPulse.size}건 + 기존 draft ${coveredDraft.size}건 커버됨 / 목표 ${targetCount}건`);
 
-  const picked = pickItem(rssData, covered);
-  if (!picked) {
-    console.warn('[draft-pulse] 신규 항목 없음 — 모든 RSS 항목이 이미 커버됨');
-    process.exit(0);
+  const created = [];
+  const skipped = [];
+
+  for (let i = 0; i < targetCount; i++) {
+    const picked = pickItem(rssData, covered);
+    if (!picked) {
+      console.warn(`[draft-pulse] 신규 항목 풀 고갈 (${i}/${targetCount}건 생성 후) — 모든 RSS 항목 커버됨`);
+      break;
+    }
+
+    const kst = fmtKstNow();
+    const slug = slugify(picked.item.title);
+    const fname = `draft-pulse-${kst.date}-${slug || 'untitled'}.mdx`;
+    const outPath = resolve(OUT_DIR, fname);
+
+    // pickItem 결과를 즉시 covered 에 추가 — 다음 iteration 에서 동일 항목 재선택 차단.
+    covered.add(picked.item.link);
+
+    if (existsSync(outPath)) {
+      console.log(`[draft-pulse] 이미 존재 → ${fname} (skip)`);
+      skipped.push({ fname, reason: 'file-exists' });
+      continue;
+    }
+
+    const mdx = buildMdx({ source: picked.source, item: picked.item, kst });
+    mkdirSync(OUT_DIR, { recursive: true });
+    writeFileSync(outPath, mdx, 'utf8');
+
+    console.log(`[draft-pulse] 신규 draft 생성 → ${fname}`);
+    console.log(`  source: ${picked.source.name} (${picked.source.id})`);
+    console.log(`  title:  ${picked.item.title.slice(0, 80)}`);
+    console.log(`  link:   ${picked.item.link}`);
+    created.push({
+      fname,
+      sourceId: picked.source.id,
+      sourceName: picked.source.name,
+      title: picked.item.title,
+      link: picked.item.link,
+    });
   }
 
-  const kst = fmtKstNow();
-  const slug = slugify(picked.item.title);
-  const fname = `draft-pulse-${kst.date}-${slug || 'untitled'}.mdx`;
-  const outPath = resolve(OUT_DIR, fname);
-
-  if (existsSync(outPath)) {
-    console.log(`[draft-pulse] 이미 존재 → ${fname} (skip)`);
-    process.exit(0);
+  // ── publish-funnel.json 누적 (Phase 9 — 통과율 측정 게이트) ─────
+  // 운영자 1.5h 예산 안에서 drafts 의 src/content/pulse 승격율을 추적.
+  const funnelPath = resolve(REPO_ROOT, 'tmp', 'publish-funnel.json');
+  let funnel = {
+    history: [],
+    total: { drafts_in: 0, drafts_killed: 0, drafts_skipped: 0, drafts_published: 0 },
+  };
+  if (existsSync(funnelPath)) {
+    try { funnel = JSON.parse(readFileSync(funnelPath, 'utf8')); } catch {}
   }
+  const nowIso = new Date().toISOString();
+  funnel.history.push({
+    at: nowIso,
+    target: targetCount,
+    created: created.length,
+    skipped: skipped.length,
+    pulse_collection_size: coveredPulse.size,
+    draft_queue_size: coveredDraft.size + created.length,
+  });
+  // 최근 90일치만 보관 (history 무한 증가 회피)
+  const cutoff = Date.now() - 90 * 86400000;
+  funnel.history = funnel.history.filter((h) => Date.parse(h.at) >= cutoff);
+  funnel.total.drafts_in = (funnel.total.drafts_in ?? 0) + created.length;
+  funnel.total.drafts_skipped = (funnel.total.drafts_skipped ?? 0) + skipped.length;
+  // drafts_published / drafts_killed 는 editor 워크플로 측에서 누적 — 본 스크립트는 in 만.
 
-  const mdx = buildMdx({ source: picked.source, item: picked.item, kst });
-  mkdirSync(OUT_DIR, { recursive: true });
-  writeFileSync(outPath, mdx, 'utf8');
+  mkdirSync(dirname(funnelPath), { recursive: true });
+  writeFileSync(funnelPath, JSON.stringify(funnel, null, 2), 'utf8');
 
-  console.log(`[draft-pulse] 신규 draft 생성 → ${fname}`);
-  console.log(`  source: ${picked.source.name} (${picked.source.id})`);
-  console.log(`  title:  ${picked.item.title.slice(0, 80)}`);
-  console.log(`  link:   ${picked.item.link}`);
-  console.log(`\n운영자 검수 후 src/content/pulse/ 로 이동.`);
+  console.log(`\n[draft-pulse] 요약 — 생성 ${created.length}건 / 스킵 ${skipped.length}건`);
+  console.log(`[draft-pulse] funnel 누적 → tmp/publish-funnel.json (총 in ${funnel.total.drafts_in}건)`);
+  if (created.length > 0) {
+    console.log(`\n운영자 검수 후 src/content/pulse/ 로 이동.`);
+  }
 }
 
 main();
