@@ -3,16 +3,20 @@ import { formatKoreanToday } from '../lib/korean';
 
 interface Props {
   date?: string;
-  activeNav?: 'daily' | 'insight' | 'guidebook' | 'data' | 'network';
+  activeNav?: 'daily' | 'insight' | 'guidebook' | 'notice' | 'data' | 'network';
 }
 
 // 기본값은 빌드 시점의 KST 오늘 — hourly scout bot 으로 매시간 자동 갱신.
 const { date = formatKoreanToday(), activeNav = 'daily' } = Astro.props;
 
+// 정부발표 (/data/notice/) 가 매일 605건 갱신 — freshness 신호 가장 강함.
+// 데이터 서브 (timeseries/100-key/board/trends/kosis-100) 보다 사용자 의도 매칭 우월.
+// 메인 nav 로 승격 — 데이터 대신 직접 노출 (데이터 페이지는 /data/ 통해 진입).
 const navItems: Array<{ key: NonNullable<Props['activeNav']>; label: string; href: string }> = [
   { key: 'daily', label: '데일리', href: '/' },
   { key: 'insight', label: '인사이트', href: '/insight/' },
   { key: 'guidebook', label: '가이드북', href: '/guidebook/' },
+  { key: 'notice', label: '정부발표', href: '/data/notice/' },
   { key: 'data', label: '데이터', href: '/data/' },
   { key: 'network', label: '자매 사이트', href: '/#network' },
 ];
