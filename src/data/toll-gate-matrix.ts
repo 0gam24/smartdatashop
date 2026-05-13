@@ -15,10 +15,15 @@
  *
  * 우선순위: 사회초년생 > 신혼부부 > 1인사업자 > 4050은퇴 > 투자자.
  * stats 카테고리는 (모든 페르소나) "글 주제별"이므로 매칭하지 않고 catch-all로 떨어진다.
- * "(지원금)" / "(부동산)" 행은 personas enum 에 존재하지 않는 키워드이므로 인코딩 대상에서 제외했다 —
- * 이런 분류가 필요하면 dataTypes/actions 태그로 별도 처리한다.
  *
- * Catch-all 기본값: { kind: 'route', primary: 'calculatorhost', primaryHint: '관련 계산기 — calculatorhost.com →' }
+ * Catch-all 기본값: { kind: 'route', primary: 'calculatorhost', primaryPath: '/category/tax/', ... }
+ *
+ * **2026-05-13 갱신**: primaryPath / secondaryPath 필드 추가 — 홈 점프 회피.
+ * 자매 카테고리 페이지 inventory (운영자 검증 2026-05-13):
+ *   - moneylook (asiatop.co.kr): /gov-support/, /tax/, /pension/, /realestate/, /savings/
+ *   - calculatorhost: /category/tax/, /category/finance/, /category/work/, /category/real-estate/
+ *   - awoo: /personas/office-rookie/, /personas/self-employed/, /personas/newlywed-family/, /personas/senior/
+ *   - iknowhowinfo: /pulse, /breaking, /surge, /flow, /income, /etf, /for/retiree, /for/newbie
  */
 
 import type { Category } from '../lib/korean';
@@ -30,7 +35,11 @@ export type ToollGateDecision =
   | {
       kind: 'route';
       primary: SisterSiteKey;
+      /** 자매 사이트 deep link path (예: '/gov-support/'). 미지정 시 홈 ('/'). */
+      primaryPath?: string;
       secondary?: SisterSiteKey;
+      /** secondary 자매 사이트 deep link path. */
+      secondaryPath?: string;
       primaryHint: string;
     }
   | {
@@ -62,6 +71,8 @@ interface MatrixRule {
 /**
  * 매트릭스 규칙 — (category, persona) 단일 매칭으로 결정.
  * 다중 페르소나는 PERSONA_PRIORITY 순으로 첫 매치를 채택.
+ *
+ * primaryPath / secondaryPath — 자매 카테고리 페이지 deep link (홈 점프 회피).
  */
 const RULES: MatrixRule[] = [
   // policy
@@ -71,8 +82,10 @@ const RULES: MatrixRule[] = [
     decision: {
       kind: 'route',
       primary: 'moneylook',
+      primaryPath: '/gov-support/',
       secondary: 'calculatorhost',
-      primaryHint: '청년 정책 핵심을 5분 안에 — asiatop.co.kr →',
+      secondaryPath: '/category/work/',
+      primaryHint: '청년 정부 지원 정책 — asiatop.co.kr/gov-support →',
     },
   },
   {
@@ -81,8 +94,10 @@ const RULES: MatrixRule[] = [
     decision: {
       kind: 'route',
       primary: 'moneylook',
+      primaryPath: '/realestate/',
       secondary: 'awoo',
-      primaryHint: '신혼부부 정책 가이드 — asiatop.co.kr →',
+      secondaryPath: '/personas/newlywed-family/',
+      primaryHint: '신혼부부 주거 정책 — asiatop.co.kr/realestate →',
     },
   },
   {
@@ -103,8 +118,10 @@ const RULES: MatrixRule[] = [
     decision: {
       kind: 'route',
       primary: 'moneylook',
+      primaryPath: '/tax/',
       secondary: 'calculatorhost',
-      primaryHint: '직장인 세금·금융 핵심 — asiatop.co.kr →',
+      secondaryPath: '/category/tax/',
+      primaryHint: '직장인 세금 가이드 — asiatop.co.kr/tax →',
     },
   },
   {
@@ -120,8 +137,10 @@ const RULES: MatrixRule[] = [
     decision: {
       kind: 'route',
       primary: 'iknowhowinfo',
+      primaryPath: '/pulse',
       secondary: 'moneylook',
-      primaryHint: '투자자라면 이 ETF 분석 — iknowhowinfo.com →',
+      secondaryPath: '/savings/',
+      primaryHint: 'ETF·시장 데일리 펄스 — iknowhowinfo.com/pulse →',
     },
   },
 
@@ -136,7 +155,8 @@ const RULES: MatrixRule[] = [
 const FALLBACK: ToollGateDecision = {
   kind: 'route',
   primary: 'calculatorhost',
-  primaryHint: '관련 계산기 — calculatorhost.com →',
+  primaryPath: '/category/tax/',
+  primaryHint: '관련 세금·금융 계산기 — calculatorhost.com/category/tax →',
 };
 
 /**
@@ -168,4 +188,27 @@ export function resolveToollGate(
  */
 export function getSisterSite(key: SisterSiteKey) {
   return SISTER_SITES[key];
+}
+
+/**
+ * route decision 으로 primary 자매 사이트 deep link href 를 조립한다.
+ * primaryPath 미지정 시 홈 ('/') 으로 fallback.
+ */
+export function buildPrimaryHref(decision: Extract<ToollGateDecision, { kind: 'route' }>): string {
+  const base = SISTER_SITES[decision.primary].baseUrl;
+  const path = decision.primaryPath ?? '/';
+  return `${base}${path.startsWith('/') ? path : '/' + path}`;
+}
+
+/**
+ * route decision 으로 secondary 자매 사이트 deep link href 를 조립한다.
+ * secondary 또는 secondaryPath 미지정 시 undefined.
+ */
+export function buildSecondaryHref(
+  decision: Extract<ToollGateDecision, { kind: 'route' }>,
+): string | undefined {
+  if (!decision.secondary) return undefined;
+  const base = SISTER_SITES[decision.secondary].baseUrl;
+  const path = decision.secondaryPath ?? '/';
+  return `${base}${path.startsWith('/') ? path : '/' + path}`;
 }

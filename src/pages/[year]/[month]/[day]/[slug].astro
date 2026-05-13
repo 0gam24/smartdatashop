@@ -6,7 +6,11 @@ import RelatedList from '../../../../components/RelatedList.astro';
 import ToollGate from '../../../../components/ToollGate.astro';
 import { estimateReadingTime, pulseUrl, pulseDateParts, categoryToKorean } from '../../../../lib/korean';
 import { buildNewsArticleLD, buildDatasetLDFromArticle } from '../../../../lib/jsonld';
-import { resolveToollGate } from '../../../../data/toll-gate-matrix';
+import {
+  resolveToollGate,
+  buildPrimaryHref,
+  buildSecondaryHref,
+} from '../../../../data/toll-gate-matrix';
 import { SISTER_SITES } from '../../../../data/sister-sites';
 import { entryHasPlaceholder } from '../../../../lib/placeholder';
 
@@ -117,10 +121,11 @@ const related = allEntries
     <ToollGate
       primaryText={tollGateDecision.primaryHint}
       primaryDomain={SISTER_SITES[tollGateDecision.primary].domain}
-      primaryHref={SISTER_SITES[tollGateDecision.primary].baseUrl}
-      secondary={tollGateDecision.secondary
+      primaryHref={buildPrimaryHref(tollGateDecision)}
+      secondaryText={tollGateDecision.secondary
         ? `보조: ${SISTER_SITES[tollGateDecision.secondary].name} · ${SISTER_SITES[tollGateDecision.secondary].domain}`
         : undefined}
+      secondaryHref={buildSecondaryHref(tollGateDecision)}
     />
   ) : (
     <ToollGate mode="main-terminal" message={tollGateDecision.message} />

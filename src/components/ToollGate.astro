@@ -15,7 +15,10 @@ interface RouteProps {
   primaryText: string;
   primaryDomain: string;
   primaryHref: string;
-  secondary?: string;
+  /** 보조 라인 텍스트 — 없으면 미렌더 */
+  secondaryText?: string;
+  /** 보조 라인 href — 있으면 보조 라인을 링크로 렌더, 없으면 plain text */
+  secondaryHref?: string;
 }
 
 interface MainTerminalProps {
@@ -42,7 +45,13 @@ const props = Astro.props as Props;
       <span class="dot">·</span>
       <span class="domain">{props.primaryDomain} →</span>
     </a>
-    {props.secondary && <div class="secondary">{props.secondary}</div>}
+    {props.secondaryText && (
+      props.secondaryHref ? (
+        <a href={props.secondaryHref} class="secondary secondary--link">{props.secondaryText}</a>
+      ) : (
+        <div class="secondary">{props.secondaryText}</div>
+      )
+    )}
   </aside>
 )}
 
@@ -80,6 +89,13 @@ const props = Astro.props as Props;
     color: var(--color-ink-secondary);
     font-style: italic;
     margin-top: 4px;
+    display: block;
+  }
+  .tollgate .secondary--link {
+    text-decoration: none;
+  }
+  .tollgate .secondary--link:hover {
+    color: var(--color-accent);
   }
   /* main-terminal 모드 — 동일한 .tollgate 외곽 + 내부만 교체 */
   .tollgate--terminal .terminal-message {
