@@ -173,111 +173,62 @@ function buildMessage(runs, content, fc) {
 
   const lines = [];
 
-  // 인사말
+  // 인사말 — 2 줄
   lines.push(`☕ *사장님, 좋은 아침이에요*`);
-  lines.push(`📅 ${kstDateStr} ${kstTimeStr} 보고서`);
+  lines.push(`📅 ${kstDateStr} ${kstTimeStr}`);
   lines.push(``);
 
-  // 한 줄 종합 (핵심 7 직원만)
-  let mood;
-  if (totalFail === 0 && totalOk > 0) {
-    mood = `핵심 자동화 ${totalOk}번 모두 정상 — 안심하고 커피 한 잔 ☕`;
-  } else if (totalFail === 0 && totalOk === 0) {
-    mood = `오늘 큰 변동 없음 (주말·휴일일 수 있어요)`;
-  } else if (totalFail < 3) {
-    mood = `${totalFail}번 실패했어요 — 아래 확인 부탁드려요`;
+  // 핵심 상태 한 줄 (가장 중요)
+  if (totalFail === 0) {
+    lines.push(`✅ *모두 정상 — 안심하셔도 돼요*`);
   } else {
-    mood = `${totalFail}번 실패 — 공장 점검 필요해요 🔴`;
-  }
-  lines.push(`*🎯 오늘 한 줄 요약*`);
-  lines.push(mood);
-  lines.push(``);
-
-  // 직원별 출근부 (역할 기반, 이름 X)
-  lines.push(`*👥 직원별 출근부*`);
-  const dayOfWeek = ranAtKst.getDay(); // 0 = 일요일
-  for (const st of STAFF) {
-    const s = byName[st.id];
-    if (!s) {
-      const isInsight = st.id === 'agent-writer-insight';
-      if (isInsight && dayOfWeek !== 0 && dayOfWeek !== 1) {
-        lines.push(`${st.emoji} ${st.role} — 오늘 쉬는 날 (일요일 출근) 😴`);
-      } else {
-        lines.push(`⚪ ${st.emoji} ${st.role} — 오늘 안 함`);
-      }
-    } else {
-      const icon = s.fail > 0 ? '⚠️' : '✅';
-      const failNote = s.fail > 0 ? ` (${s.fail}번 실패)` : '';
-      lines.push(`${icon} ${st.emoji} ${st.role} — ${s.ok}번 완료${failNote}`);
-    }
+    lines.push(`⚠️ *${totalFail}건 실패 — 아래 확인 부탁드려요*`);
   }
   lines.push(``);
 
-  // 오늘 만든 제품
-  lines.push(`*🏭 오늘 만든 제품*`);
-  if (content.pulse > 0) {
-    lines.push(`📰 일일 뉴스(펄스) ${content.pulse}건 출고 완료 ✨`);
-  } else {
-    lines.push(`📰 일일 뉴스 0건 (새 자료가 없거나 검수 대기)`);
-  }
+  // 운영 결과 (운영자 의사결정 신호만)
+  lines.push(`📰 새 글 *${content.pulse}건* 발행`);
   if (content.insight > 0) {
-    lines.push(`📊 심층 분석(인사이트) ${content.insight}건 출고 완료 ✨`);
+    lines.push(`📊 인사이트 *${content.insight}건* 발행`);
   }
   if (content.drafts > 0) {
-    lines.push(`⏳ 검수 대기 ${content.drafts}건 — 사장님 확인 후 발행`);
+    lines.push(`⏳ 검수 대기 *${content.drafts}건* — 확인 후 발행`);
   }
 
+  // 신규 펄스 제목 (제목 점검용)
   if (content.recentPulses.length > 0 && content.recentPulses.length <= 8) {
     lines.push(``);
-    lines.push(`*📌 오늘 출고한 제품 이름*`);
     for (const t of content.recentPulses) {
       lines.push(`• ${t.slice(0, 55)}${t.length > 55 ? '…' : ''}`);
     }
   }
 
-  // 품질 검사관
-  if (fc) {
+  // 위험 신호만 표시 (정상 0건 시 검증원 섹션 자체 생략)
+  if (fc && fc.risk && (fc.risk.high || 0) > 0) {
     lines.push(``);
-    lines.push(`*🛡️ 검증원 품질 보고서*`);
-    lines.push(`총 ${fc.audited}건 점검`);
-    if (fc.risk) {
-      const high = fc.risk.high || 0;
-      const med = fc.risk.medium || 0;
-      const low = fc.risk.low || 0;
-      lines.push(`🟢 합격 ${low} / 🟡 주의 ${med} / 🔴 불량 ${high}`);
-      if (high > 0) {
-        lines.push(`⚠️ 불량 ${high}건 — 출처 보강 필요해요`);
-      } else {
-        lines.push(`불량 0건 — 안전 ✅`);
-      }
-    }
-    if (fc.discrepancies > 0) {
-      lines.push(`🚨 환각 의심 ${fc.discrepancies}건 — 즉시 확인 필요`);
-    }
+    lines.push(`🔴 *환각 위험 ${fc.risk.high}건* — 출처 보강 필요`);
+  }
+  if (fc && fc.discrepancies > 0) {
+    lines.push(``);
+    lines.push(`🚨 *환각 의심 ${fc.discrepancies}건* — 즉시 확인`);
   }
 
-  // 실패 상세 (핵심 7 직원만, 부가 검증 제외)
+  // 실패 상세 (실패 있을 때만, 핵심 7 직원만)
   if (totalFail > 0) {
     lines.push(``);
-    lines.push(`*⚠️ 실패 상세*`);
     const failed = runs
       .filter((r) => r.conclusion === 'failure' && STAFF_IDS.has(r.name))
       .slice(0, 5);
     for (const r of failed) {
       const st = STAFF.find((s) => s.id === r.name);
       const label = st ? `${st.emoji} ${st.role}` : r.name;
-      lines.push(`• ${label} — [GitHub 에서 확인](${r.html_url})`);
+      lines.push(`• ${label} — [확인](${r.html_url})`);
     }
-    lines.push(`👉 위 link 누르고 본 사이트에 메시지 주세요`);
   }
 
   // 푸터
   lines.push(``);
-  lines.push(`━━━━━━━━━━━━━━━━━━━━`);
-  lines.push(`🔗 [smartdatashop.kr](https://smartdatashop.kr) 방문`);
-  lines.push(`📂 [전체 자동화 현황](https://github.com/${GH_REPO}/actions)`);
-  lines.push(``);
-  lines.push(`_사장님은 매일 이 메시지 5초만 보시면 돼요_`);
+  lines.push(`🔗 [smartdatashop.kr](https://smartdatashop.kr)`);
 
   return lines.join('\n');
 }
