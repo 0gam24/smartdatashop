@@ -156,6 +156,20 @@ const enableAdsense = import.meta.env.PROD && /^ca-pub-\d+$/.test(adsenseClient)
 const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
 const enableGa4 =
   import.meta.env.PROD && !!ga4MeasurementId && /^G-[A-Z0-9]{8,12}$/.test(ga4MeasurementId);
+
+/**
+ * 네이버 애널리틱스 — 한국 검색 트래픽 정밀 분석 (C-Rank / D.I.A. 연동).
+ *
+ * 발급 ID 형식: 16자 hex (예: `bd121b953faaf8`).
+ * 운영자 발급 절차:
+ *   1. analytics.naver.com → 사이트등록 → URL `https://smartdatashop.kr`
+ *   2. 발급 ID 복사 → 본 사이트 env (`PUBLIC_NAVER_ANALYTICS_ID`) 등록
+ *
+ * env 미설정 시 미주입.
+ */
+const naverAnalyticsId = import.meta.env.PUBLIC_NAVER_ANALYTICS_ID as string | undefined;
+const enableNaverAnalytics =
+  import.meta.env.PROD && !!naverAnalyticsId && /^[a-f0-9]{12,20}$/.test(naverAnalyticsId);
 ---
 
 <!doctype html>
@@ -233,6 +247,20 @@ const enableGa4 =
           gtag('js', new Date());
           gtag('config', '${ga4MeasurementId}', { anonymize_ip: true });
         `}></script>
+      </>
+    )}
+
+    {/* 네이버 애널리틱스 — PROD + PUBLIC_NAVER_ANALYTICS_ID 설정 시만 */}
+    {enableNaverAnalytics && (
+      <>
+        <script is:inline set:html={`
+          if (!wcs_add) var wcs_add = {};
+          wcs_add["wa"] = "${naverAnalyticsId}";
+          if (window.wcs) {
+            wcs_do();
+          }
+        `}></script>
+        <script async src="https://wcs.naver.net/wcslog.js"></script>
       </>
     )}
 
