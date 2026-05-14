@@ -1,0 +1,101 @@
+# 에이전트 #3b — Chapter Writer (가이드북 챕터 자동 생성, M2 LIVE)
+# 운영자가 workflow_dispatch 로 inputs 입력 → Sonnet 4.6 챕터 MDX 생성 → PR 자동 오픈
+name: agent-writer-chapter
+
+on:
+  workflow_dispatch:
+    inputs:
+      book_slug:
+        description: '가이드북 slug (예: retirement-2026)'
+        required: true
+        type: string
+      chapter_number:
+        description: '챕터 번호 (1~14)'
+        required: true
+        type: string
+      chapter_title:
+        description: '챕터 제목 (예: "부동산 노후")'
+        required: true
+        type: string
+      chapter_slug:
+        description: '파일 슬러그 (예: real-estate)'
+        required: true
+        type: string
+      chapter_outline:
+        description: '챕터 outline (자유 텍스트, 멀티라인)'
+        required: false
+        type: string
+      chapter_sources:
+        description: '1차 출처 JSON 배열 — [{"name":"","url":"https://...","date":"YYYY-MM-DD"}]'
+        required: true
+        type: string
+      chapter_audience:
+        description: '독자 페르소나 hint (예: "4050 노후 준비자")'
+        required: false
+        default: '일반 독자'
+        type: string
+
+concurrency:
+  group: agent-writer-chapter-${{ inputs.book_slug }}-${{ inputs.chapter_number }}
+  cancel-in-progress: false
+
+jobs:
+  writer-chapter:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run Chapter Writer (Sonnet 4.6)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WRITER_CHAPTER_MODEL: ${{ vars.WRITER_CHAPTER_MODEL || 'claude-sonnet-4-6' }}
+          CHAPTER_BOOK_SLUG: ${{ inputs.book_slug }}
+          CHAPTER_NUMBER: ${{ inputs.chapter_number }}
+          CHAPTER_TITLE: ${{ inputs.chapter_title }}
+          CHAPTER_SLUG: ${{ inputs.chapter_slug }}
+          CHAPTER_OUTLINE: ${{ inputs.chapter_outline }}
+          CHAPTER_SOURCES: ${{ inputs.chapter_sources }}
+          CHAPTER_AUDIENCE: ${{ inputs.chapter_audience }}
+        run: node scripts/agents/writer-chapter.mjs
+
+      - name: Verify build (Zod schema)
+        run: npm run build
+
+      - name: Open chapter PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chapter-drafts/${{ inputs.book_slug }}-ch${{ inputs.chapter_number }}-${{ github.run_id }}
+          base: main
+          commit-message: 'feat(guidebook): ${{ inputs.book_slug }} ch${{ inputs.chapter_number }} 자동 초안'
+          title: '[chapter-draft] ${{ inputs.book_slug }} ch${{ inputs.chapter_number }} — ${{ inputs.chapter_title }}'
+          body: |
+            Chapter Writer M2 (Sonnet 4.6) 가 자동 생성한 챕터 초안입니다.
+
+            - 가이드북: `${{ inputs.book_slug }}`
+            - 챕터: ${{ inputs.chapter_number }}장 — ${{ inputs.chapter_title }}
+            - 슬러그: `${{ inputs.chapter_slug }}`
+            - 독자: ${{ inputs.chapter_audience }}
+            - 트리거 런: ${{ github.run_id }}
+
+            **운영자 검수 의무**:
+            - 1차 출처 footnote 매핑 정확
+            - 신규 통계·가격 예측 없음 (ADR 0006)
+            - 표준 5 섹션 (시나리오/체크리스트/FAQ/액션/자매 cross-ref) 포함
+          labels: |
+            ai-draft
+            agent:chapter-writer
+            chapter-draft
+          delete-branch: true
