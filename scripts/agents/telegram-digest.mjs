@@ -138,15 +138,15 @@ function buildMessage(runs, content, fc) {
   const kstDateStr = ranAtKst.toISOString().slice(0, 10);
   const kstTimeStr = ranAtKst.toTimeString().slice(0, 5);
 
-  // 핵심 7 직원 매핑 (역할 기반, 이름 X)
+  // 핵심 7 직원 — 키포인트만 짧게
   const STAFF = [
-    { id: 'fetch-data', emoji: '📰', role: '매일 새벽 정부 발표 수집' },
-    { id: 'agent-writer', emoji: '✍️', role: '수집된 자료로 펄스 본문 작성' },
-    { id: 'agent-writer-insight', emoji: '📊', role: '주 1회 일요일 심층 인사이트 작성' },
-    { id: 'agent-fact-check', emoji: '🛡️', role: '콘텐츠 사실 점검 (환각 X)' },
-    { id: 'agent-publisher', emoji: '📢', role: '구글·네이버에 새 글 알림' },
-    { id: 'sync-sister-mirrors', emoji: '🤝', role: '자매 사이트와 정보 공유' },
-    { id: 'agent-scout', emoji: '🔍', role: '매시간 시장 데이터 수집' },
+    { id: 'fetch-data', emoji: '📰', role: '정부 발표 수집' },
+    { id: 'agent-writer', emoji: '✍️', role: '펄스 본문 작성' },
+    { id: 'agent-writer-insight', emoji: '📊', role: '주간 인사이트' },
+    { id: 'agent-fact-check', emoji: '🛡️', role: '사실 점검' },
+    { id: 'agent-publisher', emoji: '📢', role: '검색엔진 알림' },
+    { id: 'sync-sister-mirrors', emoji: '🤝', role: '자매 사이트 동기화' },
+    { id: 'agent-scout', emoji: '🔍', role: '시장 데이터 수집' },
   ];
   const STAFF_IDS = new Set(STAFF.map((s) => s.id));
 
@@ -178,7 +178,7 @@ function buildMessage(runs, content, fc) {
   lines.push(`📅 ${kstDateStr} ${kstTimeStr}`);
   lines.push(``);
 
-  // 핵심 상태 한 줄 (가장 중요)
+  // 핵심 상태 한 줄
   if (totalFail === 0) {
     lines.push(`✅ *모두 정상 — 안심하셔도 돼요*`);
   } else {
@@ -186,7 +186,23 @@ function buildMessage(runs, content, fc) {
   }
   lines.push(``);
 
-  // 운영 결과 (운영자 의사결정 신호만)
+  // 직원별 짧은 출근부
+  const dayOfWeek = ranAtKst.getDay();
+  for (const st of STAFF) {
+    const s = byName[st.id];
+    if (!s) {
+      const isInsight = st.id === 'agent-writer-insight';
+      if (isInsight && dayOfWeek !== 0) continue; // 일요일 외 인사이트 줄 자체 생략
+      lines.push(`⚪ ${st.emoji} ${st.role}`);
+    } else {
+      const icon = s.fail > 0 ? '⚠️' : '✅';
+      const failNote = s.fail > 0 ? ` (실패 ${s.fail})` : '';
+      lines.push(`${icon} ${st.emoji} ${st.role} ${s.ok}번${failNote}`);
+    }
+  }
+  lines.push(``);
+
+  // 운영 결과
   lines.push(`📰 새 글 *${content.pulse}건* 발행`);
   if (content.insight > 0) {
     lines.push(`📊 인사이트 *${content.insight}건* 발행`);
