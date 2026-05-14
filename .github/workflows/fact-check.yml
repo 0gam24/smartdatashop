@@ -5,8 +5,11 @@ name: agent-fact-check
 
 on:
   schedule:
-    # KST 02:00 = UTC 17:00 (전날). KST = UTC+9.
+    # LITE 매일 — KST 02:00 = UTC 17:00 (전날)
     - cron: '0 17 * * *'
+    # FULL 주 1회 일요일 — KST 04:00 = UTC 19:00 (토요일)
+    # 비용 가드: high-risk 우선 + MAX_AUDITS=5 (주당 약 $0.25-0.50)
+    - cron: '0 19 * * 6'
   workflow_dispatch:
     inputs:
       mode:
@@ -46,11 +49,14 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # cron 트리거 시 LITE (기본). workflow_dispatch 시 inputs.mode 사용.
+      # 모드 결정:
+      #   workflow_dispatch → inputs.mode
+      #   cron '0 19 * * 6' (토 19:00 UTC = 일 04:00 KST) → 'full'
+      #   cron '0 17 * * *' (매일 17:00 UTC = 02:00 KST) → 'lite'
       - name: Run Fact-Checker (Layer 4)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          FACT_CHECKER_MODE: ${{ github.event.inputs.mode || 'lite' }}
+          FACT_CHECKER_MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 19 * * 6' && 'full' || 'lite') }}
           FACT_CHECKER_MAX_AUDITS: ${{ github.event.inputs.max_audits || '5' }}
         run: node scripts/agents/fact-checker.mjs
 
@@ -67,4 +73,4 @@ jobs:
             echo "No fact-check changes to commit."
           fi
         env:
-          FACT_CHECKER_MODE: ${{ github.event.inputs.mode || 'lite' }}
+          FACT_CHECKER_MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 19 * * 6' && 'full' || 'lite') }}
