@@ -138,7 +138,6 @@ function buildMessage(runs, content, fc) {
   const kstDateStr = ranAtKst.toISOString().slice(0, 10);
   const kstTimeStr = ranAtKst.toTimeString().slice(0, 5);
 
-  // workflow runs 집계 (워크플로우 이름별)
   const byName = {};
   for (const r of runs) {
     const name = r.name || 'unknown';
@@ -151,77 +150,122 @@ function buildMessage(runs, content, fc) {
   const totalOk = runs.filter((r) => r.conclusion === 'success').length;
   const totalFail = runs.filter((r) => r.conclusion === 'failure').length;
 
-  const lines = [];
-  lines.push(`🤖 *스마트데이터샵 자동화 다이제스트*`);
-  lines.push(`📅 ${kstDateStr} ${kstTimeStr} KST`);
-  lines.push(``);
-  lines.push(`*📊 24시간 자동화 결과*`);
-  lines.push(`✅ 성공 ${totalOk}건 / ❌ 실패 ${totalFail}건 (총 ${runs.length}건)`);
-  lines.push(``);
-
-  // 핵심 workflow 우선 표시
-  const KEY_WORKFLOWS = [
-    'fetch-data',
-    'agent-writer',
-    'agent-writer-insight',
-    'agent-fact-check',
-    'agent-publisher',
-    'sync-sister-mirrors',
-    'agent-scout',
+  // 직원 비유 매핑 (사장님-직원)
+  const STAFF = [
+    { id: 'fetch-data', emoji: '📰', name: '신문 배달원', role: '새벽 정부 발표 수집' },
+    { id: 'agent-writer', emoji: '✍️', name: '기자', role: '펄스 본문 작성' },
+    { id: 'agent-writer-insight', emoji: '📊', name: '분석가', role: '주간 심층 인사이트' },
+    { id: 'agent-fact-check', emoji: '🛡️', name: '검증원', role: '환각·근거 부족 점검' },
+    { id: 'agent-publisher', emoji: '📢', name: '홍보부', role: '구글·네이버 색인 알림' },
+    { id: 'sync-sister-mirrors', emoji: '🤝', name: '연락책', role: '자매 사이트 RSS' },
+    { id: 'agent-scout', emoji: '🔍', name: '정찰병', role: '시장 데이터 매시간' },
   ];
 
-  lines.push(`*🔧 워크플로우별*`);
-  for (const name of KEY_WORKFLOWS) {
-    const s = byName[name];
+  const lines = [];
+
+  // 인사말
+  lines.push(`☕ *사장님, 좋은 아침이에요*`);
+  lines.push(`📅 ${kstDateStr} ${kstTimeStr} 보고서`);
+  lines.push(``);
+
+  // 한 줄 종합
+  let mood;
+  if (totalFail === 0 && totalOk > 0) {
+    mood = `오늘도 직원 ${totalOk}명 모두 정상 출근 — 안심하고 커피 한 잔 ☕`;
+  } else if (totalFail === 0 && totalOk === 0) {
+    mood = `오늘 큰 변동 없음 (주말·휴일일 수 있어요)`;
+  } else if (totalFail < 3) {
+    mood = `직원 ${totalFail}명이 실수했어요 — 아래 확인 부탁드려요`;
+  } else {
+    mood = `직원 ${totalFail}명 실수 — 공장 점검 필요해요 🔴`;
+  }
+  lines.push(`*🎯 오늘 한 줄 요약*`);
+  lines.push(mood);
+  lines.push(``);
+
+  // 직원별 출근부
+  lines.push(`*👥 직원별 출근부*`);
+  const dayOfWeek = ranAtKst.getDay(); // 0 = 일요일
+  for (const st of STAFF) {
+    const s = byName[st.id];
     if (!s) {
-      lines.push(`⚪ ${name} — 미가동`);
+      const isInsight = st.id === 'agent-writer-insight';
+      if (isInsight && dayOfWeek !== 0 && dayOfWeek !== 1) {
+        lines.push(`${st.emoji} ${st.name} — 오늘 쉬는 날 (일요일 출근) 😴`);
+      } else {
+        lines.push(`⚪ ${st.emoji} ${st.name} — 출근 안 함`);
+      }
     } else {
-      const status = s.fail > 0 ? '⚠️' : '✅';
-      lines.push(`${status} ${name} — ${s.ok}✅ ${s.fail > 0 ? `${s.fail}❌` : ''}`);
+      const icon = s.fail > 0 ? '⚠️' : '✅';
+      const failNote = s.fail > 0 ? ` (${s.fail}번 실수)` : '';
+      lines.push(`${icon} ${st.emoji} ${st.name} — ${s.ok}번 일함${failNote}`);
     }
   }
-
   lines.push(``);
-  lines.push(`*📝 신규 콘텐츠*`);
-  lines.push(`📰 펄스 +${content.pulse}건`);
-  lines.push(`📊 인사이트 +${content.insight}건`);
-  if (content.drafts > 0) {
-    lines.push(`⏳ draft 대기 ${content.drafts}건 (검수 후 발행)`);
+
+  // 오늘 만든 제품
+  lines.push(`*🏭 오늘 만든 제품*`);
+  if (content.pulse > 0) {
+    lines.push(`📰 일일 뉴스(펄스) ${content.pulse}건 출고 완료 ✨`);
+  } else {
+    lines.push(`📰 일일 뉴스 0건 (새 자료가 없거나 검수 대기)`);
   }
+  if (content.insight > 0) {
+    lines.push(`📊 심층 분석(인사이트) ${content.insight}건 출고 완료 ✨`);
+  }
+  if (content.drafts > 0) {
+    lines.push(`⏳ 검수 대기 ${content.drafts}건 — 사장님 확인 후 발행`);
+  }
+
   if (content.recentPulses.length > 0 && content.recentPulses.length <= 8) {
     lines.push(``);
-    lines.push(`*📌 신규 펄스 목록*`);
+    lines.push(`*📌 오늘 출고한 제품 이름*`);
     for (const t of content.recentPulses) {
-      lines.push(`• ${t.slice(0, 50)}${t.length > 50 ? '…' : ''}`);
+      lines.push(`• ${t.slice(0, 55)}${t.length > 55 ? '…' : ''}`);
     }
   }
 
+  // 품질 검사관
   if (fc) {
     lines.push(``);
-    lines.push(`*🛡️ Fact-Check (${fc.mode.toUpperCase()})*`);
-    lines.push(`감사 ${fc.audited}건`);
+    lines.push(`*🛡️ 검증원 품질 보고서*`);
+    lines.push(`총 ${fc.audited}건 점검`);
     if (fc.risk) {
       const high = fc.risk.high || 0;
       const med = fc.risk.medium || 0;
-      lines.push(`위험: 🔴 ${high} / 🟡 ${med} / 🟢 ${fc.risk.low || 0}`);
+      const low = fc.risk.low || 0;
+      lines.push(`🟢 합격 ${low} / 🟡 주의 ${med} / 🔴 불량 ${high}`);
+      if (high > 0) {
+        lines.push(`⚠️ 불량 ${high}건 — 출처 보강 필요해요`);
+      } else {
+        lines.push(`불량 0건 — 안전 ✅`);
+      }
     }
     if (fc.discrepancies > 0) {
-      lines.push(`⚠️ FULL 불일치 ${fc.discrepancies}건 발견`);
+      lines.push(`🚨 환각 의심 ${fc.discrepancies}건 — 즉시 확인 필요`);
     }
   }
 
+  // 실수한 직원 상세
   if (totalFail > 0) {
     lines.push(``);
-    lines.push(`*⚠️ 실패 상세 (운영자 확인 권장)*`);
+    lines.push(`*⚠️ 실수한 직원 상세*`);
     const failed = runs.filter((r) => r.conclusion === 'failure').slice(0, 5);
     for (const r of failed) {
-      lines.push(`• ${r.name} — [run #${r.id}](${r.html_url})`);
+      const st = STAFF.find((s) => s.id === r.name);
+      const label = st ? `${st.emoji} ${st.name}` : r.name;
+      lines.push(`• ${label} — [GitHub 에서 확인](${r.html_url})`);
     }
+    lines.push(`👉 위 link 누르고 본 사이트에 메시지 주세요`);
   }
 
+  // 푸터
   lines.push(``);
-  lines.push(`🔗 [https://smartdatashop.kr](https://smartdatashop.kr)`);
-  lines.push(`📂 [GitHub Actions](https://github.com/${GH_REPO}/actions)`);
+  lines.push(`━━━━━━━━━━━━━━━━━━━━`);
+  lines.push(`🔗 [smartdatashop.kr](https://smartdatashop.kr) 방문`);
+  lines.push(`📂 [전체 자동화 현황](https://github.com/${GH_REPO}/actions)`);
+  lines.push(``);
+  lines.push(`_사장님은 매일 이 메시지 5초만 보시면 돼요_`);
 
   return lines.join('\n');
 }
