@@ -141,6 +141,21 @@ const ADSENSE_CLIENT_FALLBACK = 'ca-pub-7830821732287404';
 const adsenseClient =
   (import.meta.env.PUBLIC_ADSENSE_CLIENT as string | undefined) || ADSENSE_CLIENT_FALLBACK;
 const enableAdsense = import.meta.env.PROD && /^ca-pub-\d+$/.test(adsenseClient);
+
+/**
+ * Google Analytics 4 (GA4) — 트래픽 분석.
+ *
+ * Measurement ID 형식: `G-XXXXXXXXXX` (10자리 영숫자).
+ * 운영자 발급 절차:
+ *   1. Google Analytics 4 → 관리 → 속성 → 데이터 스트림
+ *   2. 웹 스트림 만들기 → smartdatashop.kr 입력
+ *   3. 측정 ID 복사 → 본 사이트 env (`PUBLIC_GA4_MEASUREMENT_ID`) 등록
+ *
+ * env 미설정 시 미주입 — GA4 데이터 수집 X.
+ */
+const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
+const enableGa4 =
+  import.meta.env.PROD && !!ga4MeasurementId && /^G-[A-Z0-9]{8,12}$/.test(ga4MeasurementId);
 ---
 
 <!doctype html>
@@ -206,6 +221,19 @@ const enableAdsense = import.meta.env.PROD && /^ca-pub-\d+$/.test(adsenseClient)
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
         crossorigin="anonymous"
       ></script>
+    )}
+
+    {/* Google Analytics 4 — PROD + PUBLIC_GA4_MEASUREMENT_ID 설정 시만 */}
+    {enableGa4 && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${ga4MeasurementId}', { anonymize_ip: true });
+        `}></script>
+      </>
     )}
 
     <!-- 라이선스 머신-가독 (Risk #4): CC BY-NC 4.0 — Dataset LD 의 license 와 일치. -->
