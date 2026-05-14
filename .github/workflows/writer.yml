@@ -5,8 +5,14 @@ name: agent-writer
 on:
   push:
     paths:
-      # daily-queue/ 하위가 변경된 푸시에만 반응
+      # daily-queue/ 하위가 변경된 푸시에만 반응 (운영자 직접 push 케이스)
+      # 주의: 다른 workflow 가 GITHUB_TOKEN 으로 push 한 경우 트리거 안 됨 (GitHub 보안 정책)
       - 'daily-queue/**'
+  schedule:
+    # fetch-data 가 17:17 UTC (KST 02:17) 에 draft 생성 후 작동 보장.
+    # fetch-data + scout 마무리 시간 확보 위해 +1.5h 여유 → 18:45 UTC (KST 03:45) cron.
+    # GITHUB_TOKEN 보안 정책 우회 — workflow 가 스스로 자기 시각에 가동.
+    - cron: '45 18 * * *'
   # 수동 실행 트리거
   workflow_dispatch:
 
