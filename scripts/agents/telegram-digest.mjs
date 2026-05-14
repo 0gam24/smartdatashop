@@ -138,6 +138,19 @@ function buildMessage(runs, content, fc) {
   const kstDateStr = ranAtKst.toISOString().slice(0, 10);
   const kstTimeStr = ranAtKst.toTimeString().slice(0, 5);
 
+  // 핵심 7 직원 매핑 (역할 기반, 이름 X)
+  const STAFF = [
+    { id: 'fetch-data', emoji: '📰', role: '매일 새벽 정부 발표 수집' },
+    { id: 'agent-writer', emoji: '✍️', role: '수집된 자료로 펄스 본문 작성' },
+    { id: 'agent-writer-insight', emoji: '📊', role: '주 1회 일요일 심층 인사이트 작성' },
+    { id: 'agent-fact-check', emoji: '🛡️', role: '콘텐츠 사실 점검 (환각 X)' },
+    { id: 'agent-publisher', emoji: '📢', role: '구글·네이버에 새 글 알림' },
+    { id: 'sync-sister-mirrors', emoji: '🤝', role: '자매 사이트와 정보 공유' },
+    { id: 'agent-scout', emoji: '🔍', role: '매시간 시장 데이터 수집' },
+  ];
+  const STAFF_IDS = new Set(STAFF.map((s) => s.id));
+
+  // 모든 run 집계
   const byName = {};
   for (const r of runs) {
     const name = r.name || 'unknown';
@@ -147,19 +160,16 @@ function buildMessage(runs, content, fc) {
     else if (r.conclusion === 'cancelled') byName[name].cancel++;
   }
 
-  const totalOk = runs.filter((r) => r.conclusion === 'success').length;
-  const totalFail = runs.filter((r) => r.conclusion === 'failure').length;
-
-  // 직원 비유 매핑 (사장님-직원)
-  const STAFF = [
-    { id: 'fetch-data', emoji: '📰', name: '신문 배달원', role: '새벽 정부 발표 수집' },
-    { id: 'agent-writer', emoji: '✍️', name: '기자', role: '펄스 본문 작성' },
-    { id: 'agent-writer-insight', emoji: '📊', name: '분석가', role: '주간 심층 인사이트' },
-    { id: 'agent-fact-check', emoji: '🛡️', name: '검증원', role: '환각·근거 부족 점검' },
-    { id: 'agent-publisher', emoji: '📢', name: '홍보부', role: '구글·네이버 색인 알림' },
-    { id: 'sync-sister-mirrors', emoji: '🤝', name: '연락책', role: '자매 사이트 RSS' },
-    { id: 'agent-scout', emoji: '🔍', name: '정찰병', role: '시장 데이터 매시간' },
-  ];
+  // 핵심 7 직원만 종합 카운트 (Lighthouse·build-check 등 부가 검증 제외)
+  let totalOk = 0;
+  let totalFail = 0;
+  for (const st of STAFF) {
+    const s = byName[st.id];
+    if (s) {
+      totalOk += s.ok;
+      totalFail += s.fail;
+    }
+  }
 
   const lines = [];
 
@@ -168,22 +178,22 @@ function buildMessage(runs, content, fc) {
   lines.push(`📅 ${kstDateStr} ${kstTimeStr} 보고서`);
   lines.push(``);
 
-  // 한 줄 종합
+  // 한 줄 종합 (핵심 7 직원만)
   let mood;
   if (totalFail === 0 && totalOk > 0) {
-    mood = `오늘도 직원 ${totalOk}명 모두 정상 출근 — 안심하고 커피 한 잔 ☕`;
+    mood = `핵심 자동화 ${totalOk}번 모두 정상 — 안심하고 커피 한 잔 ☕`;
   } else if (totalFail === 0 && totalOk === 0) {
     mood = `오늘 큰 변동 없음 (주말·휴일일 수 있어요)`;
   } else if (totalFail < 3) {
-    mood = `직원 ${totalFail}명이 실수했어요 — 아래 확인 부탁드려요`;
+    mood = `${totalFail}번 실패했어요 — 아래 확인 부탁드려요`;
   } else {
-    mood = `직원 ${totalFail}명 실수 — 공장 점검 필요해요 🔴`;
+    mood = `${totalFail}번 실패 — 공장 점검 필요해요 🔴`;
   }
   lines.push(`*🎯 오늘 한 줄 요약*`);
   lines.push(mood);
   lines.push(``);
 
-  // 직원별 출근부
+  // 직원별 출근부 (역할 기반, 이름 X)
   lines.push(`*👥 직원별 출근부*`);
   const dayOfWeek = ranAtKst.getDay(); // 0 = 일요일
   for (const st of STAFF) {
@@ -191,14 +201,14 @@ function buildMessage(runs, content, fc) {
     if (!s) {
       const isInsight = st.id === 'agent-writer-insight';
       if (isInsight && dayOfWeek !== 0 && dayOfWeek !== 1) {
-        lines.push(`${st.emoji} ${st.name} — 오늘 쉬는 날 (일요일 출근) 😴`);
+        lines.push(`${st.emoji} ${st.role} — 오늘 쉬는 날 (일요일 출근) 😴`);
       } else {
-        lines.push(`⚪ ${st.emoji} ${st.name} — 출근 안 함`);
+        lines.push(`⚪ ${st.emoji} ${st.role} — 오늘 안 함`);
       }
     } else {
       const icon = s.fail > 0 ? '⚠️' : '✅';
-      const failNote = s.fail > 0 ? ` (${s.fail}번 실수)` : '';
-      lines.push(`${icon} ${st.emoji} ${st.name} — ${s.ok}번 일함${failNote}`);
+      const failNote = s.fail > 0 ? ` (${s.fail}번 실패)` : '';
+      lines.push(`${icon} ${st.emoji} ${st.role} — ${s.ok}번 완료${failNote}`);
     }
   }
   lines.push(``);
@@ -246,14 +256,16 @@ function buildMessage(runs, content, fc) {
     }
   }
 
-  // 실수한 직원 상세
+  // 실패 상세 (핵심 7 직원만, 부가 검증 제외)
   if (totalFail > 0) {
     lines.push(``);
-    lines.push(`*⚠️ 실수한 직원 상세*`);
-    const failed = runs.filter((r) => r.conclusion === 'failure').slice(0, 5);
+    lines.push(`*⚠️ 실패 상세*`);
+    const failed = runs
+      .filter((r) => r.conclusion === 'failure' && STAFF_IDS.has(r.name))
+      .slice(0, 5);
     for (const r of failed) {
       const st = STAFF.find((s) => s.id === r.name);
-      const label = st ? `${st.emoji} ${st.name}` : r.name;
+      const label = st ? `${st.emoji} ${st.role}` : r.name;
       lines.push(`• ${label} — [GitHub 에서 확인](${r.html_url})`);
     }
     lines.push(`👉 위 link 누르고 본 사이트에 메시지 주세요`);
