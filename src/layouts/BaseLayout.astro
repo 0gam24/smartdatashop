@@ -153,9 +153,10 @@ const enableAdsense = import.meta.env.PROD && /^ca-pub-\d+$/.test(adsenseClient)
  *
  * env 미설정 시 미주입 — GA4 데이터 수집 X.
  */
-const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
-const enableGa4 =
-  import.meta.env.PROD && !!ga4MeasurementId && /^G-[A-Z0-9]{8,12}$/.test(ga4MeasurementId);
+const GA4_MEASUREMENT_FALLBACK = 'G-1BEF2TDWMF';
+const ga4MeasurementId =
+  (import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined) || GA4_MEASUREMENT_FALLBACK;
+const enableGa4 = import.meta.env.PROD && /^G-[A-Z0-9]{8,12}$/.test(ga4MeasurementId);
 
 /**
  * 네이버 애널리틱스 — 한국 검색 트래픽 정밀 분석 (C-Rank / D.I.A. 연동).
