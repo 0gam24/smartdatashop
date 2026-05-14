@@ -140,13 +140,13 @@ function buildMessage(runs, content, fc) {
 
   // 핵심 7 직원 — 키포인트만 짧게
   const STAFF = [
-    { id: 'fetch-data', emoji: '📰', role: '정부 발표 수집' },
-    { id: 'agent-writer', emoji: '✍️', role: '펄스 본문 작성' },
-    { id: 'agent-writer-insight', emoji: '📊', role: '주간 인사이트' },
-    { id: 'agent-fact-check', emoji: '🛡️', role: '사실 점검' },
-    { id: 'agent-publisher', emoji: '📢', role: '검색엔진 알림' },
-    { id: 'sync-sister-mirrors', emoji: '🤝', role: '자매 사이트 동기화' },
-    { id: 'agent-scout', emoji: '🔍', role: '시장 데이터 수집' },
+    { id: 'fetch-data', role: '정부 발표 수집' },
+    { id: 'agent-writer', role: '펄스 본문 작성' },
+    { id: 'agent-writer-insight', role: '주간 인사이트' },
+    { id: 'agent-fact-check', role: '사실 점검' },
+    { id: 'agent-publisher', role: '검색엔진 알림' },
+    { id: 'sync-sister-mirrors', role: '자매 사이트 동기화' },
+    { id: 'agent-scout', role: '시장 데이터 수집' },
   ];
   const STAFF_IDS = new Set(STAFF.map((s) => s.id));
 
@@ -173,16 +173,16 @@ function buildMessage(runs, content, fc) {
 
   const lines = [];
 
-  // 인사말 — 2 줄
-  lines.push(`☕ *사장님, 좋은 아침이에요*`);
-  lines.push(`📅 ${kstDateStr} ${kstTimeStr}`);
+  // 인사말
+  lines.push(`*사장님, 좋은 아침이에요*`);
+  lines.push(`${kstDateStr} ${kstTimeStr}`);
   lines.push(``);
 
   // 핵심 상태 한 줄
   if (totalFail === 0) {
-    lines.push(`✅ *모두 정상 — 안심하셔도 돼요*`);
+    lines.push(`*모두 정상*`);
   } else {
-    lines.push(`⚠️ *${totalFail}건 실패 — 아래 확인 부탁드려요*`);
+    lines.push(`*${totalFail}건 실패 — 아래 확인*`);
   }
   lines.push(``);
 
@@ -192,44 +192,43 @@ function buildMessage(runs, content, fc) {
     const s = byName[st.id];
     if (!s) {
       const isInsight = st.id === 'agent-writer-insight';
-      if (isInsight && dayOfWeek !== 0) continue; // 일요일 외 인사이트 줄 자체 생략
-      lines.push(`⚪ ${st.emoji} ${st.role}`);
+      if (isInsight && dayOfWeek !== 0) continue;
+      lines.push(`- ${st.role} 0번`);
     } else {
-      const icon = s.fail > 0 ? '⚠️' : '✅';
       const failNote = s.fail > 0 ? ` (실패 ${s.fail})` : '';
-      lines.push(`${icon} ${st.emoji} ${st.role} ${s.ok}번${failNote}`);
+      lines.push(`- ${st.role} ${s.ok}번${failNote}`);
     }
   }
   lines.push(``);
 
   // 운영 결과
-  lines.push(`📰 새 글 *${content.pulse}건* 발행`);
+  lines.push(`새 글 *${content.pulse}건* 발행`);
   if (content.insight > 0) {
-    lines.push(`📊 인사이트 *${content.insight}건* 발행`);
+    lines.push(`인사이트 *${content.insight}건* 발행`);
   }
   if (content.drafts > 0) {
-    lines.push(`⏳ 검수 대기 *${content.drafts}건* — 확인 후 발행`);
+    lines.push(`검수 대기 *${content.drafts}건*`);
   }
 
-  // 신규 펄스 제목 (제목 점검용)
+  // 신규 펄스 제목
   if (content.recentPulses.length > 0 && content.recentPulses.length <= 8) {
     lines.push(``);
     for (const t of content.recentPulses) {
-      lines.push(`• ${t.slice(0, 55)}${t.length > 55 ? '…' : ''}`);
+      lines.push(`- ${t.slice(0, 55)}${t.length > 55 ? '…' : ''}`);
     }
   }
 
-  // 위험 신호만 표시 (정상 0건 시 검증원 섹션 자체 생략)
+  // 위험 신호만 표시
   if (fc && fc.risk && (fc.risk.high || 0) > 0) {
     lines.push(``);
-    lines.push(`🔴 *환각 위험 ${fc.risk.high}건* — 출처 보강 필요`);
+    lines.push(`*환각 위험 ${fc.risk.high}건 — 출처 보강 필요*`);
   }
   if (fc && fc.discrepancies > 0) {
     lines.push(``);
-    lines.push(`🚨 *환각 의심 ${fc.discrepancies}건* — 즉시 확인`);
+    lines.push(`*환각 의심 ${fc.discrepancies}건 — 즉시 확인*`);
   }
 
-  // 실패 상세 (실패 있을 때만, 핵심 7 직원만)
+  // 실패 상세
   if (totalFail > 0) {
     lines.push(``);
     const failed = runs
@@ -237,14 +236,14 @@ function buildMessage(runs, content, fc) {
       .slice(0, 5);
     for (const r of failed) {
       const st = STAFF.find((s) => s.id === r.name);
-      const label = st ? `${st.emoji} ${st.role}` : r.name;
-      lines.push(`• ${label} — [확인](${r.html_url})`);
+      const label = st ? st.role : r.name;
+      lines.push(`- ${label} — [확인](${r.html_url})`);
     }
   }
 
   // 푸터
   lines.push(``);
-  lines.push(`🔗 [smartdatashop.kr](https://smartdatashop.kr)`);
+  lines.push(`[smartdatashop.kr](https://smartdatashop.kr)`);
 
   return lines.join('\n');
 }
