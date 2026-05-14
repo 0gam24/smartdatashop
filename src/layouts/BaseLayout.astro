@@ -160,16 +160,15 @@ const enableGa4 =
 /**
  * 네이버 애널리틱스 — 한국 검색 트래픽 정밀 분석 (C-Rank / D.I.A. 연동).
  *
- * 발급 ID 형식: 16자 hex (예: `bd121b953faaf8`).
- * 운영자 발급 절차:
- *   1. analytics.naver.com → 사이트등록 → URL `https://smartdatashop.kr`
- *   2. 발급 ID 복사 → 본 사이트 env (`PUBLIC_NAVER_ANALYTICS_ID`) 등록
- *
- * env 미설정 시 미주입.
+ * 발급 ID 형식: 12-20자 hex (예: `a12608dc4b99a8`).
+ * 운영자 발급 ID 는 공개 정보 — fallback 하드코딩 사용.
+ * 운영자 변경 시 env (`PUBLIC_NAVER_ANALYTICS_ID`) 로 override 가능.
  */
-const naverAnalyticsId = import.meta.env.PUBLIC_NAVER_ANALYTICS_ID as string | undefined;
+const NAVER_ANALYTICS_FALLBACK = 'a12608dc4b99a8';
+const naverAnalyticsId =
+  (import.meta.env.PUBLIC_NAVER_ANALYTICS_ID as string | undefined) || NAVER_ANALYTICS_FALLBACK;
 const enableNaverAnalytics =
-  import.meta.env.PROD && !!naverAnalyticsId && /^[a-f0-9]{12,20}$/.test(naverAnalyticsId);
+  import.meta.env.PROD && /^[a-f0-9]{12,20}$/.test(naverAnalyticsId);
 ---
 
 <!doctype html>
@@ -250,19 +249,6 @@ const enableNaverAnalytics =
       </>
     )}
 
-    {/* 네이버 애널리틱스 — PROD + PUBLIC_NAVER_ANALYTICS_ID 설정 시만 */}
-    {enableNaverAnalytics && (
-      <>
-        <script is:inline set:html={`
-          if (!wcs_add) var wcs_add = {};
-          wcs_add["wa"] = "${naverAnalyticsId}";
-          if (window.wcs) {
-            wcs_do();
-          }
-        `}></script>
-        <script async src="https://wcs.naver.net/wcslog.js"></script>
-      </>
-    )}
 
     <!-- 라이선스 머신-가독 (Risk #4): CC BY-NC 4.0 — Dataset LD 의 license 와 일치. -->
     <link rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/" />
@@ -333,5 +319,23 @@ const enableNaverAnalytics =
     <slot />
     <MobileBottomTabs />
     <Prefetch />
+
+    {/*
+      네이버 애널리틱스 — 네이버 공식 권장 위치: </body> 직전.
+      PROD + 발급 ID 형식 검증 시만 (fallback 'a12608dc4b99a8' / env override 가능).
+      페이지 로드 영향 최소화 + 본문 렌더 후 추적.
+    */}
+    {enableNaverAnalytics && (
+      <>
+        <script async src="https://wcs.pstatic.net/wcslog.js"></script>
+        <script is:inline set:html={`
+          if (!wcs_add) var wcs_add = {};
+          wcs_add["wa"] = "${naverAnalyticsId}";
+          if (window.wcs) {
+            wcs_do();
+          }
+        `}></script>
+      </>
+    )}
   </body>
 </html>
