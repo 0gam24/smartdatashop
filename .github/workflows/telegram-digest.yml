@@ -1,0 +1,52 @@
+# 매일 자동화 결과 텔레그램 다이제스트
+# KST 09:30 (= UTC 00:30) — writer cron (KST 03:45) + fact-check (KST 02:00) 모두 끝난 후
+name: telegram-digest
+
+on:
+  schedule:
+    # KST 09:30 = UTC 00:30 매일
+    - cron: '30 0 * * *'
+  # 실패 즉시 알림 — 핵심 workflow 실패 시 트리거 (운영자 빠른 인지)
+  workflow_run:
+    workflows:
+      - fetch-data
+      - agent-writer
+      - agent-writer-insight
+      - agent-fact-check
+      - agent-publisher
+    types: [completed]
+  # 수동
+  workflow_dispatch:
+
+concurrency:
+  group: telegram-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    # workflow_run 트리거 — 실패 시만 즉시 알림 (성공은 매일 1회 cron 으로 종합)
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'failure' }}
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run Telegram Digest
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/agents/telegram-digest.mjs
