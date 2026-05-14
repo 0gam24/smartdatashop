@@ -26,16 +26,23 @@
  *   - 운영자 검수 + tldr 검수 게이트가 최후 방어선
  */
 
-import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 
 const REPO_ROOT = process.cwd();
 const DRAFTS_DIR = resolve(REPO_ROOT, 'daily-queue/drafts');
+const PUBLISH_DIR = resolve(REPO_ROOT, 'src/content/pulse');
 const HEARTBEAT_PATH = resolve(REPO_ROOT, 'tmp/writer-heartbeat.json');
 
 const API_KEY = process.env.ANTHROPIC_API_KEY;
 const MODEL = process.env.WRITER_MODEL || 'claude-haiku-4-5-20251001';
+const FACT_CHECK_MODEL = process.env.WRITER_FACT_CHECK_MODEL || 'claude-sonnet-4-6';
 const MAX_DRAFTS = Math.max(1, Math.min(10, parseInt(process.env.WRITER_MAX_DRAFTS || '4', 10)));
+
+// 자동 발행 모드 (기본 ON) — fact-check 통과 시 drafts → src/content/pulse 이동
+const AUTO_PUBLISH = (process.env.WRITER_AUTO_PUBLISH ?? 'true').toLowerCase() === 'true';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 const ranAt = new Date().toISOString();
 
@@ -156,6 +163,116 @@ function replacePlaceholder(content, body) {
   return content.replace(PLACEHOLDER, body);
 }
 
+// ─────────────────────────────────────────────────────────
+// 환각 검토 (Sonnet 4.6 + 1차 출처 fetch) — 발행 직전 게이트
+// ─────────────────────────────────────────────────────────
+
+const FACT_CHECK_SYSTEM = `당신은 발행 직전 fact-checker. 본문의 수치·일자·인용이 1차 출처에 명시되었는지 엄격 점검.
+
+룰:
+1. 본문의 수치 / 일자 / 직접 인용만 검증 대상
+2. 1차 출처 본문에 없는 항목 = 환각 (fabricated)
+3. 수치 ±1% 오차 허용 (반올림)
+4. 추측·해석·일반 설명은 검증 대상 X
+5. 본문에 1차 출처 인용 단락 (\`> 원문\`) 이 그대로 옮겨졌으면 통과
+
+JSON 응답만 (코드 펜스 X):
+{ "verdict": "ok" | "fabricated" | "mismatch", "summary": "1 문장", "issues": [{"claim": "원문", "issue": "설명"}] }`;
+
+async function fetchSourceText(url, timeoutMs = 10_000) {
+  try {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'smartdatashop-writer/1.0 (+https://smartdatashop.kr)' },
+      signal: controller.signal,
+    });
+    clearTimeout(t);
+    if (!res.ok) return null;
+    const html = await res.text();
+    return html
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 6000);
+  } catch {
+    return null;
+  }
+}
+
+async function factCheckBeforePublish(title, body, sourceUrl) {
+  if (!sourceUrl) return { verdict: 'no-sources', summary: '1차 출처 없음 — 자동 발행 보류' };
+
+  const sourceText = await fetchSourceText(sourceUrl);
+  if (!sourceText) {
+    return { verdict: 'fetch-failed', summary: '1차 출처 fetch 실패 — 자동 발행 보류' };
+  }
+
+  const userMsg = `## 글 제목
+${title}
+
+## 본문
+${body.slice(0, 4000)}
+
+## 1차 출처 (${sourceUrl})
+${sourceText}
+
+## 작업
+환각 여부 JSON 응답.`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': API_KEY,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: FACT_CHECK_MODEL,
+      max_tokens: 1200,
+      system: FACT_CHECK_SYSTEM,
+      messages: [{ role: 'user', content: userMsg }],
+    }),
+  });
+
+  if (!res.ok) return { verdict: 'check-error', summary: `Claude API ${res.status}` };
+  const data = await res.json();
+  const text = data.content?.[0]?.text;
+  if (typeof text !== 'string') return { verdict: 'check-error', summary: 'empty response' };
+
+  const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    return { verdict: 'check-error', summary: 'parse-error', raw: cleaned.slice(0, 300) };
+  }
+}
+
+async function notifyTelegram(message) {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown',
+        disable_web_page_preview: true,
+      }),
+    });
+  } catch {
+    /* silent — 알림 실패가 빌드 실패로 이어지지 않도록 */
+  }
+}
+
+/** draft 파일명 → 발행용 슬러그 (`draft-pulse-` prefix 제거 + 길이 단축). */
+function publishedFilename(draftFilename) {
+  return draftFilename.replace(/^draft-pulse-/, '');
+}
+
 async function main() {
   const files = existsSync(DRAFTS_DIR)
     ? readdirSync(DRAFTS_DIR).filter((f) => f.endsWith('.mdx'))
@@ -167,7 +284,9 @@ async function main() {
     return;
   }
 
-  const enhanced = [];
+  const enhanced = [];   // 본문 생성 OK
+  const published = [];  // 자동 발행 OK (drafts → pulse 이동)
+  const heldForReview = []; // 환각 의심 — drafts 유지
   const skipped = [];
   const failed = [];
 
@@ -194,19 +313,79 @@ async function main() {
       writeFileSync(path, newContent, 'utf8');
       enhanced.push({ filename, bodyLength: body.length });
       console.log(`  ✓ ${body.length} chars written`);
+
+      // 자동 발행 모드 — fact-check 통과 시 drafts → src/content/pulse 이동
+      if (AUTO_PUBLISH) {
+        console.log(`  [fact-check] ${filename}...`);
+        const fcResult = await factCheckBeforePublish(meta.title, body, meta.sourceUrl);
+        const verdict = fcResult.verdict;
+
+        if (verdict === 'ok') {
+          // 발행: drafts → src/content/pulse
+          mkdirSync(PUBLISH_DIR, { recursive: true });
+          const targetFilename = publishedFilename(filename);
+          const targetPath = resolve(PUBLISH_DIR, targetFilename);
+          if (existsSync(targetPath)) {
+            console.log(`  ⚠ 대상 파일 이미 존재 — drafts 유지: ${targetFilename}`);
+            heldForReview.push({ filename, reason: 'target-exists', factCheck: fcResult });
+          } else {
+            renameSync(path, targetPath);
+            published.push({ from: filename, to: targetFilename, bodyLength: body.length });
+            console.log(`  ✓ 자동 발행 → src/content/pulse/${targetFilename}`);
+          }
+        } else {
+          // 환각 의심 / fetch 실패 / API 오류 — drafts/ 에 유지
+          heldForReview.push({
+            filename,
+            verdict,
+            summary: fcResult.summary,
+            issues: fcResult.issues,
+          });
+          console.log(`  ⚠ 발행 보류 (${verdict}): ${fcResult.summary}`);
+        }
+      }
     } catch (err) {
       console.error(`  ✗ ${err.message}`);
       failed.push({ filename, error: err.message });
     }
   }
 
-  console.log(`\n[writer] enhanced ${enhanced.length} / skipped ${skipped.length} / failed ${failed.length}`);
+  console.log(
+    `\n[writer] 본문 ${enhanced.length} / 발행 ${published.length} / 보류 ${heldForReview.length} / 스킵 ${skipped.length} / 실패 ${failed.length}`,
+  );
+
+  // 환각 의심 / 발행 보류 N건 → 텔레그램 즉시 알림
+  if (heldForReview.length > 0) {
+    const lines = [`*환각 의심 ${heldForReview.length}건 — 발행 보류*`, ''];
+    for (const h of heldForReview.slice(0, 5)) {
+      lines.push(`- ${h.filename.slice(0, 60)}`);
+      lines.push(`  ${h.summary || h.verdict}`);
+    }
+    lines.push('');
+    lines.push('drafts/ 에 유지 — 운영자 확인 필요');
+    await notifyTelegram(lines.join('\n'));
+  }
+
+  // 자동 발행 N건 → 텔레그램 알림 (성공 신호)
+  if (published.length > 0) {
+    const lines = [`*자동 발행 ${published.length}건 완료*`, ''];
+    for (const p of published.slice(0, 8)) {
+      lines.push(`- ${p.to.slice(0, 60)}`);
+    }
+    lines.push('');
+    lines.push('[smartdatashop.kr](https://smartdatashop.kr)');
+    await notifyTelegram(lines.join('\n'));
+  }
 
   writeHeartbeat({
     status: 'live',
     model: MODEL,
+    factCheckModel: FACT_CHECK_MODEL,
+    autoPublish: AUTO_PUBLISH,
     maxDrafts: MAX_DRAFTS,
     enhanced,
+    published,
+    heldForReview,
     skipped,
     failed,
   });

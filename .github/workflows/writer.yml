@@ -51,30 +51,47 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # Pulse Writer 스텁 실행 — M1+에서 실제 MDX 초안 생성으로 대체
+      # Pulse Writer (M1+) — 본문 생성 + fact-check + 자동 발행
       - name: Run Pulse Writer
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WRITER_AUTO_PUBLISH: 'true'
+          WRITER_FACT_CHECK_MODEL: 'claude-sonnet-4-6'
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: node scripts/agents/writer.mjs
 
-      # 생성된 초안을 PR로 자동 제출
-      - name: Open draft PR
+      # 빌드 검증 — auto-merge 전 schema·sync gate 통과 확인
+      - name: Verify build (Zod schema + sync gate)
+        run: npm run build
+
+      # PR 자동 생성 (drafts/ 변경 + src/content/pulse/ 추가 포함)
+      - name: Open auto-published PR
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          # 새 브랜치 — run id로 충돌 회피
-          branch: drafts/${{ github.run_id }}
+          branch: auto-publish/${{ github.run_id }}
           base: main
-          commit-message: 'feat(draft): pulse writer 자동 초안 ${{ github.run_id }}'
-          title: '[draft] Pulse Writer 자동 초안 #${{ github.run_id }}'
+          commit-message: 'feat(pulse): writer 자동 발행 ${{ github.run_id }}'
+          title: '[auto] Pulse Writer 자동 발행 #${{ github.run_id }}'
           body: |
-            Pulse Writer 에이전트가 자동 생성한 초안입니다.
+            Pulse Writer (M1) + Fact-Check (Sonnet 4.6) 자동 발행.
 
-            - 트리거 커밋: ${{ github.sha }}
-            - 워크플로우 런: ${{ github.run_id }}
+            - 본문 생성: Haiku 4.5
+            - 환각 점검: Sonnet 4.6 + 1차 출처 fetch
+            - 통과: src/content/pulse/ 이동 + auto-merge
+            - 실패: drafts/ 유지 + 텔레그램 알림
 
-            데스크 리뷰어(#5)의 자동 코멘트를 확인한 뒤 사람이 최종 머지하세요.
-          # 자동 라벨 — peter-evans/create-pull-request@v6 은 labels 입력으로 라벨을 지원
+            트리거: ${{ github.run_id }}
           labels: |
             ai-draft
             agent:pulse-writer
+            auto-publish
           delete-branch: true
+
+      # PR auto-merge — 빌드 통과 후 자동 머지 (운영자 사후 검수)
+      - name: Auto-merge published PR
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --merge --delete-branch "${{ steps.cpr.outputs.pull-request-number }}"
