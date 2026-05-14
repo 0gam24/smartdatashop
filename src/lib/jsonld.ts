@@ -323,6 +323,95 @@ export function buildItemListLD(
 }
 
 /**
+ * FAQPage JSON-LD — 본문의 "## 자주 묻는 질문" 섹션 자동 추출.
+ *
+ * 패턴: `**Q1. ...?**\nA. ...` 또는 `### Q1. ...\n... A. ...`
+ * 매칭된 Q&A 가 2개 이상일 때만 LD 발행 (SERP rich snippet 조건).
+ *
+ * Google Q&A rich snippet 정책 (2024+): 일반 FAQ 페이지는 더 이상 자동 노출되지 X,
+ * 그러나 LLM (ChatGPT/Perplexity/Gemini) 인용 시 FAQ LD 가 구조 추출에 결정적.
+ *
+ * 본 함수는 markdown body 를 받아 Q&A 추출 → LD 반환. Q&A < 2 면 null.
+ */
+export function buildFaqLDFromMarkdown(body: string): Record<string, unknown> | null {
+  // 패턴 1: **Q1. ...?** A. ... 또는 **Q. ...?** A. ...
+  const pattern1 = /\*\*Q\d*\.?\s*(.+?)\*\*\s*\n+(?:A[.:]?\s*)?(.+?)(?=\n+\*\*Q|\n+##|\n+\[|$)/gs;
+  // 패턴 2: ### Q1. ...?  A. ...
+  const pattern2 = /###\s+Q\d*\.?\s*(.+?)\n+(?:A[.:]?\s*)?(.+?)(?=\n+###|\n+##|$)/gs;
+
+  const qa: Array<{ q: string; a: string }> = [];
+  for (const pat of [pattern1, pattern2]) {
+    let m: RegExpExecArray | null;
+    while ((m = pat.exec(body)) !== null) {
+      const q = m[1].trim().replace(/[?？]+$/, '').trim();
+      const a = m[2].trim().replace(/\s+/g, ' ').slice(0, 500);
+      if (q.length > 0 && a.length > 0) {
+        qa.push({ q, a });
+      }
+    }
+    if (qa.length > 0) break; // 첫 패턴 매칭 후 종료
+  }
+
+  if (qa.length < 2) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: qa.map((it) => ({
+      '@type': 'Question',
+      name: it.q.endsWith('?') ? it.q : `${it.q}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: it.a,
+      },
+    })),
+  };
+}
+
+/**
+ * HowTo JSON-LD — 본문의 "본인 액션 N 가지" / "체크리스트" 섹션 자동 추출.
+ *
+ * 패턴: 번호 매김 리스트 (`1. ... / 2. ... / 3. ...`) 가 3개 이상 연속.
+ * 매칭 시 HowTo LD 발행 — LLM 인용 시 단계 구조 보존 + Google Discover 친화.
+ *
+ * 본 함수는 (제목, 마크다운 body) 를 받아 첫 번호 리스트 추출 → LD 반환.
+ * 리스트 < 3 단계 또는 미발견 시 null.
+ */
+export function buildHowToLDFromMarkdown(
+  title: string,
+  body: string,
+): Record<string, unknown> | null {
+  // 번호 리스트 (3개 이상 연속) 매칭 — "본인 액션" 또는 "체크리스트" 섹션 직후
+  const sectionMatch = body.match(
+    /##\s+[^\n]*(?:본인 액션|액션|체크리스트|단계|절차)[^\n]*\n+([\s\S]+?)(?=\n+##|\n+\[\^|$)/,
+  );
+  if (!sectionMatch) return null;
+
+  const sectionBody = sectionMatch[1];
+  const stepRe = /^\s*(\d+)\.\s+(.+?)(?=\n\s*\d+\.|$)/gms;
+  const steps: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = stepRe.exec(sectionBody)) !== null) {
+    const text = m[2].trim().replace(/\*\*/g, '').replace(/\s+/g, ' ').slice(0, 300);
+    if (text.length > 0) steps.push(text);
+  }
+
+  if (steps.length < 3) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: title,
+    step: steps.map((text, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: text.slice(0, 80),
+      text,
+    })),
+  };
+}
+
+/**
  * CollectionPage JSON-LD — 카테고리/태그/인사이트 인덱스 페이지의
  * "이 페이지는 모음 페이지이다" 신호. ItemList와 함께 발행하면 좋다.
  */

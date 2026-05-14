@@ -23,12 +23,32 @@
 1. 파일명: `YYYY-MM-DD-slug.mdx` (slug는 영어 소문자/하이픈)
 2. publishedAt: ISO 8601 + KST 시간대 (예: `2026-05-05T07:32:00+09:00`)
 3. category: 5개 enum 중 1개 (`policy`/`tax-finance`/`market`/`stats`/`ai-tech`)
-4. tldr: 200자 이내 한 문장 요약
-5. sources: 최소 1개 (`url` 권장 — Dataset LD 자동 발행 조건)
+4. tldr: 200자 이내 한 문장 요약 — **"X 는 Y 다" 정의 문장 포함** (LLM 인용 친화)
+5. sources: 최소 1개 (`url` 권장 — Dataset LD 자동 발행 조건). **3개+ 시 GEO·SEO 가산 신호**.
 6. tags: persona/dataType/action 중 해당하는 것
-7. body: H2 섹션 2-4개, 350~500자 권장
+7. body: **본문 1,500~2,500자 권장** (Google Discover + 일반 SEO + LLM 인용 모두 충족)
 8. (선택) `chartData`: Reuters/Bloomberg 스타일 OG 차트 오버레이 — `{ type, values, label, unit? }`
 9. (선택) `coverImage`: 1200×630 16:9 — 없으면 동적 OG v2 (Satori) 자동 사용
+
+### 본문 구조 — SEO/GEO 고급화 체크리스트 (2026-05-14 추가)
+
+신규 펄스 작성 시 본문 구조 표준 — 운영자·writer agent 공통:
+
+- ☐ **도입 첫 단락** — 핵심 사실 1-2 문장 + 1차 출처 명시 + `[^1]` + "정의 문장" 1개
+- ☐ **## H2 섹션 3-5개** — 배경 / 본인 영향 / 시사점 / 액션 / FAQ 중 3-5개
+- ☐ **footnote `[^N]` 3-6회** — sources 순서대로 본문 자연 분포
+- ☐ **표 1개** — 비교·매트릭스·체크리스트 (LLM 인용 시 구조 보존)
+- ☐ **인용 단락** — `> 원문` 형식 + 직후 `[^N]` (왜곡 0)
+- ☐ **자주 묻는 질문 2-3개 Q&A** — 자동 FAQPage LD 발행 조건 (`**Q1. ...?**\nA. ...` 패턴)
+- ☐ **본인 액션 / 체크리스트 3단계+** — 자동 HowTo LD 발행 조건 (`1. ... / 2. ... / 3. ...` 번호 리스트, 섹션 제목에 "본인 액션" / "체크리스트" / "절차" 포함)
+- ☐ **자매 cross-ref 1-2개** — ToollGate 자동 (Phase A deep link 매핑 활용)
+
+LD 자동 발행 (코드):
+- NewsArticle: 모든 펄스
+- Dataset: `sources[].url` 1개+ 시
+- BreadcrumbList: 모든 펄스
+- **FAQPage**: 본문에 Q&A 패턴 2개+ 시 자동 (`src/lib/jsonld.ts` `buildFaqLDFromMarkdown`)
+- **HowTo**: "본인 액션" / "체크리스트" 섹션에 번호 리스트 3단계+ 시 자동 (`buildHowToLDFromMarkdown`)
 
 ## 새 인사이트 추가 시
 - 펄스와 동일하나 sources 최소 2개 + estimatedReadingTime 필수 (정수, 분 단위)

@@ -5,7 +5,12 @@ import Tldr from '../../../../components/Tldr.astro';
 import RelatedList from '../../../../components/RelatedList.astro';
 import ToollGate from '../../../../components/ToollGate.astro';
 import { estimateReadingTime, pulseUrl, pulseDateParts, categoryToKorean } from '../../../../lib/korean';
-import { buildNewsArticleLD, buildDatasetLDFromArticle } from '../../../../lib/jsonld';
+import {
+  buildNewsArticleLD,
+  buildDatasetLDFromArticle,
+  buildFaqLDFromMarkdown,
+  buildHowToLDFromMarkdown,
+} from '../../../../lib/jsonld';
 import {
   resolveToollGate,
   buildPrimaryHref,
@@ -57,6 +62,14 @@ const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
 const articleJsonLd: object[] = [buildNewsArticleLD(entry)];
 const datasetLd = buildDatasetLDFromArticle(entry, 'pulse');
 if (datasetLd) articleJsonLd.push(datasetLd);
+
+// GEO/SEO 고급화 — 본문에 FAQ 또는 본인 액션 단계 리스트가 있으면 자동 LD 발행
+// FAQPage: LLM (ChatGPT/Perplexity/Gemini) 인용 시 Q&A 구조 보존
+// HowTo: 본인 액션 체크리스트 → Google Discover + LLM 단계 추출 친화
+const faqLd = buildFaqLDFromMarkdown(entry.body);
+if (faqLd) articleJsonLd.push(faqLd);
+const howToLd = buildHowToLDFromMarkdown(data.title, entry.body);
+if (howToLd) articleJsonLd.push(howToLd);
 // 명시적 coverImage 가 없으면 동적 OG v2(Satori, Reuters/Bloomberg 스타일)로 폴백.
 // 구 librsvg 라우트(/og/pulse/<slug>.png) 는 D9=N 합의에 따라 1개월 병행 후 제거.
 const ogImage = data.coverImage
