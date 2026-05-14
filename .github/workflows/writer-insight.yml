@@ -1,0 +1,110 @@
+# 에이전트 #3c — Insight Writer (심층 분석 자동, M3 LIVE)
+# 매주 일요일 09:00 KST cron OR workflow_dispatch
+name: agent-writer-insight
+
+on:
+  # 매주 일요일 09:00 KST = 토요일 24:00 UTC = 일요일 00:00 UTC
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: '파일 슬러그 (예: 2026-05-policy-week1-meta)'
+        required: true
+        type: string
+      title:
+        description: '제목'
+        required: true
+        type: string
+      category:
+        description: 'category'
+        required: true
+        type: choice
+        options:
+          - policy
+          - tax-finance
+          - market
+          - stats
+          - ai-tech
+      persona:
+        description: '페르소나 (4050 / 청년 / 1인사업자 / 투자자 / 일반)'
+        required: false
+        default: '일반'
+        type: string
+      topic:
+        description: '분석 주제 (자유 텍스트)'
+        required: false
+        type: string
+      sources:
+        description: '1차 출처 JSON 배열 (2개+)'
+        required: true
+        type: string
+      data_hint:
+        description: '본 사이트 자체 데이터 활용 hint (선택)'
+        required: false
+        type: string
+
+concurrency:
+  group: agent-writer-insight-${{ inputs.slug || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  writer-insight:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run Insight Writer (Sonnet 4.6)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          WRITER_INSIGHT_MODEL: ${{ vars.WRITER_INSIGHT_MODEL || 'claude-sonnet-4-6' }}
+          INSIGHT_SLUG: ${{ inputs.slug }}
+          INSIGHT_TITLE: ${{ inputs.title }}
+          INSIGHT_CATEGORY: ${{ inputs.category }}
+          INSIGHT_PERSONA: ${{ inputs.persona }}
+          INSIGHT_TOPIC: ${{ inputs.topic }}
+          INSIGHT_SOURCES: ${{ inputs.sources }}
+          INSIGHT_DATA_HINT: ${{ inputs.data_hint }}
+        run: node scripts/agents/writer-insight.mjs
+
+      - name: Verify build
+        run: npm run build
+
+      - name: Open insight PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: insight-drafts/${{ inputs.slug || github.run_id }}
+          base: main
+          commit-message: 'feat(insight): ${{ inputs.title || '자동 인사이트' }}'
+          title: '[insight-draft] ${{ inputs.title || '주간 자동 인사이트' }}'
+          body: |
+            Insight Writer M3 (Sonnet 4.6) 자동 생성 인사이트.
+
+            - 슬러그: `${{ inputs.slug }}`
+            - 카테고리: ${{ inputs.category }}
+            - 페르소나: ${{ inputs.persona }}
+            - 트리거 런: ${{ github.run_id }}
+
+            **운영자 검수 의무**:
+            - 1차 출처 footnote 매핑 정확
+            - 신규 통계·가격 예측 없음 (ADR 0006)
+            - 본문 6,000-10,000자 (12-20분 읽기)
+            - H2 5-8개 + 표 + FAQ + 본인 액션 모두 포함
+          labels: |
+            ai-draft
+            agent:insight-writer
+            insight-draft
+          delete-branch: true
