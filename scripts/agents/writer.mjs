@@ -81,7 +81,7 @@ function extractMeta(content) {
 }
 
 const SYSTEM_PROMPT = `당신은 한국 데이터 저널 "스마트데이터샵" 의 펄스(일일 뉴스) 에디터다.
-운영자 검수 전 본문 explanatory framing 의 초안을 작성한다.
+1차 출처 기반 본문 explanatory framing 을 작성한다.
 
 본 사이트 페르소나: 정책·세금·금융·시장·통계·AI 1차 출처 (.go.kr / .or.kr) 큐레이션.
 독자: 사회초년생·신혼·1인사업자·4050 직장인·투자자.
@@ -90,35 +90,36 @@ const SYSTEM_PROMPT = `당신은 한국 데이터 저널 "스마트데이터샵"
 1. 1차 출처에 없는 새 수치·일자·인용·통계·예측 절대 금지 (ADR 0006)
 2. 가격 예측·전망·"오를 것/내릴 것" 절대 금지
 3. 추측·정치적 입장·종교적 권유 절대 금지
-4. 본인이 확신 못하는 사실은 "공식 발표 후 갱신" 으로 명시
 
-═══ 본문 구조 (SEO/GEO 고급화) ═══
-**총 분량 1,500~2,500자** (Google Discover + 일반 SEO + LLM 인용 친화)
+═══ 출력 형식 — 반드시 JSON only (코드 펜스·다른 텍스트 절대 금지) ═══
+{
+  "tldr": "200자 이내 한 문장 요약 — '[검수 후]' 같은 placeholder 절대 금지. 'X 는 Y 다' 정의 문장 권장",
+  "body": "마크다운 본문 1,500~2,500자"
+}
 
-마크다운 구조 (필수):
+═══ tldr 룰 ═══
+- 200자 이내 (정확히)
+- 핵심 사실 + 정의 문장 1개
+- placeholder 토큰 (\`[검수 후]\`, \`[검수 후 보강]\` 등) 절대 사용 X
+- 첫 발표 기관·일자 명시 (예: "정책브리핑이 2026년 5월 12일 발표한")
+
+═══ body 마크다운 구조 ═══
 - **첫 단락 (도입)** — 핵심 사실 1-2 문장 + 1차 출처 명시 + [^1]
-  · LLM 인용 친화: "X 는 Y 다" 류 정의 문장 1개 포함
 - **## 1. 배경 / 무엇이 발표됐나** — 1차 출처 핵심 사실 + 인용 단락 (> 원문) + [^1]
 - **## 2. 본인 영향 / 시사점** — 페르소나별 시사점 + 표 1개 권장
 - **## 3. 본인 액션 / 다음 단계** — 본인 체크리스트 또는 시나리오 + 자매 cross-ref
-- **(선택) ## 자주 묻는 질문** — Q&A 2-3개 (LLM·SERP rich snippet)
+- **## 자주 묻는 질문** — Q&A 2-3개
 
 ═══ 1차 출처 인용 룰 ═══
-- footnote [^1] [^2] 마커 — sources 순서대로
-- 본문에 footnote 마커 **3~6회** 자연스럽게 분포
-- 직접 인용은 \`> 원문\` 형식 + 인용 직후 [^N]
-- 본문에서 "정책브리핑은 2026년 5월 X일 발표한" 류로 기관·일자 명시
+- footnote [^1] 마커 본문에 **3~6회** 자연 분포 (sources 순서)
+- 직접 인용은 \`> 원문\` + 직후 [^N]
+- 본문에서 "정책브리핑이 2026년 5월 X일 발표한" 류로 기관·일자 명시
+- footnote 정의 (\`[^1]: 출처 — \\\`url\\\`\`) 본문 끝에 1줄 추가 (frontmatter sources 와 별개)
 
 ═══ 톤·언어 ═══
-- 한국어, 드라이한 Reuters/Bloomberg 데이터 저널 톤
-- 단호한 문장 (추측·완곡 회피)
-- 독자 호명: "본인" (개인 맥락 — GEO/네이버 D.I.A. 신호)
-
-═══ 출력 규칙 ═══
-- 마크다운 본문만 출력 (frontmatter X — 운영자가 이미 작성)
-- 인사말·메타 설명·코드 펜스 절대 금지
-- 첫 줄부터 즉시 도입 문장 또는 ## 부제목
-- footnote 정의 (\`[^1]: 출처 — \\\`url\\\`\`) 는 본문 마지막에 추가 X — 운영자가 frontmatter sources[] 와 자동 매핑`;
+- 한국어, 드라이한 Reuters/Bloomberg 톤
+- 단호한 문장
+- 독자 호명: "본인"`;
 
 async function generateBody(meta) {
   const userMsg = `## 1차 출처 정보
@@ -130,7 +131,7 @@ async function generateBody(meta) {
 ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
 
 ## 작성
-위 1차 출처를 바탕으로 본문 explanatory framing 을 작성하라.`;
+위 1차 출처를 바탕으로 tldr (200자 이내) + body (1500-2500자) JSON 으로 작성.`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -156,11 +157,45 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
   if (typeof text !== 'string' || text.length < 50) {
     throw new Error(`Empty/short response: ${text?.slice(0, 100) ?? '(no text)'}`);
   }
-  return text.trim();
+
+  // JSON 파싱 (코드 펜스 fallback)
+  const cleaned = text.trim().replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+  let parsed;
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch (err) {
+    throw new Error(`JSON parse 실패: ${err.message} — raw: ${cleaned.slice(0, 200)}`);
+  }
+  if (typeof parsed.tldr !== 'string' || typeof parsed.body !== 'string') {
+    throw new Error(`응답 형식 위반 — tldr/body 누락`);
+  }
+  // placeholder 토큰 검출 — Claude 가 실수로 남기면 폐기
+  if (/\[\s*검수\s*후[^\]]*\]/.test(parsed.tldr) || /\[\s*검수\s*후[^\]]*\]/.test(parsed.body)) {
+    throw new Error(`tldr/body 에 placeholder 토큰 남음 — 폐기`);
+  }
+  if (parsed.tldr.length > 200) parsed.tldr = parsed.tldr.slice(0, 197).trim() + '…';
+  return parsed;
 }
 
-function replacePlaceholder(content, body) {
-  return content.replace(PLACEHOLDER, body);
+// frontmatter 의 tldr 줄과 본문 placeholder 동시 교체
+function applyContent(content, { tldr, body }) {
+  // 1. body 의 [검수 후 본문 작성] 교체 + 자동 생성 안내 단락 제거
+  let result = content;
+  result = result.replace(
+    /## 자동 생성 초안[\s\S]*?(?=## 1차 출처 인용|## 다음 챕터|## 운영자 검수)/,
+    '',
+  );
+  result = result.replace(PLACEHOLDER, body);
+
+  // 2. frontmatter tldr 줄 — 첫 줄 통째 교체 (placeholder 토큰 모두 제거)
+  // tldr 안에 큰따옴표가 있을 수 있으므로 escape
+  const escapedTldr = tldr.replace(/"/g, '\\"');
+  result = result.replace(/^tldr:\s*"[\s\S]*?"\s*$/m, `tldr: "${escapedTldr}"`);
+
+  // 3. aiAssisted: draft → edit (writer 가 본문·tldr 모두 채움)
+  result = result.replace(/^aiAssisted:\s*draft\s*$/m, 'aiAssisted: edit');
+
+  return result;
 }
 
 // ─────────────────────────────────────────────────────────
@@ -306,18 +341,21 @@ async function main() {
       skipped.push({ filename, reason: 'meta-missing' });
       continue;
     }
+    // 원본 콘텐츠 보관 (fact-check 실패 시 revert 용)
+    const originalContent = content;
+
     try {
       console.log(`[writer] enhancing ${filename}...`);
-      const body = await generateBody(meta);
-      const newContent = replacePlaceholder(content, body);
+      const generated = await generateBody(meta); // { tldr, body }
+      const newContent = applyContent(content, generated);
       writeFileSync(path, newContent, 'utf8');
-      enhanced.push({ filename, bodyLength: body.length });
-      console.log(`  ✓ ${body.length} chars written`);
+      enhanced.push({ filename, bodyLength: generated.body.length });
+      console.log(`  ✓ body ${generated.body.length}자 + tldr ${generated.tldr.length}자`);
 
       // 자동 발행 모드 — fact-check 통과 시 drafts → src/content/pulse 이동
       if (AUTO_PUBLISH) {
         console.log(`  [fact-check] ${filename}...`);
-        const fcResult = await factCheckBeforePublish(meta.title, body, meta.sourceUrl);
+        const fcResult = await factCheckBeforePublish(meta.title, generated.body, meta.sourceUrl);
         const verdict = fcResult.verdict;
 
         if (verdict === 'ok') {
@@ -326,26 +364,30 @@ async function main() {
           const targetFilename = publishedFilename(filename);
           const targetPath = resolve(PUBLISH_DIR, targetFilename);
           if (existsSync(targetPath)) {
-            console.log(`  ⚠ 대상 파일 이미 존재 — drafts 유지: ${targetFilename}`);
+            console.log(`  ⚠ 대상 파일 이미 존재 — drafts revert: ${targetFilename}`);
+            writeFileSync(path, originalContent, 'utf8'); // revert
             heldForReview.push({ filename, reason: 'target-exists', factCheck: fcResult });
           } else {
             renameSync(path, targetPath);
-            published.push({ from: filename, to: targetFilename, bodyLength: body.length });
+            published.push({ from: filename, to: targetFilename, bodyLength: generated.body.length });
             console.log(`  ✓ 자동 발행 → src/content/pulse/${targetFilename}`);
           }
         } else {
-          // 환각 의심 / fetch 실패 / API 오류 — drafts/ 에 유지
+          // 환각 의심 / fetch 실패 / API 오류 — drafts/ 원본 revert (본문 채워진 상태 X)
+          writeFileSync(path, originalContent, 'utf8');
           heldForReview.push({
             filename,
             verdict,
             summary: fcResult.summary,
             issues: fcResult.issues,
           });
-          console.log(`  ⚠ 발행 보류 (${verdict}): ${fcResult.summary}`);
+          console.log(`  ⚠ 발행 보류 (${verdict}) — drafts/ 원본 복원: ${fcResult.summary}`);
         }
       }
     } catch (err) {
       console.error(`  ✗ ${err.message}`);
+      // 에러 발생 시 drafts/ 원본 복원
+      try { writeFileSync(path, originalContent, 'utf8'); } catch { /* silent */ }
       failed.push({ filename, error: err.message });
     }
   }
