@@ -23,6 +23,11 @@ import { join } from 'node:path';
 const ROOT = join(process.cwd(), 'src/content');
 const COLLECTIONS = ['pulse', 'insight'];
 const TIMEOUT_MS = 10_000;
+// 일시적 네트워크/서버 흔들림 대응 재시도 설정 (운영자 결정 — 2026-05-14).
+// 시도당 timeout 10s. 시도 사이 대기 [5s, 15s, 30s] — 마지막 30s 는 MAX_ATTEMPTS=3
+// 에서는 도달하지 않으나 향후 시도 횟수 증감 대비 progression 보존.
+const MAX_ATTEMPTS = 3;
+const RETRY_DELAYS_MS = [5_000, 15_000, 30_000];
 
 const args = new Set(process.argv.slice(2));
 const asJson = args.has('--json');
@@ -124,7 +129,7 @@ async function checkFile(collection, filename) {
   const sources = await extractSources(filepath);
   const results = [];
   for (const src of sources) {
-    const result = await headCheck(src.url);
+    const result = await headCheckWithRetry(src.url);
     const depth = classifyDepth(src.url);
     const host = classifyHost(src.url);
     results.push({ ...src, ...result, depth, host });
@@ -192,6 +197,40 @@ async function headCheck(url) {
   }
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * headCheck 재시도 래퍼 — 일시적 네트워크/정부 사이트 응답 지연 대응.
+ *
+ * 최대 MAX_ATTEMPTS 회 시도, 시도 사이 RETRY_DELAYS_MS[attempt-2] ms 대기.
+ * 200/3xx 첫 응답 즉시 반환 — 4xx/5xx/timeout 만 재시도 대상.
+ *
+ * 반환 객체에 `attempts` 필드 추가 — 성공·실패 모두 어떤 시도에서 결정됐는지 추적.
+ * 운영자가 CI 로그에서 "1차 시도 timeout 후 2차 성공" 같은 케이스를 식별할 수 있음.
+ */
+async function headCheckWithRetry(url) {
+  let last = null;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    if (attempt > 1) {
+      const delay = RETRY_DELAYS_MS[attempt - 2] ?? RETRY_DELAYS_MS[RETRY_DELAYS_MS.length - 1];
+      console.error(`  ↻ 재시도 ${attempt}/${MAX_ATTEMPTS} (${delay / 1000}s 대기) — ${url}`);
+      await sleep(delay);
+    }
+    const result = await headCheck(url);
+    last = result;
+    if (result.ok) {
+      return { ...result, attempts: attempt };
+    }
+    if (attempt < MAX_ATTEMPTS) {
+      const reason = result.error ?? `status ${result.status}`;
+      console.error(`  · 시도 ${attempt}/${MAX_ATTEMPTS} 실패: ${reason}`);
+    }
+  }
+  return { ...last, attempts: MAX_ATTEMPTS };
+}
+
 async function main() {
   const allResults = [];
   for (const c of COLLECTIONS) {
@@ -224,10 +263,17 @@ async function main() {
       const depthMark = r.depth === 'deep' ? '' : (r.depth === 'shallow' ? ' ⚠ root' : ' ⚠ landing');
       const hostMark = r.host === 'allowed' ? '' : ' ❌ foreign-host';
       const status = r.error ? `error: ${r.error}` : `${r.status}${r.redirected ? ` → ${r.finalUrl}` : ''}`;
+      // 재시도 정보 — 첫 시도 성공은 표기 없음(기존 로그 동일), 그 외는 attempt 수 명시.
+      let retryNote = '';
+      if (r.attempts && r.attempts > 1) {
+        retryNote = r.ok
+          ? ` (재시도 ${r.attempts - 1}회 후 성공)`
+          : ` (${r.attempts}회 시도 모두 실패)`;
+      }
       if (!r.ok) failed += 1;
       if (r.depth !== 'deep') shallow += 1;
       if (r.host !== 'allowed') foreign += 1;
-      console.log(`  ${mark} ${status}${depthMark}${hostMark}`);
+      console.log(`  ${mark} ${status}${retryNote}${depthMark}${hostMark}`);
       console.log(`     ${r.name}`);
       console.log(`     ${r.url}`);
     }
