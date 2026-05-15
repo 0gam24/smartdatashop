@@ -174,28 +174,61 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
     throw new Error(`tldr/body 에 placeholder 토큰 남음 — 폐기`);
   }
   if (parsed.tldr.length > 200) parsed.tldr = parsed.tldr.slice(0, 197).trim() + '…';
+
+  // footnote 무결성 검증 — [^N] 마커 있는데 정의 [^N]: 누락 시 폐기
+  // (P0 #3 — 깨진 footnote 발행 차단)
+  const markers = [...parsed.body.matchAll(/\[\^(\d+)\]/g)].map((m) => m[1]);
+  const defs = [...parsed.body.matchAll(/^\[\^(\d+)\]:\s/gm)].map((m) => m[1]);
+  const uniqueMarkers = [...new Set(markers)];
+  const missingDefs = uniqueMarkers.filter((n) => !defs.includes(n));
+  if (uniqueMarkers.length > 0 && missingDefs.length > 0) {
+    throw new Error(
+      `footnote 정의 누락 — 마커 [^${missingDefs.join('], [^')}] 있으나 정의 없음 — 폐기`,
+    );
+  }
+
   return parsed;
 }
 
-// frontmatter 의 tldr 줄과 본문 placeholder 동시 교체
+/**
+ * applyContent — P0 재작성 (단순 폐기 방식, ADR 9999 #2 거부)
+ *
+ * draft 구조 (A 보고 확인):
+ *   frontmatter (---)
+ *   ## 자동 생성 초안 — 운영자 검수 필요  (안내 단락 1)
+ *   [검수 후 본문 작성]                 (PLACEHOLDER, 단독 줄)
+ *   ## 1차 출처 인용 (편집 금지 — 원문)  (안내 단락 2 — 정책브리핑 원문)
+ *   ## 운영자 검수 체크리스트            (안내 단락 3, 파일 끝)
+ *
+ * draft 안내 단락에는 footnote 정의 [^N]: 0건 (A 보고). 보존 대상 X.
+ * writer 생성 body 가 footnote 마커 + 정의 모두 포함 (system prompt 룰).
+ *
+ * 따라서 가장 안전·단순한 방식:
+ *   1. frontmatter 만 유지 (tldr / aiAssisted 갱신)
+ *   2. draft 의 body (안내 단락 3개) 통째 폐기
+ *   3. writer 생성 body 로 완전 대체
+ *
+ * 이 방식은 regex lookahead 종속 X, draft 구조 변경에 강건,
+ * footnote 보존 명시적, debugging 쉬움.
+ */
 function applyContent(content, { tldr, body }) {
-  // 1. body 의 [검수 후 본문 작성] 교체 + 자동 생성 안내 단락 제거
-  let result = content;
-  result = result.replace(
-    /## 자동 생성 초안[\s\S]*?(?=## 1차 출처 인용|## 다음 챕터|## 운영자 검수)/,
-    '',
-  );
-  result = result.replace(PLACEHOLDER, body);
+  // 1. frontmatter 분리 (--- ... --- 패턴)
+  const fmMatch = content.match(/^(---\r?\n[\s\S]*?\r?\n---\r?\n)/);
+  if (!fmMatch) {
+    throw new Error(`frontmatter 검출 실패 — '---' 시작 패턴 X`);
+  }
+  const frontmatter = fmMatch[1];
 
-  // 2. frontmatter tldr 줄 — 첫 줄 통째 교체 (placeholder 토큰 모두 제거)
-  // tldr 안에 큰따옴표가 있을 수 있으므로 escape
-  const escapedTldr = tldr.replace(/"/g, '\\"');
-  result = result.replace(/^tldr:\s*"[\s\S]*?"\s*$/m, `tldr: "${escapedTldr}"`);
+  // 2. frontmatter 의 tldr + aiAssisted 갱신
+  let newFm = frontmatter;
+  const escapedTldr = tldr.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  newFm = newFm.replace(/^tldr:\s*"[\s\S]*?"\s*$/m, `tldr: "${escapedTldr}"`);
+  newFm = newFm.replace(/^aiAssisted:\s*draft\s*$/m, 'aiAssisted: edit');
 
-  // 3. aiAssisted: draft → edit (writer 가 본문·tldr 모두 채움)
-  result = result.replace(/^aiAssisted:\s*draft\s*$/m, 'aiAssisted: edit');
-
-  return result;
+  // 3. draft body 전체 폐기 + writer 생성 body 통째 사용
+  //    body 끝에 newline 1개만 보장 (sync gate 호환)
+  const trimmedBody = body.trimEnd();
+  return newFm + '\n' + trimmedBody + '\n';
 }
 
 // ─────────────────────────────────────────────────────────

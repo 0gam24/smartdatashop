@@ -65,6 +65,12 @@ jobs:
       - name: Verify build (Zod schema + sync gate)
         run: npm run build
 
+      # ADR 0006 4기준 검증 — 출처 페어링·deep link·기관 발표 일자·검증 불가 격리
+      # verify:strict 는 build chain 외부 — 명시적 step 으로 호출 (P0 보고 §3)
+      # fail-loud → PR 생성·머지 전부 차단 (CLAUDE.md §정식 발행 4대 기준)
+      - name: Verify strict (ADR 0006 4기준)
+        run: npm run verify:strict
+
       # PR 자동 생성 (drafts/ 변경 + src/content/pulse/ 추가 포함)
       - name: Open auto-published PR
         id: cpr
