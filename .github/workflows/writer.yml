@@ -55,7 +55,13 @@ jobs:
       - name: Run Pulse Writer
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          WRITER_AUTO_PUBLISH: 'true'
+          # AUTO_PUBLISH 비활성화 (2026-05-17 운영자 승인) — 4 버그 확인 후 안전 보강:
+          #   A) Telegram "발행 완료" 가짜 신호 (verify:strict 실패 시 workspace 폐기, PR 미생성)
+          #   B) Sonnet 4.6 fact-check 비결정성 (같은 draft 3 run, ok/fabricated/ok)
+          #   C) 환각 caught 후 격리 없음 — 다음 run 재처리
+          #   D) verify:strict 미페어링 58 → strict exit 1 → 모든 auto-publish PR 차단
+          # 흐름: writer 가 본문만 enhance, drafts/ 그대로 유지 → 운영자 직접 검수·발행.
+          WRITER_AUTO_PUBLISH: 'false'
           WRITER_FACT_CHECK_MODEL: 'claude-sonnet-4-6'
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
