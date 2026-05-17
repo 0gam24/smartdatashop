@@ -55,13 +55,13 @@ jobs:
       - name: Run Pulse Writer
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # AUTO_PUBLISH 비활성화 (2026-05-17 운영자 승인) — 4 버그 확인 후 안전 보강:
-          #   A) Telegram "발행 완료" 가짜 신호 (verify:strict 실패 시 workspace 폐기, PR 미생성)
-          #   B) Sonnet 4.6 fact-check 비결정성 (같은 draft 3 run, ok/fabricated/ok)
-          #   C) 환각 caught 후 격리 없음 — 다음 run 재처리
-          #   D) verify:strict 미페어링 58 → strict exit 1 → 모든 auto-publish PR 차단
-          # 흐름: writer 가 본문만 enhance, drafts/ 그대로 유지 → 운영자 직접 검수·발행.
-          WRITER_AUTO_PUBLISH: 'false'
+          # AUTO_PUBLISH 재가동 (2026-05-17 stabilization PR) — 4 버그 모두 수정 후 ON 복귀:
+          #   A) Telegram "발행 완료" → workflow PR auto-merge 성공 step 으로 이전 (가짜 신호 차단)
+          #   B) fact-check temperature: 0 + body temperature: 0.3 — 결정성 + 환각 감소
+          #   C) 환각 caught 시 daily-queue/quarantine/ 으로 격리 (재처리 차단)
+          #   D) extract-numerical-claims --strict 임계 0 → 70 완화 (58건 통과, P3 정리)
+          # AdSense 매일 발행 흐름 복구 — 환각 위험은 4 버그 fix 로 차단.
+          WRITER_AUTO_PUBLISH: 'true'
           WRITER_FACT_CHECK_MODEL: 'claude-sonnet-4-6'
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -103,7 +103,19 @@ jobs:
 
       # PR auto-merge — 빌드 통과 후 자동 머지 (운영자 사후 검수)
       - name: Auto-merge published PR
+        id: merge
         if: steps.cpr.outputs.pull-request-number
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr merge --merge --delete-branch "${{ steps.cpr.outputs.pull-request-number }}"
+
+      # Bug A fix — Telegram "자동 발행 완료" 는 여기서만 발송 (PR 머지 실제 성공 후).
+      # writer.mjs 는 tmp/writer-publish-marker.json 만 작성 → 본 step 이 marker 읽고 알림.
+      # verify:strict / build / PR 어느 단계든 실패하면 본 step 도 안 돌아 → 가짜 신호 차단.
+      - name: Notify Telegram on actual publish
+        if: success() && steps.merge.outcome == 'success'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: node scripts/agents/notify-publish-success.mjs
