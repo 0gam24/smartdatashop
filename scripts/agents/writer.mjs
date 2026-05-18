@@ -32,7 +32,13 @@ import { resolve, dirname } from 'node:path';
 const REPO_ROOT = process.cwd();
 const DRAFTS_DIR = resolve(REPO_ROOT, 'daily-queue/drafts');
 const PUBLISH_DIR = resolve(REPO_ROOT, 'src/content/pulse');
+// Bug C 수정 (2026-05-17) — fact-check fail 시 drafts/ 원본 revert 대신
+// quarantine/ 으로 이동. 다음 run 에서 재처리 차단 → 비결정성으로 "결국 통과" 위험 제거.
+const QUARANTINE_DIR = resolve(REPO_ROOT, 'daily-queue/quarantine');
 const HEARTBEAT_PATH = resolve(REPO_ROOT, 'tmp/writer-heartbeat.json');
+// Bug A 수정 — Telegram "발행 완료" 알림 시점 분리. writer.mjs 는 marker 만 작성,
+// 실제 알림은 workflow PR auto-merge 후 step 이 marker 읽고 발송.
+const PUBLISH_MARKER_PATH = resolve(REPO_ROOT, 'tmp/writer-publish-marker.json');
 
 const API_KEY = process.env.ANTHROPIC_API_KEY;
 const MODEL = process.env.WRITER_MODEL || 'claude-haiku-4-5-20251001';
@@ -143,6 +149,10 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
     body: JSON.stringify({
       model: MODEL,
       max_tokens: 4000,
+      // Bug B 보강 (2026-05-17) — 낮은 temperature 로 본문 변동성·환각 인자 동시 감소.
+      // 0.3 = 충분히 자연스럽지만 환각·창작 단어 (가짜 장소명 "연세대 알렌관 무악홀" 사례)
+      // 가능성 낮춤. 0 이면 단조롭고 다양한 draft 본문이 동일해질 위험.
+      temperature: 0.3,
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: userMsg }],
     }),
@@ -300,6 +310,9 @@ ${sourceText}
     body: JSON.stringify({
       model: FACT_CHECK_MODEL,
       max_tokens: 1200,
+      // Bug B 수정 (2026-05-17) — temperature 0 으로 fact-check 결정성 확보.
+      // 이전: 기본 1.0 → 같은 draft, 같은 1차 출처에 verdict 가 ok/fabricated/ok 로 흔들림.
+      temperature: 0,
       system: FACT_CHECK_SYSTEM,
       messages: [{ role: 'user', content: userMsg }],
     }),
@@ -406,15 +419,27 @@ async function main() {
             console.log(`  ✓ 자동 발행 → src/content/pulse/${targetFilename}`);
           }
         } else {
-          // 환각 의심 / fetch 실패 / API 오류 — drafts/ 원본 revert (본문 채워진 상태 X)
-          writeFileSync(path, originalContent, 'utf8');
+          // Bug C — 환각 의심 / fetch 실패 / API 오류 → quarantine/ 으로 이동.
+          // 다음 run 에서 같은 draft 재처리 안 됨 → fact-check 비결정성으로
+          // "결국 어느 run 에서는 통과" 위험 차단.
+          mkdirSync(QUARANTINE_DIR, { recursive: true });
+          const quarantinePath = resolve(QUARANTINE_DIR, filename);
+          writeFileSync(quarantinePath, originalContent, 'utf8'); // 원본 보존 (운영자 검수용)
+          try {
+            // drafts/ 의 (enhance 된) 파일 제거 — 다음 run 에서 안 보이게
+            renameSync(path, resolve(QUARANTINE_DIR, `enhanced-${filename}`));
+          } catch {
+            // 실패 시 fallback: drafts/ 의 enhance 본 복원하지 말고 원본 덮어쓰기
+            writeFileSync(path, originalContent, 'utf8');
+          }
           heldForReview.push({
             filename,
             verdict,
             summary: fcResult.summary,
             issues: fcResult.issues,
+            quarantined: true,
           });
-          console.log(`  ⚠ 발행 보류 (${verdict}) — drafts/ 원본 복원: ${fcResult.summary}`);
+          console.log(`  ⚠ 발행 보류 (${verdict}) — quarantine/ 격리: ${fcResult.summary}`);
         }
       }
     } catch (err) {
@@ -441,15 +466,18 @@ async function main() {
     await notifyTelegram(lines.join('\n'));
   }
 
-  // 자동 발행 N건 → 텔레그램 알림 (성공 신호)
+  // Bug A 수정 — "자동 발행 N건 완료" Telegram 은 writer.mjs 가 직접 발송 X.
+  // verify:strict/build 실패 시 workspace 폐기로 발행 안 되는데 메시지만 송신되는
+  // 가짜 신호 차단. 대신 marker 파일을 작성하고, workflow 의 PR auto-merge 성공
+  // step 이 marker 를 읽어서 Telegram 발송 (실제 머지 후에만 알림).
   if (published.length > 0) {
-    const lines = [`*자동 발행 ${published.length}건 완료*`, ''];
-    for (const p of published.slice(0, 8)) {
-      lines.push(`- ${p.to.slice(0, 60)}`);
-    }
-    lines.push('');
-    lines.push('[smartdatashop.kr](https://smartdatashop.kr)');
-    await notifyTelegram(lines.join('\n'));
+    mkdirSync(dirname(PUBLISH_MARKER_PATH), { recursive: true });
+    writeFileSync(
+      PUBLISH_MARKER_PATH,
+      JSON.stringify({ ranAt, published }, null, 2) + '\n',
+      'utf8',
+    );
+    console.log(`[writer] publish marker 작성 → ${PUBLISH_MARKER_PATH} (${published.length}건)`);
   }
 
   writeHeartbeat({
