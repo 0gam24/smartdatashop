@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-05-23T16:30:59.463Z",
-  "elapsedMs": 2374,
+  "fetchedAt": "2026-05-24T16:32:03.761Z",
+  "elapsedMs": 2268,
   "sourceTotal": 7,
   "sourceSuccess": 6,
   "sourceFail": 1,
   "totalHeadlines": 239,
-  "uniqueKeywords": 205,
+  "uniqueKeywords": 196,
   "multiSourceCount": 100,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 328
+      "elapsedMs": 106
     },
     {
       "id": "yna",
@@ -22,7 +22,7 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "fail",
       "itemCount": 0,
-      "elapsedMs": 957
+      "elapsedMs": 398
     },
     {
       "id": "donga",
@@ -30,7 +30,7 @@
       "url": "https://rss.donga.com/total.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1549
+      "elapsedMs": 891
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1992
+      "elapsedMs": 1287
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1406
+      "elapsedMs": 1134
     },
     {
       "id": "kmib",
@@ -54,7 +54,7 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2305
+      "elapsedMs": 1507
     },
     {
       "id": "hani",
@@ -62,13 +62,13 @@
       "url": "https://www.hani.co.kr/rss",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2254
+      "elapsedMs": 2197
     }
   ],
   "multiSourceKeywords": [
     {
-      "term": "대통령",
-      "total": 22,
+      "term": "선거",
+      "total": 6,
       "sourceCount": 5,
       "sources": [
         "sbs",
@@ -80,71 +80,95 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+          "title": "[지식의 발견] 선거 끝나면 '정청래 vs 반 정청래'…민주당 압승해도 피할 수 없다! (ft. 이동형 작가)"
+        },
+        {
+          "source": "donga",
+          "title": "[광화문에서/임현석]딥페이크가 삼킨 선거 검증의 자리 되찾아야"
+        },
+        {
+          "source": "khan",
+          "title": "9년 만에 ‘대구 밖’ 선거 지원 나선 박근혜"
+        }
+      ]
+    },
+    {
+      "term": "대통령",
+      "total": 22,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"패륜행위\" 스벅서 또?…이 대통령 \"국무회의에도 지시\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, '경기지사 시절 정비' 포천 백운계곡 방문"
+        },
+        {
+          "source": "sbs",
+          "title": "무소속 김관영 전북지사 후보 \"대통령 선거에 이용한 바 없다\""
+        }
+      ]
+    },
+    {
+      "term": "김용남",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "주소 옮겼다는데…김용남 의문의 대부업체 찾아가 보니"
+        },
+        {
+          "source": "donga",
+          "title": "민주당 “조국혁신당, 금도 지켜라…김용남 소명 듣는 중”"
+        },
+        {
+          "source": "khan",
+          "title": "김용남 ‘대부업체 의혹’ 재차 부인…“수익이나 배당 한 푼도 안 받아, 법적 책임 지겠다”"
+        }
+      ]
+    },
+    {
+      "term": "후보",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "무소속 김관영 전북지사 후보 \"대통령 선거에 이용한 바 없다\""
         },
         {
           "source": "sbs",
           "title": "[바로이뉴스] 박근혜 전 대통령, 대구서 추경호 후보 유세 지원"
         },
         {
-          "source": "sbs",
-          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
+          "source": "khan",
+          "title": "평택 사찰서 조국 후보 선거사무원 폭행한 40대 유튜버 현행범 체포"
         }
       ]
     },
     {
-      "term": "노무현",
-      "total": 9,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
-        },
-        {
-          "source": "donga",
-          "title": "이원택·김관영 후보 “노무현 정신 계승하겠다” 한목소리"
-        }
-      ]
-    },
-    {
-      "term": "내고향",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "이 대통령, 북한 내고향 아시아 정상에 “평화·화합 되새기는 계기 되길”"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 표현에 발끈한 내고향 기자회견 ‘중단’…믹스트존도 ‘쌩’"
-        },
-        {
-          "source": "donga",
-          "title": "“오 필승 내고향”…공동 응원단 환호성 속 우승 차지한 北 여자축구팀"
-        }
-      ]
-    },
-    {
-      "term": "이란",
+      "term": "트럼프",
       "total": 7,
       "sourceCount": 4,
       "sources": [
@@ -156,1107 +180,976 @@
       "examples": [
         {
           "source": "donga",
-          "title": "이란 혁명수비대 “하루 새 선박 25척 호르무즈 통과”"
+          "title": "트럼프 “이란과 합의 서두르지 말라고 지시…실수 용납 안돼”(종합)"
         },
         {
           "source": "khan",
-          "title": "술 사이에 물 한 잔…해외 인기 음주법 ‘지브라 스트라이핑’이란?"
+          "title": "[속보]트럼프 “이란과 합의 서두르지 말라 지시”"
         },
         {
           "source": "khan",
-          "title": "미, 이란 공습 재개 채비하나…트럼프, 안보회의 열고 연휴 일정도 취소"
+          "title": "트럼프 “곧 종전”…호르무즈 열리나"
         }
       ]
     },
     {
-      "term": "스타벅스",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "시민사회, 스타벅스 ‘5·18 탱크데이’ 규탄…“정용진 책임 물어야”"
-        },
-        {
-          "source": "donga",
-          "title": "국힘 “스타벅스 집단 괴롭힘은 국가 폭력” 與 “민주주의 조롱 기업 옹호”"
-        },
-        {
-          "source": "khan",
-          "title": "“매장 파트너는 무관” 스타벅스, 전국 매장에 2차 사과문…‘손절’ 의식했나"
-        }
-      ]
-    },
-    {
-      "term": "정원오",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
-        },
-        {
-          "source": "sbs",
-          "title": "정원오, 강북권 집중 공략…\"안전불감증 오세훈, 시장 자격 없어\""
-        },
-        {
-          "source": "donga",
-          "title": "오세훈 “정원오, 재개발·재건축 기초도 몰라…어린이집도 착공 못 해”"
-        }
-      ]
-    },
-    {
-      "term": "오세훈",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
-        },
-        {
-          "source": "sbs",
-          "title": "정원오, 강북권 집중 공략…\"안전불감증 오세훈, 시장 자격 없어\""
-        },
-        {
-          "source": "donga",
-          "title": "오세훈 “정원오, 재개발·재건축 기초도 몰라…어린이집도 착공 못 해”"
-        }
-      ]
-    },
-    {
-      "term": "기득권",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
-        }
-      ]
-    },
-    {
-      "term": "두려워",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
-        }
-      ]
-    },
-    {
-      "term": "이재명",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[자막뉴스] 이틀 전까지만 해도 칭찬했는데…\"김승룡 소방청장 긴급 감찰\" 이재명 대통령 지시, 왜?"
-        },
-        {
-          "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        },
-        {
-          "source": "mk",
-          "title": "‘이재명 정부 심판론’ 앞세운 국힘…지선 전 지지율 반전 성공할까"
-        }
-      ]
-    },
-    {
-      "term": "탱크데이",
+      "term": "김상욱",
       "total": 4,
       "sourceCount": 4,
       "sources": [
         "sbs",
         "donga",
         "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"정용진 석고대죄하길\" 직격…'탱크데이' 공방 계속"
-        },
-        {
-          "source": "donga",
-          "title": "시민사회, 스타벅스 ‘5·18 탱크데이’ 규탄…“정용진 책임 물어야”"
-        },
-        {
-          "source": "khan",
-          "title": "스벅 ‘탱크데이’ 공방 격화···국힘 “집단 괴롭힘”, 민주 “일베식 정치 행태”"
-        }
-      ]
-    },
-    {
-      "term": "국힘",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "장동혁 경기·송언석 울산…국힘, 험지·텃밭 동시 공략"
-        },
-        {
-          "source": "donga",
-          "title": "국힘 “스타벅스 집단 괴롭힘은 국가 폭력” 與 “민주주의 조롱 기업 옹호”"
-        },
-        {
-          "source": "khan",
-          "title": "스벅 ‘탱크데이’ 공방 격화···국힘 “집단 괴롭힘”, 민주 “일베식 정치 행태”"
-        }
-      ]
-    },
-    {
-      "term": "시장",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "mk",
         "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "정원오, 강북권 집중 공략…\"안전불감증 오세훈, 시장 자격 없어\""
+          "title": "김상욱 \"단일화 여론조사 중단\"…\"세력 개입\" 무슨 일이"
         },
         {
           "source": "donga",
-          "title": "김혜경 여사 “아직 비싸네요”…李대통령 부부, 盧추도식 후 시장 방문"
-        },
-        {
-          "source": "mk",
-          "title": "‘무료배달’ 다시 꺼낸 쿠팡이츠…배달 앱 시장 출혈경쟁 부추기나"
-        }
-      ]
-    },
-    {
-      "term": "중국",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "청와대, '중국 지도 보안시설 노출' 논란에 \"보안 처리 즉시 요청\""
+          "title": "“조직적 개입 정황”…與 김상욱, 울산시장 단일화 돌연 중단"
         },
         {
           "source": "khan",
-          "title": "[속보] 중국 중부 광산 폭발로 82명 사망…9명 실종"
-        },
-        {
-          "source": "mk",
-          "title": "“서울도 도쿄도 아니었네”…중국 관광객이 가장 만족한 ‘이 도시’"
-        }
-      ]
-    },
-    {
-      "term": "조국",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주당, '조국 멍 발언' 김용남에 \"득표에 도움 안 돼…말 한마디 유의해야\""
-        },
-        {
-          "source": "khan",
-          "title": "조국·한동훈의 평행이론…재보궐 떨어지면 앞길이 안 보인다"
-        },
-        {
-          "source": "mk",
-          "title": "보수 단일화 불씨에 ‘평택을’ 요동…김용남-조국 연대 가능성은"
-        }
-      ]
-    },
-    {
-      "term": "북한",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "이 대통령, 북한 내고향 아시아 정상에 “평화·화합 되새기는 계기 되길”"
-        },
-        {
-          "source": "khan",
-          "title": "북한 ‘내고향’ 축구단, 아시아 여자클럽축구 정상…도쿄에 1-0 승리"
-        },
-        {
-          "source": "khan",
-          "title": "“우승하면 15억 상금인데...” 북한 ‘내고향’ 축구단, 대북제재에 수령 여부 ‘불투명’"
-        }
-      ]
-    },
-    {
-      "term": "유세",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
-        },
-        {
-          "source": "sbs",
-          "title": "박근혜 유세 지원에…\"추경호 급했나\" 김부겸 맞불 유세"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 박근혜 전 대통령, 대구서 추경호 후보 유세 지원"
-        }
-      ]
-    },
-    {
-      "term": "주기",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
-        },
-        {
-          "source": "khan",
-          "title": "노무현 전 대통령 서거 17주기…여야 “노무현 정신 계승” 한목소리"
-        }
-      ]
-    },
-    {
-      "term": "스벅",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
-        },
-        {
-          "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        },
-        {
-          "source": "khan",
-          "title": "스벅 ‘탱크데이’ 공방 격화···국힘 “집단 괴롭힘”, 민주 “일베식 정치 행태”"
-        }
-      ]
-    },
-    {
-      "term": "북측",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 표현에 발끈한 내고향 기자회견 ‘중단’…믹스트존도 ‘쌩’"
-        }
-      ]
-    },
-    {
-      "term": "박근혜",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "박근혜 유세 지원에…\"추경호 급했나\" 김부겸 맞불 유세"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 박근혜 전 대통령, 대구서 추경호 후보 유세 지원"
-        },
-        {
-          "source": "khan",
-          "title": "“안녕하십니까”···박근혜, 대구 칠성시장서 추경호 지원 유세"
-        }
-      ]
-    },
-    {
-      "term": "개혁",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        }
-      ]
-    },
-    {
-      "term": "서거",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
-        },
-        {
-          "source": "khan",
-          "title": "노무현 전 대통령 서거 17주기…여야 “노무현 정신 계승” 한목소리"
-        }
-      ]
-    },
-    {
-      "term": "평택을",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        },
-        {
-          "source": "mk",
-          "title": "보수 단일화 불씨에 ‘평택을’ 요동…김용남-조국 연대 가능성은"
-        }
-      ]
-    },
-    {
-      "term": "사망",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "경남 알루미늄 제조업체서 中노동자 지게차에 깔려 사망"
-        },
-        {
-          "source": "khan",
-          "title": "[속보] 중국 중부 광산 폭발로 82명 사망…9명 실종"
-        },
-        {
-          "source": "mk",
-          "title": "러 “우크라 공격 받은 대학 기숙사 사망 16명·부상 42명으로 늘어”"
-        }
-      ]
-    },
-    {
-      "term": "이스라엘",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "“이란 핵무기보다 위험한 인물”···군대조차 거부한 극우 유대 우월주의자는 어떻게 이스라엘 장관이 됐나"
-        },
-        {
-          "source": "khan",
-          "title": "이스라엘 구금 가자구호 선단 활동가들 “최소 15건 성폭행 신고”"
-        },
-        {
-          "source": "mk",
-          "title": "중동 정세 다시 ‘시계제로’…미·이스라엘, 이란 재공습 하나"
-        }
-      ]
-    },
-    {
-      "term": "주말",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
-        },
-        {
-          "source": "donga",
-          "title": "전재수, 첫 주말 선거운동 서면 집중유세…“해양수도 부산 완성”"
-        },
-        {
-          "source": "khan",
-          "title": "[주말 ] 체력 털린 날엔 ‘냉털’, 계란밥전"
-        }
-      ]
-    },
-    {
-      "term": "특권",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
-        }
-      ]
-    },
-    {
-      "term": "않고",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
-        }
-      ]
-    },
-    {
-      "term": "계승",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
-        },
-        {
-          "source": "khan",
-          "title": "노무현 전 대통령 서거 17주기…여야 “노무현 정신 계승” 한목소리"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
-        }
-      ]
-    },
-    {
-      "term": "추도식",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
-        },
-        {
-          "source": "donga",
-          "title": "김혜경 여사 “아직 비싸네요”…李대통령 부부, 盧추도식 후 시장 방문"
-        },
-        {
-          "source": "mk",
-          "title": "李 대통령, 봉하마을서 노무현 전 대통령 추도식 참석"
-        }
-      ]
-    },
-    {
-      "term": "정용진",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"정용진 석고대죄하길\" 직격…'탱크데이' 공방 계속"
-        },
-        {
-          "source": "donga",
-          "title": "시민사회, 스타벅스 ‘5·18 탱크데이’ 규탄…“정용진 책임 물어야”"
-        },
-        {
-          "source": "mk",
-          "title": "‘5·18 탱크데이’ 논란에 스타벅스 대표 경질한 정용진 회장[이번주인공]"
-        }
-      ]
-    },
-    {
-      "term": "이벤트",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
-        },
-        {
-          "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        },
-        {
-          "source": "mk",
-          "title": "“4·16에 사이렌 이벤트, 패륜행위”…李 대통령, 스타벅스 또 저격"
-        }
-      ]
-    },
-    {
-      "term": "패륜",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
-        },
-        {
-          "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        },
-        {
-          "source": "hani",
-          "title": "이 대통령, 스벅에 “패륜”…세월호 10주기 ‘배 난파’ 사이렌 마케팅"
-        }
-      ]
-    },
-    {
-      "term": "감독",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘새의 랩소디’ 최원정 감독 “스태프 없이 홀로 작업…칸 생각 못해”"
-        },
-        {
-          "source": "mk",
-          "title": "“질문 안받겠다”…‘북측’ 호칭 듣자, 기자회견장 떠난 北 내고향 감독"
-        },
-        {
-          "source": "hani",
-          "title": "‘봉준호 인연’ 틸다 스윈턴, 칸 폐막식서 나홍진 감독 ‘호프’ 호명할까?"
-        }
-      ]
-    },
-    {
-      "term": "생각",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘새의 랩소디’ 최원정 감독 “스태프 없이 홀로 작업…칸 생각 못해”"
-        },
-        {
-          "source": "khan",
-          "title": "“부모에게 자기 생각 무시당한 아이, 가면을 쓰게 돼”"
-        },
-        {
-          "source": "mk",
-          "title": "최승호 삼전 노조위원장 “내달 재신임 투표…정계 진출 생각 없어”"
-        }
-      ]
-    },
-    {
-      "term": "아시아",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "이 대통령, 북한 내고향 아시아 정상에 “평화·화합 되새기는 계기 되길”"
-        },
-        {
-          "source": "khan",
-          "title": "북한 ‘내고향’ 축구단, 아시아 여자클럽축구 정상…도쿄에 1-0 승리"
-        },
-        {
-          "source": "mk",
-          "title": "수원에서 인공기 휘날렸다…北 내고향, 일본 꺾고 아시아 여자축구 챔피언 등극"
-        }
-      ]
-    },
-    {
-      "term": "집단",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "국힘 “스타벅스 집단 괴롭힘은 국가 폭력” 與 “민주주의 조롱 기업 옹호”"
-        },
-        {
-          "source": "khan",
-          "title": "스벅 ‘탱크데이’ 공방 격화···국힘 “집단 괴롭힘”, 민주 “일베식 정치 행태”"
-        },
-        {
-          "source": "mk",
-          "title": "“스벅 집단 괴롭힘은 국가폭력” 국힘에…민주 “일베식 정치행태”"
-        }
-      ]
-    },
-    {
-      "term": "국가",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "국힘 “스타벅스 집단 괴롭힘은 국가 폭력” 與 “민주주의 조롱 기업 옹호”"
-        },
-        {
-          "source": "khan",
-          "title": "정동영 장관, 논란의 ‘두 국가’ 표현 왜 고수할까?"
-        },
-        {
-          "source": "hani",
-          "title": "일본 ‘전쟁 가능 국가’ 개헌 추진에 북한 “재무장 야욕” 비난"
-        }
-      ]
-    },
-    {
-      "term": "아이",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“살려주세요” 의식 잃은 4살 아이…경찰이 만든 ‘8분의 기적’"
-        },
-        {
-          "source": "khan",
-          "title": "“부모에게 자기 생각 무시당한 아이, 가면을 쓰게 돼”"
-        },
-        {
-          "source": "mk",
-          "title": "“도와주세요” 의식 잃은 아이 ‘긴급 이송’…경찰, 20분 거리 8분 만에 주파"
-        }
-      ]
-    },
-    {
-      "term": "사이렌",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        },
-        {
-          "source": "mk",
-          "title": "“4·16에 사이렌 이벤트, 패륜행위”…李 대통령, 스타벅스 또 저격"
-        },
-        {
-          "source": "hani",
-          "title": "이 대통령, 스벅에 “패륜”…세월호 10주기 ‘배 난파’ 사이렌 마케팅"
-        }
-      ]
-    },
-    {
-      "term": "해남서",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "[속보]해남서 초당대학교 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 해남서 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "hani",
-          "title": "전남 해남서 초당대 경비행기 추락…탑승 학생·교관 중상"
-        }
-      ]
-    },
-    {
-      "term": "경비행기",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "[속보]해남서 초당대학교 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 해남서 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "hani",
-          "title": "전남 해남서 초당대 경비행기 추락…탑승 학생·교관 중상"
-        }
-      ]
-    },
-    {
-      "term": "추락",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "[속보]해남서 초당대학교 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 해남서 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "hani",
-          "title": "전남 해남서 초당대 경비행기 추락…탑승 학생·교관 중상"
-        }
-      ]
-    },
-    {
-      "term": "중상",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "[속보]해남서 초당대학교 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 해남서 경비행기 추락…2명 중상"
-        },
-        {
-          "source": "hani",
-          "title": "전남 해남서 초당대 경비행기 추락…탑승 학생·교관 중상"
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
         }
       ]
     },
     {
       "term": "단일화",
-      "total": 5,
-      "sourceCount": 2,
+      "total": 4,
+      "sourceCount": 4,
       "sources": [
         "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        }
-      ]
-    },
-    {
-      "term": "자기",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
         "donga",
-        "khan"
+        "khan",
+        "hani"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "source": "sbs",
+          "title": "김상욱 \"단일화 여론조사 중단\"…\"세력 개입\" 무슨 일이"
         },
         {
           "source": "donga",
-          "title": "부산서 자기 몸에 불 붙여 협박한 50대 검거"
+          "title": "“조직적 개입 정황”…與 김상욱, 울산시장 단일화 돌연 중단"
         },
         {
           "source": "khan",
-          "title": "“부모에게 자기 생각 무시당한 아이, 가면을 쓰게 돼”"
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
         }
       ]
     },
     {
-      "term": "남성",
+      "term": "중단",
       "total": 4,
-      "sourceCount": 2,
+      "sourceCount": 4,
       "sources": [
+        "sbs",
         "donga",
-        "mk"
+        "khan",
+        "hani"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "source": "sbs",
+          "title": "김상욱 \"단일화 여론조사 중단\"…\"세력 개입\" 무슨 일이"
         },
         {
           "source": "donga",
-          "title": "해운대 모래축제 ‘바다의 어머니들’ 훼손…70대 남성 경찰 조사"
+          "title": "“조직적 개입 정황”…與 김상욱, 울산시장 단일화 돌연 중단"
+        },
+        {
+          "source": "khan",
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
+        }
+      ]
+    },
+    {
+      "term": "지시",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"패륜행위\" 스벅서 또?…이 대통령 \"국무회의에도 지시\""
+        },
+        {
+          "source": "donga",
+          "title": "트럼프 “이란과 합의 서두르지 말라고 지시…실수 용납 안돼”(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]트럼프 “이란과 합의 서두르지 말라 지시”"
+        }
+      ]
+    },
+    {
+      "term": "일베",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"봉하마을까지 와 일베 손가락질…\" 발칵 뒤집히자 결국"
+        },
+        {
+          "source": "donga",
+          "title": "文 정부 때도 추진했던 ‘일베’ 폐쇄…이번엔 가능할까"
         },
         {
           "source": "mk",
-          "title": "해운대 모래축제 ‘해녀 조형물’ 부순 70대 남성 경찰조사"
+          "title": "李 \"일베 등 혐오조장 사이트 폐쇄·징벌배상 검토\""
+        }
+      ]
+    },
+    {
+      "term": "스타벅스",
+      "total": 7,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 공방 가열…민주 \"국민 분노 대변\"·국힘 \"인민재판 보는 듯\""
+        },
+        {
+          "source": "sbs",
+          "title": "스타벅스 2차 사과에도…불매·정치권 공방 확산"
+        },
+        {
+          "source": "mk",
+          "title": "스타벅스, 불매 논란 속 ‘카톡 선물’ 1위 자리 7년만에 내줬다…새 왕좌는?"
         }
       ]
     },
     {
       "term": "경찰",
-      "total": 4,
-      "sourceCount": 2,
+      "total": 6,
+      "sourceCount": 3,
       "sources": [
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
+        },
+        {
+          "source": "mk",
+          "title": "경찰, ‘5·18 탱크데이 논란’ 정용진 고발 절차상 피의자 입건"
+        },
+        {
+          "source": "mk",
+          "title": "5·18 가짜 신문기사 유포한 50대 여성 붙잡혀…경찰 “엄정 대응할 터”"
+        }
+      ]
+    },
+    {
+      "term": "부처님",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀처럼…'국민 목숨 살리는 정부'\""
+        },
+        {
+          "source": "sbs",
+          "title": "여야 지도부 '부처님 오신 날' 사찰로…'불심 공략'"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀으로 '국민 목숨 살리는 정부' 만들 것\""
+        }
+      ]
+    },
+    {
+      "term": "개혁",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
         "donga",
         "mk"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "해운대 모래축제 ‘바다의 어머니들’ 훼손…70대 남성 경찰 조사"
+          "source": "sbs",
+          "title": "이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
         },
         {
-          "source": "mk",
-          "title": "파주 군부대 공사장서 50대 근로자 심정지 상태로 발견…경찰 “정확한 사고 경위 조사”"
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
         },
         {
-          "source": "mk",
-          "title": "“도와주세요” 의식 잃은 아이 ‘긴급 이송’…경찰, 20분 거리 8분 만에 주파"
+          "source": "sbs",
+          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
         }
       ]
     },
     {
-      "term": "장동혁",
+      "term": "이란",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "네타냐후 “이란, 핵무기 보유하지 못할 것”"
+        },
+        {
+          "source": "donga",
+          "title": "이란 대통령 “美와 합의 시 반드시 하메네이 승인 받아야”"
+        },
+        {
+          "source": "donga",
+          "title": "美-이란, 종전 MOU 임박…핵 협상이 남은 최대 변수"
+        }
+      ]
+    },
+    {
+      "term": "합의",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "이란 대통령 “美와 합의 시 반드시 하메네이 승인 받아야”"
+        },
+        {
+          "source": "donga",
+          "title": "트럼프 “이란과 합의 서두르지 말라고 지시…실수 용납 안돼”(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]트럼프 “이란과 합의 서두르지 말라 지시”"
+        }
+      ]
+    },
+    {
+      "term": "정용진",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "‘5·18 탱크데이’ 논란 정용진, 피의자 입건···시민단체 고발 따른 형식적 절차"
+        },
+        {
+          "source": "mk",
+          "title": "경찰, ‘5·18 탱크데이 논란’ 정용진 고발 절차상 피의자 입건"
+        },
+        {
+          "source": "mk",
+          "title": "커지는 스타벅스 논란에…정용진, 직접 사과로 수습나서"
+        }
+      ]
+    },
+    {
+      "term": "대부업체",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "주소 옮겼다는데…김용남 의문의 대부업체 찾아가 보니"
+        },
+        {
+          "source": "khan",
+          "title": "김용남 ‘대부업체 의혹’ 재차 부인…“수익이나 배당 한 푼도 안 받아, 법적 책임 지겠다”"
+        },
+        {
+          "source": "mk",
+          "title": "‘대부업체 의혹’ 김용남 “한 푼도 배당이나 수익 받은 적이 없어”"
+        }
+      ]
+    },
+    {
+      "term": "정치",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[김승련 칼럼]귀에 대고 달콤한 소리만 하는 정치"
+        },
+        {
+          "source": "khan",
+          "title": "이번엔 200m 밖에서 백악관 향한 총성…일상이 된 정치 테러"
+        },
+        {
+          "source": "hani",
+          "title": "스벅 불매 ‘선거 쟁점’으로…국힘 “국가 폭력”-민주 “일베식 정치”"
+        }
+      ]
+    },
+    {
+      "term": "국가",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "“6·25때 군경이 형 3명 학살…유족에 1억 국가 배상”"
+        },
+        {
+          "source": "khan",
+          "title": "이란 대통령 “국가 존엄 걸린 문제엔 타협 않을 것”"
+        },
+        {
+          "source": "khan",
+          "title": "전기차 등 ‘사용 후 배터리’ 국가 자원 관리…기업 투자 잰걸음"
+        }
+      ]
+    },
+    {
+      "term": "여론조사",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "김상욱 \"단일화 여론조사 중단\"…\"세력 개입\" 무슨 일이"
+        },
+        {
+          "source": "khan",
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
+        },
+        {
+          "source": "hani",
+          "title": "민주-진보 울산시장 후보 단일화 ‘삐걱’…김상욱 캠프 여론조사 중단"
+        }
+      ]
+    },
+    {
+      "term": "백운계곡",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, '경기지사 시절 정비' 포천 백운계곡 방문"
+        },
+        {
+          "source": "donga",
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
+        },
+        {
+          "source": "hani",
+          "title": "‘그때 그’ 백운계곡 찾은 이 대통령…시민 “자릿세 안 내고 즐겨”"
+        }
+      ]
+    },
+    {
+      "term": "아냐",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "민주 \"김관영, 이 대통령과 무소속 출마 교감? 전혀 사실 아냐\""
+        },
+        {
+          "source": "donga",
+          "title": "성시경, 17세 연하 日 배우와 열애설? “남녀 관계 아냐” …유튜브서 해명"
+        },
+        {
+          "source": "mk",
+          "title": "\"적절 시점 반도체 관세 부과 시점 지금은 아냐\"…그리어 美USTR 대표"
+        }
+      ]
+    },
+    {
+      "term": "불매",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 2차 사과에도…불매·정치권 공방 확산"
+        },
+        {
+          "source": "mk",
+          "title": "스타벅스, 불매 논란 속 ‘카톡 선물’ 1위 자리 7년만에 내줬다…새 왕좌는?"
+        },
+        {
+          "source": "hani",
+          "title": "스벅 불매 ‘선거 쟁점’으로…국힘 “국가 폭력”-민주 “일베식 정치”"
+        }
+      ]
+    },
+    {
+      "term": "찾은",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "donga",
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
+        },
+        {
+          "source": "hani",
+          "title": "‘그때 그’ 백운계곡 찾은 이 대통령…시민 “자릿세 안 내고 즐겨”"
+        }
+      ]
+    },
+    {
+      "term": "지방선거",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
+        },
+        {
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
+        },
+        {
+          "source": "khan",
+          "title": "이번 주 견본주택 개관 ‘0건’…지방선거 앞두고 잠잠한 분양시장, 왜?"
+        }
+      ]
+    },
+    {
+      "term": "기득권",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
+        },
+        {
+          "source": "donga",
+          "title": "李 “기득권 반발 두려워않고 개혁 추진…남북공동선언 계승”"
+        },
+        {
+          "source": "mk",
+          "title": "사회통합 강조한 李 …\"기득권 반발 두려워않고 개혁\""
+        }
+      ]
+    },
+    {
+      "term": "이란과",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "트럼프 “이란과 합의 서두르지 말라고 지시…실수 용납 안돼”(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]트럼프 “이란과 합의 서두르지 말라 지시”"
+        },
+        {
+          "source": "hani",
+          "title": "트럼프 “이란과 합의, 서두르지 말라 지시”…MOU 임박 보도 다음날"
+        }
+      ]
+    },
+    {
+      "term": "서두르지",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "트럼프 “이란과 합의 서두르지 말라고 지시…실수 용납 안돼”(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]트럼프 “이란과 합의 서두르지 말라 지시”"
+        },
+        {
+          "source": "hani",
+          "title": "트럼프 “이란과 합의, 서두르지 말라 지시”…MOU 임박 보도 다음날"
+        }
+      ]
+    },
+    {
+      "term": "폐쇄",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "文 정부 때도 추진했던 ‘일베’ 폐쇄…이번엔 가능할까"
+        },
+        {
+          "source": "mk",
+          "title": "李 \"일베 등 혐오조장 사이트 폐쇄·징벌배상 검토\""
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령 “일베 같은 사이트 폐쇄 검토”…정부 차원서 ‘혐오’ 대응 뜻"
+        }
+      ]
+    },
+    {
+      "term": "울산시장",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "“조직적 개입 정황”…與 김상욱, 울산시장 단일화 돌연 중단"
+        },
+        {
+          "source": "khan",
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
+        },
+        {
+          "source": "hani",
+          "title": "민주-진보 울산시장 후보 단일화 ‘삐걱’…김상욱 캠프 여론조사 중단"
+        }
+      ]
+    },
+    {
+      "term": "만명",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
+        },
+        {
+          "source": "khan",
+          "title": "전쟁통에도 순례객 150만명 메카로 미·이란서 수만명 집결…충돌 우려"
+        },
+        {
+          "source": "mk",
+          "title": "6·3 선거 유권자 4465만명…50대가 전체 20%, 가장 많아"
+        }
+      ]
+    },
+    {
+      "term": "여성",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
+        },
+        {
+          "source": "mk",
+          "title": "5·18 가짜 신문기사 유포한 50대 여성 붙잡혀…경찰 “엄정 대응할 터”"
+        },
+        {
+          "source": "hani",
+          "title": "‘5·18 왜곡’ 가짜신문 이미지 SNS에 유포…경찰, 50대 여성 검거"
+        }
+      ]
+    },
+    {
+      "term": "사망",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "러시아, 초음속 미사일로 키이우 타격…“2명 사망·80명 이상 다쳐”"
+        },
+        {
+          "source": "mk",
+          "title": "“지진이 난 줄” 9층 호텔 건물 공사 중 붕괴…필리핀서 1명 사망·23명 매몰"
+        },
+        {
+          "source": "hani",
+          "title": "중국 산시성 탄광 가스 폭발 ‘대형 참사’…사망 최소 82명"
+        }
+      ]
+    },
+    {
+      "term": "피의자",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "‘5·18 탱크데이’ 논란 정용진, 피의자 입건···시민단체 고발 따른 형식적 절차"
+        },
+        {
+          "source": "mk",
+          "title": "경찰, ‘5·18 탱크데이 논란’ 정용진 고발 절차상 피의자 입건"
+        },
+        {
+          "source": "hani",
+          "title": "‘서대문구 사무실 살인’ 피의자 구속…법원 “증거 인멸·도주 우려”"
+        }
+      ]
+    },
+    {
+      "term": "반도체",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "대기업 정규직만 웃는 ‘반도체 호황’…임금격차 더 커졌다"
+        },
+        {
+          "source": "mk",
+          "title": "\"적절 시점 반도체 관세 부과 시점 지금은 아냐\"…그리어 美USTR 대표"
+        },
+        {
+          "source": "hani",
+          "title": "[사설] 반도체 초과이익 배분 갈등, 공론화로 균형점 찾아야"
+        }
+      ]
+    },
+    {
+      "term": "우승",
+      "total": 6,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "인천공항에 등장한 북 선수단…\"우승 축하!\" 인사했더니"
+        },
+        {
+          "source": "sbs",
+          "title": "북, 내고향팀 우승 보도…남 응원단은 언급 안 해"
+        },
+        {
+          "source": "donga",
+          "title": "왕서윤, 또 중등부 한국신기록…소년체전 200ｍ 우승"
+        }
+      ]
+    },
+    {
+      "term": "사설",
+      "total": 5,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]목돈 몰린 국민성장펀드… ‘관제펀드 흑역사’ 끊어내야"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]‘불법 예산’ 관저 이전 김대기 구속… 파행은 이미 그때부터"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]일자리 시장 진입조차 못 하는 ‘장백청’ 22년 만에 최대"
+        }
+      ]
+    },
+    {
+      "term": "의혹",
+      "total": 5,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "김용남 ‘대부업체 의혹’ 재차 부인…“수익이나 배당 한 푼도 안 받아, 법적 책임 지겠다”"
+        },
+        {
+          "source": "mk",
+          "title": "‘대부업체 의혹’ 김용남 “한 푼도 배당이나 수익 받은 적이 없어”"
+        },
+        {
+          "source": "mk",
+          "title": "경찰, ‘차명 대부업체 운영 의혹’ 김용남 후보 고발사건 수사 착수"
+        }
+      ]
+    },
+    {
+      "term": "민주",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 공방 가열…민주 \"국민 분노 대변\"·국힘 \"인민재판 보는 듯\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주 \"김관영, 이 대통령과 무소속 출마 교감? 전혀 사실 아냐\""
+        },
+        {
+          "source": "hani",
+          "title": "민주-진보 울산시장 후보 단일화 ‘삐걱’…김상욱 캠프 여론조사 중단"
+        }
+      ]
+    },
+    {
+      "term": "논란",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "‘5·18 탱크데이’ 논란 정용진, 피의자 입건···시민단체 고발 따른 형식적 절차"
+        },
+        {
+          "source": "khan",
+          "title": "금감원 규제 밖 ‘스벅 선불카드’…‘60% 써야 환불’ 규정 논란"
+        },
+        {
+          "source": "mk",
+          "title": "경찰, ‘5·18 탱크데이 논란’ 정용진 고발 절차상 피의자 입건"
+        }
+      ]
+    },
+    {
+      "term": "백악관",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "이번엔 200m 밖에서 백악관 향한 총성…일상이 된 정치 테러"
+        },
+        {
+          "source": "mk",
+          "title": "백악관 향해 총기 발사한 괴한…200m 거리서 사살당했다"
+        },
+        {
+          "source": "mk",
+          "title": "“과거에도 여러 차례 백악관 진입 시도”…백악관 총격범 누군가 보니"
+        }
+      ]
+    },
+    {
+      "term": "공방",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 공방 가열…민주 \"국민 분노 대변\"·국힘 \"인민재판 보는 듯\""
+        },
+        {
+          "source": "sbs",
+          "title": "스타벅스 2차 사과에도…불매·정치권 공방 확산"
+        },
+        {
+          "source": "khan",
+          "title": "“적당히 하라” “상식 말한 것”…지선 강타한 ‘스벅 공방’"
+        }
+      ]
+    },
+    {
+      "term": "부처님오신날",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…현직 첫 3대 종단 방문"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…국민 화합·안녕 기원"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]부처님오신날 국립중앙박물관에 뜬 ‘반가라춘상’…그 앞에서 추억 찰칵!"
+        }
+      ]
+    },
+    {
+      "term": "조롱",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        },
+        {
+          "source": "khan",
+          "title": "“조롱·혐오 온라인 커뮤 폐쇄해야”…‘극우와의 전쟁’ 선포한 이 대통령"
+        }
+      ]
+    },
+    {
+      "term": "배상",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -1266,20 +1159,43 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
         },
         {
           "source": "sbs",
-          "title": "장동혁 경기·송언석 울산…국힘, 험지·텃밭 동시 공략"
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
         },
         {
           "source": "donga",
-          "title": "장동혁 “MBC, 200만 충남도민 선택권 삭제…언론장악 막아야”"
+          "title": "“6·25때 군경이 형 3명 학살…유족에 1억 국가 배상”"
         }
       ]
     },
     {
-      "term": "추경호",
+      "term": "추진",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "donga",
+          "title": "李 “기득권 반발 두려워않고 개혁 추진…남북공동선언 계승”"
+        }
+      ]
+    },
+    {
+      "term": "박근혜",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -1297,81 +1213,35 @@
         },
         {
           "source": "khan",
-          "title": "“안녕하십니까”···박근혜, 대구 칠성시장서 추경호 지원 유세"
+          "title": "9년 만에 ‘대구 밖’ 선거 지원 나선 박근혜"
         }
       ]
     },
     {
-      "term": "토론",
+      "term": "구속",
       "total": 3,
       "sourceCount": 2,
       "sources": [
-        "sbs",
-        "khan"
+        "donga",
+        "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        },
-        {
-          "source": "khan",
-          "title": "[선택! 6·3 지방선거] 민주당·국힘이 ‘원팀’?···김관영 측, TV토론 ‘쌍둥이 패널’에 담합 의혹 제기"
-        }
-      ]
-    },
-    {
-      "term": "하정우",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" \"하정우 돕나\""
+          "source": "donga",
+          "title": "[사설]‘불법 예산’ 관저 이전 김대기 구속… 파행은 이미 그때부터"
         },
         {
           "source": "donga",
-          "title": "한동훈 “박민식 찍는 건 하정우 찍는 것과 다름없어”"
+          "title": "지인 사무실서 흉기 살해한 40대 남성 구속…“증거 인멸·도망 염려”"
+        },
+        {
+          "source": "hani",
+          "title": "‘서대문구 사무실 살인’ 피의자 구속…법원 “증거 인멸·도주 우려”"
         }
       ]
     },
     {
-      "term": "민주당",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주당, 충북·강원행…'강호축' 등 지역 공약 앞세워 부동층 공략"
-        },
-        {
-          "source": "sbs",
-          "title": "민주당, '조국 멍 발언' 김용남에 \"득표에 도움 안 돼…말 한마디 유의해야\""
-        },
-        {
-          "source": "khan",
-          "title": "[선택! 6·3 지방선거] 민주당·국힘이 ‘원팀’?···김관영 측, TV토론 ‘쌍둥이 패널’에 담합 의혹 제기"
-        }
-      ]
-    },
-    {
-      "term": "몸에",
+      "term": "만에",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -1381,84 +1251,107 @@
       "examples": [
         {
           "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "title": "[사설]일자리 시장 진입조차 못 하는 ‘장백청’ 22년 만에 최대"
         },
         {
           "source": "donga",
-          "title": "부산서 자기 몸에 불 붙여 협박한 50대 검거"
+          "title": "펜싱 오상욱, 4개월 만에 월드컵 정상…시즌 두 번째 金"
         },
         {
           "source": "khan",
-          "title": "몸에 좋으면 입에 쓰다더니…쓴맛 채소가 다이어트에 좋은 이유"
+          "title": "9년 만에 ‘대구 밖’ 선거 지원 나선 박근혜"
         }
       ]
     },
     {
-      "term": "호르무즈",
+      "term": "종전",
       "total": 3,
       "sourceCount": 2,
       "sources": [
         "donga",
-        "mk"
+        "khan"
       ],
       "examples": [
         {
           "source": "donga",
-          "title": "이란 혁명수비대 “하루 새 선박 25척 호르무즈 통과”"
+          "title": "美-이란, 종전 MOU 임박…핵 협상이 남은 최대 변수"
         },
         {
-          "source": "mk",
-          "title": "이란 혁명수비대 “지난 하룻동안 상선 25척 호르무즈 통과”"
+          "source": "khan",
+          "title": "트럼프 “곧 종전”…호르무즈 열리나"
         },
         {
-          "source": "mk",
-          "title": "호르무즈 봉쇄 후 韓 유조선 다섯번째로 홍해 통과"
+          "source": "khan",
+          "title": "트럼프, 종전 협상 과정서 이스라엘 배제"
         }
       ]
     },
     {
-      "term": "통과",
+      "term": "서울",
       "total": 3,
       "sourceCount": 2,
       "sources": [
         "donga",
-        "mk"
+        "hani"
       ],
       "examples": [
         {
           "source": "donga",
-          "title": "이란 혁명수비대 “하루 새 선박 25척 호르무즈 통과”"
+          "title": "서울 이랜드, ‘10명’ 성남에 3-1 완승…K리그2 2위 도약"
         },
         {
-          "source": "mk",
-          "title": "이란 혁명수비대 “지난 하룻동안 상선 25척 호르무즈 통과”"
+          "source": "hani",
+          "title": "D-10, 서울·대구·부산·충남 ‘접전’…여야, 6곳 ‘경합’ 판단"
         },
         {
-          "source": "mk",
-          "title": "호르무즈 봉쇄 후 韓 유조선 다섯번째로 홍해 통과"
+          "source": "hani",
+          "title": "시골마을 잡화점과 정치 [서울 말고]"
         }
       ]
     },
     {
-      "term": "저격",
+      "term": "통산",
       "total": 3,
       "sourceCount": 2,
       "sources": [
         "donga",
-        "mk"
+        "khan"
       ],
       "examples": [
         {
           "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
+          "title": "‘최정 끝내기 4연승’ 한국 여자바둑, 천태산배 우승…통산 6번째"
         },
         {
-          "source": "mk",
-          "title": "“4·16에 사이렌 이벤트, 패륜행위”…李 대통령, 스타벅스 또 저격"
+          "source": "donga",
+          "title": "지코 ‘아무노래’, 스포티파이 2억 스트리밍 돌파…통산 두 번째"
         },
         {
-          "source": "mk",
-          "title": "“별에서 온 놈→37분 녹취 있다”…故설리 친오빠, 또 김수현 저격"
+          "source": "khan",
+          "title": "‘괴물’ 류현진의 20년 궤적, ‘한·미 통산 200승’ 올라탔다"
+        }
+      ]
+    },
+    {
+      "term": "검거",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
+        },
+        {
+          "source": "donga",
+          "title": "“5·18은 폭동” 가짜 신문기사 조작해 유포…50대女 검거"
+        },
+        {
+          "source": "hani",
+          "title": "‘5·18 왜곡’ 가짜신문 이미지 SNS에 유포…경찰, 50대 여성 검거"
         }
       ]
     },
@@ -1473,112 +1366,20 @@
       "examples": [
         {
           "source": "donga",
-          "title": "르세라핌, 정규 2집 발매 첫날 43만 장 돌파…블핑 이은 대기록"
+          "title": "지코 ‘아무노래’, 스포티파이 2억 스트리밍 돌파…통산 두 번째"
         },
         {
           "source": "mk",
-          "title": "“홍대입구역·강남역에선 특히 주의하세요”…서울지하철 범죄 2600건 돌파"
+          "title": "유통업 온라인 비중 60% 돌파…국회, 대형마트 규제완화 논의"
         },
         {
           "source": "mk",
-          "title": "“경기·인천 분양가도 슬금슬금 올라”…수도권 평당 분양가 4000만원 돌파"
+          "title": "삼성 勞투표율 85% 돌파…'상처투성이 가결' 가능성"
         }
       ]
     },
     {
-      "term": "축구단",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "khan",
-          "title": "북한 ‘내고향’ 축구단, 아시아 여자클럽축구 정상…도쿄에 1-0 승리"
-        },
-        {
-          "source": "khan",
-          "title": "“우승하면 15억 상금인데...” 북한 ‘내고향’ 축구단, 대북제재에 수령 여부 ‘불투명’"
-        }
-      ]
-    },
-    {
-      "term": "기자회견장",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "mk",
-          "title": "“질문 안받겠다”…‘북측’ 호칭 듣자, 기자회견장 떠난 北 내고향 감독"
-        }
-      ]
-    },
-    {
-      "term": "선거",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "선거 유세차량, 철교 아래 진입 중 구조물에 ‘쾅’…1명 경상"
-        },
-        {
-          "source": "hani",
-          "title": "조국 “김용남 ‘대부업체 의혹’, 평택을 넘어 민주진영 선거 전체 악영향”"
-        },
-        {
-          "source": "hani",
-          "title": "성소수자 단체, ‘혐오 표현’ 조전혁 선거 현수막 철거 촉구"
-        }
-      ]
-    },
-    {
-      "term": "만에",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "삼성전자 노조 투표율 하루 만에 70% 넘겨···비반도체는 ‘부결 운동’"
-        },
-        {
-          "source": "mk",
-          "title": "“역성장 쇼크 한달 만에 반전”…러시아 경제 살린 고유가 [이란전쟁이 살린 러 경제①]"
-        },
-        {
-          "source": "mk",
-          "title": "“도와주세요” 의식 잃은 아이 ‘긴급 이송’…경찰, 20분 거리 8분 만에 주파"
-        }
-      ]
-    },
-    {
-      "term": "좋은",
+      "term": "부인",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -1588,66 +1389,66 @@
       "examples": [
         {
           "source": "khan",
-          "title": "‘버섯차’ 좋은 것, 서양에서도 알아버렸다…카페인 적고 항산화 효과로 입소문"
+          "title": "김용남 ‘대부업체 의혹’ 재차 부인…“수익이나 배당 한 푼도 안 받아, 법적 책임 지겠다”"
+        },
+        {
+          "source": "hani",
+          "title": "‘이회창 전 총재 부인’ 한인옥 여사 별세…향년 88"
+        },
+        {
+          "source": "hani",
+          "title": "[단독] ‘통혁당 재건위’ 고 김태열씨 부인 재심 개시…유죄 확정 51년 만"
+        }
+      ]
+    },
+    {
+      "term": "스벅",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "금감원 규제 밖 ‘스벅 선불카드’…‘60% 써야 환불’ 규정 논란"
         },
         {
           "source": "khan",
-          "title": "몸에 좋으면 입에 쓰다더니…쓴맛 채소가 다이어트에 좋은 이유"
+          "title": "“적당히 하라” “상식 말한 것”…지선 강타한 ‘스벅 공방’"
         },
         {
           "source": "hani",
-          "title": "부처님 오시네, 나가기 좋은 날…최고 28도·미세먼지 좋음"
+          "title": "스벅 불매 ‘선거 쟁점’으로…국힘 “국가 폭력”-민주 “일베식 정치”"
         }
       ]
     },
     {
-      "term": "다시",
+      "term": "플랫폼",
       "total": 3,
       "sourceCount": 2,
       "sources": [
-        "mk",
-        "hani"
+        "khan",
+        "mk"
       ],
       "examples": [
         {
-          "source": "mk",
-          "title": "중동 정세 다시 ‘시계제로’…미·이스라엘, 이란 재공습 하나"
+          "source": "khan",
+          "title": "또 개인정보 털린 '국내 최대 자원봉사 플랫폼' 행안부 ‘1365 자원봉사포털’"
+        },
+        {
+          "source": "khan",
+          "title": "서울광장 지하공간 ‘K콘텐츠 플랫폼’ 조성"
         },
         {
           "source": "mk",
-          "title": "‘무료배달’ 다시 꺼낸 쿠팡이츠…배달 앱 시장 출혈경쟁 부추기나"
-        },
-        {
-          "source": "hani",
-          "title": "이 대통령 “당신 떠난 뒤 다시 태어난 수많은 ‘노무현’…저도 그중 하나”"
+          "title": "플랫폼 수수료·배달료만 연 1300만원…남는 게 없는 외식업 사장님들"
         }
       ]
     },
     {
-      "term": "하나",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "mk",
-          "title": "중동 정세 다시 ‘시계제로’…미·이스라엘, 이란 재공습 하나"
-        },
-        {
-          "source": "mk",
-          "title": "“비싸게 빌리느니 하나 사서 돌려입는다”…요즘 결혼식 패션 공식"
-        },
-        {
-          "source": "hani",
-          "title": "이 대통령 “당신 떠난 뒤 다시 태어난 수많은 ‘노무현’…저도 그중 하나”"
-        }
-      ]
-    },
-    {
-      "term": "정청래",
+      "term": "등장한",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -1657,16 +1458,168 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+          "title": "인천공항에 등장한 북 선수단…\"우승 축하!\" 인사했더니"
         },
         {
           "source": "donga",
-          "title": "정청래 “순천 발전에 ‘예법’ 필요해…李정부 호남에 엄청난 보상 중”"
+          "title": "칸 초청작 ‘호프’에 등장한 현대차 ‘스텔라’…1980년대 감성 재현"
         }
       ]
     },
     {
-      "term": "전남",
+      "term": "시장",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "구청장 12년 정원오·시장 10년 오세훈…서울시 민심은?"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]일자리 시장 진입조차 못 하는 ‘장백청’ 22년 만에 최대"
+        }
+      ]
+    },
+    {
+      "term": "보니",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "주소 옮겼다는데…김용남 의문의 대부업체 찾아가 보니"
+        },
+        {
+          "source": "mk",
+          "title": "“과거에도 여러 차례 백악관 진입 시도”…백악관 총격범 누군가 보니"
+        }
+      ]
+    },
+    {
+      "term": "개입",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "김상욱 \"단일화 여론조사 중단\"…\"세력 개입\" 무슨 일이"
+        },
+        {
+          "source": "donga",
+          "title": "“조직적 개입 정황”…與 김상욱, 울산시장 단일화 돌연 중단"
+        }
+      ]
+    },
+    {
+      "term": "민주당",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[지식의 발견] 선거 끝나면 '정청래 vs 반 정청래'…민주당 압승해도 피할 수 없다! (ft. 이동형 작가)"
+        },
+        {
+          "source": "donga",
+          "title": "민주당 “조국혁신당, 금도 지켜라…김용남 소명 듣는 중”"
+        }
+      ]
+    },
+    {
+      "term": "국힘",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 공방 가열…민주 \"국민 분노 대변\"·국힘 \"인민재판 보는 듯\""
+        },
+        {
+          "source": "hani",
+          "title": "스벅 불매 ‘선거 쟁점’으로…국힘 “국가 폭력”-민주 “일베식 정치”"
+        }
+      ]
+    },
+    {
+      "term": "여야",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여야 지도부 '부처님 오신 날' 사찰로…'불심 공략'"
+        },
+        {
+          "source": "hani",
+          "title": "D-10, 서울·대구·부산·충남 ‘접전’…여야, 6곳 ‘경합’ 판단"
+        }
+      ]
+    },
+    {
+      "term": "불심",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여야 지도부 '부처님 오신 날' 사찰로…'불심 공략'"
+        },
+        {
+          "source": "mk",
+          "title": "불심 잡으러 사찰찾은 ‘평택을 후보 5인방’…김용남 대부업 의혹 정면충돌"
+        }
+      ]
+    },
+    {
+      "term": "안녕",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…국민 화합·안녕 기원"
+        },
+        {
+          "source": "donga",
+          "title": "타자에게 안녕 건네기[내가 만난 명문장/송재홍]"
+        }
+      ]
+    },
+    {
+      "term": "장동혁",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -1680,69 +1633,31 @@
         },
         {
           "source": "hani",
-          "title": "전남 해남서 초당대 경비행기 추락…탑승 학생·교관 중상"
+          "title": "장동혁 “6월3일, 스타벅스 커피 들고 이재명 심판하자”"
         }
       ]
     },
     {
-      "term": "반칙과",
+      "term": "충남",
       "total": 2,
       "sourceCount": 2,
       "sources": [
         "sbs",
-        "khan"
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
         },
         {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
+          "source": "hani",
+          "title": "D-10, 서울·대구·부산·충남 ‘접전’…여야, 6곳 ‘경합’ 판단"
         }
       ]
     },
     {
-      "term": "걷어내는",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “기득권 두려워 않고 반칙과 특권 걷어내는 개혁 추진하겠다”"
-        }
-      ]
-    },
-    {
-      "term": "후보",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 박근혜 전 대통령, 대구서 추경호 후보 유세 지원"
-        },
-        {
-          "source": "donga",
-          "title": "이원택·김관영 후보 “노무현 정신 계승하겠다” 한목소리"
-        }
-      ]
-    },
-    {
-      "term": "지방선거",
+      "term": "범여권",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -1756,17 +1671,17 @@
         },
         {
           "source": "khan",
-          "title": "[선택! 6·3 지방선거] 민주당·국힘이 ‘원팀’?···김관영 측, TV토론 ‘쌍둥이 패널’에 담합 의혹 제기"
+          "title": "울산시장 범여권 단일화 ‘삐걱’ 김상욱 “여론조사 중단”"
         }
       ]
     },
     {
-      "term": "승리",
+      "term": "다짐",
       "total": 2,
       "sourceCount": 2,
       "sources": [
         "sbs",
-        "khan"
+        "mk"
       ],
       "examples": [
         {
@@ -1774,8 +1689,8 @@
           "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
         },
         {
-          "source": "khan",
-          "title": "북한 ‘내고향’ 축구단, 아시아 여자클럽축구 정상…도쿄에 1-0 승리"
+          "source": "mk",
+          "title": "“사흘도 못 가는 금연 다짐, 또 실패”…의지 부족이 아닌 ‘이것’ 때문이라는데"
         }
       ]
     },
@@ -1785,7 +1700,7 @@
       "sourceCount": 2,
       "sources": [
         "sbs",
-        "mk"
+        "donga"
       ],
       "examples": [
         {
@@ -1793,198 +1708,426 @@
           "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
         },
         {
-          "source": "mk",
-          "title": "李대통령 “기득권 두려워 않고 반칙·특권 개혁…남북공동선언 계승”"
+          "source": "donga",
+          "title": "李 “기득권 반발 두려워않고 개혁 추진…남북공동선언 계승”"
         }
       ]
     },
     {
-      "term": "참석",
+      "term": "계승",
       "total": 2,
       "sourceCount": 2,
       "sources": [
         "sbs",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"기득권 반발 두려워 않고 개혁…남북공동선언 계승\""
+        },
+        {
+          "source": "donga",
+          "title": "李 “기득권 반발 두려워않고 개혁 추진…남북공동선언 계승”"
+        }
+      ]
+    },
+    {
+      "term": "관저",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]‘불법 예산’ 관저 이전 김대기 구속… 파행은 이미 그때부터"
+        },
+        {
+          "source": "khan",
+          "title": "종합특검 ‘관저 이전 수사’ 윤석열 부부 턱밑까지 왔다"
+        }
+      ]
+    },
+    {
+      "term": "이전",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]‘불법 예산’ 관저 이전 김대기 구속… 파행은 이미 그때부터"
+        },
+        {
+          "source": "khan",
+          "title": "종합특검 ‘관저 이전 수사’ 윤석열 부부 턱밑까지 왔다"
+        }
+      ]
+    },
+    {
+      "term": "이미",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]‘불법 예산’ 관저 이전 김대기 구속… 파행은 이미 그때부터"
+        },
+        {
+          "source": "khan",
+          "title": "[6·3 재보선 인터뷰]이용 국민의힘 경기 하남갑 후보 “이광재 마음은 이미 콩밭에…난 하남 위해 선거 나온 사람”"
+        }
+      ]
+    },
+    {
+      "term": "자리",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
         "mk"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
+          "source": "donga",
+          "title": "[광화문에서/임현석]딥페이크가 삼킨 선거 검증의 자리 되찾아야"
         },
         {
           "source": "mk",
-          "title": "李 대통령, 봉하마을서 노무현 전 대통령 추도식 참석"
+          "title": "스타벅스, 불매 논란 속 ‘카톡 선물’ 1위 자리 7년만에 내줬다…새 왕좌는?"
         }
       ]
     },
     {
-      "term": "원인도",
+      "term": "머리",
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
+        "donga",
         "khan"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
+          "source": "donga",
+          "title": "중이 제 머리 못 깎지만, 깎일 머리는 제 것… 타자 경유한 자기 구원[김영민의 본다는 것은]"
         },
         {
           "source": "khan",
-          "title": "정원오 “삼풍참사 원인도 반토막 철근”···오세훈 “부동산 무능 후보에 재건축 못 맡겨”"
+          "title": "누가 지구 머리 위에 X 쐈어? 기후에 악영향 끼치는 ‘위성 발사’"
         }
       ]
     },
     {
-      "term": "반토막",
+      "term": "임박",
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
-        },
-        {
-          "source": "khan",
-          "title": "정원오 “삼풍참사 원인도 반토막 철근”···오세훈 “부동산 무능 후보에 재건축 못 맡겨”"
-        }
-      ]
-    },
-    {
-      "term": "철근",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
-        },
-        {
-          "source": "khan",
-          "title": "정원오 “삼풍참사 원인도 반토막 철근”···오세훈 “부동산 무능 후보에 재건축 못 맡겨”"
-        }
-      ]
-    },
-    {
-      "term": "집결",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
+        "donga",
         "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "민주당은 '봉하마을' 집결…국힘은 '충남·전북'으로"
+          "source": "donga",
+          "title": "美-이란, 종전 MOU 임박…핵 협상이 남은 최대 변수"
         },
         {
           "source": "hani",
-          "title": "이스라엘 민간공항에 미군 급유기 집결…‘이란 재공습’ 임박했나"
+          "title": "트럼프 “이란과 합의, 서두르지 말라 지시”…MOU 임박 보도 다음날"
         }
       ]
     },
     {
-      "term": "긴급",
+      "term": "이번엔",
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[자막뉴스] 이틀 전까지만 해도 칭찬했는데…\"김승룡 소방청장 긴급 감찰\" 이재명 대통령 지시, 왜?"
-        },
-        {
-          "source": "mk",
-          "title": "“도와주세요” 의식 잃은 아이 ‘긴급 이송’…경찰, 20분 거리 8분 만에 주파"
-        }
-      ]
-    },
-    {
-      "term": "공방",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
+        "donga",
         "khan"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "\"정용진 석고대죄하길\" 직격…'탱크데이' 공방 계속"
+          "source": "donga",
+          "title": "文 정부 때도 추진했던 ‘일베’ 폐쇄…이번엔 가능할까"
         },
         {
           "source": "khan",
-          "title": "스벅 ‘탱크데이’ 공방 격화···국힘 “집단 괴롭힘”, 민주 “일베식 정치 행태”"
+          "title": "이번엔 200m 밖에서 백악관 향한 총성…일상이 된 정치 테러"
         }
       ]
     },
     {
-      "term": "계속",
+      "term": "말고",
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"정용진 석고대죄하길\" 직격…'탱크데이' 공방 계속"
-        },
-        {
-          "source": "mk",
-          "title": "‘39.8도’ 고열에도 계속 출근하다 숨진 교사…유치원장 ‘사직서 위조’ 혐의로 檢 송치"
-        }
-      ]
-    },
-    {
-      "term": "논란",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
+        "donga",
         "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "\"파란색 부러워 얼굴 시퍼렇게\" 발언 논란 [지선직관]"
+          "source": "donga",
+          "title": "‘1박2일’ 딘딘, 이준과 멸치털이 작업 후 녹다운…“새참 말고 퇴근 달라”"
         },
         {
           "source": "hani",
-          "title": "‘스타벅스 인증샷’ 논란 뮤지컬 배우 정민찬, ‘디아길레프’ 하차"
+          "title": "시골마을 잡화점과 정치 [서울 말고]"
         }
       ]
     },
     {
-      "term": "경기",
+      "term": "괴물",
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "‘괴물 신인’서 ‘코리안 몬스터’로…류현진, 한미통산 200승 축포"
+        },
+        {
+          "source": "khan",
+          "title": "‘괴물’ 류현진의 20년 궤적, ‘한·미 통산 200승’ 올라탔다"
+        }
+      ]
+    },
+    {
+      "term": "사망자",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "사망자 200명 넘었다…콩고 에볼라 확산에 각국 ‘빗장 걸기’"
+        },
+        {
+          "source": "khan",
+          "title": "아프리카 에볼라 사망자 200명 넘어···진료소 불타고 환자 도주"
+        }
+      ]
+    },
+    {
+      "term": "에볼라",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "사망자 200명 넘었다…콩고 에볼라 확산에 각국 ‘빗장 걸기’"
+        },
+        {
+          "source": "khan",
+          "title": "아프리카 에볼라 사망자 200명 넘어···진료소 불타고 환자 도주"
+        }
+      ]
+    },
+    {
+      "term": "확산에",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "사망자 200명 넘었다…콩고 에볼라 확산에 각국 ‘빗장 걸기’"
+        },
+        {
+          "source": "khan",
+          "title": "‘에볼라바이러스’ 아프리카 확산에 국내서도 검역 강화"
+        }
+      ]
+    },
+    {
+      "term": "남성",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "지인 사무실서 흉기 살해한 40대 남성 구속…“증거 인멸·도망 염려”"
+        },
+        {
+          "source": "hani",
+          "title": "‘대문에 간장·래커칠’ 또 보복대행 범죄…30대 남성 긴급체포"
+        }
+      ]
+    },
+    {
+      "term": "증거",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "지인 사무실서 흉기 살해한 40대 남성 구속…“증거 인멸·도망 염려”"
+        },
+        {
+          "source": "hani",
+          "title": "‘서대문구 사무실 살인’ 피의자 구속…법원 “증거 인멸·도주 우려”"
+        }
+      ]
+    },
+    {
+      "term": "인멸",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "지인 사무실서 흉기 살해한 40대 남성 구속…“증거 인멸·도망 염려”"
+        },
+        {
+          "source": "hani",
+          "title": "‘서대문구 사무실 살인’ 피의자 구속…법원 “증거 인멸·도주 우려”"
+        }
+      ]
+    },
+    {
+      "term": "유권자",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
         "mk"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "장동혁 경기·송언석 울산…국힘, 험지·텃밭 동시 공략"
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
         },
         {
           "source": "mk",
-          "title": "“경기·인천 분양가도 슬금슬금 올라”…수도권 평당 분양가 4000만원 돌파"
+          "title": "6·3 선거 유권자 4465만명…50대가 전체 20%, 가장 많아"
+        }
+      ]
+    },
+    {
+      "term": "대가",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
+        },
+        {
+          "source": "mk",
+          "title": "6·3 선거 유권자 4465만명…50대가 전체 20%, 가장 많아"
+        }
+      ]
+    },
+    {
+      "term": "가장",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
+        },
+        {
+          "source": "mk",
+          "title": "6·3 선거 유권자 4465만명…50대가 전체 20%, 가장 많아"
+        }
+      ]
+    },
+    {
+      "term": "많아",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "6·3 지방선거 유권자 총 4464만명…50대가 19% 가장 많아"
+        },
+        {
+          "source": "mk",
+          "title": "6·3 선거 유권자 4465만명…50대가 전체 20%, 가장 많아"
+        }
+      ]
+    },
+    {
+      "term": "부부",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
+        },
+        {
+          "source": "khan",
+          "title": "종합특검 ‘관저 이전 수사’ 윤석열 부부 턱밑까지 왔다"
+        }
+      ]
+    },
+    {
+      "term": "시민",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
+        },
+        {
+          "source": "hani",
+          "title": "‘그때 그’ 백운계곡 찾은 이 대통령…시민 “자릿세 안 내고 즐겨”"
         }
       ]
     },
@@ -1993,117 +2136,22 @@
       "total": 2,
       "sourceCount": 2,
       "sources": [
-        "sbs",
+        "donga",
         "mk"
       ],
       "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오, 강북권 집중 공략…\"안전불감증 오세훈, 시장 자격 없어\""
-        },
-        {
-          "source": "mk",
-          "title": "최승호 삼전 노조위원장 “내달 재신임 투표…정계 진출 생각 없어”"
-        }
-      ]
-    },
-    {
-      "term": "논란에",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "청와대, '중국 지도 보안시설 노출' 논란에 \"보안 처리 즉시 요청\""
-        },
-        {
-          "source": "mk",
-          "title": "‘5·18 탱크데이’ 논란에 스타벅스 대표 경질한 정용진 회장[이번주인공]"
-        }
-      ]
-    },
-    {
-      "term": "즉시",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "청와대, '중국 지도 보안시설 노출' 논란에 \"보안 처리 즉시 요청\""
-        },
-        {
-          "source": "hani",
-          "title": "류승범 전 소속사, 버스전용차로 위반 인정…“과태료 즉시 납부”"
-        }
-      ]
-    },
-    {
-      "term": "선거운동",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"공약실천 TF\"·\"내로남불 심판\"…선거운동 이틀째 총력전"
-        },
         {
           "source": "donga",
-          "title": "전재수, 첫 주말 선거운동 서면 집중유세…“해양수도 부산 완성”"
-        }
-      ]
-    },
-    {
-      "term": "이틀째",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"공약실천 TF\"·\"내로남불 심판\"…선거운동 이틀째 총력전"
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
         },
         {
           "source": "mk",
-          "title": "“Iron horse” “배터리 7% 남아”…외국인 추정 여성, 통화 후 이틀째 연락두절"
+          "title": "‘대부업체 의혹’ 김용남 “한 푼도 배당이나 수익 받은 적이 없어”"
         }
       ]
     },
     {
-      "term": "내달",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "대통령경호처, 신임 7급 경호관 공채…내달 30일까지 접수"
-        },
-        {
-          "source": "mk",
-          "title": "최승호 삼전 노조위원장 “내달 재신임 투표…정계 진출 생각 없어”"
-        }
-      ]
-    },
-    {
-      "term": "혁명수비대",
+      "term": "두려워않고",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -2113,54 +2161,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "이란 혁명수비대 “하루 새 선박 25척 호르무즈 통과”"
+          "title": "李 “기득권 반발 두려워않고 개혁 추진…남북공동선언 계승”"
         },
         {
           "source": "mk",
-          "title": "이란 혁명수비대 “지난 하룻동안 상선 25척 호르무즈 통과”"
+          "title": "사회통합 강조한 李 …\"기득권 반발 두려워않고 개혁\""
         }
       ]
     },
     {
-      "term": "하루",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "이란 혁명수비대 “하루 새 선박 25척 호르무즈 통과”"
-        },
-        {
-          "source": "khan",
-          "title": "삼성전자 노조 투표율 하루 만에 70% 넘겨···비반도체는 ‘부결 운동’"
-        }
-      ]
-    },
-    {
-      "term": "한동훈",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "한동훈 “박민식 찍는 건 하정우 찍는 것과 다름없어”"
-        },
-        {
-          "source": "khan",
-          "title": "‘YS 차남’ 김현철, 한동훈 지지 선언 “불법 계엄 온 몸으로 막은 사람···보수의 큰 자산”"
-        }
-      ]
-    },
-    {
-      "term": "세월호",
+      "term": "왜곡",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -2170,16 +2180,54 @@
       "examples": [
         {
           "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
         },
         {
           "source": "hani",
-          "title": "이 대통령, 스벅에 “패륜”…세월호 10주기 ‘배 난파’ 사이렌 마케팅"
+          "title": "‘5·18 왜곡’ 가짜신문 이미지 SNS에 유포…경찰, 50대 여성 검거"
         }
       ]
     },
     {
-      "term": "행위",
+      "term": "계정",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
+        },
+        {
+          "source": "hani",
+          "title": "경찰, ‘5·18특별법 위반’ SNS 계정 37개 내사 착수"
+        }
+      ]
+    },
+    {
+      "term": "내사",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "경찰, 언론사 사칭 5·18 왜곡 50대 여성 검거…37개 계정 내사"
+        },
+        {
+          "source": "hani",
+          "title": "경찰, ‘5·18특별법 위반’ SNS 계정 37개 내사 착수"
+        }
+      ]
+    },
+    {
+      "term": "미래",
       "total": 2,
       "sourceCount": 2,
       "sources": [
@@ -2189,113 +2237,62 @@
       "examples": [
         {
           "source": "donga",
-          "title": "李대통령, 스벅 또 저격 “‘세월호 이벤트’ 패륜 행위…일베도 아니고”"
+          "title": "“AI가 대체 못하는 ‘이것’ 갖춰야”…MIT 최순원 교수가 본 미래 인재상은?"
         },
         {
           "source": "khan",
-          "title": "“악질 장사치의 패륜 행위”···이재명 대통령, 이번엔 스벅 ‘4·16 사이렌 이벤트’ 맹비난"
-        }
-      ]
-    },
-    {
-      "term": "화성",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "차두리의 화성, 청주에 3-2 역전…7연속 무패, K리그2 3위 도약"
-        },
-        {
-          "source": "mk",
-          "title": "화성 주택 화재로 20대 손자 사망·80대 할머니 부상"
-        }
-      ]
-    },
-    {
-      "term": "없이",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘새의 랩소디’ 최원정 감독 “스태프 없이 홀로 작업…칸 생각 못해”"
-        },
-        {
-          "source": "mk",
-          "title": "정성호 “검찰개혁 흔들림 없이 완수…노무현 전 대통령 의지 계승할 것”"
-        }
-      ]
-    },
-    {
-      "term": "꺾고",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "신진서 9단, 랴오위안허 꺾고 춘란배 16강 진출"
-        },
-        {
-          "source": "mk",
-          "title": "수원에서 인공기 휘날렸다…北 내고향, 일본 꺾고 아시아 여자축구 챔피언 등극"
-        }
-      ]
-    },
-    {
-      "term": "진출",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "신진서 9단, 랴오위안허 꺾고 춘란배 16강 진출"
-        },
-        {
-          "source": "mk",
-          "title": "최승호 삼전 노조위원장 “내달 재신임 투표…정계 진출 생각 없어”"
-        }
-      ]
-    },
-    {
-      "term": "알고",
-      "total": 2,
-      "sourceCount": 2,
-      "sources": [
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘놀토’ 김세정, 김동현 부진에도 팬심 유지 “모자람 알고 있어” 폭소"
-        },
-        {
-          "source": "khan",
-          "title": "알고 보면 세균 천국, 냉장고 ‘비닐봉지 보관’이 위험한 이유"
+          "title": "[소리과학의 미래]공기와 사물의 ‘춤’ 바람이 부는 소리"
         }
       ]
     }
   ],
   "singleSourceTop": [
     {
-      "term": "공략",
+      "term": "국민",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "스타벅스 공방 가열…민주 \"국민 분노 대변\"·국힘 \"인민재판 보는 듯\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀처럼…'국민 목숨 살리는 정부'\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀으로 '국민 목숨 살리는 정부' 만들 것\""
+        }
+      ]
+    },
+    {
+      "term": "유세",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "정청래, 오늘 전남 방문…순천 법요식 뒤 광양·담양·함평 유세"
+        },
+        {
+          "source": "sbs",
+          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+        },
+        {
+          "source": "sbs",
+          "title": "박근혜 유세 지원에…\"추경호 급했나\" 김부겸 맞불 유세"
+        }
+      ]
+    },
+    {
+      "term": "방문",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2304,20 +2301,86 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "장동혁 경기·송언석 울산…국힘, 험지·텃밭 동시 공략"
+          "title": "이 대통령, '경기지사 시절 정비' 포천 백운계곡 방문"
         },
         {
           "source": "sbs",
-          "title": "민주당, 충북·강원행…'강호축' 등 지역 공약 앞세워 부동층 공략"
+          "title": "이 대통령, 부처님오신날 법요식 참석…현직 첫 3대 종단 방문"
         },
         {
           "source": "sbs",
-          "title": "정원오, 강북권 집중 공략…\"안전불감증 오세훈, 시장 자격 없어\""
+          "title": "정청래, 오늘 전남 방문…순천 법요식 뒤 광양·담양·함평 유세"
         }
       ]
     },
     {
-      "term": "첫날",
+      "term": "정청래",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[지식의 발견] 선거 끝나면 '정청래 vs 반 정청래'…민주당 압승해도 피할 수 없다! (ft. 이동형 작가)"
+        },
+        {
+          "source": "sbs",
+          "title": "정청래, 오늘 전남 방문…순천 법요식 뒤 광양·담양·함평 유세"
+        },
+        {
+          "source": "sbs",
+          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+        }
+      ]
+    },
+    {
+      "term": "법요식",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…현직 첫 3대 종단 방문"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…국민 화합·안녕 기원"
+        },
+        {
+          "source": "sbs",
+          "title": "정청래, 오늘 전남 방문…순천 법요식 뒤 광양·담양·함평 유세"
+        }
+      ]
+    },
+    {
+      "term": "참석",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…현직 첫 3대 종단 방문"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 부처님오신날 법요식 참석…국민 화합·안녕 기원"
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
+        }
+      ]
+    },
+    {
+      "term": "시즌",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2326,20 +2389,20 @@
       "examples": [
         {
           "source": "donga",
-          "title": "세븐틴 도겸·승관, ‘서재페’ 첫날 무대 장악…감성 보컬"
+          "title": "펜싱 오상욱, 4개월 만에 월드컵 정상…시즌 두 번째 金"
         },
         {
           "source": "donga",
-          "title": "르세라핌, 정규 2집 발매 첫날 43만 장 돌파…블핑 이은 대기록"
+          "title": "여자 프로당구 김가영, 새 시즌 개막전 우승…누적 상금 9억6천"
         },
         {
           "source": "donga",
-          "title": "연휴 첫날 설악산 곳곳 탈진·낙상…오세암 탈진 등산객 구조 중"
+          "title": "KLPGA 채리티 오픈서 ‘첫 우승’ 태국 분짠 “올 시즌 다승 도전”"
         }
       ]
     },
     {
-      "term": "완벽",
+      "term": "번째",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2348,42 +2411,20 @@
       "examples": [
         {
           "source": "donga",
-          "title": "리사, 막 찍어도 A컷…슬림 허리 라인에 완벽 몸매"
+          "title": "펜싱 오상욱, 4개월 만에 월드컵 정상…시즌 두 번째 金"
         },
         {
           "source": "donga",
-          "title": "‘놀토’ 전소미·김세정·김소혜, 예능서도 완벽 팀워크… 깜찍 칼군무"
+          "title": "‘최정 끝내기 4연승’ 한국 여자바둑, 천태산배 우승…통산 6번째"
         },
         {
           "source": "donga",
-          "title": "안소희, 사랑스러운 비주얼에 ‘심쿵’… 슬림 몸매까지 완벽"
+          "title": "지코 ‘아무노래’, 스포티파이 2억 스트리밍 돌파…통산 두 번째"
         }
       ]
     },
     {
-      "term": "발끈한",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 표현에 발끈한 내고향 기자회견 ‘중단’…믹스트존도 ‘쌩’"
-        }
-      ]
-    },
-    {
-      "term": "충남",
+      "term": "무소속",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2392,16 +2433,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+          "title": "무소속 김관영 전북지사 후보 \"대통령 선거에 이용한 바 없다\""
         },
         {
           "source": "sbs",
-          "title": "민주당은 '봉하마을' 집결…국힘은 '충남·전북'으로"
+          "title": "민주 \"김관영, 이 대통령과 무소속 출마 교감? 전혀 사실 아냐\""
         }
       ]
     },
     {
-      "term": "총력전",
+      "term": "김관영",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2410,11 +2451,191 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+          "title": "무소속 김관영 전북지사 후보 \"대통령 선거에 이용한 바 없다\""
         },
         {
           "source": "sbs",
-          "title": "\"공약실천 TF\"·\"내로남불 심판\"…선거운동 이틀째 총력전"
+          "title": "민주 \"김관영, 이 대통령과 무소속 출마 교감? 전혀 사실 아냐\""
+        }
+      ]
+    },
+    {
+      "term": "혐오표현",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        }
+      ]
+    },
+    {
+      "term": "징벌",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        }
+      ]
+    },
+    {
+      "term": "검토해야",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"조롱·혐오표현 징벌 배상 검토해야\""
+        }
+      ]
+    },
+    {
+      "term": "목숨",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀처럼…'국민 목숨 살리는 정부'\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀으로 '국민 목숨 살리는 정부' 만들 것\""
+        }
+      ]
+    },
+    {
+      "term": "살리는",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀처럼…'국민 목숨 살리는 정부'\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"부처님 말씀으로 '국민 목숨 살리는 정부' 만들 것\""
+        }
+      ]
+    },
+    {
+      "term": "전남",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "정청래, 오늘 전남 방문…순천 법요식 뒤 광양·담양·함평 유세"
+        },
+        {
+          "source": "sbs",
+          "title": "정청래 전남·장동혁 충남…첫 주말 유세 총력전"
+        }
+      ]
+    },
+    {
+      "term": "반칙과",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        }
+      ]
+    },
+    {
+      "term": "특권",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        }
+      ]
+    },
+    {
+      "term": "걷어내는",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        },
+        {
+          "source": "sbs",
+          "title": "봉하 찾은 이 대통령 \"반칙과 특권 걷어내는 개혁 추진\""
+        }
+      ]
+    },
+    {
+      "term": "추경호",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "박근혜 유세 지원에…\"추경호 급했나\" 김부겸 맞불 유세"
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] 박근혜 전 대통령, 대구서 추경호 후보 유세 지원"
         }
       ]
     },
@@ -2437,7 +2658,7 @@
       ]
     },
     {
-      "term": "앞세워",
+      "term": "노무현",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2446,16 +2667,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "정원오 \"삼풍 참사 원인도 반토막 철근\"…안전 문제 앞세워 오세훈 비판"
+          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
         },
         {
           "source": "sbs",
-          "title": "민주당, 충북·강원행…'강호축' 등 지역 공약 앞세워 부동층 공략"
+          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
         }
       ]
     },
     {
-      "term": "소방청장",
+      "term": "서거",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2464,16 +2685,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[자막뉴스] 이틀 전까지만 해도 칭찬했는데…\"김승룡 소방청장 긴급 감찰\" 이재명 대통령 지시, 왜?"
+          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
         },
         {
           "source": "sbs",
-          "title": "청와대 \"소방청장 감찰 착수…이 대통령, 진상 확인 지시\""
+          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
         }
       ]
     },
     {
-      "term": "감찰",
+      "term": "주기",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2482,304 +2703,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[자막뉴스] 이틀 전까지만 해도 칭찬했는데…\"김승룡 소방청장 긴급 감찰\" 이재명 대통령 지시, 왜?"
+          "title": "범여권, '노무현 전 대통령 서거 17주기' 총집결…지방선거 승리 다짐"
         },
         {
           "source": "sbs",
-          "title": "청와대 \"소방청장 감찰 착수…이 대통령, 진상 확인 지시\""
+          "title": "[바로이뉴스] 이 대통령, 노무현 전 대통령 서거 17주기 추도식 참석"
         }
       ]
     },
     {
-      "term": "지시",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[자막뉴스] 이틀 전까지만 해도 칭찬했는데…\"김승룡 소방청장 긴급 감찰\" 이재명 대통령 지시, 왜?"
-        },
-        {
-          "source": "sbs",
-          "title": "청와대 \"소방청장 감찰 착수…이 대통령, 진상 확인 지시\""
-        }
-      ]
-    },
-    {
-      "term": "나포",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "활동가",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "귀국",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "여러",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "차례",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "폭행당했다",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        },
-        {
-          "source": "sbs",
-          "title": "나포 활동가 귀국…\"여러 차례 폭행당했다\""
-        }
-      ]
-    },
-    {
-      "term": "파전",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        }
-      ]
-    },
-    {
-      "term": "부정선거",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        }
-      ]
-    },
-    {
-      "term": "난타전",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…'단일화'·'부정선거' 난타전"
-        },
-        {
-          "source": "sbs",
-          "title": "평택을 5파전 첫 토론…단일화·부정선거 난타전"
-        }
-      ]
-    },
-    {
-      "term": "시끌",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" \"하정우 돕나\""
-        }
-      ]
-    },
-    {
-      "term": "정정당당",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" \"하정우 돕나\""
-        }
-      ]
-    },
-    {
-      "term": "붙자",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" \"하정우 돕나\""
-        }
-      ]
-    },
-    {
-      "term": "돕나",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" VS \"하정우 돕나\""
-        },
-        {
-          "source": "sbs",
-          "title": "'단일화' 시끌…\"정정당당 붙자\" \"하정우 돕나\""
-        }
-      ]
-    },
-    {
-      "term": "발언",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"파란색 부러워 얼굴 시퍼렇게\" 발언 논란 [지선직관]"
-        },
-        {
-          "source": "sbs",
-          "title": "민주당, '조국 멍 발언' 김용남에 \"득표에 도움 안 돼…말 한마디 유의해야\""
-        }
-      ]
-    },
-    {
-      "term": "청와대",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "청와대 \"소방청장 감찰 착수…이 대통령, 진상 확인 지시\""
-        },
-        {
-          "source": "sbs",
-          "title": "청와대, '중국 지도 보안시설 노출' 논란에 \"보안 처리 즉시 요청\""
-        }
-      ]
-    },
-    {
-      "term": "부산",
+      "term": "하는",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2788,16 +2721,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "title": "[사설]일자리 시장 진입조차 못 하는 ‘장백청’ 22년 만에 최대"
         },
         {
           "source": "donga",
-          "title": "전재수, 첫 주말 선거운동 서면 집중유세…“해양수도 부산 완성”"
+          "title": "[김승련 칼럼]귀에 대고 달콤한 소리만 하는 정치"
         }
       ]
     },
     {
-      "term": "붙여",
+      "term": "칼럼",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2806,16 +2739,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "title": "[김승련 칼럼]귀에 대고 달콤한 소리만 하는 정치"
         },
         {
           "source": "donga",
-          "title": "부산서 자기 몸에 불 붙여 협박한 50대 검거"
+          "title": "[특파원 칼럼/황인찬]韓日‘셔틀 외교 2.0’ 모색할 때"
         }
       ]
     },
     {
-      "term": "협박한",
+      "term": "내가",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2824,16 +2757,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "title": "타자에게 안녕 건네기[내가 만난 명문장/송재홍]"
         },
         {
           "source": "donga",
-          "title": "부산서 자기 몸에 불 붙여 협박한 50대 검거"
+          "title": "내가 선택한 것만이 오로지 내 것이다[2030세상/배윤슬]"
         }
       ]
     },
     {
-      "term": "검거",
+      "term": "만난",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2842,16 +2775,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "부산 사상구서 자기 몸에 불 붙여 상대 협박한 50대 남성 검거"
+          "title": "타자에게 안녕 건네기[내가 만난 명문장/송재홍]"
         },
         {
           "source": "donga",
-          "title": "부산서 자기 몸에 불 붙여 협박한 50대 검거"
+          "title": "백운계곡 찾은 李 부부 만난 시민 “자리세 없어 편해”"
         }
       ]
     },
     {
-      "term": "슬림",
+      "term": "살해한",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2860,142 +2793,16 @@
       "examples": [
         {
           "source": "donga",
-          "title": "리사, 막 찍어도 A컷…슬림 허리 라인에 완벽 몸매"
+          "title": "“평소 무시해서”…동료 기사 살해한 60대 구속영장"
         },
         {
           "source": "donga",
-          "title": "안소희, 사랑스러운 비주얼에 ‘심쿵’… 슬림 몸매까지 완벽"
+          "title": "지인 사무실서 흉기 살해한 40대 남성 구속…“증거 인멸·도망 염려”"
         }
       ]
     },
     {
-      "term": "놀토",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘놀토’ 전소미·김세정·김소혜, 예능서도 완벽 팀워크… 깜찍 칼군무"
-        },
-        {
-          "source": "donga",
-          "title": "‘놀토’ 김세정, 김동현 부진에도 팬심 유지 “모자람 알고 있어” 폭소"
-        }
-      ]
-    },
-    {
-      "term": "김세정",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘놀토’ 전소미·김세정·김소혜, 예능서도 완벽 팀워크… 깜찍 칼군무"
-        },
-        {
-          "source": "donga",
-          "title": "‘놀토’ 김세정, 김동현 부진에도 팬심 유지 “모자람 알고 있어” 폭소"
-        }
-      ]
-    },
-    {
-      "term": "폭소",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘놀토’ 김세정, 김동현 부진에도 팬심 유지 “모자람 알고 있어” 폭소"
-        },
-        {
-          "source": "donga",
-          "title": "‘놀뭐’ 유재석 “예전에 태어났으면 여기 들어오기 힘들어” 폭소"
-        }
-      ]
-    },
-    {
-      "term": "놀뭐",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘놀뭐’ 유재석 “예전에 태어났으면 여기 들어오기 힘들어” 폭소"
-        },
-        {
-          "source": "donga",
-          "title": "‘놀뭐’ 주우재, 기상청 향해 돌직구 “날씨 왜 틀리는 거예요?”"
-        }
-      ]
-    },
-    {
-      "term": "지칭에",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        }
-      ]
-    },
-    {
-      "term": "박차고",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        }
-      ]
-    },
-    {
-      "term": "나갔다",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北축구단, 기자회견장 박차고 나갔다"
-        },
-        {
-          "source": "donga",
-          "title": "“북측” 지칭에 발끈한 北, 기자회견장 박차고 나갔다"
-        }
-      ]
-    },
-    {
-      "term": "매장",
+      "term": "아프리카",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3004,16 +2811,16 @@
       "examples": [
         {
           "source": "khan",
-          "title": "“매장 파트너는 무관” 스타벅스, 전국 매장에 2차 사과문…‘손절’ 의식했나"
+          "title": "아프리카 에볼라 사망자 200명 넘어···진료소 불타고 환자 도주"
         },
         {
           "source": "khan",
-          "title": "“1시간 이상 대기”···‘장원영 밀크티’ 차지 5번째 매장 ‘시청점’ 문 연 날 가보니"
+          "title": "‘에볼라바이러스’ 아프리카 확산에 국내서도 검역 강화"
         }
       ]
     },
     {
-      "term": "운동",
+      "term": "포토뉴스",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3022,16 +2829,16 @@
       "examples": [
         {
           "source": "khan",
-          "title": "삼성전자 노조 투표율 하루 만에 70% 넘겨···비반도체는 ‘부결 운동’"
+          "title": "[포토뉴스]부처님오신날 국립중앙박물관에 뜬 ‘반가라춘상’…그 앞에서 추억 찰칵!"
         },
         {
           "source": "khan",
-          "title": "[수피의 헬스 가이드]짧게, 그러나 강렬하게…‘운동 스낵’이 뜬다"
+          "title": "[포토뉴스]향기로운 장미축제로 오세요"
         }
       ]
     },
     {
-      "term": "털린",
+      "term": "국내",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3040,16 +2847,16 @@
       "examples": [
         {
           "source": "khan",
-          "title": "[단독]개인정보 유출 피해자에 “미녀라 대표로 털린 것”···CJ 내부 2차 가해"
+          "title": "또 개인정보 털린 '국내 최대 자원봉사 플랫폼' 행안부 ‘1365 자원봉사포털’"
         },
         {
           "source": "khan",
-          "title": "[주말 ] 체력 털린 날엔 ‘냉털’, 계란밥전"
+          "title": "국내 하이브리드차 비중, 두 달 연속 10%대"
         }
       ]
     },
     {
-      "term": "마세요",
+      "term": "트럭",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3058,70 +2865,16 @@
       "examples": [
         {
           "source": "khan",
-          "title": "“호박 속 실타래, 버리지 마세요”…과육보다 영양 많다는 의외의 부위"
+          "title": "쉿! 하이테크 트럭 SUV 넘보다"
         },
         {
           "source": "khan",
-          "title": "저당·제로파 모여라···‘무설탕’ ‘무가당’ 더는 헷갈리지 마세요"
+          "title": "수입 트럭 명가도 매서운 추격전…만트럭 “한국은 전초기지” 스카니아 “압도적 연비”"
         }
       ]
     },
     {
-      "term": "위험한",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "알고 보면 세균 천국, 냉장고 ‘비닐봉지 보관’이 위험한 이유"
-        },
-        {
-          "source": "khan",
-          "title": "“이란 핵무기보다 위험한 인물”···군대조차 거부한 극우 유대 우월주의자는 어떻게 이스라엘 장관이 됐나"
-        }
-      ]
-    },
-    {
-      "term": "이유",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "알고 보면 세균 천국, 냉장고 ‘비닐봉지 보관’이 위험한 이유"
-        },
-        {
-          "source": "khan",
-          "title": "몸에 좋으면 입에 쓰다더니…쓴맛 채소가 다이어트에 좋은 이유"
-        }
-      ]
-    },
-    {
-      "term": "어떻게",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "“이란 핵무기보다 위험한 인물”···군대조차 거부한 극우 유대 우월주의자는 어떻게 이스라엘 장관이 됐나"
-        },
-        {
-          "source": "khan",
-          "title": "[오마주]박찬욱은 어떻게 거장이 되었나…‘뉴-올드보이 박찬욱’"
-        }
-      ]
-    },
-    {
-      "term": "버스",
+      "term": "공격은",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3130,16 +2883,16 @@
       "examples": [
         {
           "source": "mk",
-          "title": "[Overseas Trip] 중앙아메리카 6개국 버스 여행① 그곳에 가보지 않으면 알 수 없기에  미지의 땅 그 첫 목적지, 과테말라"
+          "title": "“이제 공격은 그만합시다”…미·이란 휴전, 핵물질 처리 막판 쟁점"
         },
         {
           "source": "mk",
-          "title": "“니가 왜 거기서 나와”…대구터미널 정차 버스 화물칸 보고 깜짝"
+          "title": "핵물질 처리 두고 막판 줄다리기 … 상호 공격은 자제키로"
         }
       ]
     },
     {
-      "term": "부상",
+      "term": "휴전",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3148,16 +2901,16 @@
       "examples": [
         {
           "source": "mk",
-          "title": "러 “우크라 공격 받은 대학 기숙사 사망 16명·부상 42명으로 늘어”"
+          "title": "“이제 공격은 그만합시다”…미·이란 휴전, 핵물질 처리 막판 쟁점"
         },
         {
           "source": "mk",
-          "title": "화성 주택 화재로 20대 손자 사망·80대 할머니 부상"
+          "title": "'60일 휴전+호르무즈 개방'…트럼프 \"최종확정만 남아\""
         }
       ]
     },
     {
-      "term": "반전",
+      "term": "핵물질",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3166,16 +2919,16 @@
       "examples": [
         {
           "source": "mk",
-          "title": "“역성장 쇼크 한달 만에 반전”…러시아 경제 살린 고유가 [이란전쟁이 살린 러 경제①]"
+          "title": "“이제 공격은 그만합시다”…미·이란 휴전, 핵물질 처리 막판 쟁점"
         },
         {
           "source": "mk",
-          "title": "‘이재명 정부 심판론’ 앞세운 국힘…지선 전 지지율 반전 성공할까"
+          "title": "핵물질 처리 두고 막판 줄다리기 … 상호 공격은 자제키로"
         }
       ]
     },
     {
-      "term": "우즈벡",
+      "term": "처리",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3184,29 +2937,191 @@
       "examples": [
         {
           "source": "mk",
-          "title": "“‘알고리즘의 땅’ 우즈벡… 韓과 디지털 실크로드 열자”"
+          "title": "“이제 공격은 그만합시다”…미·이란 휴전, 핵물질 처리 막판 쟁점"
         },
         {
           "source": "mk",
-          "title": "“K팝 넘어 K의료”…우즈벡 수술실서 열린 민간외교"
+          "title": "핵물질 처리 두고 막판 줄다리기 … 상호 공격은 자제키로"
         }
       ]
     },
     {
-      "term": "사진",
+      "term": "막판",
       "total": 2,
       "sourceCount": 1,
       "sources": [
-        "hani"
+        "mk"
       ],
       "examples": [
         {
-          "source": "hani",
-          "title": "“봉하마을서 일베 손가락질 사진 찍어”…조수진 노무현재단 이사 주장"
+          "source": "mk",
+          "title": "“이제 공격은 그만합시다”…미·이란 휴전, 핵물질 처리 막판 쟁점"
         },
         {
-          "source": "hani",
-          "title": "“우리 사진 찍자” “트로피 무겁네” 내고향축구단 우승 미소 [만리재사진첩]"
+          "source": "mk",
+          "title": "핵물질 처리 두고 막판 줄다리기 … 상호 공격은 자제키로"
+        }
+      ]
+    },
+    {
+      "term": "세입자",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "세입자 면접 보고 신용 상태까지 들여다본다"
+        },
+        {
+          "source": "mk",
+          "title": "[Pick] 세입자 면접 이어 신용평가까지…"
+        }
+      ]
+    },
+    {
+      "term": "면접",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "세입자 면접 보고 신용 상태까지 들여다본다"
+        },
+        {
+          "source": "mk",
+          "title": "[Pick] 세입자 면접 이어 신용평가까지…"
+        }
+      ]
+    },
+    {
+      "term": "신용",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "세입자 면접 보고 신용 상태까지 들여다본다"
+        },
+        {
+          "source": "mk",
+          "title": "임차인 내보내기 힘든 獨·日…신용·소득 더 꼼꼼하게 확인"
+        }
+      ]
+    },
+    {
+      "term": "아닌",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "김용범 “고금리·고물가·고환율 ‘3고’ 악재 아닌 성장 위한 마찰음”"
+        },
+        {
+          "source": "mk",
+          "title": "“사흘도 못 가는 금연 다짐, 또 실패”…의지 부족이 아닌 ‘이것’ 때문이라는데"
+        }
+      ]
+    },
+    {
+      "term": "거리서",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "백악관 향해 총기 발사한 괴한…200m 거리서 사살당했다"
+        },
+        {
+          "source": "mk",
+          "title": "백악관 200m 거리서 총격범 사살 … 안에 있던 트럼프 무사"
+        }
+      ]
+    },
+    {
+      "term": "년만에",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "스타벅스, 불매 논란 속 ‘카톡 선물’ 1위 자리 7년만에 내줬다…새 왕좌는?"
+        },
+        {
+          "source": "mk",
+          "title": "39년만에 백악관서 취임식한 워시 연준의장 … 통화정책 딜레마"
+        }
+      ]
+    },
+    {
+      "term": "총격범",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "“과거에도 여러 차례 백악관 진입 시도”…백악관 총격범 누군가 보니"
+        },
+        {
+          "source": "mk",
+          "title": "백악관 200m 거리서 총격범 사살 … 안에 있던 트럼프 무사"
+        }
+      ]
+    },
+    {
+      "term": "대부업",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "불심 잡으러 사찰찾은 ‘평택을 후보 5인방’…김용남 대부업 의혹 정면충돌"
+        },
+        {
+          "source": "mk",
+          "title": "조국 “김용남, 대부업 의혹 제기돼…민주당이 결자해지 해야”"
+        }
+      ]
+    },
+    {
+      "term": "삼성",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "삼성 소액주주 주총 요구 길 열려 이르면 27일 주주명부 열람하기로"
+        },
+        {
+          "source": "mk",
+          "title": "삼성 勞투표율 85% 돌파…'상처투성이 가결' 가능성"
         }
       ]
     }
