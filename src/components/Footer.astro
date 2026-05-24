@@ -46,16 +46,9 @@ const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.pro
           <li><a href="/affiliate-disclosure/">제휴 공시</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title">자 매 사 이 트</div>
-        <ul>
-          <li><a href="https://calculatorhost.com" rel="noopener noreferrer" target="_blank">calculatorhost.com</a></li>
-          <li><a href="https://awoo.or.kr" rel="noopener noreferrer" target="_blank">awoo.or.kr</a></li>
-          <li><a href="https://asiatop.co.kr" rel="noopener noreferrer" target="_blank">asiatop.co.kr</a></li>
-          <li><a href="https://iknowhowinfo.com" rel="noopener noreferrer" target="_blank">iknowhowinfo.com</a></li>
-          <li><a href="#network">네트워크 안내</a></li>
-        </ul>
-      </div>
+    </div>
+    <div class="footer-ai-disclosure">
+      본 사이트 일부 콘텐츠는 AI 보조로 작성되며 운영자가 1차 출처 검증·편집·발행한다. 자세한 정책 → <a href="/ai-policy/">AI 정책</a>
     </div>
     <div class="footer-bottom">
       <span>
@@ -74,9 +67,9 @@ const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.pro
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
   @media (max-width: 880px) {
     .footer-grid {
@@ -87,6 +80,17 @@ const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.pro
     .footer-grid {
       grid-template-columns: 1fr;
     }
+  }
+  .footer-ai-disclosure {
+    padding: 12px 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+    line-height: 1.6;
+  }
+  .footer-ai-disclosure a {
+    color: var(--color-ink-secondary);
+    text-decoration: underline;
   }
   .footer-brand {
     font-family: var(--font-serif);
