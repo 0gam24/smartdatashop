@@ -1,8 +1,8 @@
 # ADR 0008 — Network Revenue Funnel (메인 + 자매 N AdSense)
 
 - 일자: 2026-05-07
-- 상태: Accepted
-- 관련: ADR 0005 (compensating controls), ADR 0006 (4 publication criteria), ADR 0007 (sourced content writing)
+- 상태: **Superseded by ADR 0010 (2026-05-24)** — 네트워크 컬렉트 폐기
+- 관련: ADR 0005 (compensating controls), ADR 0006 (4 publication criteria), ADR 0007 (sourced content writing), ADR 0010 (deprecate network bundle)
 
 ## 배경
 

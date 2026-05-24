@@ -4,66 +4,43 @@
 > 영역별 추가 규칙은 디렉토리별 CLAUDE.md 참조.
 
 ## 프로젝트 한 줄
-한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 매일 5분으로 정리하는 데이터 저널 허브.
+한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터를 매일 5분으로 정리하는 **단일 독립** 데이터 저널 사이트.
 
-## 프로젝트 목적 (확장 — 2026-05-07 ADR 0008 합의)
+## 프로젝트 목적 (2026-05-24 — 네트워크 컬렉트 폐기, ADR 0010)
 
-> 본 사이트는 *확장형 네트워크* 의 **메인 hub** 다. 단독 운영 X.
+> 본 사이트는 **단일 독립 사이트**다. 네트워크/자매 컬렉트 컨셉은 폐기.
 
-**최상위 목적**: 메인 + 자매 (현재 4 → 최대 9, 총 최대 10 사이트) 의 *합산 트래픽* 으로 **AdSense 수익화**.
+**최상위 목적**: 본 사이트 단독 트래픽으로 **Google AdSense 수익화** (1년 500만원 → 2년 1,000만원 → 3년+ 2,000만원+).
 
-**역할 분담**:
-1. **메인 (smartdatashop.kr)** — Google Discover / Naver 진입 엔진. 1차 출처 NewsArticle 매일 발행. 자매 funnel hub. *고정 단일*.
-2. **자매 사이트 (확장형, 현재 4 → 최대 9)** — 페르소나별 *독립 콘텐츠* + 자체 SEO + 메인 backref. 합류 시 NETWORK.md paste 만으로 룰 적용.
-
-   현재 가동 (4):
-   - `calculatorhost.com` — 인터랙티브 계산기·시뮬레이터
-   - `awoo.or.kr` — 정부 지원금 신청 가이드
-   - `asiatop.co.kr (moneylook)` — 사회초년생·신혼부부 재무 가이드
-   - `iknowhowinfo.com` — ETF·종목·시장 분석
-
-   확장 슬롯 (5 추가 가능 — 페르소나/도메인 미정):
-   - 신규 자매 추가 시 본 항목에 도메인·페르소나 추가
-   - 부트스트랩 절차: NETWORK.md paste + BRAND.md 신규 작성 + PLAYBOOK.md 시드 task
-
-**양방향 cross-link funnel**:
-- 메인 → 자매: 펄스 본문 톨게이트 + 카테고리/페르소나 매핑 (forward) — 자매 수 증가에 따라 매핑 표 자동 확장
-- 자매 → 메인: 메인 홈 "네트워크 최신" 섹션 + 자매 페이지 backref (reverse)
-- 메인이 자매 RSS *제목·URL·요약* 만 fetch — 본문 복제 절대 금지 (중복 콘텐츠 AdSense 차단 회피)
-- 메인의 "네트워크 최신" 섹션은 자매 N 개 모두 자동 fetch — 신규 자매 합류 시 코드 수정 0 (config 갱신만)
+**역할**:
+- **smartdatashop.kr** — Google Discover / Naver 진입 + 1차 출처 NewsArticle 매일 발행 + AdSense 수익원. *단일 독립 운영*.
+- 자매 사이트(`calculatorhost.com` / `awoo.or.kr` / `asiatop.co.kr` / `iknowhowinfo.com`)는 **별도 사업체**로 분리 — 본 사이트 하네스·의사결정·콘텐츠 영향 0. 필요 시 운영자가 외부 자원으로 호출.
+- 자매 RSS fetch / 네트워크 최신 섹션 / 톨게이트 funnel / 페르소나 매핑 — *하네스 컨텍스트 아님*. 코드가 남아 있어도 새 콘텐츠는 자매를 전제하지 않는다.
 
 **AdSense 안전 — 모든 콘텐츠 작업의 1순위 제약**:
-- **fabrication 1건 = 네트워크 전체 영구 AdSense 차단 위험** — ADR 0006 4기준 모든 사이트 (메인 + 자매 N) 균일 적용
-- 모든 사이트 각자 *고유* 콘텐츠 — 사이트간 본문 복제 금지 (canonical chain 으로 link 만 cross)
+- **fabrication 1건 = AdSense 영구 차단 위험** — ADR 0006 4기준 본 사이트 단독 적용
 - YMYL 신뢰성 — `.go.kr` / `.or.kr` 1차 출처 우선
-- NewsMediaOrganization LD + ethics/corrections/methodology 정책 URL 모든 사이트 의무
+- NewsMediaOrganization LD + ethics/corrections/methodology 정책 URL 의무
 
-**네트워크 헌법**: 본 repo 의 `docs/NETWORK.md` v0.6 (2026-05-07 동기화) 가 모든 사이트 공통 표준. 자매 추가 시 NETWORK.md paste 만으로 합류 — 1 → 9 자매 동일 패턴. 본 4 문서 (PURPOSE / PROJECT_DEFINITION / NETWORK / CATEGORY_MAP) 가 본 repo 의 헌법 anchor (아래 §네트워크 헌법 참조).
+**폐기 사유 (2026-05-24)**: 본 사이트 페이지에서 자매 링크 타고 들어가도 자세한 내용 부재 — 사용자 경험 저하. "한 덩어리" 컨셉이 실제 작동하지 않음. 본 사이트 단독으로 모든 콘텐츠·SEO·수익화 완결한다.
 
-**확장 안전 (신규 자매 합류 시)**:
-- 1인 운영 부담 한계 고려 — 동시 부트스트랩 자매 ≤ 1, 안정화 후 다음
-- 자매당 자체 verifier·fact-checker·smoke 게이트 의무 (네트워크 신뢰도 분산 위험 방지)
-- 신규 자매 도메인 등록 + Cloudflare Pages 연결은 운영자 외부 작업 (OPERATOR.md)
-- 자매 수 증가에 따라 메인 → 자매 매핑 충돌 가능 — 페르소나 중복 회피 의무
+## 위계
 
-## 네트워크 헌법
+위계: `docs/PURPOSE.md` v1.1 > 본 CLAUDE.md > ADR > STRUCTURE.
 
-본 repo 는 smartdata network HQ 의 헌법을 따른다 (2026-05-07 동기화).
+폐기된 헌법 문서 (2026-05-24, ADR 0010):
+- `docs/_archived/PROJECT_DEFINITION.md` — 5~9 사이트 네트워크 그림 (참조용 archive)
+- `docs/_archived/NETWORK.md` — 네트워크 공통 헌법 (참조용 archive)
+- `docs/_archived/CATEGORY_MAP.md` — 5 사이트 카테고리 매핑 (참조용 archive)
 
-- `docs/PURPOSE.md` — 사업·운영·콘텐츠 목적 (최상위 anchor)
-- `docs/PROJECT_DEFINITION.md` v1.0 — 5~9 사이트 네트워크 전체 그림
-- `docs/NETWORK.md` v0.6 — 5~9 사이트 공통 헌법 (multi-stack + dual-brand 인정)
-- `docs/CATEGORY_MAP.md` v1.0 — 5 사이트 카테고리 매핑 (Dispatcher 가동의 단일 진실)
-
-위 4 문서와 충돌하는 코드·콘텐츠 작성 금지.
-위계: PURPOSE > PROJECT_DEFINITION > NETWORK > CATEGORY_MAP > 본 CLAUDE.md > ADR > STRUCTURE.
+위 3 문서는 현행 하네스에 영향 없음. 호기심 차원의 참조만 가능.
 
 ## 첫 작업 진입 시 반드시 읽을 파일 (우선순위 순)
 1. `docs/PURPOSE.md` — 최상위 anchor (5분)
 2. `docs/dashboard.md` — 현재 상태 (30초)
 3. `docs/architecture.md` — 폴더 구조 / 어디에 무엇을 둘지
-4. `docs/AGENTS.md` — 7 자동화 에이전트 운영 모델
-5. `docs/PLANNING.md` — 12개월 KPI / 자매 사이트 합류 일정
+4. `docs/AGENTS.md` — 자동화 에이전트 운영 모델
+5. `docs/PLANNING.md` — 12개월 KPI
 6. `docs/DESIGN.md` — 디자인 토큰 / 활자 시스템
 
 ## docs/references/ 적극 참조 룰 (2026-05-09 합의)
@@ -79,7 +56,7 @@
 - `02-안티그래비티-바이브코딩.md` — 모듈 분리 1줄 기준 / 컨텍스트 엔지니어링
 - `03-함께해요-하네스-엔지니어링.md` — 4 신호 / Sub-agent 4요소 / 5계층 설정
 
-**선택 (큰 결정·자매 합류·보안 결정)**:
+**선택 (큰 결정·보안 결정)**:
 - `04-통합-3레이어-OS.md` — 외부/실행/제어 매트릭스
 - `05-Hermes-Agent-멀티에이전트.md` — 격리 수준 / Claude Code vs Hermes
 
