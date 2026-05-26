@@ -41,7 +41,35 @@
 - ☐ **인용 단락** — `> 원문` 형식 + 직후 `[^N]` (왜곡 0)
 - ☐ **자주 묻는 질문 2-3개 Q&A** — 자동 FAQPage LD 발행 조건 (`**Q1. ...?**\nA. ...` 패턴)
 - ☐ **본인 액션 / 체크리스트 3단계+** — 자동 HowTo LD 발행 조건 (`1. ... / 2. ... / 3. ...` 번호 리스트, 섹션 제목에 "본인 액션" / "체크리스트" / "절차" 포함)
-- ☐ **자매 cross-ref 1-2개** — ToollGate 자동 (Phase A deep link 매핑 활용)
+- ☐ ~~**자매 cross-ref 1-2개**~~ — ADR 0010(2026-05-24) 폐기, 신규 작성 금지
+
+### Google SEO 바이브코딩 체크리스트 (2026-05-26 의무, `docs/google-seo-vibe-coding/`)
+
+**매 펄스 발행 시 자체 검증 의무**:
+
+📄 `04-ranking-appearance.md` 적용:
+- ☐ **title** 60자 내 + 핵심 키워드 앞부분 배치 (검색결과 우위)
+- ☐ **tldr (meta description 역할)** 155-200자 + 검색의도 답변 명확
+- ☐ **NewsArticle LD 자동 발행 확인** — sources[] 있어야 트리거됨
+- ☐ **E-E-A-T 신호**: 1차 출처 명시 (`.go.kr` / `.or.kr`) + 발표 일자 + 저자 바이라인
+
+📄 `06-site-specific-guides.md` §뉴스 적용:
+- ☐ **NewsArticle schema** — `datePublished` (publishedAt frontmatter, KST ISO 8601), `dateModified` (수정 시 갱신)
+- ☐ **뉴스 sitemap 자동 포함** — `/news-sitemap.xml` 빌드 자동
+- ☐ **Google News 정책 준수** — 정치 편향 X, 광고-콘텐츠 분리, 1차 출처 우선
+
+📄 `07-vibe-coding-seo-template.md` 배포 전 체크:
+- ☐ canonical URL 자동 (라우트 자동 처리)
+- ☐ og:image (16:9 1200×630) — `coverImage` 또는 동적 OG v2 자동
+- ☐ 이미지 alt 속성 (펄스에 이미지 임베드 시)
+- ☐ 내부 링크 자연어 (앵커 텍스트 "여기 클릭" 금지)
+
+📄 `02-seo-fundamentals.md` 적용:
+- ☐ URL slug: 영문 소문자·하이픈만 (예: `2026-05-26-mohw-wha79-bilateral`)
+- ☐ 본문 내부 링크는 의미있는 앵커 (1차 출처 deep link 권장)
+- ☐ 단락 구조: H2 → H3 계층 일관
+
+**위계 충돌 시**: `docs/google-seo-vibe-coding/` (Google 공식) > `docs/references/06-구글-SEO-종합.md` (정리본) > 본 CLAUDE.md
 
 LD 자동 발행 (코드):
 - NewsArticle: 모든 펄스
