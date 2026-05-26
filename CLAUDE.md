@@ -43,6 +43,35 @@
 5. `docs/PLANNING.md` — 12개월 KPI
 6. `docs/DESIGN.md` — 디자인 토큰 / 활자 시스템
 
+## docs/google-seo-vibe-coding/ 적극 참조 룰 (2026-05-26 운영자 지시)
+
+> 본 폴더는 **Google Search Central 공식 가이드의 한국어 정제판** — 매 펄스/페이지/컴포넌트 작성 시 의무 참조.
+
+**📦 7개 md 파일 (`docs/google-seo-vibe-coding/`)**:
+- `01-search-essentials.md` — Google Search Essentials (기술 요구사항·스팸 정책)
+- `02-seo-fundamentals.md` — SEO 기본 (URL·콘텐츠·링크·이미지 원칙)
+- `03-crawling-indexing.md` — 크롤링·색인 (Googlebot·robots·sitemap)
+- `04-ranking-appearance.md` — **순위·노출 (title·snippet·JSON-LD·E-E-A-T)** ★ 콘텐츠 작업 1순위
+- `05-monitoring-debugging.md` — Search Console·Core Web Vitals
+- `06-site-specific-guides.md` — **§뉴스 사이트** ★ 본 사이트 해당
+- `07-vibe-coding-seo-template.md` — 즉시 적용 템플릿 + 체크리스트
+
+**🔴 매 펄스 발행 시 의무 적용 (4 파일)**:
+1. `04-ranking-appearance.md` — title 60자 내, meta description 155자 내, NewsArticle LD, E-E-A-T 신호
+2. `06-site-specific-guides.md` §뉴스 — NewsArticle schema · 정확한 `datePublished`·`dateModified` · 뉴스 sitemap
+3. `07-vibe-coding-seo-template.md` 최종 배포 전 체크리스트 — 글 발행 PR 직전 점검 의무
+4. `02-seo-fundamentals.md` — URL slug 영문 소문자/하이픈, 내부 링크 자연어, 이미지 alt
+
+**적용 의무**:
+- 새 펄스 작성 시 04 + 06 + 07 체크리스트 자체 검증 후 PR
+- 새 페이지/컴포넌트 작성 시 02 + 04 + 07 적용
+- 사이트 구조 변경 시 03 (크롤링·색인) + 06 (사이트별) 확인
+- 매월 하네스 리뷰 시 05 (모니터링) 항목 점검
+
+**위계**: `docs/PURPOSE.md` v1.1 > ADR > 본 CLAUDE.md > **docs/google-seo-vibe-coding/** > docs/references/06,07 (네이버·구글 종합)
+
+본 폴더가 *공식 출처 기반* 이므로 `docs/references/` (외부 자료 정리본) 보다 정확도 우선. 두 폴더 충돌 시 `google-seo-vibe-coding/` 우위.
+
 ## docs/references/ 적극 참조 룰 (2026-05-09 합의)
 
 7 참고 자료 우선순위 — 매 작업 진입 시 해당 자료 검증 의무.
