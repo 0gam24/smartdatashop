@@ -165,6 +165,22 @@
 - 모든 날짜 추출은 `src/lib/korean.ts`의 KST 헬퍼 (`pulseDateParts`, `formatKoreanDate`, etc.) 사용
 - `Date.getFullYear()` / `getMonth()` / `getDate()` 직접 호출 금지 (CF Pages = UTC, 로컬 = KST 차이)
 
+### 날짜 검증 의무 (2026-05-27 — long-session 자정 넘김 사고 후속)
+<!-- 운영자 지적: 시스템 reminder 의 currentDate 가 stale 한 채로 5-26 → 5-27 자정을 넘기는 사고 발생. -->
+
+다음 작업 **직전** 반드시 **PowerShell `Get-Date -Format 'yyyy-MM-dd HH:mm zzz'`** (또는 Bash `date '+%Y-%m-%d %H:%M %Z'`) 실행해 *실제 시스템 시각*으로 작업:
+
+- 펄스/인사이트 `publishedAt` 작성
+- `today.md` 갱신
+- `daily-queue/YYYY-MM-DD.json` 작성
+- "오늘" / "어제" / "그저께" 본문 표현
+- 발표 일자 본문 인용 ("정부가 2026년 X월 Y일 발표한" — ADR 0006 #3)
+- `accessedAt` frontmatter
+
+system-reminder 의 `currentDate` 는 *세션 시작 시점* 기준이며, 자정을 넘긴 long-session 에서는 stale 가능. 매 펄스 발행마다 PowerShell `Get-Date` 결과를 진실로 채택한다 (1초 부담 < AdSense ADR 0006 4기준 위반 위험).
+
+자체 결정 보호 — 위 액션을 운영자에게 묻지 않고 즉시 실행 (멀티 에이전트 자체 결정 원칙).
+
 ### 보안
 <!-- public/admin/config.yml 누출 사고 — error-log.md 참조 -->
 - `public/`은 진정한 정적 자산만. 환경별 분기는 endpoint (`src/pages/.../[name].ts`)로
