@@ -1,8 +1,8 @@
 {
   "agent": "fact-checker",
-  "ranAt": "2026-05-30T17:58:10.649Z",
+  "ranAt": "2026-05-30T20:12:10.713Z",
   "windowDays": 14,
-  "mode": "lite",
+  "mode": "full",
   "auditedCount": 13,
   "summary": {
     "risk": {
@@ -149,5 +149,7 @@
       "riskLevel": "low"
     }
   ],
-  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+  "fullAuditedCount": 0,
+  "discrepancies": [],
+  "note": "FULL: claude-sonnet-4-6 + 1차 출처 fetch. 불일치 0건."
 }
