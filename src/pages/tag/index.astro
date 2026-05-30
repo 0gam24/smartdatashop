@@ -71,7 +71,7 @@ const masTagline = '태그 아카이브 인덱스';
 const jsonld = buildWebPageLD(pageTitle, pageDescription);
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld}>
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonld={jsonld} noindex={true}>
   <Header activeNav="daily" />
   <Masthead
     todayCount={tagTotal}

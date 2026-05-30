@@ -130,20 +130,6 @@ const related = allEntries
   <Tldr>{data.tldr}</Tldr>
   <Content />
 
-  {tollGateDecision.kind === 'route' ? (
-    <ToollGate
-      primaryText={tollGateDecision.primaryHint}
-      primaryDomain={SISTER_SITES[tollGateDecision.primary].domain}
-      primaryHref={buildPrimaryHref(tollGateDecision)}
-      secondaryText={tollGateDecision.secondary
-        ? `보조: ${SISTER_SITES[tollGateDecision.secondary].name} · ${SISTER_SITES[tollGateDecision.secondary].domain}`
-        : undefined}
-      secondaryHref={buildSecondaryHref(tollGateDecision)}
-    />
-  ) : (
-    <ToollGate mode="main-terminal" message={tollGateDecision.message} />
-  )}
-
   {related.length > 0 && (
     <Fragment slot="related">
       <RelatedList items={related} />

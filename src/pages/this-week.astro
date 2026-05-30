@@ -59,24 +59,8 @@ const weekChapters = chapters
 const ecosChanges = getEcosTopChanges(5);
 const weekRss = getWeekRssTop(8);
 
-// 자매 4개 이번 주 신착 (publishedAt 이 startIso 이후 건만 — 없으면 가장 최신 1건)
-const sisterOrder: SisterSiteKey[] = ['calculatorhost', 'awoo', 'moneylook', 'iknowhowinfo'];
-const sisterRows = sisterOrder.map((key) => {
-  const meta = SISTER_SITES[key];
-  const top = getSisterLatest(key);
-  if (!top) return null;
-  const pubMs = top.publishedAt ? new Date(top.publishedAt).getTime() : 0;
-  const inWindow = pubMs >= cutoffMs;
-  return {
-    siteKey: key,
-    siteName: meta.name,
-    domain: meta.domain,
-    title: top.title,
-    url: top.url,
-    publishedAt: top.publishedAt ?? '',
-    inWindow,
-  };
-}).filter(Boolean) as Array<{
+// ADR 0010 — 단일 독립 운영. 자매 사이트 신착 섹션 폐기 (빈 배열로 미렌더).
+const sisterRows: Array<{
   siteKey: SisterSiteKey;
   siteName: string;
   domain: string;
@@ -84,14 +68,14 @@ const sisterRows = sisterOrder.map((key) => {
   url: string;
   publishedAt: string;
   inWindow: boolean;
-}>;
+}> = [];
 
 const weekTotal = weekPulses.length + weekInsights.length + weekChapters.length;
-const hasContent = weekTotal > 0 || ecosChanges.length > 0 || weekRss.length > 0 || sisterRows.length > 0;
+const hasContent = weekTotal > 0 || ecosChanges.length > 0 || weekRss.length > 0;
 
 // ── 메타 + LD ───────────────────────────────────────────────────
 const pageTitle = `이번 주 한국 데이터 — ${week.label}`;
-const pageDescription = `이번 주 (${week.label}) 한국의 정책·세금·금융·시장·통계·AI 1차 출처 데이터 종합. 발행 ${weekTotal}건 + 정부 발표 ${weekRss.length}건 + ECOS 변화 + 자매 사이트 신착.`;
+const pageDescription = `이번 주 (${week.label}) 한국의 정책·세금·금융·시장·통계 1차 출처 데이터 종합. 발행 ${weekTotal}건 + 정부 발표 ${weekRss.length}건 + 한국은행 ECOS 변화.`;
 
 const breadcrumbLd = buildBreadcrumbLD([
   { name: '홈', url: '/' },
