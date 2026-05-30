@@ -144,7 +144,7 @@ const keywords = [tagLabel, groupLabel];
 const ogImage = `https://smartdatashop.kr/og/v2/tag/${group}/${encodeURIComponent(value)}.png`;
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogType="website" ogImage={ogImage} jsonld={jsonld} keywords={keywords}>
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" ogImage={ogImage} jsonld={jsonld} keywords={keywords} noindex={true}>
   <Header activeNav="daily" />
   <Masthead
     todayCount={pulseCount}

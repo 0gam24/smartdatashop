@@ -217,18 +217,6 @@ const sisters = sisterOrder.map((key) => {
   <!-- Section 01c: 오늘의 데이터 (3 레인 — ECOS Δ + 정부 RSS 신착 + 뉴스 키워드) -->
   <TodayDataDigest />
 
-  {/* 발행 0편 day — 자매 섹션을 위로 promotion (메인 hub 정체성 유지) */}
-  {isQuietDay && (
-    <section class="section" id="network-promoted" data-screen-label="01d 자매 네트워크 (오늘 발행 0편)">
-      <div class="page-width">
-        <SectionHead num="01d" title="네트워크 최신" moreLabel={`자매 ${sisters.length}개 · 발행 0편 day 우선 노출`} />
-        <SisterSiteGrid>
-          {sisters.map((s) => <SisterSiteCard {...s} />)}
-        </SisterSiteGrid>
-      </div>
-    </section>
-  )}
-
   <!-- Section 02: 오늘의 펄스 -->
   <section class="section" data-screen-label="02 최신 펄스">
     <div class="page-width">
@@ -266,23 +254,6 @@ const sisters = sisterOrder.map((key) => {
     <div class="page-width">
       <SectionHead num="05" title="오늘의 추천 차트" moreHref="#" moreLabel="데이터 전체 →" />
       <ChartFigure />
-    </div>
-  </section>
-
-  {/* Section 06: 자매 사이트 네트워크
-      isQuietDay 일 땐 위(01d)에서 이미 노출 — 여기선 ComingSoon 슬롯만 유지해
-      "곧 합류 5개" 메시지를 한 번만 보이게 한다 (자매 그리드 중복 회피). */}
-  <section class="section" id="network" data-screen-label="06 자매 사이트">
-    <div class="page-width">
-      {!isQuietDay && (
-        <>
-          <SectionHead num="06" title="자매 사이트 네트워크" moreLabel="현재 4개 · 곧 합류 5개" />
-          <SisterSiteGrid>
-            {sisters.map((s) => <SisterSiteCard {...s} />)}
-          </SisterSiteGrid>
-        </>
-      )}
-      <ComingSoon />
     </div>
   </section>
 
