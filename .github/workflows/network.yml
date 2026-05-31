@@ -3,10 +3,8 @@
 name: agent-network
 
 on:
-  schedule:
-    # 14:00 UTC = 23:00 KST
-    - cron: '0 14 * * *'
-  # 수동 실행 트리거
+  # ADR 0010 — 단일 독립 운영. 자매/네트워크 자동 동기화 폐기 (2026-05-31, AdSense reject 대응).
+  # 데이터가 어디에도 렌더되지 않으므로 schedule 제거. 수동 실행만 유지(복구 가능).
   workflow_dispatch:
 
 concurrency:
