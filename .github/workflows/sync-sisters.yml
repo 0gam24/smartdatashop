@@ -1,9 +1,8 @@
 name: sync-sister-mirrors
 
 on:
-  schedule:
-    # 매일 02:00 KST (= UTC 17:00)
-    - cron: '0 17 * * *'
+  # ADR 0010 — 단일 독립 운영. 자매 mirror 동기화 폐기 (2026-05-31, AdSense reject 대응).
+  # 동기화 데이터가 사이트 어디에도 렌더되지 않음. schedule 제거, 수동 실행만 유지(복구 가능).
   workflow_dispatch:
 
 permissions:
