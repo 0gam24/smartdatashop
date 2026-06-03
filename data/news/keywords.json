@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-06-02T18:59:18.741Z",
-  "elapsedMs": 2544,
+  "fetchedAt": "2026-06-03T19:05:29.295Z",
+  "elapsedMs": 2799,
   "sourceTotal": 7,
   "sourceSuccess": 7,
   "sourceFail": 0,
   "totalHeadlines": 359,
-  "uniqueKeywords": 306,
+  "uniqueKeywords": 308,
   "multiSourceCount": 100,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 1220
+      "elapsedMs": 176
     },
     {
       "id": "yna",
@@ -22,7 +22,7 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "ok",
       "itemCount": 120,
-      "elapsedMs": 1640
+      "elapsedMs": 1768
     },
     {
       "id": "donga",
@@ -30,7 +30,7 @@
       "url": "https://rss.donga.com/total.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1321
+      "elapsedMs": 1269
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1972
+      "elapsedMs": 1777
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1370
+      "elapsedMs": 1417
     },
     {
       "id": "kmib",
@@ -54,7 +54,7 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2468
+      "elapsedMs": 2223
     },
     {
       "id": "hani",
@@ -62,13 +62,13 @@
       "url": "https://www.hani.co.kr/rss",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2397
+      "elapsedMs": 2722
     }
   ],
   "multiSourceKeywords": [
     {
-      "term": "한화에어로",
-      "total": 10,
+      "term": "당선",
+      "total": 86,
       "sourceCount": 6,
       "sources": [
         "sbs",
@@ -81,21 +81,263 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "이 대통령 \"한화에어로, 동일 사고 반복…심각한 문제\""
+          "title": "운명 갈린 두 후보…조국 현재 3위 · 한동훈 당선 확실 [국민의선택]"
         },
         {
-          "source": "yna",
-          "title": "\"위험 크지 않다\"던 공정서 참사…한화에어로 폭발 원인 뭘까(종합)"
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
         },
         {
-          "source": "yna",
-          "title": "한화에어로 합동감식 종료…경찰 \"동료 직원 조사·자료 확보\"(종합2보)"
+          "source": "sbs",
+          "title": "\"당선 떴습니다!\"…'대역전극'에 \"한동훈\" 연호 [바로이뉴스]"
         }
       ]
     },
     {
-      "term": "트럼프",
-      "total": 16,
+      "term": "확실",
+      "total": 36,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "운명 갈린 두 후보…조국 현재 3위 · 한동훈 당선 확실 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "전북지사 민주당 이원택 당선 확실…\"도민 주권 정부\" [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"경기도민이 제 진심 선택\"..추미애 첫 여성 광역단체장 '확실'"
+        }
+      ]
+    },
+    {
+      "term": "국힘",
+      "total": 18,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "가라앉은 국힘 상황실…'개표 중단' 요구 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "국힘, 선관위 항의방문…\"선거무효소송 내고 개표 참관인 철수\""
+        },
+        {
+          "source": "sbs",
+          "title": "전국 개표율 30.6%…민주 14곳 · 국힘 2곳 1위 [국민의선택]"
+        }
+      ]
+    },
+    {
+      "term": "선거",
+      "total": 17,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전국 개표율 50.4%…요동치는 선거 판세 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 양자 대결 경남지사 선거, 개표 완료 즈음에 당락 판가름 전망"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
+        }
+      ]
+    },
+    {
+      "term": "선관위",
+      "total": 17,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 선관위 항의방문…\"선거무효소송 내고 개표 참관인 철수\""
+        },
+        {
+          "source": "sbs",
+          "title": "청와대 \"선관위, 책임있는 조치하길…상황 엄정 주시\""
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
+        }
+      ]
+    },
+    {
+      "term": "유의동",
+      "total": 12,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "유의동, 김용남·조국 모두 눌렀다…경기 평택을 역대급 '대이변' [바로이뉴스]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 평택을 국힘 유의동, 범여권 꺾고 '4선 고지'"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 평택을 유의동, 출구조사 3위 뒤엎고 '대역전 드라마'"
+        }
+      ]
+    },
+    {
+      "term": "평택을",
+      "total": 12,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "유의동, 김용남·조국 모두 눌렀다…경기 평택을 역대급 '대이변' [바로이뉴스]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 평택을 국힘 유의동, 범여권 꺾고 '4선 고지'"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 평택을 유의동, 출구조사 3위 뒤엎고 '대역전 드라마'"
+        }
+      ]
+    },
+    {
+      "term": "추경호",
+      "total": 12,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "3만여 표 앞선 추경호…접전지 현재 판세는 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 추경호 대구시장 당선인, TK신공항·행정통합 속도전 예고"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 추경호 대구시장 당선인 \"돈·사람 모이는 도시…경제시장 되겠다\""
+        }
+      ]
+    },
+    {
+      "term": "김부겸",
+      "total": 11,
+      "sourceCount": 6,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸, 또 대구시장 문턱 못 넘었다…'대구 변화론' 미완"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 국민의힘 추경호, 민주당 김부겸 꺾고 대구시장 당선(종합)"
+        }
+      ]
+    },
+    {
+      "term": "민주",
+      "total": 23,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전국 개표율 30.6%…민주 14곳 · 국힘 2곳 1위 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주, 대전 5개구청장 '싹쓸이'…4년전 '1대 4'서 극적 반전"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김상욱, 국힘→민주 '배신자' 취급 극복 울산시장 우뚝"
+        }
+      ]
+    },
+    {
+      "term": "유력",
+      "total": 18,
       "sourceCount": 5,
       "sources": [
         "yna",
@@ -107,20 +349,150 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"美-이란 대화중단은 가짜뉴스…오늘까지도 대화 계속\""
+          "title": "[속보] 민주당 전재수, 부산시장 당선 유력[KBS]"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프 \"美-이란 대화중단은 가짜뉴스…오늘도 대화중\""
+          "title": "[6·3 지선] 국민의힘 추경호, 민주당 김부겸 꺾고 대구시장 당선 유력"
         },
         {
-          "source": "yna",
-          "title": "트럼프 '교전 중단' 선언 후에도 이스라엘·헤즈볼라 공방(종합)"
+          "source": "donga",
+          "title": "[속보]전재수, 부산시장 당선 유력"
         }
       ]
     },
     {
-      "term": "확대",
+      "term": "한동훈",
+      "total": 16,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "운명 갈린 두 후보…조국 현재 3위 · 한동훈 당선 확실 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "\"당선 떴습니다!\"…'대역전극'에 \"한동훈\" 연호 [바로이뉴스]"
+        }
+      ]
+    },
+    {
+      "term": "개표",
+      "total": 13,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "가라앉은 국힘 상황실…'개표 중단' 요구 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "국힘, 선관위 항의방문…\"선거무효소송 내고 개표 참관인 철수\""
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] 개표 중단 요구에 돌아온 답..\"중선위, 아무것도 할 수 없다더라\""
+        }
+      ]
+    },
+    {
+      "term": "조국",
+      "total": 12,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조국 \"저 개인의 실패…투영해 주신 가치 틀린 것 아냐\" [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "유의동, 김용남·조국 모두 눌렀다…경기 평택을 역대급 '대이변' [바로이뉴스]"
+        },
+        {
+          "source": "sbs",
+          "title": "운명 갈린 두 후보…조국 현재 3위 · 한동훈 당선 확실 [국민의선택]"
+        }
+      ]
+    },
+    {
+      "term": "부산",
+      "total": 11,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "이 시각 부산 북갑…하정우·한동훈 접전 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 박형준 \"부산 시민으로 돌아가…지역발전 협력 필요\""
+        }
+      ]
+    },
+    {
+      "term": "부족",
+      "total": 11,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'투표용지 부족' 총 14곳…잠실7동 기동대 투입 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 하정우 \"결과 겸허히 수용…저의 노력과 준비 부족\""
+        }
+      ]
+    },
+    {
+      "term": "승리",
       "total": 11,
       "sourceCount": 5,
       "sources": [
@@ -133,20 +505,150 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이라크 \"송유관 통한 석유 수출 3배 이상으로 확대 계획\""
+          "title": "[6·3 지선] 인물론에 맞선 조직의 승리…전북 이원택 '예상 밖 낙승'"
         },
         {
           "source": "yna",
-          "title": "앤트로픽, '미토스' 접속 150개 기관에 확대…삼성·SK 포함된듯"
+          "title": "[6·3 지선] 전재수 통일교 의혹 딛고 승리…해양수도 정책 탄력"
         },
         {
           "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
+          "title": "[인터뷰] 김상욱 울산시장 당선인 \"시민의 승리…첫날부터 전력 질주\""
         }
       ]
     },
     {
-      "term": "원유",
+      "term": "잠실",
+      "total": 8,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'투표용지 부족' 총 14곳…잠실7동 기동대 투입 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '부정선거' 주장 시위대, 4시간째 잠실7동 투표소 봉쇄(종합2보)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]잠실7동 제2투표소 앞에 경찰 기동대 투입, 운집한 인파와 대치 중"
+        }
+      ]
+    },
+    {
+      "term": "김상욱",
+      "total": 8,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의 선택] \"시민 속이는 장난질 끊어달라\"..\"'그것'이 무너진 울산\" 바꿀 김상욱 포부"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김상욱, 국힘→민주 '배신자' 취급 극복 울산시장 우뚝"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 김상욱 울산시장 당선인 \"시민의 승리…첫날부터 전력 질주\""
+        }
+      ]
+    },
+    {
+      "term": "전북지사",
+      "total": 8,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전북지사 민주당 이원택 당선 확실…\"도민 주권 정부\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 고소·고발 난무한 전북지사 선거…이젠 '경찰의 시간'"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 네거티브로 얼룩진 전북지사 선거…봉합 가능성은?"
+        }
+      ]
+    },
+    {
+      "term": "이원택",
+      "total": 7,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전북지사 민주당 이원택 당선 확실…\"도민 주권 정부\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 전북지사 이원택 당선인 \"'도민 주권 도정' 실현\""
+        },
+        {
+          "source": "yna",
+          "title": "'민주화 투사에서 도백으로'…이원택 전북지사 당선인의 궤적"
+        }
+      ]
+    },
+    {
+      "term": "추미애",
+      "total": 7,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"경기도민이 제 진심 선택\"..추미애 첫 여성 광역단체장 '확실'"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 추미애 경기도지사 당선인 \"훌륭한 도정으로 보답할 것\""
+        },
+        {
+          "source": "khan",
+          "title": "추미애 경기지사 당선인, 개혁마다 앞장 선 ‘추다르크’…여성 광역단체장의 길 ‘개척’"
+        }
+      ]
+    },
+    {
+      "term": "박찬대",
       "total": 7,
       "sourceCount": 5,
       "sources": [
@@ -159,20 +661,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
+          "title": "[인터뷰] 박찬대 인천시장 당선인 \"압도적인 성과로 반드시 보답\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 윤석열 탄핵 이끈 박찬대, 고향 인천서 재선 시장 맞서 승리"
         },
         {
           "source": "donga",
-          "title": "캐나다産 원유 도입 3배로…韓, ‘60조 잠수함 수주’ 막판 총력전"
-        },
-        {
-          "source": "donga",
-          "title": "캐나다산 원유 수입 연 2000만 배럴로 확대"
+          "title": "인천시장 박찬대 당선 확실…“잘 이끌어 달란 시민 명령”"
         }
       ]
     },
     {
-      "term": "도입",
+      "term": "인천시장",
       "total": 6,
       "sourceCount": 5,
       "sources": [
@@ -185,47 +687,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
+          "title": "[인터뷰] 박찬대 인천시장 당선인 \"압도적인 성과로 반드시 보답\""
         },
         {
           "source": "donga",
-          "title": "캐나다産 원유 도입 3배로…韓, ‘60조 잠수함 수주’ 막판 총력전"
+          "title": "인천시장 박찬대 당선 확실…“잘 이끌어 달란 시민 명령”"
         },
         {
-          "source": "khan",
-          "title": "정부, 캐나다산 원유 도입 3배 확대…강훈식 특사 ‘잠수함 수주’ 측면 지원"
+          "source": "donga",
+          "title": "[속보]인천시장, 박찬대 당선 ‘확실’"
         }
       ]
     },
     {
-      "term": "논란",
-      "total": 5,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "최교진, 또 정치중립 논란…교총 \"사퇴해야\""
-        },
-        {
-          "source": "donga",
-          "title": "‘도박장 출입 논란’ 롯데 김동혁, 징계 마치고 1군 복귀"
-        },
-        {
-          "source": "khan",
-          "title": "교육감 후보 지지글에 “훌륭하십니다”…최교진 장관, 또 ‘정치 중립 위반’ 논란"
-        }
-      ]
-    },
-    {
-      "term": "캐나다산",
-      "total": 5,
+      "term": "부정선거",
+      "total": 6,
       "sourceCount": 5,
       "sources": [
         "yna",
@@ -237,21 +713,47 @@
       "examples": [
         {
           "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
+          "title": "[6·3 지선] '부정선거' 주장 시위대, 4시간째 잠실7동 투표소 봉쇄(종합2보)"
         },
         {
           "source": "donga",
-          "title": "캐나다산 원유 수입 연 2000만 배럴로 확대"
+          "title": "정의당 “부정선거 음모론자들에 빌미 제공한 노태악 사퇴하라”"
         },
         {
           "source": "khan",
-          "title": "정부, 캐나다산 원유 도입 3배 확대…강훈식 특사 ‘잠수함 수주’ 측면 지원"
+          "title": "‘부정선거 감시’ 목적 오픈채팅방서 무효 처리된 투표용지 사진 등 공유"
         }
       ]
     },
     {
-      "term": "서울",
-      "total": 9,
+      "term": "시민",
+      "total": 5,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의 선택] \"시민 속이는 장난질 끊어달라\"..\"'그것'이 무너진 울산\" 바꿀 김상욱 포부"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 전재수 부산시장 당선인 \"변화 선택 시민 뜻 무겁게 받들 것\""
+        },
+        {
+          "source": "donga",
+          "title": "인천시장 박찬대 당선 확실…“잘 이끌어 달란 시민 명령”"
+        }
+      ]
+    },
+    {
+      "term": "민주당",
+      "total": 21,
       "sourceCount": 4,
       "sources": [
         "sbs",
@@ -262,196 +764,71 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "민주 '9+α'·국힘 '2+α'…서울·부울경 \"접전\""
+          "title": "접전지에 기대감…이 시각 민주당 상황실 [국민의선택]"
         },
         {
           "source": "sbs",
-          "title": "\"안전한 서울 만들 것\"…\"이재명 정부에 힘을\""
+          "title": "전북지사 민주당 이원택 당선 확실…\"도민 주권 정부\" [국민의선택]"
         },
         {
-          "source": "sbs",
-          "title": "민주 9+α·국힘 2+α…서울·부울경 \"접전\""
-        }
-      ]
-    },
-    {
-      "term": "마지막",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "빗속 마지막 유세…'위장전입'·'나쁜사람' 공방"
-        },
-        {
-          "source": "sbs",
-          "title": "장동혁 '정권 견제론' 강조…오세훈, 신촌서 마지막 유세"
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] 13일 열전 마지막 날 총력전…서울, 탈환이냐 수성이냐"
-        }
-      ]
-    },
-    {
-      "term": "총력전",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "sbs",
-          "title": "강원·수도권·전북서 막판 총력전…\"지방 권력 심판\""
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] 13일 열전 마지막 날 총력전…서울, 탈환이냐 수성이냐"
+          "source": "yna",
+          "title": "[6·3 지선] 전북도의회 '민주당 독식'…일당 독주 또 현실로"
         }
       ]
     },
     {
       "term": "후보",
-      "total": 7,
+      "total": 11,
       "sourceCount": 4,
       "sources": [
         "sbs",
         "yna",
         "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, 김관영 전북지사 후보 '허위사실공표'로 고발"
-        },
-        {
-          "source": "sbs",
-          "title": "\"집권여당 후보 당선돼야\" vs \"정청래 지도부 심판\""
-        },
-        {
-          "source": "yna",
-          "title": "부산선관위, 기초단체장 후보 금품 제공 의혹 조사"
-        }
-      ]
-    },
-    {
-      "term": "중단",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프 '교전 중단' 선언 후에도 이스라엘·헤즈볼라 공방(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 매체 \"미국과 지난 며칠간 메시지 교환 중단\""
-        },
-        {
-          "source": "donga",
-          "title": "[사설]‘연명의료 중단’ 앞당기는 방안 공론화… 적극 검토할 때 됐다"
-        }
-      ]
-    },
-    {
-      "term": "의혹",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "yna",
-          "title": "부산선관위, 기초단체장 후보 금품 제공 의혹 조사"
-        },
-        {
-          "source": "donga",
-          "title": "‘주학년, 日 AV배우와 성매매 의혹’ 보도한 기자 재판행"
-        }
-      ]
-    },
-    {
-      "term": "막판",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
         "mk"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "강원·수도권·전북서 막판 총력전…\"지방 권력 심판\""
+          "title": "운명 갈린 두 후보…조국 현재 3위 · 한동훈 당선 확실 [국민의선택]"
         },
         {
           "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
+          "title": "[6·3 지선] 허태정, 리턴매치서 설욕…'대통령과 호흡 후보' 주효"
         },
         {
           "source": "yna",
-          "title": "김부겸·추경호, 동성로서 막판 맞불 유세…\"변화\" vs \"견제\""
+          "title": "[6·3 지선] 더불어민주당 허태정 후보, 대전시장 당선(종합)"
         }
       ]
     },
     {
-      "term": "없었다",
-      "total": 4,
+      "term": "대구시장",
+      "total": 10,
       "sourceCount": 4,
       "sources": [
-        "sbs",
         "yna",
         "donga",
-        "mk"
+        "mk",
+        "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "'참칭'·'가짜'·'부정선거' 난타전…단일화 없었다"
+          "source": "yna",
+          "title": "[6·3 지선] 추경호 대구시장 당선인, TK신공항·행정통합 속도전 예고"
         },
         {
           "source": "yna",
-          "title": "'결승 홈런' 키움 히우라 \"연패 부담 없었다…시즌 90경기 남아\""
+          "title": "[6·3 지선] 김부겸, 또 대구시장 문턱 못 넘었다…'대구 변화론' 미완"
         },
         {
-          "source": "donga",
-          "title": "정전기로도 폭발할수 있는데…스프링클러-CCTV-대단위 환기시설 없었다"
+          "source": "yna",
+          "title": "[인터뷰] 추경호 대구시장 당선인 \"돈·사람 모이는 도시…경제시장 되겠다\""
         }
       ]
     },
     {
-      "term": "네타냐후에",
-      "total": 4,
+      "term": "인천",
+      "total": 10,
       "sourceCount": 4,
       "sources": [
         "yna",
@@ -462,21 +839,46 @@
       "examples": [
         {
           "source": "yna",
-          "title": "\"나 아니었으면 감옥 갔을 사람이\"…트럼프, 네타냐후에 격노(종합)"
+          "title": "[6·3 지선] '대통령 지역구' 인천 계양을 김남준 당선 확실(종합)"
         },
         {
           "source": "khan",
-          "title": "종전 서두르는 트럼프, 확전 지시한 네타냐후에 “미쳤냐” 격노"
+          "title": "김남준 인천 계양을 당선인, ‘대통령의 입’에서 정치적 홀로서기"
         },
         {
-          "source": "mk",
-          "title": "트럼프, 네타냐후에 \"당신 미쳤나\"… 욕설하며 경고"
+          "source": "khan",
+          "title": "송영길 인천 연수갑 당선인, 돈 봉투 살포 의혹 ‘정치적 위기’ 딛고 당 최다선 ‘6선 고지’"
         }
       ]
     },
     {
-      "term": "합의",
-      "total": 4,
+      "term": "성공",
+      "total": 8,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 보수성향 임종식 경북도교육감, 3선 성공"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주 변광용, 거제시장 당선…'거제 첫 3선 시장' 성공"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 경북도 출신 행정가들 시장·군수 도전 잇따라 성공"
+        }
+      ]
+    },
+    {
+      "term": "무소속",
+      "total": 8,
       "sourceCount": 4,
       "sources": [
         "yna",
@@ -487,957 +889,767 @@
       "examples": [
         {
           "source": "yna",
-          "title": "태국의 에너지 탐사 합의 파기에…캄보디아, 유엔 조정절차 착수"
+          "title": "[6·3 지선] 무소속 돌풍 김관영 '고배'…민주당 벽에 막혔다"
         },
         {
-          "source": "donga",
-          "title": "트럼프 “1주일내 이란과 종전 합의” 낙관…‘강경파 반발’ 걸림돌"
+          "source": "yna",
+          "title": "[6·3 지선] 박성현 당선…광양, 5번 연속 무소속 시장 배출"
         },
         {
-          "source": "khan",
-          "title": "‘이민자 제3국 송환’ 합의…트럼프 따라가는 EU"
+          "source": "yna",
+          "title": "[6·3 지선] 전남 22개 시·군 중 혁신당 2·무소속 3명 당선"
         }
       ]
     },
     {
-      "term": "이란",
-      "total": 10,
-      "sourceCount": 3,
+      "term": "북갑",
+      "total": 7,
+      "sourceCount": 4,
       "sources": [
+        "sbs",
         "yna",
         "khan",
         "hani"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "트럼프 \"美-이란 대화중단은 가짜뉴스…오늘까지도 대화 계속\""
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "이 시각 부산 북갑…하정우·한동훈 접전 [국민의선택]"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프 \"美-이란 대화중단은 가짜뉴스…오늘도 대화중\""
-        },
-        {
-          "source": "yna",
-          "title": "美국무 \"이란 최고지도자 부상한 채 생존…국정관여 점점↑\""
+          "title": "[영상] '격전지' 부산 북갑 보선서 무소속 한동훈 당선"
         }
       ]
     },
     {
-      "term": "유세",
-      "total": 9,
-      "sourceCount": 3,
+      "term": "여성",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"경기도민이 제 진심 선택\"..추미애 첫 여성 광역단체장 '확실'"
+        },
+        {
+          "source": "khan",
+          "title": "고의숙, 제주 첫 여성 선출직 교육감 ‘이변’"
+        },
+        {
+          "source": "khan",
+          "title": "추미애 경기지사 당선인, 개혁마다 앞장 선 ‘추다르크’…여성 광역단체장의 길 ‘개척’"
+        }
+      ]
+    },
+    {
+      "term": "투표지",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
+        },
+        {
+          "source": "yna",
+          "title": "서울시장 선거 '투표지 부족' 헌정초유 사태…후폭풍 예고"
+        },
+        {
+          "source": "khan",
+          "title": "출구조사에 고개 떨구던 국힘, 투표지 부족에 “선거 무효”"
+        }
+      ]
+    },
+    {
+      "term": "신용한",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '명심' 업은 신용한 충북지사 당선…행정가로 첫발"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 신용한 충북지사 당선인 \"경제 활력 불어넣겠다\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 더불어민주당 신용한 후보, 충북지사 당선 확실"
+        }
+      ]
+    },
+    {
+      "term": "안민석",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 안민석, 5선 국회의원서 경기도교육감까지"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 안민석 경기교육감 당선인 \"취임 즉시 교사 형사면책권 추진\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 안민석, 경기교육감 당선 확실…진보 계보 잇는다"
+        }
+      ]
+    },
+    {
+      "term": "대구",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸, 또 대구시장 문턱 못 넘었다…'대구 변화론' 미완"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"대구 정치 가능성 봤다…추경호 당선 축하\""
+        },
+        {
+          "source": "donga",
+          "title": "컷오프 진통 이진숙, 대구 달성군 당선 확실"
+        }
+      ]
+    },
+    {
+      "term": "아냐",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조국 \"저 개인의 실패…투영해 주신 가치 틀린 것 아냐\" [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
+          "source": "donga",
+          "title": "[속보]선관위 “개표 중단 불가…선거 연기-재선거 사유 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "경기",
+      "total": 6,
+      "sourceCount": 4,
       "sources": [
         "sbs",
         "yna",
+        "khan",
         "mk"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "빗속 마지막 유세…'위장전입'·'나쁜사람' 공방"
-        },
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "sbs",
-          "title": "장동혁 '정권 견제론' 강조…오세훈, 신촌서 마지막 유세"
-        }
-      ]
-    },
-    {
-      "term": "심판",
-      "total": 7,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"집권여당 후보 당선돼야\" vs \"정청래 지도부 심판\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주 \"내란·극우 심판\" vs 국힘 \"정권 폭주 멈춰세워야\""
-        },
-        {
-          "source": "sbs",
-          "title": "정원오 \"오세훈의 10년 심판\"…이 시각 청계광장"
-        }
-      ]
-    },
-    {
-      "term": "오세훈",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "오세훈 \"최후의 보루 서울 남겨달라\"…이 시각 신촌"
-        },
-        {
-          "source": "sbs",
-          "title": "장동혁 '정권 견제론' 강조…오세훈, 신촌서 마지막 유세"
+          "title": "유의동, 김용남·조국 모두 눌렀다…경기 평택을 역대급 '대이변' [바로이뉴스]"
         },
         {
           "source": "yna",
-          "title": "정원오 \"오세훈 10년 심판\"…12개구 돌고 청계광장서 마지막 유세(종합2보)"
+          "title": "[6·3 지선] 경기 평택을 국힘 유의동 당선…4선 고지 밟으며 국회 재입성"
+        },
+        {
+          "source": "khan",
+          "title": "[속보] ‘5파전’ 경기 평택을, 국힘 유의동 당선 “주어진 소임 다할 것”"
+        }
+      ]
+    },
+    {
+      "term": "재선거",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 유의동 평택을 재선거 당선인 \"다시 일하게 허락해 줘 감사\""
+        },
+        {
+          "source": "donga",
+          "title": "[속보]선관위 “개표 중단 불가…선거 연기-재선거 사유 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "울산시장",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김상욱, 국힘→민주 '배신자' 취급 극복 울산시장 우뚝"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 김상욱 울산시장 당선인 \"시민의 승리…첫날부터 전력 질주\""
+        },
+        {
+          "source": "khan",
+          "title": "김상욱 울산시장 당선인, 내란에 반기 들고 당적 바꿔…울산 정치 ‘세대 교체’ 기수로"
+        }
+      ]
+    },
+    {
+      "term": "충북지사",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '명심' 업은 신용한 충북지사 당선…행정가로 첫발"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 신용한 충북지사 당선인 \"경제 활력 불어넣겠다\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 더불어민주당 신용한 후보, 충북지사 당선 확실"
         }
       ]
     },
     {
       "term": "대통령",
       "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"한·아프리카 정상회의 정례화되면 좋겠다\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"한화에어로, 동일 사고 반복…심각한 문제\""
-        },
-        {
-          "source": "khan",
-          "title": "한화에어로 현장감식…이 대통령 “동일 사고 반복 사업장 보고하라”"
-        }
-      ]
-    },
-    {
-      "term": "폭발",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"위험 크지 않다\"던 공정서 참사…한화에어로 폭발 원인 뭘까(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[일문일답] \"폭발 작업장 스프링클러 없고 소화기 1대 비치…CCTV도 없어\""
-        },
-        {
-          "source": "donga",
-          "title": "LG 오스틴, KT전서 통산 100홈런 폭발…외국인선수 역대 9번째"
-        }
-      ]
-    },
-    {
-      "term": "정청래",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"집권여당 후보 당선돼야\" vs \"정청래 지도부 심판\""
-        },
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "sbs",
-          "title": "정청래 \"내란·부정부패 국힘 심판해야\"…선거 전 한표 호소"
-        }
-      ]
-    },
-    {
-      "term": "홈런",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'결승 홈런' 키움 히우라 \"연패 부담 없었다…시즌 90경기 남아\""
-        },
-        {
-          "source": "yna",
-          "title": "SSG, 홈런 세 방에 무너지며 '13연패'…키움은 8연패 탈출"
-        },
-        {
-          "source": "yna",
-          "title": "LG 오스틴, 통산 100홈런 '쾅'…역대 외국인 선수 9번째"
-        }
-      ]
-    },
-    {
-      "term": "명예훼손",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "‘김수현 명예훼손’ 가세연 김세의 구속유지…구속적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]‘김수현 명예훼손’ 가세연 김세의 구속적부심 기각…구속 유지"
-        }
-      ]
-    },
-    {
-      "term": "검찰",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "yna",
-          "title": "헤어진 연인 집 찾아가 흉기 휘두른 50대 남성 검찰 송치"
-        }
-      ]
-    },
-    {
-      "term": "역대",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "사전 투표율 역대 최대…최종 투표율 예상치는"
-        },
-        {
-          "source": "yna",
-          "title": "현대차·기아, 5월 美판매 나란히 증가…하이브리드 '역대 최고'"
-        },
-        {
-          "source": "yna",
-          "title": "LG 오스틴, 통산 100홈런 '쾅'…역대 외국인 선수 9번째"
-        }
-      ]
-    },
-    {
-      "term": "재개",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "UAE 국영석유사, 나프타 수출 재개…오만항구서 환적"
-        },
-        {
-          "source": "yna",
-          "title": "천장 무너진 부산 백화점 안전 점검 끝내고 3일 영업 재개"
-        },
-        {
-          "source": "donga",
-          "title": "이스라엘·레바논, 美 중재 속 워싱턴 휴전 협상 재개"
-        }
-      ]
-    },
-    {
-      "term": "선관위",
-      "total": 4,
-      "sourceCount": 3,
+      "sourceCount": 4,
       "sources": [
         "yna",
         "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "yna",
-          "title": "인권위 \"선관위·방미통위 '장애인 참정권 보장' 권고 일부거부\"(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "선관위, 인권위 ‘장애인 참정권 보장’ 권고에 “이행 불가”"
-        }
-      ]
-    },
-    {
-      "term": "신고",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "yna",
-          "title": "\"완전 크게 났는데\"…대전 폭발사고 119 신고 85건 쇄도"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "김수현",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "‘김수현 명예훼손’ 가세연 김세의 구속유지…구속적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]‘김수현 명예훼손’ 가세연 김세의 구속적부심 기각…구속 유지"
-        }
-      ]
-    },
-    {
-      "term": "김세의",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "‘김수현 명예훼손’ 가세연 김세의 구속유지…구속적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]‘김수현 명예훼손’ 가세연 김세의 구속적부심 기각…구속 유지"
-        }
-      ]
-    },
-    {
-      "term": "구속",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]‘김수현 명예훼손’ 가세연 김세의 구속적부심 기각…구속 유지"
-        },
-        {
-          "source": "donga",
-          "title": "여장한 20대男 영화관 여자화장실서 도촬…구속 송치"
-        }
-      ]
-    },
-    {
-      "term": "반도체",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "[박중현 칼럼]반도체 특수에 넘치는 유동성… 부동산 역류 막아야"
-        },
-        {
-          "source": "donga",
-          "title": "8002억 투입해 국산 AI반도체 개발…車·로봇·방산 탑재"
-        },
-        {
-          "source": "khan",
-          "title": "‘반도체 제조 핵심’ EUV 장비 도입, 최대 25일 단축"
-        }
-      ]
-    },
-    {
-      "term": "개발",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
         "mk",
         "hani"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "8002억 투입해 국산 AI반도체 개발…車·로봇·방산 탑재"
+          "source": "yna",
+          "title": "[6·3 지선] '대통령 지역구' 인천 계양을 김남준 당선 확실(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "‘대통령 지지’ 담긴 표심, 내란 못 벗은 국힘에 경고장 날렸다"
         },
         {
           "source": "mk",
-          "title": "팜한농-日ISK, 신물질 제초제 공동 개발 계약"
-        },
-        {
-          "source": "hani",
-          "title": "한양대 임희대 교수팀, 차세대 리튬-황 배터리 ‘셔틀 현상’ 막는 전기적 반발 분리막 개발"
-        }
-      ]
-    },
-    {
-      "term": "이재명",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"안전한 서울 만들 것\"…\"이재명 정부에 힘을\""
-        },
-        {
-          "source": "khan",
-          "title": "민주당 마지막 메시지 “이재명 정부 폄훼한 대가 혹독하게 치러야”"
-        },
-        {
-          "source": "hani",
-          "title": "정청래 “내란 옹호 냉철한 심판”…장동혁 “이재명 정부 오만 심판”"
-        }
-      ]
-    },
-    {
-      "term": "마무리",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'13일간의 열전' 마무리…당대표 최다 키워드는"
-        },
-        {
-          "source": "yna",
-          "title": "張 \"투표 안하면 자유 뺏길 것\"…서울서 유세 마무리(종합2보)"
-        },
-        {
-          "source": "khan",
-          "title": "이흥구 후임 대법관 국민 천거 마무리…노태악 후임처럼 ‘제청 단계’서 멈추나"
-        }
-      ]
-    },
-    {
-      "term": "김부겸",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김부겸 \"당내 견제 역할\" vs 추경호 \"균형추 역할\""
-        },
-        {
-          "source": "yna",
-          "title": "김부겸·추경호, 동성로서 막판 맞불 유세…\"변화\" vs \"견제\""
-        },
-        {
-          "source": "hani",
-          "title": "김부겸 “저도, 대구도 마지막 기회”…추경호 “샤이 진보는 없다”"
-        }
-      ]
-    },
-    {
-      "term": "추경호",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김부겸 \"당내 견제 역할\" vs 추경호 \"균형추 역할\""
-        },
-        {
-          "source": "yna",
-          "title": "김부겸·추경호, 동성로서 막판 맞불 유세…\"변화\" vs \"견제\""
-        },
-        {
-          "source": "hani",
-          "title": "김부겸 “저도, 대구도 마지막 기회”…추경호 “샤이 진보는 없다”"
-        }
-      ]
-    },
-    {
-      "term": "정원오",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정원오 \"오세훈의 10년 심판\"…이 시각 청계광장"
-        },
-        {
-          "source": "yna",
-          "title": "정원오 \"오세훈 10년 심판\"…12개구 돌고 청계광장서 마지막 유세(종합2보)"
-        },
-        {
-          "source": "hani",
-          "title": "정원오, 강서에서 송파까지 ‘지그재그’ 대장정…“오세훈 10년 무능 심판”"
-        }
-      ]
-    },
-    {
-      "term": "지방선거",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "지방선거 영수증…\"가장 비싼 민주주의\" [사실은]"
-        },
-        {
-          "source": "khan",
-          "title": "6·3 지방선거 이후 ‘행정 공백’ 우려…행안부, 인수위 매뉴얼 전국에 배포"
-        },
-        {
-          "source": "mk",
-          "title": "지방선거 D-1…강원·경북·전남·제주 후보들도 막판 집중 유세"
-        }
-      ]
-    },
-    {
-      "term": "사고",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"한화에어로, 동일 사고 반복…심각한 문제\""
-        },
-        {
-          "source": "khan",
-          "title": "한화에어로 현장감식…이 대통령 “동일 사고 반복 사업장 보고하라”"
-        },
-        {
-          "source": "hani",
-          "title": "한화에어로 폭발 사고 전 배기장치 교체 요구해왔다"
-        }
-      ]
-    },
-    {
-      "term": "레바논",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이스라엘·레바논 워싱턴서 회담재개…美중재로 이틀간 평화협상"
-        },
-        {
-          "source": "donga",
-          "title": "이스라엘·레바논, 美 중재 속 워싱턴 휴전 협상 재개"
-        },
-        {
-          "source": "hani",
-          "title": "트럼프 “이란 합의 다음주 가능”…네타냐후에 “미쳤냐” 레바논 확전 경고"
-        }
-      ]
-    },
-    {
-      "term": "배로",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
-        },
-        {
-          "source": "donga",
-          "title": "캐나다産 원유 도입 3배로…韓, ‘60조 잠수함 수주’ 막판 총력전"
-        },
-        {
-          "source": "mk",
-          "title": "최태원 \"2030년까지 메모리 부족 … 하이닉스 생산능력 5년 내 2배로\""
-        }
-      ]
-    },
-    {
-      "term": "잠수함",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
-        },
-        {
-          "source": "donga",
-          "title": "캐나다産 원유 도입 3배로…韓, ‘60조 잠수함 수주’ 막판 총력전"
-        },
-        {
-          "source": "khan",
-          "title": "정부, 캐나다산 원유 도입 3배 확대…강훈식 특사 ‘잠수함 수주’ 측면 지원"
-        }
-      ]
-    },
-    {
-      "term": "수주",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "캐나다산 원유 도입 3.3배로 확대…잠수함 수주 '막판 총력전'"
-        },
-        {
-          "source": "donga",
-          "title": "캐나다産 원유 도입 3배로…韓, ‘60조 잠수함 수주’ 막판 총력전"
-        },
-        {
-          "source": "khan",
-          "title": "정부, 캐나다산 원유 도입 3배 확대…강훈식 특사 ‘잠수함 수주’ 측면 지원"
-        }
-      ]
-    },
-    {
-      "term": "누락",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        },
-        {
-          "source": "hani",
-          "title": "선관위, ‘코인 누락 의혹’ 유정복 재산 신고 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "유정복",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        },
-        {
-          "source": "hani",
-          "title": "선관위, ‘코인 누락 의혹’ 유정복 재산 신고 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "재산",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        },
-        {
-          "source": "hani",
-          "title": "선관위, ‘코인 누락 의혹’ 유정복 재산 신고 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "정정",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        },
-        {
-          "source": "hani",
-          "title": "선관위, ‘코인 누락 의혹’ 유정복 재산 신고 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "공고",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "선관위, '가상자산 신고 누락 의혹' 유정복 재산 정정 공고"
-        },
-        {
-          "source": "khan",
-          "title": "중앙선관위, ‘해외 코인 신고 누락 의혹’ 유정복 재산 정정 공고"
-        },
-        {
-          "source": "hani",
-          "title": "선관위, ‘코인 누락 의혹’ 유정복 재산 신고 정정 공고"
-        }
-      ]
-    },
-    {
-      "term": "롯데",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[프로야구 광주전적] KIA 5-4 롯데"
-        },
-        {
-          "source": "donga",
-          "title": "‘도박장 출입 논란’ 롯데 김동혁, 징계 마치고 1군 복귀"
-        },
-        {
-          "source": "mk",
-          "title": "천장 무너지며 사흘간 문 닫았던 롯데 센텀시티점, 3일부터 영업 재개"
-        }
-      ]
-    },
-    {
-      "term": "부산",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "천장 무너진 부산 백화점 안전 점검 끝내고 3일 영업 재개"
-        },
-        {
-          "source": "khan",
-          "title": "2년 전 ‘13 대 1’…이번엔 평택을·부산 북갑 등 4~5곳 ‘모른다’"
-        },
-        {
-          "source": "hani",
-          "title": "전재수 “부산 운명 바꿀 변화 시작” 박형준 “보수 통합…중단 없는 발전”"
-        }
-      ]
-    },
-    {
-      "term": "교황청",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "교황청 유리천장 깼다…장관급 홍보 책임자에 첫 평신도 여성"
-        },
-        {
-          "source": "khan",
-          "title": "교황청 유리천장 깼다···레오 14세, 교황청 홍보부 수장에 평신도 여성 첫 임명"
-        },
-        {
-          "source": "mk",
-          "title": "수백 년 관행 깬 교황청…새 홍보수장 정체에 관심 집중"
+          "title": "민주 김남준, ‘대통령 지역구’ 인천 계양을서 당선 확실"
         }
       ]
     },
     {
       "term": "변화",
-      "total": 3,
-      "sourceCount": 3,
+      "total": 5,
+      "sourceCount": 4,
       "sources": [
+        "sbs",
         "yna",
         "khan",
         "hani"
       ],
       "examples": [
         {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
           "source": "yna",
-          "title": "김부겸·추경호, 동성로서 막판 맞불 유세…\"변화\" vs \"견제\""
+          "title": "[인터뷰] 전재수 부산시장 당선인 \"변화 선택 시민 뜻 무겁게 받들 것\""
         },
         {
-          "source": "khan",
-          "title": "보수의 심장, ‘정치 변화’ 시험대 서다"
-        },
-        {
-          "source": "hani",
-          "title": "전재수 “부산 운명 바꿀 변화 시작” 박형준 “보수 통합…중단 없는 발전”"
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"개인의 패배…변화 열망은 지지 않았다\""
         }
       ]
     },
     {
-      "term": "장윤기",
-      "total": 3,
+      "term": "울산",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "[국민의 선택] \"시민 속이는 장난질 끊어달라\"..\"'그것'이 무너진 울산\" 바꿀 김상욱 포부"
+        },
+        {
+          "source": "khan",
+          "title": "김상욱 울산시장 당선인, 내란에 반기 들고 당적 바꿔…울산 정치 ‘세대 교체’ 기수로"
+        }
+      ]
+    },
+    {
+      "term": "초접전",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '초접전' 부산 북갑 보선서 한동훈 당선 원동력은"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주 강석주, 초접전 끝에 통영시장 탈환…징검다리 재선"
+        }
+      ]
+    },
+    {
+      "term": "하정우",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"결과 겸허히 받아들이겠다\"…하정우 \"북구 발전 계속돼야\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 시각 부산 북갑…하정우·한동훈 접전 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 하정우 \"결과 겸허히 수용…저의 노력과 준비 부족\""
+        }
+      ]
+    },
+    {
+      "term": "투표용지",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'투표용지 부족' 총 14곳…잠실7동 기동대 투입 [국민의선택]"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]전대미문의 투표용지 부족"
+        },
+        {
+          "source": "khan",
+          "title": "‘부정선거 감시’ 목적 오픈채팅방서 무효 처리된 투표용지 사진 등 공유"
+        }
+      ]
+    },
+    {
+      "term": "송영길",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"이재명 정부 뒷받침해 위기 극복\"…송영길 \"든든한 버팀목 되겠다\""
+        },
+        {
+          "source": "khan",
+          "title": "송영길 인천 연수갑 당선인, 돈 봉투 살포 의혹 ‘정치적 위기’ 딛고 당 최다선 ‘6선 고지’"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 인천 연수갑 국회의원 보선 송영길 당선 유력 [KBS]"
+        }
+      ]
+    },
+    {
+      "term": "광역단체장",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"경기도민이 제 진심 선택\"..추미애 첫 여성 광역단체장 '확실'"
+        },
+        {
+          "source": "khan",
+          "title": "광역단체장 16곳 개표 현황…민주당 ‘전국 정당’ 재건, ‘보수 성지’ 대구도 초접전 이변"
+        },
+        {
+          "source": "mk",
+          "title": "6·3지선 초반 개표, 민주 광역단체장 14곳 우세…재보선도 우위"
+        }
+      ]
+    },
+    {
+      "term": "교육",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "'삼수생' 천호성 교수, 전북교육감 당선…\"교육 바꾸라는 명령\""
+        },
+        {
+          "source": "khan",
+          "title": "진보 교육, 최소 11곳…‘현직 프리미엄’ 줄어든 보수 교육감"
+        },
+        {
+          "source": "khan",
+          "title": "전남광주통합 첫 교육 수장에 김대중 확실"
+        }
+      ]
+    },
+    {
+      "term": "김남준",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '대통령 지역구' 인천 계양을 김남준 당선 확실(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "김남준 인천 계양을 당선인, ‘대통령의 입’에서 정치적 홀로서기"
+        },
+        {
+          "source": "mk",
+          "title": "민주 김남준, ‘대통령 지역구’ 인천 계양을서 당선 확실"
+        }
+      ]
+    },
+    {
+      "term": "개인의",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조국 \"저 개인의 실패…투영해 주신 가치 틀린 것 아냐\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"개인의 패배…변화 열망은 지지 않았다\""
+        },
+        {
+          "source": "khan",
+          "title": "[속보]김부겸 “제 개인의 패배이지 변화 열망하는 시민의 패배 아냐…추경호 당선 축하”"
+        }
+      ]
+    },
+    {
+      "term": "패배",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"개인의 패배…변화 열망은 지지 않았다\""
+        },
+        {
+          "source": "khan",
+          "title": "[속보]김부겸 “제 개인의 패배이지 변화 열망하는 시민의 패배 아냐…추경호 당선 축하”"
+        }
+      ]
+    },
+    {
+      "term": "겸허히",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"결과 겸허히 받아들이겠다\"…하정우 \"북구 발전 계속돼야\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 하정우 \"결과 겸허히 수용…저의 노력과 준비 부족\""
+        },
+        {
+          "source": "khan",
+          "title": "[사설]지방권력도 여당으로 교체, 더욱 겸허히 국정 챙기길"
+        }
+      ]
+    },
+    {
+      "term": "계양을",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '대통령 지역구' 인천 계양을 김남준 당선 확실(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "김남준 인천 계양을 당선인, ‘대통령의 입’에서 정치적 홀로서기"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 충남 공주부여청양 김영빈·인천 계양을 김남준 당선유력[KBS]"
+        }
+      ]
+    },
+    {
+      "term": "어부지리",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '국힘 제로' 승부수가 '국힘 어부지리'로…조국, 낙선 치명상"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]평택을 유의동 당선 확실…민주-조국 분열에 어부지리"
+        },
+        {
+          "source": "mk",
+          "title": "조국 낙선 치명상…‘국힘 제로’ 외쳤지만 ‘국힘 어부지리’ 결과로"
+        }
+      ]
+    },
+    {
+      "term": "지선",
+      "total": 81,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여야 결집에 치솟은 투표율…역대 지선 두 번째로 높아"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 승패 가른 핵심 요인은…견제론 누른 내란청산론"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '원조 친노' 이광재, 하남갑서 재기…4선 중진 원내 재입성"
+        }
+      ]
+    },
+    {
+      "term": "전재수",
+      "total": 10,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "전재수 부산시장 당선에 퐁피두·야구장 등 박형준 사업 기로"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 전재수 통일교 의혹 딛고 승리…해양수도 정책 탄력"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 전재수 부산시장 당선인 \"변화 선택 시민 뜻 무겁게 받들 것\""
+        }
+      ]
+    },
+    {
+      "term": "부산시장",
+      "total": 9,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "전재수 부산시장 당선에 퐁피두·야구장 등 박형준 사업 기로"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 전재수 부산시장 당선인 \"변화 선택 시민 뜻 무겁게 받들 것\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 박형준 부산시장 3선 실패…'월클 도시'는 미완으로"
+        }
+      ]
+    },
+    {
+      "term": "국회의원",
+      "total": 9,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "국회의원 재보선 14곳 잠정투표율 60.9% 기록"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]국회의원 재보선 14곳 잠정투표율 60.9% 기록"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 경기 평택을 국회의원 재선거 유의동 당선 확실 [KBS]"
+        }
+      ]
+    },
+    {
+      "term": "보수",
+      "total": 8,
       "sourceCount": 3,
       "sources": [
         "yna",
@@ -1447,20 +1659,788 @@
       "examples": [
         {
           "source": "yna",
-          "title": "성평등장관, '여고생 살해' 장윤기 구속기소에 \"분노와 참담함\""
+          "title": "[6·3 지선] 30년 보수 독점 강릉이 뒤집혔다…민주당 김중남 당선"
         },
         {
-          "source": "khan",
-          "title": "검찰 “이채원양 살해범 장윤기, 납치해 성폭행하려다 범행”"
+          "source": "yna",
+          "title": "[인터뷰] 한동훈 \"보수 재건하고 이재명 정권 폭주 제어할 것\""
         },
         {
-          "source": "mk",
-          "title": "‘광주 여고생 살해’ 장윤기 진짜 범행 목적에...성평등장관 “분노·참담함 느낀다”"
+          "source": "yna",
+          "title": "[6·3 지선] 공천갈등 딛고 대구시장 된 추경호…'경제통·보수 결집' 통했다"
         }
       ]
     },
     {
-      "term": "젠슨",
+      "term": "진보",
+      "total": 7,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '실용·포용' 윤건영, 진보 협공 뚫고 충북교육감 재선"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 안민석, 경기교육감 당선 확실…진보 계보 잇는다"
+        },
+        {
+          "source": "khan",
+          "title": "진보 교육감 시대 다시 열렸다···경기교육감 선거 안민석 당선 확실[6·3지방선거]"
+        }
+      ]
+    },
+    {
+      "term": "우세",
+      "total": 7,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 與, 기초단체장 선거 승리 전망…수도권 큰 우세"
+        },
+        {
+          "source": "khan",
+          "title": "진보 12곳 우세…‘현직 프리미엄’ 힘 못 쓴 보수 교육감"
+        },
+        {
+          "source": "khan",
+          "title": "재보선 14곳 개표 현황…민주당 11곳 우세, 국힘 대구 달성 ‘안정권’"
+        }
+      ]
+    },
+    {
+      "term": "꺾고",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 평택을 국힘 유의동, 범여권 꺾고 '4선 고지'"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주 류경완, 남해군수 당선…경선서 현직 꺾고 본선 신승"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 국민의힘 추경호, 민주당 김부겸 꺾고 대구시장 당선(종합)"
+        }
+      ]
+    },
+    {
+      "term": "사태",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "서울시장 선거 '투표지 부족' 헌정초유 사태…후폭풍 예고"
+        },
+        {
+          "source": "khan",
+          "title": "초유의 ‘투표 용지 부족’ 사태…수도권 최소 14곳 ‘대기표’"
+        },
+        {
+          "source": "khan",
+          "title": "[사설] 어처구니없는 ‘투표지 부족’사태, 선관위 엄중히 책임져야"
+        }
+      ]
+    },
+    {
+      "term": "지역",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전국 개표율 82.7%…접전 지역 상황은 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "4년 전과 비교하면…'민심 역전' 지역 10곳 [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 안산갑 김남국 당선인 \"지역 경쟁력 회복에 집중할 것\""
+        }
+      ]
+    },
+    {
+      "term": "중단",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "가라앉은 국힘 상황실…'개표 중단' 요구 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] 개표 중단 요구에 돌아온 답..\"중선위, 아무것도 할 수 없다더라\""
+        },
+        {
+          "source": "donga",
+          "title": "[속보]선관위 “개표 중단 불가…선거 연기-재선거 사유 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "정치",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "낙선 조국 \"범진보 진영 지지층에 죄송…연대·통합 정치 절실\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"대구 정치 가능성 봤다…추경호 당선 축하\""
+        },
+        {
+          "source": "donga",
+          "title": "[김형석 칼럼]지금 국민은 정치-경제계에 무엇을 바라는가"
+        }
+      ]
+    },
+    {
+      "term": "탈환",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 박종원 담양군수 당선인,혁신당 상대 단체장 탈환"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 전재수 부산시장 당선…민주당 8년 만에 탈환"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주 강석주, 초접전 끝에 통영시장 탈환…징검다리 재선"
+        }
+      ]
+    },
+    {
+      "term": "이철우",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '암 투병' 공개했던 이철우…경북도지사 3선 고지 올랐다"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 이철우 경북도지사 당선인 \"행정통합·신공항이 경북 미래\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] \"이변은 없었다\"…'암투병' 이겨낸 이철우, 경북지사 3선 당선"
+        }
+      ]
+    },
+    {
+      "term": "감사",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"일하고 또 일하겠다…선택에 깊은 감사\" 당선자들 인터뷰  [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "이광재 \"하남 시민께 감사…발전 성과로 보여드릴 것\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 유의동 평택을 재선거 당선인 \"다시 일하게 허락해 줘 감사\""
+        }
+      ]
+    },
+    {
+      "term": "이재명",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[국민의선택] \"이재명 정부 뒷받침해 위기 극복\"…송영길 \"든든한 버팀목 되겠다\""
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 한동훈 \"보수 재건하고 이재명 정권 폭주 제어할 것\""
+        },
+        {
+          "source": "khan",
+          "title": "[속보] 부산 북갑 보궐선거, 무소속 한동훈 당선 “보수 재건하고 이재명 정권 폭주 제어할 것”"
+        }
+      ]
+    },
+    {
+      "term": "청와대",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "청와대 \"선관위, 책임있는 조치하길…상황 엄정 주시\""
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 청와대 “선관위, 책임있는 조치해야…상황 엄정히 주시”"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 청와대, ‘투표지 부족 사태’에 “선관위가 대응해야 할 문제”"
+        }
+      ]
+    },
+    {
+      "term": "출신",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 정통 교육행정가 출신 3선 임종식 경북도교육감"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 경북도 출신 행정가들 시장·군수 도전 잇따라 성공"
+        },
+        {
+          "source": "khan",
+          "title": "신용한 충북지사 당선인, 윤석열 캠프 출신…‘명태균 폭로’ 이후 정치적 변신 성공"
+        }
+      ]
+    },
+    {
+      "term": "딛고",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 전재수 통일교 의혹 딛고 승리…해양수도 정책 탄력"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 공천갈등 딛고 대구시장 된 추경호…'경제통·보수 결집' 통했다"
+        },
+        {
+          "source": "khan",
+          "title": "송영길 인천 연수갑 당선인, 돈 봉투 살포 의혹 ‘정치적 위기’ 딛고 당 최다선 ‘6선 고지’"
+        }
+      ]
+    },
+    {
+      "term": "앞서",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "우크라 '러시아판 다보스포럼' 앞서 상트페테르부르크 공습(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "민주당, 인구 100만 대도시에서도 우위…‘빅5’ 중 4곳 앞서"
+        },
+        {
+          "source": "hani",
+          "title": "민주 박찬대, 인천시장 당선 확실시…현역 유정복에 크게 앞서"
+        }
+      ]
+    },
+    {
+      "term": "낙선",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "낙선 조국 \"범진보 진영 지지층에 죄송…연대·통합 정치 절실\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '국힘 제로' 승부수가 '국힘 어부지리'로…조국, 낙선 치명상"
+        },
+        {
+          "source": "mk",
+          "title": "조국 낙선 치명상…‘국힘 제로’ 외쳤지만 ‘국힘 어부지리’ 결과로"
+        }
+      ]
+    },
+    {
+      "term": "안산갑",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[인터뷰] 안산갑 김남국 당선인 \"지역 경쟁력 회복에 집중할 것\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '원조 친명' 김남국, 안산갑 당선으로 국회 재입성"
+        },
+        {
+          "source": "khan",
+          "title": "김남국 경기 안산갑 당선인, 코인·인사청탁 논란 속 국회 재입성"
+        }
+      ]
+    },
+    {
+      "term": "김남국",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[인터뷰] 안산갑 김남국 당선인 \"지역 경쟁력 회복에 집중할 것\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '원조 친명' 김남국, 안산갑 당선으로 국회 재입성"
+        },
+        {
+          "source": "khan",
+          "title": "김남국 경기 안산갑 당선인, 코인·인사청탁 논란 속 국회 재입성"
+        }
+      ]
+    },
+    {
+      "term": "행정통합",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 추경호 대구시장 당선인, TK신공항·행정통합 속도전 예고"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 이철우 경북도지사 당선인 \"행정통합·신공항이 경북 미래\""
+        },
+        {
+          "source": "khan",
+          "title": "신수정 북구청장 당선인, ‘행정통합’ 주도…광주 첫 여성 단체장"
+        }
+      ]
+    },
+    {
+      "term": "경기교육감",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[인터뷰] 안민석 경기교육감 당선인 \"취임 즉시 교사 형사면책권 추진\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 안민석, 경기교육감 당선 확실…진보 계보 잇는다"
+        },
+        {
+          "source": "khan",
+          "title": "진보 교육감 시대 다시 열렸다···경기교육감 선거 안민석 당선 확실[6·3지방선거]"
+        }
+      ]
+    },
+    {
+      "term": "축하",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 김부겸 \"대구 정치 가능성 봤다…추경호 당선 축하\""
+        },
+        {
+          "source": "khan",
+          "title": "[속보]김부겸 “제 개인의 패배이지 변화 열망하는 시민의 패배 아냐…추경호 당선 축하”"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]하정우 “노력과 준비 부족 인정…한동훈 축하”"
+        }
+      ]
+    },
+    {
+      "term": "투표소",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] '부정선거' 주장 시위대, 4시간째 잠실7동 투표소 봉쇄(종합2보)"
+        },
+        {
+          "source": "khan",
+          "title": "[속보]잠실7동 제2투표소 앞에 경찰 기동대 투입, 운집한 인파와 대치 중"
+        },
+        {
+          "source": "mk",
+          "title": "“진보기자도 색출” 부정선거 주장 시위대, 4시간째 잠실7동 투표소 봉쇄"
+        }
+      ]
+    },
+    {
+      "term": "연수갑",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "송영길 인천 연수갑 당선인, 돈 봉투 살포 의혹 ‘정치적 위기’ 딛고 당 최다선 ‘6선 고지’"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 인천 연수갑 국회의원 보선 송영길 당선 유력 [KBS]"
+        },
+        {
+          "source": "hani",
+          "title": "부산 북갑 한동훈·평택을 유의동 ‘신승’…인천 연수갑 송영길 당선"
+        }
+      ]
+    },
+    {
+      "term": "실패",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조국 \"저 개인의 실패…투영해 주신 가치 틀린 것 아냐\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 박형준 부산시장 3선 실패…'월클 도시'는 미완으로"
+        },
+        {
+          "source": "mk",
+          "title": "“아리팍·원베일리 성공 전에 사실은”…‘재건축의 신’ 만든 두 번의 실패"
+        }
+      ]
+    },
+    {
+      "term": "열망하는",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
+          "source": "khan",
+          "title": "[속보]김부겸 “제 개인의 패배이지 변화 열망하는 시민의 패배 아냐…추경호 당선 축하”"
+        },
+        {
+          "source": "hani",
+          "title": "김부겸 “제 개인의 패배…변화 열망하는 대구시민들의 패배 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "남갑",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "부산 북갑 한동훈 당선 확정…울산 남갑 '초접전'  [국민의선택]"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 울산시장 김상욱·울산 남갑 보선 전태진 당선 유력[KBS]"
+        },
+        {
+          "source": "hani",
+          "title": "민주 전태진, 울산 남갑 보궐선거 1위 달려"
+        }
+      ]
+    },
+    {
+      "term": "결과",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"결과 겸허히 받아들이겠다\"…하정우 \"북구 발전 계속돼야\""
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 하정우 \"결과 겸허히 수용…저의 노력과 준비 부족\""
+        },
+        {
+          "source": "khan",
+          "title": "조전혁 “투표용지 부족은 선거 참사…결과 영향 땐 재선거 검토해야”"
+        }
+      ]
+    },
+    {
+      "term": "역대",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여야 결집에 치솟은 투표율…역대 지선 두 번째로 높아"
+        },
+        {
+          "source": "yna",
+          "title": "민주당, 전북 기초단체장 14곳 '싹쓸이'…역대 최초"
+        },
+        {
+          "source": "khan",
+          "title": "역대 두 번째 투표율로 ‘박빙’ 지역 투표율까지 치솟았다…대구 64.2%, 4년 전보다 21%P ↑"
+        }
+      ]
+    },
+    {
+      "term": "도민",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전북지사 민주당 이원택 당선 확실…\"도민 주권 정부\" [국민의선택]"
+        },
+        {
+          "source": "yna",
+          "title": "[인터뷰] 전북지사 이원택 당선인 \"'도민 주권 도정' 실현\""
+        },
+        {
+          "source": "mk",
+          "title": "안민석, 경기교육감 사실상 확정…“도민·교육계 뜻 따라 교육 바꿀 것”"
+        }
+      ]
+    },
+    {
+      "term": "선거무효소송",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 선관위 항의방문…\"선거무효소송 내고 개표 참관인 철수\""
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 선관위 항의방문…\"선거무효소송·개표 참관인 철수\"(종합)"
+        },
+        {
+          "source": "mk",
+          "title": "장동혁 “선거무효소송 준비 중”…선관위 항의 방문한 국민의힘"
+        }
+      ]
+    },
+    {
+      "term": "책임있는",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "청와대 \"선관위, 책임있는 조치하길…상황 엄정 주시\""
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 청와대 “선관위, 책임있는 조치해야…상황 엄정히 주시”"
+        },
+        {
+          "source": "hani",
+          "title": "청와대, 투표지 사태에 “선관위 책임있는 조치 하라…엄정 주시”"
+        }
+      ]
+    },
+    {
+      "term": "주시",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "청와대 \"선관위, 책임있는 조치하길…상황 엄정 주시\""
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 청와대 “선관위, 책임있는 조치해야…상황 엄정히 주시”"
+        },
+        {
+          "source": "hani",
+          "title": "청와대, 투표지 사태에 “선관위 책임있는 조치 하라…엄정 주시”"
+        }
+      ]
+    },
+    {
+      "term": "사태에",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1471,92 +2451,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "방한하는 젠슨 황, 8일 서울대 찾는다…\"학생들 만나고 싶다\""
+          "title": "[속보] 선관위, 투표지 부족 사태에 \"선거 연기·재선거 사유 해당안돼\""
         },
         {
           "source": "mk",
-          "title": "젠슨 황 \"HBM 더 많이 만들어달라\""
+          "title": "‘참패’ 전망에 적막하던 국민의힘…선관위 사태에 분위기 급변"
         },
         {
           "source": "hani",
-          "title": "젠슨 황 “AI칩 공급 제약 여전”…최태원 “5년내 메모리 생산 2배 확대”"
+          "title": "청와대, 투표지 사태에 “선관위 책임있는 조치 하라…엄정 주시”"
         }
       ]
     },
     {
-      "term": "수첩",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "법원, 차가원이 낸 'PD수첩' 가처분 신청 기각…예정대로 방송(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "MC몽, ‘PD수첩’ 방송 앞두고 격분…“명예 걸고 싸우겠다”"
-        },
-        {
-          "source": "mk",
-          "title": "“명예 걸고 1000억 손배소”…MC몽·차가원, ‘PD수첩’에 초강경 대응"
-        }
-      ]
-    },
-    {
-      "term": "종전",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "러, 우크라 대공습 직후 \"오늘이라도 종전 가능\""
-        },
-        {
-          "source": "donga",
-          "title": "트럼프 “1주일내 이란과 종전 합의” 낙관…‘강경파 반발’ 걸림돌"
-        },
-        {
-          "source": "khan",
-          "title": "종전 서두르는 트럼프, 확전 지시한 네타냐후에 “미쳤냐” 격노"
-        }
-      ]
-    },
-    {
-      "term": "유지",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]‘김수현 명예훼손’ 가세연 김세의 구속적부심 기각…구속 유지"
-        },
-        {
-          "source": "mk",
-          "title": "故김새론 음성 조작해 김수현 명예훼손...법원, 김세의 구속 유지"
-        }
-      ]
-    },
-    {
-      "term": "원인",
+      "term": "전남광주",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1567,20 +2475,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "\"위험 크지 않다\"던 공정서 참사…한화에어로 폭발 원인 뭘까(종합)"
+          "title": "[기초단체장 당선인 명단] 전남광주"
         },
         {
           "source": "khan",
-          "title": "“일정 빡빡해 정비 시간도 없어” “원인 해결 않고 안전모만 강요”…한화에어로 직원들, 안전 우려 지속 제기"
+          "title": "텃밭 지킨 광역단체장들, 이변은 없었다…전남광주 민형배·경북 이철우 압승"
         },
         {
           "source": "mk",
-          "title": "“관행에 안주한 것이 실패 원인”…한화에어로, 대전 폭발사고 안전관리 미흡 인정"
+          "title": "[속보] 경북 이철우·전남광주 민형배·제주 위성곤 당선 확실[KBS]"
         }
       ]
     },
     {
-      "term": "삼성전자",
+      "term": "친명",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1591,880 +2499,115 @@
       "examples": [
         {
           "source": "yna",
-          "title": "삼성전자, 올해 1분기 D램 이어 낸드도 점유율 1위 수성"
+          "title": "[6·3 지선] '원조 친명' 김남국, 안산갑 당선으로 국회 재입성"
         },
         {
           "source": "khan",
-          "title": "삼성전자, 8세대 HBM5 실물모형 첫 공개"
+          "title": "박찬대 인천시장 당선인, 3선 의원서 광역시장으로 정치 체급 키운 ‘친명 핵심’"
         },
         {
           "source": "mk",
-          "title": "‘슈퍼사이클’ 올라탄 낸드…삼성전자 1위·中 YMTC 맹추격"
+          "title": "‘원조 친명’ 김남국, ‘코인·인사청탁’ 논란 딛고 안산갑 당선"
         }
       ]
     },
     {
-      "term": "태풍",
+      "term": "윤석열",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "강풍·폭우 동반 태풍 '장미' 日 접근…도요타 등 조업 일시중단(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "태풍 ‘장미’ 日 규슈 남동쪽 해상 북동진…도요타 조업 중단"
-        },
-        {
-          "source": "mk",
-          "title": "“장미 때문에…” 강풍·폭우 동반 태풍, 日 접근에 도요타 등 조업 정지"
-        }
-      ]
-    },
-    {
-      "term": "장미",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "강풍·폭우 동반 태풍 '장미' 日 접근…도요타 등 조업 일시중단(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "태풍 ‘장미’ 日 규슈 남동쪽 해상 북동진…도요타 조업 중단"
-        },
-        {
-          "source": "mk",
-          "title": "“장미 때문에…” 강풍·폭우 동반 태풍, 日 접근에 도요타 등 조업 정지"
-        }
-      ]
-    },
-    {
-      "term": "도요타",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "강풍·폭우 동반 태풍 '장미' 日 접근…도요타 등 조업 일시중단(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "태풍 ‘장미’ 日 규슈 남동쪽 해상 북동진…도요타 조업 중단"
-        },
-        {
-          "source": "mk",
-          "title": "“장미 때문에…” 강풍·폭우 동반 태풍, 日 접근에 도요타 등 조업 정지"
-        }
-      ]
-    },
-    {
-      "term": "조업",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "강풍·폭우 동반 태풍 '장미' 日 접근…도요타 등 조업 일시중단(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "태풍 ‘장미’ 日 규슈 남동쪽 해상 북동진…도요타 조업 중단"
-        },
-        {
-          "source": "mk",
-          "title": "“장미 때문에…” 강풍·폭우 동반 태풍, 日 접근에 도요타 등 조업 정지"
-        }
-      ]
-    },
-    {
-      "term": "경고",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "[사설]“미개선” “미제출” “미이행” 잇단 경고 흘려들은 한화에어로"
-        },
-        {
-          "source": "mk",
-          "title": "트럼프, 네타냐후에 \"당신 미쳤나\"… 욕설하며 경고"
-        },
-        {
-          "source": "hani",
-          "title": "트럼프 “이란 합의 다음주 가능”…네타냐후에 “미쳤냐” 레바논 확전 경고"
-        }
-      ]
-    },
-    {
-      "term": "강훈식",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
         "khan",
-        "mk",
         "hani"
       ],
       "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 윤석열 탄핵 이끈 박찬대, 고향 인천서 재선 시장 맞서 승리"
+        },
         {
           "source": "khan",
-          "title": "정부, 캐나다산 원유 도입 3배 확대…강훈식 특사 ‘잠수함 수주’ 측면 지원"
-        },
-        {
-          "source": "mk",
-          "title": "산업부, 캐나다서 원유 1600만 배럴·LNG 340만 톤 확보...강훈식 비서실장 지원사격"
+          "title": "신용한 충북지사 당선인, 윤석열 캠프 출신…‘명태균 폭로’ 이후 정치적 변신 성공"
         },
         {
           "source": "hani",
-          "title": "한국, 캐나다산 원유 도입 3배 확대…강훈식 ‘경제특사’ 지원 사격"
+          "title": "충북지사, 박근혜·윤석열 거쳐 ‘이재명의 사람’ 된 신용한 당선 확실"
         }
       ]
     },
     {
-      "term": "국힘",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주 '9+α'·국힘 '2+α'…서울·부울경 \"접전\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주 9+α·국힘 2+α…서울·부울경 \"접전\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주 \"내란·극우 심판\" vs 국힘 \"정권 폭주 멈춰세워야\""
-        }
-      ]
-    },
-    {
-      "term": "아프리카",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"한·아프리카 정상회의 정례화되면 좋겠다\""
-        },
-        {
-          "source": "yna",
-          "title": "조현, 아프리카 17개국 외교장관과 연쇄회담…협력 논의(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "반크, '아프리카 바로 알리기' 글로벌 캠페인…영문 사이트 오픈"
-        }
-      ]
-    },
-    {
-      "term": "삼성",
-      "total": 5,
-      "sourceCount": 2,
+      "term": "명령",
+      "total": 3,
+      "sourceCount": 3,
       "sources": [
         "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "앤트로픽, '미토스' 접속 150개 기관에 확대…삼성·SK 포함된듯"
-        },
-        {
-          "source": "yna",
-          "title": "삼성 박승규 \"타석에선 안 들리던 엘도라도, 나중엔 '전율'\""
-        },
-        {
-          "source": "yna",
-          "title": "박승규 동점포·김성윤 결승타…'약속의 8회' 삼성, NC에 역전승"
-        }
-      ]
-    },
-    {
-      "term": "기각",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "법원, 차가원이 낸 'PD수첩' 가처분 신청 기각…예정대로 방송(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "'김수현 명예훼손' 김세의 구속 유지…법원, 적부심 기각"
-        },
-        {
-          "source": "yna",
-          "title": "목동서 자전거 운전자 치어 숨지게 한 지게차…구속영장 기각"
-        }
-      ]
-    },
-    {
-      "term": "내란",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주 \"내란·극우 심판\" vs 국힘 \"정권 폭주 멈춰세워야\""
-        },
-        {
-          "source": "sbs",
-          "title": "정청래 \"내란·부정부패 국힘 심판해야\"…선거 전 한표 호소"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] \"내란 공천\" \"감옥 삼인방\"…목 가다듬더니 \"간절한 마음\""
-        }
-      ]
-    },
-    {
-      "term": "피날레",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "yna",
-          "title": "오세훈, 2030 손잡고 눈물 속 피날레 유세…\"계층사다리 복원\"(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "희생자",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
-        },
-        {
-          "source": "hani",
-          "title": "한화 선수들, 잠실서 근조 리본…한화에어로스페이스 희생자 추모"
-        }
-      ]
-    },
-    {
-      "term": "개최",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'총격사태로 파행' 백악관기자協 만찬 7월24일 다시 개최"
-        },
-        {
-          "source": "hani",
-          "title": "동덕여대, '1vs1 토너먼트' 방식의 '동덕 생성형AI 활용 공모전' 성황리 개최"
-        },
-        {
-          "source": "hani",
-          "title": "서울과기대 미래 이후 연구소, 노원구립 화랑도서관서 ‘2026 공릉인문학’ 개최… “AI와 인문학” 주제로 5회 강연"
-        }
-      ]
-    },
-    {
-      "term": "키움",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'결승 홈런' 키움 히우라 \"연패 부담 없었다…시즌 90경기 남아\""
-        },
-        {
-          "source": "yna",
-          "title": "'쾅쾅쾅쾅' LG, 4연승 질주…키움 8연패 탈출·SSG 13연패 추락(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[프로야구 인천전적] 키움 12-6 SSG"
-        }
-      ]
-    },
-    {
-      "term": "연패",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'결승 홈런' 키움 히우라 \"연패 부담 없었다…시즌 90경기 남아\""
-        },
-        {
-          "source": "yna",
-          "title": "'쾅쾅쾅쾅' LG, 4연승 질주…키움 8연패 탈출·SSG 13연패 추락(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "SSG, 홈런 세 방에 무너지며 '13연패'…키움은 8연패 탈출"
-        }
-      ]
-    },
-    {
-      "term": "신청",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "법원, 차가원이 낸 'PD수첩' 가처분 신청 기각…예정대로 방송(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항허가 신청\""
-        }
-      ]
-    },
-    {
-      "term": "사설",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
         "donga",
-        "hani"
+        "khan"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "[사설]‘2300조 집행’ 단체장-교육감… ‘내 돈처럼 제대로 쓸 사람’ 뽑자"
-        },
-        {
-          "source": "donga",
-          "title": "[사설]“미개선” “미제출” “미이행” 잇단 경고 흘려들은 한화에어로"
+          "source": "yna",
+          "title": "'삼수생' 천호성 교수, 전북교육감 당선…\"교육 바꾸라는 명령\""
         },
         {
           "source": "donga",
-          "title": "[사설]‘연명의료 중단’ 앞당기는 방안 공론화… 적극 검토할 때 됐다"
-        }
-      ]
-    },
-    {
-      "term": "잘못하면",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
+          "title": "인천시장 박찬대 당선 확실…“잘 이끌어 달란 시민 명령”"
         },
         {
           "source": "khan",
-          "title": "이 대통령, 검찰에 “누구나 잘못하면 사과하고 취소하는 것”"
-        }
-      ]
-    },
-    {
-      "term": "청계광장서",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "yna",
-          "title": "정원오 \"오세훈 10년 심판\"…12개구 돌고 청계광장서 마지막 유세(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "전북서",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전"
-        },
-        {
-          "source": "sbs",
-          "title": "강원·수도권·전북서 막판 총력전…\"지방 권력 심판\""
-        },
-        {
-          "source": "yna",
-          "title": "정청래, 서울 청계광장서 유세 피날레…한병도, 전북서 총력전(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "오픈",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "MS, 첫 추론모델 등 자체 AI 7종 공개…'오픈AI 의존 축소' 가속"
-        },
-        {
-          "source": "yna",
-          "title": "반크, '아프리카 바로 알리기' 글로벌 캠페인…영문 사이트 오픈"
-        },
-        {
-          "source": "mk",
-          "title": "1조달러 상장 레이스 … 오픈AI에 선수 친 앤스로픽"
-        }
-      ]
-    },
-    {
-      "term": "앞두고",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "취침시간 폐지 행정명령까지…NBA 결전 앞두고 뉴욕시 '열기'"
-        },
-        {
-          "source": "yna",
-          "title": "'무투표 당선' 앞두고 부천시의원 비례대표 후보자 등록 무효"
-        },
-        {
-          "source": "donga",
-          "title": "MC몽, ‘PD수첩’ 방송 앞두고 격분…“명예 걸고 싸우겠다”"
-        }
-      ]
-    },
-    {
-      "term": "이스라엘",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프 '교전 중단' 선언 후에도 이스라엘·헤즈볼라 공방(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이스라엘·레바논 워싱턴서 회담재개…美중재로 이틀간 평화협상"
-        },
-        {
-          "source": "donga",
-          "title": "이스라엘·레바논, 美 중재 속 워싱턴 휴전 협상 재개"
-        }
-      ]
-    },
-    {
-      "term": "관세",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "美USTR 대표, 관세 부과 근거될 301조 조사결과 \"몇주내 공개\""
-        },
-        {
-          "source": "yna",
-          "title": "美, 한국산 산업기계 관세 인하…\"수혜 품목 규모 23억弗\"(종합)"
-        },
-        {
-          "source": "mk",
-          "title": "미국산 철강 쓰면 관세 우대 고환율·고물가 뉴노멀 농기계 관세 25 → 15% 인하"
-        }
-      ]
-    },
-    {
-      "term": "만에",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "미 4월 구인규모 예상밖 증가…2년 만에 최대"
-        },
-        {
-          "source": "yna",
-          "title": "19세 안드레예바, 2년 만에 프랑스오픈 여자 단식 4강 복귀"
-        },
-        {
-          "source": "khan",
-          "title": "6개월 만에…한·미 핵추진잠수함 후속 논의 ‘첫발’"
-        }
-      ]
-    },
-    {
-      "term": "상장",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "상장 수수료 후려치는 머스크…스페이스X 파격대우 요구"
-        },
-        {
-          "source": "mk",
-          "title": "중국판 삼전닉스 등판 예고…창신·양쯔메모리 올해 상장 [특파원 인사이트]"
-        },
-        {
-          "source": "mk",
-          "title": "1조달러 상장 레이스 … 오픈AI에 선수 친 앤스로픽"
-        }
-      ]
-    },
-    {
-      "term": "메시지",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 매체 \"미국과 지난 며칠간 메시지 교환 중단\""
-        },
-        {
-          "source": "khan",
-          "title": "민주당 마지막 메시지 “이재명 정부 폄훼한 대가 혹독하게 치러야”"
-        },
-        {
-          "source": "khan",
-          "title": "국민의힘 마지막 메시지 “대통령·민주당의 오만, 투표로 심판해달라”"
-        }
-      ]
-    },
-    {
-      "term": "안전",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "천장 무너진 부산 백화점 안전 점검 끝내고 3일 영업 재개"
-        },
-        {
-          "source": "khan",
-          "title": "“일정 빡빡해 정비 시간도 없어” “원인 해결 않고 안전모만 강요”…한화에어로 직원들, 안전 우려 지속 제기"
-        },
-        {
-          "source": "khan",
-          "title": "중처법 적용 여부, 현장서 안전 매뉴얼 이행됐는지가 관건"
-        }
-      ]
-    },
-    {
-      "term": "호르무즈",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항허가 신청\""
-        },
-        {
-          "source": "khan",
-          "title": "이란 호르무즈 관리청 “한달간 300여척 통항 허가 신청, 우방국 우선”··· 주요 목적지 중국·인도"
-        }
-      ]
-    },
-    {
-      "term": "관리청",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항허가 신청\""
-        },
-        {
-          "source": "khan",
-          "title": "이란 호르무즈 관리청 “한달간 300여척 통항 허가 신청, 우방국 우선”··· 주요 목적지 중국·인도"
-        }
-      ]
-    },
-    {
-      "term": "한달간",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항허가 신청\""
-        },
-        {
-          "source": "khan",
-          "title": "이란 호르무즈 관리청 “한달간 300여척 통항 허가 신청, 우방국 우선”··· 주요 목적지 중국·인도"
-        }
-      ]
-    },
-    {
-      "term": "여척",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항허가 신청\""
-        },
-        {
-          "source": "khan",
-          "title": "이란 호르무즈 관리청 “한달간 300여척 통항 허가 신청, 우방국 우선”··· 주요 목적지 중국·인도"
-        }
-      ]
-    },
-    {
-      "term": "허가",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이란 호르무즈 관리청 \"한달간 300여척 통항 허가 신청\"(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "이란 호르무즈 관리청 “한달간 300여척 통항 허가 신청, 우방국 우선”··· 주요 목적지 중국·인도"
-        },
-        {
-          "source": "khan",
-          "title": "비자 거절당한 ‘네팔 치매 노모’…법무부, 인도적 체류 허가"
-        }
-      ]
-    },
-    {
-      "term": "한화",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "벤자민, 6⅓이닝 9K 무실점…두산, 한화 꺾고 상위권 호시탐탐"
-        },
-        {
-          "source": "yna",
-          "title": "[프로야구 잠실전적] 두산 5-3 한화"
-        },
-        {
-          "source": "hani",
-          "title": "한화 선수들, 잠실서 근조 리본…한화에어로스페이스 희생자 추모"
-        }
-      ]
-    },
-    {
-      "term": "여성",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "교황청 유리천장 깼다…장관급 홍보 책임자에 첫 평신도 여성"
-        },
-        {
-          "source": "khan",
-          "title": "교황청 유리천장 깼다···레오 14세, 교황청 홍보부 수장에 평신도 여성 첫 임명"
-        },
-        {
-          "source": "khan",
-          "title": "장성 진급 누락자 절반 ‘여성·흑인’…소수자 지우는 미 해군"
-        }
-      ]
-    },
-    {
-      "term": "송치",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "6천회 불법촬영 태권도 관장, 미성년 관원 성범죄로 추가 송치"
-        },
-        {
-          "source": "yna",
-          "title": "헤어진 연인 집 찾아가 흉기 휘두른 50대 남성 검찰 송치"
-        },
-        {
-          "source": "donga",
-          "title": "여장한 20대男 영화관 여자화장실서 도촬…구속 송치"
+          "title": "[속보] ‘울산시장 당선 확실’ 김상욱 “시민 속이는 장난질 용납 않겠다는 시민들의 준엄한 명령”"
         }
       ]
     }
   ],
   "singleSourceTop": [
     {
-      "term": "프로야구",
-      "total": 7,
+      "term": "국민의선택",
+      "total": 19,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "전국 개표율 82.7%…접전 지역 상황은 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "36.9% \"나는 중도층\"… 표심 향한 곳은 [국민의선택]"
+        },
+        {
+          "source": "sbs",
+          "title": "\"일하고 또 일하겠다…선택에 깊은 감사\" 당선자들 인터뷰  [국민의선택]"
+        }
+      ]
+    },
+    {
+      "term": "바로이뉴스",
+      "total": 5,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"변화 열망하는 대구시민의 패배 아냐\"…김부겸 \"우리는 가능성을 봤습니다\""
+        },
+        {
+          "source": "sbs",
+          "title": "유의동, 김용남·조국 모두 눌렀다…경기 평택을 역대급 '대이변' [바로이뉴스]"
+        },
+        {
+          "source": "sbs",
+          "title": "[바로이뉴스] \"결과 겸허히 받아들이겠다\"…하정우 \"북구 발전 계속돼야\""
+        }
+      ]
+    },
+    {
+      "term": "기초단체장",
+      "total": 5,
       "sourceCount": 1,
       "sources": [
         "yna"
@@ -2472,42 +2615,64 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[프로야구] 3일 선발투수"
+          "title": "[기초단체장 당선인 명단] 대전"
         },
         {
           "source": "yna",
-          "title": "[프로야구 중간순위] 2일"
+          "title": "민주당, 전북 기초단체장 14곳 '싹쓸이'…역대 최초"
         },
         {
           "source": "yna",
-          "title": "[프로야구 대구전적] 삼성 8-7 NC"
+          "title": "[기초단체장 당선인 명단] 전남광주"
         }
       ]
     },
     {
-      "term": "민주",
+      "term": "시장",
+      "total": 5,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 박성현 당선…광양, 5번 연속 무소속 시장 배출"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 민주 변광용, 거제시장 당선…'거제 첫 3선 시장' 성공"
+        },
+        {
+          "source": "yna",
+          "title": "[6·3 지선] 경북도 출신 행정가들 시장·군수 도전 잇따라 성공"
+        }
+      ]
+    },
+    {
+      "term": "임종식",
       "total": 4,
       "sourceCount": 1,
       "sources": [
-        "sbs"
+        "yna"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "민주 '9+α'·국힘 '2+α'…서울·부울경 \"접전\""
+          "source": "yna",
+          "title": "[인터뷰] 임종식 경북교육감 당선인 \"학력 격차보다 AI 격차 줄여야\""
         },
         {
-          "source": "sbs",
-          "title": "민주, 김관영 전북지사 후보 '허위사실공표'로 고발"
+          "source": "yna",
+          "title": "[6·3 지선] 정통 교육행정가 출신 3선 임종식 경북도교육감"
         },
         {
-          "source": "sbs",
-          "title": "민주 9+α·국힘 2+α…서울·부울경 \"접전\""
+          "source": "yna",
+          "title": "[6·3 지선] 보수성향 임종식 경북도교육감, 3선 성공"
         }
       ]
     },
     {
-      "term": "영국",
+      "term": "전남",
       "total": 4,
       "sourceCount": 1,
       "sources": [
@@ -2516,64 +2681,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "영국 \"2040년까지 탄소 배출 87% 줄인다\""
+          "title": "[6·3 지선] 전남 22개 시·군 중 혁신당 2·무소속 3명 당선"
         },
         {
           "source": "yna",
-          "title": "숨 못쉬겠다는데 수갑…영국 백인청년 사망에 인종논란 격화"
+          "title": "[6·3 지선] 광주·전남 현역 기초단체장 절반 생환"
         },
         {
           "source": "yna",
-          "title": "中 왕이, 영국 외무 만나 \"비차별적 비즈니스 환경 제공해야\""
+          "title": "[6·3 지선] 강진원 전남 강진군수 연임 성공…징검다리 4선"
         }
       ]
     },
     {
-      "term": "우크라",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 \"양국관계 새 장\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "우크라 방공망 뚫은 러 미사일…젤렌스키 \"패트리엇 절실\""
-        },
-        {
-          "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
-        }
-      ]
-    },
-    {
-      "term": "오존주의보",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "충남 서천 오존주의보 해제"
-        },
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 해제"
-        },
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 발령"
-        }
-      ]
-    },
-    {
-      "term": "제공",
+      "term": "경북도교육감",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2582,20 +2703,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "IAEA, 드론 공격받은 UAE 바라카 원전에 기술지원 제공"
+          "title": "[6·3 지선] 정통 교육행정가 출신 3선 임종식 경북도교육감"
         },
         {
           "source": "yna",
-          "title": "서울대, 전 구성원에 '챗GPT 에듀' 무료 제공"
+          "title": "[6·3 지선] 보수성향 임종식 경북도교육감, 3선 성공"
         },
         {
           "source": "yna",
-          "title": "부산선관위, 기초단체장 후보 금품 제공 의혹 조사"
+          "title": "[속보] 임종식 경북도교육감, 3선 당선 확실"
         }
       ]
     },
     {
-      "term": "국무",
+      "term": "예고",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2604,20 +2725,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "美국무 \"대만 무기판매는 검토단계…시기·방식 대통령이 결정\""
+          "title": "[6·3 지선] 인천시, 4년 만에 또 수장 교체…시정 대변화 예고"
         },
         {
           "source": "yna",
-          "title": "美국무 \"이란 최고지도자 부상한 채 생존…국정관여 점점↑\""
+          "title": "[6·3 지선] 추경호 대구시장 당선인, TK신공항·행정통합 속도전 예고"
         },
         {
           "source": "yna",
-          "title": "美국무 \"이란, 핵프로그램 요소들 협상하기로 동의…성공 가망성\""
+          "title": "서울시장 선거 '투표지 부족' 헌정초유 사태…후폭풍 예고"
         }
       ]
     },
     {
-      "term": "만찬",
+      "term": "박형준",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2626,20 +2747,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'총격 파행' 백악관기자協 만찬 7월24일 재개최…트럼프도 참석(종합)"
+          "title": "전재수 부산시장 당선에 퐁피두·야구장 등 박형준 사업 기로"
         },
         {
           "source": "yna",
-          "title": "'총격사태로 파행' 백악관기자協 만찬 7월24일 다시 개최"
+          "title": "[6·3 지선] 박형준 \"부산 시민으로 돌아가…지역발전 협력 필요\""
         },
         {
           "source": "yna",
-          "title": "金총리, 국무위원들과 만찬…출범 1년 격려·정책 소통"
+          "title": "[6·3 지선] 박형준 부산시장 3선 실패…'월클 도시'는 미완으로"
         }
       ]
     },
     {
-      "term": "해제",
+      "term": "혁신당",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2648,20 +2769,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "충남 서천 오존주의보 해제"
+          "title": "[6·3 지선] 전남 22개 시·군 중 혁신당 2·무소속 3명 당선"
         },
         {
           "source": "yna",
-          "title": "전북 군산 오존주의보 해제"
+          "title": "[6·3 지선] 박종원 담양군수 당선인,혁신당 상대 단체장 탈환"
         },
         {
           "source": "yna",
-          "title": "경기 중부권 11개 시 오존주의보 해제"
+          "title": "[6·3지선] 혁신당 사순문 후보, 전남 장흥군수 재수 끝 당선"
         }
       ]
     },
     {
-      "term": "서울대",
+      "term": "격전지",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2670,193 +2791,37 @@
       "examples": [
         {
           "source": "yna",
-          "title": "서울대, 전 구성원에 '챗GPT 에듀' 무료 제공"
+          "title": "[6·3 지선] 민주당 손훈모, '격전지' 순천시장 당선"
         },
         {
           "source": "yna",
-          "title": "방한하는 젠슨 황, 8일 서울대 찾는다…\"학생들 만나고 싶다\""
+          "title": "[영상] '격전지' 부산 북갑 보선서 무소속 한동훈 당선"
         },
         {
           "source": "yna",
-          "title": "[게시판] 서울대 국어교육연구소, 논증적 글쓰기 대회 참가자 모집"
+          "title": "[6·3 지선] 격전지 부산 북갑 보선 무소속 한동훈 당선(종합)"
         }
       ]
     },
     {
-      "term": "부고",
+      "term": "정치적",
       "total": 3,
       "sourceCount": 1,
       "sources": [
-        "yna"
+        "khan"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "[부고] 이동훈(국민일보 논설위원)씨 부친상"
+          "source": "khan",
+          "title": "신용한 충북지사 당선인, 윤석열 캠프 출신…‘명태균 폭로’ 이후 정치적 변신 성공"
         },
         {
-          "source": "yna",
-          "title": "[부고] 심혜진(마이데일리 스포츠부 차장)씨 외조모상"
+          "source": "khan",
+          "title": "김남준 인천 계양을 당선인, ‘대통령의 입’에서 정치적 홀로서기"
         },
         {
-          "source": "yna",
-          "title": "[부고] 김학수(전 스포츠투데이 편집국장)씨 모친상"
-        }
-      ]
-    },
-    {
-      "term": "조사",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "경찰, '서소문 고가 붕괴' 시공사 참고인 조사…수사 본격화"
-        },
-        {
-          "source": "yna",
-          "title": "부산선관위, 기초단체장 후보 금품 제공 의혹 조사"
-        },
-        {
-          "source": "yna",
-          "title": "한화에어로 합동감식 종료…경찰 \"동료 직원 조사·자료 확보\"(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "집중",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "mk",
-          "title": "수백 년 관행 깬 교황청…새 홍보수장 정체에 관심 집중"
-        },
-        {
-          "source": "mk",
-          "title": "지방선거 D-1…강원·경북·전남·제주 후보들도 막판 집중 유세"
-        },
-        {
-          "source": "mk",
-          "title": "“완벽함 대신 지속성에 집중”…목소리로 1000만 세계인 사로잡은 비결 [더인플루언서]"
-        }
-      ]
-    },
-    {
-      "term": "하이닉스",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "mk",
-          "title": "‘SK하이닉스 주식 대박’ 전원주, 절친 선우용녀에게 통크게 쏜 이것은?"
-        },
-        {
-          "source": "mk",
-          "title": "삼성, HBM5 세계 첫 공개 … 하이닉스 \"생산능력 전속력 확대\""
-        },
-        {
-          "source": "mk",
-          "title": "최태원 \"2030년까지 메모리 부족 … 하이닉스 생산능력 5년 내 2배로\""
-        }
-      ]
-    },
-    {
-      "term": "사과",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        }
-      ]
-    },
-    {
-      "term": "취소해야",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        }
-      ]
-    },
-    {
-      "term": "공소취소",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        }
-      ]
-    },
-    {
-      "term": "시동",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"검찰, 잘못하면 사과·취소해야\"…\"공소취소 시동\""
-        }
-      ]
-    },
-    {
-      "term": "부울경",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주 '9+α'·국힘 '2+α'…서울·부울경 \"접전\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주 9+α·국힘 2+α…서울·부울경 \"접전\""
+          "source": "khan",
+          "title": "송영길 인천 연수갑 당선인, 돈 봉투 살포 의혹 ‘정치적 위기’ 딛고 당 최다선 ‘6선 고지’"
         }
       ]
     },
@@ -2870,16 +2835,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "민주 '9+α'·국힘 '2+α'…서울·부울경 \"접전\""
+          "title": "전국 개표율 82.7%…접전 지역 상황은 [국민의선택]"
         },
         {
           "source": "sbs",
-          "title": "민주 9+α·국힘 2+α…서울·부울경 \"접전\""
+          "title": "이 시각 부산 북갑…하정우·한동훈 접전 [국민의선택]"
         }
       ]
     },
     {
-      "term": "열전",
+      "term": "발전",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2888,16 +2853,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "'13일간의 열전' 마무리…당대표 최다 키워드는"
+          "title": "이광재 \"하남 시민께 감사…발전 성과로 보여드릴 것\" [국민의선택]"
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 13일 열전 마지막 날 총력전…서울, 탈환이냐 수성이냐"
+          "title": "[바로이뉴스] \"결과 겸허히 받아들이겠다\"…하정우 \"북구 발전 계속돼야\""
         }
       ]
     },
     {
-      "term": "정권",
+      "term": "상황실",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2906,11 +2871,11 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "민주 \"내란·극우 심판\" vs 국힘 \"정권 폭주 멈춰세워야\""
+          "title": "가라앉은 국힘 상황실…'개표 중단' 요구 [국민의선택]"
         },
         {
           "source": "sbs",
-          "title": "장동혁 '정권 견제론' 강조…오세훈, 신촌서 마지막 유세"
+          "title": "접전지에 기대감…이 시각 민주당 상황실 [국민의선택]"
         }
       ]
     },
@@ -2924,16 +2889,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "오세훈 \"최후의 보루 서울 남겨달라\"…이 시각 신촌"
+          "title": "접전지에 기대감…이 시각 민주당 상황실 [국민의선택]"
         },
         {
           "source": "sbs",
-          "title": "정원오 \"오세훈의 10년 심판\"…이 시각 청계광장"
+          "title": "이 시각 부산 북갑…하정우·한동훈 접전 [국민의선택]"
         }
       ]
     },
     {
-      "term": "수출",
+      "term": "윤건영",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2942,16 +2907,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이라크 \"송유관 통한 석유 수출 3배 이상으로 확대 계획\""
+          "title": "[인터뷰] 윤건영 충북교육감 당선인 \"충북교육 더 발전시킬 것\""
         },
         {
           "source": "yna",
-          "title": "UAE 국영석유사, 나프타 수출 재개…오만항구서 환적"
+          "title": "[6·3 지선] '실용·포용' 윤건영, 진보 협공 뚫고 충북교육감 재선"
         }
       ]
     },
     {
-      "term": "파행",
+      "term": "충북교육감",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2960,16 +2925,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'총격 파행' 백악관기자協 만찬 7월24일 재개최…트럼프도 참석(종합)"
+          "title": "[인터뷰] 윤건영 충북교육감 당선인 \"충북교육 더 발전시킬 것\""
         },
         {
           "source": "yna",
-          "title": "'총격사태로 파행' 백악관기자協 만찬 7월24일 다시 개최"
+          "title": "[6·3 지선] '실용·포용' 윤건영, 진보 협공 뚫고 충북교육감 재선"
         }
       ]
     },
     {
-      "term": "백악관기자",
+      "term": "경남지사",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2978,16 +2943,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'총격 파행' 백악관기자協 만찬 7월24일 재개최…트럼프도 참석(종합)"
+          "title": "[6·3 지선] 양자 대결 경남지사 선거, 개표 완료 즈음에 당락 판가름 전망"
         },
         {
           "source": "yna",
-          "title": "'총격사태로 파행' 백악관기자協 만찬 7월24일 다시 개최"
+          "title": "[6·3 지선] 날 넘겨서도 승부 '안갯속'…강원·경남지사 선거 박빙 이어가"
         }
       ]
     },
     {
-      "term": "대화중단은",
+      "term": "명단",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2996,16 +2961,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"美-이란 대화중단은 가짜뉴스…오늘까지도 대화 계속\""
+          "title": "[기초단체장 당선인 명단] 대전"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프 \"美-이란 대화중단은 가짜뉴스…오늘도 대화중\""
+          "title": "[기초단체장 당선인 명단] 전남광주"
         }
       ]
     },
     {
-      "term": "가짜뉴스",
+      "term": "싹쓸이",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3014,16 +2979,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"美-이란 대화중단은 가짜뉴스…오늘까지도 대화 계속\""
+          "title": "민주당, 전북 기초단체장 14곳 '싹쓸이'…역대 최초"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프 \"美-이란 대화중단은 가짜뉴스…오늘도 대화중\""
+          "title": "[6·3 지선] 민주, 대전 5개구청장 '싹쓸이'…4년전 '1대 4'서 극적 반전"
         }
       ]
     },
     {
-      "term": "프랑스",
+      "term": "시정",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3032,16 +2997,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
+          "title": "[6·3 지선] 인천시, 4년 만에 또 수장 교체…시정 대변화 예고"
         },
         {
           "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
+          "title": "[인터뷰] 허태정 대전시장 당선인 \"민선 8기와 달리 시민중심 시정\""
         }
       ]
     },
     {
-      "term": "파리에",
+      "term": "사업",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3050,16 +3015,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
+          "title": "전재수 부산시장 당선에 퐁피두·야구장 등 박형준 사업 기로"
         },
         {
           "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
+          "title": "[6·3 지선] 민선 9기 허태정, '이장우표 사업' 대거 재검토할듯"
         }
       ]
     },
     {
-      "term": "르완다",
+      "term": "정책",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3068,16 +3033,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
+          "title": "[6·3 지선] 전재수 통일교 의혹 딛고 승리…해양수도 정책 탄력"
         },
         {
           "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
+          "title": "[6·3 지선] 김동일 철원군수 당선인 \"사람 중심 정책 실천할 것\""
         }
       ]
     },
     {
-      "term": "학살",
+      "term": "우크라",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3086,16 +3051,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
+          "title": "우크라 '러시아판 다보스포럼' 앞서 상트페테르부르크 공습(종합)"
         },
         {
           "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
+          "title": "우크라 '깜짝' 방문 나토 사무총장 \"러시아 점점 더 절박\"(종합)"
         }
       ]
     },
     {
-      "term": "추모비",
+      "term": "강석주",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3104,16 +3069,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "프랑스 파리에 '르완다 학살' 희생자 추모비(종합)"
+          "title": "[인터뷰] 강석주 통영시장 당선인 \"시민만 바라보고 헌신하겠다\""
         },
         {
           "source": "yna",
-          "title": "\"기억과 화해\"…프랑스, 파리에 '르완다 학살' 희생자 추모비"
+          "title": "[6·3 지선] 민주 강석주, 초접전 끝에 통영시장 탈환…징검다리 재선"
         }
       ]
     },
     {
-      "term": "격화",
+      "term": "통영시장",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3122,16 +3087,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "숨 못쉬겠다는데 수갑…영국 백인청년 사망에 인종논란 격화"
+          "title": "[인터뷰] 강석주 통영시장 당선인 \"시민만 바라보고 헌신하겠다\""
         },
         {
           "source": "yna",
-          "title": "남아공서 반이민 시위 격화…\"모잠비크인 5명 피살\""
+          "title": "[6·3 지선] 민주 강석주, 초접전 끝에 통영시장 탈환…징검다리 재선"
         }
       ]
     },
     {
-      "term": "가입",
+      "term": "민선",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3140,16 +3105,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 \"양국관계 새 장\"(종합)"
+          "title": "[6·3 지선] 민선 9기 허태정, '이장우표 사업' 대거 재검토할듯"
         },
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
+          "title": "[인터뷰] 허태정 대전시장 당선인 \"민선 8기와 달리 시민중심 시정\""
         }
       ]
     },
     {
-      "term": "열리나",
+      "term": "청주시장",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3158,16 +3123,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 \"양국관계 새 장\"(종합)"
+          "title": "[6·3 지선] 청주시장 또 교체, 정치력 앞세운 이장섭 입성"
         },
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
+          "title": "[인터뷰] 이장섭 청주시장 당선인 \"100년 먹거리 만들 것\""
         }
       ]
     },
     {
-      "term": "헝가리",
+      "term": "이장섭",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3176,16 +3141,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 \"양국관계 새 장\"(종합)"
+          "title": "[6·3 지선] 청주시장 또 교체, 정치력 앞세운 이장섭 입성"
         },
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
+          "title": "[인터뷰] 이장섭 청주시장 당선인 \"100년 먹거리 만들 것\""
         }
       ]
     },
     {
-      "term": "양국관계",
+      "term": "만들",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3194,16 +3159,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 \"양국관계 새 장\"(종합)"
+          "title": "[인터뷰] 이장섭 청주시장 당선인 \"100년 먹거리 만들 것\""
         },
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
+          "title": "[인터뷰] 손배찬 파주시장 당선인 \"더 나은 파주 만들 것\""
         }
       ]
     },
     {
-      "term": "에볼라",
+      "term": "보선서",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3212,16 +3177,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "민주콩고 에볼라 의심·확진 환자 400명대로 줄어"
+          "title": "[영상] '격전지' 부산 북갑 보선서 무소속 한동훈 당선"
         },
         {
           "source": "yna",
-          "title": "질병청, 아프리카 질병통제센터와 에볼라 대응 논의"
+          "title": "[6·3 지선] '초접전' 부산 북갑 보선서 한동훈 당선 원동력은"
         }
       ]
     },
     {
-      "term": "총리",
+      "term": "도시",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3230,16 +3195,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "金총리, 국무위원들과 만찬…출범 1년 격려·정책 소통"
+          "title": "[6·3 지선] 박형준 부산시장 3선 실패…'월클 도시'는 미완으로"
         },
         {
           "source": "yna",
-          "title": "우크라 EU 가입 길 열리나…헝가리 총리 \"양국관계 새 장\""
+          "title": "[인터뷰] 추경호 대구시장 당선인 \"돈·사람 모이는 도시…경제시장 되겠다\""
         }
       ]
     },
     {
-      "term": "경기",
+      "term": "미래",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3248,16 +3213,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'결승 홈런' 키움 히우라 \"연패 부담 없었다…시즌 90경기 남아\""
+          "title": "[인터뷰] 천호성 전북교육감 당선인…\"전북교육 미래 열겠다\""
         },
         {
           "source": "yna",
-          "title": "경기 중부권 11개 시 오존주의보 해제"
+          "title": "[인터뷰] 이철우 경북도지사 당선인 \"행정통합·신공항이 경북 미래\""
         }
       ]
     },
     {
-      "term": "박승규",
+      "term": "징검다리",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3266,16 +3231,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "삼성 박승규 \"타석에선 안 들리던 엘도라도, 나중엔 '전율'\""
+          "title": "[6·3 지선] 민주 강석주, 초접전 끝에 통영시장 탈환…징검다리 재선"
         },
         {
           "source": "yna",
-          "title": "박승규 동점포·김성윤 결승타…'약속의 8회' 삼성, NC에 역전승"
+          "title": "[6·3 지선] 강진원 전남 강진군수 연임 성공…징검다리 4선"
         }
       ]
     },
     {
-      "term": "탈출",
+      "term": "전남광주통합특별시",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3284,16 +3249,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'쾅쾅쾅쾅' LG, 4연승 질주…키움 8연패 탈출·SSG 13연패 추락(종합)"
+          "title": "[6·3 지선] 전남광주통합특별시 초대 시장·교육감·의원 탄생"
         },
         {
           "source": "yna",
-          "title": "SSG, 홈런 세 방에 무너지며 '13연패'…키움은 8연패 탈출"
+          "title": "[6·3 지선] 전남광주통합특별시 교육감 김대중 후보 당선"
         }
       ]
     },
     {
-      "term": "점검",
+      "term": "경북도지사",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3302,106 +3267,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "천장 무너진 부산 백화점 안전 점검 끝내고 3일 영업 재개"
+          "title": "[6·3 지선] '암 투병' 공개했던 이철우…경북도지사 3선 고지 올랐다"
         },
         {
           "source": "yna",
-          "title": "합참의장, 육군 수도군단·해병대 2사단 방문…경계태세 점검"
+          "title": "[인터뷰] 이철우 경북도지사 당선인 \"행정통합·신공항이 경북 미래\""
         }
       ]
     },
     {
-      "term": "두산",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "벤자민, 6⅓이닝 9K 무실점…두산, 한화 꺾고 상위권 호시탐탐"
-        },
-        {
-          "source": "yna",
-          "title": "[프로야구 잠실전적] 두산 5-3 한화"
-        }
-      ]
-    },
-    {
-      "term": "추가",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "울릉도 '수토' 흔적서 발견된 '사공 박명득'…글자 추가 확인"
-        },
-        {
-          "source": "yna",
-          "title": "6천회 불법촬영 태권도 관장, 미성년 관원 성범죄로 추가 송치"
-        }
-      ]
-    },
-    {
-      "term": "전북",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 해제"
-        },
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 발령"
-        }
-      ]
-    },
-    {
-      "term": "군산",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 해제"
-        },
-        {
-          "source": "yna",
-          "title": "전북 군산 오존주의보 발령"
-        }
-      ]
-    },
-    {
-      "term": "경찰",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "경찰, '서소문 고가 붕괴' 시공사 참고인 조사…수사 본격화"
-        },
-        {
-          "source": "yna",
-          "title": "한화에어로 합동감식 종료…경찰 \"동료 직원 조사·자료 확보\"(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "성매매",
+      "term": "불가",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3410,11 +3285,227 @@
       "examples": [
         {
           "source": "donga",
-          "title": "차가원 “MC몽 성매매 제보 받고 업무 배제…우려했던 상황”"
+          "title": "[속보]선관위 “개표 중단 불가…선거 연기-재선거 사유 아냐”"
         },
         {
           "source": "donga",
-          "title": "‘주학년, 日 AV배우와 성매매 의혹’ 보도한 기자 재판행"
+          "title": "[속보]선관위 “개표 중단 불가…선거 연기-재선거 사유 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "명픽",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "한동훈의 대역전극…‘명픽’도 국힘도 이겼다"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]무소속 한동훈 당선…‘명픽-국힘’ 이기고 돌아왔다"
+        }
+      ]
+    },
+    {
+      "term": "컷오프",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "컷오프 진통 이진숙, 대구 달성군 당선 확실"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]컷오프 진통 이진숙, 대구 달성군 당선 확실"
+        }
+      ]
+    },
+    {
+      "term": "진통",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "컷오프 진통 이진숙, 대구 달성군 당선 확실"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]컷오프 진통 이진숙, 대구 달성군 당선 확실"
+        }
+      ]
+    },
+    {
+      "term": "잠정투표율",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "국회의원 재보선 14곳 잠정투표율 60.9% 기록"
+        },
+        {
+          "source": "donga",
+          "title": "[속보]국회의원 재보선 14곳 잠정투표율 60.9% 기록"
+        }
+      ]
+    },
+    {
+      "term": "데이터센터",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "“작년 전세계 데이터센터 사용 전력, 佛 전체 1년치와 비슷”"
+        },
+        {
+          "source": "donga",
+          "title": "삼성重, ‘바다 위 데이터센터’ 선점 나선다"
+        }
+      ]
+    },
+    {
+      "term": "사용",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "“작년 전세계 데이터센터 사용 전력, 佛 전체 1년치와 비슷”"
+        },
+        {
+          "source": "donga",
+          "title": "아파트 품귀에 빌라 전월세가 급등… 10명중 3명은 갱신권 사용"
+        }
+      ]
+    },
+    {
+      "term": "사상",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "스페이스X “몸값 1조7500억 달러 목표” 사상 최대 IPO 초읽기"
+        },
+        {
+          "source": "donga",
+          "title": "日 닛케이주가, 사상 첫 6만8000 돌파"
+        }
+      ]
+    },
+    {
+      "term": "삼성전자",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "삼성전자-하이닉스도 ‘미토스’ 접속 가능"
+        },
+        {
+          "source": "donga",
+          "title": "삼성전자, 폐스티로폼 재활용… 가전 내장재로"
+        }
+      ]
+    },
+    {
+      "term": "현대차그룹",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "美 현대차그룹 공장서 기아 스포티지 첫 생산"
+        },
+        {
+          "source": "donga",
+          "title": "현대차그룹, 韓-佛 수교 140주년 문화예술 후원"
+        }
+      ]
+    },
+    {
+      "term": "주년",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "현대차그룹, 韓-佛 수교 140주년 문화예술 후원"
+        },
+        {
+          "source": "donga",
+          "title": "“10주년 맞아 코스닥 상장… 종합 에너지 사업자로 거듭나겠다”"
+        }
+      ]
+    },
+    {
+      "term": "파전",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "[속보] ‘5파전’ 경기 평택을, 국힘 유의동 당선 “주어진 소임 다할 것”"
+        },
+        {
+          "source": "khan",
+          "title": "조국혁신당 ‘초박빙 3파전’ 희색…눈물 훔치기도"
+        }
+      ]
+    },
+    {
+      "term": "시대",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "진보 교육감 시대 다시 열렸다···경기교육감 선거 안민석 당선 확실[6·3지방선거]"
+        },
+        {
+          "source": "khan",
+          "title": "김석준 후보, 부산시교육감 ‘당선 확실’ ··· “AI 시대 미래교육에 박차”"
         }
       ]
     }
