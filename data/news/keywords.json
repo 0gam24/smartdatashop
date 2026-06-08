@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-06-07T16:49:41.785Z",
-  "elapsedMs": 5183,
+  "fetchedAt": "2026-06-08T18:10:40.811Z",
+  "elapsedMs": 2498,
   "sourceTotal": 7,
   "sourceSuccess": 7,
   "sourceFail": 0,
   "totalHeadlines": 359,
-  "uniqueKeywords": 307,
+  "uniqueKeywords": 337,
   "multiSourceCount": 100,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 309
+      "elapsedMs": 1298
     },
     {
       "id": "yna",
@@ -22,7 +22,7 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "ok",
       "itemCount": 120,
-      "elapsedMs": 1342
+      "elapsedMs": 1305
     },
     {
       "id": "donga",
@@ -30,7 +30,7 @@
       "url": "https://rss.donga.com/total.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 5116
+      "elapsedMs": 1156
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1594
+      "elapsedMs": 1871
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1858
+      "elapsedMs": 1412
     },
     {
       "id": "kmib",
@@ -54,7 +54,7 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2343
+      "elapsedMs": 1703
     },
     {
       "id": "hani",
@@ -62,13 +62,13 @@
       "url": "https://www.hani.co.kr/rss",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 2824
+      "elapsedMs": 2443
     }
   ],
   "multiSourceKeywords": [
     {
-      "term": "선관위",
-      "total": 18,
+      "term": "이란",
+      "total": 14,
       "sourceCount": 6,
       "sources": [
         "sbs",
@@ -81,479 +81,79 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
+          "title": "\"이란 의도 아닌 건 확실\" \"이스라엘, 욱해서 지적 아냐\""
         },
         {
           "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
         },
         {
           "source": "yna",
-          "title": "'투표지 부족' 검경 합수본이 수사…선관위 직무 유기 정조준"
+          "title": "트럼프 '발포 중단' 요구 뒤 이란 \"이스라엘 작전 중지\"(종합)"
         }
       ]
     },
     {
-      "term": "대통령",
-      "total": 21,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 4부 요인 회동…투표용지 부족 사태 논의"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 신임 국무총리 후보에 한성숙 장관 지명"
-        }
-      ]
-    },
-    {
-      "term": "젠슨",
-      "total": 16,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젠슨 황, 내일 엔비디아·SK 협력 청사진 발표…삼성과도 회동"
-        },
-        {
-          "source": "yna",
-          "title": "젠슨 황, 최태원·SK 사장단과 2차 깐부회동…\"HBM 더 많이\""
-        },
-        {
-          "source": "yna",
-          "title": "젠슨 황 \"폭투였다…박 회장과 두산의 우승 시즌 얘기\""
-        }
-      ]
-    },
-    {
-      "term": "부족",
-      "total": 15,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 4부 요인 회동…투표용지 부족 사태 논의"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족' 국조에 개헌·특검카드까지…\"천지개벽 개혁\""
-        },
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        }
-      ]
-    },
-    {
-      "term": "한성숙",
-      "total": 12,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "후임 총리에 3인 두고 고심…한성숙 후보자 낙점 배경"
-        },
-        {
-          "source": "sbs",
-          "title": "새 총리 후보자에 한성숙…청와대 \"성장 이끌 적임자\""
-        },
-        {
-          "source": "sbs",
-          "title": "'벤처 4대강국' 앞장선 한성숙 총리 후보자…기업인 출신 장관"
-        }
-      ]
-    },
-    {
-      "term": "사태",
-      "total": 7,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 4부 요인 회동…투표용지 부족 사태 논의"
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 李대통령 \"검경 합수본 구성해 선관위 사태 철저 규명 지시\""
-        }
-      ]
-    },
-    {
-      "term": "총리",
-      "total": 17,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"다음 임무는 유능한 민주당\"…불붙는 당권 경쟁"
-        },
-        {
-          "source": "sbs",
-          "title": "새 총리 후보자에 한성숙…청와대 \"성장 이끌 적임자\""
-        },
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        }
-      ]
-    },
-    {
-      "term": "재선거",
-      "total": 9,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "sbs",
-          "title": "장동혁 \"정당 유불리 떠나 재선거\"…이재명 대통령 회담 요구"
-        },
-        {
-          "source": "yna",
-          "title": "이준석, '재선거 요구' 장동혁에 \"오세훈 사퇴 종용하나\""
-        }
-      ]
-    },
-    {
-      "term": "트럼프",
-      "total": 9,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수할 것\""
-        }
-      ]
-    },
-    {
-      "term": "회동",
+      "term": "경고",
       "total": 8,
-      "sourceCount": 4,
+      "sourceCount": 6,
       "sources": [
         "sbs",
         "yna",
+        "donga",
         "khan",
-        "mk"
+        "mk",
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "이 대통령, 내일 4부 요인 회동…투표용지 부족 사태 논의"
+          "title": "\"부정선거론과 달라\"…\"선거 결과는 국민의 경고\""
         },
         {
-          "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
+          "source": "sbs",
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
         },
         {
-          "source": "yna",
-          "title": "젠슨 황, 내일 엔비디아·SK 협력 청사진 발표…삼성과도 회동"
+          "source": "sbs",
+          "title": "[여담야담] 이용우 \"대통령도 선거 결과 '국민 경고'라는데…여당 지도부는?\""
         }
       ]
     },
     {
-      "term": "합수본",
+      "term": "잠실",
       "total": 8,
-      "sourceCount": 4,
+      "sourceCount": 6,
       "sources": [
         "sbs",
         "yna",
         "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"신뢰 잃은 기관, 존재 의미 없어…검경 합수본 구성\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        }
-      ]
-    },
-    {
-      "term": "경쟁",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
+        "khan",
         "mk",
         "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김 총리 \"다음 임무는 유능한 민주당\"…불붙는 당권 경쟁"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
+          "title": "6·3 지선 투표용지 4,726장 모자라…'잠실4동 7투표소' 가장 부족"
         },
         {
           "source": "yna",
-          "title": "김도영·오스틴, 나란히 17호포…뜨겁게 달아오른 홈런 경쟁(종합)"
-        }
-      ]
-    },
-    {
-      "term": "지시",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
+          "title": "잠실 개표소 봉쇄 시위 닷새째…'MAGA' 피켓까지(종합)"
         },
         {
           "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "李대통령, 선관위에 \"신뢰잃은 기관\"…합수본 투표지수사 지시"
-        }
-      ]
-    },
-    {
-      "term": "국힘",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "국힘 원내대표 선거 하루 연기…\"일정 급박\" 비판 수용"
-        },
-        {
-          "source": "yna",
-          "title": "국힘 '투표지 부족' 국조·특검 쌍끌이 압박…\"동시 추진해야\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "국힘 \"투표지 사태에도 '與전대 출마' 총리 교체…무책임\"(종합)"
-        }
-      ]
-    },
-    {
-      "term": "의혹",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "하마스 연계 의혹 팔레스타인 남성, 그리스서 체포…\"테러 획책\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        },
-        {
-          "source": "donga",
-          "title": "대검 ‘투표용지 사태’ 검경 합수본 구성…“의혹 엄정히 규명”"
-        }
-      ]
-    },
-    {
-      "term": "규명",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 李대통령 \"검경 합수본 구성해 선관위 사태 철저 규명 지시\""
-        },
-        {
-          "source": "donga",
-          "title": "대검 ‘투표용지 사태’ 검경 합수본 구성…“의혹 엄정히 규명”"
-        }
-      ]
-    },
-    {
-      "term": "구성",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"신뢰 잃은 기관, 존재 의미 없어…검경 합수본 구성\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        },
-        {
-          "source": "donga",
-          "title": "대검 ‘투표용지 사태’ 검경 합수본 구성…“의혹 엄정히 규명”"
-        }
-      ]
-    },
-    {
-      "term": "스페이스",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "스페이스X, 1천500억불 몰려 IPO 청약 목표액 2배 흥행"
-        },
-        {
-          "source": "donga",
-          "title": "스페이스X 상장 카운트다운… 국내 첫날 청약 완판"
-        },
-        {
-          "source": "donga",
-          "title": "스페이스X, 구글과 46조원대 AI데이터센터 ‘클라우드 임대 계약’"
-        }
-      ]
-    },
-    {
-      "term": "성장",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "새 총리 후보자에 한성숙…청와대 \"성장 이끌 적임자\""
-        },
-        {
-          "source": "yna",
-          "title": "'두산 유니폼' 입은 젠슨 황 \"엔비디아와 한국 함께 성장\""
-        },
-        {
-          "source": "khan",
-          "title": "공직 11개월 만에 총리로…‘모두의 성장’ 국정 기조 인선 반영"
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
         }
       ]
     },
     {
       "term": "시진핑",
-      "total": 4,
-      "sourceCount": 4,
+      "total": 25,
+      "sourceCount": 5,
       "sources": [
         "sbs",
+        "yna",
         "khan",
         "mk",
         "hani"
@@ -561,24 +161,25 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "'시진핑 방북' 대대적 환영행사 개최 전망…북중 회담 예상 의제는?"
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
         },
         {
-          "source": "khan",
-          "title": "북, 시진핑 방북 앞두고 “핵보유국 지위는 절대 불퇴”"
+          "source": "yna",
+          "title": "美, 비핵화 빠진 북중회담에 \"트럼프-시진핑 北비핵화목표 공유\""
         },
         {
-          "source": "mk",
-          "title": "시진핑 방북 하루전날 … 北 \"핵보유 지위 불퇴\""
+          "source": "yna",
+          "title": "시진핑, '한반도' 빼고 '北中 교류' 강조…새 대북관계 정립하나"
         }
       ]
     },
     {
-      "term": "김민석",
-      "total": 4,
-      "sourceCount": 4,
+      "term": "이스라엘",
+      "total": 17,
+      "sourceCount": 5,
       "sources": [
         "sbs",
+        "yna",
         "khan",
         "mk",
         "hani"
@@ -586,21 +187,177 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
+          "title": "\"이란 의도 아닌 건 확실\" \"이스라엘, 욱해서 지적 아냐\""
         },
         {
-          "source": "khan",
-          "title": "김민석·송영길 ‘반청공세’…정청래 책임론 부각"
+          "source": "yna",
+          "title": "이스라엘 국방 \"헤즈볼라가 공격하면 베이루트 또 때릴 것\""
         },
         {
-          "source": "mk",
-          "title": "당권 도전나선 김민석 \"민주 황금시대 열겠다\""
+          "source": "yna",
+          "title": "트럼프 '발포 중단' 요구 뒤 이란 \"이스라엘 작전 중지\"(종합)"
         }
       ]
     },
     {
-      "term": "원내대표",
-      "total": 4,
+      "term": "젠슨",
+      "total": 12,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젠슨 황 \"한국에 수천억달러 사업 가져왔다\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "\"지금은 한국의 시간\"…젠슨 황이 남긴 메시지"
+        },
+        {
+          "source": "yna",
+          "title": "반도체 넘어 로봇까지…젠슨 황의 'AI 동맹' 총집결"
+        }
+      ]
+    },
+    {
+      "term": "선관위",
+      "total": 11,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이번엔 \"개헌까지 검토 가능\"…'선관위 개혁안' 쏟아졌다"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"선관위, 방임할 수 없어…합당한 책임져야\""
+        },
+        {
+          "source": "yna",
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "부족",
+      "total": 9,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "6·3 지선 투표용지 4,726장 모자라…'잠실4동 7투표소' 가장 부족"
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 장동혁 \"투표용지 부족 사태, 재선거가 우선\"…사퇴 요구는 외면"
+        },
+        {
+          "source": "sbs",
+          "title": "청담동도 \"절반만 인쇄\"…100장 이상 부족 17곳 봤더니"
+        }
+      ]
+    },
+    {
+      "term": "투표용지",
+      "total": 8,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "6·3 지선 투표용지 4,726장 모자라…'잠실4동 7투표소' 가장 부족"
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 장동혁 \"투표용지 부족 사태, 재선거가 우선\"…사퇴 요구는 외면"
+        },
+        {
+          "source": "yna",
+          "title": "대법원장, '투표용지 부족 사태' 노태악 선관위원장 사의 수용"
+        }
+      ]
+    },
+    {
+      "term": "공격",
+      "total": 7,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 네타냐후 \"이란공습 일시 중단…공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "\"이스라엘, 대이란 공격 중단 결정…헤즈볼라와 교전은 계속\""
+        }
+      ]
+    },
+    {
+      "term": "국민",
+      "total": 6,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이용우 \"대통령도 선거 결과 '국민 경고'라는데…여당 지도부는?\""
+        },
+        {
+          "source": "donga",
+          "title": "데이터, 칸막이 넘어 국민 삶 바꾸는 힘으로[기고/안형준]"
+        },
+        {
+          "source": "khan",
+          "title": "“북핵 문제, 추가 생산 중단 등 단기 목표로 협상…한·일 상호군수지원협정, 국민 정서상 어려워” [이 대통령 ‘취임 1년’ 회견]"
+        }
+      ]
+    },
+    {
+      "term": "대통령",
+      "total": 24,
       "sourceCount": 4,
       "sources": [
         "sbs",
@@ -611,359 +368,829 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "국힘 원내대표 선거 하루 연기…\"일정 급박\" 비판 수용"
+          "title": "참정권 시위 짚으며 \"저도 반성\"…이 대통령, 언급 이유?"
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
+        },
+        {
+          "source": "sbs",
+          "title": "국민의힘 \"이 대통령 다주택자는 복사도 안 시킨다더니 총리로 지명\""
+        }
+      ]
+    },
+    {
+      "term": "트럼프",
+      "total": 15,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "LA시장 선거서 민주당 후보 득세에 트럼프·머스크, 음모론 제기"
         },
         {
           "source": "yna",
-          "title": "변화냐 내홍 격화냐…張버티기에 주목받는 국힘 원내대표 선거(종합)"
+          "title": "美, 비핵화 빠진 북중회담에 \"트럼프-시진핑 北비핵화목표 공유\""
+        },
+        {
+          "source": "yna",
+          "title": "\"'사자굴'로 들어가는 트럼프\"…사상 첫 NBA 파이널 직관 대통령"
+        }
+      ]
+    },
+    {
+      "term": "중단",
+      "total": 13,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 네타냐후 \"이란공습 일시 중단…공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "트럼프 '발포 중단' 요구 뒤 이란 \"이스라엘 작전 중지\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "김정은",
+      "total": 13,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김정은·시진핑, 전략협력 강화 한목소리…北비핵화 언급은 없어"
+        },
+        {
+          "source": "yna",
+          "title": "김정은 \"북중관계는 제1전략사업…하나의 중국 원칙 지지\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "김정은 \"북중관계는 국가의 가장 중대한 제1전략사업\""
+        }
+      ]
+    },
+    {
+      "term": "경제",
+      "total": 8,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "7년만에 평양 찾은 시진핑, '외교·국방·경제 수장' 총동원"
+        },
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "\"북한은 지금 세계에서 가장 놀라운 경제 성공담\"< WSJ>"
+        }
+      ]
+    },
+    {
+      "term": "투표소",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "6·3 지선 투표용지 4,726장 모자라…'잠실4동 7투표소' 가장 부족"
+        },
+        {
+          "source": "yna",
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "'용지부족에 투표 한때중단' 투표소, 부산·대구·경기서도 확인"
+        }
+      ]
+    },
+    {
+      "term": "강화",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김정은·시진핑, 전략협력 강화 한목소리…北비핵화 언급은 없어"
+        },
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 시진핑 \"북중, 전략협조 강화…각자 주권·안보·발전이익 수호\""
+        }
+      ]
+    },
+    {
+      "term": "시위",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "참정권 시위 짚으며 \"저도 반성\"…이 대통령, 언급 이유?"
+        },
+        {
+          "source": "yna",
+          "title": "잠실 개표소 봉쇄 시위 닷새째…'MAGA' 피켓까지(종합)"
         },
         {
           "source": "khan",
-          "title": "국민의힘 원내대표 3파전…당내 ‘주도권 싸움’ 시작"
+          "title": "잠실 시위, 시비붙자 “대진연이냐”···“멸공” 구호에 윤석열 지지 플랜카드도 등장"
+        }
+      ]
+    },
+    {
+      "term": "공습",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습 자제 촉구"
+        },
+        {
+          "source": "donga",
+          "title": "네타냐후 “이란 공습 일시 중단…공격 재개하면 강경대응” 경고"
+        }
+      ]
+    },
+    {
+      "term": "주권",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
+        },
+        {
+          "source": "sbs",
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 시진핑 \"북중, 전략협조 강화…각자 주권·안보·발전이익 수호\""
+        }
+      ]
+    },
+    {
+      "term": "협력",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젠슨 황 만난 삼성 전영현 \"HBM4E·HBM5 등 장기적 협력 논의\""
+        },
+        {
+          "source": "yna",
+          "title": "[전북소식] 식품진흥원, 스페인 농식품 클러스터와 기술 협력"
+        },
+        {
+          "source": "khan",
+          "title": "북·중, 경제·안보 협력 ‘한 단계 격상’…미·일 견제 등 입장 공유"
+        }
+      ]
+    },
+    {
+      "term": "생산",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"북한, 지금도 핵 물질 생산…반드시 비핵화 향해 가야\""
+        },
+        {
+          "source": "donga",
+          "title": "“국산 혈액암 항암제, 생산-투여 4주이하로 단축”"
+        },
+        {
+          "source": "khan",
+          "title": "“북핵 문제, 추가 생산 중단 등 단기 목표로 협상…한·일 상호군수지원협정, 국민 정서상 어려워” [이 대통령 ‘취임 1년’ 회견]"
+        }
+      ]
+    },
+    {
+      "term": "경쟁",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "與, '당권 경쟁' 계파 신경전 가열…지방선거 책임론 공방 지속(종합)"
+        },
+        {
+          "source": "donga",
+          "title": "더 강한 비만치료제 온다… 위고비-마운자로 고용량 출시 경쟁"
+        },
+        {
+          "source": "khan",
+          "title": "핵전력 증강 속도 내는 북·중…군비통제 실패에 ‘경쟁’ 가속화"
+        }
+      ]
+    },
+    {
+      "term": "여성",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
+        },
+        {
+          "source": "donga",
+          "title": "잠실 시위현장서 여성 신체 몰래 촬영한 남성,  현장서 체포"
+        },
+        {
+          "source": "mk",
+          "title": "“시위하러 왔다더니”…잠실 개표소 현장서 여성 ‘몰카’ 찍은 남성 덜미"
+        }
+      ]
+    },
+    {
+      "term": "남성",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
+        },
+        {
+          "source": "donga",
+          "title": "잠실 시위현장서 여성 신체 몰래 촬영한 남성,  현장서 체포"
+        },
+        {
+          "source": "mk",
+          "title": "“시위하러 왔다더니”…잠실 개표소 현장서 여성 ‘몰카’ 찍은 남성 덜미"
+        }
+      ]
+    },
+    {
+      "term": "엔비디아",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "배경훈 부총리 \"엔비디아 베라 루빈, 한국 최우선 공급\""
+        },
+        {
+          "source": "donga",
+          "title": "반도체-로봇-데이터센터까지 ‘엔비디아 동맹’"
+        },
+        {
+          "source": "mk",
+          "title": "엔비디아 신형 AI 한국 먼저…배경훈 부총리 “베라루빈 최우선 공급”"
+        }
+      ]
+    },
+    {
+      "term": "반도체",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "반도체 넘어 로봇까지…젠슨 황의 'AI 동맹' 총집결"
+        },
+        {
+          "source": "donga",
+          "title": "반도체-로봇-데이터센터까지 ‘엔비디아 동맹’"
+        },
+        {
+          "source": "khan",
+          "title": "반도체 주가 폭락엔 “할인가에 살 기회”…‘AI 낙관론’ 재확인"
+        }
+      ]
+    },
+    {
+      "term": "선거",
+      "total": 11,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"부정선거론과 달라\"…\"선거 결과는 국민의 경고\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
+        },
+        {
+          "source": "sbs",
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
+        }
+      ]
+    },
+    {
+      "term": "북중",
+      "total": 11,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…역사적 출발점\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "7년 전보다 '몸값' 높아진 북한…북중 경제협력 전면 복원되나"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 시진핑 \"북중, 새로운 역사적 출발점…중요 합의 이뤄\""
+        }
+      ]
+    },
+    {
+      "term": "외교",
+      "total": 8,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…역사적 출발점\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "7년만에 평양 찾은 시진핑, '외교·국방·경제 수장' 총동원"
+        },
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
+        }
+      ]
+    },
+    {
+      "term": "없어",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"선관위, 방임할 수 없어…합당한 책임져야\""
+        },
+        {
+          "source": "yna",
+          "title": "김정은·시진핑, 전략협력 강화 한목소리…北비핵화 언급은 없어"
+        },
+        {
+          "source": "yna",
+          "title": "수원 팔달문 대형 의류매장서 화재…\"인명피해 없어\""
+        }
+      ]
+    },
+    {
+      "term": "평양",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "시진핑, 평양 연회 참석…\"김정은과 중요 합의 이뤄\""
+        },
+        {
+          "source": "yna",
+          "title": "7년만에 평양 찾은 시진핑, '외교·국방·경제 수장' 총동원"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 김정은 \"시진핑, 올해 첫 해외방문 평양…北에 더없이 고무\"<신화통신>"
+        }
+      ]
+    },
+    {
+      "term": "추진",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "삼성바이오 노조, 삼성그룹 초기업노조 탈퇴 추진"
+        },
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "중동 정세 불안에…프랑스군 키프로스 주둔 추진"
+        }
+      ]
+    },
+    {
+      "term": "만난",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젠슨 황 만난 삼성 전영현 \"HBM4E·HBM5 등 장기적 협력 논의\""
+        },
+        {
+          "source": "yna",
+          "title": "젠슨 황 만난 배경훈 부총리 \"한국 피지컬 AI 도약 추진\""
+        },
+        {
+          "source": "khan",
+          "title": "김정은 만난 시진핑 “새 시대 중·북관계 강화”"
+        }
+      ]
+    },
+    {
+      "term": "결과",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"공소 취소, 법과 상식대로…진상규명 결과 보고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이용우 \"대통령도 선거 결과 '국민 경고'라는데…여당 지도부는?\""
+        }
+      ]
+    },
+    {
+      "term": "가장",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "6·3 지선 투표용지 4,726장 모자라…'잠실4동 7투표소' 가장 부족"
+        },
+        {
+          "source": "yna",
+          "title": "\"북한은 지금 세계에서 가장 놀라운 경제 성공담\"< WSJ>"
+        },
+        {
+          "source": "yna",
+          "title": "김정은 \"북중관계는 국가의 가장 중대한 제1전략사업\""
+        }
+      ]
+    },
+    {
+      "term": "네타냐후",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 네타냐후 \"이란공습 일시 중단…공격 재개시 강경 대응\""
+        },
+        {
+          "source": "yna",
+          "title": "\"트럼프-네타냐후 통화…이스라엘, 이란 대응책 결론 못 내려\""
+        }
+      ]
+    },
+    {
+      "term": "개표소",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "잠실 개표소 봉쇄 시위 닷새째…'MAGA' 피켓까지(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
+        },
+        {
+          "source": "mk",
+          "title": "“시위하러 왔다더니”…잠실 개표소 현장서 여성 ‘몰카’ 찍은 남성 덜미"
+        }
+      ]
+    },
+    {
+      "term": "아워홈",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김태원 아워홈 대표 \"용인공장 근로자 끼임 사고 사죄\""
+        },
+        {
+          "source": "yna",
+          "title": "아워홈 용인공장서 또 끼임사고…50대 하청 근로자 심정지(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "아워홈 용인공장 또 끼임사고…50대 하청 노동자 심정지"
+        }
+      ]
+    },
+    {
+      "term": "전략적",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
+        },
+        {
+          "source": "mk",
+          "title": "밀착하는 북중, ‘전략적 동반자’ 선언…경제·외교·군사협력 강화 추진"
+        },
+        {
+          "source": "hani",
+          "title": "미국 패권에 맞선 ‘다극화’ 추진…북-중 ‘전략적 동반자’로 격상"
+        }
+      ]
+    },
+    {
+      "term": "회동",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "4부 요인과 긴급 회동…\"대개혁 방안 마련\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
+        },
+        {
+          "source": "khan",
+          "title": "영·프·독 정상, 젤렌스키와 회동, 러·우 전쟁 종식 ‘5대 조건’ 제시"
+        }
+      ]
+    },
+    {
+      "term": "참정권",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "참정권 시위 짚으며 \"저도 반성\"…이 대통령, 언급 이유?"
+        },
+        {
+          "source": "khan",
+          "title": "장동혁 “참정권 빼앗긴 국민들에 단 한마디 사과도 안 하나”"
+        },
+        {
+          "source": "khan",
+          "title": "극우 정치 세력과 ‘거리’ 헌법상 참정권 침해 분노"
         }
       ]
     },
     {
       "term": "장동혁",
       "total": 4,
-      "sourceCount": 4,
+      "sourceCount": 3,
       "sources": [
         "sbs",
-        "donga",
         "khan",
         "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "장동혁 \"정당 유불리 떠나 재선거\"…이재명 대통령 회담 요구"
+          "title": "\"특검보다 재선거\" 장동혁 주장에…\"방패막이 돼선 안 돼\""
         },
         {
-          "source": "donga",
-          "title": "[사설]장동혁 대표, 더 버티려고 또 꼼수 쓰나"
+          "source": "sbs",
+          "title": "[여담야담] 장동혁 \"투표용지 부족 사태, 재선거가 우선\"…사퇴 요구는 외면"
         },
         {
           "source": "khan",
-          "title": "국힘 장동혁, 다시 꺼내 든 ‘재선거’…당서도 “실현할 수 없는 약속” 비판"
+          "title": "장동혁 “참정권 빼앗긴 국민들에 단 한마디 사과도 안 하나”"
         }
       ]
     },
     {
-      "term": "잠실",
+      "term": "미국",
       "total": 4,
-      "sourceCount": 4,
+      "sourceCount": 3,
       "sources": [
         "yna",
-        "khan",
         "mk",
         "hani"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "잠실 투표소 봉쇄 시위 나흘째로…새벽에도 수천명 자리지켜"
+          "title": "\"미국인 25%만 '미국 최고'…민주주의 중요성 인식 약화\""
         },
         {
-          "source": "khan",
-          "title": "잠실 개표소 봉쇄 시위, 낮밤 분위기 반전···‘재선거’ 중심 요구서 ‘부정선거’ 늘어"
+          "source": "yna",
+          "title": "미국 봉쇄에도 멕시코·벨리즈, 쿠바에 구호품 전달"
         },
         {
           "source": "mk",
-          "title": "“두산 회장 거의 맞힐 뻔했다”…잠실 달군 젠슨 황, 시구 후엔 치킨 회동"
+          "title": "미국 매체 “북한은 지금 세계에서 가장 놀라운 경제 성공담”"
         }
       ]
     },
     {
-      "term": "투표지",
-      "total": 12,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족' 국조에 개헌·특검카드까지…\"천지개벽 개혁\""
-        },
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        }
-      ]
-    },
-    {
-      "term": "민주",
-      "total": 8,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족' 국조에 개헌·특검카드까지…\"천지개벽 개혁\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        }
-      ]
-    },
-    {
-      "term": "지명",
-      "total": 8,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "차기 총리 후보로 한성숙 장관 지명"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 신임 국무총리 후보에 한성숙 장관 지명"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 신임 국무총리 후보에 한성숙 장관 지명"
-        }
-      ]
-    },
-    {
-      "term": "투표용지",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 4부 요인 회동…투표용지 부족 사태 논의"
-        },
-        {
-          "source": "donga",
-          "title": "대검 ‘투표용지 사태’ 검경 합수본 구성…“의혹 엄정히 규명”"
-        },
-        {
-          "source": "donga",
-          "title": "대검 “‘투표용지 부족 사태’ 검경 합수본 구성…의혹 엄정 규명”"
-        }
-      ]
-    },
-    {
-      "term": "기관",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"신뢰 잃은 기관, 존재 의미 없어…검경 합수본 구성\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
-        }
-      ]
-    },
-    {
-      "term": "검경",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"신뢰 잃은 기관, 존재 의미 없어…검경 합수본 구성\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "yna",
-          "title": "'투표지 부족' 검경 합수본이 수사…선관위 직무 유기 정조준"
-        }
-      ]
-    },
-    {
-      "term": "장관",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'벤처 4대강국' 앞장선 한성숙 총리 후보자…기업인 출신 장관"
-        },
-        {
-          "source": "sbs",
-          "title": "차기 총리 후보로 한성숙 장관 지명"
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 신임 국무총리 후보에 한성숙 장관 지명"
-        }
-      ]
-    },
-    {
-      "term": "김도영",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "김도영 투런포·결승 솔로포 '쾅쾅'…KIA, 짜릿한 뒤집기(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "'뜨거운 홈런 레이스' 김도영 17·18호 폭발…오스틴은 17호포(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "김도영·오스틴, 나란히 17호포…뜨겁게 달아오른 홈런 경쟁(종합)"
-        }
-      ]
-    },
-    {
-      "term": "신뢰잃은",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "李대통령, 선관위에 \"신뢰잃은 기관\"…합수본 투표지수사 지시"
-        }
-      ]
-    },
-    {
-      "term": "차기",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
-        },
-        {
-          "source": "sbs",
-          "title": "차기 총리 후보로 한성숙 장관 지명"
-        },
-        {
-          "source": "yna",
-          "title": "與, 금주 전대 준비 논의 착수…차기 당권 경쟁 모드 급속이동(종합)"
-        }
-      ]
-    },
-    {
-      "term": "만에",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "한일, 제주 동남방 공해상서 수색구조훈련…9년 만에 재개"
-        },
-        {
-          "source": "khan",
-          "title": "공직 11개월 만에 총리로…‘모두의 성장’ 국정 기조 인선 반영"
-        },
-        {
-          "source": "khan",
-          "title": "백발이 된 주인과 함께…48년 만에 고향 찾은 ‘그 시절 최고급 세단’"
-        }
-      ]
-    },
-    {
-      "term": "단계",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"호르무즈 통행 서비스료 징수 단계…선박당 150만~200만 달러\""
-        },
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
-        }
-      ]
-    },
-    {
-      "term": "시위",
-      "total": 5,
+      "term": "끼임",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
         "yna",
@@ -973,21 +1200,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "잠실 투표소 봉쇄 시위 나흘째로…새벽에도 수천명 자리지켜"
+          "title": "김태원 아워홈 대표 \"용인공장 근로자 끼임 사고 사죄\""
         },
         {
           "source": "yna",
-          "title": "'광화문 아스팔트'와 거리 두는 잠실개표소 시위…2030 자율집회"
+          "title": "완주서 굴착기 정비 중 끼임 사고…40대 사망"
         },
         {
           "source": "khan",
-          "title": "잠실 개표소 봉쇄 시위, 낮밤 분위기 반전···‘재선거’ 중심 요구서 ‘부정선거’ 늘어"
+          "title": "완주서 용접 작업하던 40대 노동자 끼임 사고로 숨져"
         }
       ]
     },
     {
-      "term": "이란",
-      "total": 5,
+      "term": "지지",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
         "yna",
@@ -997,597 +1224,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "美비자 문턱에 막힌 이란 대표팀, 월드컵 훈련 기지 멕시코 도착(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "호르무즈 살얼음판…美·이란, 종전협상 교착에 신경전 격화"
+          "title": "김정은 \"북중관계는 제1전략사업…하나의 중국 원칙 지지\"(종합)"
         },
         {
           "source": "khan",
-          "title": "트럼프 “이란 고농축 우라늄 회수해 폐기할 것···불발 시 군사 행동 취하겠다”"
-        }
-      ]
-    },
-    {
-      "term": "후보자",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "후임 총리에 3인 두고 고심…한성숙 후보자 낙점 배경"
-        },
-        {
-          "source": "sbs",
-          "title": "'벤처 4대강국' 앞장선 한성숙 총리 후보자…기업인 출신 장관"
-        },
-        {
-          "source": "yna",
-          "title": "與, 한성숙 총리 후보자 지명 환영…\"탁월한 정책역량 검증\""
-        }
-      ]
-    },
-    {
-      "term": "당권",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"다음 임무는 유능한 민주당\"…불붙는 당권 경쟁"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
-        },
-        {
-          "source": "yna",
-          "title": "與, 금주 전대 준비 논의 착수…차기 당권 경쟁 모드 급속이동(종합)"
-        }
-      ]
-    },
-    {
-      "term": "수사",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 선관위에 \"신뢰잃은 기관\"…검경 합수본 수사 지시"
-        },
-        {
-          "source": "yna",
-          "title": "李대통령 \"신뢰잃은 기관\" 선관위 수사 지시…내일 4부요인 회동(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "'투표지 부족' 검경 합수본이 수사…선관위 직무 유기 정조준"
-        }
-      ]
-    },
-    {
-      "term": "여야",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "yna",
-          "title": "여야, 韓후보 지명 신경전…원구성·투표지국조 샅바싸움 변수(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        }
-      ]
-    },
-    {
-      "term": "출신",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'벤처 4대강국' 앞장선 한성숙 총리 후보자…기업인 출신 장관"
-        },
-        {
-          "source": "khan",
-          "title": "미성년 자녀 장애인증명서, 부모가 집에서 뗀다…시설 보호아동의 출신 복지시설명 노출 최소화"
+          "title": "잠실 시위, 시비붙자 “대진연이냐”···“멸공” 구호에 윤석열 지지 플랜카드도 등장"
         },
         {
           "source": "mk",
-          "title": "새 총리 후보에 한성숙 … 첫 'CEO 출신'"
-        }
-      ]
-    },
-    {
-      "term": "확대",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김정은 \"미사일 정량 수요 대폭 늘어…생산 능력 5년 내 2.5배 확대\""
-        },
-        {
-          "source": "yna",
-          "title": "中, 금 보유량 19개월 연속 확대…외환보유액도 증가"
-        },
-        {
-          "source": "mk",
-          "title": "치매 신약·화장품·반려동물… 바이오 신사업 확대 [강원대 라이즈]"
-        }
-      ]
-    },
-    {
-      "term": "취임",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령, 8일 취임 1주년 기자회견…향후 국정 비전 밝힌다"
-        }
-      ]
-    },
-    {
-      "term": "주년",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령, 8일 취임 1주년 기자회견…향후 국정 비전 밝힌다"
-        }
-      ]
-    },
-    {
-      "term": "기자회견",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령, 8일 취임 1주년 기자회견…향후 국정 비전 밝힌다"
-        }
-      ]
-    },
-    {
-      "term": "요구",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "장동혁 \"정당 유불리 떠나 재선거\"…이재명 대통령 회담 요구"
-        },
-        {
-          "source": "yna",
-          "title": "이준석, '재선거 요구' 장동혁에 \"오세훈 사퇴 종용하나\""
-        },
-        {
-          "source": "hani",
-          "title": "오세훈 “투표용지 부족은 대통령 책임” 공세…‘재선거 요구’는 거리두기"
-        }
-      ]
-    },
-    {
-      "term": "안산",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
-        },
-        {
-          "source": "donga",
-          "title": "안산 조명기기 공장서 화재…대응 2단계 발령"
-        }
-      ]
-    },
-    {
-      "term": "화재",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
-        },
-        {
-          "source": "donga",
-          "title": "안산 조명기기 공장서 화재…대응 2단계 발령"
-        }
-      ]
-    },
-    {
-      "term": "대검",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
-        },
-        {
-          "source": "donga",
-          "title": "대검 ‘투표용지 사태’ 검경 합수본 구성…“의혹 엄정히 규명”"
-        },
-        {
-          "source": "donga",
-          "title": "대검 “‘투표용지 부족 사태’ 검경 합수본 구성…의혹 엄정 규명”"
-        }
-      ]
-    },
-    {
-      "term": "함께",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "교황 마드리드 미사에 120만 운집…\"주님은 가난한 이들과 함께\""
-        },
-        {
-          "source": "yna",
-          "title": "'두산 유니폼' 입은 젠슨 황 \"엔비디아와 한국 함께 성장\""
-        },
-        {
-          "source": "khan",
-          "title": "백발이 된 주인과 함께…48년 만에 고향 찾은 ‘그 시절 최고급 세단’"
-        }
-      ]
-    },
-    {
-      "term": "야구장",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젠슨황·최태원, 2차 깐부회동…야구장 다녀온 후 또 '치맥'"
-        },
-        {
-          "source": "yna",
-          "title": "야구장 찾은 젠슨황 \"치맥보다 좋은 건 없다\"…BBQ 또 먹었다(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "젠슨 황 “韓에 빚졌다”…PC방-식당-야구장-깐부 회동까지 광폭 행보"
-        }
-      ]
-    },
-    {
-      "term": "다시",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "손주와 치고 싶어 다시 잡은 탁구채,102세에 강릉 세계무대 서다"
-        },
-        {
-          "source": "khan",
-          "title": "빛바랜 대우 올드카, 부평서 다시 빛나다"
-        },
-        {
-          "source": "khan",
-          "title": "국힘 장동혁, 다시 꺼내 든 ‘재선거’…당서도 “실현할 수 없는 약속” 비판"
-        }
-      ]
-    },
-    {
-      "term": "없어",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"신뢰 잃은 기관, 존재 의미 없어…검경 합수본 구성\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 李대통령 \"참정권침해 깊은 유감…신뢰잃은 기관 존재의미 없어\""
-        },
-        {
-          "source": "mk",
-          "title": "'티눈 보험금' 3500만원 받고 또 청구 … 대법 \"지급의무 없어\""
-        }
-      ]
-    },
-    {
-      "term": "필요성",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "yna",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "hani",
-          "title": "선관위 ‘근본적 쇄신’ 요구 분출…“별도 헌법기관 유지 필요성 검토를”"
-        }
-      ]
-    },
-    {
-      "term": "준비",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
-        },
-        {
-          "source": "yna",
-          "title": "與, 금주 전대 준비 논의 착수…차기 당권 경쟁 모드 급속이동(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "속도 확인시킨 李정부 1년, 향후 과제는 ‘미래 준비’[기고/박광국]"
-        }
-      ]
-    },
-    {
-      "term": "방북",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'시진핑 방북' 대대적 환영행사 개최 전망…북중 회담 예상 의제는?"
-        },
-        {
-          "source": "khan",
-          "title": "북, 시진핑 방북 앞두고 “핵보유국 지위는 절대 불퇴”"
-        },
-        {
-          "source": "mk",
-          "title": "시진핑 방북 하루전날 … 北 \"핵보유 지위 불퇴\""
-        }
-      ]
-    },
-    {
-      "term": "선거",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "국힘 원내대표 선거 하루 연기…\"일정 급박\" 비판 수용"
-        },
-        {
-          "source": "yna",
-          "title": "변화냐 내홍 격화냐…張버티기에 주목받는 국힘 원내대표 선거(종합)"
-        },
-        {
-          "source": "hani",
-          "title": "선거 이후, 다시 보는 동물복지 공약 [이형주의 비인간동물사]"
-        }
-      ]
-    },
-    {
-      "term": "봉쇄",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "잠실 투표소 봉쇄 시위 나흘째로…새벽에도 수천명 자리지켜"
-        },
-        {
-          "source": "donga",
-          "title": "일본, 호르무즈 봉쇄 속 美알래스카·아프리카산 원유 확보"
-        },
-        {
-          "source": "khan",
-          "title": "잠실 개표소 봉쇄 시위, 낮밤 분위기 반전···‘재선거’ 중심 요구서 ‘부정선거’ 늘어"
-        }
-      ]
-    },
-    {
-      "term": "깐부",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "깐부치킨서 '러브샷'…최태원 \"깐부 됐다\" 젠슨황 \"매우 좋다\"(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "젠슨 황 “韓에 빚졌다”…PC방-식당-야구장-깐부 회동까지 광폭 행보"
-        },
-        {
-          "source": "khan",
-          "title": "‘작년에 왔던 깐부, 잊지도 않고 또 왔네’···젠슨 황, 이번엔 최태원과 ‘깐부 회동’"
-        }
-      ]
-    },
-    {
-      "term": "청약",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "스페이스X, 1천500억불 몰려 IPO 청약 목표액 2배 흥행"
-        },
-        {
-          "source": "donga",
-          "title": "스페이스X 상장 카운트다운… 국내 첫날 청약 완판"
-        },
-        {
-          "source": "mk",
-          "title": "스페이스X 청약, 벌써 목표액 2배 몰려"
+          "title": "北中, 혈맹 과시…習 \"통상 전면 재개통\" 金 \"하나의 중국 지지\""
         }
       ]
     },
     {
       "term": "삼성",
-      "total": 3,
+      "total": 4,
       "sourceCount": 3,
       "sources": [
         "yna",
@@ -1597,21 +1248,45 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[프로야구 광주전적] KIA 7-6 삼성"
+          "title": "젠슨 황 만난 삼성 전영현 \"HBM4E·HBM5 등 장기적 협력 논의\""
         },
         {
           "source": "donga",
-          "title": "‘김도영 멀티포’ KIA, 삼성 제압…한화, 롯데 4연패 몰고 3연승"
+          "title": "삼성重, 3.6조 규모 ‘부유식 LNG 설비’ 수주"
         },
         {
-          "source": "mk",
-          "title": "이젠 진짜 일 얘기로...젠슨황, SK·삼성·LG 등에 내놓을 선물 보따리는"
+          "source": "donga",
+          "title": "GPU 확보 사업자에 네이버-삼성SDS-엘리스그룹"
         }
       ]
     },
     {
-      "term": "엄정",
-      "total": 3,
+      "term": "심정지",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아워홈 용인공장서 또 끼임사고…50대 하청 근로자 심정지(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "아워홈 용인공장 또 끼임사고…50대 하청 노동자 심정지"
+        },
+        {
+          "source": "mk",
+          "title": "아워홈 공장 또 끼임 사고 … 50대 근로자 심정지 상태"
+        }
+      ]
+    },
+    {
+      "term": "네이버",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
         "yna",
@@ -1621,20 +1296,236 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[속보] 대검 \"'투표지 부족 사태' 합수본 신속 구성…의혹 엄정 규명\""
+          "title": "네이버, 엔비디아와 GW급 초대형 AI팩토리 구축…\"준비됐다\"(종합)"
         },
         {
           "source": "donga",
-          "title": "대검 “‘투표용지 부족 사태’ 검경 합수본 구성…의혹 엄정 규명”"
+          "title": "GPU 확보 사업자에 네이버-삼성SDS-엘리스그룹"
         },
         {
           "source": "mk",
-          "title": "[속보] 대검 “투표지 부족 사태 관련 합수본 신속 구성…의혹 엄정 규명”"
+          "title": "젠슨 황 “네이버, 우리와의 협력으로 10배 커질 것”"
         }
       ]
     },
     {
-      "term": "공급",
+      "term": "하루",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "타블로 16세 딸 하루, 라이즈 신곡 단독 작사"
+        },
+        {
+          "source": "khan",
+          "title": "“새벽 4시부터 하루 13시간씩 일하고 월급 61만원” 고흥 굴 양식장서도 외국인 계절노동자 착취 의혹"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]일꾼들도 하루 휴가 얻어 놀던 ‘밀양백중놀이’"
+        }
+      ]
+    },
+    {
+      "term": "민주",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "재선거 선 긋고 \"국정조사부터\"…민주 전대 8월 17일에"
+        },
+        {
+          "source": "mk",
+          "title": "'투표용지 부족사태' 후폭풍…민주 41.8% vs 국힘 41.1%"
+        },
+        {
+          "source": "hani",
+          "title": "민주 ‘8·17 전대’ 공식화…‘6·3 책임론’ 신경전 가열"
+        }
+      ]
+    },
+    {
+      "term": "전대",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "재선거 선 긋고 \"국정조사부터\"…민주 전대 8월 17일에"
+        },
+        {
+          "source": "khan",
+          "title": "민주당, 엇갈린 선거 결과 해석…8·17 전대 앞두고 벌써 내홍"
+        },
+        {
+          "source": "hani",
+          "title": "민주 ‘8·17 전대’ 공식화…‘6·3 책임론’ 신경전 가열"
+        }
+      ]
+    },
+    {
+      "term": "공소취소",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"공소취소, 특검이 진상 규명…잘못됐으면 시정하면 돼\""
+        },
+        {
+          "source": "khan",
+          "title": "공소취소 질문에 “중립적 특검으로 하는 게 낫다” [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령, 공소취소 논란에 “최소한 진상규명해야”…특검 도입 힘 실어"
+        }
+      ]
+    },
+    {
+      "term": "사태",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[여담야담] 장동혁 \"투표용지 부족 사태, 재선거가 우선\"…사퇴 요구는 외면"
+        },
+        {
+          "source": "yna",
+          "title": "대법원장, '투표용지 부족 사태' 노태악 선관위원장 사의 수용"
+        },
+        {
+          "source": "mk",
+          "title": "대법원장, ‘투표용지 부족 사태’ 노태악 선관위원장 사의 수용"
+        }
+      ]
+    },
+    {
+      "term": "보유세",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        },
+        {
+          "source": "khan",
+          "title": "“부동산, 조만간 한꺼번에 정리” 보유세 인상 등 세제 개편 시사 [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "mk",
+          "title": "李 \"韓 보유세 낮은 편…선진국 수준 부담해야”"
+        }
+      ]
+    },
+    {
+      "term": "시사",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        },
+        {
+          "source": "khan",
+          "title": "“부동산, 조만간 한꺼번에 정리” 보유세 인상 등 세제 개편 시사 [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령, 개표소 시위 2030에 “고민하게 해줘 감사”…선관위 개혁 시사"
+        }
+      ]
+    },
+    {
+      "term": "우려",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "IAEA \"韓 핵잠의 핵확산 우려 해소 위한 협정 논의는 초기단계\""
+        },
+        {
+          "source": "donga",
+          "title": "KDI “경제 완만한 개선”… 중동전 리스크 가시화 우려"
+        },
+        {
+          "source": "khan",
+          "title": "금리 인상 우려 속 ‘AI 거품론’ 재점화…한·미 증시 연쇄 급락"
+        }
+      ]
+    },
+    {
+      "term": "격상",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "외신 \"북중관계 격상…서방 맞서 중국 중심 단결 전선 구축\""
+        },
+        {
+          "source": "khan",
+          "title": "북·중, 경제·안보 협력 ‘한 단계 격상’…미·일 견제 등 입장 공유"
+        },
+        {
+          "source": "hani",
+          "title": "미국 패권에 맞선 ‘다극화’ 추진…북-중 ‘전략적 동반자’로 격상"
+        }
+      ]
+    },
+    {
+      "term": "가열",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1645,39 +1536,63 @@
       "examples": [
         {
           "source": "yna",
-          "title": "삼성메디슨, 미국 빅2 대형병원에 초음파 진단기기 공급"
+          "title": "與, '당권 경쟁' 계파 신경전 가열…지방선거 책임론 공방 지속(종합)"
         },
         {
           "source": "mk",
-          "title": "삼성메디슨, 美대형병원 2곳에 초음파 진단기 공급"
+          "title": "국힘 원대 후보 3인 토론 …'張 사퇴' 공방도 가열"
         },
         {
           "source": "hani",
-          "title": "젠슨 황 “메모리 수요 엄청나…앞으로 몇 년 동안 공급 부족할 것”"
+          "title": "민주 ‘8·17 전대’ 공식화…‘6·3 책임론’ 신경전 가열"
         }
       ]
     },
     {
-      "term": "경찰",
+      "term": "체포",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "yna",
-        "khan",
-        "mk"
+        "donga",
+        "hani"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "잠실개표소 봉쇄시위 사흘째…경찰 과잉진압 혐의 피고소(종합)"
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
         },
         {
-          "source": "khan",
-          "title": "“경찰 조사 못 받아” 버틴 윤…“부끄러운 줄 알라” 특검보 등판"
+          "source": "donga",
+          "title": "잠실 시위현장서 여성 신체 몰래 촬영한 남성,  현장서 체포"
+        },
+        {
+          "source": "hani",
+          "title": "잠실 ‘개표소 봉쇄 시위’서 여성 신체 불법 촬영한 남성 체포"
+        }
+      ]
+    },
+    {
+      "term": "동반자",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "북중, '전략적 동반자' 선언…경제·외교·군사협력 강화 추진(종합)"
         },
         {
           "source": "mk",
-          "title": "\"나라 지키는 마음으로\"… 현충원까지 6.6㎞ 뛴 경찰·시민들"
+          "title": "밀착하는 북중, ‘전략적 동반자’ 선언…경제·외교·군사협력 강화 추진"
+        },
+        {
+          "source": "hani",
+          "title": "미국 패권에 맞선 ‘다극화’ 추진…북-중 ‘전략적 동반자’로 격상"
         }
       ]
     },
@@ -1686,6 +1601,174 @@
       "total": 3,
       "sourceCount": 3,
       "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "\"지금은 한국의 시간\"…젠슨 황이 남긴 메시지"
+        },
+        {
+          "source": "khan",
+          "title": "‘초심’ 넥타이 맨 이 대통령, 2시간45분 동안 21개 질문 소화 [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "mk",
+          "title": "젠슨 황 “지금은 한국의 시간…이런 나라는 세상 어디에도 없다”"
+        }
+      ]
+    },
+    {
+      "term": "날씨",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[날씨] 내일 전국 대체로 맑음…강원·경북 한때 소나기"
+        },
+        {
+          "source": "donga",
+          "title": "[날씨]선선한 기온, 낮 최고기온 21~29도 …동쪽 지역 소나기"
+        },
+        {
+          "source": "khan",
+          "title": "[2026년 06월 09일 날씨]덥지만 청명한 하늘…낮밤 기온차 10도 안팎"
+        }
+      ]
+    },
+    {
+      "term": "동맹",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "반도체 넘어 로봇까지…젠슨 황의 'AI 동맹' 총집결"
+        },
+        {
+          "source": "donga",
+          "title": "반도체-로봇-데이터센터까지 ‘엔비디아 동맹’"
+        },
+        {
+          "source": "mk",
+          "title": "젠슨 황 손잡은 SK·LG·네이버 … 엔비디아와 'AI 팩토리' 동맹"
+        }
+      ]
+    },
+    {
+      "term": "끼임사고",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아워홈 용인공장서 또 끼임사고…50대 하청 근로자 심정지(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "아워홈 용인공장 또 끼임사고…50대 하청 노동자 심정지"
+        },
+        {
+          "source": "mk",
+          "title": "아워홈 용인공장서 또 ‘끼임사고’…50대 하청 근로자 심정지"
+        }
+      ]
+    },
+    {
+      "term": "하청",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아워홈 용인공장서 또 끼임사고…50대 하청 근로자 심정지(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "아워홈 용인공장 또 끼임사고…50대 하청 노동자 심정지"
+        },
+        {
+          "source": "mk",
+          "title": "아워홈 용인공장서 또 ‘끼임사고’…50대 하청 근로자 심정지"
+        }
+      ]
+    },
+    {
+      "term": "지역",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[속보] 김정은 \"中과 함께 지역·세계 평화·번영 위해 공헌할 것\" <신화통신>"
+        },
+        {
+          "source": "donga",
+          "title": "[날씨]선선한 기온, 낮 최고기온 21~29도 …동쪽 지역 소나기"
+        },
+        {
+          "source": "khan",
+          "title": "시진핑·김정은 평양 목란관에서 만찬…“국제·지역 현안 논의”"
+        }
+      ]
+    },
+    {
+      "term": "피지컬",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젠슨 황 만난 배경훈 부총리 \"한국 피지컬 AI 도약 추진\""
+        },
+        {
+          "source": "khan",
+          "title": "AI 팩토리부터 피지컬 AI까지…젠슨 황, K파트너십 다졌다"
+        },
+        {
+          "source": "mk",
+          "title": "현대차 \"엔비디아와 새만금 AI밸리\"… LG \"피지컬AI 공동개발\""
+        }
+      ]
+    },
+    {
+      "term": "금리",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
         "donga",
         "khan",
         "mk"
@@ -1693,20 +1776,20 @@
       "examples": [
         {
           "source": "donga",
-          "title": "월드내구레이스 대회는… 6~24시간 쉬지 않고 달려"
+          "title": "[단신]신한銀, 시니어 대상 연 0.1% 금리 비상금대출 外"
         },
         {
           "source": "khan",
-          "title": "미·이란 또 무력 사용…트럼프 “합의까지 시간 좀 걸릴 것”"
+          "title": "금리 인상 우려 속 ‘AI 거품론’ 재점화…한·미 증시 연쇄 급락"
         },
         {
           "source": "mk",
-          "title": "이란 동결자금 쟁점 급부상 … 트럼프 \"합의 시간 더 걸려\""
+          "title": "AI 열풍, 금리 움직일까…새 연준의장의 첫 FOMC에 쏠린 눈 [불앤베어 위클리]"
         }
       ]
     },
     {
-      "term": "환율",
+      "term": "특검",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1717,297 +1800,44 @@
       "examples": [
         {
           "source": "khan",
-          "title": "공항 환전소 원·달러 고시 환율 ‘1624원’"
+          "title": "“건진법사 만난 적 없다” 윤석열에…특검, 징역 2년 구형"
         },
         {
           "source": "mk",
-          "title": "“환율 1560원 돌파, 공항선 이미 1620원대”...외환위기 이후 최고 찍었다"
+          "title": "특검, 尹 선거법위반 징역 2년 구형…국민의힘 397억 토해내나"
         },
         {
           "source": "hani",
-          "title": "[사설] 1560원대로 치솟은 환율, 근본 대책 서둘러야"
+          "title": "이 대통령, 공소취소 논란에 “최소한 진상규명해야”…특검 도입 힘 실어"
         }
       ]
     },
     {
-      "term": "두산",
+      "term": "회견",
       "total": 7,
       "sourceCount": 2,
       "sources": [
-        "yna",
+        "khan",
         "mk"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "[프로야구 부산전적] 한화 9-8 두산"
+          "source": "khan",
+          "title": "“이번 선거, 결국 국민이 제게 준 경고” [이 대통령 ‘취임 1년’ 회견]"
         },
         {
-          "source": "yna",
-          "title": "알칸타라 6이닝 1실점…키움, 두산 꺾고 4연패 탈출"
+          "source": "khan",
+          "title": "“선거는 고개 들면 진다” 격전지 패배 여 지도부 우회 비판 [이 대통령 ‘취임 1년’ 회견]"
         },
         {
-          "source": "yna",
-          "title": "[프로야구 잠실전적] 키움 4-1 두산"
+          "source": "khan",
+          "title": "“북핵 문제, 추가 생산 중단 등 단기 목표로 협상…한·일 상호군수지원협정, 국민 정서상 어려워” [이 대통령 ‘취임 1년’ 회견]"
         }
       ]
     },
     {
-      "term": "일정",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        },
-        {
-          "source": "sbs",
-          "title": "국힘 원내대표 선거 하루 연기…\"일정 급박\" 비판 수용"
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\"(종합)"
-        }
-      ]
-    },
-    {
-      "term": "호르무즈",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"호르무즈 통행 서비스료 징수 단계…선박당 150만~200만 달러\""
-        },
-        {
-          "source": "yna",
-          "title": "OPEC＋, 호르무즈 봉쇄후 4번째 원유 증산 합의"
-        },
-        {
-          "source": "yna",
-          "title": "호르무즈 사태로 재확인된 세계 급소 '경제적 상호의존'"
-        }
-      ]
-    },
-    {
-      "term": "젠슨황",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "야구관람·회동에도 K치킨…젠슨황 \"치맥보다 좋은 건 없다\"(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "깐부치킨서 '러브샷'…최태원 \"깐부 됐다\" 젠슨황 \"매우 좋다\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "젠슨황·최태원, 2차 깐부회동…야구장 다녀온 후 또 '치맥'"
-        }
-      ]
-    },
-    {
-      "term": "연패",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'3안타' 키움 서건창 \"팀의 4연패 끊을 수 있어 기뻐\""
-        },
-        {
-          "source": "yna",
-          "title": "알칸타라 6이닝 1실점…키움, 두산 꺾고 4연패 탈출"
-        },
-        {
-          "source": "yna",
-          "title": "베니지아노, 7이닝 무실점…SSG, 13연패 뒤 2연속 위닝시리즈"
-        }
-      ]
-    },
-    {
-      "term": "국조요구서",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        }
-      ]
-    },
-    {
-      "term": "제출",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "여야, 내일 국조요구서 제출…'재선거' 필요성 놓고는 이견 충돌"
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        }
-      ]
-    },
-    {
-      "term": "고위직",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        }
-      ]
-    },
-    {
-      "term": "물러날",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        }
-      ]
-    },
-    {
-      "term": "사안",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김 총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "金총리 \"투표지 부족, 선관위 일정 이상 고위직 다 물러날 사안\""
-        }
-      ]
-    },
-    {
-      "term": "훈련",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "美비자 문턱에 막힌 이란 대표팀, 월드컵 훈련 기지 멕시코 도착(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "日육상자위대, 최대 실사격 훈련…수백km '반격 미사일' 첫 공개"
-        },
-        {
-          "source": "yna",
-          "title": "[쇼츠] 과달라하라는 이런 곳…축구대표팀 멕시코 첫 훈련"
-        }
-      ]
-    },
-    {
-      "term": "최태원",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "깐부치킨서 '러브샷'…최태원 \"깐부 됐다\" 젠슨황 \"매우 좋다\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "젠슨 황, 최태원·SK 사장단과 2차 깐부회동…\"HBM 더 많이\""
-        },
-        {
-          "source": "yna",
-          "title": "젠슨황·최태원, 2차 깐부회동…야구장 다녀온 후 또 '치맥'"
-        }
-      ]
-    },
-    {
-      "term": "깐부회동",
-      "total": 4,
+      "term": "교류",
+      "total": 6,
       "sourceCount": 2,
       "sources": [
         "yna",
@@ -2016,44 +1846,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "젠슨 황, 최태원·SK 사장단과 2차 깐부회동…\"HBM 더 많이\""
+          "title": "시진핑, '한반도' 빼고 '北中 교류' 강조…새 대북관계 정립하나"
         },
         {
           "source": "yna",
-          "title": "젠슨황·최태원, 2차 깐부회동…야구장 다녀온 후 또 '치맥'"
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…역사적 출발점\"(종합2보)"
         },
         {
-          "source": "hani",
-          "title": "젠슨 황, ‘1차 깐부회동’ 불참자 최태원과 같은 가게로 ‘2차’ 갔다"
+          "source": "yna",
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…우호 계승 원해\"(종합)"
         }
       ]
     },
     {
-      "term": "개월",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "中, 금 보유량 19개월 연속 확대…외환보유액도 증가"
-        },
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승"
-        }
-      ]
-    },
-    {
-      "term": "환영",
-      "total": 4,
+      "term": "중국",
+      "total": 5,
       "sourceCount": 2,
       "sources": [
         "yna",
@@ -2062,21 +1869,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "與, 한성숙 총리 후보자 지명 환영…\"탁월한 정책역량 검증\""
+          "title": "외신 \"북중관계 격상…서방 맞서 중국 중심 단결 전선 구축\""
         },
         {
           "source": "yna",
-          "title": "中企·소상공인업계, 한성숙 총리 지명 환영…\"AI 전환 적임자\"(종합)"
+          "title": "김정은 \"북중관계는 제1전략사업…하나의 중국 원칙 지지\"(종합)"
         },
         {
-          "source": "mk",
-          "title": "경제단체들, 20년 만의 여성 총리 두고 환영...“민생 경제 회복 힘써달라”"
+          "source": "yna",
+          "title": "[속보] 김정은 \"국제사회, 전례 없는 변화…'하나의 중국' 원칙 견지\"<신화통신>"
         }
       ]
     },
     {
-      "term": "회장",
-      "total": 4,
+      "term": "강화해야",
+      "total": 5,
       "sourceCount": 2,
       "sources": [
         "yna",
@@ -2085,21 +1892,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "젠슨 황, 잠실서 박정원 두산 회장 회동…로보틱스 협력(종합)"
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…역사적 출발점\"(종합2보)"
         },
         {
           "source": "yna",
-          "title": "[부고] 박종학(전 대한기계설비건설협회 회장)씨 별세"
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…우호 계승 원해\"(종합)"
         },
         {
           "source": "yna",
-          "title": "젠슨 황, 잠실서 박정원 두산 회장 회동…로보틱스 협력"
+          "title": "시진핑 \"북중, 외교·법·군대 등 교류 강화해야\""
         }
       ]
     },
     {
       "term": "사설",
-      "total": 4,
+      "total": 5,
       "sourceCount": 2,
       "sources": [
         "donga",
@@ -2108,273 +1915,503 @@
       "examples": [
         {
           "source": "donga",
-          "title": "[사설]李 2년차 내각, 지금보다 장관들이 더 많이, 더 잘 보여야"
+          "title": "[사설]“들어오는 대로 쓰는 건 바보”… 삼전-닉스도 2년 전 세금 못 냈다"
         },
         {
           "source": "donga",
-          "title": "[사설]장동혁 대표, 더 버티려고 또 꼼수 쓰나"
+          "title": "[사설]선관위 개혁, ‘반짝’ ‘흐지부지’ 안 된다"
         },
         {
           "source": "donga",
-          "title": "[사설]“사생활 침해만 사실적시 명예훼손 처벌”… 법 개정 나서라"
+          "title": "[사설]코스피 8,000, 코스닥 1,000 붕괴… 급등도 급락도 경계할 때"
         }
       ]
     },
     {
-      "term": "개표소",
+      "term": "여당",
       "total": 4,
       "sourceCount": 2,
       "sources": [
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "잠실 개표소 봉쇄 시위, 낮밤 분위기 반전···‘재선거’ 중심 요구서 ‘부정선거’ 늘어"
-        },
-        {
-          "source": "khan",
-          "title": "길어지는 개표소 시위 속 이 대통령 “속히 진상규명”"
-        },
-        {
-          "source": "khan",
-          "title": "개표소 봉쇄한 시위대 “재선거”…부정선거론자 합류에 마찰"
-        }
-      ]
-    },
-    {
-      "term": "전대",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
         "sbs",
         "yna"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
+          "title": "[여담야담] 이용우 \"대통령도 선거 결과 '국민 경고'라는데…여당 지도부는?\""
         },
         {
           "source": "yna",
-          "title": "국힘 \"투표지 사태에도 '與전대 출마' 총리 교체…무책임\"(종합)"
+          "title": "러 압박에도…친서방 아르메니아 여당, 총선 승리(종합2보)"
         },
         {
           "source": "yna",
-          "title": "與, 금주 전대 준비 논의 착수…차기 당권 경쟁 모드 급속이동(종합)"
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨(종합)"
         }
       ]
     },
     {
-      "term": "착수",
-      "total": 3,
+      "term": "혐의",
+      "total": 4,
       "sourceCount": 2,
       "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, 전대 준비 논의 착수…차기 당권 경쟁 체제 급속 전환"
-        },
-        {
-          "source": "yna",
-          "title": "LG엔솔, 미국 관세 환급 절차 착수…환급금 1천억원 넘을 듯"
-        },
-        {
-          "source": "yna",
-          "title": "與, 금주 전대 준비 논의 착수…차기 당권 경쟁 모드 급속이동(종합)"
-        }
-      ]
-    },
-    {
-      "term": "황금시대",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
-        },
-        {
-          "source": "sbs",
-          "title": "김 총리 \"당원의 바다에서 민주 황금시대\"…당권도전 시사"
-        },
-        {
-          "source": "mk",
-          "title": "당권 도전나선 김민석 \"민주 황금시대 열겠다\""
-        }
-      ]
-    },
-    {
-      "term": "개헌도",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
+        "yna",
         "khan"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
-        },
-        {
-          "source": "khan",
-          "title": "적극적 대응 나선 민주당 “필요하면 특검·개헌도 검토”"
-        }
-      ]
-    },
-    {
-      "term": "후보에",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] 신임 국무총리 후보에 한성숙 장관 지명"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령, 신임 국무총리 후보에 한성숙 장관 지명"
-        },
-        {
-          "source": "mk",
-          "title": "새 총리 후보에 한성숙 … 첫 'CEO 출신'"
-        }
-      ]
-    },
-    {
-      "term": "미사일",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김정은 \"미사일 정량 수요 대폭 늘어…생산 능력 5년 내 2.5배 확대\""
+          "source": "yna",
+          "title": "美, 성범죄 혐의 등 부적절 귀화자 17명 시민권 박탈 소송"
         },
         {
           "source": "yna",
-          "title": "日육상자위대, 최대 실사격 훈련…수백km '반격 미사일' 첫 공개"
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
         },
         {
           "source": "yna",
-          "title": "中, 대만 맞은편 최전선에 신형 지대공 미사일 배치"
+          "title": "대전경찰청, 타인 수사정보 유출 혐의 현직 경찰관 송치"
         }
       ]
     },
     {
-      "term": "대한민국",
-      "total": 3,
+      "term": "봉쇄",
+      "total": 4,
       "sourceCount": 2,
       "sources": [
-        "sbs",
+        "yna",
         "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
+          "source": "yna",
+          "title": "잠실 개표소 봉쇄 시위 닷새째…'MAGA' 피켓까지(종합)"
         },
         {
-          "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
+          "source": "yna",
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재"
+        }
+      ]
+    },
+    {
+      "term": "중동",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "뉴욕증시, 중동 갈등 완화·반도체주 반등에 상승 출발"
+        },
+        {
+          "source": "yna",
+          "title": "이란군 \"이스라엘 석화단지에 보복…중동 전역 확대될 것\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "중동 정세 불안에…프랑스군 키프로스 주둔 추진"
+        }
+      ]
+    },
+    {
+      "term": "사업",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젠슨 황 \"한국에 수천억달러 사업 가져왔다\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "트럼프 사위 리조트 사업 논란…EU도 \"알바니아 EU 가입 악영향\""
+        },
+        {
+          "source": "yna",
+          "title": "서강대, 과기정통부 기관유치 사업 선정…연구비 135억원 지원"
+        }
+      ]
+    },
+    {
+      "term": "근로자",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김태원 아워홈 대표 \"용인공장 근로자 끼임 사고 사죄\""
+        },
+        {
+          "source": "yna",
+          "title": "아워홈 용인공장서 또 끼임사고…50대 하청 근로자 심정지(종합)"
+        },
+        {
+          "source": "mk",
+          "title": "아워홈 공장 또 끼임 사고 … 50대 근로자 심정지 상태"
+        }
+      ]
+    },
+    {
+      "term": "배경훈",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "배경훈 부총리 \"엔비디아 베라 루빈, 한국 최우선 공급\""
+        },
+        {
+          "source": "yna",
+          "title": "젠슨 황 만난 배경훈 부총리 \"한국 피지컬 AI 도약 추진\""
+        },
+        {
+          "source": "mk",
+          "title": "배경훈 부총리도 '코리아 AI' 지원사격"
+        }
+      ]
+    },
+    {
+      "term": "이란군",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "트럼프 '발포 중단' 요구 뒤…이란군 \"이스라엘 작전 중지\""
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 이란군 \"이스라엘 대응 작전 중단…목적 달성\""
+        },
+        {
+          "source": "yna",
+          "title": "이란군 \"이스라엘 석화단지에 보복…중동 전역 확대될 것\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "즉각",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습자제 압박(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습 자제 촉구"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 교전중단 촉구"
+        }
+      ]
+    },
+    {
+      "term": "멈춰라",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습자제 압박(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습 자제 촉구"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 교전중단 촉구"
+        }
+      ]
+    },
+    {
+      "term": "만에",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김수현, 1년여 만에 활동 재개…\"필리핀 브랜드 광고 촬영\""
         },
         {
           "source": "hani",
-          "title": "‘종이 부족 국가’ 대한민국 [그림판]"
+          "title": "시진핑 7년 만에 방북…“북한과 외교·법·군사 교류 강화”"
+        },
+        {
+          "source": "hani",
+          "title": "용지 부족 투표소 사흘 만에 50→91곳…선관위, 관리 부실 ‘점입가경’"
         }
       ]
     },
     {
-      "term": "국내",
+      "term": "각자",
       "total": 3,
       "sourceCount": 2,
       "sources": [
         "sbs",
-        "donga"
+        "yna"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "거리로 돌아 본 이 대통령 1년…\"국내 2.2만·해외 15만 km 이동\""
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
         },
         {
-          "source": "donga",
-          "title": "스페이스X 상장 카운트다운… 국내 첫날 청약 완판"
+          "source": "sbs",
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
         },
         {
-          "source": "donga",
-          "title": "테슬라 ‘모델 Y’ 지난달 8762대 팔아, 국내 판매 1위"
+          "source": "yna",
+          "title": "[속보] 시진핑 \"북중, 전략협조 강화…각자 주권·안보·발전이익 수호\""
         }
       ]
     },
     {
-      "term": "젤렌스키",
+      "term": "수호",
       "total": 3,
       "sourceCount": 2,
       "sources": [
-        "yna",
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
+        },
+        {
+          "source": "sbs",
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 시진핑 \"북중, 전략협조 강화…각자 주권·안보·발전이익 수호\""
+        }
+      ]
+    },
+    {
+      "term": "북핵",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
         "khan"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "\"젤렌스키, 러 재벌 통해 푸틴에 정상회담 요청\""
+          "source": "sbs",
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
         },
         {
-          "source": "yna",
-          "title": "젤렌스키 \"러, 체르노빌 사용후핵연료 저장시설 의도적 공격\"(종합)"
+          "source": "sbs",
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
         },
         {
           "source": "khan",
-          "title": "젤렌스키, 드론 날려 푸틴 압박 ‘러시아판 다보스’ 폐막일 재공습"
+          "title": "“북핵 문제, 추가 생산 중단 등 단기 목표로 협상…한·일 상호군수지원협정, 국민 정서상 어려워” [이 대통령 ‘취임 1년’ 회견]"
         }
       ]
     },
     {
-      "term": "원유",
+      "term": "대개혁",
       "total": 3,
       "sourceCount": 2,
       "sources": [
-        "yna",
-        "donga"
+        "sbs",
+        "hani"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "OPEC＋, 호르무즈 봉쇄후 4번째 원유 증산 합의"
+          "source": "sbs",
+          "title": "4부 요인과 긴급 회동…\"대개혁 방안 마련\""
         },
         {
-          "source": "yna",
-          "title": "日 '대체 경로 조달' 원유 속속 도착…작년 6월 수입량 70% 확보"
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
         },
         {
-          "source": "donga",
-          "title": "일본, 호르무즈 봉쇄 속 美알래스카·아프리카산 원유 확보"
+          "source": "hani",
+          "title": "이 대통령-4부 요인 “국회서 선거 관리 대개혁 방안 마련하자”"
         }
       ]
     },
     {
-      "term": "치킨",
+      "term": "방안",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "4부 요인과 긴급 회동…\"대개혁 방안 마련\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령-4부 요인 “국회서 선거 관리 대개혁 방안 마련하자”"
+        }
+      ]
+    },
+    {
+      "term": "취소",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"공소 취소, 법과 상식대로…진상규명 결과 보고 판단\""
+        },
+        {
+          "source": "khan",
+          "title": "‘야스쿠니 무단 합사’ 재일동포 유족, 첫 취소 소송 참여"
+        }
+      ]
+    },
+    {
+      "term": "재선거",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "재선거 선 긋고 \"국정조사부터\"…민주 전대 8월 17일에"
+        },
+        {
+          "source": "sbs",
+          "title": "\"특검보다 재선거\" 장동혁 주장에…\"방패막이 돼선 안 돼\""
+        },
+        {
+          "source": "khan",
+          "title": "여야, ‘투표용지 부족’ 국조요구서 제출…일각선 재선거 주장도"
+        }
+      ]
+    },
+    {
+      "term": "관리",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
+        },
+        {
+          "source": "hani",
+          "title": "용지 부족 투표소 사흘 만에 50→91곳…선관위, 관리 부실 ‘점입가경’"
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령-4부 요인 “국회서 선거 관리 대개혁 방안 마련하자”"
+        }
+      ]
+    },
+    {
+      "term": "부정선거",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
+        },
+        {
+          "source": "hani",
+          "title": "‘재선거만’ 대자보 위에 붉은 ‘X’… 하루 만에 도로 “부정선거”"
+        },
+        {
+          "source": "hani",
+          "title": "‘부정선거’라는 망령 [똑똑! 한국사회]"
+        }
+      ]
+    },
+    {
+      "term": "비핵화",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"북한, 지금도 핵 물질 생산…반드시 비핵화 향해 가야\""
+        },
+        {
+          "source": "yna",
+          "title": "美, 비핵화 빠진 북중회담에 \"트럼프-시진핑 北비핵화목표 공유\""
+        },
+        {
+          "source": "yna",
+          "title": "김정은·시진핑, 전략협력 강화 한목소리…北비핵화 언급은 없어"
+        }
+      ]
+    },
+    {
+      "term": "후보",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -2384,43 +2421,43 @@
       "examples": [
         {
           "source": "yna",
-          "title": "야구관람·회동에도 K치킨…젠슨황 \"치맥보다 좋은 건 없다\"(종합2보)"
+          "title": "LA시장 선거서 민주당 후보 득세에 트럼프·머스크, 음모론 제기"
+        },
+        {
+          "source": "yna",
+          "title": "'0.76%p차 석패' 인천교육감 이대형 후보, 재검표 소청 제기"
         },
         {
           "source": "mk",
-          "title": "“두산 회장 거의 맞힐 뻔했다”…잠실 달군 젠슨 황, 시구 후엔 치킨 회동"
-        },
-        {
-          "source": "mk",
-          "title": "“치킨 사달라면 겁부터 나네요”…닭고기값, 작년 보다 20% 올랐다"
+          "title": "국힘 원대 후보 3인 토론 …'張 사퇴' 공방도 가열"
         }
       ]
     },
     {
-      "term": "포장지",
+      "term": "차세대",
       "total": 3,
       "sourceCount": 2,
       "sources": [
         "yna",
-        "khan"
+        "mk"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
+          "title": "\"프랑스·독일·스페인, 차세대 전투기 공동개발 무산\""
         },
         {
           "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
+          "title": "\"한·일·대만 기업들, 7천억원 규모 차세대 광통신 펀드 만든다\""
         },
         {
-          "source": "khan",
-          "title": "경기 안산 포장지 공장 화재···대응 2단계 상향"
+          "source": "mk",
+          "title": "기업 회동 마무리는 삼성…\"차세대 추론칩 협력 확대\""
         }
       ]
     },
     {
-      "term": "공장서",
+      "term": "넘어",
       "total": 3,
       "sourceCount": 2,
       "sources": [
@@ -2430,46 +2467,67 @@
       "examples": [
         {
           "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
+          "title": "민주콩고 에볼라 누적 확진자 500명 넘어…확산세 계속"
         },
         {
           "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
+          "title": "반도체 넘어 로봇까지…젠슨 황의 'AI 동맹' 총집결"
         },
         {
           "source": "donga",
-          "title": "안산 조명기기 공장서 화재…대응 2단계 발령"
-        }
-      ]
-    },
-    {
-      "term": "전국",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[날씨] 전국 흐리고 곳곳 비…낮 최고 20∼27도"
-        },
-        {
-          "source": "yna",
-          "title": "월요일 전국 대부분 비…더위 꺾여 낮 최고 20∼27도"
-        },
-        {
-          "source": "hani",
-          "title": "‘과수 괴질’ 과수 화상병 전국 확산…충북 등 전국 78농가 발병"
+          "title": "데이터, 칸막이 넘어 국민 삶 바꾸는 힘으로[기고/안형준]"
         }
       ]
     }
   ],
   "singleSourceTop": [
     {
-      "term": "프로야구",
-      "total": 7,
+      "term": "취임",
+      "total": 6,
+      "sourceCount": 1,
+      "sources": [
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "“이번 선거, 결국 국민이 제게 준 경고” [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "khan",
+          "title": "“선거는 고개 들면 진다” 격전지 패배 여 지도부 우회 비판 [이 대통령 ‘취임 1년’ 회견]"
+        },
+        {
+          "source": "khan",
+          "title": "“북핵 문제, 추가 생산 중단 등 단기 목표로 협상…한·일 상호군수지원협정, 국민 정서상 어려워” [이 대통령 ‘취임 1년’ 회견]"
+        }
+      ]
+    },
+    {
+      "term": "여담야담",
+      "total": 5,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[여담야담] 장동혁 \"투표용지 부족 사태, 재선거가 우선\"…사퇴 요구는 외면"
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"공소 취소, 법과 상식대로…진상규명 결과 보고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        }
+      ]
+    },
+    {
+      "term": "사망",
+      "total": 5,
       "sourceCount": 1,
       "sources": [
         "yna"
@@ -2477,20 +2535,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[프로야구 중간순위] 7일"
+          "title": "\"몰타 인근 해역서 이민자 보트 전복…최소 11명 사망\""
         },
         {
           "source": "yna",
-          "title": "[프로야구 부산전적] 한화 9-8 두산"
+          "title": "파키스탄령 카슈미르서 경찰-사회단체 충돌…최소 7명 사망"
         },
         {
           "source": "yna",
-          "title": "[프로야구 광주전적] KIA 7-6 삼성"
+          "title": "美, '정치범 사망'에 \"니카라과 관료 100여명 美비자 추가제한\""
         }
       ]
     },
     {
-      "term": "멕시코",
+      "term": "투표",
       "total": 4,
       "sourceCount": 1,
       "sources": [
@@ -2499,20 +2557,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "월드컵 앞두고 빛의 향연…멕시코 성당 수놓은 '미디어 파사드'"
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\"(종합)"
         },
         {
           "source": "yna",
-          "title": "美비자 문턱에 막힌 이란 대표팀, 월드컵 훈련 기지 멕시코 도착(종합)"
+          "title": "'용지부족에 투표 한때중단' 투표소, 부산·대구·경기서도 확인"
         },
         {
           "source": "yna",
-          "title": "이란축구대표팀, 월드컵 베이스캠프 멕시코 도착…담금질 시작"
+          "title": "대구서도 투표 중단 투표소 1곳 확인…\"시민들께 깊이 사과\""
         }
       ]
     },
     {
-      "term": "협력",
+      "term": "압박",
       "total": 4,
       "sourceCount": 1,
       "sources": [
@@ -2521,20 +2579,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "젠슨 황, 내일 엔비디아·SK 협력 청사진 발표…삼성과도 회동"
+          "title": "\"아동 음란물 막아라\"…영국 정부, 애플·구글 압박"
         },
         {
           "source": "yna",
-          "title": "젠슨 황, 잠실서 박정원 두산 회장 회동…로보틱스 협력(종합)"
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습자제 압박(종합)"
         },
         {
           "source": "yna",
-          "title": "젠슨 황, 잠실서 박정원 두산 회장 회동…로보틱스 협력"
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨(종합)"
         }
       ]
     },
     {
-      "term": "우승",
+      "term": "군대",
       "total": 4,
       "sourceCount": 1,
       "sources": [
@@ -2543,20 +2601,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "젠슨 황 \"폭투였다…박 회장과 두산의 우승 시즌 얘기\""
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…역사적 출발점\"(종합2보)"
         },
         {
           "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승(종합)"
+          "title": "시진핑 \"북중, 외교·법·군대 교류 강화해야…우호 계승 원해\"(종합)"
         },
         {
           "source": "yna",
-          "title": "육상 김주하, 밀양아리랑 전국대회 여자 200ｍ 우승"
+          "title": "시진핑 \"북중, 외교·법·군대 등 교류 강화해야\""
         }
       ]
     },
     {
-      "term": "회담",
+      "term": "달라",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2565,20 +2623,20 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"핵보유국, 엄연한 현실\" 과시한 북…북중 회담 의식?"
+          "title": "\"부정선거론과 달라\"…\"선거 결과는 국민의 경고\""
         },
         {
           "source": "sbs",
-          "title": "'시진핑 방북' 대대적 환영행사 개최 전망…북중 회담 예상 의제는?"
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
         },
         {
           "source": "sbs",
-          "title": "장동혁 \"정당 유불리 떠나 재선거\"…이재명 대통령 회담 요구"
+          "title": "이 대통령 \"부정선거론과 달라…국민주권 존중 없었다\""
         }
       ]
     },
     {
-      "term": "월드컵",
+      "term": "강경",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2587,20 +2645,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "월드컵 앞두고 빛의 향연…멕시코 성당 수놓은 '미디어 파사드'"
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
         },
         {
           "source": "yna",
-          "title": "美비자 문턱에 막힌 이란 대표팀, 월드컵 훈련 기지 멕시코 도착(종합)"
+          "title": "[속보] 네타냐후 \"이란공습 일시 중단…공격 재개시 강경 대응\""
         },
         {
           "source": "yna",
-          "title": "이란축구대표팀, 월드컵 베이스캠프 멕시코 도착…담금질 시작"
+          "title": "남아공 '흑흑 갈등'에…정부, 불법 이민 강경 대응 선언"
         }
       ]
     },
     {
-      "term": "도착",
+      "term": "평화",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2609,20 +2667,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "美비자 문턱에 막힌 이란 대표팀, 월드컵 훈련 기지 멕시코 도착(종합)"
+          "title": "교황 \"무기로는 평화 못 이뤄\"…AI 무기화도 거듭 경고"
         },
         {
           "source": "yna",
-          "title": "이란축구대표팀, 월드컵 베이스캠프 멕시코 도착…담금질 시작"
+          "title": "정동영, 스웨덴 특사 접견…\"비핵화만 앞세우면 평화 어려워\""
         },
         {
           "source": "yna",
-          "title": "日 '대체 경로 조달' 원유 속속 도착…작년 6월 수입량 70% 확보"
+          "title": "[속보] 김정은 \"中과 함께 지역·세계 평화·번영 위해 공헌할 것\" <신화통신>"
         }
       ]
     },
     {
-      "term": "부고",
+      "term": "요구",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2631,20 +2689,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[부고] 이인재(전 한화임팩트 부사장)씨 부친상"
+          "title": "트럼프 '발포 중단' 요구 뒤 이란 \"이스라엘 작전 중지\"(종합)"
         },
         {
           "source": "yna",
-          "title": "[부고] 박종학(전 대한기계설비건설협회 회장)씨 별세"
+          "title": "\"美, 나토 동맹국에 국방예산으로 中업체 장비 교체 요구\""
         },
         {
           "source": "yna",
-          "title": "[부고] 김정호(전 한국경제신문 사장)씨 장인상"
+          "title": "트럼프 '발포 중단' 요구 뒤…이란군 \"이스라엘 작전 중지\""
         }
       ]
     },
     {
-      "term": "키움",
+      "term": "작전",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2653,20 +2711,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'3안타' 키움 서건창 \"팀의 4연패 끊을 수 있어 기뻐\""
+          "title": "트럼프 '발포 중단' 요구 뒤 이란 \"이스라엘 작전 중지\"(종합)"
         },
         {
           "source": "yna",
-          "title": "알칸타라 6이닝 1실점…키움, 두산 꺾고 4연패 탈출"
+          "title": "트럼프 '발포 중단' 요구 뒤…이란군 \"이스라엘 작전 중지\""
         },
         {
           "source": "yna",
-          "title": "[프로야구 잠실전적] 키움 4-1 두산"
+          "title": "[속보] 이란군 \"이스라엘 대응 작전 중단…목적 달성\""
         }
       ]
     },
     {
-      "term": "선수권대회",
+      "term": "갈등",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2675,20 +2733,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승(종합)"
+          "title": "군부·협상파 갈등 대신 '통제된 균형' 과시한 이란"
         },
         {
           "source": "yna",
-          "title": "[KPGA 최종순위] KPGA 선수권대회"
+          "title": "뉴욕증시, 중동 갈등 완화·반도체주 반등에 상승 출발"
         },
         {
           "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승"
+          "title": "남아공 '흑흑 갈등'에…정부, 불법 이민 강경 대응 선언"
         }
       ]
     },
     {
-      "term": "강릉",
+      "term": "재개",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2697,64 +2755,174 @@
       "examples": [
         {
           "source": "yna",
-          "title": "주말 강릉 해안가 덮친 너울성 파도…1명 숨지고 2명 중태"
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\"(종합)"
         },
         {
           "source": "yna",
-          "title": "강릉 사천해변서 파도에 휩쓸린 70대 심정지 이송"
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\""
         },
         {
           "source": "yna",
-          "title": "손주와 치고 싶어 다시 잡은 탁구채,102세에 강릉 세계무대 서다"
+          "title": "김수현, 1년여 만에 활동 재개…\"필리핀 브랜드 광고 촬영\""
         }
       ]
     },
     {
-      "term": "완판",
+      "term": "원칙",
       "total": 3,
       "sourceCount": 1,
       "sources": [
-        "donga"
+        "yna"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "스페이스X 상장 카운트다운… 국내 첫날 청약 완판"
+          "source": "yna",
+          "title": "\"日 전문가 회의서 '비핵 3원칙' 재검토 찬반 엇갈려\""
         },
         {
-          "source": "donga",
-          "title": "‘5일만에 완판’ 국민성장펀드, 9월께 2차 출시"
+          "source": "yna",
+          "title": "김정은 \"북중관계는 제1전략사업…하나의 중국 원칙 지지\"(종합)"
         },
         {
-          "source": "donga",
-          "title": "“전산 1동 완공전 이미 완판… 2030년까지 수주 5조 노린다”"
+          "source": "yna",
+          "title": "[속보] 김정은 \"국제사회, 전례 없는 변화…'하나의 중국' 원칙 견지\"<신화통신>"
         }
       ]
     },
     {
-      "term": "경제계",
+      "term": "친서방",
       "total": 3,
       "sourceCount": 1,
       "sources": [
-        "donga"
+        "yna"
       ],
       "examples": [
         {
-          "source": "donga",
-          "title": "상의, 내달 ‘제주포럼’… CEO 등 경제계 600명 참석"
+          "source": "yna",
+          "title": "러 압박에도…친서방 아르메니아 여당, 총선 승리(종합2보)"
         },
         {
-          "source": "donga",
-          "title": "[경제계 단신]포스코, 임직원 2만4000명 글로벌 봉사활동 外"
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨(종합)"
         },
         {
-          "source": "donga",
-          "title": "[경제계 인사]구다이글로벌 공동대표 구창근씨"
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨"
         }
       ]
     },
     {
-      "term": "북중",
+      "term": "아르메니아",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "러 압박에도…친서방 아르메니아 여당, 총선 승리(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨"
+        }
+      ]
+    },
+    {
+      "term": "총선",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "러 압박에도…친서방 아르메니아 여당, 총선 승리(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "러 압박 속 아르메니아 총선…친서방 여당 과반 못 넘겨"
+        }
+      ]
+    },
+    {
+      "term": "지속",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "與, '당권 경쟁' 계파 신경전 가열…지방선거 책임론 공방 지속(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이스라엘군 \"이란과 교전 며칠 지속 대비…전면전 가능성도\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이스라엘군 \"이란과 교전 며칠 지속 대비…전면전 가능성도\""
+        }
+      ]
+    },
+    {
+      "term": "이란에",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습자제 압박(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 공습 자제 촉구"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 트럼프, 이스라엘·이란에 \"즉각 멈춰라\" 교전중단 촉구"
+        }
+      ]
+    },
+    {
+      "term": "신화통신",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[속보] 김정은 \"中과 함께 지역·세계 평화·번영 위해 공헌할 것\" <신화통신>"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 김정은 \"국제사회, 전례 없는 변화…'하나의 중국' 원칙 견지\"<신화통신>"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 김정은 \"시진핑, 올해 첫 해외방문 평양…北에 더없이 고무\"<신화통신>"
+        }
+      ]
+    },
+    {
+      "term": "이익",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2763,16 +2931,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"핵보유국, 엄연한 현실\" 과시한 북…북중 회담 의식?"
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
         },
         {
           "source": "sbs",
-          "title": "'시진핑 방북' 대대적 환영행사 개최 전망…북중 회담 예상 의제는?"
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
         }
       ]
     },
     {
-      "term": "청와대",
+      "term": "묵인하나",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2781,16 +2949,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "새 총리 후보자에 한성숙…청와대 \"성장 이끌 적임자\""
+          "title": "북 방문해 \"각자 주권 이익 수호\"…북핵 묵인하나?"
         },
         {
           "source": "sbs",
-          "title": "청와대 \"지난 1년 정부 성과는 김 총리 성과\"…사의 공식화"
+          "title": "북 방문한 시진핑 \"각자 주권 이익 수호\"…북핵 묵인하나"
         }
       ]
     },
     {
-      "term": "당원의",
+      "term": "마련",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2799,16 +2967,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
+          "title": "4부 요인과 긴급 회동…\"대개혁 방안 마련\""
         },
         {
           "source": "sbs",
-          "title": "김 총리 \"당원의 바다에서 민주 황금시대\"…당권도전 시사"
+          "title": "이 대통령, 4부 요인 회동 \"선거 관리 대개혁 방안 마련\""
         }
       ]
     },
     {
-      "term": "바다에서",
+      "term": "공소",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2817,16 +2985,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
         },
         {
           "source": "sbs",
-          "title": "김 총리 \"당원의 바다에서 민주 황금시대\"…당권도전 시사"
+          "title": "[여담야담] 이 대통령 \"공소 취소, 법과 상식대로…진상규명 결과 보고 판단\""
         }
       ]
     },
     {
-      "term": "당권도전",
+      "term": "특검이",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2835,16 +3003,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
         },
         {
           "source": "sbs",
-          "title": "김 총리 \"당원의 바다에서 민주 황금시대\"…당권도전 시사"
+          "title": "\"공소취소, 특검이 진상 규명…잘못됐으면 시정하면 돼\""
         }
       ]
     },
     {
-      "term": "시사",
+      "term": "진상",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2853,16 +3021,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김민석 \"당원의 바다에서 민주의 황금시대\"…당권도전 시사"
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
         },
         {
           "source": "sbs",
-          "title": "김 총리 \"당원의 바다에서 민주 황금시대\"…당권도전 시사"
+          "title": "\"공소취소, 특검이 진상 규명…잘못됐으면 시정하면 돼\""
         }
       ]
     },
     {
-      "term": "부족사태",
+      "term": "규명",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2871,16 +3039,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
         },
         {
           "source": "sbs",
-          "title": "민주, '투표지 부족사태' 국조요구서 내일 제출…\"개헌도 검토\""
+          "title": "\"공소취소, 특검이 진상 규명…잘못됐으면 시정하면 돼\""
         }
       ]
     },
     {
-      "term": "신임",
+      "term": "잘못됐으면",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2889,16 +3057,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[바로이뉴스] 신임 국무총리 후보에 한성숙 장관 지명"
+          "title": "\"공소 취소, 특검이 진상 규명…잘못됐으면 시정\""
         },
         {
           "source": "sbs",
-          "title": "이 대통령, 신임 국무총리 후보에 한성숙 장관 지명"
+          "title": "\"공소취소, 특검이 진상 규명…잘못됐으면 시정하면 돼\""
         }
       ]
     },
     {
-      "term": "국무총리",
+      "term": "부정선거론과",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2907,16 +3075,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[바로이뉴스] 신임 국무총리 후보에 한성숙 장관 지명"
+          "title": "\"부정선거론과 달라\"…\"선거 결과는 국민의 경고\""
         },
         {
           "source": "sbs",
-          "title": "이 대통령, 신임 국무총리 후보에 한성숙 장관 지명"
+          "title": "이 대통령 \"부정선거론과 달라…국민주권 존중 없었다\""
         }
       ]
     },
     {
-      "term": "대체불가",
+      "term": "국민의",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2925,16 +3093,124 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
+          "title": "\"부정선거론과 달라\"…\"선거 결과는 국민의 경고\""
         },
         {
           "source": "sbs",
-          "title": "이 대통령, 내일 취임 1주년 기자회견…'대체불가 대한민국'"
+          "title": "\"또 그 부정선거? 이건 달라\"…\"선거 결과, 국민의 경고\""
         }
       ]
     },
     {
-      "term": "이란과",
+      "term": "한성숙",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "한성숙 \"AI 대전환 총력\"…다주택 논란 속에 '30억' 차익"
+        },
+        {
+          "source": "sbs",
+          "title": "한성숙 \"민생경제 비상 타개 총력…AI 대전환 박차\""
+        }
+      ]
+    },
+    {
+      "term": "대전환",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "한성숙 \"AI 대전환 총력\"…다주택 논란 속에 '30억' 차익"
+        },
+        {
+          "source": "sbs",
+          "title": "한성숙 \"민생경제 비상 타개 총력…AI 대전환 박차\""
+        }
+      ]
+    },
+    {
+      "term": "총력",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "한성숙 \"AI 대전환 총력\"…다주택 논란 속에 '30억' 차익"
+        },
+        {
+          "source": "sbs",
+          "title": "한성숙 \"민생경제 비상 타개 총력…AI 대전환 박차\""
+        }
+      ]
+    },
+    {
+      "term": "전세",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"주식 저평가·고환율 일시적…전세 부족은 정상화 과정\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        }
+      ]
+    },
+    {
+      "term": "정상화",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"주식 저평가·고환율 일시적…전세 부족은 정상화 과정\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        }
+      ]
+    },
+    {
+      "term": "과정",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"주식 저평가·고환율 일시적…전세 부족은 정상화 과정\""
+        },
+        {
+          "source": "sbs",
+          "title": "[여담야담] 이 대통령 \"전세 사라져가지 않겠나. 정상화 과정\"…보유세 인상도 시사"
+        }
+      ]
+    },
+    {
+      "term": "박탈",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2943,16 +3219,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수\"(종합)"
+          "title": "美, 성범죄 혐의 등 부적절 귀화자 17명 시민권 박탈 소송"
         },
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수할 것\""
+          "title": "'라건아 세금 분쟁' 가스공사, KBL 지명권 박탈 효력정지 가처분"
         }
       ]
     },
     {
-      "term": "합의불발시",
+      "term": "제기",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2961,16 +3237,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수\"(종합)"
+          "title": "LA시장 선거서 민주당 후보 득세에 트럼프·머스크, 음모론 제기"
         },
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수할 것\""
+          "title": "'0.76%p차 석패' 인천교육감 이대형 후보, 재검표 소청 제기"
         }
       ]
     },
     {
-      "term": "타격한",
+      "term": "나토",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2979,16 +3255,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수\"(종합)"
+          "title": "또 발트 3국 영공 넘은 드론…나토 전투기로 격추(종합)"
         },
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수할 것\""
+          "title": "\"美, 나토 동맹국에 국방예산으로 中업체 장비 교체 요구\""
         }
       ]
     },
     {
-      "term": "고농축우라늄",
+      "term": "재개시",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2997,16 +3273,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수\"(종합)"
+          "title": "네타냐후 \"이란 공습 당분간 중단… 공격 재개시 강경 대응\""
         },
         {
           "source": "yna",
-          "title": "트럼프 \"이란과 합의불발시 타격한 뒤 고농축우라늄 회수할 것\""
+          "title": "[속보] 네타냐후 \"이란공습 일시 중단…공격 재개시 강경 대응\""
         }
       ]
     },
     {
-      "term": "이스라엘",
+      "term": "독일",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3015,16 +3291,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "\"프랑스·독일·스페인, 차세대 전투기 공동개발 무산\""
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "'옛 정적' 메르켈 구호까지 꺼내든 독일 총리"
         }
       ]
     },
     {
-      "term": "만류",
+      "term": "스페인",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3033,16 +3309,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "\"프랑스·독일·스페인, 차세대 전투기 공동개발 무산\""
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "[전북소식] 식품진흥원, 스페인 농식품 클러스터와 기술 협력"
         }
       ]
     },
     {
-      "term": "에도",
+      "term": "국방",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3051,16 +3327,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "이스라엘 국방 \"헤즈볼라가 공격하면 베이루트 또 때릴 것\""
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "7년만에 평양 찾은 시진핑, '외교·국방·경제 수장' 총동원"
         }
       ]
     },
     {
-      "term": "레바논",
+      "term": "계속",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3069,16 +3345,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "민주콩고 에볼라 누적 확진자 500명 넘어…확산세 계속"
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "\"이스라엘, 대이란 공격 중단 결정…헤즈볼라와 교전은 계속\""
         }
       ]
     },
     {
-      "term": "수도",
+      "term": "경찰",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3087,16 +3363,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "파키스탄령 카슈미르서 경찰-사회단체 충돌…최소 7명 사망"
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "경찰, 잠실 개표소 시위서 여성 불법촬영한 혐의 남성 체포"
         }
       ]
     },
     {
-      "term": "베이루트",
+      "term": "호르무즈",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3105,16 +3381,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재(종합)"
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재"
         }
       ]
     },
     {
-      "term": "공습",
+      "term": "개인",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3123,16 +3399,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습(종합)"
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재(종합)"
         },
         {
           "source": "yna",
-          "title": "이스라엘, '트럼프 만류'에도 레바논 수도 베이루트 공습"
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재"
         }
       ]
     },
     {
-      "term": "테러",
+      "term": "제재",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3141,16 +3417,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "하마스 연계 의혹 팔레스타인 남성, 그리스서 체포…\"테러 획책\""
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재(종합)"
         },
         {
           "source": "yna",
-          "title": "이스라엘서 테러 추정 연쇄 총격…1명 사망·5명 부상"
+          "title": "EU, '호르무즈 봉쇄' 이란 개인·단체 제재"
         }
       ]
     },
     {
-      "term": "번째",
+      "term": "송부",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3159,16 +3435,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "OPEC＋, 호르무즈 봉쇄후 4번째 원유 증산 합의"
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\"(종합)"
         },
         {
           "source": "yna",
-          "title": "프로야구 김정국 심판, 통산 1천500경기 출장…역대 35번째"
+          "title": "선관위 \"용지 추가 송부 투표소 140곳…26곳 투표 중단 후 재개\""
         }
       ]
     },
     {
-      "term": "치맥보다",
+      "term": "북중관계",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3177,245 +3453,11 @@
       "examples": [
         {
           "source": "yna",
-          "title": "야구관람·회동에도 K치킨…젠슨황 \"치맥보다 좋은 건 없다\"(종합2보)"
+          "title": "외신 \"북중관계 격상…서방 맞서 중국 중심 단결 전선 구축\""
         },
         {
           "source": "yna",
-          "title": "야구장 찾은 젠슨황 \"치맥보다 좋은 건 없다\"…BBQ 또 먹었다(종합)"
-        }
-      ]
-    },
-    {
-      "term": "좋은",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "야구관람·회동에도 K치킨…젠슨황 \"치맥보다 좋은 건 없다\"(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "야구장 찾은 젠슨황 \"치맥보다 좋은 건 없다\"…BBQ 또 먹었다(종합)"
-        }
-      ]
-    },
-    {
-      "term": "소방",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 2단계 상향(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "안산 포장지 공장서 화재…소방 대응 1단계"
-        }
-      ]
-    },
-    {
-      "term": "투런포",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "김도영 투런포·결승 솔로포 '쾅쾅'…KIA, 짜릿한 뒤집기(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "KIA 김도영, 중월 투런포 '쾅'…시즌 17호로 단독 1위"
-        }
-      ]
-    },
-    {
-      "term": "홈런",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'뜨거운 홈런 레이스' 김도영 17·18호 폭발…오스틴은 17호포(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "김도영·오스틴, 나란히 17호포…뜨겁게 달아오른 홈런 경쟁(종합)"
-        }
-      ]
-    },
-    {
-      "term": "호포",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'뜨거운 홈런 레이스' 김도영 17·18호 폭발…오스틴은 17호포(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "김도영·오스틴, 나란히 17호포…뜨겁게 달아오른 홈런 경쟁(종합)"
-        }
-      ]
-    },
-    {
-      "term": "체르노빌",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젤렌스키 \"러, 체르노빌 사용후핵연료 저장시설 의도적 공격\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "IAEA \"체르노빌 사용후핵연료 저장 시설 드론 공격 받아\""
-        }
-      ]
-    },
-    {
-      "term": "사용후핵연료",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젤렌스키 \"러, 체르노빌 사용후핵연료 저장시설 의도적 공격\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "IAEA \"체르노빌 사용후핵연료 저장 시설 드론 공격 받아\""
-        }
-      ]
-    },
-    {
-      "term": "공격",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젤렌스키 \"러, 체르노빌 사용후핵연료 저장시설 의도적 공격\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "IAEA \"체르노빌 사용후핵연료 저장 시설 드론 공격 받아\""
-        }
-      ]
-    },
-    {
-      "term": "이닝",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "알칸타라 6이닝 1실점…키움, 두산 꺾고 4연패 탈출"
-        },
-        {
-          "source": "yna",
-          "title": "베니지아노, 7이닝 무실점…SSG, 13연패 뒤 2연속 위닝시리즈"
-        }
-      ]
-    },
-    {
-      "term": "미국",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "삼성메디슨, 미국 빅2 대형병원에 초음파 진단기기 공급"
-        },
-        {
-          "source": "yna",
-          "title": "LG엔솔, 미국 관세 환급 절차 착수…환급금 1천억원 넘을 듯"
-        }
-      ]
-    },
-    {
-      "term": "시즌",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "젠슨 황 \"폭투였다…박 회장과 두산의 우승 시즌 얘기\""
-        },
-        {
-          "source": "yna",
-          "title": "KIA 김도영, 중월 투런포 '쾅'…시즌 17호로 단독 1위"
-        }
-      ]
-    },
-    {
-      "term": "문동현",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승"
-        }
-      ]
-    },
-    {
-      "term": "최연소",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "20세 2개월 문동현, KPGA 선수권대회 최연소 우승"
+          "title": "김정은·시진핑, 평양서 정상회담…북중관계·북핵문제 논의 주목"
         }
       ]
     }
