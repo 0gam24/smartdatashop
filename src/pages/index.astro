@@ -12,7 +12,7 @@ import PulseCard from '../components/PulseCard.astro';
 import CategoryStrip from '../components/CategoryStrip.astro';
 import CategoryColumn from '../components/CategoryColumn.astro';
 import GuidebookCard from '../components/GuidebookCard.astro';
-import ChartFigure from '../components/ChartFigure.astro';
+import EconomyChart from '../components/EconomyChart.astro';
 import SisterSiteGrid from '../components/SisterSiteGrid.astro';
 import SisterSiteCard from '../components/SisterSiteCard.astro';
 import ComingSoon from '../components/ComingSoon.astro';
@@ -252,8 +252,8 @@ const sisters = sisterOrder.map((key) => {
   <!-- Section 05: 오늘의 추천 차트 -->
   <section class="section" id="data" data-screen-label="05 추천 차트">
     <div class="page-width">
-      <SectionHead num="05" title="오늘의 추천 차트" moreHref="#" moreLabel="데이터 전체 →" />
-      <ChartFigure />
+      <SectionHead num="05" title="오늘의 추천 차트" moreHref="/data/timeseries/" moreLabel="데이터 전체 →" />
+      <EconomyChart ecosId="usd-krw" />
     </div>
   </section>
 
