@@ -22,7 +22,6 @@ import {
   getEcosTopChanges,
   getWeekRssTop,
   getCurrentWeekRange,
-  getSisterLatest,
 } from '../lib/today-signals';
 import {
   buildBreadcrumbLD,
@@ -30,7 +29,6 @@ import {
   buildItemListLD,
 } from '../lib/jsonld';
 import { categoryToKorean, formatKoreanDate, pulseUrl, insightUrl } from '../lib/korean';
-import { SISTER_SITES, type SisterSiteKey } from '../data/sister-sites';
 
 const SITE = 'https://smartdatashop.kr';
 const PAGE_PATH = '/this-week/';
@@ -58,17 +56,6 @@ const weekChapters = chapters
 
 const ecosChanges = getEcosTopChanges(5);
 const weekRss = getWeekRssTop(8);
-
-// ADR 0010 — 단일 독립 운영. 자매 사이트 신착 섹션 폐기 (빈 배열로 미렌더).
-const sisterRows: Array<{
-  siteKey: SisterSiteKey;
-  siteName: string;
-  domain: string;
-  title: string;
-  url: string;
-  publishedAt: string;
-  inWindow: boolean;
-}> = [];
 
 const weekTotal = weekPulses.length + weekInsights.length + weekChapters.length;
 const hasContent = weekTotal > 0 || ecosChanges.length > 0 || weekRss.length > 0;
@@ -226,26 +213,6 @@ function elapsedShort(iso: string): string {
       </section>
     )}
 
-    {sisterRows.length > 0 && (
-      <section class="tw-section">
-        <h2 class="tw-h2"><span class="num">04</span>자매 사이트 신착</h2>
-        <ul class="tw-list">
-          {sisterRows.map((s) => (
-            <li class="tw-sister-row">
-              <a href={s.url} rel="external noopener" class="no-underline tw-sister-link">
-                <div class="tw-sister-meta">
-                  <span class="tw-sister-domain">{s.domain}</span>
-                  {!s.inWindow && <span class="tw-sister-stale">7일 이전</span>}
-                </div>
-                <div class="tw-sister-title">{s.title}</div>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p class="tw-foot">출처 — 자매 사이트 mirror · 매일 02:00 KST 자동 갱신</p>
-      </section>
-    )}
-
     <p class="tw-policy">
       본 페이지는 자동 집계 페이지입니다. 모든 항목은 1차 출처에서 그대로 가져온 메타데이터 (제목·링크·수치·발행일자) 만 표시합니다 — 본문 복제 0, 가공 수치 0.
     </p>
@@ -356,11 +323,11 @@ function elapsedShort(iso: string): string {
     flex-direction: column;
     gap: 18px;
   }
-  .tw-row, .tw-rss-row, .tw-sister-row {
+  .tw-row, .tw-rss-row {
     padding-bottom: 14px;
     border-bottom: 0.5px dashed var(--color-ink-quat);
   }
-  .tw-row-meta, .tw-rss-meta, .tw-sister-meta {
+  .tw-row-meta, .tw-rss-meta {
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--color-ink-tertiary);
@@ -371,7 +338,7 @@ function elapsedShort(iso: string): string {
     align-items: baseline;
     flex-wrap: wrap;
   }
-  .tw-row-meta .dot, .tw-rss-meta .dot, .tw-sister-meta .dot { color: var(--color-ink-quat); }
+  .tw-row-meta .dot, .tw-rss-meta .dot { color: var(--color-ink-quat); }
   .tw-cat { color: var(--color-ink-secondary); }
   .tw-kind {
     margin-left: auto;
@@ -379,7 +346,7 @@ function elapsedShort(iso: string): string {
     border: 0.5px solid var(--color-ink-quat);
     padding: 1px 6px;
   }
-  .tw-row-title, .tw-rss-title, .tw-sister-title {
+  .tw-row-title, .tw-rss-title {
     font-family: var(--font-serif);
     font-size: 16px;
     line-height: 1.5;
@@ -387,7 +354,7 @@ function elapsedShort(iso: string): string {
     transition: color 0.15s ease;
     display: block;
   }
-  .tw-row-title:hover, .tw-rss-link:hover .tw-rss-title, .tw-sister-link:hover .tw-sister-title {
+  .tw-row-title:hover, .tw-rss-link:hover .tw-rss-title {
     color: var(--color-accent);
   }
   .tw-row-tldr {
@@ -451,16 +418,7 @@ function elapsedShort(iso: string): string {
   .delta-down { color: #2a7a3a; }
   .delta-flat { color: var(--color-ink-tertiary); }
 
-  /* RSS / Sister */
+  /* RSS */
   .tw-rss-source { color: var(--color-ink-secondary); }
   .tw-rss-cat { color: var(--color-ink-tertiary); }
-  .tw-sister-domain { color: var(--color-accent); }
-  .tw-sister-stale {
-    margin-left: 8px;
-    font-size: 10px;
-    color: var(--color-ink-tertiary);
-    border: 0.5px solid var(--color-ink-quat);
-    padding: 1px 5px;
-    background: var(--color-paper-soft);
-  }
 </style>

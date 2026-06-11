@@ -12,8 +12,6 @@ import PulseCard from '../components/PulseCard.astro';
 import CategoryStrip from '../components/CategoryStrip.astro';
 import CategoryColumn from '../components/CategoryColumn.astro';
 import GuidebookCard from '../components/GuidebookCard.astro';
-import SisterSiteGrid from '../components/SisterSiteGrid.astro';
-import SisterSiteCard from '../components/SisterSiteCard.astro';
 import ComingSoon from '../components/ComingSoon.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import Footer from '../components/Footer.astro';
@@ -23,7 +21,7 @@ import {
   buildPersonLD,
   buildSearchActionLD,
 } from '../lib/jsonld';
-import { getTodaySignals, getEcosHeroSpotlight, getSisterLatest } from '../lib/today-signals';
+import { getTodaySignals, getEcosHeroSpotlight } from '../lib/today-signals';
 
 // 섹션 02 — 오늘의 펄스 5편 (content collection 기반)
 const allPulses = await getCollection('pulse');
@@ -158,22 +156,6 @@ const guidebooks = guidebooksCollection
     };
   });
 
-// 섹션 06 — 자매 사이트 (정적 sister-sites.ts 메타 + 자동 fetch sister-mirrors/{id}/posts.json
-// 의 최신 글 1건). sync-sister-mirrors cron 이 매일 02:00 KST 갱신 → 자매 카드 latest 자동.
-import { SISTER_SITES, type SisterSiteKey } from '../data/sister-sites';
-const sisterOrder: SisterSiteKey[] = ['calculatorhost', 'awoo', 'moneylook', 'iknowhowinfo'];
-const sisters = sisterOrder.map((key) => {
-  const meta = SISTER_SITES[key];
-  const latestPost = getSisterLatest(key);
-  return {
-    domain: meta.domain,
-    name: meta.name,
-    persona: meta.persona,
-    latest: latestPost?.title ?? '', // posts.json 없거나 비어있으면 빈 문자열 (컴포넌트 graceful)
-    latestUrl: latestPost?.url ?? '',
-    baseUrl: meta.baseUrl,
-  };
-});
 ---
 
 <BaseLayout jsonld={[buildOrganizationLD(), buildPersonLD(), buildSearchActionLD()]}>
