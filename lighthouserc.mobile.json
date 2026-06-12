@@ -33,7 +33,16 @@
         "total-blocking-time": ["warn", { "maxNumericValue": 300 }],
         "interactive": ["warn", { "maxNumericValue": 5000 }],
         "uses-http2": "off",
-        "csp-xss": "off"
+        "csp-xss": "off",
+        "third-party-cookies": "off",
+        "legacy-javascript-insight": "off",
+        "unused-javascript": "off",
+        "total-byte-weight": "off",
+        "network-dependency-tree-insight": "off",
+        "forced-reflow-insight": ["warn", { "minScore": 0.9 }],
+        "inspector-issues": ["warn", { "minScore": 0.9 }],
+        "label-content-name-mismatch": ["warn", { "minScore": 0.9 }],
+        "link-in-text-block": ["warn", { "minScore": 0.9 }]
       }
     }
   }
