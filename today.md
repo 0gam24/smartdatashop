@@ -4,7 +4,10 @@
 
 ## 2026-06-13 (토) — 오늘
 
-- 📝 발행 0건
+- 📝 발행 **3건**:
+  - [한은 총재 \](https://smartdatashop.kr/stats/weekly-indicators-rate-signal/) — 신현송 한국은행 총재가 6월 12일 창립 76주년 기념사에서 물가 안정에 중점을 두고 늦지 않게 금리를 인…
+  - [온열질환 예방수칙 — 작년 3,813명, 감시체계 가동 중](https://smartdatashop.kr/policy/heat-illness-prevention/) — 온열질환은 열사병·열탈진처럼 더위로 생기는 급성 질환으로, 지난해 응급실 감시체계에 신고된 환자만 3,81…
+  - [자동차세 연납 6월 신청 — 16~30일, 하반기분 2.5% 아끼기](https://smartdatashop.kr/tax-finance/car-tax-annual-prepay-june/) — 자동차세 연납은 1년치 세금을 미리 내고 공제받는 제도로 1·3·6·9월에 신청할 수 있다. 6월 신청 기…
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **20건**
 
