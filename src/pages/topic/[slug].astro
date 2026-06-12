@@ -165,7 +165,7 @@ const itemListSrc: Item[] = [
   ...matchedInsights.map((e) => ({ name: e.data.title, url: insightUrl(e.slug) })),
   ...matchedPulses.map((e) => ({
     name: e.data.title,
-    url: pulseUrl(e.slug, e.data.publishedAt),
+    url: pulseUrl(e.slug, e.data.publishedAt, e.data.category),
   })),
 ];
 const itemListLd = buildItemListLD(itemListSrc);
@@ -316,7 +316,7 @@ const totalItems = matchedPulses.length + matchedInsights.length + matchedChapte
         <ul class="topic-list">
           {matchedPulses.slice(0, 10).map((e) => (
             <li>
-              <a href={pulseUrl(e.slug, e.data.publishedAt)} class="no-underline">
+              <a href={pulseUrl(e.slug, e.data.publishedAt, e.data.category)} class="no-underline">
                 <span class="t-title">{e.data.title}</span>
                 <span class="t-meta">
                   {formatKoreanDate(e.data.publishedAt)} · 1차 출처 {e.data.sources.length}건

@@ -54,10 +54,18 @@ if (!existsSync(sitemapPath)) {
   fail('dist/sitemap-0.xml 미생성 — astro build 가 실패했거나 @astrojs/sitemap 통합 문제');
 } else {
   const sitemap = readFileSync(sitemapPath, 'utf8');
-  const pulseUrlRe = /<loc>https:\/\/smartdatashop\.kr\/\d{4}\/\d{2}\/\d{2}\/[^<]+<\/loc>/g;
+  // 펄스 URL 2형식 (2026-06-12 URL 정책 개정):
+  //   구형 /YYYY/MM/DD/slug/ (2026-06-13 이전 발행, 색인 보존) +
+  //   신형 /카테고리/slug/ (이후 발행). 카테고리 5종 enum 은 config.ts 와 동기.
+  const pulseDateUrlRe = /<loc>https:\/\/smartdatashop\.kr\/\d{4}\/\d{2}\/\d{2}\/[^<]+<\/loc>/g;
+  const pulseCategoryUrlRe =
+    /<loc>https:\/\/smartdatashop\.kr\/(?:policy|tax-finance|market|stats|ai-tech)\/[^<\/]+\/<\/loc>/g;
   const insightUrlRe = /<loc>https:\/\/smartdatashop\.kr\/insight\/[^<\/]+\/<\/loc>/g;
 
-  const pulseInSitemap = sitemap.match(pulseUrlRe) ?? [];
+  const pulseInSitemap = [
+    ...(sitemap.match(pulseDateUrlRe) ?? []),
+    ...(sitemap.match(pulseCategoryUrlRe) ?? []),
+  ];
   const insightInSitemap = (sitemap.match(insightUrlRe) ?? []).filter(
     // /insight/index 격인 /insight/ 자체는 제외 (콜렉션 페이지)
     (s) => !/<loc>https:\/\/smartdatashop\.kr\/insight\/<\/loc>/.test(s),

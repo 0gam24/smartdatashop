@@ -54,7 +54,7 @@ const hasChart =
 const hasEntry = entry !== undefined;
 const category = hasEntry ? categoryToKorean(entry!.data.category) : '';
 const publishedAt = hasEntry ? formatKoreanDateTime(entry!.data.publishedAt) : '';
-const href = hasEntry ? pulseUrl(entry!.slug, entry!.data.publishedAt) : '#';
+const href = hasEntry ? pulseUrl(entry!.slug, entry!.data.publishedAt, entry!.data.category) : '#';
 const title = hasEntry ? entry!.data.title : '';
 const tldr = hasEntry ? entry!.data.tldr : '';
 const aiAssisted = hasEntry ? entry!.data.aiAssisted : false;

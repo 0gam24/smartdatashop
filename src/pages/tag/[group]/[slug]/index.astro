@@ -93,7 +93,7 @@ const pulseCards = taggedPulses.map((entry: CollectionEntry<'pulse'>) => {
     time: formatKoreanTime(entry.data.publishedAt),
     title: entry.data.title,
     tldr: entry.data.tldr,
-    href: pulseUrl(entry.slug, entry.data.publishedAt),
+    href: pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category),
     tags,
   };
 });

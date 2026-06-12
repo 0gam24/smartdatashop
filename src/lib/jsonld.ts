@@ -173,7 +173,7 @@ export function buildPersonLD(): Record<string, unknown> {
  * 단일 자산을 등록 (1:1, 4:3 변형은 향후 이미지 에이전트에서 추가).
  */
 export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<string, unknown> {
-  const url = `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt)}`;
+  const url = `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`;
   const primaryImage = entry.data.coverImage
     ? entry.data.coverImage.startsWith('http')
       ? entry.data.coverImage
@@ -512,7 +512,7 @@ export function buildDatasetLDFromArticle(
 
   const articleUrl =
     type === 'pulse'
-      ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt)}`
+      ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`
       : `${SITE_URL}/insight/${entry.slug}/`;
 
   return {

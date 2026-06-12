@@ -68,7 +68,7 @@ export async function GET(context: APIContext) {
   }
 
   const items: FeedItem[] = [
-    ...pulses.map((entry) => richItem(entry, pulseUrl(entry.slug, entry.data.publishedAt))),
+    ...pulses.map((entry) => richItem(entry, pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category))),
     ...insights.map((entry) => richItem(entry, `/insight/${entry.slug}/`)),
   ];
 

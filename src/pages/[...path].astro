@@ -1,27 +1,35 @@
 ---
+/**
+ * 펄스 단일 렌더러 — 두 가지 URL 체계를 한 라우트에서 처리 (2026-06-12 URL 정책 개정).
+ *
+ *   - 2026-06-13(KST) 이후 발행: /카테고리/슬러그/        (예: /tax-finance/vat-guide/)
+ *   - 그 이전 발행:            /YYYY/MM/DD/슬러그/       (구글·네이버 색인 보존 — 영구 유지)
+ *
+ * 경로 분기는 src/lib/korean.ts 의 pulseUrl() 단일 진실을 따른다. rest 라우트는
+ * Astro 라우팅 우선순위가 가장 낮아 /insight, /topic, /category 등 기존 라우트와
+ * 충돌하지 않는다. (구 라우트 src/pages/[year]/[month]/[day]/[slug].astro 를 대체)
+ */
 import { getCollection, type CollectionEntry } from 'astro:content';
-import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
-import Tldr from '../../../../components/Tldr.astro';
-import RelatedList from '../../../../components/RelatedList.astro';
-import ToollGate from '../../../../components/ToollGate.astro';
-import { estimateReadingTime, pulseUrl, pulseDateParts, categoryToKorean } from '../../../../lib/korean';
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import Tldr from '../components/Tldr.astro';
+import RelatedList from '../components/RelatedList.astro';
+import { estimateReadingTime, pulseUrl, pulseDateParts, categoryToKorean } from '../lib/korean';
 import {
   buildNewsArticleLD,
   buildDatasetLDFromArticle,
   buildFaqLDFromMarkdown,
   buildHowToLDFromMarkdown,
-} from '../../../../lib/jsonld';
-import { entryHasPlaceholder } from '../../../../lib/placeholder';
+} from '../lib/jsonld';
+import { entryHasPlaceholder } from '../lib/placeholder';
 
 export async function getStaticPaths() {
   const entries = await getCollection('pulse');
-  return entries.map((entry) => {
-    const { year, month, day } = pulseDateParts(entry.data.publishedAt);
-    return {
-      params: { year, month, day, slug: entry.slug },
-      props: { entry },
-    };
-  });
+  return entries.map((entry) => ({
+    params: {
+      path: pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category).replace(/^\/|\/$/g, ''),
+    },
+    props: { entry },
+  }));
 }
 
 interface Props {
@@ -62,7 +70,6 @@ if (faqLd) articleJsonLd.push(faqLd);
 const howToLd = buildHowToLDFromMarkdown(data.title, entry.body);
 if (howToLd) articleJsonLd.push(howToLd);
 // 명시적 coverImage 가 없으면 동적 OG v2(Satori, Reuters/Bloomberg 스타일)로 폴백.
-// 구 librsvg 라우트(/og/pulse/<slug>.png)는 2026-06-12 제거 완료 (D9=N 1개월 병행 종료).
 const ogImage = data.coverImage
   ? data.coverImage.startsWith('http')
     ? data.coverImage
@@ -98,7 +105,7 @@ const related = allEntries
     return {
       when: `${year}.${month}.${day}`,
       title: e.data.title,
-      href: pulseUrl(e.slug, e.data.publishedAt),
+      href: pulseUrl(e.slug, e.data.publishedAt, e.data.category),
     };
   });
 ---

@@ -8,7 +8,7 @@ const entries = await getCollection('pulse');
 const sorted = entries.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
 );
-const target = sorted[0] ? pulseUrl(sorted[0].slug, sorted[0].data.publishedAt) : '/';
+const target = sorted[0] ? pulseUrl(sorted[0].slug, sorted[0].data.publishedAt, sorted[0].data.category) : '/';
 ---
 <!doctype html>
 <html lang="ko">

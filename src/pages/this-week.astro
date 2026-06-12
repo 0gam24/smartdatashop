@@ -70,7 +70,7 @@ const breadcrumbLd = buildBreadcrumbLD([
 ]);
 const collectionLd = buildCollectionPageLD(pageTitle, pageDescription, PAGE_PATH);
 const itemListSrc = [
-  ...weekPulses.map((e) => ({ name: e.data.title, url: pulseUrl(e.slug, e.data.publishedAt) })),
+  ...weekPulses.map((e) => ({ name: e.data.title, url: pulseUrl(e.slug, e.data.publishedAt, e.data.category) })),
   ...weekInsights.map((e) => ({ name: e.data.title, url: insightUrl(e.slug) })),
 ];
 const itemListLd = itemListSrc.length > 0 ? buildItemListLD(itemListSrc) : null;
@@ -134,7 +134,7 @@ function elapsedShort(iso: string): string {
                 <span class="tw-when">{formatKoreanDate(e.data.publishedAt)}</span>
                 <span class="tw-kind">펄스</span>
               </div>
-              <a href={pulseUrl(e.slug, e.data.publishedAt)} class="tw-row-title no-underline">{e.data.title}</a>
+              <a href={pulseUrl(e.slug, e.data.publishedAt, e.data.category)} class="tw-row-title no-underline">{e.data.title}</a>
               {e.data.tldr && <p class="tw-row-tldr">{e.data.tldr}</p>}
             </li>
           ))}

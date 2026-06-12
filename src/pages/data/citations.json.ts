@@ -33,7 +33,7 @@ export async function GET() {
   const rows: CitationRow[] = [];
 
   for (const e of pulses) {
-    const url = `https://smartdatashop.kr${pulseUrl(e.slug, e.data.publishedAt)}`;
+    const url = `https://smartdatashop.kr${pulseUrl(e.slug, e.data.publishedAt, e.data.category)}`;
     e.data.sources.forEach((s, i) => {
       rows.push({
         article_url: url,

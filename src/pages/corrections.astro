@@ -23,7 +23,7 @@ for (const e of allPulses) {
   for (const c of e.data.correctionLog ?? []) {
     corrections.push({
       ...c,
-      href: pulseUrl(e.slug, e.data.publishedAt),
+      href: pulseUrl(e.slug, e.data.publishedAt, e.data.category),
       title: e.data.title,
       collection: 'pulse',
     });

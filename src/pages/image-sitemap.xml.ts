@@ -46,7 +46,7 @@ export const GET: APIRoute = async () => {
   }> = [];
 
   for (const e of pulses) {
-    const pageUrl = `${SITE}${pulseUrl(e.slug, e.data.publishedAt)}`;
+    const pageUrl = `${SITE}${pulseUrl(e.slug, e.data.publishedAt, e.data.category)}`;
     const imageUrl = e.data.coverImage
       ? e.data.coverImage.startsWith('http')
         ? e.data.coverImage

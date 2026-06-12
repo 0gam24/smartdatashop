@@ -40,7 +40,7 @@ export async function GET(_context: APIContext) {
   function toItem(entry: any, kind: 'pulse' | 'insight'): Item {
     const link =
       kind === 'pulse'
-        ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt)}`
+        ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`
         : `${SITE_URL}/insight/${entry.slug}/`;
     const cover = entry.data.coverImage as string | undefined;
     const image = cover

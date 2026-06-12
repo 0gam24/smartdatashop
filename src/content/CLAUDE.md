@@ -19,6 +19,11 @@
 - `previewMode` / `verifiedBy` 두 필드는 ADR 0005 로 폐기됨 — frontmatter 에 절대 다시 등장 금지
 - Zod 스키마에서 삭제되어 신규 추가 시 `npm run build` 실패
 
+## URL 정책 (2026-06-12 운영자 지시 — 영구)
+- **2026-06-13(KST) 이후 발행 펄스 URL = `/카테고리/슬러그/`** (날짜 미포함). 파일명은 기존 규약(`YYYY-MM-DD-slug.mdx`) 그대로 유지하되, URL 에서는 날짜 접두사가 자동 제거된다 — `src/lib/korean.ts` `pulseUrl()` 단일 진실.
+- **2026-06-13 이전 발행분 URL(`/YYYY/MM/DD/슬러그/`)은 절대 변경·리다이렉트 금지** — 구글·네이버 색인 보존.
+- **본문 내부링크 작성 시**: 구 글 링크는 기존 날짜형 그대로, 신 글(6/13+) 링크는 `/카테고리/슬러그/` 형식으로 쓴다. 예: `/tax-finance/vat-second-half/`
+
 ## 새 펄스 추가 시
 1. 파일명: `YYYY-MM-DD-slug.mdx` (slug는 영어 소문자/하이픈)
 2. publishedAt: ISO 8601 + KST 시간대 (예: `2026-05-05T07:32:00+09:00`)
