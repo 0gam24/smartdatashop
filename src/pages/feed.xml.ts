@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 사이트 전체 RSS 피드 (PLANNING.md §13.1)
  *
  * pulse + insight 모두 합쳐 publishedAt 내림차순으로 최신 50건.
@@ -7,7 +7,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
-import { categoryToKorean, pulseUrl, type Category } from '../lib/korean';
+import { categoryToKorean, pulseUrl, insightUrl, type Category } from '../lib/korean';
 
 const SITE_TITLE = '스마트데이터샵';
 const SITE_DESC = '한국의 데이터를 매일 5분으로 — 1차 출처 데이터 저널';
@@ -68,8 +68,8 @@ export async function GET(context: APIContext) {
   }
 
   const items: FeedItem[] = [
-    ...pulses.map((entry) => richItem(entry, pulseUrl(entry.slug, entry.data.publishedAt))),
-    ...insights.map((entry) => richItem(entry, `/insight/${entry.slug}/`)),
+    ...pulses.map((entry) => richItem(entry, pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category))),
+    ...insights.map((entry) => richItem(entry, insightUrl(entry.slug, entry.data.publishedAt))),
   ];
 
   items.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());

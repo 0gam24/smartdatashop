@@ -67,13 +67,33 @@ function shortLine(text, max = 80) {
   return cleaned.slice(0, max - 1) + '…';
 }
 
-function pulseUrl(slug, publishedAt) {
+// URL 정책 (2026-06-12 개정, src/lib/korean.ts pulseUrl 과 동일 규칙):
+// 2026-06-13(KST) 이후 발행분 = /카테고리/슬러그(날짜 접두사 제거)/,
+// 이전 발행분 = /YYYY/MM/DD/슬러그/ (색인 보존 — 영구 유지).
+const CATEGORY_URL_CUTOFF_KST = '2026-06-13';
+
+function pulseUrl(slug, publishedAt, category) {
   const d = new Date(publishedAt);
   const k = new Date(d.getTime() + KST_OFFSET);
   const Y = k.getUTCFullYear();
   const M = String(k.getUTCMonth() + 1).padStart(2, '0');
   const D = String(k.getUTCDate()).padStart(2, '0');
+  if (category && `${Y}-${M}-${D}` >= CATEGORY_URL_CUTOFF_KST) {
+    return `${SITE}/${category}/${slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')}/`;
+  }
   return `${SITE}/${Y}/${M}/${D}/${slug}/`;
+}
+
+function insightUrlOf(slug, publishedAt) {
+  const d = new Date(publishedAt);
+  const k = new Date(d.getTime() + KST_OFFSET);
+  const Y = k.getUTCFullYear();
+  const M = String(k.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(k.getUTCDate()).padStart(2, '0');
+  const s = `${Y}-${M}-${D}` >= CATEGORY_URL_CUTOFF_KST
+    ? slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    : slug;
+  return `${SITE}/insight/${s}/`;
 }
 
 function urlEnc(s) { return encodeURIComponent(s); }
@@ -82,8 +102,8 @@ function urlEnc(s) { return encodeURIComponent(s); }
 function collectAll() {
   const items = [];
   const dirs = [
-    { dir: 'src/content/pulse', kind: '펄스', urlBuilder: (slug, pubAt) => pulseUrl(slug, pubAt) },
-    { dir: 'src/content/insight', kind: '인사이트', urlBuilder: (slug) => `${SITE}/insight/${slug}/` },
+    { dir: 'src/content/pulse', kind: '펄스', urlBuilder: (slug, pubAt, cat) => pulseUrl(slug, pubAt, cat) },
+    { dir: 'src/content/insight', kind: '인사이트', urlBuilder: (slug, pubAt) => insightUrlOf(slug, pubAt) },
   ];
   for (const { dir, kind, urlBuilder } of dirs) {
     const abs = resolve(ROOT, dir);
@@ -101,7 +121,7 @@ function collectAll() {
           tldr: fm.tldr ?? '',
           category: fm.category ?? '',
           publishedAt: fm.publishedAt,
-          url: urlBuilder(slug, fm.publishedAt),
+          url: urlBuilder(slug, fm.publishedAt, fm.category),
           dateKst: kstDateOf(fm.publishedAt),
         });
       } catch {}

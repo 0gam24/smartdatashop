@@ -72,7 +72,7 @@ const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
     time: formatKoreanTime(entry.data.publishedAt),
     title: entry.data.title,
     tldr: entry.data.tldr,
-    href: pulseUrl(entry.slug, entry.data.publishedAt),
+    href: pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category),
     tags,
     coverImage: entry.data.coverImage,
   };
@@ -120,7 +120,7 @@ const categories = CATEGORY_ORDER.map((cat) => {
       num: String(i + 1).padStart(2, '0'),
       title: e.data.title,
       meta: src ? `${month}.${day} · ${src}` : `${month}.${day}`,
-      href: pulseUrl(e.slug, e.data.publishedAt),
+      href: pulseUrl(e.slug, e.data.publishedAt, e.data.category),
     };
   });
   return {

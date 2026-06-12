@@ -64,9 +64,12 @@ function affectedUrls() {
       changedFiles.add(f);
     }
   }
-  // pulse → /YYYY/MM/DD/<slug>/, insight → /insight/<slug>/
-  // GitHub event 만으로 publishedAt 재구성 어려움 → slug 만 매칭하고 IndexNow 핑은
-  // 사이트 인덱스 페이지 + 구체 URL 두 후보 모두 보내 색인 보장.
+  // URL 정책 (2026-06-12 개정, src/lib/korean.ts pulseUrl 과 동일 규칙):
+  //   2026-06-13 이후 발행 pulse → /<category>/<slug>/ (frontmatter category 를 파일에서 읽음)
+  //   그 이전 발행 pulse → /YYYY/MM/DD/<날짜포함slug>/ (색인 보존)
+  //   insight → /insight/<파일명slug>/
+  // IndexNow 핑은 사이트 인덱스 페이지 + 구체 URL 두 후보 모두 보내 색인 보장.
+  const CATEGORY_URL_CUTOFF = '2026-06-13';
   const urls = new Set([SITE, `${SITE}/news-sitemap.xml`]);
   for (const f of changedFiles) {
     const m = f.match(
@@ -75,7 +78,23 @@ function affectedUrls() {
     if (!m) continue;
     const [, kind, date, slug] = m;
     if (kind === 'insight') {
-      urls.add(`${SITE}/insight/${date}-${slug}/`);
+      // 6/13 이후 발행 인사이트는 URL 슬러그에서 날짜 접두사 제거
+      urls.add(date >= CATEGORY_URL_CUTOFF
+        ? `${SITE}/insight/${slug}/`
+        : `${SITE}/insight/${date}-${slug}/`);
+    } else if (date >= CATEGORY_URL_CUTOFF) {
+      // 신형 URL — 워크플로 checkout 에서 frontmatter category 추출 (실패 시 date URL 폴백)
+      let category = null;
+      try {
+        const text = readFileSync(f, 'utf8');
+        category = text.match(/^category:\s*([^\s\n]+)/m)?.[1] ?? null;
+      } catch {}
+      if (category) {
+        urls.add(`${SITE}/${category}/${slug}/`);
+      } else {
+        const [yyyy, mm, dd] = date.split('-');
+        urls.add(`${SITE}/${yyyy}/${mm}/${dd}/${date}-${slug}/`);
+      }
     } else {
       const [yyyy, mm, dd] = date.split('-');
       urls.add(`${SITE}/${yyyy}/${mm}/${dd}/${date}-${slug}/`);

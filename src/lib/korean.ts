@@ -161,12 +161,34 @@ export function pulseDateParts(publishedAt: Date | string): {
 }
 
 /**
- * 펄스 글 URL: /YYYY/MM/DD/slug/ (PLANNING.md §9.1)
- * KST 기준 발행일을 path에 사용한다.
+ * URL 정책 전환 기준일 (2026-06-12 운영자 지시).
+ *
+ * 이 날짜(KST) **이후** 발행분: /카테고리/슬러그/ (날짜 미포함, 파일명의 날짜 접두사 제거)
+ * 이 날짜 **이전** 발행분: /YYYY/MM/DD/슬러그/ — 구글·네이버에 이미 색인된 URL 이므로
+ * 영구 보존한다. 변경·리다이렉트 금지 (AdSense 재심사 중 색인 안정성).
+ */
+const CATEGORY_URL_CUTOFF_KST = '2026-06-13';
+
+/** 파일명 규약(YYYY-MM-DD-slug)의 날짜 접두사를 URL 용으로 제거. */
+export function cleanPulseSlug(slug: string): string {
+  return slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+
+/**
+ * 펄스 글 URL (PLANNING.md §9.1 + 2026-06-12 개정)
+ *   - 2026-06-13(KST) 이후 발행: /카테고리/슬러그/ — category 인자 필수
+ *   - 그 이전 발행: /YYYY/MM/DD/슬러그/ (KST 기준 발행일, 기존 색인 보존)
  * 빌드 환경 타임존(Cloudflare Pages = UTC)과 무관하게 일관된 URL이 생성되어야 한다.
  */
-export function pulseUrl(slug: string, publishedAt: Date | string): string {
+export function pulseUrl(
+  slug: string,
+  publishedAt: Date | string,
+  category: string,
+): string {
   const { year, month, day } = pulseDateParts(publishedAt);
+  if (`${year}-${month}-${day}` >= CATEGORY_URL_CUTOFF_KST) {
+    return `/${category}/${cleanPulseSlug(slug)}/`;
+  }
   return `/${year}/${month}/${day}/${slug}/`;
 }
 
@@ -179,10 +201,23 @@ export function estimateReadingTime(text: string): number {
 }
 
 /**
- * 인사이트 글 URL: /insight/[slug]/ (PLANNING.md §9.2)
- * 펄스와 달리 날짜를 path에 포함하지 않는다 — evergreen 성격이라
- * 발행일이 URL 식별자로 의미 있지 않기 때문.
+ * 인사이트 URL 슬러그 (2026-06-12 URL 정책 개정).
+ * 2026-06-13(KST) 이후 발행분은 파일명의 날짜 접두사를 URL 에서 제거,
+ * 이전 발행분은 기존 슬러그 그대로 (색인 보존).
  */
-export function insightUrl(slug: string): string {
-  return `/insight/${slug}/`;
+export function insightSlugForUrl(slug: string, publishedAt: Date | string): string {
+  const { year, month, day } = pulseDateParts(publishedAt);
+  if (`${year}-${month}-${day}` >= CATEGORY_URL_CUTOFF_KST) {
+    return cleanPulseSlug(slug);
+  }
+  return slug;
+}
+
+/**
+ * 인사이트 글 URL: /insight/[slug]/ (PLANNING.md §9.2 + 2026-06-12 개정)
+ * 펄스와 달리 날짜를 path에 포함하지 않으며, 2026-06-13 이후 발행분은
+ * 슬러그의 날짜 접두사도 제거한다.
+ */
+export function insightUrl(slug: string, publishedAt: Date | string): string {
+  return `/insight/${insightSlugForUrl(slug, publishedAt)}/`;
 }

@@ -37,7 +37,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const urlEntries = fresh
     .map((entry) => {
-      const loc = `${origin}${pulseUrl(entry.slug, entry.data.publishedAt)}`;
+      const loc = `${origin}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`;
       const pubIso = new Date(entry.data.publishedAt).toISOString();
       return `  <url>
     <loc>${xmlEscape(loc)}</loc>

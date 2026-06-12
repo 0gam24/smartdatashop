@@ -16,7 +16,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import InsightLayout from '../../layouts/InsightLayout.astro';
 import Tldr from '../../components/Tldr.astro';
 import RelatedList from '../../components/RelatedList.astro';
-import { categoryToKorean, insightUrl, pulseDateParts } from '../../lib/korean';
+import { categoryToKorean, insightUrl, insightSlugForUrl, pulseDateParts } from '../../lib/korean';
 import { entryHasPlaceholder } from '../../lib/placeholder';
 import {
   buildArticleLD,
@@ -27,7 +27,8 @@ import {
 export async function getStaticPaths() {
   const entries = await getCollection('insight');
   return entries.map((entry) => ({
-    params: { slug: entry.slug },
+    // 2026-06-13 이후 발행분은 URL 슬러그에서 날짜 접두사 제거 (URL 정책 2026-06-12)
+    params: { slug: insightSlugForUrl(entry.slug, entry.data.publishedAt) },
     props: { entry },
   }));
 }
@@ -58,7 +59,7 @@ const related = relatedEntries.map((e) => {
   return {
     when: `${year}.${month}.${day}`,
     title: e.data.title,
-    href: insightUrl(e.slug),
+    href: insightUrl(e.slug, e.data.publishedAt),
   };
 });
 

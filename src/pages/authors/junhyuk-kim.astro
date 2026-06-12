@@ -65,13 +65,13 @@ type RecentItem = { title: string; href: string; publishedAt: string; collection
 const recent: RecentItem[] = [
   ...pulses.map<RecentItem>((e) => ({
     title: e.data.title,
-    href: pulseUrl(e.slug, e.data.publishedAt),
+    href: pulseUrl(e.slug, e.data.publishedAt, e.data.category),
     publishedAt: e.data.publishedAt,
     collection: 'pulse',
   })),
   ...insights.map<RecentItem>((e) => ({
     title: e.data.title,
-    href: insightUrl(e.slug),
+    href: insightUrl(e.slug, e.data.publishedAt),
     publishedAt: e.data.publishedAt,
     collection: 'insight',
   })),

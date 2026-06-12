@@ -48,7 +48,7 @@ export async function GET(context: APIContext) {
       title: entry.data.title,
       pubDate: new Date(entry.data.publishedAt),
       description: entry.data.tldr,
-      link: pulseUrl(entry.slug, entry.data.publishedAt),
+      link: pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category),
       categories: [categoryToKorean(entry.data.category as Category)],
       content: entry.body,
     })),
