@@ -32,6 +32,13 @@ const ENV_VARS = [
   'PUBLIC_CF_ANALYTICS_TOKEN',
   'PUBLIC_STIBEE_LIST_ID',
 ];
+// 미설정이어도 액션 불필요한 키 — 표에 사유 병기 (⚠ 대신 안내).
+const ENV_OPTIONAL_NOTES = {
+  // GSC 는 2026-05-10 도메인 속성(DNS) 으로 소유권 인증 완료 — HTML 태그용 본 키는 불필요.
+  PUBLIC_GOOGLE_SITE_VERIFICATION: 'GSC 도메인 속성 DNS 인증 완료(2026-05-10) — 선택',
+  // 뉴스레터(Stibee) 운영 개시 결정 시에만 필요. 미설정 시 폼은 fallback 모드.
+  PUBLIC_STIBEE_LIST_ID: '뉴스레터 개시 결정 시에만 — 선택',
+};
 const REQUIRED_DOCS = [
   ['docs/PLANNING.md', '12개월 KPI / 자매 사이트 합류 일정'],
   ['docs/DESIGN.md', '디자인 토큰 / 활자 시스템 / 컴포넌트 카탈로그'],
@@ -162,7 +169,9 @@ function render() {
   lines.push('| 키 | 상태 |');
   lines.push('|---|---|');
   for (const e of envs) {
-    lines.push(`| \`${e.key}\` | ${e.set ? '✅ 설정됨' : '⚠ 미설정'} |`);
+    const note = ENV_OPTIONAL_NOTES[e.key];
+    const status = e.set ? '✅ 설정됨' : note ? `◻ 미설정 — ${note}` : '⚠ 미설정';
+    lines.push(`| \`${e.key}\` | ${status} |`);
   }
   lines.push('');
   lines.push('미설정 키는 Cloudflare Pages → Settings → Environment variables 에서 추가. `docs/operations.md` 환경변수 섹션 참조.');
@@ -242,8 +251,9 @@ function render() {
   // 6. 외부 콘솔 액션
   lines.push('## ⑥ 외부 콘솔 액션 (수동, 자동화 불가)');
   lines.push('');
-  lines.push('- [ ] Google Search Console — placeholder URL 7개 제거 요청');
-  lines.push('- [ ] Bing Webmaster Tools — 동일');
+  // 2026-06-12 폐기: "placeholder URL 7개 제거 요청" 항목 — 해당 글들은 5월 중
+  // 정상 콘텐츠로 보완 완료 (§② 0건). 지금 제거 요청하면 멀쩡한 글이 ~6개월
+  // 검색에서 숨겨져 역효과이므로 체크리스트에서 제거.
   lines.push('- [ ] (선택) `.claude/settings.json` allowlist 수기 편집 — `docs/operations.md` 참조');
   lines.push('');
 
