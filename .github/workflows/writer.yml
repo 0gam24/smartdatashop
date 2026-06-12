@@ -3,23 +3,13 @@
 name: agent-writer
 
 on:
-  # 다중 안전망 — GitHub cron 부정확성·skip 위험 대응:
+  # 수동 전용 (2026-06-12 운영자 지시 — 포스팅은 매일 "오늘 포스팅" 수동 발행만).
   #
-  # 1. workflow_run — fetch-data 완료 후 자동 가동 (가장 안정).
-  #    GITHUB_TOKEN 한계 회피: workflow_run 은 같은 repo workflow 의 완료 이벤트를
-  #    수신할 수 있어 fetch-data → writer 체이닝이 보안 정책 우회 가능.
-  workflow_run:
-    workflows: ['fetch-data']
-    types: [completed]
-  # 2. push 트리거 — 운영자 직접 push 케이스 (PR 머지 시 daily-queue/** 변경 시).
-  push:
-    paths:
-      - 'daily-queue/**'
-  # 3. 백업 cron — workflow_run 누락 대비 1일 2회 (03:45 + 09:00 KST).
-  schedule:
-    - cron: '45 18 * * *'  # KST 03:45 (fetch-data 02:17 후 1.5h)
-    - cron: '0 0 * * *'    # KST 09:00 (운영자 아침 점검 직전)
-  # 4. 수동 — workflow_dispatch
+  # 이전의 workflow_run(fetch-data 후속)·push(daily-queue/**)·백업 cron 트리거는
+  # 모두 제거 — WRITER_AUTO_PUBLISH=false(2026-05-17) 이후 매일 자동 실행이
+  # verify:strict 링크 체커의 CI 러너 .go.kr timeout 으로 실패만 반복하며
+  # 빨간 실행·텔레그램 경보 소음을 만들었다. 자동 발행 재개 결정 시
+  # 트리거 복원은 별도 PR + 운영자 명시 승인으로만.
   workflow_dispatch:
 
 concurrency:
@@ -29,8 +19,6 @@ concurrency:
 jobs:
   writer:
     runs-on: ubuntu-latest
-    # workflow_run 트리거 시 fetch-data 가 성공한 경우만 실행 (실패·취소 시 skip)
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     permissions:
       # PR 생성과 브랜치 푸시를 위해 권한 필요
       contents: write

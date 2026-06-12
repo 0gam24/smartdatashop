@@ -228,6 +228,10 @@ const enableNaverAnalytics =
     <link rel="alternate" type="application/feed+json" title="스마트데이터샵 JSON Feed" href="/feed.json" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    {/* 서드파티 preconnect — lighthouse uses-rel-preconnect (광고·GA 오리진 핸드셰이크 선행) */}
+    {enableAdsense && <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />}
+    {enableGa4 && <link rel="preconnect" href="https://www.googletagmanager.com" />}
+
     {/* Google AdSense — 사이트 소유권 인증 + 자동 광고 게재 (PUBLIC_ADSENSE_CLIENT 설정 시만 PROD) */}
     {enableAdsense && (
       <script

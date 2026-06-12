@@ -11,12 +11,6 @@ import {
   buildFaqLDFromMarkdown,
   buildHowToLDFromMarkdown,
 } from '../../../../lib/jsonld';
-import {
-  resolveToollGate,
-  buildPrimaryHref,
-  buildSecondaryHref,
-} from '../../../../data/toll-gate-matrix';
-import { SISTER_SITES } from '../../../../data/sister-sites';
 import { entryHasPlaceholder } from '../../../../lib/placeholder';
 
 export async function getStaticPaths() {
@@ -54,9 +48,6 @@ const hasPlaceholder = entryHasPlaceholder({
 const description =
   data.tldr.length > 155 ? data.tldr.slice(0, 152).trim() + '…' : data.tldr;
 
-// ToollGate (자매 사이트 라우팅) — PLANNING.md §12
-const tollGateDecision = resolveToollGate(data.category, data.tags.personas);
-
 // SEO — JSON-LD NewsArticle + Dataset (1차 출처 데이터 저널 차별화)
 // Dataset 은 sources[].url 이 1개 이상 있을 때만 발행 (없으면 null 반환).
 const articleJsonLd: object[] = [buildNewsArticleLD(entry)];
@@ -71,7 +62,7 @@ if (faqLd) articleJsonLd.push(faqLd);
 const howToLd = buildHowToLDFromMarkdown(data.title, entry.body);
 if (howToLd) articleJsonLd.push(howToLd);
 // 명시적 coverImage 가 없으면 동적 OG v2(Satori, Reuters/Bloomberg 스타일)로 폴백.
-// 구 librsvg 라우트(/og/pulse/<slug>.png) 는 D9=N 합의에 따라 1개월 병행 후 제거.
+// 구 librsvg 라우트(/og/pulse/<slug>.png)는 2026-06-12 제거 완료 (D9=N 1개월 병행 종료).
 const ogImage = data.coverImage
   ? data.coverImage.startsWith('http')
     ? data.coverImage

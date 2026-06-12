@@ -88,8 +88,10 @@ jobs:
         with:
           branch: insight-drafts/${{ inputs.slug || github.run_id }}
           base: main
-          commit-message: 'feat(insight): ${{ inputs.title || '자동 인사이트' }}'
-          title: '[insight-draft] ${{ inputs.title || '주간 자동 인사이트' }}'
+          # 주의 — YAML 작은따옴표 스칼라 안에 작은따옴표 중첩 시 워크플로 파일 자체가
+          # invalid 가 되어 모든 push 에 startup_failure 가 기록된다 (2026-06-12 수정).
+          commit-message: "feat(insight): ${{ inputs.title || '자동 인사이트' }}"
+          title: "[insight-draft] ${{ inputs.title || '주간 자동 인사이트' }}"
           body: |
             Insight Writer M3 (Sonnet 4.6) 자동 생성 인사이트.
 

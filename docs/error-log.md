@@ -85,6 +85,24 @@
 
 ---
 
+## 2026-06-12 — writer-insight.yml YAML 작은따옴표 중첩 → 모든 push 에 startup_failure
+
+- **증상**: `gh run list` 에서 writer-insight 가 main push 마다 `failure(push)` 기록 (잡 0개 = startup_failure). 트리거에는 push 가 없는데도 발생.
+- **원인**: `commit-message: 'feat(insight): ${{ inputs.title || '자동 인사이트' }}'` — YAML 작은따옴표 스칼라 안의 작은따옴표 중첩으로 워크플로 파일 자체가 invalid. GitHub 는 invalid 워크플로를 모든 push 이벤트에 startup_failure 로 기록한다.
+- **해결**: 표현식을 큰따옴표 스칼라로 교체 (`"... ${{ ... || '자동 인사이트' }}"`).
+- **예방**: GitHub 표현식 안에 한국어 기본값 등 작은따옴표 리터럴을 쓸 때 바깥은 반드시 큰따옴표. 워크플로 수정 후 `failure(push) + 잡 0개` 패턴이 보이면 YAML invalid 를 먼저 의심.
+
+---
+
+## 2026-06-12 — lighthouserc.mobile.json `preset: mobile` → 모바일 측정 0회 실행
+
+- **증상**: lighthouse 워크플로가 PR #147 이후 전 실행 빨강. 데스크톱 assertion 정리 후에도 모바일 collect 가 `Invalid values: Argument: preset, Given: "mobile"` 로 즉사.
+- **원인**: Lighthouse CLI preset 유효값은 `perf`/`experimental`/`desktop` 뿐 — 모바일이 기본값이라 `mobile` preset 은 존재하지 않음. 설정 도입 이래 모바일 측정이 한 번도 돌지 않았고, 데스크톱 실패에 가려 발견 지연.
+- **해결**: `preset` 제거 (명시된 screenEmulation/throttling 이 모바일 에뮬레이션 담당). 첫 실측 mobile perf = 0.54 → 회귀 감지선 0.5 설정.
+- **예방**: 만성 빨강 체크는 "원래 그런 것"이 아니라 가려진 설정 버그일 수 있다 — 빨강이 2주+ 지속되면 로그의 *첫 번째* 에러부터 재진단. 모바일 perf 실개선(폰트 서브셋·JS 지연·서드파티 경량화)은 후속 과제.
+
+---
+
 ## 추가 가이드
 
 - 이 로그가 10건 넘으면 `매월 정기 리뷰`(operations.md) 시점에 분류·요약

@@ -9,7 +9,7 @@ name: fetch-data
 
 on:
   schedule:
-    # 매일 00:30 KST (= UTC 15:30) — sister sync(02:00 KST) 와 겹치지 않게 30분 일찍
+    # 매일 00:30 KST (= UTC 15:30)
     - cron: '30 15 * * *'
   workflow_dispatch:
 
@@ -93,6 +93,12 @@ jobs:
         env:
           NODE_ENV: production
         run: node scripts/draft-pulse-from-rss.mjs --count 4
+        continue-on-error: true
+
+      - name: Prune 오래된 펄스 초안 (7일+ 미발행 초안 자동 삭제)
+        # 초안은 당일 수동 발행("오늘 포스팅") 후보로만 사용 — 시한 지난 초안 적체 방지.
+        id: prune-drafts
+        run: node scripts/prune-drafts.mjs --days 7
         continue-on-error: true
 
       - name: Generate today.md (운영자 일일 시야)
