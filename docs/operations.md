@@ -74,9 +74,9 @@ Settings → Environment variables 에 한 번 입력하면 코드 변경 없이
 | `PUBLIC_AUTHOR_SAMEAS` | 김준혁 외부 프로필 (Person LD `sameAs` + 저자 페이지) | 콤마 구분 URL — `https://linkedin.com/in/...,https://blog.naver.com/...` |
 | `PUBLIC_ORG_SAMEAS` | 사이트 SNS (Organization LD `sameAs`) | 동상 |
 | `PUBLIC_NAVER_SITE_VERIFICATION` | 네이버 서치어드바이저 토큰 | 토큰 문자열 |
-| `PUBLIC_GOOGLE_SITE_VERIFICATION` | 구글 서치 콘솔 토큰 | 토큰 문자열 |
+| `PUBLIC_GOOGLE_SITE_VERIFICATION` | 구글 서치 콘솔 토큰 (HTML 태그 인증용) | **불필요** — 2026-05-10 GSC 도메인 속성(DNS)으로 소유권 인증 완료. 도메인 속성은 HTML 태그 인증을 쓰지 않음 |
 | `PUBLIC_CF_ANALYTICS_TOKEN` | Cloudflare Web Analytics | 토큰 (미설정 시 beacon 미발행) |
-| `PUBLIC_STIBEE_LIST_ID` | Stibee 뉴스레터 폼 | 리스트 ID (미설정 시 fallback 모드) |
+| `PUBLIC_STIBEE_LIST_ID` | Stibee 뉴스레터 폼 | 리스트 ID (미설정 시 fallback 모드) — 뉴스레터 개시 결정 시에만 |
 
 ---
 
