@@ -33,7 +33,7 @@ for (const e of allInsights) {
   for (const c of e.data.correctionLog ?? []) {
     corrections.push({
       ...c,
-      href: insightUrl(e.slug),
+      href: insightUrl(e.slug, e.data.publishedAt),
       title: e.data.title,
       collection: 'insight',
     });

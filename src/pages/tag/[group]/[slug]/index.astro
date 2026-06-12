@@ -103,7 +103,7 @@ const insightItems = taggedInsights.map((entry) => {
   return {
     when: `${year}.${month}.${day}`,
     title: entry.data.title,
-    href: insightUrl(entry.slug),
+    href: insightUrl(entry.slug, entry.data.publishedAt),
   };
 });
 

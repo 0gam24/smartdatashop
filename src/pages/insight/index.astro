@@ -33,7 +33,7 @@ const sorted = entries.sort(
 
 const items = sorted.map((entry) => ({
   slug: entry.slug,
-  href: insightUrl(entry.slug),
+  href: insightUrl(entry.slug, entry.data.publishedAt),
   category: categoryToKorean(entry.data.category).replace(/ /g, ''),
   publishedAt: formatKoreanDate(entry.data.publishedAt),
   title: entry.data.title,

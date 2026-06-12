@@ -84,6 +84,18 @@ function pulseUrl(slug, publishedAt, category) {
   return `${SITE}/${Y}/${M}/${D}/${slug}/`;
 }
 
+function insightUrlOf(slug, publishedAt) {
+  const d = new Date(publishedAt);
+  const k = new Date(d.getTime() + KST_OFFSET);
+  const Y = k.getUTCFullYear();
+  const M = String(k.getUTCMonth() + 1).padStart(2, '0');
+  const D = String(k.getUTCDate()).padStart(2, '0');
+  const s = `${Y}-${M}-${D}` >= CATEGORY_URL_CUTOFF_KST
+    ? slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    : slug;
+  return `${SITE}/insight/${s}/`;
+}
+
 function urlEnc(s) { return encodeURIComponent(s); }
 
 // ── 콘텐츠 수집 ─────────────────────────────────────
@@ -91,7 +103,7 @@ function collectAll() {
   const items = [];
   const dirs = [
     { dir: 'src/content/pulse', kind: '펄스', urlBuilder: (slug, pubAt, cat) => pulseUrl(slug, pubAt, cat) },
-    { dir: 'src/content/insight', kind: '인사이트', urlBuilder: (slug) => `${SITE}/insight/${slug}/` },
+    { dir: 'src/content/insight', kind: '인사이트', urlBuilder: (slug, pubAt) => insightUrlOf(slug, pubAt) },
   ];
   for (const { dir, kind, urlBuilder } of dirs) {
     const abs = resolve(ROOT, dir);

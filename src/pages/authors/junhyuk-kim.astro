@@ -71,7 +71,7 @@ const recent: RecentItem[] = [
   })),
   ...insights.map<RecentItem>((e) => ({
     title: e.data.title,
-    href: insightUrl(e.slug),
+    href: insightUrl(e.slug, e.data.publishedAt),
     publishedAt: e.data.publishedAt,
     collection: 'insight',
   })),

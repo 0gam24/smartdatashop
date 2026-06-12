@@ -78,7 +78,10 @@ function affectedUrls() {
     if (!m) continue;
     const [, kind, date, slug] = m;
     if (kind === 'insight') {
-      urls.add(`${SITE}/insight/${date}-${slug}/`);
+      // 6/13 이후 발행 인사이트는 URL 슬러그에서 날짜 접두사 제거
+      urls.add(date >= CATEGORY_URL_CUTOFF
+        ? `${SITE}/insight/${slug}/`
+        : `${SITE}/insight/${date}-${slug}/`);
     } else if (date >= CATEGORY_URL_CUTOFF) {
       // 신형 URL — 워크플로 checkout 에서 frontmatter category 추출 (실패 시 date URL 폴백)
       let category = null;

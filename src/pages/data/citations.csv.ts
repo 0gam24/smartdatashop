@@ -70,7 +70,7 @@ export async function GET() {
     });
   }
   for (const e of insights) {
-    const url = `https://smartdatashop.kr${insightUrl(e.slug)}`;
+    const url = `https://smartdatashop.kr${insightUrl(e.slug, e.data.publishedAt)}`;
     e.data.sources.forEach((s, i) => {
       pushRow({
         article_url: url,

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * JSON Feed — /feed.json
  *
  * https://www.jsonfeed.org/version/1.1/ — 모던 JSON 기반 피드 형식.
@@ -7,7 +7,7 @@
  */
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { categoryToKorean, pulseUrl, type Category } from '../lib/korean';
+import { categoryToKorean, pulseUrl, insightUrl, type Category } from '../lib/korean';
 
 const SITE_TITLE = '스마트데이터샵';
 const SITE_URL = 'https://smartdatashop.kr';
@@ -41,7 +41,7 @@ export async function GET(_context: APIContext) {
     const link =
       kind === 'pulse'
         ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`
-        : `${SITE_URL}/insight/${entry.slug}/`;
+        : `${SITE_URL}${insightUrl(entry.slug, entry.data.publishedAt)}`;
     const cover = entry.data.coverImage as string | undefined;
     const image = cover
       ? cover.startsWith('http')
