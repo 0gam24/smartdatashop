@@ -4,7 +4,10 @@
 
 ## 2026-06-14 (일) — 오늘
 
-- 📝 발행 0건
+- 📝 발행 **3건**:
+  - [여름 식중독 예방 6대 요령 — 손씻기·익혀먹기·보관온도](https://smartdatashop.kr/policy/summer-food-poisoning-prevention/) — 식중독은 오염된 음식을 먹어 생기는 질환으로 기온·습도가 높은 여름에 급증한다. 식약처 예방 6대 요령은 …
+  - [건강보험 피부양자 자격 — 소득·재산 기준과 탈락 시 대처](https://smartdatashop.kr/policy/health-insurance-dependent-criteria/) — 건강보험 피부양자는 직장가입자에 기대어 보험료를 따로 내지 않는 가족이다. 자격을 유지하려면 연 합산소득 …
+  - [1세대 1주택 양도세 비과세 — 2년·12억·실거주 요건 총정리](https://smartdatashop.kr/tax-finance/one-house-capital-gains-exemption/) — 1세대 1주택자는 2년 이상 보유한 집을 팔 때 양도가액 12억 원까지 양도소득세가 비과세된다. 2017년…
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **16건**
 
@@ -71,11 +74,8 @@
 
 ## 2026-05-31 (일)
 
-- 📝 발행 **4건**:
+- 📝 발행 **1건**:
   - [2026년 6월 한국인의 돈 일정 — 종소세 마감·청년적금·고금리를 한 판으로](https://smartdatashop.kr/insight/2026-05-31-june-2026-money-calendar/) — 2026년 6월은 '정산의 끝(종합소득세 6월 1일 마감)'과 '자산형성의 시작(청년미래적금 출시)'이 겹…
-  - [지진조기경보 6월부터 3~5초 — 통보시간 단축](https://smartdatashop.kr/2026/05/31/2026-05-31-earthquake-early-warning-upgrade/) — 기상청은 2026년 6월부터 지진 관측 후 조기경보 통보 시간을 기존 5~10초에서 3~5초로 단축한다. …
-  - [청년미래적금 6월 출시 — 월 50만원·3년·비과세](https://smartdatashop.kr/2026/05/31/2026-05-31-youth-future-savings-launch/) — 청년미래적금은 만 19~34세 청년이 월 최대 50만 원을 3년간 자유 납입하면 정부 기여금과 비과세를 더…
-  - [한국 경제 5대 지표 — 5월 말 기준금리 2.5% 동결](https://smartdatashop.kr/2026/05/31/2026-05-31-korea-economy-five-indicators/) — 한국은행 ECOS 기준 2026년 5월 말 한국 경제 5대 지표는 기준금리 2.5% 동결, 원/달러 1,5…
 
 ---
 
