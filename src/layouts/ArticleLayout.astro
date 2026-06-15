@@ -216,4 +216,45 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd, buildPersonLD()
   .article-body section[data-footnotes] {
     display: none;
   }
+
+  /* 본문 표(MDX 렌더) — 가운데 정렬·해어라인·헤더 강조로 가독성 확보 (2026-06-15).
+     DESIGN.md v1.0 준수: 그림자·radius·그라데이션·카테고리 컬러 없음, 디자인 토큰만,
+     font-weight ≤500. 표 가독성 룰(셀 ≤40자)과 정합 — 짧은 셀이므로 가운데 정렬이 깔끔. */
+  .article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6rem 0;
+    font-size: 15px;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+  .article-body thead th {
+    text-align: center;
+    font-weight: 500;
+    background: var(--color-paper-soft);
+    border-top: 1px solid var(--color-ink-tertiary);
+    border-bottom: 1px solid var(--color-ink-tertiary);
+    padding: 11px 12px;
+    white-space: nowrap;
+  }
+  .article-body tbody td {
+    text-align: center;
+    padding: 10px 12px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    word-break: keep-all;
+    vertical-align: middle;
+  }
+  /* 첫 열(행 라벨)은 약간 강조해 행 식별성 ↑ */
+  .article-body tbody td:first-child {
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .article-body tbody tr:last-child td {
+    border-bottom: 1px solid var(--color-ink-tertiary);
+  }
+  @media (max-width: 480px) {
+    .article-body table { font-size: 13px; }
+    .article-body thead th { padding: 9px 6px; }
+    .article-body tbody td { padding: 9px 6px; }
+  }
 </style>
