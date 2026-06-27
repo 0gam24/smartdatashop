@@ -1,8 +1,14 @@
-# Today — 2026-06-27 (토) (KST)
+# Today — 2026-06-28 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-06-27 (토) — 오늘
+## 2026-06-28 (일) — 오늘
+
+- 📝 발행 0건
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **20건**
+
+## 2026-06-27 (토)
 
 - 📝 발행 **5건**:
   - [교육급여 2026 — 초50·중70·고86만원·대상·신청방법](https://smartdatashop.kr/policy/education-benefit-2026/) — 교육급여는 저소득 가구 학생의 교육비를 지원하는 기초생활보장 급여로, 2026년 교육활동지원비가 초등학생 …
@@ -10,8 +16,6 @@
   - [다자녀 가구 혜택 2026 — KTX·전기·자동차세 감면 총정리](https://smartdatashop.kr/policy/multichild-benefits-2026/) — 다자녀 가구 혜택은 자녀가 둘 이상인 가구의 부담을 덜어 주는 여러 지원으로, KTX·SRT는 만 25세 …
   - [의료급여 2026 — 1종·2종 본인부담·대상·외래 365회 규정](https://smartdatashop.kr/policy/medical-benefit-2026/) — 의료급여는 기초생활보장 의료급여 수급자의 병원비를 국가가 대부분 부담하는 제도로, 1종과 2종으로 나뉜다.…
   - [자립준비청년 자립수당 2026 — 월 50만원·5년·자립정착금](https://smartdatashop.kr/policy/youth-independence-allowance-2026/) — 자립준비청년 자립수당은 보육원·위탁가정 등 보호가 끝난 청년에게 홀로서기를 돕도록 매달 현금을 주는 제도로…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **20건**
 
 ## 2026-06-26 (금)
 
@@ -112,13 +116,6 @@
   - [여름 식중독 예방 6대 요령 — 손씻기·익혀먹기·보관온도](https://smartdatashop.kr/policy/summer-food-poisoning-prevention/) — 식중독은 오염된 음식을 먹어 생기는 질환으로 기온·습도가 높은 여름에 급증한다. 식약처 예방 6대 요령은 …
   - [건강보험 피부양자 자격 — 소득·재산 기준과 탈락 시 대처](https://smartdatashop.kr/policy/health-insurance-dependent-criteria/) — 건강보험 피부양자는 직장가입자에 기대어 보험료를 따로 내지 않는 가족이다. 자격을 유지하려면 연 합산소득 …
   - [1세대 1주택 양도세 비과세 — 2년·12억·실거주 요건 총정리](https://smartdatashop.kr/tax-finance/one-house-capital-gains-exemption/) — 1세대 1주택자는 2년 이상 보유한 집을 팔 때 양도가액 12억 원까지 양도소득세가 비과세된다. 2017년…
-
-## 2026-06-13 (토)
-
-- 📝 발행 **3건**:
-  - [한은 총재 \](https://smartdatashop.kr/stats/weekly-indicators-rate-signal/) — 신현송 한국은행 총재가 6월 12일 창립 76주년 기념사에서 물가 안정에 중점을 두고 늦지 않게 금리를 인…
-  - [온열질환 예방수칙 — 작년 3,813명, 감시체계 가동 중](https://smartdatashop.kr/policy/heat-illness-prevention/) — 온열질환은 열사병·열탈진처럼 더위로 생기는 급성 질환으로, 지난해 응급실 감시체계에 신고된 환자만 3,81…
-  - [자동차세 연납 6월 신청 — 16~30일, 하반기분 2.5% 아끼기](https://smartdatashop.kr/tax-finance/car-tax-annual-prepay-june/) — 자동차세 연납은 1년치 세금을 미리 내고 공제받는 제도로 1·3·6·9월에 신청할 수 있다. 6월 신청 기…
 
 ---
 
