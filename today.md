@@ -10,7 +10,8 @@
   - [고용보험 미적용자 출산급여 2026 — 프리랜서 150만원](https://smartdatashop.kr/policy/maternity-allowance-uninsured-2026/) — 고용보험 미적용자 출산급여는 일은 하지만 고용보험에 들지 않아 출산전후휴가급여를 받지 못하는 출산 여성에게…
   - [국민연금 임의가입·추납 2026 — 전업주부 노후 만들기](https://smartdatashop.kr/policy/national-pension-voluntary-2026/) — 국민연금 임의가입은 소득이 없어 의무 가입 대상이 아닌 전업주부·학생 등이 본인 희망으로 국민연금에 가입해…
   - [국민임대주택 2026 — 소득 70%·시세 60~80%·30년 거주](https://smartdatashop.kr/policy/national-rental-housing-2026/) — 국민임대주택은 무주택 저소득층의 주거 안정을 위해 국가와 LH가 시세보다 싸게 공급하는 장기 공공임대주택으…
-- 📋 검수 대기: **16건**
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **12건**
 
 ## 2026-06-29 (월)
 
