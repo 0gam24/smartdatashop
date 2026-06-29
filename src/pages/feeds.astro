@@ -10,8 +10,23 @@
  * DESIGN.md v1.0 에 맞춰 이모지·그라데이션·카테고리 컬러코딩 없이 활자 라벨·
  * 헤어라인 테이블로만 표현한다.
  */
+import { getCollection } from 'astro:content';
 import PolicyLayout from '../layouts/PolicyLayout.astro';
 import { buildBreadcrumbLD, buildWebPageLD } from '../lib/jsonld';
+import { pulseDateParts } from '../lib/korean';
+
+// "마지막 갱신" 은 가장 최근 발행 글의 날짜로 자동 계산한다 — 매 발행(=빌드)마다
+// 자동 갱신되어 하드코딩 날짜가 stale 되지 않는다. (KST 기준, korean.ts 헬퍼 사용)
+const [allPulses, allInsights] = await Promise.all([
+  getCollection('pulse'),
+  getCollection('insight'),
+]);
+const latestMs = [...allPulses, ...allInsights]
+  .map((e) => new Date(e.data.publishedAt).getTime())
+  .reduce((a, b) => Math.max(a, b), 0);
+const { year, month, day } = pulseDateParts(new Date(latestMs));
+const lastUpdated = `${year}-${month}-${day}`;
+const totalCount = allPulses.length + allInsights.length;
 
 const breadcrumb = buildBreadcrumbLD([
   { name: '홈', url: '/' },
@@ -79,13 +94,14 @@ const machineFiles = [
   title="구독 · 피드"
   eyebrow="구 독 · F E E D S"
   description="스마트데이터샵의 새 글을 RSS·Atom·JSON Feed로 구독하세요. 카테고리별 피드와 AI·검색 엔진용 파일도 제공합니다."
-  updatedAt="2026-06-29"
+  updatedAt={lastUpdated}
   jsonld={[breadcrumb, webpage]}
 >
   <p>
     스마트데이터샵의 새 글을 원하는 방식으로 받아보세요. 1차 출처 데이터 저널의
-    데일리 펄스·인사이트가 발행될 때마다 자동으로 업데이트됩니다. 관심 있는
-    주제만 골라 카테고리별로 구독할 수도 있습니다.
+    데일리 펄스·인사이트가 발행될 때마다 모든 피드가 자동으로 갱신됩니다(현재
+    수록 {totalCount}건, 마지막 갱신 {lastUpdated}). 관심 있는 주제만 골라
+    카테고리별로 구독할 수도 있습니다.
   </p>
 
   <h2>1. 전체 피드</h2>
