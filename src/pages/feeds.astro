@@ -1,0 +1,180 @@
+---
+/**
+ * 구독 · 피드 — /feeds/
+ *
+ * 사이트가 제공하는 모든 머신리더블 엔드포인트를 한곳에 모은 구독 허브.
+ * 전체 피드(RSS·Atom·JSON Feed) + 카테고리별 RSS + AI·검색 엔진용 파일
+ * (llms.txt·사이트맵·robots.txt). 사람용 안내 + rel=alternate 는 BaseLayout head.
+ *
+ * 디자인: 자매 사이트(혜택노트)의 피드 페이지 구성을 차용하되, 본 사이트
+ * DESIGN.md v1.0 에 맞춰 이모지·그라데이션·카테고리 컬러코딩 없이 활자 라벨·
+ * 헤어라인 테이블로만 표현한다.
+ */
+import PolicyLayout from '../layouts/PolicyLayout.astro';
+import { buildBreadcrumbLD, buildWebPageLD } from '../lib/jsonld';
+
+const breadcrumb = buildBreadcrumbLD([
+  { name: '홈', url: '/' },
+  { name: '구독 · 피드', url: '/feeds/' },
+]);
+const webpage = buildWebPageLD(
+  '구독 · 피드 (RSS · Atom · JSON)',
+  '스마트데이터샵의 새 글을 RSS·Atom·JSON Feed로 구독하세요. 카테고리별 피드와 AI·검색 엔진용 파일도 제공합니다.',
+);
+
+// 전체 피드
+const fullFeeds = [
+  {
+    name: 'RSS',
+    href: '/feed.xml',
+    desc: '가장 널리 쓰이는 표준 피드. 대부분의 리더가 호환합니다. 본문 전문을 함께 실어 네이버 서치어드바이저 색인에 유리합니다.',
+  },
+  {
+    name: 'Atom',
+    href: '/atom.xml',
+    desc: '발행일·수정일 등 메타데이터를 정밀하게 담는 표준 피드. 일부 리더·수집기가 Atom을 우선 처리합니다.',
+  },
+  {
+    name: 'JSON Feed',
+    href: '/feed.json',
+    desc: 'JSON 기반 피드(1.1). 앱·스크립트 연동에 편리합니다.',
+  },
+];
+
+// 카테고리별 RSS — 5개 카테고리
+const categoryFeeds = [
+  { label: '정책', href: '/category/policy/feed.xml', desc: '정부 지원금·복지·제도의 조건·신청 방법' },
+  { label: '세금·금융', href: '/category/tax-finance/feed.xml', desc: '세금 신고·절세·대출·연금·투자 기초' },
+  { label: '시장', href: '/category/market/feed.xml', desc: '물가·부동산·산업 동향' },
+  { label: '통계', href: '/category/stats/feed.xml', desc: '통계청·한국은행 등 1차 통계 지표' },
+  { label: 'AI·기술', href: '/category/ai-tech/feed.xml', desc: 'AI·기술 정책과 도구' },
+];
+
+// AI · 검색 엔진용 파일
+const machineFiles = [
+  {
+    name: 'llms.txt',
+    href: '/llms.txt',
+    desc: 'AI 답변 엔진이 사이트를 정확히 인용하도록 돕는 요약 색인.',
+  },
+  {
+    name: '사이트맵',
+    href: '/sitemap-index.xml',
+    desc: '검색 엔진용 전체 URL 목록(뉴스·이미지 사이트맵 포함).',
+  },
+  {
+    name: '뉴스 사이트맵',
+    href: '/news-sitemap.xml',
+    desc: 'Google News·Discover용 최신 기사 목록.',
+  },
+  {
+    name: 'robots.txt',
+    href: '/robots.txt',
+    desc: '크롤러 수집 규칙. 학습 봇은 차단하고 인용·검색 봇은 허용합니다.',
+  },
+];
+---
+
+<PolicyLayout
+  title="구독 · 피드"
+  eyebrow="구 독 · F E E D S"
+  description="스마트데이터샵의 새 글을 RSS·Atom·JSON Feed로 구독하세요. 카테고리별 피드와 AI·검색 엔진용 파일도 제공합니다."
+  updatedAt="2026-06-29"
+  jsonld={[breadcrumb, webpage]}
+>
+  <p>
+    스마트데이터샵의 새 글을 원하는 방식으로 받아보세요. 1차 출처 데이터 저널의
+    데일리 펄스·인사이트가 발행될 때마다 자동으로 업데이트됩니다. 관심 있는
+    주제만 골라 카테고리별로 구독할 수도 있습니다.
+  </p>
+
+  <h2>1. 전체 피드</h2>
+  <p>
+    사이트 전체 글을 최신순으로 받아보는 표준 피드입니다. 세 형식 모두 같은
+    내용을 담으며, 쓰는 리더에 맞는 형식 하나를 등록하면 됩니다.
+  </p>
+  <table class="meta-table">
+    <thead>
+      <tr><th>형식</th><th>설명 · 주소</th></tr>
+    </thead>
+    <tbody>
+      {fullFeeds.map((f) => (
+        <tr>
+          <td>{f.name}</td>
+          <td>
+            {f.desc}<br />
+            <a href={f.href}><code>{f.href}</code></a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <h2>2. 카테고리별 RSS</h2>
+  <p>
+    관심 주제만 구독하려면 아래 카테고리 피드를 사용하세요. 각 피드는 해당
+    카테고리의 펄스·인사이트만 최신순으로 담습니다.
+  </p>
+  <table class="meta-table">
+    <thead>
+      <tr><th>카테고리</th><th>설명 · 주소</th></tr>
+    </thead>
+    <tbody>
+      {categoryFeeds.map((c) => (
+        <tr>
+          <td>{c.label}</td>
+          <td>
+            {c.desc}<br />
+            <a href={c.href}><code>{c.href}</code></a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <h2>3. AI · 검색 엔진</h2>
+  <p>
+    검색 엔진과 AI 답변 엔진이 사이트를 정확히 수집·인용하도록 돕는
+    머신리더블 파일입니다. 일반 구독에는 필요 없지만, 개발자·연구자나
+    크롤러를 위해 공개합니다.
+  </p>
+  <table class="meta-table">
+    <thead>
+      <tr><th>파일</th><th>설명 · 주소</th></tr>
+    </thead>
+    <tbody>
+      {machineFiles.map((m) => (
+        <tr>
+          <td>{m.name}</td>
+          <td>
+            {m.desc}<br />
+            <a href={m.href}><code>{m.href}</code></a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <h2>4. 피드를 어떻게 쓰나요?</h2>
+  <p>
+    RSS·Atom·JSON 피드는 <strong>피드 리더</strong>(예: Feedly, Inoreader,
+    NetNewsWire 등)에 위 주소를 등록하면, 새 글이 올라올 때마다 자동으로
+    받아볼 수 있습니다. 카테고리별 피드를 쓰면 관심 주제만 골라 구독할 수
+    있습니다. 브라우저나 앱에서 위 주소를 복사해 리더의 "피드 추가"에
+    붙여 넣으면 됩니다.
+  </p>
+  <p>
+    피드의 본문 요약·발행일은 각 글의 정보를 기반으로 자동 생성되며, 새 글
+    발행 시 갱신됩니다. 모든 글은 국세청·정부24·복지로·한국은행 등 1차 출처를
+    확인해 작성하고 발행일·수정일을 명시합니다 —
+    자세한 절차는 <a href="/methodology/">/methodology/</a> 를 참고하세요.
+  </p>
+
+  <h2>5. 라이선스</h2>
+  <p>
+    본 사이트의 모든 글과 피드 콘텐츠는
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a>
+    하에 출처를 밝히면 자유롭게 인용·재배포할 수 있습니다. 상업적 이용은
+    별도 문의(<a href="/contact/">/contact/</a>)를 부탁드립니다.
+  </p>
+</PolicyLayout>
