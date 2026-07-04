@@ -1,12 +1,19 @@
-# Today — 2026-07-04 (토) (KST)
+# Today — 2026-07-05 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-07-04 (토) — 오늘
+## 2026-07-05 (일) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **8건**
+- 📋 검수 대기: **4건**
+
+## 2026-07-04 (토)
+
+- 📝 발행 **3건**:
+  - [주택청약저축 소득공제 2026 — 무주택·연 300만·40%](https://smartdatashop.kr/tax-finance/housing-subscription-savings-deduction/) — 주택청약종합저축 소득공제는 무주택 근로자가 청약통장에 넣은 돈의 일부를 연말정산에서 소득에서 빼 주는 절세…
+  - [연금저축·IRP 중도해지 세금 2026 — 16.5% 기타소득세](https://smartdatashop.kr/tax-finance/pension-savings-early-withdrawal-tax/) — 연금저축·IRP 중도해지 세금은 노후용 연금계좌를 만기 전에 깨면 그동안 세액공제받은 원금과 운용수익에 매…
+  - [중도퇴사자 연말정산 2026 — 이직·퇴사 시 환급 받는 법](https://smartdatashop.kr/tax-finance/midyear-resignation-tax-settlement/) — 중도퇴사자 연말정산은 연도 중간에 회사를 그만두거나 옮긴 사람이 덜 받은 소득공제를 되찾는 절차다. 재취업…
 
 ## 2026-07-03 (금)
 
@@ -103,15 +110,6 @@
   - [국가건강검진 2026 — 일반검진 무료·6대 암검진·대상·주기](https://smartdatashop.kr/policy/national-health-checkup-2026/) — 국가건강검진은 건강보험 가입자와 피부양자에게 질병을 조기에 발견하도록 제공하는 검진으로, 일반건강검진은 2…
   - [난임부부 시술비 지원 2026 — 회당 최대 110만원·횟수·소득기준](https://smartdatashop.kr/policy/infertility-treatment-support-2026/) — 난임부부 시술비 지원은 임신을 시도하는 난임부부에게 체외수정·인공수정 시술 비용 일부를 지원하는 제도로, …
   - [임신·출산 진료비 지원 2026 — 국민행복카드 100만원·사용처·신청](https://smartdatashop.kr/policy/pregnancy-childbirth-voucher-2026/) — 임신·출산 진료비 지원은 임신·출산에 드는 의료비를 국민행복카드 바우처로 지원하는 제도로, 2026년 지원…
-
-## 2026-06-20 (토)
-
-- 📝 발행 **5건**:
-  - [장애인 활동지원서비스 2026 — 활동지원급여·자격·신청](https://smartdatashop.kr/policy/disability-activity-support-2026/) — 장애인 활동지원서비스는 혼자 일상생활이 어려운 중증장애인에게 활동지원사가 방문해 신체활동·가사·이동 등을 …
-  - [재난적의료비 지원 2026 — 최대 5천만원·대상·지원율·신청](https://smartdatashop.kr/policy/catastrophic-medical-expense-2026/) — 재난적의료비 지원은 갑작스러운 질병·부상으로 큰 의료비가 발생한 가구를 돕는 제도로, 소득 구간에 따라 본…
-  - [노인 임플란트·틀니 건강보험 — 65세부터 본인부담 30%](https://smartdatashop.kr/policy/senior-dental-implant-2026/) — 만 65세 이상이면 치과 임플란트와 틀니에 건강보험이 적용돼 본인부담이 30%로 낮아진다. 임플란트는 부분…
-  - [주거급여 2026 — 중위 48%·4인 311만원·기준임대료·신청](https://smartdatashop.kr/policy/housing-benefit-2026/) — 주거급여는 소득이 적은 가구의 주거비를 지원하는 기초생활보장 급여로, 2026년 선정기준은 기준 중위소득 …
-  - [아이돌봄서비스 2026 — 시간당 요금·소득별 정부지원·신청](https://smartdatashop.kr/policy/child-care-service-2026/) — 아이돌봄서비스는 부모가 일·외출 등으로 아이를 돌보기 어려울 때 아이돌보미가 가정을 방문해 돌봐 주는 제도…
 
 ---
 
