@@ -40,6 +40,7 @@ export default defineConfig({
         'https://smartdatashop.kr/terms/',
         'https://smartdatashop.kr/affiliate-disclosure/',
         'https://smartdatashop.kr/authors/junhyuk-kim/',
+        'https://smartdatashop.kr/tools/loan-calculator/',
       ],
     }),
   ],
