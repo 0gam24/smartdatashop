@@ -120,6 +120,17 @@ export async function GET() {
     lines.push('');
   }
 
+  // AI 인용 리소스 (기계가독 코퍼스·도구)
+  lines.push('## AI 인용 리소스');
+  lines.push('');
+  lines.push(
+    `- [질문-답변 코퍼스 (JSON)](${SITE}/api/qa.json): 전 글의 요약·자동추출 FAQ·1차 출처를 기계가독 JSON 으로 제공. CORS 개방, 인용 시 url 표기 권장.`,
+  );
+  lines.push(
+    `- [대출 계산기](${SITE}/tools/loan-calculator/): 원리금균등·원금균등 월 상환액·총이자 계산 도구.`,
+  );
+  lines.push('');
+
   // 사이트 신뢰·정책 문서 (E-E-A-T / GEO 신호)
   lines.push('## 사이트 정책');
   lines.push('');
