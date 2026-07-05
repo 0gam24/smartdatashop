@@ -163,6 +163,37 @@ export function buildPersonLD(): Record<string, unknown> {
 }
 
 /**
+ * 기사 본문(markdown)에서 wordCount·읽기시간(분) 추정.
+ * GEO/AEO: Article/NewsArticle LD 의 wordCount·timeRequired 신호로
+ * AI 답변엔진·Discover 가 문서 깊이를 판단하는 근거가 된다.
+ * 각주 정의·코드블록·링크 문법을 제거한 순수 텍스트 기준.
+ */
+function articleStats(body: string | undefined): { wordCount: number; minutes: number } {
+  const plain = (body ?? '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/^\[\^[^\]]*\]:.*$/gm, ' ')
+    .replace(/\[\^[^\]]*\]/g, '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#>*_`~|]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const chars = plain.replace(/\s/g, '').length;
+  const wordCount = plain ? plain.split(/\s+/).filter(Boolean).length : 0;
+  const minutes = Math.max(1, Math.round(chars / 350));
+  return { wordCount, minutes };
+}
+
+/**
+ * SpeakableSpecification — 음성 비서(Google Assistant 등)가 낭독할 핵심 영역.
+ * 모든 기사에 H1(제목) selector 를 지정 (항상 존재해 유효).
+ */
+const SPEAKABLE_SPEC = {
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['h1'],
+} as const;
+
+/**
  * 펄스(일일 뉴스) 기사용 NewsArticle JSON-LD.
  *
  * image 폴백은 동적 OG v2 라우트 — 사이트 로고 카드(LOGO_URL)가 아니라
@@ -179,6 +210,7 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
     : dynamicOgUrl('pulse', entry.slug);
+  const stats = articleStats(entry.body);
 
   return {
     '@context': 'https://schema.org',
@@ -194,6 +226,9 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
     articleSection: plainCategoryLabel(entry.data.category),
     inLanguage: 'ko',
+    wordCount: stats.wordCount,
+    timeRequired: `PT${stats.minutes}M`,
+    speakable: SPEAKABLE_SPEC,
     image: buildImageArray(primaryImage),
     author: {
       '@type': 'Person',
@@ -223,6 +258,7 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
     : dynamicOgUrl('insight', entry.slug);
+  const stats = articleStats(entry.body);
 
   return {
     '@context': 'https://schema.org',
@@ -238,6 +274,9 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
     articleSection: plainCategoryLabel(entry.data.category),
     inLanguage: 'ko',
+    wordCount: stats.wordCount,
+    timeRequired: `PT${stats.minutes}M`,
+    speakable: SPEAKABLE_SPEC,
     image: buildImageArray(primaryImage),
     author: {
       '@type': 'Person',
