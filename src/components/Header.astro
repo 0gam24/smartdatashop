@@ -3,7 +3,7 @@ import { formatKoreanToday } from '../lib/korean';
 
 interface Props {
   date?: string;
-  activeNav?: 'daily' | 'insight' | 'guidebook' | 'notice' | 'data' | 'network';
+  activeNav?: 'daily' | 'all' | 'insight' | 'guidebook' | 'notice' | 'data' | 'network';
 }
 
 // 기본값은 빌드 시점의 KST 오늘 — hourly scout bot 으로 매시간 자동 갱신.
@@ -14,6 +14,7 @@ const { date = formatKoreanToday(), activeNav = 'daily' } = Astro.props;
 // 메인 nav 로 승격 — 데이터 대신 직접 노출 (데이터 페이지는 /data/ 통해 진입).
 const navItems: Array<{ key: NonNullable<Props['activeNav']>; label: string; href: string }> = [
   { key: 'daily', label: '데일리', href: '/' },
+  { key: 'all', label: '전체', href: '/category/all/' },
   { key: 'insight', label: '인사이트', href: '/insight/' },
   { key: 'guidebook', label: '가이드북', href: '/guidebook/' },
   { key: 'notice', label: '정부발표', href: '/data/notice/' },
