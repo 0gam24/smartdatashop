@@ -25,6 +25,7 @@ import BarSpark from '../../../components/viz/BarSpark.astro';
 import {
   categoryToKorean,
   formatKoreanTime,
+  pulseDateParts,
   pulseUrl,
   insightUrl,
   kstTodayIso,
@@ -57,9 +58,10 @@ const cards = merged.map(({ entry, kind }) => {
     ...dataTypes.map((label: string) => ({ label })),
     ...actions.map((label: string) => ({ label, action: true })),
   ].slice(0, 3);
+  const { year, month, day } = pulseDateParts(entry.data.publishedAt);
   return {
     category: categoryToKorean(entry.data.category),
-    time: formatKoreanTime(entry.data.publishedAt),
+    time: `${year}.${month}.${day} · ${formatKoreanTime(entry.data.publishedAt)}`,
     title: entry.data.title,
     tldr: entry.data.tldr,
     href:
