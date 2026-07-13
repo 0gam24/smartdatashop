@@ -33,7 +33,6 @@ export default defineConfig({
       customPages: [
         'https://smartdatashop.kr/about/',
         'https://smartdatashop.kr/editorial-policy/',
-        'https://smartdatashop.kr/ai-policy/',
         'https://smartdatashop.kr/corrections/',
         'https://smartdatashop.kr/contact/',
         'https://smartdatashop.kr/privacy/',

@@ -137,7 +137,6 @@ export async function GET() {
   lines.push(`- [편집 정책](${SITE}/editorial-policy/): 1차 출처 검증·환각 방지 원칙`);
   lines.push(`- [방법론](${SITE}/methodology/): 데이터 수집·검증 방법`);
   lines.push(`- [정정 정책](${SITE}/corrections/): 오류 정정 절차와 기록`);
-  lines.push(`- [AI 활용 정책](${SITE}/ai-policy/): AI 보조 작성과 사람 검수 기준`);
   lines.push('');
 
   const body = lines.join('\n');

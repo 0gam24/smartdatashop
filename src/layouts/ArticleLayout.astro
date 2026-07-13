@@ -35,7 +35,6 @@ interface Props {
   author?: string;
   readingTime: number;
   sources: Source[];
-  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   vol?: string;
   no?: string;
   /** SEO/SNS 카드용 — 호출자가 전달하면 BaseLayout으로 그대로 전달된다. */
@@ -62,7 +61,6 @@ const {
   author = '김준혁',
   readingTime,
   sources,
-  aiAssisted,
   vol = 'I',
   no = '89',
   description,
@@ -133,13 +131,11 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd, buildPersonLD()
       author={author}
       readingTime={readingTime}
       sourceCount={sources.length}
-      aiAssisted={aiAssisted}
       updatedAt={updatedAt}
     />
 
     <div class="article-body">
       <TrustBar
-        aiAssisted={aiAssisted}
         sourceCount={sources.length}
         updatedAt={updatedAt ?? publishedAt}
         correctionsCount={corrections.length}

@@ -46,7 +46,6 @@ interface Props {
   /** 인사이트는 frontmatter의 estimatedReadingTime을 그대로 사용 */
   readingTime: number;
   sources: Source[];
-  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   vol?: string;
   no?: string;
   /** 정정 이력 — 비어 있으면 CorrectionsBlock은 렌더되지 않는다 */
@@ -76,7 +75,6 @@ const {
   author = '김준혁',
   readingTime,
   sources,
-  aiAssisted,
   vol = 'I',
   no = '89',
   corrections = [],
@@ -138,13 +136,11 @@ const mergedJsonld: object[] = [...incomingJsonld, insightBreadcrumb, buildPerso
       author={author}
       readingTime={readingTime}
       sourceCount={sources.length}
-      aiAssisted={aiAssisted}
       updatedAt={updatedAt}
     />
 
     <div class="article-body">
       <TrustBar
-        aiAssisted={aiAssisted}
         sourceCount={sources.length}
         updatedAt={updatedAt ?? publishedAt}
         correctionsCount={corrections.length}

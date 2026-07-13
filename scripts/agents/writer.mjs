@@ -204,7 +204,6 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
  * writer 생성 body 가 footnote 마커 + 정의 모두 포함 (system prompt 룰).
  *
  * 따라서 가장 안전·단순한 방식:
- *   1. frontmatter 만 유지 (tldr / aiAssisted 갱신)
  *   2. draft 의 body (안내 단락 3개) 통째 폐기
  *   3. writer 생성 body 로 완전 대체
  *
@@ -219,11 +218,9 @@ function applyContent(content, { tldr, body }) {
   }
   const frontmatter = fmMatch[1];
 
-  // 2. frontmatter 의 tldr + aiAssisted 갱신
   let newFm = frontmatter;
   const escapedTldr = tldr.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   newFm = newFm.replace(/^tldr:\s*"[\s\S]*?"\s*$/m, `tldr: "${escapedTldr}"`);
-  newFm = newFm.replace(/^aiAssisted:\s*draft\s*$/m, 'aiAssisted: edit');
 
   // 3. draft body 전체 폐기 + writer 생성 body 통째 사용
   //    body 끝에 newline 1개만 보장 (sync gate 호환)

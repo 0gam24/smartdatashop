@@ -87,7 +87,6 @@ const policyPages = [
   'about',
   'corrections',
   'editorial-policy',
-  'ai-policy',
   'terms',
   'privacy',
   'contact',
@@ -580,7 +579,6 @@ check(
 const policyPagesWithLD = [
   'about',
   'editorial-policy',
-  'ai-policy',
   'terms',
   'privacy',
   'contact',

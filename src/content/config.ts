@@ -47,22 +47,6 @@ const chartDataSchema = z.object({
   unit: z.string().max(10).optional(),
 });
 
-/**
- * aiAssisted — AI 활용 등급 (4관점 합의 Decision #9, 2026-05-06).
- *
- *   - false  : 운영자 단독 작성, AI 미사용
- *   - 'edit' : 운영자 초안 + AI 가 문법/표현 보조 (사실 입력은 운영자)
- *   - 'draft': AI 가 초안 + 운영자가 1차 출처 대조하여 사실 확인
- *   - 'fact-check': AI 가 1차 출처 fuzzy match (Layer 4 fact-checker 사후 감사 결과)
- *
- * 하위 호환 — `true` 입력 시 'draft' 로 normalize. `false` 는 그대로 유지.
- * Trust Bar / OG 카드 / Person LD 가 등급별로 다른 표기 가능 (향후 확장).
- */
-const aiAssistedSchema = z
-  .union([z.boolean(), z.enum(['edit', 'draft', 'fact-check'])])
-  .default(false)
-  .transform((v) => (v === true ? 'draft' : v === false ? false : v));
-
 // 8.1 펄스 (일일)
 const pulse = defineCollection({
   type: 'content',
@@ -76,7 +60,6 @@ const pulse = defineCollection({
     chartUrl: z.string().optional(),
     coverImage: z.string().optional(),
     chartData: chartDataSchema.optional(),
-    aiAssisted: aiAssistedSchema,
     correctionLog: z.array(correctionSchema).default([]),
     tags: tagGroupsSchema.default({ personas: [], dataTypes: [], actions: [] }),
   }),
@@ -95,7 +78,6 @@ const insight = defineCollection({
     coverImage: z.string().optional(),
     chartData: chartDataSchema.optional(),
     estimatedReadingTime: z.number().int().positive(),
-    aiAssisted: aiAssistedSchema,
     correctionLog: z.array(correctionSchema).default([]),
     tags: tagGroupsSchema.default({ personas: [], dataTypes: [], actions: [] }),
   }),
@@ -125,7 +107,6 @@ const guidebookChapter = defineCollection({
     title: z.string(),
     publishedAt: z.string(),
     sources: z.array(sourceSchema).default([]),
-    aiAssisted: aiAssistedSchema,
   }),
 });
 

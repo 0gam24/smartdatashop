@@ -125,7 +125,6 @@ sources:
     date: "YYYY-MM-DD"
     url: "https://..."
     accessedAt: "YYYY-MM-DD"
-aiAssisted: draft
 ---
 
 ## 한 줄 요약

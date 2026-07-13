@@ -71,7 +71,6 @@ collections:
           - { name: "values", label: "값 (콤마 구분 숫자)", widget: "list", required: false, hint: "예: 3.2, 3.4, 3.1, 3.6" }
           - { name: "label", label: "차트 라벨", widget: "string", required: false, hint: "최대 80자" }
           - { name: "unit", label: "단위 (선택)", widget: "string", required: false }
-      - { name: "aiAssisted", label: "AI 보조 작성", widget: "boolean", default: false, required: false }
       - name: "sources"
         label: "1차 출처"
         label_singular: "출처"
@@ -158,7 +157,6 @@ collections:
           - { name: "values", label: "값 (콤마 구분 숫자)", widget: "list", required: false }
           - { name: "label", label: "차트 라벨", widget: "string", required: false }
           - { name: "unit", label: "단위", widget: "string", required: false }
-      - { name: "aiAssisted", label: "AI 보조 작성", widget: "boolean", default: false, required: false }
       - name: "sources"
         label: "1차 출처"
         label_singular: "출처"
@@ -251,7 +249,6 @@ collections:
           - { name: "date", label: "발표일", widget: "string", required: false }
           - { name: "accessedAt", label: "확인일", widget: "string", required: false }
           - { name: "note", label: "비고", widget: "string", required: false }
-      - { name: "aiAssisted", label: "AI 보조 작성", widget: "boolean", default: false, required: false }
       - { name: "body", label: "본문", widget: "markdown", required: true }
 
   # ──────────────────────────────────────────────────────────

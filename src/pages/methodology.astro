@@ -31,7 +31,6 @@ const webpage = buildWebPageLD(
     경계는 어디인지, 발행 후 오류 발견 시 어떻게 정정되는지를 정리한 운영 정책
     요약입니다. 자세한 결정 기록은
     <a href="/editorial-policy/">/editorial-policy/</a>·
-    <a href="/ai-policy/">/ai-policy/</a>·
     <a href="/corrections/">/corrections/</a> 에서 찾아볼 수 있습니다.
   </p>
 
@@ -77,14 +76,14 @@ const webpage = buildWebPageLD(
         <td>Layer 1 — 스키마 강제</td>
         <td>
           Zod 스키마가 모든 글의 frontmatter (제목 길이, tldr 200자 한도,
-          출처 ≥1건, AI 보조 등급) 를 빌드 시점에 검증. 실패 시 빌드 자체 중단.
+          출처 ≥1건) 를 빌드 시점에 검증. 실패 시 빌드 자체 중단.
         </td>
       </tr>
       <tr>
         <td>Layer 2 — UI 신뢰 신호</td>
         <td>
-          모든 글 상단에 <em>TrustBar</em> 가 (a) AI 보조 등급, (b) 1차 출처 수,
-          (c) 마지막 업데이트 일자, (d) 정정 횟수 를 노출. 독자가 시각적으로 검증.
+          모든 글 상단에 <em>TrustBar</em> 가 (a) 1차 출처 수,
+          (b) 마지막 업데이트 일자, (c) 정정 횟수 를 노출. 독자가 시각적으로 검증.
         </td>
       </tr>
       <tr>
@@ -98,7 +97,7 @@ const webpage = buildWebPageLD(
       <tr>
         <td>Layer 4 — Fact-checker 사후 감사</td>
         <td>
-          AI 보조 도구가 본문 수치 ↔ sources URL 본문을 fuzzy match 로 대조.
+          자동 검증 도구가 본문 수치 ↔ sources URL 본문을 fuzzy match 로 대조.
           M0 단계는 stub, M3 단계에서 본격 가동 예정.
         </td>
       </tr>
@@ -112,30 +111,7 @@ const webpage = buildWebPageLD(
     </tbody>
   </table>
 
-  <h2>3. AI 보조 등급</h2>
-  <p>
-    본 사이트의 모든 글은 frontmatter 의 <code>aiAssisted</code> 필드로 AI 활용
-    수준을 명시합니다. TrustBar 가 등급별로 다른 라벨을 노출합니다.
-  </p>
-  <ul>
-    <li>
-      <code>false</code> — 운영자 단독 작성, AI 미사용.
-    </li>
-    <li>
-      <code>'edit'</code> — 운영자 초안 + AI 가 문법·표현 보조. 사실 입력은
-      운영자.
-    </li>
-    <li>
-      <code>'draft'</code> — AI 가 초안 작성, 운영자가 1차 출처 대조하여 사실
-      확인. <strong>본 사이트의 가이드북·인사이트 대부분</strong>.
-    </li>
-    <li>
-      <code>'fact-check'</code> — AI 가 1차 출처 fuzzy match 까지 수행한 사후
-      감사 결과를 반영. M3 단계 이후 활용.
-    </li>
-  </ul>
-
-  <h2>4. 출처 정책</h2>
+  <h2>3. 출처 정책</h2>
   <p>
     1차 출처는 정부 (.go.kr) · 공공기관 (.or.kr) · 거래소 · 발표 기관 본문을
     원칙으로 하며, 모든 source url 은 검증 가능한 URL 이어야 합니다 (Zod 스키마
@@ -147,7 +123,7 @@ const webpage = buildWebPageLD(
     본문에 그 한계를 명시합니다.
   </p>
 
-  <h2>5. 정정 절차</h2>
+  <h2>4. 정정 절차</h2>
   <p>
     발행 후 사실·수치 오류가 확인되면 (a) 본문 하단에 정정 일자·내용을 명시,
     (b) 글 frontmatter 의 <code>correctionLog</code> 에 항목 추가,
@@ -160,7 +136,7 @@ const webpage = buildWebPageLD(
     기록하지 않습니다.
   </p>
 
-  <h2>6. 라이선스</h2>
+  <h2>5. 라이선스</h2>
   <p>
     본 사이트의 모든 글은 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
     하에 자유롭게 인용·재배포 가능합니다. 상업적 이용은 별도 문의
@@ -171,7 +147,7 @@ const webpage = buildWebPageLD(
     인용은 공정 이용(<em>fair use</em>) 범위입니다.
   </p>
 
-  <h2>7. 면책</h2>
+  <h2>6. 면책</h2>
   <p>
     본 사이트는 데이터·세무·금융 정보를 1차 출처 기준으로 정리하지만,
     개인의 구체 의사결정 (납세 신고 / 투자 판단 / 정책 신청 등) 은 반드시
