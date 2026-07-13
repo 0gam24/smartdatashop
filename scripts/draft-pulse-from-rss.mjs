@@ -218,7 +218,6 @@ title: "${safeTitle}"
 publishedAt: "${pubDateIso}"
 category: ${category}
 tldr: "${tldr}"
-aiAssisted: draft
 sources:
   - name: "${(source.name ?? source.id).replace(/"/g, '\\"')} — ${safeTitle.slice(0, 30)}"
     date: "${kst.date}"

@@ -11,7 +11,7 @@
  *   │                                                            │
  *   │ [선택] sparkline (chartData 있을 때) + 차트 라벨            │  chart
  *   │                                                            │
- *   │ 📊 1차 출처 N건 · 🤖 AI-보조       smartdatashop.kr        │  trust + brand
+ *   │ 📊 1차 출처 N건                    smartdatashop.kr        │  trust + brand
  *   └────────────────────────────────────────────────────────────┘
  *
  * 디자인 토큰 (DESIGN.md v1.0 정합):
@@ -41,8 +41,6 @@ export interface DefaultTemplateProps {
   publishedDate: string;
   /** 1차 출처 수 — D8 배지 텍스트의 N */
   sourceCount: number;
-  /** AI 활용 등급 (false / 'edit' / 'draft' / 'fact-check'). truthy 면 "🤖 AI-보조" 칩. */
-  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   /** 옵셔널 — 있으면 차트 영역 렌더 */
   chartData?: ChartData;
 }
@@ -232,9 +230,6 @@ export function defaultTemplate(p: DefaultTemplateProps): Node {
             { style: { display: 'flex', alignItems: 'center', gap: '20px' } },
             [
               el('span', {}, `📊 1차 출처 ${p.sourceCount}건`),
-              ...(p.aiAssisted
-                ? [el('span', { style: { color: TOKENS.ink3 } }, '·'), el('span', {}, '🤖 AI-보조')]
-                : []),
             ],
           ),
           el(

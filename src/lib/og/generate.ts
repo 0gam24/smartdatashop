@@ -7,7 +7,6 @@
  *     category: '정 책',
  *     publishedDate: '2026-05-05',
  *     sourceCount: 3,
- *     aiAssisted: true,
  *     chartData: { type: 'sparkline', values: [..], label: 'KOSPI 4월', unit: 'pt' },
  *   });
  *   return new Response(png, { headers: { 'Content-Type': 'image/png' } });

@@ -43,14 +43,10 @@ const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.pro
         <ul>
           <li><a href="/about/">소개</a></li>
           <li><a href="/editorial-policy/">편집정책</a></li>
-          <li><a href="/ai-policy/">AI 정책</a></li>
           <li><a href="/corrections/">정정 이력</a></li>
           <li><a href="/affiliate-disclosure/">제휴 공시</a></li>
         </ul>
       </div>
-    </div>
-    <div class="footer-ai-disclosure">
-      본 사이트 일부 콘텐츠는 AI 보조로 작성되며 운영자가 1차 출처 검증·편집·발행한다. 자세한 정책 → <a href="/ai-policy/">AI 정책</a>
     </div>
     <div class="footer-bottom">
       <span>
@@ -82,17 +78,6 @@ const { vol = _auto.vol, no = _auto.no, date = formatKoreanToday() } = Astro.pro
     .footer-grid {
       grid-template-columns: 1fr;
     }
-  }
-  .footer-ai-disclosure {
-    padding: 12px 0;
-    border-top: 0.5px solid var(--color-ink-quat);
-    font-size: 12px;
-    color: var(--color-ink-tertiary);
-    line-height: 1.6;
-  }
-  .footer-ai-disclosure a {
-    color: var(--color-ink-secondary);
-    text-decoration: underline;
   }
   .footer-brand {
     font-family: var(--font-serif);

@@ -129,7 +129,6 @@ export const AUTHOR_KNOWS_ABOUT: ReadonlyArray<string> = [
   'KRX 시장 데이터',
   '1인사업자 정책·세금·금융',
   '데이터 시각화 및 비전문가용 해설',
-  'AI-보조 데이터 저널리즘',
 ];
 
 export function buildPersonLD(): Record<string, unknown> {

@@ -3,14 +3,13 @@
  * TrustBar — 본문 상단 신뢰 시그널 노출 컴포넌트.
  *
  * Discover/E-E-A-T 가시성 강화를 위한 본문 내부 트러스트 띠.
- * 푸터/프론트매터에만 묻혀 있던 신뢰 신호(1차 출처 수, AI-보조 여부,
- * 마지막 업데이트, 정정 횟수)를 본문 진입 직후 한 줄로 보여준다.
+ * 푸터/프론트매터에만 묻혀 있던 신뢰 신호(1차 출처 수, 마지막 업데이트,
+ * 정정 횟수)를 본문 진입 직후 한 줄로 보여준다.
  *
- * 표시 형식 (D8=δ, 4관점 합의):
- *   🤖 AI-보조 · 📊 출처 3건 · ✏️ 업데이트 2026-05-05 · ⚖ 정정 1건
+ * 표시 형식:
+ *   📊 출처 3건 · ✏️ 업데이트 2026-05-05 · ⚖ 정정 1건
  *
  * 규약:
- *   - aiAssisted=false 시 "🤖 AI-보조" 칩 미표시 (정직)
  *   - sources 0건은 표시되지 않음 (Zod 에서 min(1) 강제 — 원래 도달 불가)
  *   - updatedAt 미지정이면 publishedAt 으로 표시
  *   - correctionsCount=0 시 정정 칩 미표시 (정직)
@@ -20,7 +19,6 @@
  *
  * 사용:
  *   <TrustBar
- *     aiAssisted={data.aiAssisted}
  *     sourceCount={data.sources.length}
  *     updatedAt={data.updatedAt ?? data.publishedAt}
  *     correctionsCount={data.correctionLog.length}
@@ -29,37 +27,18 @@
 import { formatKoreanDate } from '../lib/korean';
 
 interface Props {
-  /**
-   * AI 활용 등급 (Decision #9, 2026-05-06):
-   *   false / 'edit' / 'draft' / 'fact-check'
-   * Trust Bar 는 등급별 다른 라벨 표기 — 운영자 단독은 칩 미표시.
-   */
-  aiAssisted: false | 'edit' | 'draft' | 'fact-check';
   sourceCount: number;
   /** ISO 8601 (KST) — updatedAt 없으면 호출자가 publishedAt 을 그대로 전달 */
   updatedAt: string;
   correctionsCount?: number;
 }
 
-const { aiAssisted, sourceCount, updatedAt, correctionsCount = 0 } = Astro.props;
+const { sourceCount, updatedAt, correctionsCount = 0 } = Astro.props;
 
 const updatedDisplay = formatKoreanDate(updatedAt);
-
-const AI_LABEL: Record<'edit' | 'draft' | 'fact-check', { icon: string; label: string; title: string }> = {
-  edit: { icon: '✏️', label: 'AI 편집 보조', title: '운영자가 초안을 작성하고 AI 가 표현/문법만 다듬음' },
-  draft: { icon: '🤖', label: 'AI-보조', title: 'AI 가 초안을 작성하고 운영자가 1차 출처 대조해 사실 확인' },
-  'fact-check': { icon: '🔍', label: 'AI 감사 통과', title: 'Layer 4 fact-checker 가 1차 출처와 본문을 fuzzy match 하여 검증' },
-};
-const aiMeta = aiAssisted ? AI_LABEL[aiAssisted] : null;
 ---
 
 <aside class="trust-bar" role="complementary" aria-label="신뢰 신호">
-  {aiMeta && (
-    <span class="trust-chip" title={aiMeta.title}>
-      <span class="trust-icon" aria-hidden="true">{aiMeta.icon}</span>
-      <span class="trust-label">{aiMeta.label}</span>
-    </span>
-  )}
   <span class="trust-chip" title="본문이 인용한 1차 출처 수">
     <span class="trust-icon" aria-hidden="true">📊</span>
     <span class="trust-label">1차 출처 {sourceCount}건</span>

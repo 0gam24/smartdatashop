@@ -57,7 +57,6 @@ const publishedAt = hasEntry ? formatKoreanDateTime(entry!.data.publishedAt) : '
 const href = hasEntry ? pulseUrl(entry!.slug, entry!.data.publishedAt, entry!.data.category) : '#';
 const title = hasEntry ? entry!.data.title : '';
 const tldr = hasEntry ? entry!.data.tldr : '';
-const aiAssisted = hasEntry ? entry!.data.aiAssisted : false;
 
 // stale 감지 — 최신 펄스가 24h 이상 전이면 "최근 N일 전" 배지 노출.
 // 운영자가 펄스 발행이 끊긴 동안 "왜 같은 글이 hero 에 박혀 있나" 인식 회피.
@@ -87,7 +86,6 @@ const staleLabel = hasEntry ? staleDayLabel(entry!.data.publishedAt) : null;
           <div class="hero-byline">
             <span>김준혁</span><span class="dot">·</span>
             <span>5분 읽기</span>
-            {aiAssisted && <span class="ai-badge">AI 보조</span>}
           </div>
         </div>
 

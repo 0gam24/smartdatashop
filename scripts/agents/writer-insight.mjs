@@ -138,7 +138,6 @@ MDX 전체 (frontmatter 포함) 출력. 첫 줄부터 \`---\` 시작.
 인사이트 frontmatter 필수 필드:
 - title, publishedAt (ISO8601+09:00), category, tldr (200자 이내, "X 는 Y 다" 정의 문장 포함)
 - estimatedReadingTime (정수, 분 단위 — 본문 분량 / 500자)
-- aiAssisted: 'draft'
 - sources (2개+, url 필수)
 - tags { personas[], dataTypes[], actions[] }
 

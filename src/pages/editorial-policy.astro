@@ -5,7 +5,7 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
 <PolicyLayout
   title="편집정책"
   eyebrow="정 책 · E D I T O R I A L"
-  description="스마트데이터샵 편집 헌법 — 1차 출처 검증, AI 활용 범위, 정정 절차, 정식 발행 4대 기준 (ADR 0006)."
+  description="스마트데이터샵 편집 헌법 — 1차 출처 검증, 정정 절차, 정식 발행 4대 기준 (ADR 0006)."
 >
   <p>
     본 사이트의 모든 발행물은 아래 5개 원칙과 ADR 0006 정식 발행 4대 기준을 따릅니다.
@@ -13,12 +13,11 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
     <a href="/corrections/">/corrections/</a> 페이지의 정정 신고 채널로 제보해 주십시오.
   </p>
 
-  <h2>편집 헌법 5대 원칙</h2>
+  <h2>편집 헌법 4대 원칙</h2>
   <ol>
     <li><strong>모든 글은 1차 출처를 명시한다</strong> — 국세청·기재부·KRX·한국은행 ECOS·DART·data.go.kr·KIPO·NIPA·법제처 등 정부·공공기관 deep link 우선</li>
     <li><strong>모든 글은 5분 안에 읽힌다</strong> — 깊이는 자매 사이트와 가이드북의 일</li>
     <li><strong>모든 글은 톨게이트를 가진다</strong> — 다음 단계는 페르소나에 맞는 자매 사이트로 (<a href="/about/#자매-사이트-네트워크">자매 사이트</a> 참조)</li>
-    <li><strong>AI 보조를 숨기지 않는다</strong> — frontmatter <code>aiAssisted</code> 4 등급으로 등급화하여 Trust Bar 에 표기</li>
     <li><strong>발행 전 정식 발행 4대 기준을 통과한다</strong> — 출처 페어링 + 정확한 URL + 발표 일자 + 검증 불가 격리</li>
   </ol>
 
@@ -37,14 +36,6 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
     <li><strong>1차 출처 정의</strong> — 정부·공공기관·거래소 등 데이터 발행 주체의 공식 페이지·보도자료 PDF·통계 DB.</li>
     <li><strong>WebFetch 권장 흐름</strong> — 발견된 URL 본문을 직접 추출 후 본문 수치와 1:1 대조.</li>
     <li><strong>"출처 없음" 마킹</strong> — 검증 못 한 수치는 본문에서 제거하거나 명시 격리.</li>
-  </ul>
-
-  <h2>AI 활용 등급 (4 단계)</h2>
-  <ul>
-    <li><code>false</code> — 운영자 단독 작성, AI 미사용</li>
-    <li><code>'edit'</code> — 운영자 초안 + AI 가 문법/표현 보조 (사실 입력은 운영자)</li>
-    <li><code>'draft'</code> — AI 초안 + 운영자 1차 출처 대조하여 사실 확인</li>
-    <li><code>'fact-check'</code> — Layer 4 fact-checker 사후 감사 통과</li>
   </ul>
 
   <h2>이해상충 정책</h2>

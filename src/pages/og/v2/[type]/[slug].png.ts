@@ -48,7 +48,6 @@ export const GET: APIRoute = async ({ props }) => {
     category: categoryToKorean(data.category).replace(/ /g, ''), // OG 카드는 평문
     publishedDate: formatKoreanDate(data.publishedAt),
     sourceCount: data.sources.length,
-    aiAssisted: data.aiAssisted,
     chartData: data.chartData,
   });
 
