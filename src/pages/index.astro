@@ -15,7 +15,7 @@ import GuidebookCard from '../components/GuidebookCard.astro';
 import ComingSoon from '../components/ComingSoon.astro';
 import NewsletterCTA from '../components/NewsletterCTA.astro';
 import Footer from '../components/Footer.astro';
-import { categoryToKorean, formatKoreanTime, pulseUrl, pulseDateParts, kstTodayIso, type Category } from '../lib/korean';
+import { categoryToKorean, formatKoreanTime, formatKoreanDate, pulseUrl, insightUrl, pulseDateParts, kstTodayIso, type Category } from '../lib/korean';
 import {
   buildOrganizationLD,
   buildPersonLD,
@@ -77,6 +77,21 @@ const pulseCards = sortedPulses.slice(0, 5).map((entry) => {
     coverImage: entry.data.coverImage,
   };
 });
+
+// 섹션 01a — 심층 인사이트 3편 (원본 분석 최상단 배치). 사람이 직접 쓴 교차종합·
+// 해설 글을 홈 상단에 노출해 E-E-A-T·원본 가치 신호를 강화한다(AdSense 재건 B단계).
+const insightCards = allInsights
+  .slice()
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3)
+  .map((entry) => ({
+    href: insightUrl(entry.slug, entry.data.publishedAt),
+    category: categoryToKorean(entry.data.category).replace(/ /g, ''),
+    publishedAt: formatKoreanDate(entry.data.publishedAt),
+    title: entry.data.title,
+    tldr: entry.data.tldr,
+    readingTime: entry.data.estimatedReadingTime,
+  }));
 
 // 섹션 03 — 카테고리별 최신 (콘텐츠 컬렉션 기반)
 //
@@ -180,6 +195,30 @@ const guidebooks = guidebooksCollection
     chartHref={ecosSpotlight ? `/topic/${ecosSpotlight.topicId}/` : undefined}
   />
 
+  <!-- Section 01a: 심층 인사이트 — 사람이 쓴 원본 분석을 최상단 배치 (E-E-A-T) -->
+  {insightCards.length > 0 && (
+    <section class="section section-insight" data-screen-label="01a 인사이트">
+      <div class="page-width">
+        <SectionHead num="01a" title="심층 인사이트" moreHref="/insight/" moreLabel="인사이트 전체 →" />
+        <ol class="home-ins-list">
+          {insightCards.map((it) => (
+            <li class="home-ins-item">
+              <a href={it.href} class="home-ins-link no-underline">
+                <div class="home-ins-meta">
+                  <span class="cat-label">{it.category}</span>
+                  <span class="home-ins-date">{it.publishedAt}</span>
+                  <span class="home-ins-rt">{it.readingTime}분 읽기</span>
+                </div>
+                <h3 class="home-ins-title">{it.title}</h3>
+                <p class="home-ins-tldr">{it.tldr}</p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
   <!-- Section 01b: 오늘의 핵심 지표 (한국은행 ECOS 매일 자동 갱신) -->
   <section class="section section-key-econ" data-screen-label="01b 핵심 지표">
     <div class="page-width">
@@ -255,6 +294,51 @@ const guidebooks = guidebooksCollection
       grid-template-columns: 1fr;
       gap: 32px;
     }
+  }
+
+  /* 심층 인사이트 섹션 (Section 01a) — 홈 상단 원본 분석 */
+  .section-insight { padding-top: 8px; padding-bottom: 8px; }
+  .home-ins-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .home-ins-item { border-bottom: 0.5px solid var(--color-ink-quat); }
+  .home-ins-link { display: block; padding: 20px 0; color: inherit; }
+  .home-ins-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .home-ins-date,
+  .home-ins-rt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.04em;
+  }
+  .home-ins-title {
+    font-family: var(--font-serif);
+    font-size: 21px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .home-ins-link:hover .home-ins-title { color: var(--color-accent); }
+  .home-ins-tldr {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .home-ins-title { font-size: 18px; }
   }
 
   /* 핵심 지표 섹션 (Section 01b) */

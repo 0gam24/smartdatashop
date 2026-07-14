@@ -9,16 +9,15 @@ interface Props {
 // 기본값은 빌드 시점의 KST 오늘 — hourly scout bot 으로 매시간 자동 갱신.
 const { date = formatKoreanToday(), activeNav = 'daily' } = Astro.props;
 
-// 정부발표 (/data/notice/) 가 매일 605건 갱신 — freshness 신호 가장 강함.
-// 데이터 서브 (timeseries/100-key/board/trends/kosis-100) 보다 사용자 의도 매칭 우월.
-// 메인 nav 로 승격 — 데이터 대신 직접 노출 (데이터 페이지는 /data/ 통해 진입).
+// 콘텐츠 우선 nav — AdSense 재거절 대응(2026-07-14). 자동 fetch·정부 RSS 재게시
+// 성격의 /data/*·/topic/* 은 noindex + sitemap 제외로 전환했으므로, 크롤러를 얇은
+// 페이지로 유도하지 않도록 메인 nav 에서 데이터·정부발표를 내린다. 두 항목은 Footer
+// 에 그대로 남겨 사용자 접근성은 유지(색인만 차단, 페이지는 살아 있음).
 const navItems: Array<{ key: NonNullable<Props['activeNav']>; label: string; href: string }> = [
   { key: 'daily', label: '데일리', href: '/' },
   { key: 'all', label: '전체', href: '/category/all/' },
   { key: 'insight', label: '인사이트', href: '/insight/' },
   { key: 'guidebook', label: '가이드북', href: '/guidebook/' },
-  { key: 'notice', label: '정부발표', href: '/data/notice/' },
-  { key: 'data', label: '데이터', href: '/data/' },
 ];
 ---
 
