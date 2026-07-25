@@ -329,19 +329,30 @@ const enableNaverAnalytics =
     {/*
       네이버 애널리틱스 — 네이버 공식 권장 위치: </body> 직전.
       PROD + 발급 ID 형식 검증 시만 (fallback 'a12608dc4b99a8' / env override 가능).
-      페이지 로드 영향 최소화 + 본문 렌더 후 추적.
+
+      동적 로더 + onload 콜백 구조 (2026-07-25 픽스):
+      기존 `<script async>` + 즉시 `if (window.wcs) wcs_do()` 조합은 async 로딩이
+      끝나기 전에 조건 검사가 실행돼 wcs_do() 가 영원히 호출되지 않는 레이스 버그
+      (실시간 집계 0 원인). wcslog.js 는 GA 의 dataLayer 같은 큐가 없어 로드 완료
+      "후에" wcs_do() 를 명시 호출해야만 전송된다. onload 콜백으로 순서를 보장하고
+      비차단 로딩(성능)은 유지.
     */}
     {enableNaverAnalytics && (
-      <>
-        <script async src="https://wcs.pstatic.net/wcslog.js"></script>
-        <script is:inline set:html={`
-          if (!wcs_add) var wcs_add = {};
-          wcs_add["wa"] = "${naverAnalyticsId}";
-          if (window.wcs) {
-            wcs_do();
-          }
-        `}></script>
-      </>
+      <script is:inline set:html={`
+        (function () {
+          window.wcs_add = window.wcs_add || {};
+          window.wcs_add["wa"] = "${naverAnalyticsId}";
+          var s = document.createElement("script");
+          s.src = "https://wcs.pstatic.net/wcslog.js";
+          s.async = true;
+          s.onload = function () {
+            if (window.wcs) {
+              wcs_do();
+            }
+          };
+          document.body.appendChild(s);
+        })();
+      `}></script>
     )}
   </body>
 </html>
