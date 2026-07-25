@@ -1,0 +1,125 @@
+---
+/**
+ * 404 — 페이지를 찾을 수 없음
+ *
+ * Astro SSG 예약 라우트 → dist/404.html. Cloudflare Pages 가 미존재 경로에
+ * 이 파일을 HTTP 404 상태코드로 자동 서빙한다 (soft 404 아님).
+ *
+ * 근거 (2026-07-25 구글·네이버 공식 가이드 반영):
+ *   - 네이버 01-02·02-03: 내용 없는 200(soft 404)은 "불용문서"로 분류되어
+ *     사이트 신뢰도 하락. 진짜 404 상태코드가 색인 품질 신호.
+ *   - 구글 crawl-budget: 존재하지 않는 URL 은 404 로 명확히 — 크롤 낭비 차단.
+ *
+ * noindex — 오류 페이지 자체는 색인 대상이 아니다.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const links = [
+  { href: '/', label: '데일리 홈', desc: '오늘의 펄스와 핵심 지표' },
+  { href: '/category/all/', label: '전체 글', desc: '모든 글을 최신순으로' },
+  { href: '/insight/', label: '인사이트', desc: '깊이 있는 교차 분석' },
+  { href: '/guidebook/', label: '가이드북', desc: '주제별 장기 시리즈' },
+];
+---
+
+<BaseLayout
+  noindex
+  title="페이지를 찾을 수 없습니다 (404) — 스마트데이터샵"
+  description="요청하신 페이지가 존재하지 않거나 이동됐습니다. 데일리·전체 글·인사이트·가이드북에서 원하는 콘텐츠를 찾아보세요."
+>
+  <Header />
+
+  <main id="main" role="main">
+    <section class="section" data-screen-label="404">
+      <div class="page-width nf-wrap">
+        <p class="nf-code">404 NOT FOUND</p>
+        <h1 class="nf-title">페이지를 찾을 수 없습니다</h1>
+        <p class="nf-desc">
+          주소가 잘못 입력됐거나, 글이 이동·삭제됐을 수 있습니다.
+          아래에서 찾으시는 콘텐츠로 이동하거나, 상단의 검색을 이용해 주세요.
+        </p>
+
+        <ul class="nf-links">
+          {links.map((l) => (
+            <li class="nf-item">
+              <a href={l.href} class="nf-link no-underline">
+                <span class="nf-label">{l.label}</span>
+                <span class="nf-item-desc">{l.desc}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .nf-wrap {
+    padding-top: 72px;
+    padding-bottom: 96px;
+    max-width: 640px;
+  }
+  .nf-code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--color-accent);
+    margin: 0 0 16px;
+  }
+  .nf-title {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .nf-desc {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-ink-secondary);
+    margin: 0 0 40px;
+  }
+  .nf-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.5px solid var(--color-ink-quat);
+  }
+  .nf-item {
+    border-bottom: 0.5px solid var(--color-ink-quat);
+  }
+  .nf-link {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 0;
+    color: inherit;
+  }
+  .nf-label {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink);
+    min-width: 96px;
+  }
+  .nf-link:hover .nf-label {
+    color: var(--color-accent);
+  }
+  .nf-item-desc {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--color-ink-tertiary);
+  }
+  @media (max-width: 640px) {
+    .nf-title { font-size: 26px; }
+  }
+</style>

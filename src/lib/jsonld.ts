@@ -162,6 +162,22 @@ export function buildPersonLD(): Record<string, unknown> {
 }
 
 /**
+ * ProfilePage — 저자 프로필 페이지 전용 (Google article.md 권장).
+ *
+ * Google 공식: 기사 author 가 가리키는 내부 프로필 페이지에는 ProfilePage
+ * 마크업을 권장 (G/05-structured-data/article.md). mainEntity 로 Person 을
+ * 감싸면 검색이 저자 엔티티를 페이지와 확정적으로 연결한다 (E-E-A-T).
+ */
+export function buildProfilePageLD(): Record<string, unknown> {
+  const { '@context': _ctx, ...person } = buildPersonLD();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: person,
+  };
+}
+
+/**
  * 기사 본문(markdown)에서 wordCount·읽기시간(분) 추정.
  * GEO/AEO: Article/NewsArticle LD 의 wordCount·timeRequired 신호로
  * AI 답변엔진·Discover 가 문서 깊이를 판단하는 근거가 된다.

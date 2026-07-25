@@ -61,8 +61,11 @@
 
 # ──────────────────────────────────────────
 # 보안 헤더 — 모든 페이지 공통
+# HSTS: 사이트는 Cloudflare 로 HTTPS 전용 — 1년 + 서브도메인.
+# (preload 는 hstspreload.org 등록이 필요한 별도 결정이라 미포함)
 # ──────────────────────────────────────────
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
