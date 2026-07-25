@@ -1,14 +1,15 @@
 ---
 import PolicyLayout from '../../layouts/PolicyLayout.astro';
 import KpiTile from '../../components/viz/KpiTile.astro';
-import { AUTHOR_KNOWS_ABOUT, buildPersonLD, buildBreadcrumbLD } from '../../lib/jsonld';
+import { AUTHOR_KNOWS_ABOUT, buildProfilePageLD, buildBreadcrumbLD } from '../../lib/jsonld';
 import { getCollection } from 'astro:content';
 import { pulseUrl, insightUrl, formatKoreanDate } from '../../lib/korean';
 
-// 저자 페이지 LD: Person + Breadcrumb (홈 › 저자 › 김준혁).
+// 저자 페이지 LD: ProfilePage(mainEntity=Person) + Breadcrumb (홈 › 저자 › 김준혁).
+// Google article.md 권장 — 기사 author.url 이 가리키는 프로필 페이지는 ProfilePage 로 마크업.
 // PUBLIC_AUTHOR_SAMEAS 환경변수로 외부 프로필 URL 자동 주입 (LinkedIn/네이버블로그/X 등) —
 // 코드 변경 없이 운영자가 즉시 채울 수 있도록 분리.
-const personLd = buildPersonLD();
+const personLd = buildProfilePageLD();
 const breadcrumbLd = buildBreadcrumbLD([
   { name: '홈', url: '/' },
   { name: '저자', url: '/' },
