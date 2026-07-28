@@ -28,6 +28,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { execSync } from 'node:child_process';
 import { pingIndexNow } from './shared/indexnow.mjs';
 
 const repoRoot = resolve(process.cwd());
@@ -45,25 +46,47 @@ console.log(
 );
 
 /**
- * GitHub push 이벤트 페이로드에서 src/content/(pulse|insight)/ 변경 파일 추출 →
- * 사이트 절대 URL 로 변환. push 이벤트가 아니거나 파일 정보 없으면 빈 배열.
+ * 변경된 콘텐츠 파일 추출 → 사이트 절대 URL 로 변환.
+ *
+ * 1차 소스: `git diff --name-only HEAD^ HEAD` — PR 머지 커밋의 첫 부모(직전
+ * main)와의 diff 가 곧 그 PR 이 발행한 파일 전체다. push 이벤트 payload 의
+ * commits[].added 는 머지 커밋에서 비어 오는 경우가 많아(2026-07-28 실측:
+ * 모든 머지에서 기사 URL 0건 → 홈+뉴스사이트맵 2 URL 만 ping) 보조로 강등.
+ * 워크플로 checkout 은 fetch-depth: 2 로 HEAD^ 를 보장한다.
  */
 function affectedUrls() {
-  const eventPath = process.env.GITHUB_EVENT_PATH;
-  if (!eventPath) return [];
-  let event;
-  try {
-    event = JSON.parse(readFileSync(eventPath, 'utf8'));
-  } catch {
-    return [];
-  }
-  const commits = event.commits ?? [];
   const changedFiles = new Set();
-  for (const c of commits) {
-    for (const f of [...(c.added ?? []), ...(c.modified ?? [])]) {
+
+  // 1차: 머지 커밋 diff (로컬 git). shallow 미달 등 실패 시 조용히 폴백.
+  try {
+    // HEAD~1 = 첫 부모 (머지 커밋이면 직전 main). HEAD^ 표기는 Windows cmd 의
+    // 이스케이프 문자와 충돌해 로컬 실행이 조용히 실패하므로 ~1 표기 고정.
+    const out = execSync('git diff --name-only HEAD~1 HEAD', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+    for (const f of out.split('\n').map((s) => s.trim()).filter(Boolean)) {
       changedFiles.add(f);
     }
+  } catch {
+    /* fall through to event payload */
   }
+
+  // 2차: push 이벤트 payload (직접 push 등 머지 커밋이 아닌 경우 보완).
+  const eventPath = process.env.GITHUB_EVENT_PATH;
+  if (eventPath) {
+    try {
+      const event = JSON.parse(readFileSync(eventPath, 'utf8'));
+      for (const c of event.commits ?? []) {
+        for (const f of [...(c.added ?? []), ...(c.modified ?? [])]) {
+          changedFiles.add(f);
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  if (changedFiles.size === 0 && !eventPath) return [];
   // URL 정책 (2026-06-12 개정, src/lib/korean.ts pulseUrl 과 동일 규칙):
   //   2026-06-13 이후 발행 pulse → /<category>/<slug>/ (frontmatter category 를 파일에서 읽음)
   //   그 이전 발행 pulse → /YYYY/MM/DD/<날짜포함slug>/ (색인 보존)
@@ -124,6 +147,8 @@ writeFileSync(
       status: 'ok',
       indexnow: {
         live: liveIndexNow,
+        // 감지된 URL 은 stub 여부와 무관하게 기록 — 추출 로직 회귀를 로그로 잡는다
+        urlsDetected: urls,
         urlsPinged: liveIndexNow ? urls : [],
         result: indexNowResult,
       },

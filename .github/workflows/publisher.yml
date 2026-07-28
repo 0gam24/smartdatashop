@@ -23,9 +23,13 @@ jobs:
     permissions:
       contents: read
     steps:
-      # 저장소 체크아웃
+      # 저장소 체크아웃 — fetch-depth 2: 머지 커밋의 첫 부모(직전 main)와 diff 해
+      # 변경 파일을 추출하기 위함 (push 이벤트 payload 는 머지 커밋의 파일 목록을
+      # 담지 않아 기사 URL 추출이 항상 비었던 버그 픽스, 2026-07-28)
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       # Node 20 환경 설정
       - name: Setup Node
