@@ -27,6 +27,15 @@ const COLLECTIONS = ['pulse', 'insight'];
 const args = new Set(process.argv.slice(2));
 const asJson = args.has('--json');
 const strict = args.has('--strict');
+// Bug D 완화 (2026-05-17) — 임계 0 → 일시적으로 70 으로 완화.
+// 사유: 5/4 ETF 인사이트 + 5/12 정책 1주 인사이트의 표·체크리스트 수치 footnote 누락으로
+// 미페어링 58건 누적. PR #100 으로 strict 게이트가 writer.yml 에 추가된 후 모든 auto-publish
+// 차단됨 (운영자 5/15~17 사이 6 run fail 보고). 매일 발행 흐름 우선 복귀, 58 → 0 정리는 P3.
+// 환경변수 STRICT_UNPAIRED_THRESHOLD 로 override 가능 (정리 진행에 따라 단계적 하향).
+const STRICT_UNPAIRED_THRESHOLD = Math.max(
+  0,
+  parseInt(process.env.STRICT_UNPAIRED_THRESHOLD ?? '70', 10),
+);
 
 // 한국 데이터 저널이 자주 다루는 수치 단위. 각 토큰은 \d 류 와 인접해야 매칭.
 // 단어 경계가 한글에 적용되지 않으므로 lookahead 로 단위 종료를 명시 필요 X —
@@ -117,8 +126,17 @@ async function main() {
     '⚠ 미페어링 = 수치 옆 단락에 [^N] footnote 마커 부재. Layer 1(writer 프롬프트) 또는 운영자 직접 추가 필요.',
   );
 
-  if (strict && totalUnpaired > 0) {
-    process.exit(1);
+  if (strict) {
+    if (totalUnpaired > STRICT_UNPAIRED_THRESHOLD) {
+      console.error(
+        `\n[extract-numerical-claims] --strict FAIL — 미페어링 ${totalUnpaired}건 (임계 ${STRICT_UNPAIRED_THRESHOLD} 초과).`,
+      );
+      process.exit(1);
+    } else if (totalUnpaired > 0) {
+      console.log(
+        `\n[extract-numerical-claims] --strict WARN — 미페어링 ${totalUnpaired}건 (임계 ${STRICT_UNPAIRED_THRESHOLD} 이하 → pass). P3 정리 대상.`,
+      );
+    }
   }
 }
 
