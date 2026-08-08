@@ -1,8 +1,8 @@
 {
   "agent": "fact-checker",
-  "ranAt": "2026-08-08T17:21:42.570Z",
+  "ranAt": "2026-08-08T19:35:18.605Z",
   "windowDays": 14,
-  "mode": "lite",
+  "mode": "full",
   "auditedCount": 45,
   "summary": {
     "risk": {
@@ -469,5 +469,94 @@
       "riskLevel": "low"
     }
   ],
-  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+  "fullAuditedCount": 2,
+  "discrepancies": [
+    {
+      "collection": "pulse",
+      "filename": "2026-07-28-comprehensive-real-estate-tax-single-house.mdx",
+      "verdict": "fabricated",
+      "issues": [
+        {
+          "claim": "1세대 1주택자 12억원·그 밖의 경우 9억원",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치의 정확성을 검증할 근거 없음 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "과세기준일 6월 1일",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 일자 정확성 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "공정시장가액비율 주택분 60%",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "세 부담 상한 직전 연도 세액의 150%",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "고령자·장기보유 세액공제 합산 최대 80%",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "고령자 공제율: 60세 이상 20%, 65세 이상 30%, 70세 이상 40%",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "장기보유 공제율: 5년 이상 20%, 10년 이상 40%, 15년 이상 50%",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "납부기간 12월 1일부터 15일까지, 250만원 초과 시 6개월 이내 분납",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 일자 및 수치 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        },
+        {
+          "claim": "세율표 (3주택 이상 25억 초과 2.0%~94억 초과 5.0% 등 전 구간)",
+          "issue": "1차 출처 URL fetch 실패로 원문 확인 불가 — 세율 수치 전체 검증 불가 (fabricated 처리)",
+          "severity": "high"
+        }
+      ],
+      "summary": "두 1차 출처 URL이 모두 fetch 실패하여 본문에 등장하는 모든 수치·일자를 원문과 대조할 수 없다. 결과적으로 공제금액, 세율, 공정시장가액비율, 세부담 상한, 세액공제율, 납부기간 등 핵심 수치 전체가 출처 미확인 상태이므로 fabricated로 분류하며, 반드시 국세청 원문을 직접 재확인한 후 게재 여부를 결정해야 한다."
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-07-28-private-pension-separate-taxation.mdx",
+      "verdict": "fabricated",
+      "issues": [
+        {
+          "claim": "연간 사적연금이 1,500만원 이하이면 3.3~5.5%의 낮은 세율로 분리과세",
+          "issue": "1차 출처(국세청) fetch 실패로 본문 내 수치 검증 불가 — 출처 미확인 상태이므로 fabricated로 분류",
+          "severity": "high"
+        },
+        {
+          "claim": "70세 미만 5%, 70세 이상 80세 미만 4%, 80세 이상 3% (지방소득세 10% 포함)",
+          "issue": "1차 출처 fetch 실패로 연령별 세율 수치 확인 불가 — 출처 미확인",
+          "severity": "high"
+        },
+        {
+          "claim": "2026년 1월 1일 이후 연금수령분부터 종신형 세율이 3%(지방소득세 포함 3.3%)로 인하",
+          "issue": "1차 출처 fetch 실패로 시행일 및 세율 인하 사실 확인 불가 — 출처 미확인",
+          "severity": "high"
+        },
+        {
+          "claim": "1,500만원 초과 시 분리과세 선택 세율 16.5% (국세 15% + 지방소득세)",
+          "issue": "1차 출처 fetch 실패로 초과 시 분리과세 세율 수치 확인 불가 — 출처 미확인",
+          "severity": "high"
+        },
+        {
+          "claim": "한도가 2024년부터 종전 연 1,200만원에서 1,500만원으로 상향",
+          "issue": "1차 출처 fetch 실패로 한도 상향 시점 및 이전 한도(1,200만원) 수치 확인 불가 — 출처 미확인",
+          "severity": "high"
+        }
+      ],
+      "summary": "두 1차 출처 URL 모두 fetch에 실패하여 본문의 핵심 수치(분리과세 한도 1,500만원, 연령별 세율, 종신형 세율 인하 시행일, 초과 시 16.5% 세율, 한도 상향 이력 등) 를 원문과 직접 대조하는 것이 불가능하다. 출처 본문으로 뒷받침되지 않는 모든 수치·일자는 검증 규칙상 fabricated로 처리해야 하므로, 현 상태에서는 본문 전체의 사실 정확성을 확인할 수 없다."
+    }
+  ],
+  "note": "FULL: claude-sonnet-4-6 + 1차 출처 fetch. 불일치 2건."
 }
