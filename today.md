@@ -1,12 +1,19 @@
-# Today — 2026-08-08 (토) (KST)
+# Today — 2026-08-09 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-08 (토) — 오늘
+## 2026-08-09 (일) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **1건**
+- 📋 검수 대기: **2건**
+
+## 2026-08-08 (토)
+
+- 📝 발행 **3건**:
+  - [대환대출 갈아타기, 주담대·전세대출 원스톱으로 옮기는 법](https://smartdatashop.kr/tax-finance/one-stop-loan-refinancing/) — 온라인 원스톱 대환대출은 스마트폰 앱으로 기존 대출을 더 낮은 금리의 다른 금융사 대출로 갈아타는 금융위원…
+  - [임금체불 진정 신청 방법, 대지급금과 지연이자 20%까지](https://smartdatashop.kr/policy/unpaid-wage-complaint/) — 임금체불 진정은 밀린 임금을 받도록 도와달라고 지방고용노동관서에 제기하는 신고 절차다. 근로기준법상 사업주…
+  - [배우자 증여 후 양도세 이월과세, 10년 함정 피하는 법](https://smartdatashop.kr/tax-finance/spouse-gift-carryover-taxation/) — 배우자 증여 후 양도세 이월과세는 배우자나 직계존비속에게 증여받은 부동산을 10년 안에 팔면 증여받은 가격…
 
 ## 2026-08-07 (금)
 
@@ -98,13 +105,6 @@
   - [노란우산공제 중도해지 세금, 기타소득 과세 정리](https://smartdatashop.kr/tax-finance/yellow-umbrella-early-termination-tax/) — 노란우산공제 중도해지 세금은 폐업 같은 지급 사유가 생기기 전에 임의로 해지할 때 소득공제를 받은 부금에 …
   - [자영업자 고용보험, 폐업하면 실업급여 받는 법](https://smartdatashop.kr/policy/self-employed-employment-insurance/) — 자영업자 고용보험은 근로자를 두지 않거나 50인 미만을 둔 자영업자가 스스로 가입해, 폐업 시 구직급여를 …
   - [전세자금대출 원리금 소득공제, 40% 연 400만원](https://smartdatashop.kr/tax-finance/jeonse-loan-principal-deduction/) — 주택임차차입금 원리금상환액 소득공제는 무주택 세대주 근로자가 전세·월세 보증금 대출의 원리금 상환액 40%…
-
-## 2026-07-25 (토)
-
-- 📝 발행 **3건**:
-  - [부담부증여 세금, 증여세와 양도세 함께 계산하는 법](https://smartdatashop.kr/tax-finance/burdened-gift-tax/) — 부담부증여는 전세보증금이나 대출 같은 채무를 낀 재산을 넘겨, 채무만큼은 양도로 보아 증여자에게 양도소득세…
-  - [자경농지 양도세 감면, 8년 재촌자경 요건과 한도](https://smartdatashop.kr/tax-finance/self-cultivated-farmland-capital-gains/) — 자경농지 양도소득세 감면은 농지 소재지에 살면서 8년 이상 직접 농사지은 농지를 팔 때 양도세를 연 1억원…
-  - [성실신고확인 대상 기준과 세액공제, 자영업자 신고 정리](https://smartdatashop.kr/tax-finance/honest-filing-confirmation/) — 성실신고확인제도는 수입금액이 업종별 기준(15억·7.5억·5억원)을 넘는 개인사업자가 종합소득세 신고 전에…
 
 ---
 
