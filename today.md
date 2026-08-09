@@ -1,12 +1,19 @@
-# Today — 2026-08-09 (일) (KST)
+# Today — 2026-08-10 (월) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-09 (일) — 오늘
+## 2026-08-10 (월) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **2건**
+
+## 2026-08-09 (일)
+
+- 📝 발행 **3건**:
+  - [국가장학금 2학기 2차 신청, 재학생 재도전 마지막 기회](https://smartdatashop.kr/policy/national-scholarship-second-round/) — 2학기 국가장학금 2차 신청은 1차 때 신청하지 못한 재학생과 신입·편입생이 등록금 지원을 다시 신청하는 …
+  - [근로장려금 반기신청, 근로소득자가 9월에 미리 받는 법](https://smartdatashop.kr/tax-finance/eitc-semiannual-application/) — 근로장려금 반기신청은 근로소득만 있는 가구가 한 해 장려금을 두 번에 나눠 미리 받는 제도다. 상반기 소득…
+  - [재산세 9월 2기분, 주택 나머지 절반과 토지분 납부](https://smartdatashop.kr/tax-finance/property-tax-second-half-september/) — 9월 재산세는 주택분 재산세의 나머지 절반과 토지분 재산세를 함께 내는 2기분 납부다. 주택분은 연세액이 …
 
 ## 2026-08-08 (토)
 
@@ -98,13 +105,6 @@
   - [노인장기요양 등급, 95점 이상이면 1등급](https://smartdatashop.kr/policy/long-term-care-insurance-grades/) — 노인장기요양 등급은 혼자 일상생활이 어려운 노인을 장기요양인정점수에 따라 1등급부터 5등급과 인지지원등급으…
   - [예금자보호 한도 1억원, 24년 만에 상향된 안전선](https://smartdatashop.kr/tax-finance/deposit-protection-limit-100-million/) — 예금자보호 한도는 금융회사가 파산해도 예금보험공사가 원금과 이자를 합쳐 1인당 최대 1억원까지 대신 지급하…
   - [주휴수당 조건, 주 15시간 개근이면 하루치 임금](https://smartdatashop.kr/policy/weekly-holiday-allowance-conditions/) — 주휴수당은 1주 소정근로시간이 15시간 이상이고 그 주의 소정근로일을 개근한 근로자에게 유급휴일 하루치 임…
-
-## 2026-07-26 (일)
-
-- 📝 발행 **3건**:
-  - [노란우산공제 중도해지 세금, 기타소득 과세 정리](https://smartdatashop.kr/tax-finance/yellow-umbrella-early-termination-tax/) — 노란우산공제 중도해지 세금은 폐업 같은 지급 사유가 생기기 전에 임의로 해지할 때 소득공제를 받은 부금에 …
-  - [자영업자 고용보험, 폐업하면 실업급여 받는 법](https://smartdatashop.kr/policy/self-employed-employment-insurance/) — 자영업자 고용보험은 근로자를 두지 않거나 50인 미만을 둔 자영업자가 스스로 가입해, 폐업 시 구직급여를 …
-  - [전세자금대출 원리금 소득공제, 40% 연 400만원](https://smartdatashop.kr/tax-finance/jeonse-loan-principal-deduction/) — 주택임차차입금 원리금상환액 소득공제는 무주택 세대주 근로자가 전세·월세 보증금 대출의 원리금 상환액 40%…
 
 ---
 
