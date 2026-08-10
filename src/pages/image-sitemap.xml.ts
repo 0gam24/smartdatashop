@@ -21,7 +21,7 @@
  */
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { pulseUrl } from '../lib/korean';
+import { insightUrl, pulseUrl } from '../lib/korean';
 
 const SITE = 'https://smartdatashop.kr';
 
@@ -61,7 +61,9 @@ export const GET: APIRoute = async () => {
   }
 
   for (const e of insights) {
-    const pageUrl = `${SITE}/insight/${e.slug}/`;
+    // 페이지 URL 은 insightUrl() 경유 (2026-06-13 이후 발행분 슬러그 날짜 접두사 제거).
+    // 이미지 URL 은 OG 라우트가 raw slug 를 쓰므로 그대로 둔다.
+    const pageUrl = `${SITE}${insightUrl(e.slug, e.data.publishedAt)}`;
     const imageUrl = e.data.coverImage
       ? e.data.coverImage.startsWith('http')
         ? e.data.coverImage

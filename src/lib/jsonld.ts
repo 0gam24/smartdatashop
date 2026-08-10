@@ -5,7 +5,7 @@
  */
 
 import type { CollectionEntry } from 'astro:content';
-import { categoryToKorean, pulseUrl } from './korean';
+import { categoryToKorean, insightUrl, pulseUrl } from './korean';
 
 // 사이트 상수 — astro.config.mjs의 site 와 동일하게 유지.
 const SITE_URL = 'https://smartdatashop.kr';
@@ -267,7 +267,10 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
  * 동적 OG v2 폴백 + image array + 평문 articleSection (NewsArticle 와 동일 정책).
  */
 export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string, unknown> {
-  const url = `${SITE_URL}/insight/${entry.slug}/`;
+  // URL 은 insightUrl() 경유 — 2026-06-13 이후 발행분은 슬러그 날짜 접두사가 제거되므로
+  // raw slug 로 조립하면 실재하지 않는 URL 을 가리킨다.
+  // 반면 dynamicOgUrl 은 OG 라우트가 raw slug 를 params 로 쓰므로 그대로 둔다.
+  const url = `${SITE_URL}${insightUrl(entry.slug, entry.data.publishedAt)}`;
   const primaryImage = entry.data.coverImage
     ? entry.data.coverImage.startsWith('http')
       ? entry.data.coverImage
@@ -387,6 +390,22 @@ export function buildItemListLD(
  *
  * 본 함수는 markdown body 를 받아 Q&A 추출 → LD 반환. Q&A < 2 면 null.
  */
+/**
+ * 본문 마크다운에서 추출한 문자열을 JSON-LD 평문 필드용으로 정리한다.
+ *
+ * 각주 마커(`[^1]`)·강조(`**`)·인라인 링크는 본문에서는 정상 렌더되지만 LD 의
+ * name/text 는 평문 필드라 문법이 그대로 노출된다 (리치 결과에 `[^1]` 표시).
+ */
+function plainTextForLD(raw: string): string {
+  return raw
+    .replace(/\[\^[^\]]+\]/g, '') // 각주 참조 [^1]
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // 인라인 링크 → 텍스트만
+    .replace(/\*\*|__/g, '') // 굵게
+    .replace(/`/g, '') // 인라인 코드
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function buildFaqLDFromMarkdown(body: string): Record<string, unknown> | null {
   // 패턴 1: **Q1. ...?** A. ... 또는 **Q. ...?** A. ...
   const pattern1 = /\*\*Q\d*\.?\s*(.+?)\*\*\s*\n+(?:A[.:]?\s*)?(.+?)(?=\n+\*\*Q|\n+##|\n+\[|$)/gs;
@@ -397,8 +416,8 @@ export function buildFaqLDFromMarkdown(body: string): Record<string, unknown> | 
   for (const pat of [pattern1, pattern2]) {
     let m: RegExpExecArray | null;
     while ((m = pat.exec(body)) !== null) {
-      const q = m[1].trim().replace(/[?？]+$/, '').trim();
-      const a = m[2].trim().replace(/\s+/g, ' ').slice(0, 500);
+      const q = plainTextForLD(m[1]).replace(/[?？]+$/, '').trim();
+      const a = plainTextForLD(m[2]).slice(0, 500);
       if (q.length > 0 && a.length > 0) {
         qa.push({ q, a });
       }
@@ -446,7 +465,7 @@ export function buildHowToLDFromMarkdown(
   const steps: string[] = [];
   let m: RegExpExecArray | null;
   while ((m = stepRe.exec(sectionBody)) !== null) {
-    const text = m[2].trim().replace(/\*\*/g, '').replace(/\s+/g, ' ').slice(0, 300);
+    const text = plainTextForLD(m[2]).slice(0, 300);
     if (text.length > 0) steps.push(text);
   }
 
@@ -567,7 +586,7 @@ export function buildDatasetLDFromArticle(
   const articleUrl =
     type === 'pulse'
       ? `${SITE_URL}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`
-      : `${SITE_URL}/insight/${entry.slug}/`;
+      : `${SITE_URL}${insightUrl(entry.slug, entry.data.publishedAt)}`;
 
   return {
     '@context': 'https://schema.org',

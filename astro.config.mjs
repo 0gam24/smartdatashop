@@ -36,6 +36,10 @@ export default defineConfig({
         if (path === '/article/' || path === '/article') return false;
         if (path.startsWith('/admin')) return false;
         if (path.startsWith('/data') || path.startsWith('/topic')) return false;
+        // /tag 도 동일하게 noindex 상태 — sitemap 에 색인 대상만 넣으라는 Google 권고에
+        // 따라 제외한다. 그대로 두면 Search Console 이 "제출됨, noindex" 로 경고한다.
+        // 태그 재색인 시 이 줄도 함께 되돌린다.
+        if (path.startsWith('/tag')) return false;
         return true;
       },
       customPages: [
