@@ -142,7 +142,11 @@ async function checkFile(collection, filename) {
 const BROWSER_UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
   '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 smartdatashop-link-checker/1.0';
-const HEAD_FALLBACK_STATUSES = new Set([400, 401, 403, 405, 501]);
+// 404 도 포함한다. law.go.kr 은 동일 URL 에 HEAD 404 / GET 200 을 반환하는데,
+// 404 를 최종 실패로 처리하면 정상 출처 77건이 통째로 깨진 링크로 잡혀 진짜 breakage 가
+// 노이즈에 묻힌다. HEAD 지원은 서버마다 제각각이라 4xx/5xx 는 GET 으로 한 번 더 확인한다.
+// 진짜 죽은 URL 은 GET 에서도 404 라 검출력은 그대로다.
+const HEAD_FALLBACK_STATUSES = new Set([400, 401, 403, 404, 405, 410, 500, 501, 502, 503]);
 
 /** HTTP HEAD (실패 응답 코드/네트워크 에러 시 GET fallback) */
 async function headCheck(url) {
