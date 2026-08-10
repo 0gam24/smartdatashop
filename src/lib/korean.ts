@@ -143,6 +143,17 @@ export function categoryToKorean(slug: Category): string {
 }
 
 /**
+ * 자간용 공백을 뺀 카테고리 라벨 ("정 책" → "정책").
+ *
+ * CATEGORY_KO 는 활자 디자인상 글자 사이에 공백을 넣으므로 화면 표시에는 적합하나,
+ * title·description·JSON-LD 같은 기계 판독 필드에 그대로 쓰면 검색엔진 토크나이저가
+ * "정책"이 아닌 "정"+"책"으로 끊어 키워드 매칭이 약해진다. 그런 필드는 이 헬퍼를 쓴다.
+ */
+export function categoryToKoreanPlain(slug: Category): string {
+  return CATEGORY_KO[slug].replace(/ /g, '');
+}
+
+/**
  * KST 기준 발행일에서 연/월/일 문자열을 추출한다 — 동적 라우트의
  * getStaticPaths에서 path params를 만들 때, 그리고 RelatedList의
  * "YYYY.MM.DD" 표기에서 사용한다.
