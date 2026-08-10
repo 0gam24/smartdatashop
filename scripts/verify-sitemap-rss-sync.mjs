@@ -35,6 +35,19 @@ function pass(msg) {
   console.log(`[verify-sync] ✓ ${msg}`);
 }
 
+/**
+ * 파일명을 URL 슬러그(날짜 접두사 제거)로 묶는다 — src/lib/korean.ts cleanPulseSlug 와 동일 규칙.
+ * 값이 2개 이상인 항목이 곧 같은 URL 로 충돌하는 중복이다.
+ */
+function groupByUrlSlug(filenames) {
+  const groups = new Map();
+  for (const f of filenames) {
+    const slug = f.replace(/\.mdx?$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
+    groups.set(slug, [...(groups.get(slug) ?? []), f]);
+  }
+  return groups;
+}
+
 // ── 1. 콘텐츠 컬렉션 파일 카운트 ────────────────────────────────
 const pulseDir = resolve(ROOT, 'src/content/pulse');
 const insightDir = resolve(ROOT, 'src/content/insight');
@@ -75,6 +88,13 @@ if (!existsSync(sitemapPath)) {
     fail(
       `sitemap 펄스 URL 수 불일치: sitemap=${pulseInSitemap.length} / 콘텐츠=${pulseFiles.length}`,
     );
+    // 숫자만 알려주면 범인을 찾는 데 시간이 걸린다. 이 갭의 사실상 유일한 원인이
+    // 날짜 접두사만 다른 동일 슬러그이므로(7/23·7/28·8/10 세 번 모두) 바로 지목한다.
+    for (const [slug, files] of groupByUrlSlug(pulseFiles)) {
+      if (files.length > 1) {
+        fail(`  ↳ 슬러그 중복 "${slug}" — ${files.join(' / ')} (같은 URL 로 충돌)`);
+      }
+    }
   } else {
     pass(`sitemap 펄스 ${pulseInSitemap.length}건 일치`);
   }

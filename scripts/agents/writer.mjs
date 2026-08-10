@@ -338,6 +338,34 @@ function publishedFilename(draftFilename) {
   return draftFilename.replace(/^draft-pulse-/, '');
 }
 
+/** 파일명 규약(YYYY-MM-DD-slug)의 날짜 접두사 제거 — src/lib/korean.ts cleanPulseSlug 와 동일 규칙. */
+function urlSlugOf(filename) {
+  return filename.replace(/\.mdx$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+
+/**
+ * 이미 같은 URL 슬러그를 쓰는 펄스가 있으면 그 파일명을 돌려준다 (없으면 null).
+ *
+ * 파일명 일치만 보면 날짜 접두사가 다른 동일 슬러그를 놓친다. 2026-06-13 이후
+ * 발행분 URL 은 /카테고리/슬러그/ 라 날짜가 URL 에 없으므로 그대로 충돌하고,
+ * verify-sitemap-rss-sync 가 콘텐츠 수 vs sitemap URL 수 불일치로 모든 배포를
+ * 차단한다. 실제로 7/23·7/28·8/10 세 번 이 사고로 배포가 멈췄다.
+ *
+ * cutoff 이전 발행분은 URL 에 날짜가 있어 기술적으로는 충돌하지 않지만, 같은
+ * 슬러그는 그 자체로 근접 중복(src/content/CLAUDE.md cannibalization 금지)
+ * 신호이므로 구분 없이 보류시킨다. 오검출은 운영자 검토로 끝나지만 미검출은
+ * 배포 전면 중단으로 이어진다.
+ */
+function findSlugCollision(targetFilename) {
+  if (!existsSync(PUBLISH_DIR)) return null;
+  const target = urlSlugOf(targetFilename);
+  return (
+    readdirSync(PUBLISH_DIR)
+      .filter((f) => f.endsWith('.mdx'))
+      .find((f) => f !== targetFilename && urlSlugOf(f) === target) ?? null
+  );
+}
+
 async function main() {
   const files = existsSync(DRAFTS_DIR)
     ? readdirSync(DRAFTS_DIR).filter((f) => f.endsWith('.mdx'))
@@ -393,10 +421,21 @@ async function main() {
           mkdirSync(PUBLISH_DIR, { recursive: true });
           const targetFilename = publishedFilename(filename);
           const targetPath = resolve(PUBLISH_DIR, targetFilename);
+          const collidingFile = findSlugCollision(targetFilename);
           if (existsSync(targetPath)) {
             console.log(`  ⚠ 대상 파일 이미 존재 — drafts revert: ${targetFilename}`);
             writeFileSync(path, originalContent, 'utf8'); // revert
             heldForReview.push({ filename, reason: 'target-exists', factCheck: fcResult });
+          } else if (collidingFile) {
+            // 날짜 접두사만 다른 동일 슬러그 — 발행하면 URL 이 겹쳐 배포가 전면 차단된다.
+            console.log(`  ⚠ 슬러그 충돌 (${collidingFile}) — drafts revert: ${targetFilename}`);
+            writeFileSync(path, originalContent, 'utf8'); // revert
+            heldForReview.push({
+              filename,
+              reason: 'slug-collision',
+              collidesWith: collidingFile,
+              factCheck: fcResult,
+            });
           } else {
             renameSync(path, targetPath);
             published.push({ from: filename, to: targetFilename, bodyLength: generated.body.length });
@@ -428,13 +467,27 @@ async function main() {
 
   // 환각 의심 / 발행 보류 N건 → 텔레그램 즉시 알림
   if (heldForReview.length > 0) {
-    const lines = [`*환각 의심 ${heldForReview.length}건 — 발행 보류*`, ''];
+    // 슬러그 충돌은 환각과 원인이 달라 조치도 다르다 (주제 재선정 vs 본문 재검수).
+    const collisions = heldForReview.filter((h) => h.reason === 'slug-collision');
+    const heading =
+      collisions.length === heldForReview.length
+        ? `*슬러그 충돌 ${collisions.length}건 — 발행 보류*`
+        : `*발행 보류 ${heldForReview.length}건* (슬러그 충돌 ${collisions.length} / 환각 의심 ${heldForReview.length - collisions.length})`;
+    const lines = [heading, ''];
     for (const h of heldForReview.slice(0, 5)) {
       lines.push(`- ${h.filename.slice(0, 60)}`);
-      lines.push(`  ${h.summary || h.verdict}`);
+      if (h.reason === 'slug-collision') {
+        lines.push(`  기존 글과 슬러그 중복: ${h.collidesWith}`);
+      } else {
+        lines.push(`  ${h.summary || h.verdict}`);
+      }
     }
     lines.push('');
-    lines.push('drafts/ 에 유지 — 운영자 확인 필요');
+    lines.push(
+      collisions.length > 0
+        ? 'drafts/ 에 유지 — 중복 건은 다른 롱테일 각도로 재작성하거나 기존 글 보강'
+        : 'drafts/ 에 유지 — 운영자 확인 필요',
+    );
     await notifyTelegram(lines.join('\n'));
   }
 
