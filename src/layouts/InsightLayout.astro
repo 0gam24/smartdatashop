@@ -22,7 +22,7 @@ import Footer from '../components/Footer.astro';
 import ArticleTOC from '../components/ArticleTOC.astro';
 import CitationExport from '../components/CitationExport.astro';
 import { categoryToKorean, formatKoreanDate, type Category } from '../lib/korean';
-import { buildBreadcrumbLD, buildPersonLD } from '../lib/jsonld';
+import { buildPersonLD } from '../lib/jsonld';
 
 interface Source {
   name: string;
@@ -42,6 +42,11 @@ interface Props {
   publishedAt: string;
   updatedAt?: string;
   title: string;
+  /**
+   * SERP/OG description. 미지정 시 BaseLayout 의 사이트 기본 설명으로 폴백되어
+   * 전 인사이트가 동일한 스니펫을 갖게 되므로 호출자가 반드시 전달한다.
+   */
+  description?: string;
   author?: string;
   /** 인사이트는 frontmatter의 estimatedReadingTime을 그대로 사용 */
   readingTime: number;
@@ -72,6 +77,7 @@ const {
   publishedAt,
   updatedAt,
   title,
+  description,
   author = '김준혁',
   readingTime,
   sources,
@@ -91,23 +97,19 @@ const pageTitle = `${title} — 스마트데이터샵 인사이트`;
 // BreadcrumbMasthead는 "데일리"가 하드코딩돼 있어 인라인으로 별도 구성.
 const categoryLabel = categoryToKorean(category).replace(/ /g, '');
 
-// BreadcrumbList LD + Person LD 자동 병합 (호출자 jsonld + 자동 LD 통합)
-// 06 §3 E-E-A-T / 07 §3 D.I.A. 저자 신뢰성 / 06 §11 BreadcrumbList 리치결과
-const insightBreadcrumb = buildBreadcrumbLD([
-  { name: '홈', url: '/' },
-  { name: '인사이트', url: '/insight/' },
-  { name: categoryLabel, url: `/insight/category/${category}/` },
-  { name: title, url: Astro.url.pathname },
-]);
+// BreadcrumbList 는 라우트가 빌드해 jsonld 로 전달한다. 과거 이 레이아웃도 자체
+// BreadcrumbList 를 발행해 페이지마다 2개가 중복 출력됐고, 그 사본은 존재하지 않는
+// /insight/category/<cat>/ 를 가리켰다 (실재 라우트는 /category/<cat>/).
+// Person LD 만 자동 병합한다. 06 §3 E-E-A-T / 07 §3 D.I.A. 저자 신뢰성.
 const incomingJsonld = jsonld
   ? Array.isArray(jsonld)
     ? jsonld
     : [jsonld]
   : [];
-const mergedJsonld: object[] = [...incomingJsonld, insightBreadcrumb, buildPersonLD()];
+const mergedJsonld: object[] = [...incomingJsonld, buildPersonLD()];
 ---
 
-<BaseLayout title={pageTitle} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage} noindex={noindex} jsonld={mergedJsonld}>
+<BaseLayout title={pageTitle} description={description} ogType="article" ogPublishedAt={publishedAt} ogModifiedAt={updatedAt} keywords={keywords} ogImage={ogImage} noindex={noindex} jsonld={mergedJsonld}>
   <Header activeNav="insight" date={headerDate} />
 
   <div class="masthead">

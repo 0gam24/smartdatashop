@@ -22,6 +22,8 @@ import {
   buildArticleLD,
   buildBreadcrumbLD,
   buildDatasetLDFromArticle,
+  buildFaqLDFromMarkdown,
+  buildHowToLDFromMarkdown,
 } from '../../lib/jsonld';
 
 export async function getStaticPaths() {
@@ -97,9 +99,16 @@ const hasPlaceholder = entryHasPlaceholder({
   body: entry.body,
 });
 
+// SERP description — 펄스 라우트와 동일 규칙(Google 약 160자). 미전달 시 사이트
+// 기본 설명으로 폴백되어 전 인사이트 스니펫이 같아지므로 반드시 넘긴다.
+const description =
+  data.tldr.length > 155 ? data.tldr.slice(0, 152).trim() + '…' : data.tldr;
+
 // JSON-LD 누락 픽스 (G10): Article + BreadcrumbList + Dataset (sources url 있을 때).
 // 인사이트 라우트는 그동안 LD 0개였음 — Discover 진입 자격 손실의 직접 원인.
-const insightUrlAbs = `https://smartdatashop.kr/insight/${entry.slug}/`;
+// URL 은 insightUrl() 경유 — raw slug 로 조립하면 2026-06-13 이후 발행분이
+// 실재하지 않는 /insight/<날짜접두사-슬러그>/ 를 가리킨다.
+const insightUrlAbs = `https://smartdatashop.kr${insightUrl(entry.slug, data.publishedAt)}`;
 const categoryLabel = categoryToKorean(data.category).replace(/ /g, '');
 const breadcrumb = buildBreadcrumbLD([
   { name: '홈', url: '/' },
@@ -111,6 +120,12 @@ const breadcrumb = buildBreadcrumbLD([
 const insightJsonLd: object[] = [buildArticleLD(entry), breadcrumb];
 const datasetLd = buildDatasetLDFromArticle(entry, 'insight');
 if (datasetLd) insightJsonLd.push(datasetLd);
+
+// 펄스 라우트와 동일하게 본문 Q&A·단계 리스트를 LD 로 승격 (AEO — LLM 인용 시 구조 보존).
+const faqLd = buildFaqLDFromMarkdown(entry.body);
+if (faqLd) insightJsonLd.push(faqLd);
+const howToLd = buildHowToLDFromMarkdown(data.title, entry.body);
+if (howToLd) insightJsonLd.push(howToLd);
 ---
 
 <InsightLayout
@@ -118,6 +133,7 @@ if (datasetLd) insightJsonLd.push(datasetLd);
   publishedAt={data.publishedAt}
   updatedAt={data.updatedAt}
   title={data.title}
+  description={description}
   readingTime={data.estimatedReadingTime}
   sources={data.sources}
   corrections={data.correctionLog}
