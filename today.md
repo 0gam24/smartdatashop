@@ -1,12 +1,19 @@
-# Today — 2026-08-10 (월) (KST)
+# Today — 2026-08-11 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-10 (월) — 오늘
+## 2026-08-11 (화) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **2건**
+
+## 2026-08-10 (월)
+
+- 📝 발행 **3건**:
+  - [한국 기준금리 변동 추이, 2020년 0.5%에서 2026년 2.75%까지](https://smartdatashop.kr/insight/korea-base-rate-history/) — 기준금리는 한국은행 금융통화위원회가 연 8회 결정하는 정책금리로, 예금·대출·전월세전환율 계산의 출발점이 …
+  - [취업 후 학자금 상환, 소득 넘어야 갚는 의무상환 기준](https://smartdatashop.kr/tax-finance/income-contingent-loan-repayment/) — 취업 후 상환 학자금대출(ICL)은 재학 중 등록금·생활비를 빌리고, 취업해 소득이 상환기준소득을 넘으면 …
+  - [청년월세 특별지원 2026, 월 20만원 최대 24개월](https://smartdatashop.kr/policy/youth-monthly-rent-special-support/) — 청년월세 특별지원은 무주택 청년에게 실제 월세 범위에서 월 최대 20만원을 최대 24개월 동안 지원하는 국…
 
 ## 2026-08-09 (일)
 
@@ -98,13 +105,6 @@
   - [청년도약계좌 특별중도해지 순서, 갈아타기 손해 없는 4단계](https://smartdatashop.kr/tax-finance/youth-leap-special-termination/) — 특별중도해지는 청년도약계좌 가입자가 청년미래적금으로 갈아탈 때 정부기여금과 비과세 혜택을 그대로 받으며 기…
   - [1주택자 종합부동산세 공제 12억, 내가 대상일까](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-single-house/) — 종합부동산세는 6월 1일 기준 보유 주택 공시가격 합계가 공제금액을 넘는 사람이 12월에 내는 국세다. 1…
   - [청년미래적금 계좌개설 8월 7일까지, 놓치면 12월 2차 기다려야](https://smartdatashop.kr/tax-finance/youth-future-savings-account-opening/) — 청년미래적금은 월 최대 50만 원을 3년간 납입하면 정부가 납입액의 6% 또는 12%를 기여금으로 보태 주…
-
-## 2026-07-27 (월)
-
-- 📝 발행 **3건**:
-  - [노인장기요양 등급, 95점 이상이면 1등급](https://smartdatashop.kr/policy/long-term-care-insurance-grades/) — 노인장기요양 등급은 혼자 일상생활이 어려운 노인을 장기요양인정점수에 따라 1등급부터 5등급과 인지지원등급으…
-  - [예금자보호 한도 1억원, 24년 만에 상향된 안전선](https://smartdatashop.kr/tax-finance/deposit-protection-limit-100-million/) — 예금자보호 한도는 금융회사가 파산해도 예금보험공사가 원금과 이자를 합쳐 1인당 최대 1억원까지 대신 지급하…
-  - [주휴수당 조건, 주 15시간 개근이면 하루치 임금](https://smartdatashop.kr/policy/weekly-holiday-allowance-conditions/) — 주휴수당은 1주 소정근로시간이 15시간 이상이고 그 주의 소정근로일을 개근한 근로자에게 유급휴일 하루치 임…
 
 ---
 
