@@ -1,12 +1,19 @@
-# Today — 2026-08-11 (화) (KST)
+# Today — 2026-08-12 (수) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-11 (화) — 오늘
+## 2026-08-12 (수) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **2건**
+- 📋 검수 대기: **3건**
+
+## 2026-08-11 (화)
+
+- 📝 발행 **3건**:
+  - [가족돌봄휴가 연 10일, 가족돌봄휴직 90일 쓰는 법](https://smartdatashop.kr/policy/family-care-leave/) — 가족돌봄휴가는 아픈 가족을 급히 돌봐야 할 때 근로자가 연간 최대 10일을 하루 단위 무급으로 쓰는 남녀고…
+  - [임신기 근로시간 단축, 하루 2시간 임금 그대로 줄인다](https://smartdatashop.kr/policy/pregnancy-work-hour-reduction/) — 임신기 근로시간 단축은 임신 후 12주 이내이거나 32주 이후인 여성 근로자가 하루 2시간까지 근무 시간을…
+  - [보금자리론 자격 2026, 부부소득 7천만원·집값 6억 이하](https://smartdatashop.kr/tax-finance/bogeumjari-loan-2026/) — 보금자리론은 무주택이나 1주택 실수요자가 6억원 이하 집을 살 때 한국주택금융공사가 고정금리로 최대 3억6…
 
 ## 2026-08-10 (월)
 
@@ -97,14 +104,6 @@
 - 📝 발행 **2건**:
   - [일용직 세금, 하루 15만원까지 왜 안 떼나](https://smartdatashop.kr/tax-finance/daily-worker-income-tax/) — 일용근로소득 세금은 하루 단위로 일하는 근로자의 일당에 원천징수로 매겨 그것으로 끝나는 세금이다. 하루 1…
   - [지역가입자 건강보험료, 소득과 재산에 어떻게 매기나](https://smartdatashop.kr/policy/regional-health-insurance-premium/) — 지역가입자 건강보험료는 직장에 다니지 않는 사람이 소득과 재산에 매겨 세대 단위로 스스로 내는 건강보험료다…
-
-## 2026-07-28 (화)
-
-- 📝 발행 **4건**:
-  - [연금저축 IRP 수령 세금, 연 1500만원이 갈림길](https://smartdatashop.kr/tax-finance/private-pension-separate-taxation/) — 사적연금 분리과세는 연금저축·IRP에서 받는 연간 사적연금이 1,500만원 이하면 3.3~5.5% 낮은 세…
-  - [청년도약계좌 특별중도해지 순서, 갈아타기 손해 없는 4단계](https://smartdatashop.kr/tax-finance/youth-leap-special-termination/) — 특별중도해지는 청년도약계좌 가입자가 청년미래적금으로 갈아탈 때 정부기여금과 비과세 혜택을 그대로 받으며 기…
-  - [1주택자 종합부동산세 공제 12억, 내가 대상일까](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-single-house/) — 종합부동산세는 6월 1일 기준 보유 주택 공시가격 합계가 공제금액을 넘는 사람이 12월에 내는 국세다. 1…
-  - [청년미래적금 계좌개설 8월 7일까지, 놓치면 12월 2차 기다려야](https://smartdatashop.kr/tax-finance/youth-future-savings-account-opening/) — 청년미래적금은 월 최대 50만 원을 3년간 납입하면 정부가 납입액의 6% 또는 12%를 기여금으로 보태 주…
 
 ---
 
