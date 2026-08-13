@@ -1,12 +1,26 @@
-# Today — 2026-08-12 (수) (KST)
+# Today — 2026-08-14 (금) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-12 (수) — 오늘
+## 2026-08-14 (금) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **3건**
+
+## 2026-08-13 (목)
+
+- 📝 발행 **3건**:
+  - [자동차 상속 이전등록, 기한 6개월 넘기면 과태료](https://smartdatashop.kr/policy/inherited-car-title-transfer/) — 자동차 상속 이전등록은 차주가 사망하면 그 차의 명의를 상속인 앞으로 바꾸는 절차다. 사망일이 속한 달의 …
+  - [주택연금 중도해지하면 손해일까, 정산과 재가입 제한](https://smartdatashop.kr/tax-finance/housing-pension-early-termination/) — 주택연금 중도해지는 그동안 받은 연금과 보증료, 이자를 한꺼번에 갚고 계약을 끝내는 것이다. 가입 3년 안…
+  - [출퇴근길 교통사고 산재 되나요, 통상 출퇴근재해 기준](https://smartdatashop.kr/policy/commuting-accident-workers-comp/) — 통상의 출퇴근재해는 근로자가 평소 다니던 경로와 방법으로 출퇴근하다 당한 사고를 산업재해로 인정하는 제도다…
+
+## 2026-08-12 (수)
+
+- 📝 발행 **3건**:
+  - [응급의료비 대지급제도, 돈 없어도 응급진료 받는 법](https://smartdatashop.kr/policy/emergency-medical-cost-payment/) — 응급의료비 대지급제도는 응급환자가 진료비를 당장 내지 못해도 국가가 병원에 대신 내주고, 나중에 환자나 가…
+  - [기저귀 분유 지원 2026, 저소득 영아 월 최대 20만원](https://smartdatashop.kr/policy/diaper-formula-support-2026/) — 저소득층 기저귀·조제분유 지원은 만 2세 미만 영아를 키우는 저소득 가구에 기저귀와 분유 구입비를 매달 지…
+  - [상병수당 시범사업 2026, 아파서 못 벌 때 하루 49,540원](https://smartdatashop.kr/policy/sickness-benefit-pilot-2026/) — 상병수당은 근로자가 업무 외 질병이나 부상으로 일하지 못할 때 소득 일부를 정부가 보전해 주는 제도다. 아…
 
 ## 2026-08-11 (화)
 
@@ -91,19 +105,6 @@
   - [퇴직금 중간정산 사유 2026, 법으로 정한 8가지 요건](https://smartdatashop.kr/policy/severance-interim-settlement/) — 퇴직금 중간정산은 재직 중에 그동안 쌓인 퇴직금을 미리 정산해 받는 것으로, 근로자퇴직급여보장법 시행령이 …
   - [실업크레딧 2026, 실업 중 국민연금 보험료 75% 지원](https://smartdatashop.kr/policy/unemployment-credit-pension/) — 실업크레딧은 구직급여를 받는 실업 기간에 국민연금 보험료의 75%를 국가가 대신 내 주고 그 기간을 가입 …
   - [자녀세액공제 2026, 1명 25만원 2명 55만원 3명 95만원](https://smartdatashop.kr/tax-finance/child-tax-credit-yearend/) — 자녀세액공제는 8세 이상 자녀·손자녀를 둔 사람이 연말정산에서 산출세액을 직접 줄이는 공제로, 자녀 1명이…
-
-## 2026-07-30 (목)
-
-- 📝 발행 **3건**:
-  - [자발적 퇴사도 실업급여? 정당한 이직 사유 정리](https://smartdatashop.kr/policy/voluntary-resignation-unemployment-benefit/) — 자발적 퇴사 실업급여는 근로자가 스스로 회사를 그만뒀더라도 고용보험법이 정한 정당한 이직 사유에 해당하면 …
-  - [개인사업자 폐업신고, 부가세부터 종소세까지 순서](https://smartdatashop.kr/tax-finance/business-closure-tax-report/) — 개인사업자 폐업신고는 사업을 접을 때 세무서나 홈택스에 폐업 사실을 알리고 남은 세금을 정리하는 절차다. …
-  - [해외주식 양도소득세, 250만원 넘으면 22% 신고](https://smartdatashop.kr/tax-finance/overseas-stock-capital-gains-tax/) — 해외주식 양도소득세는 해외 상장주식을 팔아 얻은 차익에 매기는 세금으로, 한 해 순이익에서 기본공제 250…
-
-## 2026-07-29 (수)
-
-- 📝 발행 **2건**:
-  - [일용직 세금, 하루 15만원까지 왜 안 떼나](https://smartdatashop.kr/tax-finance/daily-worker-income-tax/) — 일용근로소득 세금은 하루 단위로 일하는 근로자의 일당에 원천징수로 매겨 그것으로 끝나는 세금이다. 하루 1…
-  - [지역가입자 건강보험료, 소득과 재산에 어떻게 매기나](https://smartdatashop.kr/policy/regional-health-insurance-premium/) — 지역가입자 건강보험료는 직장에 다니지 않는 사람이 소득과 재산에 매겨 세대 단위로 스스로 내는 건강보험료다…
 
 ---
 
