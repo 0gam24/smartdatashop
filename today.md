@@ -1,12 +1,19 @@
-# Today — 2026-08-14 (금) (KST)
+# Today — 2026-08-15 (토) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-14 (금) — 오늘
+## 2026-08-15 (토) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **3건**
+
+## 2026-08-14 (금)
+
+- 📝 발행 **3건**:
+  - [부녀자공제 50만원 한부모공제 100만원, 요건과 중복 정리](https://smartdatashop.kr/tax-finance/single-parent-woman-deduction/) — 부녀자공제와 한부모공제는 기본공제 150만원에 더해지는 연말정산 추가공제다. 부녀자공제는 종합소득금액 3,…
+  - [월세 현금영수증 소득공제, 세액공제 못 받을 때 받는 법](https://smartdatashop.kr/tax-finance/monthly-rent-cash-receipt/) — 월세 현금영수증 소득공제는 월세를 현금영수증으로 등록해 신용카드등 사용금액 소득공제에 30% 공제율로 넣는…
+  - [국민연금 장애연금 2026, 장애등급 1급 100% 4급 일시금 225%](https://smartdatashop.kr/policy/national-pension-disability/) — 국민연금 장애연금은 가입 중 생긴 질병이나 부상으로 장애가 남았을 때 등급별로 기본연금액의 60~100%를…
 
 ## 2026-08-13 (목)
 
@@ -98,13 +105,6 @@
   - [주택청약저축 소득공제, 무주택 세대주 연 300만 40%](https://smartdatashop.kr/tax-finance/housing-subscription-deduction/) — 주택청약종합저축 소득공제는 무주택 세대주가 청약저축에 넣은 돈의 일부를 근로소득에서 빼 주는 제도로, 총급…
   - [배우자 상속공제, 분할 안 하면 5억뿐 실제론 30억](https://smartdatashop.kr/tax-finance/spousal-inheritance-deduction/) — 배우자 상속공제는 배우자가 물려받은 재산을 상속세 과세 대상에서 빼 주는 제도로, 실제 상속액이 없거나 5…
   - [전월세전환율 2026, 기준금리 2.75%로 상한 4.75%](https://smartdatashop.kr/policy/jeonse-monthly-conversion-rate/) — 전월세전환율은 전세보증금을 월세로 바꿀 때 적용하는 법정 이율 상한으로, 연 10%와 한국은행 기준금리에 …
-
-## 2026-07-31 (금)
-
-- 📝 발행 **3건**:
-  - [퇴직금 중간정산 사유 2026, 법으로 정한 8가지 요건](https://smartdatashop.kr/policy/severance-interim-settlement/) — 퇴직금 중간정산은 재직 중에 그동안 쌓인 퇴직금을 미리 정산해 받는 것으로, 근로자퇴직급여보장법 시행령이 …
-  - [실업크레딧 2026, 실업 중 국민연금 보험료 75% 지원](https://smartdatashop.kr/policy/unemployment-credit-pension/) — 실업크레딧은 구직급여를 받는 실업 기간에 국민연금 보험료의 75%를 국가가 대신 내 주고 그 기간을 가입 …
-  - [자녀세액공제 2026, 1명 25만원 2명 55만원 3명 95만원](https://smartdatashop.kr/tax-finance/child-tax-credit-yearend/) — 자녀세액공제는 8세 이상 자녀·손자녀를 둔 사람이 연말정산에서 산출세액을 직접 줄이는 공제로, 자녀 1명이…
 
 ---
 
