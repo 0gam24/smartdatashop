@@ -1,12 +1,19 @@
-# Today — 2026-08-15 (토) (KST)
+# Today — 2026-08-16 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-15 (토) — 오늘
+## 2026-08-16 (일) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **3건**
+
+## 2026-08-15 (토)
+
+- 📝 발행 **3건**:
+  - [부당해고 구제신청, 3개월 이내 노동위원회 신청 절차](https://smartdatashop.kr/policy/unfair-dismissal-remedy/) — 부당해고 구제신청은 정당한 이유 없이 해고당한 근로자가 노동위원회에 원직복직 등 구제를 요구하는 제도다. …
+  - [보장성보험료 세액공제, 100만원 한도 12% 장애인전용 15%](https://smartdatashop.kr/tax-finance/insurance-premium-tax-credit/) — 보장성보험료 세액공제는 근로소득자가 본인과 부양가족을 위해 낸 보장성보험료를 연말정산에서 세금으로 돌려주는…
+  - [직장가입자 소득월액보험료, 월급 외 소득 2천만원 초과 건보료](https://smartdatashop.kr/tax-finance/off-payroll-income-health-premium/) — 소득월액보험료는 직장가입자가 월급 외에 이자·배당·임대·사업 소득을 연 2,000만원 넘게 벌 때 그 초과…
 
 ## 2026-08-14 (금)
 
@@ -98,13 +105,6 @@
   - [예술인 고용보험, 월평균 50만원부터 실업급여 받는 법](https://smartdatashop.kr/policy/artist-employment-insurance/) — 예술인 고용보험은 프리랜서 예술인이 실업급여와 출산전후급여를 받도록 근로자처럼 가입하는 제도로, 문화예술용…
   - [따로 사는 부모님도 부양가족 공제, 60세 소득 100만원](https://smartdatashop.kr/tax-finance/parents-dependent-deduction/) — 따로 사는 부모 부양가족 공제는 부모가 만 60세 이상이고 연 소득금액이 100만원 이하이면 실제로 부양하…
   - [상속세 2천만원 넘으면 나눠 낸다, 연부연납과 분납](https://smartdatashop.kr/tax-finance/inheritance-gift-tax-installment/) — 연부연납은 상속세·증여세를 여러 해에 걸쳐 나눠 내는 제도로, 납부세액이 2천만원을 넘고 담보를 제공하면 …
-
-## 2026-08-01 (토)
-
-- 📝 발행 **3건**:
-  - [주택청약저축 소득공제, 무주택 세대주 연 300만 40%](https://smartdatashop.kr/tax-finance/housing-subscription-deduction/) — 주택청약종합저축 소득공제는 무주택 세대주가 청약저축에 넣은 돈의 일부를 근로소득에서 빼 주는 제도로, 총급…
-  - [배우자 상속공제, 분할 안 하면 5억뿐 실제론 30억](https://smartdatashop.kr/tax-finance/spousal-inheritance-deduction/) — 배우자 상속공제는 배우자가 물려받은 재산을 상속세 과세 대상에서 빼 주는 제도로, 실제 상속액이 없거나 5…
-  - [전월세전환율 2026, 기준금리 2.75%로 상한 4.75%](https://smartdatashop.kr/policy/jeonse-monthly-conversion-rate/) — 전월세전환율은 전세보증금을 월세로 바꿀 때 적용하는 법정 이율 상한으로, 연 10%와 한국은행 기준금리에 …
 
 ---
 
