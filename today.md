@@ -1,12 +1,19 @@
-# Today — 2026-08-16 (일) (KST)
+# Today — 2026-08-17 (월) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-16 (일) — 오늘
+## 2026-08-17 (월) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **3건**
+
+## 2026-08-16 (일)
+
+- 📝 발행 **3건**:
+  - [근로소득 간이세액표, 월급 원천징수 80·100·120% 고르기](https://smartdatashop.kr/tax-finance/earned-income-simplified-tax-table/) — 근로소득 간이세액표는 회사가 매달 월급에서 미리 떼는 소득세를 급여 수준과 부양가족 수에 따라 정해 둔 국…
+  - [고향사랑기부제 세액공제, 10만원 전액공제에 답례품 30%](https://smartdatashop.kr/tax-finance/hometown-love-donation-tax-credit/) — 고향사랑기부제는 주민등록상 거주지가 아닌 다른 지방자치단체에 기부하면 세액공제와 답례품을 함께 받는 제도다…
+  - [전세보증금 반환보증 가입 조건, 수도권 7억 그 외 5억](https://smartdatashop.kr/policy/hug-jeonse-deposit-return-guarantee/) — 전세보증금 반환보증은 집주인이 전세금을 돌려주지 못할 때 주택도시보증공사(HUG)가 대신 세입자에게 보증금…
 
 ## 2026-08-15 (토)
 
@@ -98,13 +105,6 @@
   - [연장·야간·휴일근로 수당, 통상임금 50% 더 받는다](https://smartdatashop.kr/policy/overtime-night-holiday-premium-pay/) — 연장·야간·휴일근로 가산수당은 정해진 시간을 넘겨 일하거나 밤 또는 휴일에 일할 때 통상임금의 50%를 더…
   - [기타소득 종합과세 기준, 연 300만원 넘으면 합산](https://smartdatashop.kr/tax-finance/other-income-tax-separate/) — 기타소득 종합과세 기준은 연간 기타소득금액 300만원으로, 이 금액 이하이면 원천징수로 끝내는 분리과세를 …
   - [배우자 출산휴가 20일 유급, 급여 상한 168만원](https://smartdatashop.kr/policy/spouse-maternity-leave-pay/) — 배우자 출산휴가는 근로자의 배우자가 아이를 낳으면 20일을 유급으로 쉬는 휴가로, 고용보험 피보험 단위기간…
-
-## 2026-08-02 (일)
-
-- 📝 발행 **3건**:
-  - [예술인 고용보험, 월평균 50만원부터 실업급여 받는 법](https://smartdatashop.kr/policy/artist-employment-insurance/) — 예술인 고용보험은 프리랜서 예술인이 실업급여와 출산전후급여를 받도록 근로자처럼 가입하는 제도로, 문화예술용…
-  - [따로 사는 부모님도 부양가족 공제, 60세 소득 100만원](https://smartdatashop.kr/tax-finance/parents-dependent-deduction/) — 따로 사는 부모 부양가족 공제는 부모가 만 60세 이상이고 연 소득금액이 100만원 이하이면 실제로 부양하…
-  - [상속세 2천만원 넘으면 나눠 낸다, 연부연납과 분납](https://smartdatashop.kr/tax-finance/inheritance-gift-tax-installment/) — 연부연납은 상속세·증여세를 여러 해에 걸쳐 나눠 내는 제도로, 납부세액이 2천만원을 넘고 담보를 제공하면 …
 
 ---
 
