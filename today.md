@@ -1,12 +1,19 @@
-# Today — 2026-08-17 (월) (KST)
+# Today — 2026-08-18 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-17 (월) — 오늘
+## 2026-08-18 (화) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **3건**
+- 📋 검수 대기: **4건**
+
+## 2026-08-17 (월)
+
+- 📝 발행 **3건**:
+  - [새출발기금 2026, 자영업자 채무조정 원금감면 최대 90%](https://smartdatashop.kr/tax-finance/fresh-start-fund-debt-relief/) — 새출발기금은 빚 상환이 어려워진 자영업자·소상공인의 채무를 조정해 주는 정부 프로그램이다. 90일 이상 연…
+  - [탄소중립포인트 2026, 전기 아끼면 최대 20만원 자동차 10만원](https://smartdatashop.kr/policy/carbon-neutral-point/) — 탄소중립포인트제는 국민이 전기·물·가스를 아끼거나 친환경 생활을 실천하면 그 실적만큼 포인트를 현금이나 상…
+  - [청년일자리도약장려금 2026, 기업 720만 청년 최대 720만원](https://smartdatashop.kr/policy/youth-job-leap-incentive/) — 청년일자리도약장려금은 청년을 정규직으로 뽑아 6개월 이상 고용을 유지한 중소기업과 그 청년에게 정부가 돈을…
 
 ## 2026-08-16 (일)
 
@@ -98,13 +105,6 @@
   - [노령연금 받으며 일하면 감액, 2026년 519만원 기준](https://smartdatashop.kr/policy/old-age-pension-income-reduction/) — 재직자 노령연금 감액은 국민연금을 받으면서 일정 소득을 넘게 벌면 연금 일부를 깎는 규정이다. 2026년 …
   - [상속세 사전증여 합산, 상속인 10년 상속인외 5년](https://smartdatashop.kr/tax-finance/inheritance-prior-gift-inclusion/) — 상속세 사전증여 합산은 사망 전 미리 증여한 재산을 상속재산에 다시 더해 세금을 매기는 규정이다. 자녀 같…
   - [문화비 소득공제, 총급여 7천만원 이하 30% 공제](https://smartdatashop.kr/tax-finance/culture-expense-income-deduction/) — 문화비 소득공제는 총급여 7,000만원 이하 근로자가 도서·공연·영화·박물관·체육시설에 쓴 돈의 30%를 …
-
-## 2026-08-03 (월)
-
-- 📝 발행 **3건**:
-  - [연장·야간·휴일근로 수당, 통상임금 50% 더 받는다](https://smartdatashop.kr/policy/overtime-night-holiday-premium-pay/) — 연장·야간·휴일근로 가산수당은 정해진 시간을 넘겨 일하거나 밤 또는 휴일에 일할 때 통상임금의 50%를 더…
-  - [기타소득 종합과세 기준, 연 300만원 넘으면 합산](https://smartdatashop.kr/tax-finance/other-income-tax-separate/) — 기타소득 종합과세 기준은 연간 기타소득금액 300만원으로, 이 금액 이하이면 원천징수로 끝내는 분리과세를 …
-  - [배우자 출산휴가 20일 유급, 급여 상한 168만원](https://smartdatashop.kr/policy/spouse-maternity-leave-pay/) — 배우자 출산휴가는 근로자의 배우자가 아이를 낳으면 20일을 유급으로 쉬는 휴가로, 고용보험 피보험 단위기간…
 
 ---
 
