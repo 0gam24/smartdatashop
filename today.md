@@ -1,12 +1,19 @@
-# Today — 2026-08-18 (화) (KST)
+# Today — 2026-08-19 (수) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-18 (화) — 오늘
+## 2026-08-19 (수) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **4건**
+- 📋 검수 대기: **5건**
+
+## 2026-08-18 (화)
+
+- 📝 발행 **3건**:
+  - [부부 국민연금, 한 명 사망하면 유족연금 30% 규칙](https://smartdatashop.kr/policy/pension-duplicate-benefit-adjustment/) — 중복급여 조정은 한 사람에게 국민연금 급여가 둘 이상 생겼을 때 하나만 지급하는 원칙이다. 노령연금을 받던…
+  - [경차 유류세 환급 연 30만원, 유류구매카드 신청법](https://smartdatashop.kr/tax-finance/compact-car-fuel-tax-refund/) — 경차 유류세 환급은 배기량 1,000cc 미만 경차 소유자에게 유류세 일부를 되돌려주는 제도다. 휘발유·경…
+  - [장기보유특별공제율 표, 1세대 1주택 최대 80% 계산법](https://smartdatashop.kr/tax-finance/long-term-holding-special-deduction/) — 장기보유특별공제는 부동산을 오래 보유할수록 양도차익에서 일정 비율을 빼주는 제도다. 1세대 1주택은 보유·…
 
 ## 2026-08-17 (월)
 
@@ -98,13 +105,6 @@
   - [부가세 조기환급, 설비 투자한 사장님 15일 안에 받는 법](https://smartdatashop.kr/tax-finance/vat-early-refund-equipment/) — 부가가치세 조기환급은 수출 영세율이나 사업 설비 투자로 환급이 생긴 사업자에게 정기 과세기간을 기다리지 않…
   - [이직확인서 발급, 실업급여 신청 전 10일 안에 받는 법](https://smartdatashop.kr/policy/separation-certificate-unemployment/) — 이직확인서는 회사가 퇴직한 근로자의 이직 사유, 피보험단위기간, 평균임금을 적어 고용센터에 제출하는 서류로…
   - [경정청구, 놓친 연말정산 공제 5년 안에 돌려받는 법](https://smartdatashop.kr/tax-finance/tax-reassessment-claim/) — 경정청구는 이미 신고한 세금에서 공제를 빠뜨렸거나 더 냈을 때 법정신고기한이 지난 뒤 5년 안에 관할 세무…
-
-## 2026-08-04 (화)
-
-- 📝 발행 **3건**:
-  - [노령연금 받으며 일하면 감액, 2026년 519만원 기준](https://smartdatashop.kr/policy/old-age-pension-income-reduction/) — 재직자 노령연금 감액은 국민연금을 받으면서 일정 소득을 넘게 벌면 연금 일부를 깎는 규정이다. 2026년 …
-  - [상속세 사전증여 합산, 상속인 10년 상속인외 5년](https://smartdatashop.kr/tax-finance/inheritance-prior-gift-inclusion/) — 상속세 사전증여 합산은 사망 전 미리 증여한 재산을 상속재산에 다시 더해 세금을 매기는 규정이다. 자녀 같…
-  - [문화비 소득공제, 총급여 7천만원 이하 30% 공제](https://smartdatashop.kr/tax-finance/culture-expense-income-deduction/) — 문화비 소득공제는 총급여 7,000만원 이하 근로자가 도서·공연·영화·박물관·체육시설에 쓴 돈의 30%를 …
 
 ---
 
