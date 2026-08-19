@@ -1,8 +1,8 @@
-# Today — 2026-08-19 (수) (KST)
+# Today — 2026-08-20 (목) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-19 (수) — 오늘
+## 2026-08-20 (목) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
@@ -98,13 +98,6 @@
   - [퇴직연금 중도인출, DC·IRP 미리 빼 쓸 수 있는 5가지 사유](https://smartdatashop.kr/tax-finance/retirement-pension-early-withdrawal/) — 퇴직연금 중도인출은 퇴직 전이라도 DC형이나 IRP에 쌓인 적립금을 법이 정한 사유가 있을 때 미리 찾아 …
   - [국민연금 반납금, 예전에 받은 일시금 돌려주고 가입기간 살리기](https://smartdatashop.kr/policy/national-pension-refund-repayment/) — 국민연금 반납금은 과거에 반환일시금으로 받아 사라진 가입기간을, 그 일시금에 이자를 더해 다시 납부해 되살…
   - [소액임차인 최우선변제, 경매 넘어가도 보증금 먼저 받는 법](https://smartdatashop.kr/tax-finance/small-tenant-priority-repayment/) — 소액임차인 최우선변제는 보증금이 지역별 기준 이하인 세입자가 살던 집이 경매로 넘어가도 담보권자보다 먼저 …
-
-## 2026-08-05 (수)
-
-- 📝 발행 **3건**:
-  - [부가세 조기환급, 설비 투자한 사장님 15일 안에 받는 법](https://smartdatashop.kr/tax-finance/vat-early-refund-equipment/) — 부가가치세 조기환급은 수출 영세율이나 사업 설비 투자로 환급이 생긴 사업자에게 정기 과세기간을 기다리지 않…
-  - [이직확인서 발급, 실업급여 신청 전 10일 안에 받는 법](https://smartdatashop.kr/policy/separation-certificate-unemployment/) — 이직확인서는 회사가 퇴직한 근로자의 이직 사유, 피보험단위기간, 평균임금을 적어 고용센터에 제출하는 서류로…
-  - [경정청구, 놓친 연말정산 공제 5년 안에 돌려받는 법](https://smartdatashop.kr/tax-finance/tax-reassessment-claim/) — 경정청구는 이미 신고한 세금에서 공제를 빠뜨렸거나 더 냈을 때 법정신고기한이 지난 뒤 5년 안에 관할 세무…
 
 ---
 
