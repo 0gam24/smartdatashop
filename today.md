@@ -1,12 +1,19 @@
-# Today — 2026-08-20 (목) (KST)
+# Today — 2026-08-21 (금) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-20 (목) — 오늘
+## 2026-08-21 (금) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **5건**
+- 📋 검수 대기: **6건**
+
+## 2026-08-20 (목)
+
+- 📝 발행 **3건**:
+  - [고용촉진장려금 2026, 취약계층 뽑으면 연 최대 720만원](https://smartdatashop.kr/policy/employment-promotion-incentive-2026/) — 고용촉진장려금은 취업이 어려운 취약계층을 정규직으로 채용해 6개월 이상 고용을 유지한 사업주에게 주는 고용…
+  - [근로자 휴가지원사업, 20만원 내면 40만원 여행적립금](https://smartdatashop.kr/market/worker-vacation-support-2026/) — 근로자 휴가지원사업은 정부·기업·근로자가 함께 돈을 모아 국내여행 경비로 쓰게 해 주는 한국관광공사 지원 …
+  - [산재 장해급여 등급별 정리, 연금과 일시금 어떻게 고르나](https://smartdatashop.kr/policy/industrial-accident-disability-benefit/) — 산재 장해급여는 업무상 재해 치료가 끝난 뒤 남은 장해에 대해 장해등급(1~14급)에 따라 지급하는 산재보…
 
 ## 2026-08-18 (화)
 
@@ -91,13 +98,6 @@
   - [월세 세액공제 2026, 총급여 8천만원 이하 최대 170만원](https://smartdatashop.kr/tax-finance/monthly-rent-tax-credit-2026/) — 월세 세액공제는 총급여 8,000만원(종합소득 7,000만원) 이하 무주택 세대주가 낸 월세의 최대 17%…
   - [출산하면 받는 돈 2026, 첫만남 200만 부모급여 월 100만](https://smartdatashop.kr/policy/birth-support-cash-2026/) — 2026년 출산 지원금은 첫만남이용권(첫째 200만·둘째 이상 300만), 부모급여(0세 월 100만·1세…
   - [1세대 1주택 양도세 비과세, 2년 보유·12억 이하가 핵심](https://smartdatashop.kr/tax-finance/single-house-capital-gains-exemption/) — 1세대 1주택 양도세 비과세는 양도일 현재 국내에 집 한 채만 2년 이상 보유한 세대가 12억원 이하로 팔…
-
-## 2026-08-06 (목)
-
-- 📝 발행 **3건**:
-  - [퇴직연금 중도인출, DC·IRP 미리 빼 쓸 수 있는 5가지 사유](https://smartdatashop.kr/tax-finance/retirement-pension-early-withdrawal/) — 퇴직연금 중도인출은 퇴직 전이라도 DC형이나 IRP에 쌓인 적립금을 법이 정한 사유가 있을 때 미리 찾아 …
-  - [국민연금 반납금, 예전에 받은 일시금 돌려주고 가입기간 살리기](https://smartdatashop.kr/policy/national-pension-refund-repayment/) — 국민연금 반납금은 과거에 반환일시금으로 받아 사라진 가입기간을, 그 일시금에 이자를 더해 다시 납부해 되살…
-  - [소액임차인 최우선변제, 경매 넘어가도 보증금 먼저 받는 법](https://smartdatashop.kr/tax-finance/small-tenant-priority-repayment/) — 소액임차인 최우선변제는 보증금이 지역별 기준 이하인 세입자가 살던 집이 경매로 넘어가도 담보권자보다 먼저 …
 
 ---
 
