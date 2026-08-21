@@ -1,12 +1,19 @@
-# Today — 2026-08-21 (금) (KST)
+# Today — 2026-08-22 (토) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-21 (금) — 오늘
+## 2026-08-22 (토) — 오늘
 
 - 📝 발행 0건
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 🔄 자동 갱신 (24h): ECOS · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **6건**
+
+## 2026-08-21 (금)
+
+- 📝 발행 **3건**:
+  - [연금저축 IRP 받을 때 세금, 1500만원 넘으면 갈리는 룰](https://smartdatashop.kr/tax-finance/private-pension-withdrawal-tax/) — 사적연금 연금수령 저율과세는 연금저축·IRP에서 받는 연금액이 연 1,500만원 이하면 나이에 따라 3.3…
+  - [청약통장 소득공제 조건, 연 300만원 40% 무주택 세대주](https://smartdatashop.kr/tax-finance/housing-subscription-savings-deduction/) — 주택청약종합저축 소득공제는 무주택 세대주가 청약통장에 넣은 돈의 일부를 근로소득에서 빼주는 연말정산 항목이…
+  - [국민연금 추납, 안 낸 기간 최대 119개월 메우는 법](https://smartdatashop.kr/policy/national-pension-additional-payment/) — 국민연금 추후납부(추납)는 실직·경력단절 등으로 보험료를 못 낸 기간을 나중에 채워 가입 기간을 늘리는 제…
 
 ## 2026-08-20 (목)
 
@@ -91,13 +98,6 @@
   - [대환대출 갈아타기, 주담대·전세대출 원스톱으로 옮기는 법](https://smartdatashop.kr/tax-finance/one-stop-loan-refinancing/) — 온라인 원스톱 대환대출은 스마트폰 앱으로 기존 대출을 더 낮은 금리의 다른 금융사 대출로 갈아타는 금융위원…
   - [임금체불 진정 신청 방법, 대지급금과 지연이자 20%까지](https://smartdatashop.kr/policy/unpaid-wage-complaint/) — 임금체불 진정은 밀린 임금을 받도록 도와달라고 지방고용노동관서에 제기하는 신고 절차다. 근로기준법상 사업주…
   - [배우자 증여 후 양도세 이월과세, 10년 함정 피하는 법](https://smartdatashop.kr/tax-finance/spouse-gift-carryover-taxation/) — 배우자 증여 후 양도세 이월과세는 배우자나 직계존비속에게 증여받은 부동산을 10년 안에 팔면 증여받은 가격…
-
-## 2026-08-07 (금)
-
-- 📝 발행 **3건**:
-  - [월세 세액공제 2026, 총급여 8천만원 이하 최대 170만원](https://smartdatashop.kr/tax-finance/monthly-rent-tax-credit-2026/) — 월세 세액공제는 총급여 8,000만원(종합소득 7,000만원) 이하 무주택 세대주가 낸 월세의 최대 17%…
-  - [출산하면 받는 돈 2026, 첫만남 200만 부모급여 월 100만](https://smartdatashop.kr/policy/birth-support-cash-2026/) — 2026년 출산 지원금은 첫만남이용권(첫째 200만·둘째 이상 300만), 부모급여(0세 월 100만·1세…
-  - [1세대 1주택 양도세 비과세, 2년 보유·12억 이하가 핵심](https://smartdatashop.kr/tax-finance/single-house-capital-gains-exemption/) — 1세대 1주택 양도세 비과세는 양도일 현재 국내에 집 한 채만 2년 이상 보유한 세대가 12억원 이하로 팔…
 
 ---
 
