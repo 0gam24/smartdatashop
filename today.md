@@ -1,11 +1,11 @@
-# Today — 2026-08-22 (토) (KST)
+# Today — 2026-08-23 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-22 (토) — 오늘
+## 2026-08-23 (일) — 오늘
 
 - 📝 발행 0건
-- 🔄 자동 갱신 (24h): ECOS · 정부 RSS · 뉴스 키워드
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 - 📋 검수 대기: **6건**
 
 ## 2026-08-21 (금)
@@ -87,17 +87,9 @@
 
 ## 2026-08-09 (일)
 
-- 📝 발행 **3건**:
+- 📝 발행 **2건**:
   - [국가장학금 2학기 2차 신청, 재학생 재도전 마지막 기회](https://smartdatashop.kr/policy/national-scholarship-second-round/) — 2학기 국가장학금 2차 신청은 1차 때 신청하지 못한 재학생과 신입·편입생이 등록금 지원을 다시 신청하는 …
   - [근로장려금 반기신청, 근로소득자가 9월에 미리 받는 법](https://smartdatashop.kr/tax-finance/eitc-semiannual-application/) — 근로장려금 반기신청은 근로소득만 있는 가구가 한 해 장려금을 두 번에 나눠 미리 받는 제도다. 상반기 소득…
-  - [재산세 9월 2기분, 주택 나머지 절반과 토지분 납부](https://smartdatashop.kr/tax-finance/property-tax-second-half-september/) — 9월 재산세는 주택분 재산세의 나머지 절반과 토지분 재산세를 함께 내는 2기분 납부다. 주택분은 연세액이 …
-
-## 2026-08-08 (토)
-
-- 📝 발행 **3건**:
-  - [대환대출 갈아타기, 주담대·전세대출 원스톱으로 옮기는 법](https://smartdatashop.kr/tax-finance/one-stop-loan-refinancing/) — 온라인 원스톱 대환대출은 스마트폰 앱으로 기존 대출을 더 낮은 금리의 다른 금융사 대출로 갈아타는 금융위원…
-  - [임금체불 진정 신청 방법, 대지급금과 지연이자 20%까지](https://smartdatashop.kr/policy/unpaid-wage-complaint/) — 임금체불 진정은 밀린 임금을 받도록 도와달라고 지방고용노동관서에 제기하는 신고 절차다. 근로기준법상 사업주…
-  - [배우자 증여 후 양도세 이월과세, 10년 함정 피하는 법](https://smartdatashop.kr/tax-finance/spouse-gift-carryover-taxation/) — 배우자 증여 후 양도세 이월과세는 배우자나 직계존비속에게 증여받은 부동산을 10년 안에 팔면 증여받은 가격…
 
 ---
 
