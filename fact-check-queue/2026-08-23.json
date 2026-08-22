@@ -1,8 +1,8 @@
 {
   "agent": "fact-checker",
-  "ranAt": "2026-08-22T17:13:03.205Z",
+  "ranAt": "2026-08-22T19:27:02.164Z",
   "windowDays": 14,
-  "mode": "lite",
+  "mode": "full",
   "auditedCount": 33,
   "summary": {
     "risk": {
@@ -349,5 +349,46 @@
       "riskLevel": "low"
     }
   ],
-  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+  "fullAuditedCount": 1,
+  "discrepancies": [
+    {
+      "collection": "pulse",
+      "filename": "2026-08-18-long-term-holding-special-deduction.mdx",
+      "verdict": "fabricated",
+      "issues": [
+        {
+          "claim": "일반 토지·건물에 쓰는 표1은 3년 이상부터 매년 2%p씩 쌓여 15년 이상이면 30%가 한도다",
+          "issue": "1차 출처(국세청 장기보유특별공제율 페이지) fetch 실패로 원문 확인 불가. 수치의 정확성을 검증할 근거 없음 → fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "표2 보유 기간과 거주 기간을 따로 계산해 각각 매년 4%p씩, 두 항목을 더해 최대 80%까지 공제한다",
+          "issue": "1차 출처 fetch 실패로 '매년 4%p씩' 및 '최대 80%' 수치 검증 불가 → fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "표 내 수치 — 3년 6%/12%/12%, 5년 10%/20%/20%, 7년 14%/28%/28%, 10년 이상 20%/40%/40%, 15년 이상 30%/40%/40%, 2년 거주 8%",
+          "issue": "1차 출처 fetch 실패로 표의 개별 공제율 수치 전체 검증 불가 → fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "과세 대상 양도차익 = 전체 양도차익 × (양도가액 − 12억원) ÷ 양도가액",
+          "issue": "1차 출처(국세청 고가주택 양도소득금액 계산 페이지) fetch 실패로 공식 검증 불가 → fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "양도가액 15억원, 취득가액 8억원, 필요경비 3천만원, 12억원 초과분 비율 20%, 과세 양도소득금액 2억6,880만원",
+          "issue": "1차 출처 fetch 실패로 국세청 예시 수치(특히 최종 2억6,880만원) 검증 불가 → fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "이 구조는 2021년 이후 거주 요건이 강화되면서 굳어졌다",
+          "issue": "1차 출처 fetch 실패로 '2021년 이후' 강화 시점 검증 불가 → fabricated 처리",
+          "severity": "medium"
+        }
+      ],
+      "summary": "3개의 1차 출처 URL이 모두 fetch 실패하여 본문에 등장하는 공제율 수치(표1·표2 전체), 계산 공식, 국세청 예시 금액, 제도 변경 연도 등 핵심 수치와 일자를 단 하나도 원문과 대조할 수 없었다. 출처 확인이 불가능한 상태에서 본문의 모든 구체적 수치·일자는 검증 근거 없음(fabricated)으로 분류되며, 실제 발행 전 반드시 국세청 원문 및 소득세법 제95조 조문과 직접 대조해야 한다."
+    }
+  ],
+  "note": "FULL: claude-sonnet-4-6 + 1차 출처 fetch. 불일치 1건."
 }
