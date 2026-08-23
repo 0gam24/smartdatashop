@@ -1,12 +1,12 @@
-# Today — 2026-08-23 (일) (KST)
+# Today — 2026-08-24 (월) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-23 (일) — 오늘
+## 2026-08-24 (월) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **6건**
+- 📋 검수 대기: **5건**
 
 ## 2026-08-21 (금)
 
@@ -84,12 +84,6 @@
   - [한국 기준금리 변동 추이, 2020년 0.5%에서 2026년 2.75%까지](https://smartdatashop.kr/insight/korea-base-rate-history/) — 기준금리는 한국은행 금융통화위원회가 연 8회 결정하는 정책금리로, 예금·대출·전월세전환율 계산의 출발점이 …
   - [취업 후 학자금 상환, 소득 넘어야 갚는 의무상환 기준](https://smartdatashop.kr/tax-finance/income-contingent-loan-repayment/) — 취업 후 상환 학자금대출(ICL)은 재학 중 등록금·생활비를 빌리고, 취업해 소득이 상환기준소득을 넘으면 …
   - [청년월세 특별지원 2026, 월 20만원 최대 24개월](https://smartdatashop.kr/policy/youth-monthly-rent-special-support/) — 청년월세 특별지원은 무주택 청년에게 실제 월세 범위에서 월 최대 20만원을 최대 24개월 동안 지원하는 국…
-
-## 2026-08-09 (일)
-
-- 📝 발행 **2건**:
-  - [국가장학금 2학기 2차 신청, 재학생 재도전 마지막 기회](https://smartdatashop.kr/policy/national-scholarship-second-round/) — 2학기 국가장학금 2차 신청은 1차 때 신청하지 못한 재학생과 신입·편입생이 등록금 지원을 다시 신청하는 …
-  - [근로장려금 반기신청, 근로소득자가 9월에 미리 받는 법](https://smartdatashop.kr/tax-finance/eitc-semiannual-application/) — 근로장려금 반기신청은 근로소득만 있는 가구가 한 해 장려금을 두 번에 나눠 미리 받는 제도다. 상반기 소득…
 
 ---
 
