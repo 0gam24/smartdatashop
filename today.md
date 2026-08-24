@@ -1,12 +1,19 @@
-# Today — 2026-08-24 (월) (KST)
+# Today — 2026-08-25 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-24 (월) — 오늘
+## 2026-08-25 (화) — 오늘
 
 - 📝 발행 0건
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **5건**
+- 📋 검수 대기: **4건**
+
+## 2026-08-24 (월)
+
+- 📝 발행 **3건**:
+  - [장기수선충당금 반환, 이사 갈 때 집주인에게 돌려받는 법](https://smartdatashop.kr/tax-finance/long-term-repair-reserve-refund/) — 장기수선충당금은 아파트 주요 시설의 교체·보수를 위해 소유자가 부담하는 관리비다. 세입자가 관리비에 얹어 …
+  - [산재 요양급여, 4일 이상 치료비 전액 공단이 대는 급여](https://smartdatashop.kr/policy/workers-comp-medical-care-benefit/) — 산재 요양급여는 업무상 부상이나 질병으로 4일 이상 치료가 필요할 때, 근로복지공단이 지정 의료기관에서 치…
+  - [출산전후휴가 급여 2026, 90일 상한 660만원 지급 순서](https://smartdatashop.kr/policy/maternity-leave-benefit-2026/) — 출산전후휴가 급여는 출산한 근로자에게 휴가 90일(다태아 120일) 동안 통상임금을 보전해 주는 고용보험 …
 
 ## 2026-08-21 (금)
 
@@ -77,13 +84,6 @@
   - [가족돌봄휴가 연 10일, 가족돌봄휴직 90일 쓰는 법](https://smartdatashop.kr/policy/family-care-leave/) — 가족돌봄휴가는 아픈 가족을 급히 돌봐야 할 때 근로자가 연간 최대 10일을 하루 단위 무급으로 쓰는 남녀고…
   - [임신기 근로시간 단축, 하루 2시간 임금 그대로 줄인다](https://smartdatashop.kr/policy/pregnancy-work-hour-reduction/) — 임신기 근로시간 단축은 임신 후 12주 이내이거나 32주 이후인 여성 근로자가 하루 2시간까지 근무 시간을…
   - [보금자리론 자격 2026, 부부소득 7천만원·집값 6억 이하](https://smartdatashop.kr/tax-finance/bogeumjari-loan-2026/) — 보금자리론은 무주택이나 1주택 실수요자가 6억원 이하 집을 살 때 한국주택금융공사가 고정금리로 최대 3억6…
-
-## 2026-08-10 (월)
-
-- 📝 발행 **3건**:
-  - [한국 기준금리 변동 추이, 2020년 0.5%에서 2026년 2.75%까지](https://smartdatashop.kr/insight/korea-base-rate-history/) — 기준금리는 한국은행 금융통화위원회가 연 8회 결정하는 정책금리로, 예금·대출·전월세전환율 계산의 출발점이 …
-  - [취업 후 학자금 상환, 소득 넘어야 갚는 의무상환 기준](https://smartdatashop.kr/tax-finance/income-contingent-loan-repayment/) — 취업 후 상환 학자금대출(ICL)은 재학 중 등록금·생활비를 빌리고, 취업해 소득이 상환기준소득을 넘으면 …
-  - [청년월세 특별지원 2026, 월 20만원 최대 24개월](https://smartdatashop.kr/policy/youth-monthly-rent-special-support/) — 청년월세 특별지원은 무주택 청년에게 실제 월세 범위에서 월 최대 20만원을 최대 24개월 동안 지원하는 국…
 
 ---
 
