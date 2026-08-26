@@ -33,12 +33,15 @@ export const GET: APIRoute = async ({ site }) => {
     .sort(
       (a, b) =>
         new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime(),
-    );
+    )
+    // 구글 뉴스 sitemap 상한 — <news:news> 사이트맵당 최대 1,000개 (스펙 방어선)
+    .slice(0, 1000);
 
   const urlEntries = fresh
     .map((entry) => {
       const loc = `${origin}${pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category)}`;
-      const pubIso = new Date(entry.data.publishedAt).toISOString();
+      // 밀리초 절삭 — 구글 news-sitemap.md 열거 형식(YYYY-MM-DDThh:mm:ssTZD)과 정확히 일치
+      const pubIso = new Date(entry.data.publishedAt).toISOString().replace(/\.\d{3}Z$/, 'Z');
       return `  <url>
     <loc>${xmlEscape(loc)}</loc>
     <news:news>
