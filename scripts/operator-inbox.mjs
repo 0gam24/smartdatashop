@@ -39,10 +39,9 @@ const ENV_OPTIONAL_NOTES = {
   // 뉴스레터(Stibee) 운영 개시 결정 시에만 필요. 미설정 시 폼은 fallback 모드.
   PUBLIC_STIBEE_LIST_ID: '뉴스레터 개시 결정 시에만 — 선택',
 };
-const REQUIRED_DOCS = [
-  ['docs/PLANNING.md', '12개월 KPI / 자매 사이트 합류 일정'],
-  ['docs/DESIGN.md', '디자인 토큰 / 활자 시스템 / 컴포넌트 카탈로그'],
-];
+// 2026-08-26 docs 재편: 구 운영자 docs 체계(PLANNING/DESIGN 등)는
+// docs/references/ 라이브러리 + CLAUDE.md 인라인 룰로 대체 — 필수 doc 추적 대상 없음.
+const REQUIRED_DOCS = [];
 
 function envStatus() {
   // Cloudflare Pages env 는 빌드 시 import.meta.env 로 주입.
@@ -174,7 +173,7 @@ function render() {
     lines.push(`| \`${e.key}\` | ${status} |`);
   }
   lines.push('');
-  lines.push('미설정 키는 Cloudflare Pages → Settings → Environment variables 에서 추가. `docs/operations.md` 환경변수 섹션 참조.');
+  lines.push('미설정 키는 Cloudflare Pages → Settings → Environment variables 에서 추가.');
   lines.push('');
 
   // 2. placeholder 글
@@ -240,7 +239,7 @@ function render() {
   lines.push(`## ⑤ 미작성 운영자 docs — ${missing.length}건`);
   lines.push('');
   if (missing.length === 0) {
-    lines.push('모든 운영자 doc 작성 완료 ✅');
+    lines.push('해당 없음 — 구 운영자 docs 체계는 2026-08-26 `docs/references/` 라이브러리로 대체 ✅');
   } else {
     for (const [path, desc] of missing) {
       lines.push(`- \`${path}\` — ${desc}`);
@@ -254,7 +253,7 @@ function render() {
   // 2026-06-12 폐기: "placeholder URL 7개 제거 요청" 항목 — 해당 글들은 5월 중
   // 정상 콘텐츠로 보완 완료 (§② 0건). 지금 제거 요청하면 멀쩡한 글이 ~6개월
   // 검색에서 숨겨져 역효과이므로 체크리스트에서 제거.
-  lines.push('- [ ] (선택) `.claude/settings.json` allowlist 수기 편집 — `docs/operations.md` 참조');
+  lines.push('- [ ] (선택) `.claude/settings.json` allowlist 수기 편집');
   lines.push('');
 
   lines.push('---');

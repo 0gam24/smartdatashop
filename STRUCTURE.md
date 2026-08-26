@@ -10,27 +10,17 @@
 - 도메인: smartdatashop.kr
 - 역할: 메인 hub (Google Discover / Naver 진입 엔진, 1차 출처 NewsArticle 매일 발행)
 - repo: github.com/0gam24/smartdatashop
-- 네트워크 헌법: docs/NETWORK.md v0.6 (2026-05-07 동기화 완료, 5~9 사이트 공통 헌법, multi-stack + dual-brand 인정)
+- 운영 체제: **단일 독립 사이트** (2026-05-24 ADR 0010 — 네트워크 컨셉 폐기)
 
-## 1.5 🏛️ 네트워크 헌법 (docs/)
+## 1.5 🏛️ 하네스 문서 체계 (2026-08-26 개편)
 
-본 메인 사이트는 smartdata network HQ 의 헌법을 따른다:
+구 네트워크 헌법(PURPOSE/PROJECT_DEFINITION/NETWORK/CATEGORY_MAP)과 구 docs/ 트리는
+2026-08-26 docs 재편으로 폐기됐다 (git 이력으로만 참조). 현행 체계:
 
-- **docs/PURPOSE.md** — 사업·운영·콘텐츠 목적 (최상위 anchor)
-  - 1년 월 500만원 / 2년 월 1,000만원 수익 목표
-  - 1인 + AdSense + 환각 0
-- **docs/PROJECT_DEFINITION.md** v1.0 — 5~9 사이트 네트워크 전체 그림
-  - 메인 1 + 자매 4~8 = 최대 9 사이트
-  - 333편 + 1099 prerender 콘텐츠 자산
-- **docs/NETWORK.md** v0.6 — 5~9 사이트 공통 헌법
-  - 4 절대 규칙 (신뢰성·실시간·정확성·출처표기)
-  - multi-stack + dual-brand 인정
-- **docs/CATEGORY_MAP.md** — 5 사이트 카테고리 매핑
-  - Dispatcher 가동의 단일 진실
-  - 메인 5 ↔ 자매 (calc 5 / awoo 6 / moneylook 12 / ikhi 5)
-
-본 헌법과 충돌하는 메인 사이트 코드·콘텐츠는 무효.
-헌법 위계: PURPOSE > PROJECT_DEFINITION > NETWORK > CATEGORY_MAP.
+- **CLAUDE.md** (루트) — 최상위 규약. 프로젝트 목적·AdSense 정책·발행 방침·절대 금지 인라인
+- **src/content/CLAUDE.md** — 콘텐츠 규칙 + 포스팅 구조 엔진 V4 (실행 규범)
+- **docs/references/** — 참고 문서 라이브러리 (진입점 `00-목차-INDEX.md`, G/H 공식 가이드 1순위)
+- **docs/references/F-프로젝트별/스마트데이터샵-포스팅구조엔진-V4.md** — 글 구조 규약 라이브러리 정본
 
 ## 2. 기술 스택
 - Astro ^5.0.0 (정적 사이트 생성)
@@ -275,7 +265,7 @@ GitHub Actions secrets/vars (코드 내 참조 — 키만):
 - 데이터 던전: 0편 (`.gitkeep` 만 존재)
 - 마지막 발행일: 2026-05-06 (펄스 publishedAt 최댓값)
 
-## 17. ADR (`docs/decisions/`)
+## 17. ADR (구 `docs/decisions/` — 2026-08-26 docs 재편으로 폐기, git 이력 `git show 69d20bd:docs/decisions/...` 로 참조)
 - 0000-template
 - 0001-timezone-kst-lock
 - 0002-preview-mode-protocol (폐기 → 0005)

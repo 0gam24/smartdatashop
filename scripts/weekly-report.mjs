@@ -230,7 +230,7 @@ if (env.missing.length > 0) {
   lines.push('');
   for (const k of env.missing) lines.push(`- \`${k}\``);
   lines.push('');
-  lines.push('Cloudflare Pages → Settings → Environment variables. `docs/operations.md` 환경변수 섹션 참조.');
+  lines.push('Cloudflare Pages → Settings → Environment variables 에서 추가.');
   lines.push('');
 }
 

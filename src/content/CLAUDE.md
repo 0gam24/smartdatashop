@@ -61,7 +61,8 @@
 > **목적: 구글 scaled content(AI 대량 생성) 판정 회피.** 문장 변주(2026-07-10 룰)만으로는 부족하다 — 최근 발행분 분석 결과 문서 골격이 10/10 동일했다. **문서 구조 자체가 검색의도에 따라 글마다 달라야 한다.**
 >
 > 적용 범위: *본문 구조만* 본 절로 전면 교체. 주제·키워드 선정 운영(위 롱테일 차별화 절 + 루트 CLAUDE.md 발행 방침: 기본 3편/상한 5편·질 우선)은 기존 그대로.
-> 폐기: "골든 레퍼런스 구조 복제" 지시, 구 포스팅 청사진(`docs/posting-blueprint.md`)의 골격 대입 지시 — 구조에 관해서는 **본 절이 청사진을 대체**한다 (청사진의 발굴·주제 선정 파트는 유효). 골든 레퍼런스(2026-05-28-voice-phishing)는 이제 *깊이·검증 품질*의 기준으로만 남고 **구조 모델이 아니다**.
+> 폐기: "골든 레퍼런스 구조 복제" 지시, 구 포스팅 청사진의 골격 대입 지시 — 구조에 관해서는 **본 절이 청사진을 대체**한다. 구 청사진 문서(`docs/posting-blueprint.md`)는 2026-08-26 docs 재편으로 폐기됨(git 이력으로만 참조). 발굴·주제 선정의 실질은 위 롱테일 차별화 절 + 루트 CLAUDE.md 발행 방침에 이미 흡수되어 있다. 골든 레퍼런스(2026-05-28-voice-phishing)는 이제 *깊이·검증 품질*의 기준으로만 남고 **구조 모델이 아니다**.
+> 라이브러리 정본: `docs/references/F-프로젝트별/스마트데이터샵-포스팅구조엔진-V4.md` (본 절이 실행 규범, 개정 시 양쪽 동기 갱신).
 
 **V4-1. 구조 선택 — 검색의도별 TYPE (모든 글 동일 템플릿 금지)**
 
@@ -169,41 +170,43 @@ TYPE별 자연 골격 예 (강제 골격 아님 — 검색자 질문이 해결�
 **[내부 링크]** ★ SEO
 - ☐ 관련 기존 펄스 1-2개 자연어 link
 
-위계: PURPOSE > ADR > CLAUDE.md > **본 체크리스트** > `docs/google-seo-vibe-coding/` (공식 가이드) > `docs/references/06,07`
+위계: 루트 CLAUDE.md > **본 체크리스트** > `docs/references/G-구글-공식가이드/`·`H-네이버-공식가이드/` (공식 1차 출처) > `docs/references/D-SEO-GEO/` (요약)
 
-### Google SEO 바이브코딩 체크리스트 (2026-05-26 의무, `docs/google-seo-vibe-coding/`)
+### Google SEO 발행 전 체크리스트 (2026-05-26 의무 · 2026-08-26 경로 개편 — `docs/references/G-구글-공식가이드/`)
+
+> 구 `docs/google-seo-vibe-coding/` 폴더는 2026-08-26 폐기 (`docs/references/_archive/google-seo/` 보존). 아래 각 블록의 근거 문서가 새 G 폴더로 승계됐다. 진입점: `docs/references/00-목차-INDEX.md`.
 
 **매 펄스 발행 시 자체 검증 의무**:
 
-📄 `04-ranking-appearance.md` 적용:
+📄 `G/04-appearance-검색결과표시/title-link.md`·`snippet.md` + `G/02-fundamentals-기본/creating-helpful-content.md` 적용:
 - ☐ **title** 목표 30~40자 (Zod 상한 60자) + 핵심 키워드 앞부분 배치. 본문에 없는 약속·과장(무조건/100%/폭등) 금지
 - ☐ **tldr (meta description 역할)** 목표 90~150자 (Zod 상한 200자) + 검색의도 답변 명확, 키워드 반복 금지
 - ☐ **NewsArticle LD 자동 발행 확인** — sources[] 있어야 트리거됨
 - ☐ **E-E-A-T 신호**: 1차 출처 명시 (`.go.kr` / `.or.kr`) + 발표 일자 + 저자 바이라인
 
-📄 `06-site-specific-guides.md` §뉴스 적용:
+📄 뉴스 요건 (`G/03-crawling-indexing-크롤링색인/sitemaps/news-sitemap.md` + `G/05-structured-data-구조화데이터/article.md` + `G/04-appearance-검색결과표시/publication-dates.md`) 적용:
 - ☐ **NewsArticle schema** — `datePublished` (publishedAt frontmatter, KST ISO 8601), `dateModified` (수정 시 갱신)
 - ☐ **뉴스 sitemap 자동 포함** — `/news-sitemap.xml` 빌드 자동
 - ☐ **Google News 정책 준수** — 정치 편향 X, 광고-콘텐츠 분리, 1차 출처 우선
 
-📄 `07-vibe-coding-seo-template.md` 배포 전 체크:
+📄 배포 전 체크 (구 07 템플릿 — 본 체크리스트가 현행 진실, 코드 템플릿은 `D-SEO-GEO/D4-메타데이터-기본SEO.md`·`D3-구조화데이터-JSON-LD.md`):
 - ☐ canonical URL 자동 (라우트 자동 처리)
 - ☐ og:image (16:9 1200×630) — `coverImage` 또는 동적 OG v2 자동
 - ☐ 이미지 alt 속성 (펄스에 이미지 임베드 시)
 - ☐ 내부 링크 자연어 (앵커 텍스트 "여기 클릭" 금지)
 
-📄 `02-seo-fundamentals.md` 적용:
+📄 `G/03-crawling-indexing-크롤링색인/url-structure.md`·`links-crawlable.md` 적용:
 - ☐ URL slug: 영문 소문자·하이픈만 (예: `2026-05-26-mohw-wha79-bilateral`)
 - ☐ 본문 내부 링크는 의미있는 앵커 (1차 출처 deep link 권장)
 - ☐ 단락 구조: H2 → H3 계층 일관
 
-**위계 충돌 시**: `docs/google-seo-vibe-coding/` (Google 공식) > `docs/references/06-구글-SEO-종합.md` (정리본) > 본 CLAUDE.md
+**위계 충돌 시**: `docs/references/G-구글-공식가이드/` (Google 공식) > `docs/references/D-SEO-GEO/D1-구글-SEO.md` (정리본) > 본 CLAUDE.md
 
 LD 자동 발행 (코드):
 - NewsArticle: 모든 펄스
 - Dataset: `sources[].url` 1개+ 시
 - BreadcrumbList: 모든 펄스
-- **FAQPage**: 본문에 Q&A 패턴 2개+ 시 자동 (`src/lib/jsonld.ts` `buildFaqLDFromMarkdown`) — V4-8: FAQ 가 실제 가치 있을 때만 존재, LD 목적의 억지 FAQ 금지
+- **FAQPage**: 본문에 Q&A 패턴 2개+ 시 자동 (`src/lib/jsonld.ts` `buildFaqLDFromMarkdown`) — V4-8: FAQ 가 실제 가치 있을 때만 존재, LD 목적의 억지 FAQ 금지. 참고: Google FAQPage 리치 결과는 2026-06 폐지(`docs/references/00-목차-INDEX.md` 정정표) — 발행 유지하되 노출 기대 금지
 - **HowTo**: "액션" / "체크리스트" / "절차" 섹션에 번호 리스트 3단계+ 시 자동 (`buildHowToLDFromMarkdown`) — V4-4: 체크리스트성 블록은 문서 전체 1개만
 
 ## 새 인사이트 추가 시

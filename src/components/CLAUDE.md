@@ -8,7 +8,7 @@
 ## 작성 규칙
 
 ### CSS
-<!-- DESIGN.md v1.0 일관성 -->
+<!-- 디자인 시스템 일관성 (구 DESIGN.md v1.0 — 규칙은 루트 CLAUDE.md §디자인 시스템에 인라인) -->
 - 모든 컴포넌트는 scoped <style> 사용 (Astro 기본)
 - 글로벌 토큰 (var(--color-paper) 등) 참조만, 정의는 src/styles/global.css에서
 - :global() 사용은 자식 컴포넌트나 MDX-rendered 요소에 한정 (왜 사용하는지 주석)
@@ -26,7 +26,7 @@
 
 ### 콘텐츠 컬렉션 데이터 받을 때
 - `CollectionEntry<'pulse'>` 타입 사용
-- previewMode 표시 시 ArticlePreviewWarning 컴포넌트 활용
+- (previewMode 필드는 ADR 0005로 폐기 — 신규 사용 금지)
 
 ## 새 컴포넌트 추가 체크리스트
 - [ ] 단일 책임? (한 가지 일만)
@@ -38,6 +38,6 @@
 
 ## 절대 금지
 - 컴포넌트 안에서 src/styles/global.css 수정
-- 카테고리별 컬러 코딩 (활자 라벨로만 구분 — DESIGN.md v1.0)
+- 카테고리별 컬러 코딩 (활자 라벨로만 구분 — 루트 CLAUDE.md §디자인 시스템)
 - inline JavaScript event handler (예: `onclick="..."`); 대신 `<script is:inline>` 블록
 - 다른 컴포넌트의 scoped 클래스를 직접 참조 (강결합)
