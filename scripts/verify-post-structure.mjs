@@ -14,6 +14,7 @@
  *   - 템플릿 습관 문형 ("표에서 보듯" / "표를 풀어 보면" / "첫째,+둘째," 열거)
  *   - H2 헤딩 시퀀스가 기존 발행 글과 완전 동일 (구조 복제 백스톱)
  *   - 비종결 코드 펜스 (이후 검사가 무력화되므로 문서 자체 결함으로 취급)
+ *   - 수치 글(수치 토큰 3+)인데 상단 리드 차트(chart frontmatter) 없음 (2026-08-26 지시)
  *
  *   [WARN — 참고 신호, 차단 안 함]
  *   - H2 슬롯(역할 버킷) 시퀀스가 다른 글과 동일 — 골격 유사 신호 (다양화는 작성자 책임)
@@ -217,7 +218,7 @@ function roughCharCount(body) {
 
 // ── 파일별 분석 (writer.mjs 인라인 게이트에서도 사용) ──────
 
-export function analyzeStructure(text) {
+export function analyzeStructure(text, opts = {}) {
   const { frontmatter, body } = splitDoc(text);
   const title = fmField(frontmatter, 'title');
   const tldr = fmField(frontmatter, 'tldr');
@@ -296,6 +297,30 @@ export function analyzeStructure(text) {
     warns.push(
       `본문 약 ${chars}자(공백·MD 제외) — 3,000자 미만이면 리서치 추가 또는 발행 보류 (V4-6, 패딩 금지)`,
     );
+  }
+
+  // 10. 상단 리드 차트 (2026-08-26 운영자 지시 — 매 글 상단 1개)
+  //     수치가 실린 글(대략 3개+ 수치 토큰)인데 chart frontmatter 가 없으면 fail,
+  //     수치가 거의 없는 글은 warn (억지 차트 = AI 티 — 차트화할 수치가 없으면 예외 허용).
+  //     연도("2026년")·나이는 ADR 0006 이 발표일 명시를 의무화해 모든 글에 등장하므로
+  //     차트화 가능 수치로 세지 않는다 (년·세 접미사 제외).
+  //     chart.alt 필수·형식은 Zod(빌드)가 검사한다.
+  //     opts.skipChartCheck: writer.mjs 자동 발행 인라인 게이트용 — 자동 파이프라인은
+  //     아직 chart frontmatter 를 생성할 수 없어 이 검사만 제외한다 (CI 게이트는 유지).
+  if (!opts.skipChartCheck) {
+    const hasChart = /^chart:/m.test(frontmatter);
+    if (!hasChart) {
+      const numericTokens = (
+        prose.match(/\d+(?:[.,]\d+)?\s*(?:%|원|명|건|개|억|조|만\s*원|포인트|배)/g) ?? []
+      ).length;
+      if (numericTokens >= 3) {
+        fails.push(
+          `상단 리드 차트 없음 (수치 토큰 ${numericTokens}개) — 수치 글은 chart frontmatter 의무 (§상단 차트)`,
+        );
+      } else {
+        warns.push('상단 리드 차트 없음 — 차트화할 수치가 정말 없는 글인지 확인 (§상단 차트)');
+      }
+    }
   }
 
   return {

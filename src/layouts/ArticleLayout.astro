@@ -51,6 +51,12 @@ interface Props {
    * 색인 자동 차단용 — Layer 1 안전망. BaseLayout.noindex 로 그대로 전달.
    */
   noindex?: boolean;
+  /**
+   * 리드 차트 — frontmatter `chart` 가 있는 글에서 라우트가 전달.
+   * 본문 최상단(TrustBar 직후)에 1200×675 WebP <img> 로 렌더.
+   * 첫 화면 콘텐츠이므로 lazy 금지 (G/03 lazy-loading 색인 조건).
+   */
+  leadChart?: { src: string; alt: string };
 }
 
 const {
@@ -69,6 +75,7 @@ const {
   keywords,
   corrections = [],
   noindex = false,
+  leadChart,
 } = Astro.props;
 
 // 브레드크럼 표시용 날짜 (YYYY/MM/DD) — KST 기준
@@ -140,6 +147,19 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd, buildPersonLD()
         updatedAt={updatedAt ?? publishedAt}
         correctionsCount={corrections.length}
       />
+      {leadChart && (
+        <figure class="lead-chart">
+          <img
+            src={leadChart.src}
+            alt={leadChart.alt}
+            width="1200"
+            height="675"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )}
       <slot />
       <AuthorCard name={author} />
       <CitationExport
@@ -179,6 +199,16 @@ const mergedJsonld: object[] = [...incomingJsonld, breadcrumbLd, buildPersonLD()
     border: 0;
     border-top: 0.5px solid var(--color-ink-quat);
     margin: 2rem 0;
+  }
+  /* 리드 차트 — 본문 폭에 맞춰 반응형, 헤어라인 프레임 (DESIGN: radius·shadow 금지) */
+  .lead-chart {
+    margin: 0 0 1.8rem;
+  }
+  .lead-chart img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0.5px solid var(--color-ink-quat);
   }
 </style>
 

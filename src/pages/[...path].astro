@@ -123,6 +123,7 @@ const related = allEntries
   keywords={keywords}
   corrections={data.correctionLog}
   noindex={hasPlaceholder}
+  leadChart={data.chart ? { src: `/charts/pulse/${entry.slug}.webp`, alt: data.chart.alt } : undefined}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />
