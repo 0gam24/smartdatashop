@@ -60,7 +60,8 @@ export async function GET(context: APIContext) {
       pubDate: new Date(entry.data.publishedAt),
       description: entry.data.tldr,
       link,
-      categories: [categoryToKorean(entry.data.category as Category)],
+      // 자간 표시 라벨("세 금 · 금 융")이 아닌 평문 — 피드 메타는 구독기·검색에 그대로 노출
+      categories: [categoryToKorean(entry.data.category as Category).replace(/ /g, '')],
       content: entry.body ?? '',
       author: AUTHOR_EMAIL_NAME,
       customData: customParts.join(''),

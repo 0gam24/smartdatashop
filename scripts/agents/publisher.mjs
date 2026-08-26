@@ -135,6 +135,11 @@ if (liveIndexNow && urls.length > 0) {
   console.log(
     `[publisher] IndexNow ${urls.length} URLs → ${indexNowResult.ok ? '✓' : '✗'} status=${indexNowResult.status}${indexNowResult.error ? ' err=' + indexNowResult.error : ''}`,
   );
+  // 엔드포인트별 상세 — 네이버만 403/422 로 침묵 실패하는 사고를 CI 로그에서 즉시 식별
+  // (집계 ok 는 "1곳 이상 성공" 이라 naver 단독 실패가 ✓ 로 가려진다, 2026-08-26 감사)
+  for (const e of indexNowResult.endpoints ?? []) {
+    console.log(`[publisher]   └ ${e.endpoint} → ${e.ok ? '✓' : '✗'} status=${e.status}${e.error ? ' err=' + e.error : ''}`);
+  }
 }
 
 mkdirSync(dirname(outPath), { recursive: true });

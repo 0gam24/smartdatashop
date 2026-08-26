@@ -7,7 +7,12 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
-import { categoryToKorean, pulseUrl, type Category } from '../../../lib/korean';
+import { categoryToKorean, insightUrl, pulseUrl, type Category } from '../../../lib/korean';
+
+/** 자간용 공백이 들어간 표시 라벨("세 금 · 금 융")을 피드 메타용 평문으로 변환. */
+function plainLabel(category: Category): string {
+  return categoryToKorean(category).replace(/ /g, '');
+}
 
 const FEED_LIMIT = 50;
 
@@ -49,15 +54,17 @@ export async function GET(context: APIContext) {
       pubDate: new Date(entry.data.publishedAt),
       description: entry.data.tldr,
       link: pulseUrl(entry.slug, entry.data.publishedAt, entry.data.category),
-      categories: [categoryToKorean(entry.data.category as Category)],
+      categories: [plainLabel(entry.data.category as Category)],
       content: entry.body,
     })),
     ...insights.map((entry) => ({
       title: entry.data.title,
       pubDate: new Date(entry.data.publishedAt),
       description: entry.data.tldr,
-      link: `/insight/${entry.slug}/`,
-      categories: [categoryToKorean(entry.data.category as Category)],
+      // insightUrl() 경유 — 2026-06-13 이후 발행분은 슬러그 날짜 접두사가 제거되므로
+      // raw slug 로 조립하면 404 URL 을 피드에 발행하게 된다 (2026-08-26 감사 수정).
+      link: insightUrl(entry.slug, entry.data.publishedAt),
+      categories: [plainLabel(entry.data.category as Category)],
       content: entry.body,
     })),
   ];
@@ -65,7 +72,7 @@ export async function GET(context: APIContext) {
   items.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
   const top = items.slice(0, FEED_LIMIT);
 
-  const koLabel = categoryToKorean(category);
+  const koLabel = plainLabel(category);
   return rss({
     title: `스마트데이터샵 — ${koLabel}`,
     description: `${koLabel} 카테고리 1차 출처 데이터 — 최신 ${FEED_LIMIT}건`,

@@ -169,7 +169,8 @@ if (robots) {
   check('robots GPTBot 차단', /User-agent: GPTBot[\s\S]*Disallow: \//.test(robots));
   check('robots ClaudeBot 차단', /User-agent: ClaudeBot[\s\S]*Disallow: \//.test(robots));
   check('robots CCBot 차단', /User-agent: CCBot[\s\S]*Disallow: \//.test(robots));
-  check('robots Yeti(네이버) 허용', /User-agent: Yeti\nAllow: \//.test(robots));
+  // \r?\n — Windows 워킹트리(core.autocrlf=true)의 CRLF 로컬 오탐 방지 (2026-08-26)
+  check('robots Yeti(네이버) 허용', /User-agent: Yeti\r?\nAllow: \//.test(robots));
   check('robots image-sitemap 등록', robots.includes('image-sitemap.xml'));
 }
 

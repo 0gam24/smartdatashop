@@ -15,12 +15,16 @@ Allow: /
 Disallow: /admin/
 Disallow: /uploads/
 
-# 한국 검색 — 명시적 Allow
+# 한국 검색 — 명시적 Allow (전용 그룹에는 * 그룹의 Disallow 가 적용되지 않으므로 병기)
 User-agent: Yeti
 Allow: /
+Disallow: /admin/
+Disallow: /uploads/
 
 User-agent: NaverBot
 Allow: /
+Disallow: /admin/
+Disallow: /uploads/
 
 User-agent: Googlebot-News
 Allow: /
