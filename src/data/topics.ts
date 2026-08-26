@@ -54,7 +54,7 @@ export const TOPICS: TopicConfig[] = [
     description:
       '한국 ETF 시장 (KRX 상장 1,000+ 종) 의 자산군 매핑·전략 분류·과세체계. 가이드북 ETF 지도 + 시장 펄스·인사이트.',
     eyebrow: '주 제 · E T F',
-    lead: '한국거래소 (KRX) 상장 ETF 와 시장 자금흐름. 자산군 6 × 전략 4 × 과세체계 3 의 72 셀 매트릭스 정리 (가이드북 ETF 지도) + 일일 시장 펄스 + 자매 사이트 iknowhowinfo 의 종목 단위 분석 연결.',
+    lead: '한국거래소 (KRX) 상장 ETF 와 시장 자금흐름. 자산군 6 × 전략 4 × 과세체계 3 의 72 셀 매트릭스 정리 (가이드북 ETF 지도) + 일일 시장 펄스·인사이트.',
     match: {
       pulseCategory: ['market'],
       insightCategory: ['market'],
@@ -123,7 +123,7 @@ export const TOPICS: TopicConfig[] = [
     description:
       'KOSPI 종합지수 (1980.01.04=100) 일별 180일 추이 + 관련 펄스·인사이트. 한국은행 ECOS.',
     eyebrow: '주 제 · K O S P I',
-    lead: 'KOSPI 종합지수 일별 시계열. 한국 주식시장 자금흐름·외국인 매매·ETF 자산군 결정의 기초 지표. 자매 사이트 iknowhowinfo (ETF·종목 분석) 와 가이드북 2권 ETF 지도 직접 연결.',
+    lead: 'KOSPI 종합지수 일별 시계열. 한국 주식시장 자금흐름·외국인 매매·ETF 자산군 결정의 기초 지표. 가이드북 2권 ETF 지도와 직접 연결.',
     match: {
       pulseCategory: ['market'],
       insightCategory: ['market'],

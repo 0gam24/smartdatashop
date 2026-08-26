@@ -214,8 +214,9 @@
 - `npm run build` — `astro build` (`prebuild`: auto-cover.mjs / `postbuild`: pagefind --site dist + operator-inbox.mjs)
 - `npm run preview` — `astro preview`
 - `npm run smoke` — 빌드 산출물 회귀 검증
-- `npm run verify` — verify:links + verify:claims (관대)
-- `npm run verify:strict` — verify:links --strict + verify:claims --strict (CI 게이트)
+- `npm run verify` — verify:structure + verify:links + verify:claims (관대)
+- `npm run verify:strict` — verify:structure --strict + verify:links --strict + verify:claims --strict (CI 게이트)
+- `npm run verify:structure` — V4 포스팅 구조 게이트 (2026-08-26+ 발행분, build-check CI 편입)
 - `npm run verify:links` — 1차 출처 url HEAD 체크
 - `npm run verify:claims` — 본문 수치 ↔ footnote 페어링
 - `npm run weekly` — 주간 운영자 리포트

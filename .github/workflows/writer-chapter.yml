@@ -90,10 +90,12 @@ jobs:
             - 독자: ${{ inputs.chapter_audience }}
             - 트리거 런: ${{ github.run_id }}
 
-            **운영자 검수 의무**:
+            **운영자 검수 의무 (V4 구조 엔진, 2026-08-26)**:
             - 1차 출처 footnote 매핑 정확
             - 신규 통계·가격 예측 없음 (ADR 0006)
-            - 표준 5 섹션 (시나리오/체크리스트/FAQ/액션/자매 cross-ref) 포함
+            - 고정 5 섹션 골격 없음 — outline 질문 해결 순서로 구성됐는지
+            - 체크리스트성 블록 최대 1개 / FAQ 조건부(본문 재서술 아님)
+            - 자매 사이트 cross-ref 0건 (ADR 0010 — 있으면 즉시 반려)
           labels: |
             ai-draft
             agent:chapter-writer
