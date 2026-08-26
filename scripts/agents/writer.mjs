@@ -470,7 +470,9 @@ async function main() {
           const collidingFile = findSlugCollision(targetFilename);
           // V4 구조 게이트 (verify-post-structure 와 동일 로직) — 발행 직전 인라인 검사.
           // 여기서 안 잡으면 이후 CI verify:strict 에서 run 전체가 실패한다 (가짜 발행 신호 방지).
-          const structure = analyzeStructure(refreshed.content);
+          // skipChartCheck: 자동 파이프라인은 chart frontmatter 를 생성하지 못하므로
+          // 차트 의무 검사는 제외 — 자동 발행분 차트는 운영자 후속 보강 (2026-08-26).
+          const structure = analyzeStructure(refreshed.content, { skipChartCheck: true });
           if (structure.fails.length > 0) {
             console.log(`  ⚠ V4 구조 위반 ${structure.fails.length}건 — drafts revert: ${targetFilename}`);
             for (const v of structure.fails) console.log(`    ❌ ${v}`);

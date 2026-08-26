@@ -70,6 +70,8 @@ interface Props {
    * G10 픽스: 그동안 인사이트 페이지 LD 가 0개여서 Discover 진입 자격 손실.
    */
   jsonld?: object | object[];
+  /** 리드 차트 — frontmatter `chart` 있는 글에서 라우트가 전달 (첫 화면, lazy 금지). */
+  leadChart?: { src: string; alt: string };
 }
 
 const {
@@ -88,6 +90,7 @@ const {
   ogImage,
   noindex = false,
   jsonld,
+  leadChart,
 } = Astro.props;
 
 const headerDate = formatKoreanDate(publishedAt);
@@ -147,6 +150,19 @@ const mergedJsonld: object[] = [...incomingJsonld, buildPersonLD()];
         updatedAt={updatedAt ?? publishedAt}
         correctionsCount={corrections.length}
       />
+      {leadChart && (
+        <figure class="lead-chart">
+          <img
+            src={leadChart.src}
+            alt={leadChart.alt}
+            width="1200"
+            height="675"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )}
       <slot />
       <AuthorCard name={author} />
       <CitationExport
@@ -210,6 +226,16 @@ const mergedJsonld: object[] = [...incomingJsonld, buildPersonLD()];
     max-width: var(--width-prose);
     margin: 0 auto;
     padding: 0 var(--width-gutter);
+  }
+  /* 리드 차트 — 본문 폭 반응형, 헤어라인 프레임 (DESIGN: radius·shadow 금지) */
+  .lead-chart {
+    margin: 0 0 1.8rem;
+  }
+  .lead-chart img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0.5px solid var(--color-ink-quat);
   }
   .article-body :global(p) {
     margin-bottom: 1.4rem;

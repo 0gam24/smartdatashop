@@ -141,6 +141,7 @@ if (howToLd) insightJsonLd.push(howToLd);
   ogImage={ogImage}
   noindex={hasPlaceholder}
   jsonld={insightJsonLd}
+  leadChart={data.chart ? { src: `/charts/insight/${entry.slug}.webp`, alt: data.chart.alt } : undefined}
 >
   <Tldr>{data.tldr}</Tldr>
   <Content />

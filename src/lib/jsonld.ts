@@ -32,8 +32,11 @@ function dynamicOgUrl(type: 'pulse' | 'insight', slug: string): string {
  * `ImageObject` 로 wrap 해 width/height 를 명시 — Google 이 다른 비율 자산이
  * 없음을 명시적으로 인지. 향후 1:1 / 4:3 자산 추가 시 본 헬퍼만 확장.
  */
-function buildImageArray(primaryUrl: string): Array<Record<string, unknown>> {
-  return [
+function buildImageArray(
+  primaryUrl: string,
+  chartUrl?: string,
+): Array<Record<string, unknown>> {
+  const images: Array<Record<string, unknown>> = [
     {
       '@type': 'ImageObject',
       url: primaryUrl,
@@ -41,6 +44,18 @@ function buildImageArray(primaryUrl: string): Array<Record<string, unknown>> {
       height: 630,
     },
   ];
+  // 리드 차트 (frontmatter chart) — 본문 실제 노출 이미지, 16:9 1200×675.
+  // OG 카드(제목 텍스트 위주)보다 콘텐츠 대표성이 높은 데이터 시각화라
+  // Discover "텍스트 이미지 지양" 권고 대응 이미지로 함께 발행.
+  if (chartUrl) {
+    images.push({
+      '@type': 'ImageObject',
+      url: chartUrl,
+      width: 1200,
+      height: 675,
+    });
+  }
+  return images;
 }
 
 /**
@@ -225,6 +240,9 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
     : dynamicOgUrl('pulse', entry.slug);
+  const chartImage = entry.data.chart
+    ? `${SITE_URL}/charts/pulse/${entry.slug}.webp`
+    : undefined;
   const stats = articleStats(entry.body);
 
   return {
@@ -244,7 +262,7 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
     wordCount: stats.wordCount,
     timeRequired: `PT${stats.minutes}M`,
     speakable: SPEAKABLE_SPEC,
-    image: buildImageArray(primaryImage),
+    image: buildImageArray(primaryImage, chartImage),
     author: {
       '@type': 'Person',
       name: AUTHOR_NAME,
@@ -276,6 +294,9 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
       ? entry.data.coverImage
       : `${SITE_URL}${entry.data.coverImage}`
     : dynamicOgUrl('insight', entry.slug);
+  const chartImage = entry.data.chart
+    ? `${SITE_URL}/charts/insight/${entry.slug}.webp`
+    : undefined;
   const stats = articleStats(entry.body);
 
   return {
@@ -295,7 +316,7 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
     wordCount: stats.wordCount,
     timeRequired: `PT${stats.minutes}M`,
     speakable: SPEAKABLE_SPEC,
-    image: buildImageArray(primaryImage),
+    image: buildImageArray(primaryImage, chartImage),
     author: {
       '@type': 'Person',
       name: AUTHOR_NAME,
