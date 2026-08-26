@@ -23,9 +23,11 @@
  *   - 본문 공백 제외 3,000자 미만 (미달 시 리서치 추가 또는 발행 보류 — 패딩 금지)
  *   - publishedAt frontmatter 파싱 실패 (게이트 침묵 우회 방지용 가시화)
  *
- * 검사 대상: publishedAt >= 2026-08-26 (KST) 발행분만.
+ * 검사 대상: publishedAt >= 2026-08-27 (KST) 발행분만.
  * 기발행 글은 소급 수정 금지(색인 보존) 원칙에 따라 검사 제외 —
  * 단 H2 시퀀스 비교의 "기준(비교 상대)"으로는 전체 글을 사용한다.
+ * (V4 채택일 2026-08-26 당일 이미 발행된 3편이 있어 하드 게이트는 익일부터 —
+ *  당일 이후 신규 작성분은 CLAUDE.md V4 룰 + writer.mjs 인라인 게이트가 커버)
  *
  * 사용:
  *   node scripts/verify-post-structure.mjs            # 사람이 읽는 표
@@ -48,7 +50,7 @@ import { pathToFileURL } from 'node:url';
 
 const ROOT = join(process.cwd(), 'src/content');
 const COLLECTIONS = ['pulse', 'insight'];
-const CUTOFF = '2026-08-26'; // publishedAt (KST 날짜 문자열) 이 이 날짜 이상이면 검사
+const CUTOFF = '2026-08-27'; // publishedAt (KST 날짜 문자열) 이 이 날짜 이상이면 검사
 
 // ── 파싱 헬퍼 ────────────────────────────────────────────
 

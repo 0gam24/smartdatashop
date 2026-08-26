@@ -132,7 +132,7 @@ TYPE별 자연 골격 예 (강제 골격 아님 — 검색자 질문이 해결�
 
 **V4-9. 자동 검증**
 
-- `npm run verify:structure` (`scripts/verify-post-structure.mjs`) 가 **2026-08-26 이후 발행분**(publishedAt 기준)의 구조 위반을 검사: 체크리스트성 블록 2개+, 산문 "→" 2회+, 산문 전각 대시, FAQ 고정 정의 문형, 금지 문형, H2 시퀀스 완전 복제(fail)·슬롯 시퀀스 유사(warn). `verify` / `verify:strict` 체인 + build-check CI 편입. writer.mjs 자동 발행 경로는 발행 직전 인라인으로 동일 검사.
+- `npm run verify:structure` (`scripts/verify-post-structure.mjs`) 가 **2026-08-27 이후 발행분**(publishedAt 기준, 채택일 8/26 당일 기발행 3편 면제)의 구조 위반을 검사: 체크리스트성 블록 2개+, 산문 "→" 2회+, 산문 전각 대시, FAQ 고정 정의 문형, 금지 문형, H2 시퀀스 완전 복제(fail)·슬롯 시퀀스 유사(warn). `verify` / `verify:strict` 체인 + build-check CI 편입. writer.mjs 자동 발행 경로는 발행 직전 인라인으로 동일 검사.
 - 기발행 글(컷오프 이전)은 소급 수정 금지(색인 보존) — 검사 제외.
 - 게이트는 백스톱이다 — 통과가 곧 "구조 다양화 충분"을 뜻하지 않는다. 발행 전 직전 5편의 H2 골격과 눈으로 대조하라.
 
