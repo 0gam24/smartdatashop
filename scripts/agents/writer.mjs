@@ -17,17 +17,24 @@
  *
  * ADR 0006 4기준 안전망:
  *   - tldr 의 `[검수 후]` placeholder 는 그대로 — 자동 noindex 유지
- *   - frontmatter sources[].url / publishedAt 은 변경 X
+ *   - frontmatter sources[].url 은 변경 X. publishedAt 은 *발행 시점* 에 실제 시각으로
+ *     갱신 (datePublished 정확성 + verify:structure 컷오프 우회 방지 — draft 의
+ *     RSS pubDate 가 과거면 구조 게이트를 건너뛰는 구멍이 있었다, 2026-08-26)
  *   - 운영자가 src/content/pulse/ 로 이동 + tldr 검수 시점에 최종 발행
  *
  * 환각 방지 가드:
  *   - prompt 에 "1차 출처에 없는 새 수치/일자/인용 절대 금지" 명시
- *   - 본문 max_tokens 1500 (긴 환각 단락 차단)
- *   - 운영자 검수 + tldr 검수 게이트가 최후 방어선
+ *   - 발행 직전 Sonnet fact-check 게이트 + 운영자 검수가 최후 방어선
+ *
+ * 구조 룰 (2026-08-26 V4 구조 엔진 — src/content/CLAUDE.md "포스팅 구조 엔진 V4"):
+ *   - 고정 템플릿 금지 — 검색의도별 TYPE 선택, H2 골격 글마다 상이
+ *   - 체크리스트성 블록 최대 1개 / FAQ 조건부 / 마무리 재요약 금지
+ *   - 발행 후 scripts/verify-post-structure.mjs 가 구조 위반 검사 (verify:structure)
  */
 
-import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, renameSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
+import { analyzeStructure } from '../verify-post-structure.mjs';
 
 const REPO_ROOT = process.cwd();
 const DRAFTS_DIR = resolve(REPO_ROOT, 'daily-queue/drafts');
@@ -90,25 +97,45 @@ const SYSTEM_PROMPT = `당신은 한국 데이터 저널 "스마트데이터샵"
 1. 1차 출처에 없는 새 수치·일자·인용·통계·예측 절대 금지 (ADR 0006)
 2. 가격 예측·전망·"오를 것/내릴 것" 절대 금지
 3. 추측·정치적 입장·종교적 권유 절대 금지
+4. 1인칭 경험("직접 해보니/신청해보니") 절대 금지
+5. 자매·외부 사이트 cross-link 절대 금지 (ADR 0010)
 
 ═══ 출력 형식 — 반드시 JSON only (코드 펜스·다른 텍스트 절대 금지) ═══
 {
-  "tldr": "200자 이내 한 문장 요약 — '[검수 후]' 같은 placeholder 절대 금지. 'X 는 Y 다' 정의 문장 권장",
-  "body": "마크다운 본문 1,500~2,500자"
+  "tldr": "90~150자 목표(상한 200자) 요약. placeholder 절대 금지, 'X 는 Y 다' 정의 문장 권장",
+  "body": "마크다운 본문. 공백 제외 3,000자 이상, 중복 없는 분량"
 }
 
 ═══ tldr 룰 ═══
-- 200자 이내 (정확히)
-- 핵심 사실 + 정의 문장 1개
+- 목표 90~150자 (상한 200자)
+- 핵심 사실 + 정의 문장 1개, 키워드 반복 금지
+- 전각 대시(—) 금지 (제목·tldr 포함 — 구조 게이트가 하드 차단)
 - placeholder 토큰 (\`[검수 후]\`, \`[검수 후 보강]\` 등) 절대 사용 X
 - 첫 발표 기관·일자 명시 (예: "정책브리핑이 2026년 5월 12일 발표한")
 
-═══ body 마크다운 구조 ═══
-- **첫 단락 (도입)** — 핵심 사실 1-2 문장 + 1차 출처 명시 + [^1]
-- **## 1. 배경 / 무엇이 발표됐나** — 1차 출처 핵심 사실 + 인용 단락 (> 원문) + [^1]
-- **## 2. 본인 영향 / 시사점** — 페르소나별 시사점 + 표 1개 권장
-- **## 3. 본인 액션 / 다음 단계** — 본인 체크리스트 또는 시나리오 + 자매 cross-ref
-- **## 자주 묻는 질문** — Q&A 2-3개
+═══ body 구조 — V4 구조 엔진 (고정 템플릿 금지) ═══
+1. 이 발표의 핵심 검색 질문(PRIMARY INTENT)을 먼저 정하고, 검색의도에 맞는 TYPE 을 고른다:
+   A 문제해결 / B 제도설명 / C 비교분석 / D 계산 / E 사례분석 / F 변경사항 (조합 가능)
+2. H2 는 실제 질문을 해결하는 것만 — 개수 채우기 섹션 금지. 골격은 글마다 달라야 한다.
+   "배경→영향→액션→FAQ" 같은 고정 순서를 매 글 반복하지 마라 (구글 scaled content 신호).
+3. 도입 첫 단락: 검색자가 가장 궁금한 답(핵심 수치·조건) + 1차 출처 명시 + [^1].
+   "이 글에서는 ~을 정리한다" 류 고정 도입 문형 금지.
+4. 독창적 가치 2개 이상 (1차 출처 사실 범위 내에서): 직접 계산("편집자 계산: 식"),
+   조건별 시나리오, 판단 기준 제공, 실무 마찰 지점, 수치의 의미 해석, 타임라인, 분류 기준 등.
+5. 체크리스트성 블록(체크리스트/체크포인트/확인사항/점검)은 문서 전체 최대 1개.
+6. FAQ 는 조건부 — 본문이 답하지 않은 실제 후속 질문·예외·경계 조건만.
+   본문 재서술 Q&A 금지, "Q1. X는 무엇인가요?" 고정 정의 문형 금지. 새 정보 없으면 FAQ 생략.
+7. 마무리 = 본문 재요약 금지. 독자가 다음에 확인할 공식 자료·수치·조건 제시 (1~2문단).
+8. 표는 비교·데이터 구조화가 필요할 때만. 표 직후 해설은 표에 없는 함의만 — 표 수치 재나열 금지.
+9. 해석·추정은 라벨 의무: "편집자 해석:" / "편집자 추정(가정: ~):". 사실과 혼동 금지.
+
+═══ 표현 룰 ═══
+- 산문 "→" 화살표 단계 표현 글 전체 최대 1회 (표 셀 0회)
+- 전각 대시(—) 산문 금지 (각주 서지 예외)
+- 습관 표현 금지: "첫째,/둘째,/셋째,", "결론적으로", "정리하면,", "다시 말해", "쉽게 말하면", "표에서 보듯", "표를 풀어 보면"
+- 같은 핵심 수치를 도입·본문·표·FAQ 에 반복 배치 금지
+- 관련주·테마주 언급 시 (V4-7): 기업별 연결 근거 4단계([직접 관련]/[간접 관련]/[시장 테마상 연관]/[관련성 낮음]) 명시,
+  하드 데이터(매출·수주 등) 1개+ 없이 종목 나열 금지, 리스크 병기, 목표주가·수혜 확정 표현 절대 금지
 
 ═══ 1차 출처 인용 룰 ═══
 - footnote [^1] 마커 본문에 **3~6회** 자연 분포 (sources 순서)
@@ -117,9 +144,9 @@ const SYSTEM_PROMPT = `당신은 한국 데이터 저널 "스마트데이터샵"
 - footnote 정의 (\`[^1]: 출처 — \\\`url\\\`\`) 본문 끝에 1줄 추가 (frontmatter sources 와 별개)
 
 ═══ 톤·언어 ═══
-- 한국어, 드라이한 Reuters/Bloomberg 톤
-- 단호한 문장
-- 독자 호명: "본인"`;
+- 한국어, 드라이한 Reuters/Bloomberg 톤 (기존 문체 유지 — 이번 개편은 구조만 변경)
+- 단호한 문장, 한 문장에 하나의 핵심
+- 독자 호명: "독자" (기존 "본인" 호명 폐기 — 표현 자연화 룰)`;
 
 async function generateBody(meta) {
   const userMsg = `## 1차 출처 정보
@@ -131,7 +158,7 @@ async function generateBody(meta) {
 ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
 
 ## 작성
-위 1차 출처를 바탕으로 tldr (200자 이내) + body (1500-2500자) JSON 으로 작성.`;
+위 1차 출처를 바탕으로 tldr (90~150자 목표) + body (공백 제외 3,000자+, V4 구조 엔진) JSON 으로 작성.`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -142,7 +169,7 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 4000,
+      max_tokens: 12000,
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: userMsg }],
     }),
@@ -153,6 +180,9 @@ ${meta.sourceQuote ? `> ${meta.sourceQuote}` : '(인용문 없음)'}
     throw new Error(`Anthropic API ${res.status}: ${body.slice(0, 200)}`);
   }
   const data = await res.json();
+  if (data.stop_reason === 'max_tokens') {
+    throw new Error('출력 상한(max_tokens) 도달 — 본문 절단, 폐기');
+  }
   const text = data.content?.[0]?.text;
   if (typeof text !== 'string' || text.length < 50) {
     throw new Error(`Empty/short response: ${text?.slice(0, 100) ?? '(no text)'}`);
@@ -338,6 +368,21 @@ function publishedFilename(draftFilename) {
   return draftFilename.replace(/^draft-pulse-/, '');
 }
 
+/**
+ * 발행 시점 기준으로 publishedAt frontmatter 와 파일명 날짜 접두사를 갱신.
+ *
+ * draft 의 publishedAt 은 RSS pubDate(최대 14일 과거)라, 그대로 발행하면
+ * (a) NewsArticle datePublished 가 실제 발행일과 어긋나고 (06-site-specific-guides)
+ * (b) verify:structure 의 publishedAt 컷오프 게이트를 통째로 우회한다.
+ */
+function refreshPublishDate(content, filename) {
+  const kstIso = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().replace('Z', '+09:00');
+  const kstDate = kstIso.slice(0, 10);
+  const updated = content.replace(/^publishedAt:\s*"[^"]*"\s*$/m, `publishedAt: "${kstIso}"`);
+  const renamed = filename.replace(/^\d{4}-\d{2}-\d{2}-/, `${kstDate}-`);
+  return { content: updated, filename: renamed };
+}
+
 /** 파일명 규약(YYYY-MM-DD-slug)의 날짜 접두사 제거 — src/lib/korean.ts cleanPulseSlug 와 동일 규칙. */
 function urlSlugOf(filename) {
   return filename.replace(/\.mdx$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
@@ -417,12 +462,26 @@ async function main() {
         const verdict = fcResult.verdict;
 
         if (verdict === 'ok') {
-          // 발행: drafts → src/content/pulse
+          // 발행: drafts → src/content/pulse (발행 시점 publishedAt·파일명 날짜 갱신)
           mkdirSync(PUBLISH_DIR, { recursive: true });
-          const targetFilename = publishedFilename(filename);
+          const refreshed = refreshPublishDate(newContent, publishedFilename(filename));
+          const targetFilename = refreshed.filename;
           const targetPath = resolve(PUBLISH_DIR, targetFilename);
           const collidingFile = findSlugCollision(targetFilename);
-          if (existsSync(targetPath)) {
+          // V4 구조 게이트 (verify-post-structure 와 동일 로직) — 발행 직전 인라인 검사.
+          // 여기서 안 잡으면 이후 CI verify:strict 에서 run 전체가 실패한다 (가짜 발행 신호 방지).
+          const structure = analyzeStructure(refreshed.content);
+          if (structure.fails.length > 0) {
+            console.log(`  ⚠ V4 구조 위반 ${structure.fails.length}건 — drafts revert: ${targetFilename}`);
+            for (const v of structure.fails) console.log(`    ❌ ${v}`);
+            writeFileSync(path, originalContent, 'utf8'); // revert
+            heldForReview.push({
+              filename,
+              reason: 'structure-fail',
+              structureFails: structure.fails,
+              factCheck: fcResult,
+            });
+          } else if (existsSync(targetPath)) {
             console.log(`  ⚠ 대상 파일 이미 존재 — drafts revert: ${targetFilename}`);
             writeFileSync(path, originalContent, 'utf8'); // revert
             heldForReview.push({ filename, reason: 'target-exists', factCheck: fcResult });
@@ -437,7 +496,8 @@ async function main() {
               factCheck: fcResult,
             });
           } else {
-            renameSync(path, targetPath);
+            writeFileSync(targetPath, refreshed.content, 'utf8');
+            unlinkSync(path);
             published.push({ from: filename, to: targetFilename, bodyLength: generated.body.length });
             console.log(`  ✓ 자동 발행 → src/content/pulse/${targetFilename}`);
           }
@@ -478,6 +538,9 @@ async function main() {
       lines.push(`- ${h.filename.slice(0, 60)}`);
       if (h.reason === 'slug-collision') {
         lines.push(`  기존 글과 슬러그 중복: ${h.collidesWith}`);
+      } else if (h.reason === 'structure-fail') {
+        const extra = h.structureFails.length > 1 ? ` 외 ${h.structureFails.length - 1}건` : '';
+        lines.push(`  V4 구조 위반: ${h.structureFails[0]}${extra}`);
       } else {
         lines.push(`  ${h.summary || h.verdict}`);
       }

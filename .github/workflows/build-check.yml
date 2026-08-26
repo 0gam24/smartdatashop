@@ -39,6 +39,11 @@ jobs:
       - name: Install deps
         run: npm ci
 
+      # V4 구조 엔진 게이트 — 2026-08-26 이후 발행분의 구조 위반 차단
+      # (scripts/verify-post-structure.mjs — 네트워크 무의존이라 PR 게이트 안전)
+      - name: Verify post structure (V4)
+        run: node scripts/verify-post-structure.mjs --strict
+
       # 타입/콘텐츠 스키마 검사
       - name: Astro check
         run: npx astro check
