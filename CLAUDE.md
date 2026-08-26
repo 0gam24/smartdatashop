@@ -24,24 +24,17 @@
 
 **폐기 사유 (2026-05-24)**: 본 사이트 페이지에서 자매 링크 타고 들어가도 자세한 내용 부재 — 사용자 경험 저하. "한 덩어리" 컨셉이 실제 작동하지 않음. 본 사이트 단독으로 모든 콘텐츠·SEO·수익화 완결한다.
 
-## 위계
+## 위계 (2026-08-26 docs 재편 반영)
 
-위계: `docs/PURPOSE.md` v1.1 > 본 CLAUDE.md > ADR > STRUCTURE.
+위계: **본 CLAUDE.md (최상위)** > 영역별 CLAUDE.md (src/content, src/components) > `docs/references/` 라이브러리 > STRUCTURE.md.
 
-폐기된 헌법 문서 (2026-05-24, ADR 0010):
-- `docs/_archived/PROJECT_DEFINITION.md` — 5~9 사이트 네트워크 그림 (참조용 archive)
-- `docs/_archived/NETWORK.md` — 네트워크 공통 헌법 (참조용 archive)
-- `docs/_archived/CATEGORY_MAP.md` — 5 사이트 카테고리 매핑 (참조용 archive)
-
-위 3 문서는 현행 하네스에 영향 없음. 호기심 차원의 참조만 가능.
+구 헌법 문서 체계(`docs/PURPOSE.md` v1.1, `docs/decisions/` ADR 0000~0011, dashboard/operations/PLANNING/DESIGN 등)는 2026-08-26 docs 재편으로 **폐기** — 실질 조항(수익 목표·AdSense 정책·ADR 0006 4기준·발행 방침·디자인 금지 룰)은 전부 본 파일에 인라인되어 있고, 원문은 git 이력으로만 참조한다: `git show 69d20bd:docs/PURPOSE.md` / `git show 69d20bd:docs/decisions/0006-formal-publish-criteria.md`. 본문에서 "ADR 0006" 등 번호 인용은 이 이력 문서를 가리킨다.
 
 ## 첫 작업 진입 시 반드시 읽을 파일 (우선순위 순)
-1. `docs/PURPOSE.md` — 최상위 anchor (5분)
-2. `docs/dashboard.md` — 현재 상태 (30초)
-3. `docs/architecture.md` — 폴더 구조 / 어디에 무엇을 둘지
-4. `docs/AGENTS.md` — 자동화 에이전트 운영 모델
-5. `docs/PLANNING.md` — 12개월 KPI
-6. `docs/DESIGN.md` — 디자인 토큰 / 활자 시스템
+1. `docs/references/00-목차-INDEX.md` — 참고 문서 라이브러리 진입점 (260문서, G/H 공식 가이드 1순위)
+2. `today.md` / `OPERATOR_INBOX.md` — 현재 상태 (빌드 자동 생성, 구 dashboard 대체)
+3. 콘텐츠 작업 시: `src/content/CLAUDE.md` (자동 상속 — 포스팅 구조 엔진 V4 포함) + `docs/references/F-프로젝트별/스마트데이터샵-포스팅구조엔진-V4.md` (라이브러리 정본)
+4. 구조 파악 시: `STRUCTURE.md`
 
 ## 멀티 에이전트 자체 결정 원칙 (2026-05-26 운영자 영구 지시, ADR 0011)
 
@@ -53,72 +46,64 @@
 - 🔵 **SEO** — 구글·네이버 검색 노출
 - 🟢 **AEO** — ChatGPT·Perplexity 답변 엔진 노출
 - 🟣 **GEO** — LLM 인용성·생성형 엔진
-- 🟠 **운영자 시간 (1.5h/일 한도)** — PURPOSE.md §2
+- 🟠 **운영자 시간 (1.5h/일 한도)** — 구 PURPOSE.md §2 (조항 인라인 승계)
 - 🔴 **AdSense 리스크** — 검토 기간 동결 정책 + ADR 0006 4기준
 - ⚖ **편집자·법무** — 단정 표현·명예훼손·정확성
 - 📊 **데이터 저널** — 시각화·인용성
 
-**합의 형식**: 에이전트별 ✅/⚠/❌ 표 + PURPOSE.md 항목 매핑 근거 + 즉시 실행
+**합의 형식**: 에이전트별 ✅/⚠/❌ 표 + 본 CLAUDE.md 조항 매핑 근거 + 즉시 실행
 
 **자체 결정 금지 (운영자 결정 필요)**:
 - 외부 결제·도메인·DNS·Cloudflare env var 변경
 - AdSense 계정·GitHub repo 신설
-- 사업 모델 근본 변경 (PURPOSE.md major bump)
-- ADR 신설은 운영자 명시 지시 시만
+- 사업 모델 근본 변경 (수익 목표·사이트 정체성 차원)
+- 본 CLAUDE.md 헌법급 조항 신설·개정은 운영자 명시 지시 시만
 
-**위계 충돌 시 우선순위**: §1 수익 > §5 절대 마지노선 > §2 운영 > §3 콘텐츠 > §4 사이트 운영
+**위계 충돌 시 우선순위**: 수익(AdSense) > 절대 마지노선(fabrication 0·검수 토큰 0) > 운영(1.5h/일) > 콘텐츠 > 사이트 운영
 
-## docs/google-seo-vibe-coding/ 적극 참조 룰 (2026-05-26 운영자 지시)
+## docs/references/ G·H 공식 가이드 적극 참조 룰 (2026-05-26 운영자 지시 → 2026-08-26 라이브러리 개편)
 
-> 본 폴더는 **Google Search Central 공식 가이드의 한국어 정제판** — 매 펄스/페이지/컴포넌트 작성 시 의무 참조.
+> `docs/references/G-구글-공식가이드/`(Google Search Central 원문 174문서)와 `docs/references/H-네이버-공식가이드/`(서치어드바이저 원문 55문서)는 **1차 출처 사본** — 매 펄스/페이지/컴포넌트 작성 시 의무 참조. 진입점: `docs/references/00-목차-INDEX.md`. 구 `docs/google-seo-vibe-coding/` 폴더는 폐기(`_archive/google-seo/` 보존), 본 절이 대체한다.
 
-**📦 7개 md 파일 (`docs/google-seo-vibe-coding/`)**:
-- `01-search-essentials.md` — Google Search Essentials (기술 요구사항·스팸 정책)
-- `02-seo-fundamentals.md` — SEO 기본 (URL·콘텐츠·링크·이미지 원칙)
-- `03-crawling-indexing.md` — 크롤링·색인 (Googlebot·robots·sitemap)
-- `04-ranking-appearance.md` — **순위·노출 (title·snippet·JSON-LD·E-E-A-T)** ★ 콘텐츠 작업 1순위
-- `05-monitoring-debugging.md` — Search Console·Core Web Vitals
-- `06-site-specific-guides.md` — **§뉴스 사이트** ★ 본 사이트 해당
-- `07-vibe-coding-seo-template.md` — 즉시 적용 템플릿 + 체크리스트
+**우선순위 (문서 충돌 시)**:
+1. `G-구글-공식가이드/` · `H-네이버-공식가이드/` — 스펙·정책의 최종 근거
+2. `D-SEO-GEO/`(D1~D5) 등 A~F 내부 요약 — 실행 방법·프로젝트 적용
+3. `_archive/` — 이력 참고용, **작업 근거 사용 금지**
 
-**🔴 매 펄스 발행 시 의무 적용 (4 파일)**:
-1. `04-ranking-appearance.md` — title 60자 내, meta description 155자 내, NewsArticle LD, E-E-A-T 신호
-2. `06-site-specific-guides.md` §뉴스 — NewsArticle schema · 정확한 `datePublished`·`dateModified` · 뉴스 sitemap
-3. `07-vibe-coding-seo-template.md` 최종 배포 전 체크리스트 — 글 발행 PR 직전 점검 의무
-4. `02-seo-fundamentals.md` — URL slug 영문 소문자/하이픈, 내부 링크 자연어, 이미지 alt
+**🔴 매 펄스 발행 시 의무 적용** (구 04·06·07·02 체크의 실질 승계 — 상세 체크 항목은 `src/content/CLAUDE.md` §Google SEO 발행 전 체크리스트):
+1. **title·snippet** — `G/04-appearance-검색결과표시/title-link.md` + `snippet.md`: title 목표 30~40자(상한 60), tldr 목표 90~150자(상한 200)
+2. **NewsArticle LD** — `G/05-structured-data-구조화데이터/article.md` + `sd-policies.md`: 정확한 `datePublished`·`dateModified`
+3. **뉴스 sitemap·게시일** — `G/03-crawling-indexing-크롤링색인/sitemaps/news-sitemap.md` + `G/04-appearance-검색결과표시/publication-dates.md`
+4. **E-E-A-T** — `G/02-fundamentals-기본/creating-helpful-content.md`: 1차 출처·발표 일자·저자 신호
+5. **URL·링크·이미지** — `G/03-crawling-indexing-크롤링색인/url-structure.md` + `links-crawlable.md` + `G/04-appearance-검색결과표시/google-images.md`
+6. **글 구조** — `docs/references/F-프로젝트별/스마트데이터샵-포스팅구조엔진-V4.md` (scaled content 회피 — `npm run verify:structure` 게이트)
 
-**적용 의무**:
-- 새 펄스 작성 시 04 + 06 + 07 체크리스트 자체 검증 후 PR
-- 새 페이지/컴포넌트 작성 시 02 + 04 + 07 적용
-- 사이트 구조 변경 시 03 (크롤링·색인) + 06 (사이트별) 확인
-- 매월 하네스 리뷰 시 05 (모니터링) 항목 점검
+**작업 유형별 적용 의무**:
+- 새 페이지/컴포넌트: `G/02-fundamentals-기본/seo-starter-guide.md` + 위 1·5 + `D-SEO-GEO/D4-메타데이터-기본SEO.md`(Astro 메타 템플릿)·`D3-구조화데이터-JSON-LD.md`
+- 사이트 구조 변경: `G/03-crawling-indexing-크롤링색인/` + `G/08-crawling-크롤링전문/` (robots.txt·크롤러 목록은 2026년 문서 분리로 **08**에 있음)
+- 매월 하네스 리뷰: `G/06-monitor-debug-모니터링/search-console-start.md` + `debugging-search-traffic-drops.md` + `G/04-appearance-검색결과표시/core-web-vitals.md`
+- 네이버 대응: H 폴더는 Google로 대체 불가 (Yeti·meta keywords·RSS 제출·IndexNow) — `H-네이버-공식가이드/00-목차.md` 진입
+- GEO/AEO 작업: `G/02-fundamentals-기본/ai-optimization-guide.md` **먼저** (llms.txt·청킹은 Google 검색에 무효 공식 명시) → `D-SEO-GEO/D5`는 ChatGPT·Perplexity 등 Google 외 엔진 전용
 
-**위계**: `docs/PURPOSE.md` v1.1 > ADR > 본 CLAUDE.md > **docs/google-seo-vibe-coding/** > docs/references/06,07 (네이버·구글 종합)
+## docs/references/ 내부 요약(A~F) 참조 룰 (2026-05-09 합의 → 2026-08-26 개편)
 
-본 폴더가 *공식 출처 기반* 이므로 `docs/references/` (외부 자료 정리본) 보다 정확도 우선. 두 폴더 충돌 시 `google-seo-vibe-coding/` 우위.
-
-## docs/references/ 적극 참조 룰 (2026-05-09 합의)
-
-7 참고 자료 우선순위 — 매 작업 진입 시 해당 자료 검증 의무.
+구 references 01~07 은 `_archive/` 이동·보존. 현행 참조 대상:
 
 **🏆 최우선 (모든 콘텐츠·페이지 작업)**:
-- `docs/references/06-구글-SEO-종합.md` (27KB) — E-E-A-T / AI 콘텐츠 정책 §5.3 / 스팸 §6 / URL 구조 §8 / Discover
-- `docs/references/07-네이버-SEO-종합.md` (43KB) — C-Rank / D.I.A. §3 / Yeti / 서치어드바이저 §5 / RSS 제출 §7
+- `D-SEO-GEO/D1-구글-SEO.md` — 구 06-구글-SEO-종합 후속: E-E-A-T / AI 콘텐츠 정책 / 스팸 / URL·canonical / Discover
+- `D-SEO-GEO/D2-네이버-SEO.md` — 구 07-네이버-SEO-종합 후속: C-Rank·D.I.A. / Yeti / 서치어드바이저 / 유사문서
 
 **★ 적극 (매 작업 시작·매 모듈 작성)**:
-- `01-바이브코딩-왜-실패하는가.md` — 노트-First / 시간 예산 / ADR / 에러로그
-- `02-안티그래비티-바이브코딩.md` — 모듈 분리 1줄 기준 / 컨텍스트 엔지니어링
-- `03-함께해요-하네스-엔지니어링.md` — 4 신호 / Sub-agent 4요소 / 5계층 설정
+- `A-바이브코딩-방법론/A1-바이브코딩-핵심원칙.md` — 구 01~05 통합본: 3레이어 OS / 노트-First·시간 예산 / 모듈 분리 1줄 기준 / 컨텍스트 엔지니어링 / 하네스 제어
 
-**선택 (큰 결정·보안 결정)**:
-- `04-통합-3레이어-OS.md` — 외부/실행/제어 매트릭스
-- `05-Hermes-Agent-멀티에이전트.md` — 격리 수준 / Claude Code vs Hermes
+**선택 (구현 시 코드 템플릿)**:
+- `D-SEO-GEO/D3-구조화데이터-JSON-LD.md` / `D4-메타데이터-기본SEO.md` — 구 07-vibe-coding-seo-template 의 템플릿 역할 승계
 
-**적용 의무**:
-- 새 펄스/인사이트/가이드북 챕터 작성 시 06 §5.3 + 07 §3 명시 검증
-- 새 페이지 작성 시 06 §7~8 + 07 §5~6 점검
-- 매 컴포넌트 작성 시 02 P2 (모듈 분리 1줄 기준) 자문
-- CLAUDE.md / Hook / Sub-agent 작업 시 03 4 신호 매핑
+**적용 의무** (기존 실질 유지):
+- 새 펄스/인사이트/챕터 작성 시 D1(AI 콘텐츠 정책) + D2(C-Rank/D.I.A.) 검증 — 최종 근거는 `G/01-essentials-필수정책/spam-policies.md` + `H/03-콘텐츠 가이드라인/`
+- 매 컴포넌트 작성 시 A1 모듈 분리 1줄 기준 자문
+- CLAUDE.md / Hook / Sub-agent 작업 시 A1 제어 레이어 매핑
+- D 요약은 G·H 공식의 하위 — 충돌 시 항상 G·H 우선
 
 ## 디렉토리별 추가 규칙 (자동 상속)
 - `src/components/CLAUDE.md` — 컴포넌트 작성 규칙
@@ -152,7 +137,7 @@
 - WebFetch 로 본문 추출 후 본인 직접 대조
 - 미발견 시 Layer 1 explanatory framing 으로 회귀 ("1차 출처 원본 참조" 류)
 
-### 디자인 시스템 (DESIGN.md v1.0)
+### 디자인 시스템 (구 DESIGN.md v1.0 — 조항 인라인 승계, 원문은 git 이력)
 <!-- 한지 톤 + 와인 액센트 단일색 시안 — 시각 일관성 핵심 -->
 - 카테고리별 컬러 코딩 금지 (활자 라벨로만 구분)
 - box-shadow / linear-gradient / border-radius ≥ 12px 금지
@@ -214,7 +199,7 @@ system-reminder 의 `currentDate` 는 *세션 시작 시점* 기준이며, 자�
 <!-- book 19470 Mitchell Hashimoto -->
 - 같은 교정 두 번 반복하면 즉시 본 CLAUDE.md 또는 영역 CLAUDE.md에 반영
 - 또는 `.claude/settings.json` Hook으로 영구 차단
-- `docs/error-log.md`에 자산화
+- 메모리(`memory/`)에 자산화 (구 docs/error-log.md 는 2026-08-26 폐기 — 이력은 git 참조)
 
 ## 권한
 - Git 커밋: 명시 사용자 요청 시만
@@ -252,8 +237,8 @@ system-reminder 의 `currentDate` 는 *세션 시작 시점* 기준이며, 자�
 재신청 권장 시점: 위 원본 가치 작업을 1~2주 누적해 "양산"이 아닌 "심층 저널" 신호가 쌓인 뒤. 해제 조건: AdSense 콘솔 "승인됨" 확인 시 본 섹션 폐기.
 
 ## 운영 사이클
-- 매 작업 세션 시작/종료: `docs/operations.md` 체크리스트
-- 매주: error-log.md 점검
+- 매 작업 세션 시작/종료: `OPERATOR_INBOX.md` (빌드 자동 생성) 펜딩 액션 확인
+- 매주: `npm run weekly` 리포트 점검
 - 매월: 하네스 정기 리뷰 (book 19470 P7)
 
 ## 변경 시 이 파일은 별도 PR
