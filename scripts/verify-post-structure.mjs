@@ -265,6 +265,12 @@ export function analyzeStructure(text, opts = {}) {
       fails.push(`표 재서술 개시 문형 "${phrase}" — 표 직후 해설은 표에 없는 함의만 (V4-4)`);
     }
   }
+  // 편집자 라벨 문형 — 사실/해석 구분은 자연어로 (2026-08-26 운영자 지시, V4-3 개정)
+  for (const phrase of ['편집자 계산', '편집자 해석', '편집자 추정']) {
+    if (prose.includes(phrase)) {
+      fails.push(`고정 라벨 문형 "${phrase}" — 해석·계산 성격은 문장으로 구분 ("대입해 계산하면"/"~로 읽힌다", V4-3)`);
+    }
+  }
   if (prose.includes('첫째,') && prose.includes('둘째,')) {
     fails.push('"첫째,/둘째," 열거 문형 — 금지 습관 표현 (V4-5)');
   }
