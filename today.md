@@ -1,8 +1,13 @@
-# Today — 2026-08-27 (목) (KST)
+# Today — 2026-08-28 (금) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-27 (목) — 오늘
+## 2026-08-28 (금) — 오늘
+
+- 📝 발행 **1건**:
+  - [종부세 일시적 2주택 특례, 9월 16일부터 신청해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-house-count-exclusion/) — 종합부동산세 1세대1주택자 판단 시 주택 수 산정 제외 특례는 1주택 외에 신규주택·상속주택 등 5가지 유…
+
+## 2026-08-27 (목)
 
 - 📝 발행 **1건**:
   - [국내주식 양도세 예정신고 8월 31일, 대주주 기준과 세율](https://smartdatashop.kr/tax-finance/stock-capital-gains-preliminary-filing/) — 국내주식 양도소득세 예정신고는 올 상반기 상장주식 대주주와 장외 소액주주, 비상장주식 양도자가 8월 31일…
@@ -70,13 +75,6 @@
   - [부당해고 구제신청, 3개월 이내 노동위원회 신청 절차](https://smartdatashop.kr/policy/unfair-dismissal-remedy/) — 부당해고 구제신청은 정당한 이유 없이 해고당한 근로자가 노동위원회에 원직복직 등 구제를 요구하는 제도다. …
   - [보장성보험료 세액공제, 100만원 한도 12% 장애인전용 15%](https://smartdatashop.kr/tax-finance/insurance-premium-tax-credit/) — 보장성보험료 세액공제는 근로소득자가 본인과 부양가족을 위해 낸 보장성보험료를 연말정산에서 세금으로 돌려주는…
   - [직장가입자 소득월액보험료, 월급 외 소득 2천만원 초과 건보료](https://smartdatashop.kr/tax-finance/off-payroll-income-health-premium/) — 소득월액보험료는 직장가입자가 월급 외에 이자·배당·임대·사업 소득을 연 2,000만원 넘게 벌 때 그 초과…
-
-## 2026-08-14 (금)
-
-- 📝 발행 **3건**:
-  - [부녀자공제 50만원 한부모공제 100만원, 요건과 중복 정리](https://smartdatashop.kr/tax-finance/single-parent-woman-deduction/) — 부녀자공제와 한부모공제는 기본공제 150만원에 더해지는 연말정산 추가공제다. 부녀자공제는 종합소득금액 3,…
-  - [월세 현금영수증 소득공제, 세액공제 못 받을 때 받는 법](https://smartdatashop.kr/tax-finance/monthly-rent-cash-receipt/) — 월세 현금영수증 소득공제는 월세를 현금영수증으로 등록해 신용카드등 사용금액 소득공제에 30% 공제율로 넣는…
-  - [국민연금 장애연금 2026, 장애등급 1급 100% 4급 일시금 225%](https://smartdatashop.kr/policy/national-pension-disability/) — 국민연금 장애연금은 가입 중 생긴 질병이나 부상으로 장애가 남았을 때 등급별로 기본연금액의 60~100%를…
 
 ---
 
