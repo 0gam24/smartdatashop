@@ -1,8 +1,13 @@
-# Today — 2026-08-29 (토) (KST)
+# Today — 2026-08-30 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-29 (토) — 오늘
+## 2026-08-30 (일) — 오늘
+
+- 📝 발행 **1건**:
+  - [2027년 7월 아이맞이지원금, 첫만남이용권 대신 최대 2000만원](https://smartdatashop.kr/policy/child-welcome-support-fund-2027/) — 아이맞이지원금은 2027년 7월 이후 출생아에게 첫만남이용권 대신 주는 일시금으로, 첫째 1000만원부터 …
+
+## 2026-08-29 (토)
 
 - 📝 발행 **1건**:
   - [암표 팔면 최대 50배 과징금, 8월 28일부터 시행](https://smartdatashop.kr/policy/ticket-scalping-penalty-50x/) — 암표 부정판매 과징금 강화는 문화체육관광부가 8월 28일부터 시행한 공연법·국민체육진흥법 시행령 개정으로,…
@@ -66,20 +71,6 @@
   - [새출발기금 2026, 자영업자 채무조정 원금감면 최대 90%](https://smartdatashop.kr/tax-finance/fresh-start-fund-debt-relief/) — 새출발기금은 빚 상환이 어려워진 자영업자·소상공인의 채무를 조정해 주는 정부 프로그램이다. 90일 이상 연…
   - [탄소중립포인트 2026, 전기 아끼면 최대 20만원 자동차 10만원](https://smartdatashop.kr/policy/carbon-neutral-point/) — 탄소중립포인트제는 국민이 전기·물·가스를 아끼거나 친환경 생활을 실천하면 그 실적만큼 포인트를 현금이나 상…
   - [청년일자리도약장려금 2026, 기업 720만 청년 최대 720만원](https://smartdatashop.kr/policy/youth-job-leap-incentive/) — 청년일자리도약장려금은 청년을 정규직으로 뽑아 6개월 이상 고용을 유지한 중소기업과 그 청년에게 정부가 돈을…
-
-## 2026-08-16 (일)
-
-- 📝 발행 **3건**:
-  - [근로소득 간이세액표, 월급 원천징수 80·100·120% 고르기](https://smartdatashop.kr/tax-finance/earned-income-simplified-tax-table/) — 근로소득 간이세액표는 회사가 매달 월급에서 미리 떼는 소득세를 급여 수준과 부양가족 수에 따라 정해 둔 국…
-  - [고향사랑기부제 세액공제, 10만원 전액공제에 답례품 30%](https://smartdatashop.kr/tax-finance/hometown-love-donation-tax-credit/) — 고향사랑기부제는 주민등록상 거주지가 아닌 다른 지방자치단체에 기부하면 세액공제와 답례품을 함께 받는 제도다…
-  - [전세보증금 반환보증 가입 조건, 수도권 7억 그 외 5억](https://smartdatashop.kr/policy/hug-jeonse-deposit-return-guarantee/) — 전세보증금 반환보증은 집주인이 전세금을 돌려주지 못할 때 주택도시보증공사(HUG)가 대신 세입자에게 보증금…
-
-## 2026-08-15 (토)
-
-- 📝 발행 **3건**:
-  - [부당해고 구제신청, 3개월 이내 노동위원회 신청 절차](https://smartdatashop.kr/policy/unfair-dismissal-remedy/) — 부당해고 구제신청은 정당한 이유 없이 해고당한 근로자가 노동위원회에 원직복직 등 구제를 요구하는 제도다. …
-  - [보장성보험료 세액공제, 100만원 한도 12% 장애인전용 15%](https://smartdatashop.kr/tax-finance/insurance-premium-tax-credit/) — 보장성보험료 세액공제는 근로소득자가 본인과 부양가족을 위해 낸 보장성보험료를 연말정산에서 세금으로 돌려주는…
-  - [직장가입자 소득월액보험료, 월급 외 소득 2천만원 초과 건보료](https://smartdatashop.kr/tax-finance/off-payroll-income-health-premium/) — 소득월액보험료는 직장가입자가 월급 외에 이자·배당·임대·사업 소득을 연 2,000만원 넘게 벌 때 그 초과…
 
 ---
 
