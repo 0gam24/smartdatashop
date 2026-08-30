@@ -1,8 +1,13 @@
-# Today — 2026-08-30 (일) (KST)
+# Today — 2026-08-31 (월) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-08-30 (일) — 오늘
+## 2026-08-31 (월) — 오늘
+
+- 📝 발행 **1건**:
+  - [본인부담상한액 초과금 226만명 환급, 9월 자동입금 확인법](https://smartdatashop.kr/policy/medical-copay-excess-refund-payout/) — 본인부담상한액 초과금은 1년간 낸 건강보험 본인부담 의료비가 개인별 상한액을 넘으면 초과분을 공단이 돌려주…
+
+## 2026-08-30 (일)
 
 - 📝 발행 **1건**:
   - [2027년 7월 아이맞이지원금, 첫만남이용권 대신 최대 2000만원](https://smartdatashop.kr/policy/child-welcome-support-fund-2027/) — 아이맞이지원금은 2027년 7월 이후 출생아에게 첫만남이용권 대신 주는 일시금으로, 첫째 1000만원부터 …
@@ -64,13 +69,6 @@
   - [부부 국민연금, 한 명 사망하면 유족연금 30% 규칙](https://smartdatashop.kr/policy/pension-duplicate-benefit-adjustment/) — 중복급여 조정은 한 사람에게 국민연금 급여가 둘 이상 생겼을 때 하나만 지급하는 원칙이다. 노령연금을 받던…
   - [경차 유류세 환급 연 30만원, 유류구매카드 신청법](https://smartdatashop.kr/tax-finance/compact-car-fuel-tax-refund/) — 경차 유류세 환급은 배기량 1,000cc 미만 경차 소유자에게 유류세 일부를 되돌려주는 제도다. 휘발유·경…
   - [장기보유특별공제율 표, 1세대 1주택 최대 80% 계산법](https://smartdatashop.kr/tax-finance/long-term-holding-special-deduction/) — 장기보유특별공제는 부동산을 오래 보유할수록 양도차익에서 일정 비율을 빼주는 제도다. 1세대 1주택은 보유·…
-
-## 2026-08-17 (월)
-
-- 📝 발행 **3건**:
-  - [새출발기금 2026, 자영업자 채무조정 원금감면 최대 90%](https://smartdatashop.kr/tax-finance/fresh-start-fund-debt-relief/) — 새출발기금은 빚 상환이 어려워진 자영업자·소상공인의 채무를 조정해 주는 정부 프로그램이다. 90일 이상 연…
-  - [탄소중립포인트 2026, 전기 아끼면 최대 20만원 자동차 10만원](https://smartdatashop.kr/policy/carbon-neutral-point/) — 탄소중립포인트제는 국민이 전기·물·가스를 아끼거나 친환경 생활을 실천하면 그 실적만큼 포인트를 현금이나 상…
-  - [청년일자리도약장려금 2026, 기업 720만 청년 최대 720만원](https://smartdatashop.kr/policy/youth-job-leap-incentive/) — 청년일자리도약장려금은 청년을 정규직으로 뽑아 6개월 이상 고용을 유지한 중소기업과 그 청년에게 정부가 돈을…
 
 ---
 
