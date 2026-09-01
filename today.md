@@ -1,8 +1,13 @@
-# Today — 2026-09-01 (화) (KST)
+# Today — 2026-09-02 (수) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-01 (화) — 오늘
+## 2026-09-02 (수) — 오늘
+
+- 📝 발행 **1건**:
+  - [기준금리 3.00%로 인상, 대출·예금 이자 어떻게 바뀌나](https://smartdatashop.kr/market/base-rate-hike-3-percent/) — 기준금리는 한국은행이 물가·성장 전망에 따라 조정하는 정책금리다. 8월 27일 위원회는 기존 2.75%에서…
+
+## 2026-09-01 (화)
 
 - 📝 발행 **1건**:
   - [국세수입 274조, 증시 관련 세금이 소득세 증가분보다 컸다](https://smartdatashop.kr/stats/national-tax-revenue-july-securities-tax/) — 국세수입은 한 해 동안 정부가 걷는 국세 총액을 뜻한다. 재정경제부에 따르면 2026년 1~7월 누계 국세…
@@ -67,13 +72,6 @@
   - [고용촉진장려금 2026, 취약계층 뽑으면 연 최대 720만원](https://smartdatashop.kr/policy/employment-promotion-incentive-2026/) — 고용촉진장려금은 취업이 어려운 취약계층을 정규직으로 채용해 6개월 이상 고용을 유지한 사업주에게 주는 고용…
   - [근로자 휴가지원사업, 20만원 내면 40만원 여행적립금](https://smartdatashop.kr/market/worker-vacation-support-2026/) — 근로자 휴가지원사업은 정부·기업·근로자가 함께 돈을 모아 국내여행 경비로 쓰게 해 주는 한국관광공사 지원 …
   - [산재 장해급여 등급별 정리, 연금과 일시금 어떻게 고르나](https://smartdatashop.kr/policy/industrial-accident-disability-benefit/) — 산재 장해급여는 업무상 재해 치료가 끝난 뒤 남은 장해에 대해 장해등급(1~14급)에 따라 지급하는 산재보…
-
-## 2026-08-18 (화)
-
-- 📝 발행 **3건**:
-  - [부부 국민연금, 한 명 사망하면 유족연금 30% 규칙](https://smartdatashop.kr/policy/pension-duplicate-benefit-adjustment/) — 중복급여 조정은 한 사람에게 국민연금 급여가 둘 이상 생겼을 때 하나만 지급하는 원칙이다. 노령연금을 받던…
-  - [경차 유류세 환급 연 30만원, 유류구매카드 신청법](https://smartdatashop.kr/tax-finance/compact-car-fuel-tax-refund/) — 경차 유류세 환급은 배기량 1,000cc 미만 경차 소유자에게 유류세 일부를 되돌려주는 제도다. 휘발유·경…
-  - [장기보유특별공제율 표, 1세대 1주택 최대 80% 계산법](https://smartdatashop.kr/tax-finance/long-term-holding-special-deduction/) — 장기보유특별공제는 부동산을 오래 보유할수록 양도차익에서 일정 비율을 빼주는 제도다. 1세대 1주택은 보유·…
 
 ---
 
