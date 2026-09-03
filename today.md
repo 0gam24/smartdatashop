@@ -1,13 +1,18 @@
-# Today — 2026-09-03 (목) (KST)
+# Today — 2026-09-04 (금) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-03 (목) — 오늘
+## 2026-09-04 (금) — 오늘
+
+- 📝 발행 **1건**:
+  - [8월 수출 982억 달러 역대 최대, 반도체가 47% 차지했다](https://smartdatashop.kr/market/august-exports-semiconductor-record/) — 수출입동향은 산업통상부가 매달 발표하는 품목별·지역별 무역 실적 통계다. 8월 수출은 전년 대비 68.7%…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **2건**
+
+## 2026-09-03 (목)
 
 - 📝 발행 **1건**:
   - [8월 소비자물가 3.1% 상승, 근원물가가 더 가파르게 올랐다](https://smartdatashop.kr/stats/cpi-august-3-1-percent/) — 소비자물가지수는 가계가 사는 상품과 서비스 가격의 평균적인 변동을 나타내는 지표다. 국가데이터처가 9월 2…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **2건**
 
 ## 2026-09-02 (수)
 
@@ -72,13 +77,6 @@
   - [연금저축 IRP 받을 때 세금, 1500만원 넘으면 갈리는 룰](https://smartdatashop.kr/tax-finance/private-pension-withdrawal-tax/) — 사적연금 연금수령 저율과세는 연금저축·IRP에서 받는 연금액이 연 1,500만원 이하면 나이에 따라 3.3…
   - [청약통장 소득공제 조건, 연 300만원 40% 무주택 세대주](https://smartdatashop.kr/tax-finance/housing-subscription-savings-deduction/) — 주택청약종합저축 소득공제는 무주택 세대주가 청약통장에 넣은 돈의 일부를 근로소득에서 빼주는 연말정산 항목이…
   - [국민연금 추납, 안 낸 기간 최대 119개월 메우는 법](https://smartdatashop.kr/policy/national-pension-additional-payment/) — 국민연금 추후납부(추납)는 실직·경력단절 등으로 보험료를 못 낸 기간을 나중에 채워 가입 기간을 늘리는 제…
-
-## 2026-08-20 (목)
-
-- 📝 발행 **3건**:
-  - [고용촉진장려금 2026, 취약계층 뽑으면 연 최대 720만원](https://smartdatashop.kr/policy/employment-promotion-incentive-2026/) — 고용촉진장려금은 취업이 어려운 취약계층을 정규직으로 채용해 6개월 이상 고용을 유지한 사업주에게 주는 고용…
-  - [근로자 휴가지원사업, 20만원 내면 40만원 여행적립금](https://smartdatashop.kr/market/worker-vacation-support-2026/) — 근로자 휴가지원사업은 정부·기업·근로자가 함께 돈을 모아 국내여행 경비로 쓰게 해 주는 한국관광공사 지원 …
-  - [산재 장해급여 등급별 정리, 연금과 일시금 어떻게 고르나](https://smartdatashop.kr/policy/industrial-accident-disability-benefit/) — 산재 장해급여는 업무상 재해 치료가 끝난 뒤 남은 장해에 대해 장해등급(1~14급)에 따라 지급하는 산재보…
 
 ---
 
