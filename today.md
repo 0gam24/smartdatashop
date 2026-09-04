@@ -1,13 +1,18 @@
-# Today — 2026-09-04 (금) (KST)
+# Today — 2026-09-05 (토) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-04 (금) — 오늘
+## 2026-09-05 (토) — 오늘
+
+- 📝 발행 **1건**:
+  - [7월 산업생산 보합, 소비는 줄고 설비투자는 24.9% 늘었다](https://smartdatashop.kr/stats/july-industrial-activity-consumption-investment/) — 산업활동동향은 국가데이터처가 매달 발표하는 생산·소비·투자 통계다. 8월 31일 발표한 7월 지표에서 전산…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **4건**
+
+## 2026-09-04 (금)
 
 - 📝 발행 **1건**:
   - [8월 수출 982억 달러 역대 최대, 반도체가 47% 차지했다](https://smartdatashop.kr/market/august-exports-semiconductor-record/) — 수출입동향은 산업통상부가 매달 발표하는 품목별·지역별 무역 실적 통계다. 8월 수출은 전년 대비 68.7%…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **3건**
 
 ## 2026-09-03 (목)
 
@@ -70,13 +75,6 @@
   - [장기수선충당금 반환, 이사 갈 때 집주인에게 돌려받는 법](https://smartdatashop.kr/tax-finance/long-term-repair-reserve-refund/) — 장기수선충당금은 아파트 주요 시설의 교체·보수를 위해 소유자가 부담하는 관리비다. 세입자가 관리비에 얹어 …
   - [산재 요양급여, 4일 이상 치료비 전액 공단이 대는 급여](https://smartdatashop.kr/policy/workers-comp-medical-care-benefit/) — 산재 요양급여는 업무상 부상이나 질병으로 4일 이상 치료가 필요할 때, 근로복지공단이 지정 의료기관에서 치…
   - [출산전후휴가 급여 2026, 90일 상한 660만원 지급 순서](https://smartdatashop.kr/policy/maternity-leave-benefit-2026/) — 출산전후휴가 급여는 출산한 근로자에게 휴가 90일(다태아 120일) 동안 통상임금을 보전해 주는 고용보험 …
-
-## 2026-08-21 (금)
-
-- 📝 발행 **3건**:
-  - [연금저축 IRP 받을 때 세금, 1500만원 넘으면 갈리는 룰](https://smartdatashop.kr/tax-finance/private-pension-withdrawal-tax/) — 사적연금 연금수령 저율과세는 연금저축·IRP에서 받는 연금액이 연 1,500만원 이하면 나이에 따라 3.3…
-  - [청약통장 소득공제 조건, 연 300만원 40% 무주택 세대주](https://smartdatashop.kr/tax-finance/housing-subscription-savings-deduction/) — 주택청약종합저축 소득공제는 무주택 세대주가 청약통장에 넣은 돈의 일부를 근로소득에서 빼주는 연말정산 항목이…
-  - [국민연금 추납, 안 낸 기간 최대 119개월 메우는 법](https://smartdatashop.kr/policy/national-pension-additional-payment/) — 국민연금 추후납부(추납)는 실직·경력단절 등으로 보험료를 못 낸 기간을 나중에 채워 가입 기간을 늘리는 제…
 
 ---
 
