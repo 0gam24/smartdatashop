@@ -1,8 +1,8 @@
 {
   "agent": "fact-checker",
-  "ranAt": "2026-09-05T18:41:29.072Z",
+  "ranAt": "2026-09-05T21:03:42.806Z",
   "windowDays": 14,
-  "mode": "lite",
+  "mode": "full",
   "auditedCount": 21,
   "summary": {
     "risk": {
@@ -229,5 +229,14 @@
       "riskLevel": "low"
     }
   ],
-  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+  "fullAuditedCount": 2,
+  "discrepancies": [
+    {
+      "collection": "pulse",
+      "filename": "2026-09-01-national-tax-revenue-july-securities-tax.mdx",
+      "verdict": "parse-error",
+      "raw": "1차 출처 분석:\n\n출처 1 (PDF)은 바이너리/이미지 데이터로 실제 수치를 확인할 수 없음.\n출처 2 (웹페이지)는 보도자료 목록 페이지로, 실제 수치 데이터가 포함되지 않음 — 첨부파일(hwpx/pdf) 링크만 존재.\n\n따라서 본문의 수치들(274.0조원, 41.4조원, 51.0조원, 8.4조원, 415.4조원, 66.0%, 62.2%, 63.5%, 각 세목별 수치, 거래대금 수치, 수입액 수치 등)을 1차 출처 본문 텍스트와 직접 대조할 수 없음.\n\n그러나 검증 가능한 논리적 계산 오류를 확인:\n\n- 증권거래세 누계: 25년 1.8조 → 26년 8.2조, 증감 = +6.4조 ✓\n- 농어촌특별세 누계: 25년 4.6조 → 26년 13.1조, 증감 = +8.5조 ✓\n- 두 합산: 6.4 + 8.5 = 14.9조 ✓\n- 소득세: 25년 77.1 → 26년 89.3, 증감 = +12.2조 ✓\n- 부가가치세: 25년 61.4 → 26년 69.4, 증감 = +8.0조 (본문은 +8.1조"
+    }
+  ],
+  "note": "FULL: claude-sonnet-4-6 + 1차 출처 fetch. 불일치 1건."
 }
