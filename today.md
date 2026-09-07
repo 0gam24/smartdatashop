@@ -1,13 +1,18 @@
-# Today — 2026-09-07 (월) (KST)
+# Today — 2026-09-08 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-07 (월) — 오늘
+## 2026-09-08 (화) — 오늘
+
+- 📝 발행 **1건**:
+  - [2027년 기준중위소득 6.7% 인상, 생계급여 문턱 넓어진다](https://smartdatashop.kr/policy/median-income-2027-budget-expansion/) — 기준 중위소득은 정부가 매년 정하는 국민 가구소득의 중간값으로, 생계급여 등 80여 개 복지사업의 지원 자…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **6건**
+
+## 2026-09-07 (월)
 
 - 📝 발행 **1건**:
   - [그냥드림 전국 확대, 증빙 없이 175개서 230개 시군구로](https://smartdatashop.kr/policy/geunyangdeurim-nationwide-expansion/) — 그냥드림은 소득 증빙 없이 먹거리와 생필품을 즉시 지원하는 보건복지부 사업이다. 9월 중 175개에서 23…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **6건**
 
 ## 2026-09-06 (일)
 
@@ -78,13 +83,6 @@
   - [육아휴직 복직, 원직복귀와 불이익 금지 이렇게 지킨다](https://smartdatashop.kr/policy/parental-leave-reinstatement/) — 육아휴직 후 원직복직은 사업주가 휴직 전과 같은 업무 또는 같은 수준의 임금을 주는 직무로 되돌려야 하는 …
   - [수습기간 급여, 최저임금 90%가 되는 조건과 계산](https://smartdatashop.kr/tax-finance/probation-period-minimum-wage/) — 수습기간 최저임금 90%는 1년 이상 근로계약을 맺고 수습 3개월 이내인 근로자에게만 허용되는 예외다. 2…
   - [전세권 설정과 전입신고, 보증금 지키는 방법 비교](https://smartdatashop.kr/policy/jeonse-right-vs-move-in-report/) — 전입신고와 확정일자는 이사와 신고만으로 보증금을 지키는 무료 방법이고, 전세권 설정은 집주인 동의를 받아 …
-
-## 2026-08-24 (월)
-
-- 📝 발행 **3건**:
-  - [장기수선충당금 반환, 이사 갈 때 집주인에게 돌려받는 법](https://smartdatashop.kr/tax-finance/long-term-repair-reserve-refund/) — 장기수선충당금은 아파트 주요 시설의 교체·보수를 위해 소유자가 부담하는 관리비다. 세입자가 관리비에 얹어 …
-  - [산재 요양급여, 4일 이상 치료비 전액 공단이 대는 급여](https://smartdatashop.kr/policy/workers-comp-medical-care-benefit/) — 산재 요양급여는 업무상 부상이나 질병으로 4일 이상 치료가 필요할 때, 근로복지공단이 지정 의료기관에서 치…
-  - [출산전후휴가 급여 2026, 90일 상한 660만원 지급 순서](https://smartdatashop.kr/policy/maternity-leave-benefit-2026/) — 출산전후휴가 급여는 출산한 근로자에게 휴가 90일(다태아 120일) 동안 통상임금을 보전해 주는 고용보험 …
 
 ---
 
