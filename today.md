@@ -1,13 +1,18 @@
-# Today — 2026-09-08 (화) (KST)
+# Today — 2026-09-09 (수) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-08 (화) — 오늘
+## 2026-09-09 (수) — 오늘
+
+- 📝 발행 **1건**:
+  - [사망자 명의 금융거래, 9월 11일부터 신고 다음날 차단](https://smartdatashop.kr/policy/deceased-account-fraud-block/) — 사망자 명의 금융거래 신속차단 시스템은 행정안전부·금융위원회·금융감독원·한국신용정보원이 사망자 명의를 도용…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **7건**
+
+## 2026-09-08 (화)
 
 - 📝 발행 **1건**:
   - [2027년 기준중위소득 6.7% 인상, 생계급여 문턱 넓어진다](https://smartdatashop.kr/policy/median-income-2027-budget-expansion/) — 기준 중위소득은 정부가 매년 정하는 국민 가구소득의 중간값으로, 생계급여 등 80여 개 복지사업의 지원 자…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **7건**
 
 ## 2026-09-07 (월)
 
@@ -76,13 +81,6 @@
   - [현금영수증 의무발행, 10만원 미발급 신고 포상금](https://smartdatashop.kr/tax-finance/cash-receipt-mandatory-issuance-report/) — 현금영수증 의무발행업종 사업자는 건당 10만원 이상 현금거래 시 소비자가 요구하지 않아도 발급해야 한다. …
   - [안심상속 원스톱, 사망자 재산·빚 한 번에 조회](https://smartdatashop.kr/policy/safe-inheritance-property-search/) — 안심상속 원스톱 서비스는 상속인이 사망자의 금융거래·토지·자동차·세금·연금 가입 여부를 한 번의 신청으로 …
   - [잠자는 내 돈 찾기, 파인으로 휴면예금·보험금 조회](https://smartdatashop.kr/tax-finance/dormant-deposit-hidden-assets-search/) — 숨은 금융자산은 오래 찾지 않아 잠들어 있는 예금·보험금·증권·카드포인트를 통칭한다. 금융감독원 파인(fi…
-
-## 2026-08-25 (화)
-
-- 📝 발행 **3건**:
-  - [육아휴직 복직, 원직복귀와 불이익 금지 이렇게 지킨다](https://smartdatashop.kr/policy/parental-leave-reinstatement/) — 육아휴직 후 원직복직은 사업주가 휴직 전과 같은 업무 또는 같은 수준의 임금을 주는 직무로 되돌려야 하는 …
-  - [수습기간 급여, 최저임금 90%가 되는 조건과 계산](https://smartdatashop.kr/tax-finance/probation-period-minimum-wage/) — 수습기간 최저임금 90%는 1년 이상 근로계약을 맺고 수습 3개월 이내인 근로자에게만 허용되는 예외다. 2…
-  - [전세권 설정과 전입신고, 보증금 지키는 방법 비교](https://smartdatashop.kr/policy/jeonse-right-vs-move-in-report/) — 전입신고와 확정일자는 이사와 신고만으로 보증금을 지키는 무료 방법이고, 전세권 설정은 집주인 동의를 받아 …
 
 ---
 
