@@ -1,13 +1,18 @@
-# Today — 2026-09-09 (수) (KST)
+# Today — 2026-09-10 (목) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-09 (수) — 오늘
+## 2026-09-10 (목) — 오늘
+
+- 📝 발행 **1건**:
+  - [8월 취업자 18만 4천명 증가, 청년실업률만 5.4%로 올랐다](https://smartdatashop.kr/stats/august-employment-youth-unemployment-rate/) — 8월 고용동향은 국가데이터처가 매달 발표하는 취업자·고용률·실업률 통계다. 9월 9일 발표에서 취업자는 1…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **6건**
+
+## 2026-09-09 (수)
 
 - 📝 발행 **1건**:
   - [사망자 명의 금융거래, 9월 11일부터 신고 다음날 차단](https://smartdatashop.kr/policy/deceased-account-fraud-block/) — 사망자 명의 금융거래 신속차단 시스템은 행정안전부·금융위원회·금융감독원·한국신용정보원이 사망자 명의를 도용…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **7건**
 
 ## 2026-09-08 (화)
 
@@ -73,14 +78,6 @@
 
 - 📝 발행 **1건**:
   - [국내주식 양도세 예정신고 8월 31일, 대주주 기준과 세율](https://smartdatashop.kr/tax-finance/stock-capital-gains-preliminary-filing/) — 국내주식 양도소득세 예정신고는 올 상반기 상장주식 대주주와 장외 소액주주, 비상장주식 양도자가 8월 31일…
-
-## 2026-08-26 (수)
-
-- 📝 발행 **4건**:
-  - [생애최초 취득세 감면 확대, 오피스텔과 청년 300만원 한도](https://smartdatashop.kr/tax-finance/first-home-acquisition-tax-officetel/) — 행정안전부가 2026년 8월 26일 발표한 지방세제 개편안은 생애최초 취득세 감면을 주거용 오피스텔까지 넓…
-  - [현금영수증 의무발행, 10만원 미발급 신고 포상금](https://smartdatashop.kr/tax-finance/cash-receipt-mandatory-issuance-report/) — 현금영수증 의무발행업종 사업자는 건당 10만원 이상 현금거래 시 소비자가 요구하지 않아도 발급해야 한다. …
-  - [안심상속 원스톱, 사망자 재산·빚 한 번에 조회](https://smartdatashop.kr/policy/safe-inheritance-property-search/) — 안심상속 원스톱 서비스는 상속인이 사망자의 금융거래·토지·자동차·세금·연금 가입 여부를 한 번의 신청으로 …
-  - [잠자는 내 돈 찾기, 파인으로 휴면예금·보험금 조회](https://smartdatashop.kr/tax-finance/dormant-deposit-hidden-assets-search/) — 숨은 금융자산은 오래 찾지 않아 잠들어 있는 예금·보험금·증권·카드포인트를 통칭한다. 금융감독원 파인(fi…
 
 ---
 
