@@ -1,13 +1,18 @@
-# Today — 2026-09-10 (목) (KST)
+# Today — 2026-09-11 (금) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-10 (목) — 오늘
+## 2026-09-11 (금) — 오늘
+
+- 📝 발행 **1건**:
+  - [외래진료 연 300회 넘으면 2027년부터 본인부담 90%](https://smartdatashop.kr/policy/outpatient-300-visits-copay-90-percent/) — 과다 외래이용 관리는 건강보험 재정이 반복 진료로 새지 않게 막는 장치다. 보건복지부가 시행령을 개정해 2…
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **6건**
+
+## 2026-09-10 (목)
 
 - 📝 발행 **1건**:
   - [8월 취업자 18만 4천명 증가, 청년실업률만 5.4%로 올랐다](https://smartdatashop.kr/stats/august-employment-youth-unemployment-rate/) — 8월 고용동향은 국가데이터처가 매달 발표하는 취업자·고용률·실업률 통계다. 9월 9일 발표에서 취업자는 1…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **6건**
 
 ## 2026-09-09 (수)
 
@@ -68,16 +73,6 @@
 
 - 📝 발행 **1건**:
   - [암표 팔면 최대 50배 과징금, 8월 28일부터 시행](https://smartdatashop.kr/policy/ticket-scalping-penalty-50x/) — 암표 부정판매 과징금 강화는 문화체육관광부가 8월 28일부터 시행한 공연법·국민체육진흥법 시행령 개정으로,…
-
-## 2026-08-28 (금)
-
-- 📝 발행 **1건**:
-  - [종부세 일시적 2주택 특례, 9월 16일부터 신청해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-house-count-exclusion/) — 종합부동산세 1세대1주택자 판단 시 주택 수 산정 제외 특례는 1주택 외에 신규주택·상속주택 등 5가지 유…
-
-## 2026-08-27 (목)
-
-- 📝 발행 **1건**:
-  - [국내주식 양도세 예정신고 8월 31일, 대주주 기준과 세율](https://smartdatashop.kr/tax-finance/stock-capital-gains-preliminary-filing/) — 국내주식 양도소득세 예정신고는 올 상반기 상장주식 대주주와 장외 소액주주, 비상장주식 양도자가 8월 31일…
 
 ---
 
