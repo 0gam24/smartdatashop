@@ -69,11 +69,6 @@
 - 📝 발행 **1건**:
   - [7월 산업생산 보합, 소비는 줄고 설비투자는 24.9% 늘었다](https://smartdatashop.kr/stats/july-industrial-activity-consumption-investment/) — 산업활동동향은 국가데이터처가 매달 발표하는 생산·소비·투자 통계다. 8월 31일 발표한 7월 지표에서 전산…
 
-## 2026-09-04 (금)
-
-- 📝 발행 **1건**:
-  - [8월 수출 982억 달러 역대 최대, 반도체가 47% 차지했다](https://smartdatashop.kr/market/august-exports-semiconductor-record/) — 수출입동향은 산업통상부가 매달 발표하는 품목별·지역별 무역 실적 통계다. 8월 수출은 전년 대비 68.7%…
-
 ---
 
 ## 🔗 검색엔진 콘솔
