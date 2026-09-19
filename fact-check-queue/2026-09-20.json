@@ -1,8 +1,8 @@
 {
   "agent": "fact-checker",
-  "ranAt": "2026-09-19T19:05:41.407Z",
+  "ranAt": "2026-09-19T21:22:46.419Z",
   "windowDays": 14,
-  "mode": "lite",
+  "mode": "full",
   "auditedCount": 13,
   "summary": {
     "risk": {
@@ -149,5 +149,62 @@
       "riskLevel": "low"
     }
   ],
-  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+  "fullAuditedCount": 2,
+  "discrepancies": [
+    {
+      "collection": "pulse",
+      "filename": "2026-09-10-august-employment-youth-unemployment-rate.mdx",
+      "verdict": "parse-error",
+      "raw": "{\n  \"verdict\": \"mismatch\",\n  \"issues\": [\n    {\n      \"claim\": \"실업자 수는 58만 8천명으로 전년동월대비 4천명(0.6%) 줄었다\",\n      \"issue\": \"1차 출처에는 실업자가 '4천명(-0.6%) 감소'로 기재되어 있어 감소분 4천명과 비율 0.6%는 일치하나, 본문은 '줄었다(0.6%)'로 표기해 부호 없이 서술했고 수치 자체는 일치함. 단, 출처 원문의 감소율은 '-0.6%'이므로 본문의 '0.6% 줄었다' 표현은 실질적으로 동일하여 수치 불일치는 없음. — 이 항목은 이슈 없음(검토 완료).\",\n      \"severity\": \"low\"\n    },\n    {\n      \"claim\": \"취업자는 2,915만 1천명으로 전년동월대비 18만 4천명(0.6%) 늘었다\",\n      \"issue\": \"1차 출처에는 취업자가 '29,151천명으로 전년동월대비 18만 4천명(0.6%) 증가'로 명시되어 있어 본문 수치와 완전히"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-19-national-transfer-accounts-2024.mdx",
+      "verdict": "fabricated",
+      "issues": [
+        {
+          "claim": "9월 17일 내놓은 2024년 국민이전계정",
+          "issue": "1차 출처 fetch 실패로 '9월 17일'이라는 발표 일자를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "medium"
+        },
+        {
+          "claim": "국민 전체가 쓴 돈은 1509조8000억원인데 일해서 번 돈은 1289조7000억원",
+          "issue": "1차 출처 fetch 실패로 해당 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "생애주기적자 220조1000억원",
+          "issue": "1차 출처 fetch 실패로 해당 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "344조9000억원(노동연령층 순유출 이전 규모)",
+          "issue": "1차 출처 fetch 실패로 해당 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "유년층(0~14세)에 185조9000억원, 노년층(65세 이상)에 148조3000억원 이전",
+          "issue": "1차 출처 fetch 실패로 해당 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "자산재배분 노동연령층 189조8000억원, 노년층 40조7000억원, 유년층 3000억원 순유입",
+          "issue": "1차 출처 fetch 실패로 해당 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "28세에 흑자로 진입, 61세에 다시 적자로 전환",
+          "issue": "1차 출처 fetch 실패로 해당 연령 수치를 출처 본문에서 확인 불가 — fabricated 처리",
+          "severity": "high"
+        },
+        {
+          "claim": "\"1인당 생애주기적자는 연령증가에 따라 '적자→흑자→적자' 순서의 3단계 구조로, 28세에 흑자로 진입\"",
+          "issue": "직접 인용구로 표시되어 있으나 1차 출처 fetch 실패로 원문 인용 여부 확인 불가 — fabricated 처리",
+          "severity": "high"
+        }
+      ],
+      "summary": "1차 출처 URL fetch가 완전히 실패하여 본문에 등장하는 모든 수치(생애주기적자 220조1000억원, 소비 1509조8000억원, 노동소득 1289조7000억원, 이전 344조9000억원 등), 발표 일자(9월 17일), 연령 전환점(28세·61세), 직접 인용문 전부를 출처 본문과 대조하는 것이 불가능하다. 검증 대상 항목 전체가 출처 미확인 상태이므로 모두 fabricated로 분류한다."
+    }
+  ],
+  "note": "FULL: claude-sonnet-4-6 + 1차 출처 fetch. 불일치 2건."
 }
