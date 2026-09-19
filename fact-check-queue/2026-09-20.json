@@ -1,0 +1,153 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-09-19T19:05:41.407Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 13,
+  "summary": {
+    "risk": {
+      "low": 11,
+      "medium": 2,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 34,
+    "avgFootnotesPerArticle": 22.15,
+    "avgSourcesPerArticle": 2.08,
+    "totalClaims": 442,
+    "totalFootnotes": 288,
+    "totalSources": 27
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-09-07-geunyangdeurim-nationwide-expansion.mdx",
+      "publishedAt": "2026-09-07T02:20:00+09:00",
+      "claimsCount": 34,
+      "footnoteCount": 25,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 34,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-08-median-income-2027-budget-expansion.mdx",
+      "publishedAt": "2026-09-08T02:10:00+09:00",
+      "claimsCount": 34,
+      "footnoteCount": 24,
+      "sourceUrlCount": 4,
+      "claimsPerSource": 8.5,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-09-deceased-account-fraud-block.mdx",
+      "publishedAt": "2026-09-09T02:30:00+09:00",
+      "claimsCount": 10,
+      "footnoteCount": 22,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 10,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-10-august-employment-youth-unemployment-rate.mdx",
+      "publishedAt": "2026-09-10T02:10:00+09:00",
+      "claimsCount": 47,
+      "footnoteCount": 14,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 47,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-11-outpatient-300-visits-copay-90-percent.mdx",
+      "publishedAt": "2026-09-11T02:10:00+09:00",
+      "claimsCount": 26,
+      "footnoteCount": 17,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 13,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-13-health-insurance-rate-2027-frozen.mdx",
+      "publishedAt": "2026-09-13T02:20:00+09:00",
+      "claimsCount": 45,
+      "footnoteCount": 26,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 15,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-14-minimum-wage-2027-confirmed.mdx",
+      "publishedAt": "2026-09-14T02:20:00+09:00",
+      "claimsCount": 19,
+      "footnoteCount": 28,
+      "sourceUrlCount": 6,
+      "claimsPerSource": 3.17,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-15-employment-insurance-6day-payment-reform.mdx",
+      "publishedAt": "2026-09-15T02:35:00+09:00",
+      "claimsCount": 32,
+      "footnoteCount": 25,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 16,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-16-voice-phishing-card-payment-fss-measures.mdx",
+      "publishedAt": "2026-09-16T02:10:00+09:00",
+      "claimsCount": 16,
+      "footnoteCount": 27,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 16,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-17-youth-future-savings-round2-october.mdx",
+      "publishedAt": "2026-09-17T02:12:00+09:00",
+      "claimsCount": 34,
+      "footnoteCount": 34,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 17,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-18-chuseok-onnuri-voucher-refund.mdx",
+      "publishedAt": "2026-09-18T02:15:00+09:00",
+      "claimsCount": 25,
+      "footnoteCount": 17,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 25,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-19-national-transfer-accounts-2024.mdx",
+      "publishedAt": "2026-09-19T02:35:00+09:00",
+      "claimsCount": 66,
+      "footnoteCount": 9,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 66,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-09-20-comprehensive-tax-joint-ownership-election.mdx",
+      "publishedAt": "2026-09-20T02:20:00+09:00",
+      "claimsCount": 54,
+      "footnoteCount": 20,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 27,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
