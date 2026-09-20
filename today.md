@@ -7,7 +7,6 @@
 - 📝 발행 **1건**:
   - [10월 26일 부가세 예정고지, 개인사업자는 절반만 낸다](https://smartdatashop.kr/tax-finance/vat-preliminary-notice-october/) — 부가가치세 예정고지는 국세청이 직전 6개월 납부세액의 50%를 미리 고지해 개인 일반사업자가 예정신고 없이…
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **1건**
 
 ## 2026-09-20 (일)
 
@@ -68,11 +67,6 @@
 
 - 📝 발행 **1건**:
   - [2027년 기준중위소득 6.7% 인상, 생계급여 문턱 넓어진다](https://smartdatashop.kr/policy/median-income-2027-budget-expansion/) — 기준 중위소득은 정부가 매년 정하는 국민 가구소득의 중간값으로, 생계급여 등 80여 개 복지사업의 지원 자…
-
-## 2026-09-07 (월)
-
-- 📝 발행 **1건**:
-  - [그냥드림 전국 확대, 증빙 없이 175개서 230개 시군구로](https://smartdatashop.kr/policy/geunyangdeurim-nationwide-expansion/) — 그냥드림은 소득 증빙 없이 먹거리와 생필품을 즉시 지원하는 보건복지부 사업이다. 9월 중 175개에서 23…
 
 ---
 
