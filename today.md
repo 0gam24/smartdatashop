@@ -1,12 +1,16 @@
-# Today — 2026-09-22 (화) (KST)
+# Today — 2026-09-23 (수) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-22 (화) — 오늘
+## 2026-09-23 (수) — 오늘
+
+- 📝 발행 **1건**:
+  - [임대주택·사원용주택 종부세 합산배제, 9월 30일까지 신고해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-rental-exclusion/) — 종부세 합산배제는 임대주택·사원용주택 등을 과세표준 합산 대상에서 빼 비과세로 처리하는 제도다. 매년 9월…
+
+## 2026-09-22 (화)
 
 - 📝 발행 **1건**:
   - [음식점·미용실 창업, 사업자등록 시청에서 한 번에 끝난다](https://smartdatashop.kr/tax-finance/food-beauty-business-registration-onestop/) — 사업자등록·영업신고 한 번에 서비스는 음식점·이미용업 예비 창업자가 시·군·구청 한 곳에서 영업신고와 사업…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 
 ## 2026-09-21 (월)
 
