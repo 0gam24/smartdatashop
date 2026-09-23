@@ -1,8 +1,13 @@
-# Today — 2026-09-23 (수) (KST)
+# Today — 2026-09-24 (목) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-23 (수) — 오늘
+## 2026-09-24 (목) — 오늘
+
+- 📝 발행 **1건**:
+  - [추석 연휴에 아프면, 문 여는 병원 8294곳 어떻게 찾나](https://smartdatashop.kr/policy/chuseok-emergency-medical-open-hospitals/) — 보건복지부는 추석 연휴 나흘간(9월 24~27일) 응급의료체계를 24시간 유지하며, 병원·의원·약국을 하루…
+
+## 2026-09-23 (수)
 
 - 📝 발행 **1건**:
   - [임대주택·사원용주택 종부세 합산배제, 9월 30일까지 신고해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-rental-exclusion/) — 종부세 합산배제는 임대주택·사원용주택 등을 과세표준 합산 대상에서 빼 비과세로 처리하는 제도다. 매년 9월…
@@ -61,16 +66,6 @@
 
 - 📝 발행 **1건**:
   - [외래진료 연 300회 넘으면 2027년부터 본인부담 90%](https://smartdatashop.kr/policy/outpatient-300-visits-copay-90-percent/) — 과다 외래이용 관리는 건강보험 재정이 반복 진료로 새지 않게 막는 장치다. 보건복지부가 시행령을 개정해 2…
-
-## 2026-09-10 (목)
-
-- 📝 발행 **1건**:
-  - [8월 취업자 18만 4천명 증가, 청년실업률만 5.4%로 올랐다](https://smartdatashop.kr/stats/august-employment-youth-unemployment-rate/) — 8월 고용동향은 국가데이터처가 매달 발표하는 취업자·고용률·실업률 통계다. 9월 9일 발표에서 취업자는 1…
-
-## 2026-09-09 (수)
-
-- 📝 발행 **1건**:
-  - [사망자 명의 금융거래, 9월 11일부터 신고 다음날 차단](https://smartdatashop.kr/policy/deceased-account-fraud-block/) — 사망자 명의 금융거래 신속차단 시스템은 행정안전부·금융위원회·금융감독원·한국신용정보원이 사망자 명의를 도용…
 
 ---
 
