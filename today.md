@@ -1,8 +1,20 @@
-# Today — 2026-09-29 (화) (KST)
+# Today — 2026-10-01 (목) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-09-29 (화) — 오늘
+## 2026-10-01 (목) — 오늘
+
+- 📝 발행 **1건**:
+  - [개인투자용 국채 10월 청약, 1000만원 넣으면 얼마 받나](https://smartdatashop.kr/tax-finance/individual-investment-bond-october-issuance/) — 개인투자용 국채는 정부가 개인에게만 파는 장기 국채로, 만기까지 보유하면 표면금리에 가산금리를 더한 복리 …
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **1건**
+
+## 2026-09-30 (수)
+
+- 📝 발행 **1건**:
+  - [신청 674곳 중 120곳 선정, 일차의료 혁신 시범사업 시작](https://smartdatashop.kr/policy/community-primary-care-pilot-120-clinics/) — 지역사회 일차의료 혁신 시범사업은 동네의원이 의사·간호사 등 다학제팀을 꾸려 치료뿐 아니라 예방·건강관리·…
+
+## 2026-09-29 (화)
 
 - 📝 발행 **1건**:
   - [잠든 돈 1.5조, 환급실적 2027년부터 금융사별 공개](https://smartdatashop.kr/tax-finance/dormant-asset-refund-disclosure/) — 휴면금융자산은 소멸시효가 끝났는데도 주인이 찾아가지 않아 금융회사가 그대로 보유 중인 예금·보험금이다. 금…
@@ -61,21 +73,6 @@
 
 - 📝 발행 **1건**:
   - [추석 전통시장 온누리상품권 환급, 20일 마감 최대 2만원](https://smartdatashop.kr/policy/chuseok-onnuri-voucher-refund/) — 전통시장 온누리상품권 환급행사는 국산 농축산물 구매액의 최대 30%를 상품권으로 돌려주는 농림축산식품부 사…
-
-## 2026-09-17 (목)
-
-- 📝 발행 **1건**:
-  - [청년미래적금 2차, 10월 7일 신청 시작에 갈아타기도 또 열린다](https://smartdatashop.kr/tax-finance/youth-future-savings-round2-october/) — 청년미래적금은 청년이 매달 저축하면 정부가 납입액 일부를 얹어 주는 3년 만기 자산형성 적금이다. 최초 모…
-
-## 2026-09-16 (수)
-
-- 📝 발행 **1건**:
-  - [보이스피싱 카드결제 이상거래 탐지 강화, 70대는 심층상담 거친다](https://smartdatashop.kr/policy/voice-phishing-card-payment-fss-measures/) — 보이스피싱 카드결제 피해는 상품권 등 고환금성 물품을 본인이 직접 카드로 결제하도록 속이는 신종 사기다. …
-
-## 2026-09-15 (화)
-
-- 📝 발행 **1건**:
-  - [실업급여 지급기준 주 7일서 6일로, 보험료율도 오른다](https://smartdatashop.kr/policy/employment-insurance-6day-payment-reform/) — 구직급여(실업급여)는 고용보험에 가입한 근로자가 실직했을 때 재취업 기간의 생계를 지원하는 급여다. 고용노…
 
 ---
 
