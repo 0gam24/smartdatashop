@@ -74,11 +74,6 @@
 - 📝 발행 **1건**:
   - [부부 공동명의 1주택 종부세 특례, 9월 30일까지 신청해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-tax-joint-ownership-election/) — 공동명의 1주택자 과세특례는 부부가 함께 소유한 집 한 채를 1세대1주택자로 보아 12억원 공제와 세액공제…
 
-## 2026-09-19 (토)
-
-- 📝 발행 **1건**:
-  - [생애주기적자 220조원, 28세부터 흑자 61세부터 다시 적자](https://smartdatashop.kr/stats/national-transfer-accounts-2024/) — 국민이전계정은 세대별 소비와 노동소득의 격차를 이전·자산재배분으로 메우는 흐름을 보여주는 통계다. 2024…
-
 ---
 
 ## 🔗 검색엔진 콘솔
