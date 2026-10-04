@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-10-03T18:45:52.627Z",
-  "elapsedMs": 2038,
+  "fetchedAt": "2026-10-04T18:42:15.486Z",
+  "elapsedMs": 5309,
   "sourceTotal": 7,
-  "sourceSuccess": 7,
-  "sourceFail": 0,
-  "totalHeadlines": 359,
-  "uniqueKeywords": 392,
+  "sourceSuccess": 6,
+  "sourceFail": 1,
+  "totalHeadlines": 309,
+  "uniqueKeywords": 283,
   "multiSourceCount": 100,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 1065
+      "elapsedMs": 296
     },
     {
       "id": "yna",
@@ -22,15 +22,15 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "ok",
       "itemCount": 120,
-      "elapsedMs": 1341
+      "elapsedMs": 1352
     },
     {
       "id": "donga",
       "name": "동아일보",
       "url": "https://rss.donga.com/total.xml",
-      "status": "ok",
-      "itemCount": 50,
-      "elapsedMs": 1037
+      "status": "fail",
+      "itemCount": 0,
+      "elapsedMs": 5241
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1682
+      "elapsedMs": 1884
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 620
+      "elapsedMs": 2983
     },
     {
       "id": "kmib",
@@ -54,7 +54,7 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 1534
+      "elapsedMs": 2124
     },
     {
       "id": "hani",
@@ -62,1624 +62,221 @@
       "url": "https://www.hani.co.kr/rss",
       "status": "ok",
       "itemCount": 30,
-      "elapsedMs": 1965
+      "elapsedMs": 2412
     }
   ],
   "multiSourceKeywords": [
     {
-      "term": "금메달",
-      "total": 23,
-      "sourceCount": 6,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구 금메달 시상식서도 터진 사고…제때 오르지 못한 태극기"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '금메달 캡틴' 이기혁 \"올해 제게 천운이 따르네요\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '금메달 골' 엄지성 \"하나만 기다렸다…평생 잊지 못할 것\""
-        }
-      ]
-    },
-    {
-      "term": "남자",
-      "total": 16,
-      "sourceCount": 6,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국, 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 한국, AG 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 이도현, 남자 리드 동메달"
-        }
-      ]
-    },
-    {
-      "term": "부캉이",
-      "total": 10,
-      "sourceCount": 6,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "그물 넘어 돌아온 부캉이…추가 구조 없이 당분간 움직임 주시(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "‘부캉이’ 돌아온 북항, 누적 방문객 81만8800명"
-        },
-        {
-          "source": "khan",
-          "title": "그물 넘어 수로로 다시 온 부캉이…당국, 당분간 추가 구조 없이 주시하기로"
-        }
-      ]
-    },
-    {
-      "term": "해킹",
-      "total": 8,
-      "sourceCount": 6,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출"
-        }
-      ]
-    },
-    {
-      "term": "부기장",
-      "total": 7,
-      "sourceCount": 6,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\""
-        },
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        }
-      ]
-    },
-    {
       "term": "대통령",
-      "total": 12,
+      "total": 14,
       "sourceCount": 5,
       "sources": [
         "sbs",
         "yna",
         "khan",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, '청래 그만 괴롭히라'는 SNS에 \"우린 동지…곡해 말라\""
-        },
-        {
-          "source": "sbs",
-          "title": "북한 김여정, 군 사과 요구·이 대통령 긴장완화 발언에 \"자작 광대극 2부\""
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"국민 억울함 최소화해야\"…'민원 해결 수당' 검토 제안"
-        }
-      ]
-    },
-    {
-      "term": "축구",
-      "total": 12,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
         "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구 금메달 시상식서도 터진 사고…제때 오르지 못한 태극기"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구·양궁·클라이밍·골프·요트·태권도서 金 6개 획득(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] \"금메달로 한국 축구 일으킬 것\"…약속 지키며 떠나는 이민성"
-        }
-      ]
-    },
-    {
-      "term": "연패",
-      "total": 10,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib",
         "hani"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "[아시안게임] 4연패 이끈 이민성 감독 \"목표 달성했다…다 선수들 덕분\""
+          "source": "sbs",
+          "title": "이 대통령 \"끝까지 도전한 대한민국 선수단 모두가 챔피언\""
         },
         {
-          "source": "yna",
-          "title": "[아시안게임] 남자축구 4연패 걸린 한일전에 이영준·엄지성 등 선발 출격"
+          "source": "sbs",
+          "title": "이 대통령 \"한반도 평화 여정 쉽지 않을 것…그래도 가야할 길\""
         },
         {
-          "source": "donga",
-          "title": "‘4연패’ 이끈 이민성 감독 “결국 중요한 건 결과…목표 달성”"
-        }
-      ]
-    },
-    {
-      "term": "김주형",
-      "total": 10,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 김주형 \"타이거 우즈가 보낸 응원 메시지가 큰 힘이 됐다\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 부활한 김주형, AG 금메달로 정점…탄탄대로 펼쳐진다"
-        }
-      ]
-    },
-    {
-      "term": "골프",
-      "total": 9,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구·양궁·클라이밍·골프·요트·태권도서 金 6개 획득(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 양궁 이우석, 한국 5번째 2관왕…골프·요트서도 金金"
-        }
-      ]
-    },
-    {
-      "term": "개인전",
-      "total": 9,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 김주형, 16년 만의 AG 남자 골프 개인전 金…단체전은 은메달"
+          "source": "sbs",
+          "title": "이 대통령, 금융기관 개인정보 유출에 \"철저한 조사·대책 마련\" 지시"
         }
       ]
     },
     {
       "term": "암살자",
-      "total": 9,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'암살자(들)', 역사 왜곡 논란에도 관객 200만명 돌파"
-        },
-        {
-          "source": "khan",
-          "title": "정치권 논란에도···‘암살자(들)’ 관객 200만명 돌파"
-        },
-        {
-          "source": "mk",
-          "title": "암살자(들)보다 더한 경우도 있었다고?…‘표현의 자유’ 논쟁 과거 작품들 살펴보니"
-        }
-      ]
-    },
-    {
-      "term": "김여정",
-      "total": 8,
+      "total": 10,
       "sourceCount": 5,
       "sources": [
         "sbs",
         "yna",
-        "donga",
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "메가박스, '암살자(들)' 탄흔 굿즈 논란 사과…\"남은 수량 폐기\""
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합2보)"
+        }
+      ]
+    },
+    {
+      "term": "국힘",
+      "total": 11,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
         "khan",
         "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김여정, 정동영 사과 요구·만남 제안에 \"대꾸할 가치도 없는 망상\""
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
         },
         {
           "source": "sbs",
-          "title": "김여정 \"대통령이라는 사람은…\" 조롱…통일부 \"증오 부추기는 공방 멈추고 만나야\""
+          "title": "장외집회 마친 국힘 \"이 대통령, SNS 중단하고 민심 들어야\""
         },
         {
           "source": "sbs",
-          "title": "또 김여정…\"왜 한국과 엮일 일 했을 거라 상상하나\""
+          "title": "국힘, 오세훈·윤석열·추경호 재판 주시…우려 속 전화위복 기대도"
         }
       ]
     },
     {
       "term": "트럼프",
       "total": 8,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프 \"알래스카에 인류 역사상 누구보다 많은 것 가져와\""
-        },
-        {
-          "source": "yna",
-          "title": "트럼프 특사-푸틴, 종전안 뒤에서 '러 석유업체 빅딜' 밀담"
-        },
-        {
-          "source": "donga",
-          "title": "트럼프 특사·푸틴, 우크라 종전 협상서 ‘러 석유업체 빅딜’ 논의"
-        }
-      ]
-    },
-    {
-      "term": "한일전",
-      "total": 8,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국, 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 한국, AG 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]남자축구 AG 4연속 금메달…결승 한일전 1-0 승리"
-        }
-      ]
-    },
-    {
-      "term": "넘어",
-      "total": 6,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김종철, '미디어 기본사회' 정책 발제…\"미디어, 수단을 넘어 이제는 환경\""
-        },
-        {
-          "source": "yna",
-          "title": "그물 넘어 돌아온 부캉이…추가 구조 없이 당분간 움직임 주시(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "하석진, 17억에 산 한강뷰 아파트 10년새 40억 넘어…남다른 안목"
-        }
-      ]
-    },
-    {
-      "term": "그물",
-      "total": 6,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "그물 넘어 돌아온 부캉이…추가 구조 없이 당분간 움직임 주시(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "그물 넘어 수로로 다시 온 부캉이…당국, 당분간 추가 구조 없이 주시하기로"
-        },
-        {
-          "source": "mk",
-          "title": "“마! 쫌 집에 가라”…‘부캉이’ 그물 뚫고 북항친수공원 리턴"
-        }
-      ]
-    },
-    {
-      "term": "이우석",
-      "total": 6,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 양궁 이우석, 한국 5번째 2관왕…골프·요트서도 金金"
-        },
-        {
-          "source": "khan",
-          "title": "[속보] 양궁 이우석 한국 양궁 자존심 지켰다…리커브 개인전 금, 대회 ‘2관왕’"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 양궁 이우석, 日 꺾고 개인전 금메달…2회 연속 2관왕"
-        }
-      ]
-    },
-    {
-      "term": "관왕",
-      "total": 5,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 양궁 이우석, 한국 5번째 2관왕…골프·요트서도 金金"
-        },
-        {
-          "source": "khan",
-          "title": "[속보] 양궁 이우석 한국 양궁 자존심 지켰다…리커브 개인전 금, 대회 ‘2관왕’"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 양궁 이우석, 日 꺾고 개인전 금메달…2회 연속 2관왕"
-        }
-      ]
-    },
-    {
-      "term": "여객기",
-      "total": 5,
-      "sourceCount": 5,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "방콕 홍수 대응못해 한국행 여객기 차질…타이항공 CEO 해임"
-        },
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        },
-        {
-          "source": "khan",
-          "title": "기장 흉기로 공격한 부기장…“이스라엘행 여객기 고의 추락시키려 했다” 시인"
-        }
-      ]
-    },
-    {
-      "term": "국힘",
-      "total": 8,
       "sourceCount": 4,
       "sources": [
-        "sbs",
         "yna",
-        "donga",
+        "khan",
+        "mk",
         "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
-        },
-        {
-          "source": "sbs",
-          "title": "민주, 국힘 장외집회에 \"장동혁의 세 과시…반민생정당\""
+          "source": "yna",
+          "title": "트럼프 \"여론조사, 항상 MAGA 과소평가\"…지지층 투표 독려"
         },
         {
           "source": "yna",
-          "title": "與, 국힘 장외집회에 \"張체제 연명 위해 국감 내팽개쳐…反민생\""
+          "title": "트럼프, 자기 유세 보도 안한 폭스뉴스 또 직격…'폐업' 경고도"
+        },
+        {
+          "source": "yna",
+          "title": "트럼프 \"美선두 유지\" 슈퍼지능TF 발족…AI차르에 국가정보국장"
         }
       ]
     },
     {
-      "term": "양궁",
+      "term": "해킹",
       "total": 8,
       "sourceCount": 4,
       "sources": [
         "yna",
-        "khan",
         "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구·양궁·클라이밍·골프·요트·태권도서 金 6개 획득(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 양궁 이우석, 한국 5번째 2관왕…골프·요트서도 金金"
-        },
-        {
-          "source": "khan",
-          "title": "[속보] 양궁 이우석 한국 양궁 자존심 지켰다…리커브 개인전 금, 대회 ‘2관왕’"
-        }
-      ]
-    },
-    {
-      "term": "탄도미사일",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "북한, 탄도미사일 1발 발사…700㎞ 이상 비행"
-        },
-        {
-          "source": "sbs",
-          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
-        },
-        {
-          "source": "sbs",
-          "title": "합참 \"북, 동해상으로 탄도미사일 발사\""
-        }
-      ]
-    },
-    {
-      "term": "승리",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'김상엽 역전골' HL안양, 레드이글스 상대로 홈 개막전 승리"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국, 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 한국, AG 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리"
-        }
-      ]
-    },
-    {
-      "term": "결승",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국, 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 한국, AG 남자 축구 4회 연속 금메달…결승 한일전 1-0 승리"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 강상현, 첫 AG서 동메달…결승 진출은 불발"
-        }
-      ]
-    },
-    {
-      "term": "서채현",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 금메달 서채현 \"마침내 해냈다\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합)"
-        }
-      ]
-    },
-    {
-      "term": "겨루기",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 40년 겨루기 금맥 지킨 송다빈 \"어깨는 무거웠지만 발은 가볍게\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 송다빈, 여자 67㎏초과급 우승…겨루기 첫 금 수확(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 태권도 송다빈, 여자 67㎏초과급 금메달…겨루기 첫 금 수확"
-        }
-      ]
-    },
-    {
-      "term": "송다빈",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 40년 겨루기 금맥 지킨 송다빈 \"어깨는 무거웠지만 발은 가볍게\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 송다빈, 여자 67㎏초과급 우승…겨루기 첫 금 수확(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 태권도 송다빈, 여자 67㎏초과급 금메달…겨루기 첫 금 수확"
-        }
-      ]
-    },
-    {
-      "term": "태권도",
-      "total": 7,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 송다빈, 여자 67㎏초과급 우승…겨루기 첫 금 수확(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 태권도 송다빈, 여자 67㎏초과급 금메달…겨루기 첫 금 수확"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 강상현, 첫 AG서 동메달…결승 진출은 불발"
-        }
-      ]
-    },
-    {
-      "term": "엄지성",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
         "kmib",
         "hani"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "[아시안게임] '금메달 골' 엄지성 \"하나만 기다렸다…평생 잊지 못할 것\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 이민성호 처음과 끝엔 해결사 엄지성…와일드카드 임무 완수"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 남자축구 4연패 걸린 한일전에 이영준·엄지성 등 선발 출격"
-        }
-      ]
-    },
-    {
-      "term": "개천절",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "개천절 연휴 첫날 강원서 산악사고 등 잇따라…4명 헬기 구조"
-        },
-        {
-          "source": "yna",
-          "title": "개천절 도심 대규모 집회·행진 잇달아…강남에선 축제 퍼레이드"
-        },
-        {
-          "source": "khan",
-          "title": "개천절 나들이 차량에 고속도로 정체…도심은 집회·행사로 혼잡"
-        }
-      ]
-    },
-    {
-      "term": "유출",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "현대캐피탈도 해킹 확인…주택대출 모집인 정보 일부 유출"
-        }
-      ]
-    },
-    {
-      "term": "만명",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "'암살자(들)', 역사 왜곡 논란에도 관객 200만명 돌파"
-        },
-        {
-          "source": "khan",
-          "title": "정치권 논란에도···‘암살자(들)’ 관객 200만명 돌파"
-        }
-      ]
-    },
-    {
-      "term": "추가",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"김지용, 장기간 추가 검증…재제청 적절치 않아\""
-        },
-        {
-          "source": "sbs",
-          "title": "[자막뉴스] \"한반도 전쟁 발발 기도\" 강력 비판…\"공개 사과 거부 시 추가 조치\" 경고"
-        },
-        {
-          "source": "yna",
-          "title": "그물 넘어 돌아온 부캉이…추가 구조 없이 당분간 움직임 주시(종합)"
-        }
-      ]
-    },
-    {
-      "term": "로또",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "1244회 로또 1등 18명…당첨금 각 16억원(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "1244회 로또 1등 '1, 13, 18, 26, 34, 38'"
-        },
-        {
-          "source": "donga",
-          "title": "1244회 로또 1등 18명 16억씩 받는다…자동 11명·수동 7명"
-        }
-      ]
-    },
-    {
-      "term": "추락",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\""
-        },
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        }
-      ]
-    },
-    {
-      "term": "장외집회",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
-        },
-        {
-          "source": "yna",
-          "title": "국힘, 대규모 장외집회 개최…\"사법파괴·안보참사에 국민 분노\""
-        },
-        {
-          "source": "donga",
-          "title": "국힘, 1년만의 장외집회…“李 재판 재개해야…北에 대북송금 이상 약점 잡혔나”"
-        }
-      ]
-    },
-    {
-      "term": "김민석",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김민석 \"2028년 총선 주 싸움터는 낙동강…부산에서 승리할 것\""
-        },
-        {
-          "source": "yna",
-          "title": "김민석, '단식농성' 공공노련 위원장에 \"공공기관 통폐합 소통\""
-        },
-        {
-          "source": "khan",
-          "title": "‘부캉이 열풍’에 김민석 “돔돔돔, 부캉! 돔 아레나로 관심 이어가자”"
-        }
-      ]
-    },
-    {
-      "term": "대회",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 北, 역도 외 금메달 없이 대회 일정 마무리"
-        },
-        {
-          "source": "khan",
-          "title": "[속보] 양궁 이우석 한국 양궁 자존심 지켰다…리커브 개인전 금, 대회 ‘2관왕’"
-        },
-        {
-          "source": "kmib",
-          "title": "‘한일전 완승’ 이우석, 리커브 개인전 金…대회 2관왕"
-        }
-      ]
-    },
-    {
-      "term": "당국",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "당국, '해킹피해' 2금융권 확산에 내일 全업권 긴급소집"
-        },
-        {
-          "source": "donga",
-          "title": "은행·2금융권 줄줄이 ‘AI 해킹’에…당국, 내일 全금융사 CEO 긴급대응 회의"
-        },
-        {
-          "source": "khan",
-          "title": "그물 넘어 수로로 다시 온 부캉이…당국, 당분간 추가 구조 없이 주시하기로"
-        }
-      ]
-    },
-    {
-      "term": "돌아온",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "그물 넘어 돌아온 부캉이…추가 구조 없이 당분간 움직임 주시(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "‘부캉이’ 돌아온 북항, 누적 방문객 81만8800명"
+          "title": "법원 해킹 시도 올해만 24만건…개인정보 유출도 14건으로 7배↑(종합)"
         },
         {
           "source": "mk",
-          "title": "“대출 갚으라고 건넨 목돈 다 날려”…주식 깡통 찬 남편, 돌아온 건 ‘이혼 소장’"
-        }
-      ]
-    },
-    {
-      "term": "꺾고",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국 남자 수구, 홍콩 꺾고 최종 5위로 마감"
-        },
-        {
-          "source": "donga",
-          "title": "프로농구 LG, KCC 꺾고 개막 축포…소노·정관장도 승전고"
+          "title": "AI해킹 전면전… 다음 타깃은 국가인프라"
         },
         {
           "source": "mk",
-          "title": "[속보] 양궁 이우석, 日 꺾고 개인전 금메달…2회 연속 2관왕"
+          "title": "첫 공격 막은 우리銀 … AI 해킹, 24시간 감시 AI 방패로 차단"
         }
       ]
     },
     {
-      "term": "집회",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "개천절 도심 대규모 집회·행진 잇달아…강남에선 축제 퍼레이드"
-        },
-        {
-          "source": "khan",
-          "title": "개천절 나들이 차량에 고속도로 정체…도심은 집회·행사로 혼잡"
-        },
-        {
-          "source": "mk",
-          "title": "“가자지구 학살 중단” vs “이스라엘 지지”…개천절 서울서 잇따라 집회"
-        }
-      ]
-    },
-    {
-      "term": "돌파",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'암살자(들)', 역사 왜곡 논란에도 관객 200만명 돌파"
-        },
-        {
-          "source": "khan",
-          "title": "정치권 논란에도···‘암살자(들)’ 관객 200만명 돌파"
-        },
-        {
-          "source": "mk",
-          "title": "역사 왜곡 논란 ‘암살자(들)’, 개봉 11일째 200만 관객 돌파"
-        }
-      ]
-    },
-    {
-      "term": "기장",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        },
-        {
-          "source": "khan",
-          "title": "기장 흉기로 공격한 부기장…“이스라엘행 여객기 고의 추락시키려 했다” 시인"
-        },
-        {
-          "source": "mk",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE, 범행 동기·연계성 등 수사"
-        }
-      ]
-    },
-    {
-      "term": "아시안게임",
-      "total": 40,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구 금메달 시상식서도 터진 사고…제때 오르지 못한 태극기"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '금메달 캡틴' 이기혁 \"올해 제게 천운이 따르네요\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '금메달 골' 엄지성 \"하나만 기다렸다…평생 잊지 못할 것\""
-        }
-      ]
-    },
-    {
-      "term": "여자",
-      "total": 8,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 서채현, 아시안게임 스포츠클라이밍 여자 리드 금메달"
-        }
-      ]
-    },
-    {
-      "term": "스포츠클라이밍",
-      "total": 7,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 금메달 서채현 \"마침내 해냈다\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 이도현, 남자 리드 동메달"
-        }
-      ]
-    },
-    {
-      "term": "발사",
+      "term": "조희대",
       "total": 6,
-      "sourceCount": 3,
+      "sourceCount": 4,
       "sources": [
         "sbs",
-        "yna",
-        "khan"
+        "khan",
+        "mk",
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "북한 \"중거리 전략미사일 발사…적들 목표 소실\""
+          "title": "조희대 \"국감 증언 어렵다\"…여당 반발·야당 옹호"
         },
         {
           "source": "sbs",
-          "title": "북한, 탄도미사일 1발 발사…700㎞ 이상 비행"
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
         },
         {
-          "source": "sbs",
-          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
+          "source": "khan",
+          "title": "조희대 ‘증인 불출석’ 의견서…여 “안 나올 거면 사퇴하라”"
         }
       ]
     },
     {
-      "term": "리드",
+      "term": "개인정보",
       "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합2보)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 이도현, 남자 리드 동메달"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합)"
-        }
-      ]
-    },
-    {
-      "term": "목표",
-      "total": 5,
-      "sourceCount": 3,
+      "sourceCount": 4,
       "sources": [
         "sbs",
         "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "북한 \"중거리 전략미사일 발사…적들 목표 소실\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 4연패 이끈 이민성 감독 \"목표 달성했다…다 선수들 덕분\""
-        },
-        {
-          "source": "yna",
-          "title": "전남광주 연고 프로배구 SOOP 수퍼스 창단식…\"시즌 목표 우승\""
-        }
-      ]
-    },
-    {
-      "term": "역사",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"찬란한 사비 백제의 역사\"…부여서 백제문화제 개막"
-        },
-        {
-          "source": "yna",
-          "title": "'암살자(들)', 역사 왜곡 논란에도 관객 200만명 돌파"
-        },
-        {
-          "source": "donga",
-          "title": "유도장에 욱일기 등장…아시아 화합 내건 대회에서 또 역사 논란"
-        }
-      ]
-    },
-    {
-      "term": "우승",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 송다빈, 여자 67㎏초과급 우승…겨루기 첫 금 수확(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "전남광주 연고 프로배구 SOOP 수퍼스 창단식…\"시즌 목표 우승\""
-        },
-        {
-          "source": "donga",
-          "title": "김연섭, 첫 우승 도전…KPGA 최경주 인비테이셔널 3R 단독 선두"
-        }
-      ]
-    },
-    {
-      "term": "시간",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "kmib",
+        "mk",
         "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
-        },
-        {
-          "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
-        },
-        {
-          "source": "kmib",
-          "title": "개천절 나들이 인파에 고속도로 정체…서울→부산 6시간30분"
-        }
-      ]
-    },
-    {
-      "term": "부상",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
+          "title": "이 대통령, 금융기관 개인정보 유출에 \"철저한 조사·대책 마련\" 지시"
         },
         {
           "source": "yna",
-          "title": "'낙하물 피하려다'…서해안고속도로서 차량 4대 추돌해 7명 부상"
-        }
-      ]
-    },
-    {
-      "term": "민주당",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "텍사스·알래스카·오하이오서 민주당 약진…美공화 텃밭 '흔들'"
-        },
-        {
-          "source": "khan",
-          "title": "장동혁 “이 지지율 3자&#8594;2자&#8594;1자로 평탄화”…민주당 “장동혁 위한 장외집회”"
-        },
-        {
-          "source": "khan",
-          "title": "북 탄도미사일에 민주당 “도발 규탄”, 국민의힘 “이재명 대통령 나홀로 평화”"
-        }
-      ]
-    },
-    {
-      "term": "감독",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 4연패 이끈 이민성 감독 \"목표 달성했다…다 선수들 덕분\""
+          "title": "법원 해킹 시도 올해만 24만건…개인정보 유출도 14건으로 7배↑(종합)"
         },
         {
           "source": "yna",
-          "title": "진재운 감독 '나무의 노래', 프리 이탈리아 다큐 경쟁부문 수상"
-        },
-        {
-          "source": "donga",
-          "title": "‘4연패’ 이끈 이민성 감독 “결국 중요한 건 결과…목표 달성”"
-        }
-      ]
-    },
-    {
-      "term": "요트",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 축구·양궁·클라이밍·골프·요트·태권도서 金 6개 획득(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 요트 조성민, OCA 선수위원 낙선…\"선수 위한 활동 계속\"(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "14세 최지운, AG 요트 소년부 금메달…4위서 역전"
-        }
-      ]
-    },
-    {
-      "term": "금융권",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'해킹피해' 2금융권 확산…금융당국 투톱, 내일 全업권 긴급소집(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "당국, '해킹피해' 2금융권 확산에 내일 全업권 긴급소집"
-        },
-        {
-          "source": "donga",
-          "title": "은행·2금융권 줄줄이 ‘AI 해킹’에…당국, 내일 全금융사 CEO 긴급대응 회의"
-        }
-      ]
-    },
-    {
-      "term": "차량",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'낙하물 피하려다'…서해안고속도로서 차량 4대 추돌해 7명 부상"
-        },
-        {
-          "source": "yna",
-          "title": "안산 선부광장 가전제품 매장에 차량 돌진…인명 피해는 없어"
-        },
-        {
-          "source": "donga",
-          "title": "러 드론, 키이우 남부교 이틀새 4번 타격…차량·지하철 통행 끊겼다"
-        }
-      ]
-    },
-    {
-      "term": "시인",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"플라이두바이 부기장, 이스라엘 향해 '고의 추락' 의도 시인\""
-        },
-        {
-          "source": "khan",
-          "title": "기장 흉기로 공격한 부기장…“이스라엘행 여객기 고의 추락시키려 했다” 시인"
-        }
-      ]
-    },
-    {
-      "term": "수확",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 송다빈, 여자 67㎏초과급 우승…겨루기 첫 금 수확(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[1보] 태권도 송다빈, 여자 67㎏초과급 금메달…겨루기 첫 금 수확"
-        },
-        {
-          "source": "donga",
-          "title": "축구 4연패로 ‘금빛 피날레’…한국, 골프·양궁서 金 6개 수확"
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"AI 해킹과는 무관\"(종합)"
         }
       ]
     },
     {
       "term": "공격",
-      "total": 4,
-      "sourceCount": 3,
+      "total": 5,
+      "sourceCount": 4,
       "sources": [
-        "donga",
+        "sbs",
+        "yna",
         "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "결승 한일전 공격 선봉에 이영준…‘캡틴’ 이기혁 선발 복귀"
-        },
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        },
-        {
-          "source": "mk",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE, 범행 동기·연계성 등 수사"
-        }
-      ]
-    },
-    {
-      "term": "리커브",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "kmib",
         "hani"
       ],
       "examples": [
         {
-          "source": "khan",
-          "title": "[속보] 양궁 이우석 한국 양궁 자존심 지켰다…리커브 개인전 금, 대회 ‘2관왕’"
+          "source": "sbs",
+          "title": "이 대통령 \"개혁은 목표여야…선명성·공격 수단이어선 안 돼\""
         },
         {
-          "source": "khan",
-          "title": "여자 리커브, 역대 최초 AG ‘노골드’···‘세계 최강’ 한국 양궁, 아시아에서 자존심 구겼다"
+          "source": "yna",
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
         },
         {
-          "source": "kmib",
-          "title": "‘한일전 완승’ 이우석, 리커브 개인전 金…대회 2관왕"
+          "source": "yna",
+          "title": "\"금융사 해킹사고, 동일 공격 IP 여러 곳 발견…AI활용 추정\"(종합)"
         }
       ]
     },
     {
       "term": "만에",
-      "total": 3,
-      "sourceCount": 3,
+      "total": 5,
+      "sourceCount": 4,
       "sources": [
         "sbs",
-        "kmib",
-        "hani"
+        "yna",
+        "khan",
+        "mk"
       ],
       "examples": [
         {
@@ -1687,851 +284,2071 @@
           "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
         },
         {
-          "source": "kmib",
-          "title": "‘바다 안 갈래’…상어 부캉이, 그물 넘어 하루 만에 복귀"
-        },
-        {
-          "source": "hani",
-          "title": "국힘 1년 만에 장외 집회…“이재명 정권 심판”"
-        }
-      ]
-    },
-    {
-      "term": "동지",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, '청래 그만 괴롭히라'는 SNS에 \"우린 동지…곡해 말라\""
+          "source": "yna",
+          "title": "'9회 3득점' KIA, 35일 만에 3위 탈환…LG 7연패 추락"
         },
         {
           "source": "yna",
-          "title": "李대통령, '청래 그만 괴롭히라'는 SNS에 \"鄭은 동지…곡해말라\"(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령, ‘정청래 만찬’ 비판에 “함께 싸우며 넘어온 동지”"
+          "title": "[아시안게임 결산] ①44년 만에 최소 금…'역대 최고' 일본과 멀어진 격차(종합)"
         }
       ]
     },
     {
-      "term": "장외집회에",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "민주, 국힘 장외집회에 \"장동혁의 세 과시…반민생정당\""
-        },
-        {
-          "source": "yna",
-          "title": "與, 국힘 장외집회에 \"張체제 연명 위해 국감 내팽개쳐…反민생\""
-        },
-        {
-          "source": "donga",
-          "title": "與, 국힘 장외집회에 “장동혁 세 과시…국감 내팽개친 반민생”"
-        }
-      ]
-    },
-    {
-      "term": "회의",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
-        },
-        {
-          "source": "donga",
-          "title": "은행·2금융권 줄줄이 ‘AI 해킹’에…당국, 내일 全금융사 CEO 긴급대응 회의"
-        },
-        {
-          "source": "kmib",
-          "title": "후티 방관하던 트럼프 결단?… 별장서 수뇌부 극비 회의"
-        }
-      ]
-    },
-    {
-      "term": "없는",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "kmib",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정, 정동영 사과 요구·만남 제안에 \"대꾸할 가치도 없는 망상\""
-        },
-        {
-          "source": "kmib",
-          "title": "‘젠·티·한’ 임시 동맹 오늘로 끝…피할 수 없는 가을이 온다"
-        },
-        {
-          "source": "hani",
-          "title": "추미애 “김지용 검사장…제 형편 없는 사람 보는 실력에 가슴 친다”"
-        }
-      ]
-    },
-    {
-      "term": "국민",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"국민 억울함 최소화해야\"…'민원 해결 수당' 검토 제안"
-        },
-        {
-          "source": "yna",
-          "title": "국힘, 대규모 장외집회 개최…\"사법파괴·안보참사에 국민 분노\""
-        },
-        {
-          "source": "mk",
-          "title": "“나 돌아갈래”…영국, ‘EU 재가입’ 국민 49% 찬성·반대 28.5%"
-        }
-      ]
-    },
-    {
-      "term": "기도",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[자막뉴스] \"한반도 전쟁 발발 기도\" 강력 비판…\"공개 사과 거부 시 추가 조치\" 경고"
-        },
-        {
-          "source": "donga",
-          "title": "‘김지민♥’ 50세 예비아빠 김준호 “2세 두릅이 건강하게 태어나길” 기도"
-        },
-        {
-          "source": "kmib",
-          "title": "[365기도 ON] <277> 이웃과 미더운 관계를 이루고 하나님 앞에 겸손하게 하소서"
-        }
-      ]
-    },
-    {
-      "term": "알래스카",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "텍사스·알래스카·오하이오서 민주당 약진…美공화 텃밭 '흔들'"
-        },
-        {
-          "source": "khan",
-          "title": "트럼프 “한국, 알래스카 LNG 안 한다면 비용 2배 청구할 것”"
-        },
-        {
-          "source": "kmib",
-          "title": "트럼프 “韓 알래스카 LNG 투자 않으면 2배로 청구”"
-        }
-      ]
-    },
-    {
-      "term": "영화",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'디거' 개봉 첫 주말 흥행 참패…톰 크루즈 영화 중 19년래 최저"
-        },
-        {
-          "source": "mk",
-          "title": "“우리 아버지가 그렇게 미운가”…영화 ‘암살자(들)’ 논란에 입 연 박지만"
-        },
-        {
-          "source": "kmib",
-          "title": "산업·기업은행 “영화 암살자(들) 투자에 외압 없었다”"
-        }
-      ]
-    },
-    {
-      "term": "타격",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"외국인 키이우 떠나라\"…러, '타격 계속' 또 경고"
-        },
-        {
-          "source": "donga",
-          "title": "러 드론, 키이우 남부교 이틀새 4번 타격…차량·지하철 통행 끊겼다"
-        },
-        {
-          "source": "hani",
-          "title": "김여정 “우리 AI 미사일 타격 못 피해”…한·일 탐지 한계 주장"
-        }
-      ]
-    },
-    {
-      "term": "메달",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 메달 순위(3일)"
-        },
-        {
-          "source": "donga",
-          "title": "한국 럭비, 동메달 걸린 한일전서 패배…‘노 메달’로 마무리"
-        },
-        {
-          "source": "hani",
-          "title": "41살 홍텐의 춤은 ‘은’에서 멈추지 않는다…AG 브레이킹 2연속 메달"
-        }
-      ]
-    },
-    {
-      "term": "개막",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"찬란한 사비 백제의 역사\"…부여서 백제문화제 개막"
-        },
-        {
-          "source": "donga",
-          "title": "프로농구 LG, KCC 꺾고 개막 축포…소노·정관장도 승전고"
-        },
-        {
-          "source": "mk",
-          "title": "춘천 애니토이페스티벌 개막…가족 관람객 북적"
-        }
-      ]
-    },
-    {
-      "term": "욱일기",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 아시아 화합 내건 대회에 욱일기…유도 경기장에 버젓이 등장"
-        },
-        {
-          "source": "donga",
-          "title": "유도장에 욱일기 등장…아시아 화합 내건 대회에서 또 역사 논란"
-        },
-        {
-          "source": "hani",
-          "title": "야구장 반입금지 ‘욱일기’ 유도장 등장…조처 요구도 ‘묵살’"
-        }
-      ]
-    },
-    {
-      "term": "등장",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 아시아 화합 내건 대회에 욱일기…유도 경기장에 버젓이 등장"
-        },
-        {
-          "source": "donga",
-          "title": "유도장에 욱일기 등장…아시아 화합 내건 대회에서 또 역사 논란"
-        },
-        {
-          "source": "hani",
-          "title": "야구장 반입금지 ‘욱일기’ 유도장 등장…조처 요구도 ‘묵살’"
-        }
-      ]
-    },
-    {
-      "term": "필요",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[속보] 北 \"저고도 비행궤도 변경능력 보유…'AI 도입' 상기 필요\""
-        },
-        {
-          "source": "donga",
-          "title": "“로봇 늘수록 사람 더 필요”…포드 CEO가 꼽은 AI 시대 살아남을 직종"
-        },
-        {
-          "source": "mk",
-          "title": "[속보] 北 “저고도 비행궤도 변경능력 보유…‘AI 도입’ 상기 필요”"
-        }
-      ]
-    },
-    {
-      "term": "남자축구",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 남자축구 4연패 걸린 한일전에 이영준·엄지성 등 선발 출격"
-        },
-        {
-          "source": "donga",
-          "title": "[속보]남자축구 AG 4연속 금메달…결승 한일전 1-0 승리"
-        },
-        {
-          "source": "hani",
-          "title": "엄지성 왼발, 일본 골망 뚫었다…남자축구 AG 4연패"
-        }
-      ]
-    },
-    {
-      "term": "복귀",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "버넘 총리가 띄운 EU 복귀 카드, 영국인 49％ 찬성"
-        },
-        {
-          "source": "donga",
-          "title": "결승 한일전 공격 선봉에 이영준…‘캡틴’ 이기혁 선발 복귀"
-        },
-        {
-          "source": "kmib",
-          "title": "‘바다 안 갈래’…상어 부캉이, 그물 넘어 하루 만에 복귀"
-        }
-      ]
-    },
-    {
-      "term": "금빛",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 15세 '금빛 항해사' 최지운 \"한국 가면 고기 엄청 사주겠죠?\""
-        },
-        {
-          "source": "donga",
-          "title": "축구 4연패로 ‘금빛 피날레’…한국, 골프·양궁서 金 6개 수확"
-        },
-        {
-          "source": "hani",
-          "title": "태권도 송다빈 ‘금빛 발차기’…겨루기 첫 ‘금’ 종주국 자존심 살려"
-        }
-      ]
-    },
-    {
-      "term": "최지운",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 15세 '금빛 항해사' 최지운 \"한국 가면 고기 엄청 사주겠죠?\""
-        },
-        {
-          "source": "khan",
-          "title": "14세 최지운, AG 요트 소년부 금메달…4위서 역전"
-        },
-        {
-          "source": "hani",
-          "title": "중3 최지운, 요트 소년부 ‘금 물살’…“요트계 호날두 되고파요”"
-        }
-      ]
-    },
-    {
-      "term": "자전거",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "khan",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "hani",
-          "title": "제주서 동호회원들과 자전거 타던 50대, 버스와 충돌해 숨져"
-        }
-      ]
-    },
-    {
-      "term": "타던",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "khan",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "hani",
-          "title": "제주서 동호회원들과 자전거 타던 50대, 버스와 충돌해 숨져"
-        }
-      ]
-    },
-    {
-      "term": "버스와",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "khan",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "hani",
-          "title": "제주서 동호회원들과 자전거 타던 50대, 버스와 충돌해 숨져"
-        }
-      ]
-    },
-    {
-      "term": "심정지",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        },
-        {
-          "source": "donga",
-          "title": "완주 대둔산서 70대 여성 추락해 심정지…이송 후 숨져"
-        },
-        {
-          "source": "khan",
-          "title": "제주 1100도로서 자전거 타던 50대, 버스와 부딪쳐 심정지"
-        }
-      ]
-    },
-    {
-      "term": "예가람저축은행도",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "예가람저축은행도 해킹 피해로 고객정보 유출…4만명 추정(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "예가람저축은행도 해킹…4만명 고객정보 유출 피해 추정"
-        },
-        {
-          "source": "hani",
-          "title": "예가람저축은행도 해킹…이름·연락처 등 개인정보 유출"
-        }
-      ]
-    },
-    {
-      "term": "결승골",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'윤도영 PK 결승골' 김은중호, 호주 원정 평가전서 2-1 승리"
-        },
-        {
-          "source": "donga",
-          "title": "엄지성 ‘캡틴’ 물려받고 4분만에 결승골…男축구 AG 4연패"
-        },
-        {
-          "source": "kmib",
-          "title": "[속보] ‘엄지성 결승골’ 韓, 日 꺾고 AG 4연패"
-        }
-      ]
-    },
-    {
-      "term": "관객",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'암살자(들)', 역사 왜곡 논란에도 관객 200만명 돌파"
-        },
-        {
-          "source": "khan",
-          "title": "정치권 논란에도···‘암살자(들)’ 관객 200만명 돌파"
-        },
-        {
-          "source": "mk",
-          "title": "역사 왜곡 논란 ‘암살자(들)’, 개봉 11일째 200만 관객 돌파"
-        }
-      ]
-    },
-    {
-      "term": "미사일",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "김여정 “미사일 700km 비행? 한·일 목표 놓쳤다…저고도서 궤도변경”"
-        },
-        {
-          "source": "khan",
-          "title": "김여정 “한·일, 북 미사일 추적 실패…특수 비행방식 우월성 검증”"
-        },
-        {
-          "source": "hani",
-          "title": "김여정 “우리 AI 미사일 타격 못 피해”…한·일 탐지 한계 주장"
-        }
-      ]
-    },
-    {
-      "term": "숨져",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "완주 대둔산서 70대 여성 추락해 심정지…이송 후 숨져"
-        },
-        {
-          "source": "khan",
-          "title": "1호선 선로서 60대 남성 열차에 치여 숨져…상행선 지연"
-        },
-        {
-          "source": "hani",
-          "title": "제주서 동호회원들과 자전거 타던 50대, 버스와 충돌해 숨져"
-        }
-      ]
-    },
-    {
-      "term": "시도",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE “테러 시도” 규정"
-        },
-        {
-          "source": "mk",
-          "title": "‘여객기 추락 시도’ 부기장, 도끼로 기장 공격…UAE, 범행 동기·연계성 등 수사"
-        },
-        {
-          "source": "kmib",
-          "title": "도끼 들고 기장 공격…플라이두바이 부기장 ‘추락 시도’ 시인"
-        }
-      ]
-    },
-    {
-      "term": "사망",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "평택시흥고속도로 군자JC 부근서 화물차-승용차 추돌…1명 사망"
-        },
-        {
-          "source": "mk",
-          "title": "평택시흥고속도로서 트럭이 승용차 2대 추돌…트럭 운전자 사망"
-        },
-        {
-          "source": "hani",
-          "title": "전철 1호선 성균관대역 인근서 60대 남성 열차에 치여 사망"
-        }
-      ]
-    },
-    {
-      "term": "북한",
-      "total": 6,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "북한 \"중거리 전략미사일 발사…적들 목표 소실\""
-        },
-        {
-          "source": "sbs",
-          "title": "북한, 탄도미사일 1발 발사…700㎞ 이상 비행"
-        },
-        {
-          "source": "sbs",
-          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
-        }
-      ]
-    },
-    {
-      "term": "김지용",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "hani"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
-        },
-        {
-          "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
-        },
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"김지용, 장기간 추가 검증…재제청 적절치 않아\""
-        }
-      ]
-    },
-    {
-      "term": "동메달",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 한국 레슬링, 동메달 1개로 마침표…최악의 성적표"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 이도현, 남자 리드 동메달"
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] 태권도 강상현, 첫 AG서 동메달…결승 진출은 불발"
-        }
-      ]
-    },
-    {
-      "term": "프로농구",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[프로농구 안양전적] 정관장 88-85 현대모비스"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
-        }
-      ]
-    },
-    {
-      "term": "만찬",
+      "term": "우려",
       "total": 4,
-      "sourceCount": 2,
+      "sourceCount": 4,
       "sources": [
         "sbs",
-        "khan"
+        "khan",
+        "mk",
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
-        },
-        {
-          "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "국힘, 오세훈·윤석열·추경호 재판 주시…우려 속 전화위복 기대도"
         },
         {
           "source": "khan",
-          "title": "이 대통령과 만찬 정청래 “내란 밤 함께 넘었던 동지들이여, 뭉치자”"
+          "title": "자동차, 미 관세 10조 타격…부품사 ‘납품단가’ 부담 전가 우려"
+        },
+        {
+          "source": "mk",
+          "title": "\"정부 재정통제 우회 우려\"… 미래기금 견제 나선 국회"
         }
       ]
     },
     {
       "term": "예멘",
       "total": 4,
-      "sourceCount": 2,
+      "sourceCount": 4,
       "sources": [
         "yna",
-        "donga"
+        "khan",
+        "mk",
+        "hani"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
+        },
+        {
+          "source": "khan",
+          "title": "예멘 정부 “후티 반군 점령지역 탈환 위한 대규모 군사작전 개시”"
+        },
+        {
+          "source": "mk",
+          "title": "예멘 정부군, 후티에 맞불공습"
+        }
+      ]
+    },
+    {
+      "term": "아시안게임",
+      "total": 13,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[아시안게임] 유도 정수진, 계체 실격 폭로 \"대상 아니라고 해서 음식 섭취\"(종합)"
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "[아시안게임] OCA 사무총장 \"10만 건 중 1∼2건 지연, 수송 실패 아냐\""
         },
         {
           "source": "yna",
-          "title": "\"사우디-예멘 정부군, 후티 대공세 준비\"…美는 참전 거부(종합)"
+          "title": "[아시안게임] 유도 정수진, 계체 실격 폭로 \"대상 아니라고 해서 음식물 섭취\""
+        }
+      ]
+    },
+    {
+      "term": "발사",
+      "total": 9,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'지뢰' 언급 없이…\"극초음속 미사일 시험 발사\""
+        },
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "sbs",
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
+        }
+      ]
+    },
+    {
+      "term": "국감",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조희대 \"국감 증언 어렵다\"…여당 반발·야당 옹호"
+        },
+        {
+          "source": "sbs",
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        }
+      ]
+    },
+    {
+      "term": "미사일",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'지뢰' 언급 없이…\"극초음속 미사일 시험 발사\""
+        },
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "sbs",
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
+        }
+      ]
+    },
+    {
+      "term": "탈환",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
+        },
+        {
+          "source": "yna",
+          "title": "지상전에 로봇 대세…우크라, 러에 빼앗겼던 영토 대거 탈환"
+        },
+        {
+          "source": "yna",
+          "title": "'9회 3득점' KIA, 35일 만에 3위 탈환…LG 7연패 추락"
+        }
+      ]
+    },
+    {
+      "term": "군대",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "축구 금메달 땄지만…'군대 안 간다' 발언에, '전역모 인증샷' 등 눈살"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] '군대 안 간다' 축구팀 논란에…국힘서 병역특례 개편 목소리"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] \"군대 안 갑니다\"…금메달 축구 대표팀, 병역 관련 언행 논란"
+        }
+      ]
+    },
+    {
+      "term": "평화",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"한반도 평화 여정 쉽지 않을 것…그래도 가야할 길\""
+        },
+        {
+          "source": "yna",
+          "title": "크렘린궁 \"평화 달성 불가능하다면 전력 다해 싸운다\""
+        },
+        {
+          "source": "yna",
+          "title": "李대통령 \"적대와 대결 악순환 끊어내야 평화·번영 선순환\""
+        }
+      ]
+    },
+    {
+      "term": "민주",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주, 국힘 장외집회에 \"장동혁의 세 과시…반민생정당\""
+        },
+        {
+          "source": "yna",
+          "title": "트럼프에 등돌린 美라틴계…\"지지정당, 민주 59% 對 공화 35%\""
+        }
+      ]
+    },
+    {
+      "term": "만나요",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]말 타고 등장한 기수 “4년 뒤 카타르에서 만나요”"
+        }
+      ]
+    },
+    {
+      "term": "간다",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "축구 금메달 땄지만…'군대 안 간다' 발언에, '전역모 인증샷' 등 눈살"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] '군대 안 간다' 축구팀 논란에…국힘서 병역특례 개편 목소리"
+        },
+        {
+          "source": "khan",
+          "title": "“군대 안 간다” 남자축구팀, 금 따고도 고개부터 숙여"
+        }
+      ]
+    },
+    {
+      "term": "철회",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제에 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "khan",
+          "title": "국힘, 해외에 ‘상영 철회’ 서한…정치판 끌려 나온 ‘암살자(들)’"
+        }
+      ]
+    },
+    {
+      "term": "서한",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제에 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "khan",
+          "title": "국힘, 해외에 ‘상영 철회’ 서한…정치판 끌려 나온 ‘암살자(들)’"
+        }
+      ]
+    },
+    {
+      "term": "여사",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "첫 '경복궁 결혼식' 찾은 김혜경 여사…유튜버 '김치귀신 마이'에 축하"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]고궁박물관 ‘1호 결혼식’ 찾은 김혜경 여사"
+        },
+        {
+          "source": "mk",
+          "title": "“육영수 여사 죽음 조롱 안했다”…‘암살자들’ 본 조국, 유해진엔 “의병상”"
+        }
+      ]
+    },
+    {
+      "term": "주년",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "민주당 \"10·4 남북정상선언 19주년…멈춰 선 대화 다시 시작해야\""
+        },
+        {
+          "source": "yna",
+          "title": "[동포의 창] 고려인 정주 90주년…카자흐 카라간다서 '한국문화 축제'"
+        },
+        {
+          "source": "kmib",
+          "title": "기성 120주년… “복음의 본질·기도 열정 회복하자”"
+        }
+      ]
+    },
+    {
+      "term": "김지용",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+        },
+        {
+          "source": "yna",
+          "title": "李대통령 반박에 與 김지용 내홍 수습 기류…일각선 회의론도(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "여 의원들 “김지용, 친윤 아니다”…적격 여론 힘 싣기"
+        }
+      ]
+    },
+    {
+      "term": "시간",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+        },
+        {
+          "source": "mk",
+          "title": "첫 공격 막은 우리銀 … AI 해킹, 24시간 감시 AI 방패로 차단"
+        },
+        {
+          "source": "hani",
+          "title": "새 형사사법, 이제 ‘세부’의 시간 [한겨레 프리즘]"
+        }
+      ]
+    },
+    {
+      "term": "개시",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
+        },
+        {
+          "source": "khan",
+          "title": "예멘 정부 “후티 반군 점령지역 탈환 위한 대규모 군사작전 개시”"
+        },
+        {
+          "source": "hani",
+          "title": "예멘 “후티 장악지 탈환 위한 군사작전 개시”"
+        }
+      ]
+    },
+    {
+      "term": "후티",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
+        },
+        {
+          "source": "khan",
+          "title": "예멘 정부 “후티 반군 점령지역 탈환 위한 대규모 군사작전 개시”"
+        },
+        {
+          "source": "hani",
+          "title": "예멘 “후티 장악지 탈환 위한 군사작전 개시”"
+        }
+      ]
+    },
+    {
+      "term": "날씨",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[날씨] 연휴 마지막날 흐리고 비…낮 기온 5도가량 '뚝'"
+        },
+        {
+          "source": "khan",
+          "title": "[2026년 10월 05일 날씨]비 소식에 찬 바람…가을 속으로"
+        },
+        {
+          "source": "mk",
+          "title": "[표] 오늘의 날씨"
+        }
+      ]
+    },
+    {
+      "term": "금융권",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "금융권 해킹에 정부 비상대응…기업 2만8천곳 보안점검 권고"
+        },
+        {
+          "source": "mk",
+          "title": "금융권 왕창 털리더니 한전까지도…직원 2만4000여 명 개인정보 노출"
+        },
+        {
+          "source": "kmib",
+          "title": "[사설] 금융권 전방위 AI 해킹, 보안 체계 전면 개편하길"
+        }
+      ]
+    },
+    {
+      "term": "코넬대",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "코넬대 총장, 집단성폭행 의혹 첫 입장…\"투명성·책임강화\""
+        },
+        {
+          "source": "khan",
+          "title": "“내가 제인 도다(#IAmJaneDoe)” 코넬대 성폭력 사건  “누구라도 피해자 될 수 있어” 연대 확산"
+        },
+        {
+          "source": "mk",
+          "title": "‘2년 침묵’ 코넬대 총장, 성폭행 의혹에 드디어 입 열었지만 정작…"
+        }
+      ]
+    },
+    {
+      "term": "중수청",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "문열고도 수사 못하는 중수청…\"누가봐도 성급\"·\"개혁의지 있나\""
+        },
+        {
+          "source": "khan",
+          "title": "어수선한 중수청, 주말 내내 ‘준비 중’"
+        },
+        {
+          "source": "hani",
+          "title": "중수청 시험대 될 ‘1호 수사’…법조계, 중대경제범죄에 무게"
+        }
+      ]
+    },
+    {
+      "term": "악순환",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "李대통령 \"적대와 대결 악순환 끊어내야 평화·번영 선순환\""
+        },
+        {
+          "source": "mk",
+          "title": "李대통령 “북한과 적대·대결의 악순환 끊어내야…평화는 가야할 길”"
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령 “10·4 남북정상선언 정신으로 적대·대결 악순환 끊어내야”"
+        }
+      ]
+    },
+    {
+      "term": "끊어내야",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "李대통령 \"적대와 대결 악순환 끊어내야 평화·번영 선순환\""
+        },
+        {
+          "source": "mk",
+          "title": "李대통령 “북한과 적대·대결의 악순환 끊어내야…평화는 가야할 길”"
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령 “10·4 남북정상선언 정신으로 적대·대결 악순환 끊어내야”"
+        }
+      ]
+    },
+    {
+      "term": "논란에",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[아시안게임] '군대 안 간다' 축구팀 논란에…국힘서 병역특례 개편 목소리"
+        },
+        {
+          "source": "mk",
+          "title": "“사회복무요원이지만 군인 신분”…축구대표팀 병역특례 논란에 김제덕 주목"
+        },
+        {
+          "source": "hani",
+          "title": "“영화 비판 아닌 선 넘은 인신 공격”…‘암살자(들)’ 논란에 영화감독조합 우려"
+        }
+      ]
+    },
+    {
+      "term": "미래기금",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "재경위 \"미래기금 재정통제 약해질 수도…재원 지속성 검토해야\"(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "미래기금 30%까지 정부 재량 지출 담겨…국회 통제 약화 ‘현실로’"
+        },
+        {
+          "source": "mk",
+          "title": "\"정부 재정통제 우회 우려\"… 미래기금 견제 나선 국회"
+        }
+      ]
+    },
+    {
+      "term": "불출석",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "조희대 ‘증인 불출석’ 의견서…여 “안 나올 거면 사퇴하라”"
+        },
+        {
+          "source": "mk",
+          "title": "조희대, 국감증인 불출석…\"李와 협의 공개 부적절\""
+        },
+        {
+          "source": "hani",
+          "title": "조희대, 국감 증인 불출석…민주 “그럴거면 사퇴” 국힘 “겁박정치”"
+        }
+      ]
+    },
+    {
+      "term": "방문",
+      "total": 6,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "스페인, 국왕 방문 앞둔 세우타 해변서 이주민 캠프 철거"
+        },
+        {
+          "source": "yna",
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
+        }
+      ]
+    },
+    {
+      "term": "축구",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "축구 금메달 땄지만…'군대 안 간다' 발언에, '전역모 인증샷' 등 눈살"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 축구 결승에 123만명 몰렸다…네이버 중계 최다"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] \"군대 안 갑니다\"…금메달 축구 대표팀, 병역 관련 언행 논란"
+        }
+      ]
+    },
+    {
+      "term": "금메달",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "축구 금메달 땄지만…'군대 안 간다' 발언에, '전역모 인증샷' 등 눈살"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 금메달 땄다고 병역 부담 줄이는 나라는 한국·대만·이란뿐"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] \"군대 안 갑니다\"…금메달 축구 대표팀, 병역 관련 언행 논란"
+        }
+      ]
+    },
+    {
+      "term": "추진",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "수사",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "해경 수사 권한 커졌는데…수사관 3명 중 1명은 '경력 3년 미만'"
+        },
+        {
+          "source": "yna",
+          "title": "포르투갈 검찰, '이란전 美에 대서양 기지 사용 허용' 수사 착수"
+        },
+        {
+          "source": "yna",
+          "title": "문열고도 수사 못하는 중수청…\"누가봐도 성급\"·\"개혁의지 있나\""
+        }
+      ]
+    },
+    {
+      "term": "관세",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "미국에서도 “알래스카 LNG 고비용”  트럼프 ‘합의 안 하면 관세 2배’ 압박"
+        },
+        {
+          "source": "khan",
+          "title": "선거 열세로 다급한 트럼프, 투자 조건 ‘관세 15%’ 나몰라라"
+        },
+        {
+          "source": "khan",
+          "title": "자동차, 미 관세 10조 타격…부품사 ‘납품단가’ 부담 전가 우려"
+        }
+      ]
+    },
+    {
+      "term": "사설",
+      "total": 4,
+      "sourceCount": 2,
+      "sources": [
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "kmib",
+          "title": "[사설] 금융권 전방위 AI 해킹, 보안 체계 전면 개편하길"
+        },
+        {
+          "source": "hani",
+          "title": "[사설] 검토 단계 알래스카 사업에 ‘서명 강요’, 받아들일 수 없다"
+        },
+        {
+          "source": "hani",
+          "title": "[사설] 북은 미사일 도발 멈추고, 우리는 대응체계 확충해야"
+        }
+      ]
+    },
+    {
+      "term": "선수단",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"끝까지 도전한 대한민국 선수단 모두가 챔피언\""
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 폐회식 北선수단 기수는 레슬링 손만광"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] '리드 금메달' 서채현, 한국 선수단 폐회식 기수로 선정"
+        }
+      ]
+    },
+    {
+      "term": "한미",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "北 '탐지제한·요격불가' 주장에 軍 \"한미 자산으로 가능\" 반박(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "가능",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "北 '탐지제한·요격불가' 주장에 軍 \"한미 자산으로 가능\" 반박(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "출석",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "yna",
+          "title": "與 \"曺, 국감 출석 불응 의사…불출석할 거면 사퇴하라\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "불응",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "yna",
+          "title": "與 \"曺, 국감 출석 불응 의사…불출석할 거면 사퇴하라\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "의사",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "sbs",
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
+        },
+        {
+          "source": "yna",
+          "title": "與 \"曺, 국감 출석 불응 의사…불출석할 거면 사퇴하라\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "장외집회",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "장외집회 마친 국힘 \"이 대통령, SNS 중단하고 민심 들어야\""
+        },
+        {
+          "source": "sbs",
+          "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
+        },
+        {
+          "source": "mk",
+          "title": "野 \"폭주 정권에 경고\" vs 與 \"습관성 장외집회\""
+        }
+      ]
+    },
+    {
+      "term": "김정은",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
+        },
+        {
+          "source": "sbs",
+          "title": "김정은, 주애와 전략미사일 발사 참관…\"핵억제력 고도화\""
+        },
+        {
+          "source": "hani",
+          "title": "김정은 ‘핵 고도화’ 강조…미국에 ‘비핵화 의제 불가’ 메시지"
+        }
+      ]
+    },
+    {
+      "term": "고도화",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
+        },
+        {
+          "source": "sbs",
+          "title": "김정은, 주애와 전략미사일 발사 참관…\"핵억제력 고도화\""
+        },
+        {
+          "source": "hani",
+          "title": "김정은 ‘핵 고도화’ 강조…미국에 ‘비핵화 의제 불가’ 메시지"
+        }
+      ]
+    },
+    {
+      "term": "개최",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "젤렌스키 \"美, 10월 중 러·우크라와 3자 평화회담 개최 제안\""
+        },
+        {
+          "source": "yna",
+          "title": "주인니대사관, 한국의 외국인 요양보호사 제도 설명회 개최"
+        },
+        {
+          "source": "kmib",
+          "title": "전주 순복음참사랑교회… 성도와 주민 소통의 장… 행복나눔 페스티벌 개최"
+        }
+      ]
+    },
+    {
+      "term": "전주",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "전주 배 저장창고에 불…인명 피해 없어"
+        },
+        {
+          "source": "kmib",
+          "title": "전주 순복음참사랑교회… 성도와 주민 소통의 장… 행복나눔 페스티벌 개최"
+        },
+        {
+          "source": "kmib",
+          "title": "“전주, 피지컬AI 산업 선도 AI 특별도시로 키울 것”"
+        }
+      ]
+    },
+    {
+      "term": "없어",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "전주 배 저장창고에 불…인명 피해 없어"
+        },
+        {
+          "source": "yna",
+          "title": "제주 노형동 물류창고에 불…인명피해 없어"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어” 재차 강조"
+        }
+      ]
+    },
+    {
+      "term": "법원",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "시총 기준 상폐요건 강화에 법원 제동…\"비례 원칙에 어긋나\""
+        },
+        {
+          "source": "yna",
+          "title": "법원 해킹 시도 올해만 24만건…개인정보 유출도 14건으로 7배↑(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "혈세로 해외연수 다녀온 법관들, 의무복무도 안 채우고 법원 떠났다"
+        }
+      ]
+    },
+    {
+      "term": "권한",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "해경 수사 권한 커졌는데…수사관 3명 중 1명은 '경력 3년 미만'"
+        },
+        {
+          "source": "hani",
+          "title": "검찰 폐지에 특검 검사 권한 혼선…“공소청, 공소유지 담당 재파견을”"
+        },
+        {
+          "source": "hani",
+          "title": "스웨덴 사민당 대표, 이번엔 정부 구성할까…또 실패하면 권한 넘겨야"
+        }
+      ]
+    },
+    {
+      "term": "아이치",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
+        },
+        {
+          "source": "khan",
+          "title": "아이치·나고야 아시안게임 폐막…한국, 금 39·은 43·동 68개 ‘종합 3위’"
+        }
+      ]
+    },
+    {
+      "term": "나고야",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
+        },
+        {
+          "source": "khan",
+          "title": "아이치·나고야 아시안게임 폐막…한국, 금 39·은 43·동 68개 ‘종합 3위’"
+        }
+      ]
+    },
+    {
+      "term": "폐막",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
+        },
+        {
+          "source": "khan",
+          "title": "아이치·나고야 아시안게임 폐막…한국, 금 39·은 43·동 68개 ‘종합 3위’"
+        }
+      ]
+    },
+    {
+      "term": "도하에서",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
+        },
+        {
+          "source": "hani",
+          "title": "아시안게임 16일간 여정 마무리 “도하에서 만나요”"
+        }
+      ]
+    },
+    {
+      "term": "이란",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"7대조건 충족 안되면 호르무즈 재개방 안해\"…입장 재확인(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이란 \"호르무즈 재개방 안해\"…미국 답변 받고 기존 입장 재확인"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어” 재차 강조"
+        }
+      ]
+    },
+    {
+      "term": "호르무즈",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"7대조건 충족 안되면 호르무즈 재개방 안해\"…입장 재확인(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이란 \"호르무즈 재개방 안해\"…미국 답변 받고 기존 입장 재확인"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어” 재차 강조"
+        }
+      ]
+    },
+    {
+      "term": "재개방",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"7대조건 충족 안되면 호르무즈 재개방 안해\"…입장 재확인(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이란 \"호르무즈 재개방 안해\"…미국 답변 받고 기존 입장 재확인"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어” 재차 강조"
+        }
+      ]
+    },
+    {
+      "term": "대회",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "현대해상, 11년째 KPGA 투어 대회 후원…누적 총상금 115억원"
+        },
+        {
+          "source": "yna",
+          "title": "유해란 \"7년 전 우승 못 했던 하이트 대회, 체증 내려간 느낌\""
+        },
+        {
+          "source": "hani",
+          "title": "신지애, 일본 메이저 4개 대회 석권…통산 30승, 영구 시드 획득"
+        }
+      ]
+    },
+    {
+      "term": "한전",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"AI 해킹과는 무관\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"고객정보는 안전\""
+        },
+        {
+          "source": "hani",
+          "title": "한전 전직원 2만4천명 개인정보 해킹 유출…이름·사번 등 7개 항목"
+        }
+      ]
+    },
+    {
+      "term": "직원",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"AI 해킹과는 무관\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"고객정보는 안전\""
+        },
+        {
+          "source": "mk",
+          "title": "금융권 왕창 털리더니 한전까지도…직원 2만4000여 명 개인정보 노출"
+        }
+      ]
+    },
+    {
+      "term": "노출",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"AI 해킹과는 무관\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "한전 직원 2만4천여명 개인정보 노출…\"고객정보는 안전\""
+        },
+        {
+          "source": "mk",
+          "title": "금융권 왕창 털리더니 한전까지도…직원 2만4000여 명 개인정보 노출"
+        }
+      ]
+    },
+    {
+      "term": "의제",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "다음달 中 APEC서 미중러 3자회담 성사될까…\"의제 설정이 관건\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "中, 美주도 G20 통상 의제 비판…\"과잉생산·강제노동 이견 커\""
+        },
+        {
+          "source": "hani",
+          "title": "김정은 ‘핵 고도화’ 강조…미국에 ‘비핵화 의제 불가’ 메시지"
+        }
+      ]
+    },
+    {
+      "term": "미국",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이란 \"호르무즈 재개방 안해\"…미국 답변 받고 기존 입장 재확인"
+        },
+        {
+          "source": "yna",
+          "title": "미국 축구, 멕시코와 친선전 3-0 완승…17세 설리번 최연소 득점"
+        },
+        {
+          "source": "khan",
+          "title": "이란 “미국, 7가지 조건 수용 안 하면 호르무즈 해협 재개방 없어” 재차 강조"
+        }
+      ]
+    },
+    {
+      "term": "투자",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "선거 열세로 다급한 트럼프, 투자 조건 ‘관세 15%’ 나몰라라"
+        },
+        {
+          "source": "khan",
+          "title": "“한·미는 동반자, 지시 관계 아냐”…미 투자 압박에 여당 내부서 반발"
+        },
+        {
+          "source": "mk",
+          "title": "‘암살자(들)’ 제작사, 국책은행 돈으로 홍대 사옥?…“투자 전 공사 끝나” 반박"
+        }
+      ]
+    },
+    {
+      "term": "지역",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "지역 축제 불꽃놀이 왜 안 하냐고요? 수리부엉이·수달 놀라요"
+        },
+        {
+          "source": "khan",
+          "title": "“아기를 지켜라” 추운 지역 살았던 엄마 공룡의 지혜"
+        },
+        {
+          "source": "kmib",
+          "title": "화장실에 유치부실까지 개방… 공간 여니 지역·영혼 보였다"
+        }
+      ]
+    },
+    {
+      "term": "확산",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "“내가 제인 도다(#IAmJaneDoe)” 코넬대 성폭력 사건  “누구라도 피해자 될 수 있어” 연대 확산"
+        },
+        {
+          "source": "khan",
+          "title": "공공기관 통폐합·지방 이전 반발 확산…“숫자 채우기식”"
+        },
+        {
+          "source": "mk",
+          "title": "러시아 'AI 전쟁가요' 확산 … 美기술로 선전전 대량생산"
+        }
+      ]
+    },
+    {
+      "term": "시대",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "[소리과학의 미래]AI 시대, ‘인간다움’을 완성하는 소리"
+        },
+        {
+          "source": "kmib",
+          "title": "“기업 평판 관리에도 골든타임 있다… AI시대 핵심은 타이밍”"
+        },
+        {
+          "source": "kmib",
+          "title": "‘새 형소법 시대’ 경찰 혼란 불가피"
+        }
+      ]
+    },
+    {
+      "term": "국회",
+      "total": 3,
+      "sourceCount": 2,
+      "sources": [
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "미래기금 30%까지 정부 재량 지출 담겨…국회 통제 약화 ‘현실로’"
+        },
+        {
+          "source": "mk",
+          "title": "정부 162조 쌈짓돈 만들어줄 판…재경위 ‘국회 패싱 특례’ 반발"
+        },
+        {
+          "source": "mk",
+          "title": "\"정부 재정통제 우회 우려\"… 미래기금 견제 나선 국회"
+        }
+      ]
+    },
+    {
+      "term": "지뢰",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "'지뢰' 언급 없이…\"극초음속 미사일 시험 발사\""
+        },
+        {
+          "source": "khan",
+          "title": "남 지뢰 사과·대화 요구에…미사일로 답한 북"
+        }
+      ]
+    },
+    {
+      "term": "여당",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "조희대 \"국감 증언 어렵다\"…여당 반발·야당 옹호"
+        },
+        {
+          "source": "khan",
+          "title": "“한·미는 동반자, 지시 관계 아냐”…미 투자 압박에 여당 내부서 반발"
+        }
+      ]
+    },
+    {
+      "term": "끝까지",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"끝까지 도전한 대한민국 선수단 모두가 챔피언\""
+        },
+        {
+          "source": "mk",
+          "title": "이 대통령 “메달 숫자로는 다 못 센 땀…끝까지 도전한 모두 챔피언”"
+        }
+      ]
+    },
+    {
+      "term": "도전한",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"끝까지 도전한 대한민국 선수단 모두가 챔피언\""
+        },
+        {
+          "source": "mk",
+          "title": "이 대통령 “메달 숫자로는 다 못 센 땀…끝까지 도전한 모두 챔피언”"
+        }
+      ]
+    },
+    {
+      "term": "챔피언",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"끝까지 도전한 대한민국 선수단 모두가 챔피언\""
+        },
+        {
+          "source": "mk",
+          "title": "이 대통령 “메달 숫자로는 다 못 센 땀…끝까지 도전한 모두 챔피언”"
+        }
+      ]
+    },
+    {
+      "term": "국방부",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "방어자산으로",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "탐지",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "요격",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국방부 \"북 발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        },
+        {
+          "source": "yna",
+          "title": "국방부 \"北발사 미사일, 한미 방어자산으로 탐지·요격 가능\""
+        }
+      ]
+    },
+    {
+      "term": "한반도",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"한반도 평화 여정 쉽지 않을 것…그래도 가야할 길\""
+        },
+        {
+          "source": "kmib",
+          "title": "한국교회와 한반도 향한 기도 함성, 부산 달궜다"
+        }
+      ]
+    },
+    {
+      "term": "여정",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"한반도 평화 여정 쉽지 않을 것…그래도 가야할 길\""
+        },
+        {
+          "source": "hani",
+          "title": "아시안게임 16일간 여정 마무리 “도하에서 만나요”"
+        }
+      ]
+    },
+    {
+      "term": "가야할",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"한반도 평화 여정 쉽지 않을 것…그래도 가야할 길\""
+        },
+        {
+          "source": "mk",
+          "title": "李대통령 “북한과 적대·대결의 악순환 끊어내야…평화는 가야할 길”"
+        }
+      ]
+    },
+    {
+      "term": "싱가포르영화제에",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제에 '암살자(들)' 개막작 철회 서한 추진"
+        }
+      ]
+    },
+    {
+      "term": "영화",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "hani",
+          "title": "“영화 비판 아닌 선 넘은 인신 공격”…‘암살자(들)’ 논란에 영화감독조합 우려"
+        }
+      ]
+    },
+    {
+      "term": "개막작",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 싱가포르영화제에 영화 '암살자(들)' 개막작 철회 서한 추진"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제에 '암살자(들)' 개막작 철회 서한 추진"
+        }
+      ]
+    },
+    {
+      "term": "지시",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 금융기관 개인정보 유출에 \"철저한 조사·대책 마련\" 지시"
+        },
+        {
+          "source": "khan",
+          "title": "“한·미는 동반자, 지시 관계 아냐”…미 투자 압박에 여당 내부서 반발"
+        }
+      ]
+    },
+    {
+      "term": "결혼식",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "첫 '경복궁 결혼식' 찾은 김혜경 여사…유튜버 '김치귀신 마이'에 축하"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]고궁박물관 ‘1호 결혼식’ 찾은 김혜경 여사"
+        }
+      ]
+    },
+    {
+      "term": "찾은",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "첫 '경복궁 결혼식' 찾은 김혜경 여사…유튜버 '김치귀신 마이'에 축하"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]고궁박물관 ‘1호 결혼식’ 찾은 김혜경 여사"
+        }
+      ]
+    },
+    {
+      "term": "김혜경",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "첫 '경복궁 결혼식' 찾은 김혜경 여사…유튜버 '김치귀신 마이'에 축하"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]고궁박물관 ‘1호 결혼식’ 찾은 김혜경 여사"
+        }
+      ]
+    },
+    {
+      "term": "청년",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"청년 미래에 정부가 힘 보탤 것\"…청년미래적금 소개"
+        },
+        {
+          "source": "khan",
+          "title": "‘빌라 거주’ 청년 보금자리론 연체율, 아파트 대비 3배 육박"
+        }
+      ]
+    },
+    {
+      "term": "남북정상선언",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "민주당 \"10·4 남북정상선언 19주년…멈춰 선 대화 다시 시작해야\""
+        },
+        {
+          "source": "hani",
+          "title": "이 대통령 “10·4 남북정상선언 정신으로 적대·대결 악순환 끊어내야”"
+        }
+      ]
+    },
+    {
+      "term": "대화",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "민주당 \"10·4 남북정상선언 19주년…멈춰 선 대화 다시 시작해야\""
+        },
+        {
+          "source": "khan",
+          "title": "남 지뢰 사과·대화 요구에…미사일로 답한 북"
+        }
+      ]
+    },
+    {
+      "term": "오세훈",
+      "total": 2,
+      "sourceCount": 2,
+      "sources": [
+        "sbs",
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "국힘, 오세훈·윤석열·추경호 재판 주시…우려 속 전화위복 기대도"
+        },
+        {
+          "source": "yna",
+          "title": "[동정] 오세훈, 북촌 공공한옥 방문…보전·활용 현장 점검"
         }
       ]
     }
   ],
   "singleSourceTop": [
+    {
+      "term": "우승",
+      "total": 7,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "kt, 연장 11회 혈투 끝에 비겼지만 우승 매직넘버 '2'(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "신지애, 일본여자오픈골프 우승…30승·커리어 그랜드 슬램 달성"
+        },
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승(종합)"
+        }
+      ]
+    },
     {
       "term": "프로야구",
       "total": 7,
@@ -2542,42 +2359,152 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[프로야구] 4일 선발투수"
+          "title": "[프로야구] 5일 선발투수"
         },
         {
           "source": "yna",
-          "title": "[프로야구 중간순위] 3일"
+          "title": "[프로야구 중간순위] 4일"
         },
         {
           "source": "yna",
-          "title": "[프로야구 잠실전적] KIA 5-4 LG"
+          "title": "[프로야구 수원전적] kt 2-2 롯데"
         }
       ]
     },
     {
-      "term": "사과",
+      "term": "포토뉴스",
+      "total": 6,
+      "sourceCount": 1,
+      "sources": [
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "[포토뉴스]아동복지시설 공기청정기 깨끗하게"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]지금 민둥산엔 억새물결"
+        },
+        {
+          "source": "khan",
+          "title": "[포토뉴스]‘정조대왕 능행차’ 재현 행사 지켜보는 세종대왕상"
+        }
+      ]
+    },
+    {
+      "term": "프로농구",
       "total": 4,
       "sourceCount": 1,
       "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "프로농구 우승후보 DB, 개막전서 소노 제압…알바노 더블 더블(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[프로농구 수원전적] 삼성 81-76 kt"
+        },
+        {
+          "source": "yna",
+          "title": "프로농구 우승후보 DB, 개막전서 소노 제압…알바노 더블 더블"
+        }
+      ]
+    },
+    {
+      "term": "현대해상",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "현대해상, 11년째 KPGA 투어 대회 후원…누적 총상금 115억원"
+        },
+        {
+          "source": "yna",
+          "title": "[KPGA 최종순위] 현대해상 최경주 인비테이셔널"
+        }
+      ]
+    },
+    {
+      "term": "추정",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "제주 차귀도 인근 24t 어선 좌초 \"선장 졸음운항 추정\""
+        },
+        {
+          "source": "yna",
+          "title": "\"금융사 해킹사고, 동일 공격 IP 여러 곳 발견…AI활용 추정\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "충남 공주 신풍면서 또 산불…전날 화재 재발화 추정"
+        }
+      ]
+    },
+    {
+      "term": "대만",
+      "total": 4,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[쇼츠] 미국산 F-16V 첫 인도분 2대 대만 도착"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 금메달 땄다고 병역 부담 줄이는 나라는 한국·대만·이란뿐"
+        },
+        {
+          "source": "yna",
+          "title": "[영상] F-16V 첫 인도분 2대 대만 도착…美 판매 승인 7년만"
+        }
+      ]
+    },
+    {
+      "term": "북한",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
         "sbs"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김여정, 정동영 사과 요구·만남 제안에 \"대꾸할 가치도 없는 망상\""
+          "title": "북한 \"중거리 전략미사일 발사…적들 목표 소실\""
         },
         {
           "source": "sbs",
-          "title": "북한 김여정, 군 사과 요구·이 대통령 긴장완화 발언에 \"자작 광대극 2부\""
+          "title": "북한, 탄도미사일 1발 발사…700㎞ 이상 비행"
         },
         {
           "source": "sbs",
-          "title": "[자막뉴스] \"한반도 전쟁 발발 기도\" 강력 비판…\"공개 사과 거부 시 추가 조치\" 경고"
+          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
         }
       ]
     },
     {
-      "term": "중거리전략미사일",
+      "term": "우크라",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2586,20 +2513,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "北 \"오늘 중거리전략미사일 발사훈련…한·일 탐지능력 한계\"(종합)"
+          "title": "지상전에 로봇 대세…우크라, 러에 빼앗겼던 영토 대거 탈환"
         },
         {
           "source": "yna",
-          "title": "北 \"오늘 중거리전략미사일 훈련…한·일 탐지 제한\""
+          "title": "'北포로 송환 공개' 갈등에 우크라 유명 전직군인 가세…韓비판"
         },
         {
           "source": "yna",
-          "title": "[속보] 北김여정 \"오늘 동해상 전략무기 발사훈련…중거리전략미사일\""
+          "title": "러, 우크라 교량 왜 때리나…\"경제·일상 흔들어 저항의지 약화\""
         }
       ]
     },
     {
-      "term": "단체전은",
+      "term": "입장",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2608,20 +2535,196 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합2보)"
+          "title": "이란 \"7대조건 충족 안되면 호르무즈 재개방 안해\"…입장 재확인(종합)"
         },
         {
           "source": "yna",
-          "title": "[아시안게임] 김주형, 16년 만의 남자 골프 개인전 金…단체전은 은메달(종합)"
+          "title": "코넬대 총장, 집단성폭행 의혹 첫 입장…\"투명성·책임강화\""
         },
         {
           "source": "yna",
-          "title": "[1보] 김주형, 16년 만의 AG 남자 골프 개인전 金…단체전은 은메달"
+          "title": "이란 \"호르무즈 재개방 안해\"…미국 답변 받고 기존 입장 재확인"
         }
       ]
     },
     {
-      "term": "민주",
+      "term": "소노",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "프로농구 우승후보 DB, 개막전서 소노 제압…알바노 더블 더블(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "프로농구 우승후보 DB, 개막전서 소노 제압…알바노 더블 더블"
+        },
+        {
+          "source": "yna",
+          "title": "[프로농구 원주전적] DB 95-86 소노"
+        }
+      ]
+    },
+    {
+      "term": "최경주",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[KPGA 최종순위] 현대해상 최경주 인비테이셔널"
+        },
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승"
+        }
+      ]
+    },
+    {
+      "term": "인비테이셔널",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[KPGA 최종순위] 현대해상 최경주 인비테이셔널"
+        },
+        {
+          "source": "yna",
+          "title": "유럽투어 3승 왕정훈, KPGA 현대해상 최경주 인비테이셔널 우승"
+        }
+      ]
+    },
+    {
+      "term": "유도",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[아시안게임] 유도 정수진, 계체 실격 폭로 \"대상 아니라고 해서 음식 섭취\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 유도 정수진, 계체 실격 폭로 \"대상 아니라고 해서 음식물 섭취\""
+        },
+        {
+          "source": "yna",
+          "title": "트럼프, 당내 정책 반대자 전번 공개해 '항의폭탄' 유도"
+        }
+      ]
+    },
+    {
+      "term": "유해란",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유해란 \"7년 전 우승 못 했던 하이트 대회, 체증 내려간 느낌\""
+        },
+        {
+          "source": "yna",
+          "title": "유해란, 하이트진로 우승…LPGA 이어 한국 메이저도 제패(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "유해란, 하이트진로 우승…LPGA 이어 한국 메이저도 제패"
+        }
+      ]
+    },
+    {
+      "term": "하이트진로",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유해란, 하이트진로 우승…LPGA 이어 한국 메이저도 제패(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[KLPGA 최종순위] 하이트진로 챔피언십"
+        },
+        {
+          "source": "yna",
+          "title": "유해란, 하이트진로 우승…LPGA 이어 한국 메이저도 제패"
+        }
+      ]
+    },
+    {
+      "term": "활용",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "\"금융사 해킹사고, 동일 공격 IP 여러 곳 발견…AI활용 추정\"(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[동정] 오세훈, 북촌 공공한옥 방문…보전·활용 현장 점검"
+        },
+        {
+          "source": "yna",
+          "title": "\"금융사 해킹사고, 동일 공격자 IP 여러 곳서 발견…AI활용 추정\""
+        }
+      ]
+    },
+    {
+      "term": "교회",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "kmib",
+          "title": "[우리 교회 소식] 충남 서산성결교회 外"
+        },
+        {
+          "source": "kmib",
+          "title": "“신학, 교회 세우고 섬기는 데 초점 맞춰야”"
+        },
+        {
+          "source": "kmib",
+          "title": "[오늘의 설교] 하나님의 영광을 위해 움직이는 교회"
+        }
+      ]
+    },
+    {
+      "term": "극초음속",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2630,16 +2733,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "국힘, 1년 만에 장외집회…민주 \"반민생 정당\""
+          "title": "'지뢰' 언급 없이…\"극초음속 미사일 시험 발사\""
         },
         {
           "source": "sbs",
-          "title": "민주, 국힘 장외집회에 \"장동혁의 세 과시…반민생정당\""
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
         }
       ]
     },
     {
-      "term": "청문요청안",
+      "term": "대법원장",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2648,16 +2751,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
         },
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
         }
       ]
     },
     {
-      "term": "재가",
+      "term": "국회법",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2666,16 +2769,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "여 \"조 대법원장, 국감 출석 불응 의사…국회법 위반\""
         },
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
         }
       ]
     },
     {
-      "term": "정청래와",
+      "term": "민주당",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2684,16 +2787,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "민주당 \"조희대 대법원장, 국감 출석 불응 의사…국회법 위반\""
         },
         {
           "source": "sbs",
-          "title": "김지용 청문요청안 재가…정청래와 4시간 만찬"
+          "title": "민주당 \"10·4 남북정상선언 19주년…멈춰 선 대화 다시 시작해야\""
         }
       ]
     },
     {
-      "term": "상대국",
+      "term": "핵억제력",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2702,16 +2805,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "북 \"극초음속 미사일 발사 훈련\"…김정은 \"핵억제력 고도화\""
         },
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "김정은, 주애와 전략미사일 발사 참관…\"핵억제력 고도화\""
         }
       ]
     },
     {
-      "term": "원수",
+      "term": "전략미사일",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2720,16 +2823,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "김정은, 주애와 전략미사일 발사 참관…\"핵억제력 고도화\""
         },
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "북한 \"중거리 전략미사일 발사…적들 목표 소실\""
         }
       ]
     },
     {
-      "term": "거짓말쟁이",
+      "term": "탄도미사일",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2738,322 +2841,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "북한, 탄도미사일 1발 발사…700㎞ 이상 비행"
         },
         {
           "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
+          "title": "청와대, '북한 탄도미사일 발사'에 긴급 회의…\"즉각 중단 촉구\""
         }
       ]
     },
     {
-      "term": "만들어",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        },
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        }
-      ]
-    },
-    {
-      "term": "대사",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        },
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        }
-      ]
-    },
-    {
-      "term": "소환",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        },
-        {
-          "source": "sbs",
-          "title": "\"상대국 원수 거짓말쟁이 만들어\"…대사 소환 검토"
-        }
-      ]
-    },
-    {
-      "term": "불의의",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        }
-      ]
-    },
-    {
-      "term": "표현",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        }
-      ]
-    },
-    {
-      "term": "장병",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        }
-      ]
-    },
-    {
-      "term": "위로하는",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        }
-      ]
-    },
-    {
-      "term": "맥락",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        },
-        {
-          "source": "sbs",
-          "title": "\"'불의의 사고' 표현, 부상 장병 위로하는 맥락\""
-        }
-      ]
-    },
-    {
-      "term": "내가",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        },
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        }
-      ]
-    },
-    {
-      "term": "맞을",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        },
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        }
-      ]
-    },
-    {
-      "term": "흉탄을",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        },
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        }
-      ]
-    },
-    {
-      "term": "대신",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        },
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        }
-      ]
-    },
-    {
-      "term": "맞아",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        },
-        {
-          "source": "sbs",
-          "title": "\"내가 맞을 흉탄을 대신 맞아\"…박정희 손편지 공개"
-        }
-      ]
-    },
-    {
-      "term": "한국과",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "잇단 입장 발표…\"왜 한국과 엮일 일 했을 거라 상상하냐\""
-        },
-        {
-          "source": "sbs",
-          "title": "또 김여정…\"왜 한국과 엮일 일 했을 거라 상상하나\""
-        }
-      ]
-    },
-    {
-      "term": "엮일",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "잇단 입장 발표…\"왜 한국과 엮일 일 했을 거라 상상하냐\""
-        },
-        {
-          "source": "sbs",
-          "title": "또 김여정…\"왜 한국과 엮일 일 했을 거라 상상하나\""
-        }
-      ]
-    },
-    {
-      "term": "했을",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "잇단 입장 발표…\"왜 한국과 엮일 일 했을 거라 상상하냐\""
-        },
-        {
-          "source": "sbs",
-          "title": "또 김여정…\"왜 한국과 엮일 일 했을 거라 상상하나\""
-        }
-      ]
-    },
-    {
-      "term": "거라",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "잇단 입장 발표…\"왜 한국과 엮일 일 했을 거라 상상하냐\""
-        },
-        {
-          "source": "sbs",
-          "title": "또 김여정…\"왜 한국과 엮일 일 했을 거라 상상하나\""
-        }
-      ]
-    },
-    {
-      "term": "확산",
+      "term": "개편",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3062,16 +2859,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "스페인 주택난 항의 시위 확산…마드리드에 7만 집결"
+          "title": "구글 제미나이 AI요금 개편…월10달러 내도 '프로' 모델 못쓴다"
         },
         {
           "source": "yna",
-          "title": "'해킹피해' 2금융권 확산…금융당국 투톱, 내일 全업권 긴급소집(종합)"
+          "title": "[아시안게임] '군대 안 간다' 축구팀 논란에…국힘서 병역특례 개편 목소리"
         }
       ]
     },
     {
-      "term": "수도서",
+      "term": "달러",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3080,16 +2877,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "구글 제미나이 AI요금 개편…월10달러 내도 '프로' 모델 못쓴다"
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "美에너지장관 \"유럽 경유 방출에 갤런당 6달러 아래로 내릴 것\""
         }
       ]
     },
     {
-      "term": "폭음",
+      "term": "영토",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3098,16 +2895,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "지상전에 로봇 대세…우크라, 러에 빼앗겼던 영토 대거 탈환"
         }
       ]
     },
     {
-      "term": "아람코",
+      "term": "사우디",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3116,16 +2913,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "예멘 정부 \"영토 탈환 작전 개시\"…후티 \"사우디 석유시설 공격\""
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "\"사우디, 2034 월드컵 경기장 '네옴 스타디움' 건설 계획 보류\""
         }
       ]
     },
     {
-      "term": "시설에서도",
+      "term": "유럽",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3134,16 +2931,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "美에너지장관 \"유럽 경유 방출에 갤런당 6달러 아래로 내릴 것\""
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "美국방장관, 미군 유럽→본토·중남미 재배치 가능성 시사"
         }
       ]
     },
     {
-      "term": "화염",
+      "term": "독일",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3152,16 +2949,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염(종합)"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "예멘 수도서 폭음…사우디 아람코 시설에서도 화염"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "발사훈련",
+      "term": "총리",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3170,16 +2967,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "北 \"오늘 중거리전략미사일 발사훈련…한·일 탐지능력 한계\"(종합)"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "[속보] 北김여정 \"오늘 동해상 전략무기 발사훈련…중거리전략미사일\""
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "지킨",
+      "term": "공세",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3188,16 +2985,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[아시안게임] 12년째 정상 지킨 한국 축구…'유럽파 영건'도 날개 달았다"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "[아시안게임] 40년 겨루기 금맥 지킨 송다빈 \"어깨는 무거웠지만 발은 가볍게\""
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "간판",
+      "term": "격화",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3206,16 +3003,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합2보)"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "[아시안게임] 스포츠클라이밍 간판 서채현, 주 종목 여자 리드 금메달(종합)"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "수상",
+      "term": "키이우",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3224,16 +3021,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[동포의 창] 한창우·박상익·김예자·박동우, 첫 세계한민족지도자상 수상"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "진재운 감독 '나무의 노래', 프리 이탈리아 다큐 경쟁부문 수상"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "업권",
+      "term": "깜짝",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3242,16 +3039,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'해킹피해' 2금융권 확산…금융당국 투톱, 내일 全업권 긴급소집(종합)"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…추가 지원 발표(종합)"
         },
         {
           "source": "yna",
-          "title": "당국, '해킹피해' 2금융권 확산에 내일 全업권 긴급소집"
+          "title": "독일 총리, 러 공세 격화 속 키이우 깜짝 방문…전폭 지원 약속"
         }
       ]
     },
     {
-      "term": "긴급소집",
+      "term": "이송",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3260,11 +3057,227 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'해킹피해' 2금융권 확산…금융당국 투톱, 내일 全업권 긴급소집(종합)"
+          "title": "나주 단독주택서 불…70대 여성 심정지 이송"
         },
         {
           "source": "yna",
-          "title": "당국, '해킹피해' 2금융권 확산에 내일 全업권 긴급소집"
+          "title": "설악산 울산바위서 50대 암벽등반객 추락…구조 후 헬기 이송"
+        }
+      ]
+    },
+    {
+      "term": "논란",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "메가박스, '암살자(들)' 탄흔 굿즈 논란 사과…\"남은 수량 폐기\""
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] \"군대 안 갑니다\"…금메달 축구 대표팀, 병역 관련 언행 논란"
+        }
+      ]
+    },
+    {
+      "term": "수원전적",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[프로야구 수원전적] kt 2-2 롯데"
+        },
+        {
+          "source": "yna",
+          "title": "[프로농구 수원전적] 삼성 81-76 kt"
+        }
+      ]
+    },
+    {
+      "term": "완승",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "하나은행, 박신자컵 여자농구 첫판 빅토리아에 완승"
+        },
+        {
+          "source": "yna",
+          "title": "미국 축구, 멕시코와 친선전 3-0 완승…17세 설리번 최연소 득점"
+        }
+      ]
+    },
+    {
+      "term": "로봇",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "지상전에 로봇 대세…우크라, 러에 빼앗겼던 영토 대거 탈환"
+        },
+        {
+          "source": "yna",
+          "title": "\"중국, 조선수주 63% 점유…한국·일본 승부수는 '스마트 로봇'\""
+        }
+      ]
+    },
+    {
+      "term": "누적",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "떠나지 않는 '부캉이' 식지 않는 인기…누적 방문객 90만명(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "현대해상, 11년째 KPGA 투어 대회 후원…누적 총상금 115억원"
+        }
+      ]
+    },
+    {
+      "term": "만명",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "떠나지 않는 '부캉이' 식지 않는 인기…누적 방문객 90만명(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "[아시안게임] 축구 결승에 123만명 몰렸다…네이버 중계 최다"
+        }
+      ]
+    },
+    {
+      "term": "싱가포르영화제",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "상영철회",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "영틀막",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합2보)"
+        },
+        {
+          "source": "yna",
+          "title": "국힘, 싱가포르영화제 '암살자(들)' 상영철회 추진…與 \"영틀막\"(종합)"
+        }
+      ]
+    },
+    {
+      "term": "연휴",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[날씨] 연휴 마지막날 흐리고 비…낮 기온 5도가량 '뚝'"
+        },
+        {
+          "source": "yna",
+          "title": "연휴 마지막날 전국 곳곳 비…오후부터 찬바람 불며 '쌀쌀'"
+        }
+      ]
+    },
+    {
+      "term": "마지막날",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[날씨] 연휴 마지막날 흐리고 비…낮 기온 5도가량 '뚝'"
+        },
+        {
+          "source": "yna",
+          "title": "연휴 마지막날 전국 곳곳 비…오후부터 찬바람 불며 '쌀쌀'"
+        }
+      ]
+    },
+    {
+      "term": "혹은",
+      "total": 2,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "아이치·나고야 AG 폐막…4년 뒤, 혹은 5년 뒤? 도하에서 만나요"
         }
       ]
     },
@@ -3278,173 +3291,11 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[부고] 김관주(대한경제신문 기자)씨 부친상"
+          "title": "[부고] 최인철(군산경찰서 치안정보안보과장)씨 장모상"
         },
         {
           "source": "yna",
-          "title": "[부고] 문병윤(광주도시공사 대외협력실장)씨 부친상"
-        }
-      ]
-    },
-    {
-      "term": "부친상",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[부고] 김관주(대한경제신문 기자)씨 부친상"
-        },
-        {
-          "source": "yna",
-          "title": "[부고] 문병윤(광주도시공사 대외협력실장)씨 부친상"
-        }
-      ]
-    },
-    {
-      "term": "없어",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "서울 광진구 중곡동 공동주택 화재…인명피해 없어"
-        },
-        {
-          "source": "yna",
-          "title": "안산 선부광장 가전제품 매장에 차량 돌진…인명 피해는 없어"
-        }
-      ]
-    },
-    {
-      "term": "비보이",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 멈추지 않는 '전설의 비보이' 홍텐 \"제 열정이 좀 전해졌으면\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '41세 전설' 비보이 홍텐, 세월도 잊은 '은빛 무대'"
-        }
-      ]
-    },
-    {
-      "term": "홍텐",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[아시안게임] 멈추지 않는 '전설의 비보이' 홍텐 \"제 열정이 좀 전해졌으면\""
-        },
-        {
-          "source": "yna",
-          "title": "[아시안게임] '41세 전설' 비보이 홍텐, 세월도 잊은 '은빛 무대'"
-        }
-      ]
-    },
-    {
-      "term": "개막전서",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
-        }
-      ]
-    },
-    {
-      "term": "디펜딩",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
-        }
-      ]
-    },
-    {
-      "term": "챔피언",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
-        }
-      ]
-    },
-    {
-      "term": "완파",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
-        }
-      ]
-    },
-    {
-      "term": "양홍석",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "LG, 프로농구 개막전서 디펜딩 챔피언 KCC 완파…양홍석 22점"
+          "title": "[부고] 황의영(중앙일보 기자)씨 부친상"
         }
       ]
     }
