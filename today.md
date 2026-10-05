@@ -1,13 +1,18 @@
-# Today — 2026-10-05 (월) (KST)
+# Today — 2026-10-06 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-10-05 (월) — 오늘
+## 2026-10-06 (화) — 오늘
+
+- 📝 발행 **1건**:
+  - [호우·홈플러스 피해기업, 부가세 신청 없이 두 달 늦게 낸다](https://smartdatashop.kr/tax-finance/vat-flood-homeplus-payment-extension/) — 부가가치세 예정신고·예정고지는 모든 사업자가 10월에 치르는 정기 납부다. 국세청이 2026년 10월 5일…
+- 🔄 자동 갱신 (24h): ECOS · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **4건**
+
+## 2026-10-05 (월)
 
 - 📝 발행 **1건**:
   - [불법사금융 신고 포상금 50만원, 광고 사전심사도 도입](https://smartdatashop.kr/policy/illegal-lending-crackdown-measures/) — 불법사금융 근절대책은 정부가 범정부 TF로 매년 보완하는 단속·예방 계획으로, 금융위원회가 2026년 10…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **3건**
 
 ## 2026-10-04 (일)
 
@@ -68,11 +73,6 @@
 
 - 📝 발행 **1건**:
   - [임대주택·사원용주택 종부세 합산배제, 9월 30일까지 신고해야 한다](https://smartdatashop.kr/tax-finance/comprehensive-real-estate-tax-rental-exclusion/) — 종부세 합산배제는 임대주택·사원용주택 등을 과세표준 합산 대상에서 빼 비과세로 처리하는 제도다. 매년 9월…
-
-## 2026-09-22 (화)
-
-- 📝 발행 **1건**:
-  - [음식점·미용실 창업, 사업자등록 시청에서 한 번에 끝난다](https://smartdatashop.kr/tax-finance/food-beauty-business-registration-onestop/) — 사업자등록·영업신고 한 번에 서비스는 음식점·이미용업 예비 창업자가 시·군·구청 한 곳에서 영업신고와 사업…
 
 ---
 
