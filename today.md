@@ -7,7 +7,7 @@
 - 📝 발행 **1건**:
   - [국민참여성장펀드 2차 55% 팔렸다, 10월 15일까지 선착순](https://smartdatashop.kr/tax-finance/national-growth-fund-round2-sales-pace/) — 국민참여성장펀드는 정부가 조성을 지원하고 민간 자산운용사가 운용하는 선착순 판매형 공모 펀드다. 2차 모집…
 - 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **6건**
+- 📋 검수 대기: **7건**
 
 ## 2026-10-09 (금)
 
@@ -73,11 +73,6 @@
 
 - 📝 발행 **1건**:
   - [2024년 경상의료비 216.6조원, 1인당 처음 400만원 넘었다](https://smartdatashop.kr/stats/current-health-expenditure-2024/) — 국민보건계정은 국민 전체가 한 해 동안 보건의료에 쓴 비용을 재원별·기능별로 집계하는 통계다. 보건복지부·…
-
-## 2026-09-26 (토)
-
-- 📝 발행 **1건**:
-  - [OECD 9월 전망, 한국 성장률 3.7%로 G20 중 최대폭 상향](https://smartdatashop.kr/market/oecd-korea-growth-forecast-upgrade/) — OECD 중간 경제전망은 매년 3월과 9월 세계 경제와 G20 국가의 성장률을 다시 계산해 내놓는 자료다.…
 
 ---
 
