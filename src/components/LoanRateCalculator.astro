@@ -1,0 +1,253 @@
+---
+/**
+ * LoanRateCalculator — 금리 인상 시 대출 상환액 변화 계산기 (본문 삽입용).
+ *
+ * 정부 수치를 쓰지 않고 표준 상환 공식만 쓴다 (fabrication 위험 0):
+ *   - 원리금균등: M = P·r·(1+r)^n / ((1+r)^n − 1)   (r = 연이율/12, n = 개월 수)
+ *   - 원금균등:   첫 달 = P/n + P·r,  총이자 = P·r·(n+1)/2
+ *   - 만기일시:   매달 이자 = P·r,  총이자 = P·r·n
+ *
+ * 빌드 시점에 기본 입력값으로 결과를 미리 계산해 HTML 에 넣는다 — 스크립트가
+ * 꺼져 있거나 크롤러가 실행하지 않아도 표가 보인다. 입력을 바꾸면 아래
+ * <script> 가 같은 공식으로 다시 계산한다.
+ *
+ * 사용 (.mdx):
+ *   import LoanRateCalculator from '../../components/LoanRateCalculator.astro';
+ *   <LoanRateCalculator defaultPrincipal={300000000} defaultRate={4} defaultYears={30} deltas={[0.25, 0.5]} />
+ */
+interface Props {
+  /** 기본 대출 잔액 (원) — 예시 입력값 */
+  defaultPrincipal?: number;
+  /** 기본 연 금리 (%) — 예시 입력값 */
+  defaultRate?: number;
+  /** 기본 남은 기간 (년) */
+  defaultYears?: number;
+  /** 비교할 금리 인상 폭 (%포인트) */
+  deltas?: number[];
+  /** 카드 제목 */
+  title?: string;
+}
+
+const {
+  defaultPrincipal = 300_000_000,
+  defaultRate = 4,
+  defaultYears = 30,
+  deltas = [0.25, 0.5],
+  title = '내 대출로 계산해 보기',
+} = Astro.props;
+
+type Method = 'equal-payment' | 'equal-principal' | 'bullet';
+
+/** 첫 달 상환액과 총이자 (원). 공식은 파일 상단 주석과 동일 — 아래 <script> 와 반드시 같이 고칠 것. */
+function calc(principal: number, ratePct: number, years: number, method: Method) {
+  const n = Math.round(years * 12);
+  const r = ratePct / 100 / 12;
+  if (n <= 0 || principal <= 0) return { first: 0, interest: 0 };
+  if (method === 'equal-principal') {
+    return { first: principal / n + principal * r, interest: (principal * r * (n + 1)) / 2 };
+  }
+  if (method === 'bullet') {
+    return { first: principal * r, interest: principal * r * n };
+  }
+  if (r === 0) return { first: principal / n, interest: 0 };
+  const f = Math.pow(1 + r, n);
+  const m = (principal * r * f) / (f - 1);
+  return { first: m, interest: m * n - principal };
+}
+
+const won = (v: number) => `${Math.round(v).toLocaleString('ko-KR')}원`;
+const base = calc(defaultPrincipal, defaultRate, defaultYears, 'equal-payment');
+const rows = deltas.map((d) => {
+  const next = calc(defaultPrincipal, defaultRate + d, defaultYears, 'equal-payment');
+  return { d, first: next.first, diff: next.first - base.first, interest: next.interest - base.interest };
+});
+---
+
+<figure class="loan-calc" data-loan-calc data-deltas={JSON.stringify(deltas)}>
+  <figcaption class="lc-title">{title}</figcaption>
+
+  <div class="lc-inputs">
+    <label>
+      <span>대출 잔액 (만원)</span>
+      <input type="number" inputmode="numeric" min="100" step="100" name="principal" value={defaultPrincipal / 10_000} />
+    </label>
+    <label>
+      <span>현재 연 금리 (%)</span>
+      <input type="number" inputmode="decimal" min="0" max="30" step="0.01" name="rate" value={defaultRate} />
+    </label>
+    <label>
+      <span>남은 기간 (년)</span>
+      <input type="number" inputmode="numeric" min="1" max="50" step="1" name="years" value={defaultYears} />
+    </label>
+    <label>
+      <span>상환 방식</span>
+      <select name="method">
+        <option value="equal-payment" selected>원리금균등</option>
+        <option value="equal-principal">원금균등 (첫 달 기준)</option>
+        <option value="bullet">만기일시 (이자만)</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="lc-scroll">
+  <table class="lc-table">
+    <thead>
+      <tr><th scope="col">금리</th><th scope="col">첫 달 상환액</th><th scope="col">매달 증가</th><th scope="col">총이자 증가</th></tr>
+    </thead>
+    <tbody aria-live="polite">
+      <tr data-row="base">
+        <th scope="row" data-cell="rate">{defaultRate.toFixed(2)}% (현재)</th>
+        <td data-cell="first">{won(base.first)}</td>
+        <td data-cell="diff">-</td>
+        <td data-cell="interest">-</td>
+      </tr>
+      {rows.map((row) => (
+        <tr data-row={String(row.d)}>
+          <th scope="row" data-cell="rate">{(defaultRate + row.d).toFixed(2)}% (+{row.d.toFixed(2)}%p)</th>
+          <td data-cell="first">{won(row.first)}</td>
+          <td data-cell="diff">+{won(row.diff)}</td>
+          <td data-cell="interest">+{won(row.interest)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  </div>
+
+  <p class="lc-note">
+    표의 첫 결과는 예시 입력값(잔액 {(defaultPrincipal / 100_000_000).toLocaleString('ko-KR')}억 원, 연 {defaultRate}%, {defaultYears}년, 원리금균등)으로 계산한 값입니다.
+    인상분이 대출금리에 그대로 반영된다고 가정한 표준 상환 공식 결과이며, 실제 고지 금액은 은행의 금리 재산정 주기와 가산금리에 따라 달라집니다.
+  </p>
+</figure>
+
+<script>
+  type Method = 'equal-payment' | 'equal-principal' | 'bullet';
+
+  // 프론트매터 calc() 와 같은 공식 — 한쪽만 고치지 말 것
+  function calc(principal: number, ratePct: number, years: number, method: Method) {
+    const n = Math.round(years * 12);
+    const r = ratePct / 100 / 12;
+    if (n <= 0 || principal <= 0) return { first: 0, interest: 0 };
+    if (method === 'equal-principal') return { first: principal / n + principal * r, interest: (principal * r * (n + 1)) / 2 };
+    if (method === 'bullet') return { first: principal * r, interest: principal * r * n };
+    if (r === 0) return { first: principal / n, interest: 0 };
+    const f = Math.pow(1 + r, n);
+    const m = (principal * r * f) / (f - 1);
+    return { first: m, interest: m * n - principal };
+  }
+
+  const won = (v: number) => `${Math.round(v).toLocaleString('ko-KR')}원`;
+
+  document.querySelectorAll<HTMLElement>('[data-loan-calc]').forEach((root) => {
+    const deltas: number[] = JSON.parse(root.dataset.deltas ?? '[]');
+    const field = (name: string) => root.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${name}"]`)!;
+
+    const update = () => {
+      const principal = Number(field('principal').value) * 10_000;
+      const rate = Number(field('rate').value);
+      const years = Number(field('years').value);
+      const method = field('method').value as Method;
+      if (!(principal > 0) || !(rate >= 0) || !(years > 0)) return;
+
+      const base = calc(principal, rate, years, method);
+      const baseRow = root.querySelector<HTMLElement>('[data-row="base"]')!;
+      baseRow.querySelector('[data-cell="rate"]')!.textContent = `${rate.toFixed(2)}% (현재)`;
+      baseRow.querySelector('[data-cell="first"]')!.textContent = won(base.first);
+
+      deltas.forEach((d) => {
+        const row = root.querySelector<HTMLElement>(`[data-row="${d}"]`);
+        if (!row) return;
+        const next = calc(principal, rate + d, years, method);
+        row.querySelector('[data-cell="rate"]')!.textContent = `${(rate + d).toFixed(2)}% (+${d.toFixed(2)}%p)`;
+        row.querySelector('[data-cell="first"]')!.textContent = won(next.first);
+        row.querySelector('[data-cell="diff"]')!.textContent = `+${won(next.first - base.first)}`;
+        row.querySelector('[data-cell="interest"]')!.textContent = `+${won(next.interest - base.interest)}`;
+      });
+    };
+
+    root.querySelectorAll('input, select').forEach((el) => el.addEventListener('input', update));
+  });
+</script>
+
+<style>
+  .loan-calc {
+    margin: 1.6rem 0 2rem;
+    padding: 18px 18px 14px;
+    border: 0.5px solid var(--color-ink-quat);
+    background: var(--color-paper-soft);
+  }
+  .lc-title {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+  }
+  .lc-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .lc-inputs label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .lc-inputs input,
+  .lc-inputs select {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    padding: 6px 8px;
+    border: 0.5px solid var(--color-ink-tertiary);
+    border-radius: 2px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  /* 좁은 화면에서 표가 카드 밖으로 넘치지 않게 — 넘치면 표 안에서만 가로 스크롤 */
+  .lc-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .lc-table th,
+  .lc-table td {
+    padding: 8px 6px;
+    border-bottom: 0.5px solid var(--color-ink-quat);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    word-break: keep-all;
+  }
+  .lc-table thead th {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+  .lc-table tbody th {
+    text-align: left;
+    font-weight: 500;
+  }
+  @media (max-width: 480px) {
+    .loan-calc {
+      padding: 14px 12px 12px;
+    }
+    .lc-table {
+      font-size: 12.5px;
+    }
+    .lc-table th,
+    .lc-table td {
+      padding: 7px 3px;
+    }
+  }
+  .lc-note {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-ink-tertiary);
+  }
+</style>
