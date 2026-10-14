@@ -96,6 +96,7 @@ export function buildOrganizationLD(): Record<string, unknown> {
     '@context': 'https://schema.org',
     '@type': 'NewsMediaOrganization',
     name: SITE_NAME,
+    alternateName: ['Smart Data Shop', 'smartdatashop.kr'],
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
@@ -254,6 +255,8 @@ export function buildNewsArticleLD(entry: CollectionEntry<'pulse'>): Record<stri
     },
     url,
     headline: entry.data.title,
+    // citation — 본문이 실제로 인용한 1차 출처 (frontmatter sources[].url, 검증된 링크만)
+    citation: entry.data.sources.map((src) => src.url).filter(Boolean),
     description: entry.data.tldr,
     datePublished: entry.data.publishedAt,
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,
@@ -308,6 +311,8 @@ export function buildArticleLD(entry: CollectionEntry<'insight'>): Record<string
     },
     url,
     headline: entry.data.title,
+    // citation — 본문이 실제로 인용한 1차 출처 (frontmatter sources[].url, 검증된 링크만)
+    citation: entry.data.sources.map((src) => src.url).filter(Boolean),
     description: entry.data.tldr,
     datePublished: entry.data.publishedAt,
     dateModified: entry.data.updatedAt ?? entry.data.publishedAt,

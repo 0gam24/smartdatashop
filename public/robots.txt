@@ -26,6 +26,10 @@ Allow: /
 Disallow: /admin/
 Disallow: /uploads/
 
+# Google AdSense 크롤러 — 광고 적합성 심사·게재용 (명시 허용, 2026-10-14)
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: Googlebot-News
 Allow: /
 
