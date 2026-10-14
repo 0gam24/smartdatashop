@@ -17,6 +17,7 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
   <ul>
     <li><strong>뉴스레터 구독</strong> — 발행 글 알림 발송 (Stibee 위탁)</li>
     <li><strong>방문 분석</strong> — 사이트 운영·개선 (IP 비저장 / 쿠키 비사용)</li>
+    <li><strong>광고 게재</strong> — Google AdSense 를 통한 광고 노출·성과 측정 (아래 6. 쿠키 정책 참조)</li>
     <li><strong>제보·정정 응대</strong> — 이메일 회신 (단, 운영자 본인이 직접 처리)</li>
   </ul>
 
@@ -24,6 +25,7 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
   <ul>
     <li><strong>뉴스레터 구독</strong>: 이메일 주소 (Stibee 발송 대행)</li>
     <li><strong>방문 분석</strong>: Cloudflare Web Analytics — IP 비저장, 쿠키 비사용 (privacy-friendly beacon)</li>
+    <li><strong>광고 게재</strong>: 본 사이트가 직접 수집하지 않으며, Google 이 쿠키·기기 식별자·IP 주소·방문 기록 등을 자체 정책에 따라 처리합니다</li>
     <li><strong>제보·정정</strong>: 제보자가 자발적으로 본문에 포함시킨 정보 (이메일/이름)</li>
   </ul>
 
@@ -38,7 +40,8 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
   <ul>
     <li><strong>Stibee</strong> (㈜스티비) — 뉴스레터 발송 대행. 이메일 주소만 위탁.</li>
     <li><strong>Cloudflare, Inc.</strong> — 사이트 호스팅·CDN·privacy-friendly 분석 (IP 비저장).</li>
-    <li>위 처리위탁 업체 외 제3자에게 개인정보를 제공하지 않습니다.</li>
+    <li><strong>Google LLC</strong> — Google AdSense 광고 게재. 광고 쿠키를 통해 Google 이 직접 정보를 처리하며, 본 사이트는 해당 정보에 접근하지 않습니다.</li>
+    <li>위 업체 외 제3자에게 개인정보를 제공하지 않습니다.</li>
   </ul>
 
   <h2>5. 이용자 권리</h2>
@@ -50,9 +53,16 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
 
   <h2>6. 쿠키 정책</h2>
   <p>
-    본 사이트는 <strong>분석 목적의 쿠키를 사용하지 않습니다</strong> (Cloudflare Web Analytics 채택,
-    cookieless beacon). 향후 광고 도입 시 별도 쿠키 동의 배너 + 본 페이지 갱신.
+    본 사이트의 <strong>방문 분석은 쿠키를 사용하지 않습니다</strong> (Cloudflare Web Analytics,
+    cookieless beacon). 다만 <strong>광고 게재를 위해 Google AdSense 를 사용하며, 이 과정에서 광고 쿠키가 사용됩니다.</strong>
   </p>
+  <ul>
+    <li>Google 을 포함한 제3자 광고 사업자는 쿠키를 사용해 이용자의 본 사이트 및 다른 웹사이트 방문 기록을 바탕으로 광고를 게재합니다.</li>
+    <li>Google 은 광고 쿠키를 사용해 이용자의 본 사이트 및 인터넷상의 다른 사이트 방문 기록을 바탕으로 이용자와 Google 파트너에게 광고를 게재할 수 있습니다.</li>
+    <li>이용자는 <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있습니다. 제3자 광고 사업자의 맞춤 광고 쿠키는 <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">aboutads.info</a>에서 해제할 수 있습니다.</li>
+    <li>Google 이 광고 서비스에서 데이터를 사용하는 방식은 <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google 파트너 사이트 데이터 사용 안내</a>와 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google 광고 정책</a>에서 확인할 수 있습니다.</li>
+    <li>브라우저 설정에서 쿠키 저장을 거부할 수 있으며, 이 경우에도 본 사이트의 글은 모두 정상적으로 읽을 수 있습니다.</li>
+  </ul>
 
   <h2>7. 개인정보 안전 조치</h2>
   <ul>
@@ -70,6 +80,7 @@ import PolicyLayout from '../layouts/PolicyLayout.astro';
 
   <h2>9. 변경 이력</h2>
   <ul>
+    <li><strong>2026-10-14</strong> — Google AdSense 광고 쿠키 사용 고지 추가 (1·2·4·6항).</li>
     <li><strong>2026-05-06</strong> — 시행. 정식 발행 4대 기준(ADR 0006) 도입과 함께 보관·위탁 절차 명시화.</li>
     <li>변경 발생 시 본 항목과 사이트 공지를 통해 알립니다.</li>
   </ul>
