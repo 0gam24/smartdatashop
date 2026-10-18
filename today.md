@@ -6,8 +6,8 @@
 
 - 📝 발행 **1건**:
   - [복지사각지대 19만 명 발굴, 불법사금융 피해자 복지로 바로 연결](https://smartdatashop.kr/policy/welfare-crisis-household-5th-screening/) — 복지사각지대 발굴·조사는 보건복지부가 빅데이터로 위기가구를 찾아 지원하는 상시 제도다. 10월 19일부터 …
-- 🔄 자동 갱신 (24h): ECOS · 정부 RSS · 뉴스 키워드
-- 📋 검수 대기: **3건**
+- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
+- 📋 검수 대기: **2건**
 
 ## 2026-10-18 (일)
 
@@ -63,11 +63,6 @@
 
 - 📝 발행 **1건**:
   - [호우·홈플러스 피해기업, 부가세 신청 없이 두 달 늦게 낸다](https://smartdatashop.kr/tax-finance/vat-flood-homeplus-payment-extension/) — 부가가치세 예정신고·예정고지는 모든 사업자가 10월에 치르는 정기 납부다. 국세청이 2026년 10월 5일…
-
-## 2026-10-05 (월)
-
-- 📝 발행 **1건**:
-  - [불법사금융 신고 포상금 50만원, 광고 사전심사도 도입](https://smartdatashop.kr/policy/illegal-lending-crackdown-measures/) — 불법사금융 근절대책은 정부가 범정부 TF로 매년 보완하는 단속·예방 계획으로, 금융위원회가 2026년 10…
 
 ---
 
