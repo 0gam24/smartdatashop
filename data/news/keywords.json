@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-10-19T20:39:21.583Z",
-  "elapsedMs": 10544,
+  "fetchedAt": "2026-10-20T19:26:23.023Z",
+  "elapsedMs": 2417,
   "sourceTotal": 7,
-  "sourceSuccess": 6,
-  "sourceFail": 1,
-  "totalHeadlines": 399,
-  "uniqueKeywords": 374,
+  "sourceSuccess": 7,
+  "sourceFail": 0,
+  "totalHeadlines": 429,
+  "uniqueKeywords": 393,
   "multiSourceCount": 100,
   "sources": [
     {
@@ -14,7 +14,7 @@
       "url": "https://news.sbs.co.kr/news/SectionRssFeed.do?sectionId=01",
       "status": "ok",
       "itemCount": 29,
-      "elapsedMs": 321
+      "elapsedMs": 318
     },
     {
       "id": "yna",
@@ -22,7 +22,7 @@
       "url": "https://www.yna.co.kr/rss/news.xml",
       "status": "ok",
       "itemCount": 120,
-      "elapsedMs": 1204
+      "elapsedMs": 1681
     },
     {
       "id": "donga",
@@ -30,7 +30,7 @@
       "url": "https://rss.donga.com/total.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1064
+      "elapsedMs": 1355
     },
     {
       "id": "khan",
@@ -38,7 +38,7 @@
       "url": "https://www.khan.co.kr/rss/rssdata/total_news.xml",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 1597
+      "elapsedMs": 1649
     },
     {
       "id": "mk",
@@ -46,7 +46,7 @@
       "url": "https://www.mk.co.kr/rss/30000001/",
       "status": "ok",
       "itemCount": 50,
-      "elapsedMs": 3852
+      "elapsedMs": 1608
     },
     {
       "id": "kmib",
@@ -54,630 +54,757 @@
       "url": "https://www.kmib.co.kr/rss/data/kmibRssAll.xml",
       "status": "ok",
       "itemCount": 100,
-      "elapsedMs": 2201
+      "elapsedMs": 2348
     },
     {
       "id": "hani",
       "name": "한겨레",
       "url": "https://www.hani.co.kr/rss",
-      "status": "fail",
-      "itemCount": 0,
-      "elapsedMs": 10486
+      "status": "ok",
+      "itemCount": 30,
+      "elapsedMs": 2116
     }
   ],
   "multiSourceKeywords": [
     {
       "term": "대통령",
-      "total": 15,
+      "total": 17,
       "sourceCount": 6,
       "sources": [
         "sbs",
         "yna",
-        "donga",
         "khan",
         "mk",
-        "kmib"
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "이 대통령 \"대통령이 정계개편 한다고 되겠나…의원 빼오기, 쌍팔년도식\""
+          "title": "이 대통령 \"신청이 왜 필요하나…실질적 불평등 야기\""
         },
         {
           "source": "sbs",
-          "title": "이 대통령 \"전작권 맡겨놓고 방치할 상황아냐…반드시 신속히 환수\""
+          "title": "이 대통령 \"3기 신도시 공급에 부동산 성패…속도 무엇보다 중요\""
         },
         {
           "source": "sbs",
-          "title": "이 대통령, 김지용 중수청장에 \"네 편 내 편 가리지 말라\""
+          "title": "이 대통령 \"동시대적 소통 홍보로 전환\"…SNS·생중계 기조 재확인"
         }
       ]
     },
     {
-      "term": "김여정",
-      "total": 11,
-      "sourceCount": 6,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌한 국면, 대한국 확성기 방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "재개",
-      "total": 11,
-      "sourceCount": 6,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌한 국면, 대한국 확성기 방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "대남",
+      "term": "신도시",
       "total": 8,
       "sourceCount": 6,
       "sources": [
         "sbs",
         "yna",
-        "donga",
         "khan",
         "mk",
-        "kmib"
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "소방관",
-      "total": 8,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"국가가 책임지고 소방관 안전 지켜야…지원 강화\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         },
         {
           "source": "sbs",
-          "title": "[바로이뉴스] \"어쩔 수 없이 하는 듯한 사과에 전국 7만 소방관 공분\"…우리가 빨대? \"추미애 사퇴해라\""
-        }
-      ]
-    },
-    {
-      "term": "추미애",
-      "total": 8,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
-        },
-        {
-          "source": "sbs",
-          "title": "[바로이뉴스] \"어쩔 수 없이 하는 듯한 사과에 전국 7만 소방관 공분\"…우리가 빨대? \"추미애 사퇴해라\""
-        }
-      ]
-    },
-    {
-      "term": "재정",
-      "total": 8,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
-        },
-        {
-          "source": "yna",
-          "title": "\"소방이 재정 쭉쭉\" 발언 부승찬에 김민석 경고…윤리심판원 조사"
-        },
-        {
-          "source": "donga",
-          "title": "“소방이 재정 쭉쭉 빨아먹어”… 與 부승찬, 추미애 옹호 논란"
-        }
-      ]
-    },
-    {
-      "term": "유홍준",
-      "total": 5,
-      "sourceCount": 5,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "친일파 글씨 '셀프 전시'…유홍준 \"중대한 불찰\""
-        },
-        {
-          "source": "yna",
-          "title": "문체위, 유홍준 '소장품 셀프 출품' 질타…野 \"깔끔히 그만둬라\"(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "‘셀프 출품’ 논란 유홍준 “서예사 전공자라 확신”"
-        }
-      ]
-    },
-    {
-      "term": "사과",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] 서용주 \"추, 골치 아픈 민주당의 '빨대' 돼버려\" 장성철 \"사과 진정성 안 느껴져\""
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
-        }
-      ]
-    },
-    {
-      "term": "모든",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "中당국 \"모든 금융활동 감독…사각지대 없앨 것\""
-        },
-        {
-          "source": "yna",
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\""
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 태권도 송다빈, 3연패 뒤 특별한 감사 인사 \"모든 게 오빠 덕분\""
-        }
-      ]
-    },
-    {
-      "term": "매우",
-      "total": 8,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "확성기",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌한 국면, 대한국 확성기 방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "논란",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "조문 가서 '응급환자 전용' 주차…논란 커지자"
-        },
-        {
-          "source": "donga",
-          "title": "“소방이 재정 쭉쭉 빨아먹어”… 與 부승찬, 추미애 옹호 논란"
-        },
-        {
-          "source": "donga",
-          "title": "소방관 조문 김민석 차량, ‘응급환자 구역’ 주차 논란"
-        }
-      ]
-    },
-    {
-      "term": "발언",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "yna",
-          "title": "\"소방이 재정 쭉쭉\" 발언 부승찬에 김민석 경고…윤리심판원 조사"
-        },
-        {
-          "source": "yna",
-          "title": "방미심위, 위안부 강제동원 부정 발언 내보낸 법률방송에 '경고'"
-        }
-      ]
-    },
-    {
-      "term": "김민석",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[여담야담] 김민석 \"국무회의 공개는 불가역적\"…장성철 \"지금처럼 공개하는 게 맞아\" 의외의 찬성"
-        },
-        {
-          "source": "yna",
-          "title": "김민석, 강릉 ITS 세계총회 방문…내년 보선 앞두고 민심공략"
-        },
-        {
-          "source": "yna",
-          "title": "\"소방이 재정 쭉쭉\" 발언 부승찬에 김민석 경고…윤리심판원 조사"
-        }
-      ]
-    },
-    {
-      "term": "회담",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
-        },
-        {
-          "source": "yna",
-          "title": "전쟁중 이란·러 외무장관 회담…양국 공조 강조(종합)"
-        }
-      ]
-    },
-    {
-      "term": "이찬진",
-      "total": 6,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "이찬진 \"의무복무 병사 대부업체 대출 금지 검토\"(종합3보)"
-        },
-        {
-          "source": "yna",
-          "title": "이찬진 \"금감원 현장에 있어야…지방이전 정책적 고려 기다려\""
-        },
-        {
-          "source": "yna",
-          "title": "이찬진 \"해킹때 CEO 책임 강화...망분리규제 완화는 단계적으로\"(종합)"
-        }
-      ]
-    },
-    {
-      "term": "쭉쭉",
-      "total": 5,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"소방이 재정 쭉쭉\" 발언 부승찬에 김민석 경고…윤리심판원 조사"
-        },
-        {
-          "source": "donga",
-          "title": "“소방이 재정 쭉쭉 빨아먹어”… 與 부승찬, 추미애 옹호 논란"
-        },
-        {
-          "source": "donga",
-          "title": "秋 징계 미룬 與…“재정 쭉쭉 빨아먹어” 옹호로 또 민심 불질러"
-        }
-      ]
-    },
-    {
-      "term": "셀프",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "친일파 글씨 '셀프 전시'…유홍준 \"중대한 불찰\""
-        },
-        {
-          "source": "yna",
-          "title": "문체위, 유홍준 '소장품 셀프 출품' 질타…野 \"깔끔히 그만둬라\"(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "‘셀프 출품’ 논란 유홍준 “서예사 전공자라 확신”"
-        }
-      ]
-    },
-    {
-      "term": "장비",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "sbs",
-        "yna",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"소방 처우 개선·장비 보완, 국가 차원 대책\""
-        },
-        {
-          "source": "yna",
-          "title": "中, 분쟁국에 터널굴착기·장비 수출 제한…드론 통제도 조정(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "“무거운 장비 내려놓고…” 눈물 속 서울현충원 영면"
-        }
-      ]
-    },
-    {
-      "term": "세계",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "yna",
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"인천공항 비항공수익 66.6%…세계 주요 공항 대비 높아\""
-        },
-        {
-          "source": "donga",
-          "title": "세계 첨단 교통기술, 강릉에 다 모였다"
-        },
-        {
-          "source": "mk",
-          "title": "‘세계 최대 박물관’까지 점령한 시위대…운영 막히자 관광객 불편 가중"
-        }
-      ]
-    },
-    {
-      "term": "저평가",
-      "total": 4,
-      "sourceCount": 4,
-      "sources": [
-        "donga",
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "李 “지배경영권 남용 등에 증시 저평가” 기업에 화살"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “한국 주식시장, 매우 저평가···조만간 필요한 조치”"
-        },
-        {
-          "source": "mk",
-          "title": "李대통령 \"韓증시 매우 저평가 … 필요한 정책 검토\""
+          "title": "이 대통령 \"3기 신도시 공급에 부동산 성패…속도 무엇보다 중요\""
         }
       ]
     },
     {
       "term": "트럼프",
-      "total": 10,
-      "sourceCount": 3,
+      "total": 12,
+      "sourceCount": 5,
       "sources": [
         "yna",
         "donga",
-        "khan"
+        "khan",
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프, '교체설' 백악관 비서실장에 \"엄청난 투사\" 찬사"
+          "title": "트럼프 \"러시아는 매우 큰 나라…젤렌스키, 종전 합의해야\""
         },
         {
           "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "트럼프, 중간선거 2주앞 자금전…\"선거일까지 4억달러 풀 것\""
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "\"우크라 대신 中·러 손잡는 트럼프, '21세기판 얄타회담' 포석\""
         }
       ]
     },
     {
-      "term": "빨대",
+      "term": "프랑스",
+      "total": 9,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "프랑스, 폭력시위 강경 대응…24일 시위에 군병력도 투입(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "기념 우표까지 발행된 프랑스 태권도 전파자…이관영 사범 별세"
+        },
+        {
+          "source": "yna",
+          "title": "\"르펜 6차선 고속도로 탔다\"…프랑스 폭력사태에 극우 반사이익"
+        }
+      ]
+    },
+    {
+      "term": "별세",
+      "total": 9,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세"
+        },
+        {
+          "source": "yna",
+          "title": "기념 우표까지 발행된 프랑스 태권도 전파자…이관영 사범 별세"
+        }
+      ]
+    },
+    {
+      "term": "강헌",
       "total": 8,
-      "sourceCount": 3,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세"
+        },
+        {
+          "source": "khan",
+          "title": "‘대중음악 평론 새 지평’ 강헌 문화예술교육진흥원 이사장 별세"
+        }
+      ]
+    },
+    {
+      "term": "국무회의",
+      "total": 7,
+      "sourceCount": 5,
       "sources": [
         "sbs",
+        "yna",
+        "donga",
         "khan",
         "kmib"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 서용주 \"추, 골치 아픈 민주당의 '빨대' 돼버려\" 장성철 \"사과 진정성 안 느껴져\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
+          "title": "[성민종합정치] \"국무회의 생중계 해주세요\" 댓글에 이 대통령 웃은 이유는?"
         }
       ]
     },
     {
-      "term": "프랑스",
+      "term": "공급",
+      "total": 7,
+      "sourceCount": 5,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "donga",
+          "title": "[단독]삼성바이오에피스, 브라질에 희귀질환약 10년간 단독 공급"
+        }
+      ]
+    },
+    {
+      "term": "대화",
+      "total": 6,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "러 \"미국과 핵 안정성 대화 시급히 재개해야\""
+        },
+        {
+          "source": "khan",
+          "title": "여 ‘초광역특구법’ 발의 강행…노 “사회적 대화 중 기습 추진”"
+        },
+        {
+          "source": "mk",
+          "title": "[단독] “무료 백업했는데 이전 대화 날려”…카톡, 폰 바꾸는 순간 ‘유료결제 덫’"
+        }
+      ]
+    },
+    {
+      "term": "방화",
+      "total": 5,
+      "sourceCount": 5,
+      "sources": [
+        "yna",
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "'역삼 방화 70대' 4년전에도 특허법인 2곳에 휘발유 2L 뿌려 위협"
+        },
+        {
+          "source": "khan",
+          "title": "서울 역삼동 빌딩 두 곳 ‘연쇄 방화’로 불타"
+        },
+        {
+          "source": "mk",
+          "title": "‘역삼 연쇄방화’ 70대 체포…4년 전, 같은 건물 방화 시도했다"
+        }
+      ]
+    },
+    {
+      "term": "김도영",
+      "total": 11,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
+        }
+      ]
+    },
+    {
+      "term": "만루포",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출"
+        },
+        {
+          "source": "yna",
+          "title": "역대 PS 최장 비거리 타이 '145ｍ'…KIA 김도영 초대형 만루포"
+        }
+      ]
+    },
+    {
+      "term": "방사청",
+      "total": 7,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 제재"
+        }
+      ]
+    },
+    {
+      "term": "철수",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        }
+      ]
+    },
+    {
+      "term": "시위",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "외교부, 유럽 대규모 시위 확산에 재외국민 안전 점검"
+        },
+        {
+          "source": "donga",
+          "title": "[횡설수설/우경임]유럽 청년 시위"
+        },
+        {
+          "source": "khan",
+          "title": "[뉴스 분석]청년 분노 눈감고 폭력만 보는 정치…격화되는 프랑스 시위"
+        }
+      ]
+    },
+    {
+      "term": "해킹",
+      "total": 6,
+      "sourceCount": 4,
+      "sources": [
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "‘외부 해킹 방어’ 넘어 기업 ‘내부 AI’도 감시한다"
+        },
+        {
+          "source": "khan",
+          "title": "해킹 고도화에도…농협·수협·산림조합 ‘정보보호’ 돈 안 쓴다"
+        },
+        {
+          "source": "mk",
+          "title": "경찰 '금융기관 해킹' 중수청에 통보"
+        }
+      ]
+    },
+    {
+      "term": "생중계",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"동시대적 소통 홍보로 전환\"…SNS·생중계 기조 재확인"
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] \"국무회의 생중계 해주세요\" 댓글에 이 대통령 웃은 이유는?"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]李 “SNS, 국무회의 생중계 계속”… 기자들 더 자주 만나 균형 잡아야"
+        }
+      ]
+    },
+    {
+      "term": "청년",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "이 대통령, 청년 대상 연금 지원사업에 \"신청제는 실질적 불평등\""
+        },
+        {
+          "source": "donga",
+          "title": "[횡설수설/우경임]유럽 청년 시위"
+        },
+        {
+          "source": "khan",
+          "title": "[뉴스 분석]청년 분노 눈감고 폭력만 보는 정치…격화되는 프랑스 시위"
+        }
+      ]
+    },
+    {
+      "term": "유도",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "유도 김동훈, 장애인AG 남자 81㎏급 은메달 \"허무하게 져\""
+        },
+        {
+          "source": "mk",
+          "title": "“벽에 머리 박고, 상처 투성”...상어 부캉이, 내일 3차 유도 작업한다"
+        },
+        {
+          "source": "kmib",
+          "title": "강원도, 공공임대주택 1만호 공급⋯ 지역 정착 유도"
+        }
+      ]
+    },
+    {
+      "term": "국내",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[AI프리즘] 국내 AI 모델 개발에 중국산 활용 급증했다"
+        },
+        {
+          "source": "donga",
+          "title": "구글 지도 국내 이용자 석달 연속 1000만명대"
+        },
+        {
+          "source": "khan",
+          "title": "노사갈등에 빛바랜 국내 첫 ‘상생형 일자리’"
+        }
+      ]
+    },
+    {
+      "term": "준비",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "[영상] \"살려주세요\" 긴박했던 탈출…역삼방화 용의자 \"3일전부터 준비\""
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 역삼방화 70대 “3일 전부터 범행 준비”…수서경찰서 압송돼"
+        },
+        {
+          "source": "kmib",
+          "title": "‘역삼 연쇄방화’ 70대 “특허법인이 사기쳐⋯범행 3일 준비\""
+        }
+      ]
+    },
+    {
+      "term": "발의",
+      "total": 5,
+      "sourceCount": 4,
+      "sources": [
+        "donga",
+        "khan",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]與 ‘주 52시간 특례’ 찬반 법안 각각 발의… 왜 이리 무책임한가"
+        },
+        {
+          "source": "khan",
+          "title": "여 ‘초광역특구법’ 발의 강행…노 “사회적 대화 중 기습 추진”"
+        },
+        {
+          "source": "kmib",
+          "title": "희한한 메가특구 법안⋯ 與, ‘52시간 특례’ 포함·제외 동시 발의"
+        }
+      ]
+    },
+    {
+      "term": "판단",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "yna",
+          "title": "정부, 우크라 공관원 절반 철수 결정…\"전향적조치 없다고 판단\"(종합2보)"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 경찰, 금융기관 해킹사건 ‘중대범죄’ 판단…중수청에 통보키로"
+        }
+      ]
+    },
+    {
+      "term": "삼성",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "박진만 삼성 감독 \"김도영은 스타…우리는 대처할 능력 갖췄다\""
+        },
+        {
+          "source": "donga",
+          "title": "삼성, 中 저가폰 제치고 印 스마트폰 1위 탈환"
+        },
+        {
+          "source": "khan",
+          "title": "이건희 ‘기술 혁신’ 계승…삼성, 6주기 ‘조용한 추모’"
+        }
+      ]
+    },
+    {
+      "term": "개발",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "LIG D&A, 입찰제한에 법적대응 예고…수주·개발 차질 비상"
+        },
+        {
+          "source": "donga",
+          "title": "두산에너빌-LIG D&A, 유도무기 엔진 개발 맞손"
+        },
+        {
+          "source": "khan",
+          "title": "두산에너빌리티·LIG D A, 유도무기 엔진 개발 협력 MOU 체결"
+        }
+      ]
+    },
+    {
+      "term": "추가",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\""
+        },
+        {
+          "source": "khan",
+          "title": "군 “북, 추가 도발 땐 단호하게 대응”"
+        },
+        {
+          "source": "kmib",
+          "title": "합참 “北 추가 도발땐 단호 대응”⋯ DMZ 주도권 강화도 지시"
+        }
+      ]
+    },
+    {
+      "term": "비중",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "donga",
+        "khan",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "서울 아파트 월세 비중 50% 처음 돌파… 전세 거래 27% 줄어 주거비 부담 커져"
+        },
+        {
+          "source": "khan",
+          "title": "서울 아파트 월세 비중 50% 넘었다"
+        },
+        {
+          "source": "mk",
+          "title": "“더 떨어지긴 힘들다고 봤는데”…삼전닉스 비중 늘린 개미들 ‘더 비명’"
+        }
+      ]
+    },
+    {
+      "term": "착공",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "[서울25]중구, 인쇄 소상공인 위한 ‘세운웍스’ 착공"
+        },
+        {
+          "source": "mk",
+          "title": "이 대통령 “주택 공급 성패는 속도…3기 신도시 착공 최대한 앞당겨야”"
+        },
+        {
+          "source": "kmib",
+          "title": "李대통령 “3기 신도시 2030년까지 90% 착공”"
+        }
+      ]
+    },
+    {
+      "term": "같은",
+      "total": 4,
+      "sourceCount": 4,
+      "sources": [
+        "khan",
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "[뉴스분석]“혼란은 이민자 탓” 본질 흐리는 극우…미·러 ‘프랑스 시위’ 유럽 극우와 같은 해석"
+        },
+        {
+          "source": "mk",
+          "title": "‘역삼 연쇄방화’ 70대 체포…4년 전, 같은 건물 방화 시도했다"
+        },
+        {
+          "source": "kmib",
+          "title": "역삼동 잇따라 불지른 70대 검거⋯ 4년 전 같은 건물 방화 시도‘실형’"
+        }
+      ]
+    },
+    {
+      "term": "만에",
       "total": 7,
       "sourceCount": 3,
       "sources": [
@@ -688,404 +815,620 @@
       "examples": [
         {
           "source": "yna",
-          "title": "파리 일부 지역 등에 야간 통금…폭력사태에 충격 빠진 프랑스(종합)"
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
         },
         {
           "source": "yna",
-          "title": "\"폭력 시위자에도, 정부에도 분노\"…프랑스 주민·상인들 분통"
-        },
-        {
-          "source": "yna",
-          "title": "프랑스 폭동, 이민의 대가?…유럽서 이주민 논쟁 다시 불붙었다"
-        }
-      ]
-    },
-    {
-      "term": "남부",
-      "total": 6,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌한 국면, 대한국 확성기 방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "국민",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
-        },
-        {
-          "source": "yna",
-          "title": "서울공소청장 \"한동훈 수사, 국민 눈높이에 안 맞는 부분 있다\"(종합2보)"
-        }
-      ]
-    },
-    {
-      "term": "남부국경",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "불안정",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "만에",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "2년 만에 KOVO 컵대회 돌아온 현대캐피탈, OK에 3-2 승리(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[가요소식] 있지 채령, 데뷔 7년 만에 내달 솔로 데뷔"
-        },
-        {
-          "source": "donga",
-          "title": "재외동포청 3년 만에 세종으로? 인천 與野 모두 반발"
-        }
-      ]
-    },
-    {
-      "term": "시대",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "‘마찰 없는 사회’ AI 시대… 몸이 던지는 불편한 질문"
-        },
-        {
-          "source": "donga",
-          "title": "청주공항 年 이용객 500만 명 시대 눈앞"
-        },
-        {
-          "source": "khan",
-          "title": "[AI 시대, 한국 사회를 다시 설계하자]밀려오는 ‘무인시대’…그럼에도 결국 ‘사람’"
-        }
-      ]
-    },
-    {
-      "term": "국내",
-      "total": 5,
-      "sourceCount": 3,
-      "sources": [
-        "khan",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "khan",
-          "title": "벤츠 CLA·GLC 첫 전기차 모델 국내 출시"
-        },
-        {
-          "source": "khan",
-          "title": "‘OLED 맥북’ 시대…국내 디스플레이 ‘애플 수혜’ 기대"
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출"
         },
         {
           "source": "mk",
-          "title": "다올투자증권, 국내 증권사 최초 ‘트레이딩뷰’서 미국주식 거래"
-        }
-      ]
-    },
-    {
-      "term": "조희대",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "'조희대 탄핵안' 동참 촉구…민주 \"여론 보겠다\""
-        },
-        {
-          "source": "khan",
-          "title": "혁신당 ‘조희대 탄핵안’ 범여 TF 압박…여당 “국감 이후 논의”"
-        },
-        {
-          "source": "kmib",
-          "title": "조희대 탄핵하면? 김건희 등 내란 사건 줄줄이 지연 우려"
-        }
-      ]
-    },
-    {
-      "term": "주차",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "조문 가서 '응급환자 전용' 주차…논란 커지자"
-        },
-        {
-          "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
-        },
-        {
-          "source": "donga",
-          "title": "소방관 조문 김민석 차량, ‘응급환자 구역’ 주차 논란"
-        }
-      ]
-    },
-    {
-      "term": "전작권",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"전작권 맡겨놓고 방치할 상황아냐…반드시 신속히 환수\""
-        },
-        {
-          "source": "donga",
-          "title": "[단독]전작권 전환 서두르는데…北 미사일 감시 레이더는 9개월 멈췄다"
-        },
-        {
-          "source": "donga",
-          "title": "李 “전작권 반드시 조기 환수”… 북핵엔 “최후 방어 무기”"
-        }
-      ]
-    },
-    {
-      "term": "강화",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"국가가 책임지고 소방관 안전 지켜야…지원 강화\""
-        },
-        {
-          "source": "yna",
-          "title": "美의회 \"우크라에 정보 제한시 의회통지…한일과 정보협력 강화\""
-        },
-        {
-          "source": "yna",
-          "title": "이찬진 \"해킹때 CEO 책임 강화...망분리규제 완화는 단계적으로\"(종합)"
-        }
-      ]
-    },
-    {
-      "term": "우려",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "감사원 \"불합격 기상관측장비 활용…예보 신뢰저하 우려\""
-        },
-        {
-          "source": "khan",
-          "title": "정부, ‘브런슨 영토 발언’ 우려 전달…미 “충분히 공감”"
-        },
-        {
-          "source": "kmib",
-          "title": "조희대 탄핵하면? 김건희 등 내란 사건 줄줄이 지연 우려"
-        }
-      ]
-    },
-    {
-      "term": "국감",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "국회, 법사위 등 12개 국감…대미투자·국군사관학교 등 쟁점"
-        },
-        {
-          "source": "yna",
-          "title": "[오늘의 국감](20일)"
-        },
-        {
-          "source": "khan",
-          "title": "혁신당 ‘조희대 탄핵안’ 범여 TF 압박…여당 “국감 이후 논의”"
-        }
-      ]
-    },
-    {
-      "term": "통화",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "네타냐후, 총선 지지 트럼프와 통화…이란 언급하며 \"할일 남아\""
-        },
-        {
-          "source": "yna",
-          "title": "교황, 젤렌스키와 통화…\"러 점령한 지역에 식량 전달되길\""
-        },
-        {
-          "source": "donga",
-          "title": "네타냐후, 트럼프와 전화 통화…“과거·미래 美대통령 중 최고의 친구”"
-        }
-      ]
-    },
-    {
-      "term": "미국",
-      "total": 4,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\""
-        },
-        {
-          "source": "khan",
-          "title": "“내년 미국 모든 어린이에게 스페이스X 주식 1주씩”···‘조만장자’ 머스크의 화끈한 플렉스"
-        },
-        {
-          "source": "khan",
-          "title": "자율항해·고장 대응…HD현대, 미국 바다서 ‘무인 함정’ 뽐내"
+          "title": "이수만 걸그룹 A2O 라이트, 데뷔 7일 만에 음방 1위…논란 뚫고 질주"
         }
       ]
     },
     {
       "term": "서울",
+      "total": 7,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "서울 아파트 월세 비중 50% 처음 돌파… 전세 거래 27% 줄어 주거비 부담 커져"
+        },
+        {
+          "source": "khan",
+          "title": "서울 역삼동 빌딩 두 곳 ‘연쇄 방화’로 불타"
+        },
+        {
+          "source": "khan",
+          "title": "[서울25]영등포구, 저소득층 자립 위한 음식점 오픈"
+        }
+      ]
+    },
+    {
+      "term": "사설",
+      "total": 7,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[사설]與 ‘주 52시간 특례’ 찬반 법안 각각 발의… 왜 이리 무책임한가"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]李 “SNS, 국무회의 생중계 계속”… 기자들 더 자주 만나 균형 잡아야"
+        },
+        {
+          "source": "donga",
+          "title": "[사설]레버리지ETF ‘졸속’ 인정… 누가 했는지는 왜 입 닫나"
+        }
+      ]
+    },
+    {
+      "term": "사망",
+      "total": 6,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "\"수단군, 남수단과 영유권 분쟁지역 시장 공습…153명 사망\""
+        },
+        {
+          "source": "yna",
+          "title": "IS 연계 무장세력, 말리 민간인 보복 공격…최소 48명 사망"
+        },
+        {
+          "source": "yna",
+          "title": "남아공 해변서 수영하던 여성, 상어에 물려 사망"
+        }
+      ]
+    },
+    {
+      "term": "공관원",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        }
+      ]
+    },
+    {
+      "term": "민주당",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"죄송합니다\" 매일 사과하는 민주당…잇단 실언들"
+        },
+        {
+          "source": "sbs",
+          "title": "[자막뉴스] '소방이 재정 쭉쭉' 부승찬, 민주당 \"직권 조사!\" 불호령에 \"진심으로 사과드린다\""
+        },
+        {
+          "source": "kmib",
+          "title": "결국 李 대통령 방탄? 국힘이 보는 ‘曺탄핵’ 민주당 속내"
+        }
+      ]
+    },
+    {
+      "term": "법원",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "美법원, 샘 올트먼 여동생 성학대 의혹 소송 기각"
+        },
+        {
+          "source": "yna",
+          "title": "\"이게 왜 허위공문서?\"…법원, 종합특검에 또 공소장 부실 지적"
+        },
+        {
+          "source": "mk",
+          "title": "법원, 23일 오세훈 ‘명태균 여론조사’ 2심 생중계"
+        }
+      ]
+    },
+    {
+      "term": "중간선거",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "khan"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "트럼프, 중간선거 2주앞 자금전…\"선거일까지 4억달러 풀 것\""
+        },
+        {
+          "source": "yna",
+          "title": "\"이란, 중간선거 앞둔 트럼프에 타격 주려 종전협상 지연\""
+        },
+        {
+          "source": "yna",
+          "title": "\"미국인 10명 중 7명, 트럼프 중간선거 결과 수용 확신못해\""
+        }
+      ]
+    },
+    {
+      "term": "대중음악평론가",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세"
+        },
+        {
+          "source": "khan",
+          "title": "대중음악평론가 강헌 별세…향년 64세"
+        }
+      ]
+    },
+    {
+      "term": "제한",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 제재"
+        }
+      ]
+    },
+    {
+      "term": "경찰",
+      "total": 5,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "경찰 '금융기관 해킹' 중수청에 통보"
+        },
+        {
+          "source": "mk",
+          "title": "[속보] 경찰, 금융기관 해킹사건 ‘중대범죄’ 판단…중수청에 통보키로"
+        },
+        {
+          "source": "kmib",
+          "title": "경찰, 금융권 해킹 ‘중대범죄’ 판단⋯ “중수청 통보 예정”"
+        }
+      ]
+    },
+    {
+      "term": "중수청장",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
+        },
+        {
+          "source": "sbs",
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
+        },
+        {
+          "source": "yna",
+          "title": "김지용 중수청장 국무회의 첫 참석…정치적 중립성 논란도(종합2보)"
+        }
+      ]
+    },
+    {
+      "term": "없어",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "yna",
+          "title": "이란 외무 \"러시아-이란, 역사상 지금처럼 긴밀했던 적 없어\""
+        }
+      ]
+    },
+    {
+      "term": "구글",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "구글 클라우드 장애로 영국 은행·공공의료 사이트 차질(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "구글 클라우드 네트워크 장애…영국 은행 등 웹사이트 차질"
+        },
+        {
+          "source": "donga",
+          "title": "구글 지도 국내 이용자 석달 연속 1000만명대"
+        }
+      ]
+    },
+    {
+      "term": "우크라",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "\"우크라 대신 中·러 손잡는 트럼프, '21세기판 얄타회담' 포석\""
+        },
+        {
+          "source": "yna",
+          "title": "정부, 우크라 공관원 절반 철수 결정…\"전향적조치 없다고 판단\"(종합2보)"
+        },
+        {
+          "source": "khan",
+          "title": "미, 패트리엇 공급 승인 지연…우크라 방공망 비상"
+        }
+      ]
+    },
+    {
+      "term": "추진",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "캐나다 앨버타주, 분리독립 추진 주민투표 부결…잔류 선택(종합)"
+        },
+        {
+          "source": "khan",
+          "title": "여 ‘초광역특구법’ 발의 강행…노 “사회적 대화 중 기습 추진”"
+        },
+        {
+          "source": "khan",
+          "title": "현대차·기아, ‘자율주행 4단계’ 대형트럭 운행 실증 추진"
+        }
+      ]
+    },
+    {
+      "term": "투입",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "프랑스, 폭력시위 강경 대응…24일 시위에 군병력도 투입(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "이탈리아 폭력시위에 軍투입…밀라노에 병력 500명 배치"
+        },
+        {
+          "source": "khan",
+          "title": "밀라노서도 생활고 항의 시위 폭력 사태로 번져···군 500명 투입"
+        }
+      ]
+    },
+    {
+      "term": "문화예술교육진흥원",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세"
+        },
+        {
+          "source": "khan",
+          "title": "‘대중음악 평론 새 지평’ 강헌 문화예술교육진흥원 이사장 별세"
+        }
+      ]
+    },
+    {
+      "term": "이사장",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "대중음악평론가 강헌 문화예술교육진흥원 이사장 별세"
+        },
+        {
+          "source": "khan",
+          "title": "‘대중음악 평론 새 지평’ 강헌 문화예술교육진흥원 이사장 별세"
+        }
+      ]
+    },
+    {
+      "term": "역삼",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "'역삼 방화 70대' 4년전에도 특허법인 2곳에 휘발유 2L 뿌려 위협"
+        },
+        {
+          "source": "yna",
+          "title": "역삼 연쇄방화 70대, 특허등록증 온라인발행에 \"사기쳤다\" 앙심(종합2보)"
+        },
+        {
+          "source": "mk",
+          "title": "‘역삼 연쇄방화’ 70대 체포…4년 전, 같은 건물 방화 시도했다"
+        }
+      ]
+    },
+    {
+      "term": "코스피",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "donga",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "삼성증권 \"모니모서 신규 계좌 개설시 코스피200 주식 증정\""
+        },
+        {
+          "source": "donga",
+          "title": "글로벌 국채 금리 오르자… 코스피 5550선까지 밀려"
+        },
+        {
+          "source": "donga",
+          "title": "[동아광장/유재동]미리 쓰는 2026년 코스피 징비록"
+        }
+      ]
+    },
+    {
+      "term": "협력",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "정동영, 獨의원 만나 \"한반도 문제, 국제사회 협력 병행돼야\""
+        },
+        {
+          "source": "khan",
+          "title": "전기차가 알아서 교환소서 배터리 교체…중 CATL·화웨이 ‘서비스 고도화’ 협력"
+        },
+        {
+          "source": "khan",
+          "title": "두산에너빌리티·LIG D A, 유도무기 엔진 개발 협력 MOU 체결"
+        }
+      ]
+    },
+    {
+      "term": "사장",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현 전 콘텐츠웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보에 이태현 前 웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현"
+        }
+      ]
+    },
+    {
+      "term": "최종",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현 전 콘텐츠웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보에 이태현 前 웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현"
+        }
+      ]
+    },
+    {
+      "term": "이태현",
+      "total": 4,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현 전 콘텐츠웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보에 이태현 前 웨이브 대표"
+        },
+        {
+          "source": "kmib",
+          "title": "KBS 사장 최종 후보자에 PD 출신 이태현"
+        }
+      ]
+    },
+    {
+      "term": "이어",
       "total": 4,
       "sourceCount": 3,
       "sources": [
         "donga",
         "khan",
-        "mk"
+        "hani"
       ],
       "examples": [
         {
           "source": "donga",
-          "title": "‘김기동 매직’ FC서울, 10년만의 우승 눈앞… ‘이정효 매직’ 수원삼성, 3년만의 승격 유력"
-        },
-        {
-          "source": "donga",
-          "title": "서울-수원공소청장 “李 공소취소 검토-협의한 적 없어”"
+          "title": "美 이어 英박물관 빛낸 ‘이건희 컬렉션’, 의료 기부로 환아 2만8000명 혜택"
         },
         {
           "source": "khan",
-          "title": "“서울 정릉천고가 손상 케이블 2년째 방치”"
+          "title": "정부, 주우크라 대사 소환 이어…공관원 절반 철수 결정"
+        },
+        {
+          "source": "hani",
+          "title": "프랑스 이어 이탈리아도 시위 격화…군 배치하고 청소년 체포도 강화"
         }
       ]
     },
     {
-      "term": "증시",
+      "term": "금리",
       "total": 4,
       "sourceCount": 3,
       "sources": [
@@ -1096,260 +1439,92 @@
       "examples": [
         {
           "source": "donga",
-          "title": "李 “지배경영권 남용 등에 증시 저평가” 기업에 화살"
+          "title": "내년 금리 오를 위험 주담대 563조… 영끌 대출자들 “잠이 안와요”"
+        },
+        {
+          "source": "donga",
+          "title": "글로벌 국채 금리 오르자… 코스피 5550선까지 밀려"
         },
         {
           "source": "mk",
-          "title": "李대통령 \"韓증시 매우 저평가 … 필요한 정책 검토\""
-        },
-        {
-          "source": "kmib",
-          "title": "李대통령 “韓증시 매우 저평가⋯곧 정상화 대책 마련”"
+          "title": "2번 연속 금리 올린 한국은행…“또 올리나” vs “동결하나” 관심 집중"
         }
       ]
     },
     {
-      "term": "글씨",
-      "total": 3,
+      "term": "아파트",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
-        "sbs",
+        "donga",
         "khan",
         "kmib"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "친일파 글씨 '셀프 전시'…유홍준 \"중대한 불찰\""
+          "source": "donga",
+          "title": "서울 아파트 월세 비중 50% 처음 돌파… 전세 거래 27% 줄어 주거비 부담 커져"
         },
         {
           "source": "khan",
-          "title": "유홍준, 본인 소유 ‘친일파 글씨’ 셀프 전시·세탁 의혹에 사과"
+          "title": "서울 아파트 월세 비중 50% 넘었다"
         },
         {
           "source": "kmib",
-          "title": "“글씨 검증 받은 적 없나?”⋯ 유홍준 “내가 서예 전공자라서 확신”"
+          "title": "[여의춘추] 용산 대신 국회에 ‘청년 아파트’를"
         }
       ]
     },
     {
-      "term": "전시",
-      "total": 3,
+      "term": "세계",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
-        "sbs",
         "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "친일파 글씨 '셀프 전시'…유홍준 \"중대한 불찰\""
-        },
-        {
-          "source": "donga",
-          "title": "“보듬고 응원해주기” 암 생존자 일기 특별한 전시"
-        },
-        {
-          "source": "khan",
-          "title": "유홍준, 본인 소유 ‘친일파 글씨’ 셀프 전시·세탁 의혹에 사과"
-        }
-      ]
-    },
-    {
-      "term": "일정",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
+        "mk",
         "kmib"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "\"일정 맞추려 ETF 빨리 심사\"…\"드러누워 막았어야\""
-        },
-        {
           "source": "donga",
-          "title": "이찬진 “레버리지 ETF, 상장 일정 맞추려 심사 빨리 진행”"
-        },
-        {
-          "source": "kmib",
-          "title": "이찬진 “일정 맞추려 심사 서둘러”⋯ ‘삼전닉스 레버리지’ 졸속 시인"
-        }
-      ]
-    },
-    {
-      "term": "맞추려",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"일정 맞추려 ETF 빨리 심사\"…\"드러누워 막았어야\""
-        },
-        {
-          "source": "donga",
-          "title": "이찬진 “레버리지 ETF, 상장 일정 맞추려 심사 빨리 진행”"
-        },
-        {
-          "source": "kmib",
-          "title": "이찬진 “일정 맞추려 심사 서둘러”⋯ ‘삼전닉스 레버리지’ 졸속 시인"
-        }
-      ]
-    },
-    {
-      "term": "심사",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"일정 맞추려 ETF 빨리 심사\"…\"드러누워 막았어야\""
-        },
-        {
-          "source": "donga",
-          "title": "이찬진 “레버리지 ETF, 상장 일정 맞추려 심사 빨리 진행”"
-        },
-        {
-          "source": "kmib",
-          "title": "이찬진 “일정 맞추려 심사 서둘러”⋯ ‘삼전닉스 레버리지’ 졸속 시인"
-        }
-      ]
-    },
-    {
-      "term": "조문",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "조문 가서 '응급환자 전용' 주차…논란 커지자"
-        },
-        {
-          "source": "donga",
-          "title": "소방관 조문 김민석 차량, ‘응급환자 구역’ 주차 논란"
-        },
-        {
-          "source": "khan",
-          "title": "조문 간 김민석 ‘응급전용구역 주차’로 또 구설"
-        }
-      ]
-    },
-    {
-      "term": "반드시",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"전작권 맡겨놓고 방치할 상황아냐…반드시 신속히 환수\""
-        },
-        {
-          "source": "donga",
-          "title": "李 “전작권 반드시 조기 환수”… 북핵엔 “최후 방어 무기”"
-        },
-        {
-          "source": "khan",
-          "title": "이 대통령 “전작권 반드시 조기 환수해야”"
-        }
-      ]
-    },
-    {
-      "term": "환수",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "donga",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"전작권 맡겨놓고 방치할 상황아냐…반드시 신속히 환수\""
-        },
-        {
-          "source": "donga",
-          "title": "李 “전작권 반드시 조기 환수”… 북핵엔 “최후 방어 무기”"
+          "title": "“韓은 세계 트렌드 발신지… 푸마도 한국 반응부터 본다”"
         },
         {
           "source": "mk",
-          "title": "李대통령 \"전작권은 맡겨놓은 것…전환 아닌 환수·환원\""
-        }
-      ]
-    },
-    {
-      "term": "말라",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "sbs",
-        "yna",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령, 김지용 중수청장에 \"네 편 내 편 가리지 말라\""
-        },
-        {
-          "source": "yna",
-          "title": "총선 앞 공군기지 찾은 네타냐후 \"우리를 시험하지 말라\""
+          "title": "356g 몸무게로 심장 시술 견딘 신생아…日서 ‘세계 최소 체중’ 신기록"
         },
         {
           "source": "kmib",
-          "title": "‘비대면 진료’ 하위법령에⋯ 의료계 “30일 처방 말라” 반발"
+          "title": "전 세계 7개 ‘AI 선도국’, 한국도 들었다⋯ 미·중과 어깨 나란히"
         }
       ]
     },
     {
-      "term": "조정",
-      "total": 3,
+      "term": "시대",
+      "total": 4,
       "sourceCount": 3,
       "sources": [
-        "sbs",
-        "yna",
-        "mk"
+        "mk",
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "yna",
-          "title": "中, 분쟁국에 터널굴착기·장비 수출 제한…드론 통제도 조정(종합)"
-        },
-        {
           "source": "mk",
-          "title": "中, 드론 수출통제 조정 … 민간용은 허가 간소화"
+          "title": "“AI 시대, 살아남는 기업은 따로 있다”…혁신의 답은 사람"
+        },
+        {
+          "source": "kmib",
+          "title": "AI무인함정 시대 열렸다⋯ K방산, 美시장 선점 승부"
+        },
+        {
+          "source": "hani",
+          "title": "고금리 시대, 사모신용·순환금융과 ‘메가프로젝트 딜레마’"
         }
       ]
     },
     {
-      "term": "이젠",
+      "term": "지역",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1360,44 +1535,68 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김혜경 \"아이 키우는 데에 이젠 온 나라가 필요\"…권역모자의료센터 방문"
+          "title": "\"대북 확성기도 배제 안 해\"…접경 지역 가보니"
         },
         {
           "source": "mk",
-          "title": "“벤츠도 이젠 ‘쏘나타값’, 얼마나 좋아”…한국女 반한 ‘그돈C’, 4천만원대 승부수 [세상만車]"
+          "title": "한국지역난방공사, 전남·광주지역 상생협력 본격화…지역 중소기업 성장 지원"
         },
         {
           "source": "kmib",
-          "title": "단종된 볶음너구리는 왜 2년 만에 돌아왔을까…이젠 상수 된 ‘재출시 마케팅’"
+          "title": "강원도, 공공임대주택 1만호 공급⋯ 지역 정착 유도"
         }
       ]
     },
     {
-      "term": "방문",
+      "term": "사고",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "sbs",
         "yna",
-        "mk"
+        "khan"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "김혜경 \"아이 키우는 데에 이젠 온 나라가 필요\"…권역모자의료센터 방문"
+          "title": "[성민종합정치] \"SNS는 목숨줄\"…성한용, 이 대통령 성남시장 시절 SNS 사고 방지 시스템 전격 공개"
         },
         {
           "source": "yna",
-          "title": "김민석, 강릉 ITS 세계총회 방문…내년 보선 앞두고 민심공략"
+          "title": "논산서 30대 외국인 노동자 압축설비 끼임 사고 사망"
         },
         {
-          "source": "mk",
-          "title": "‘아크메르 동탄’ 견본주택 사흘간 2만7000여 명 방문"
+          "source": "khan",
+          "title": "LG전자, 위험 감지해 차 사고 방지 ‘V2X’ 공개"
         }
       ]
     },
     {
-      "term": "교수",
+      "term": "민주",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "sbs",
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 추미애 두둔하며 \"쭉쭉\" 민주 투톱 또 사과…허민 \"부승찬, 정치적 의도 의심\""
+        },
+        {
+          "source": "yna",
+          "title": "美민주 \"하원 탈환시 머스크 정조준\"…전방위 조사 예고"
+        },
+        {
+          "source": "hani",
+          "title": "사회적 대화 한창인데…민주 ‘주52시간 예외’ 초광역특구법 발의"
+        }
+      ]
+    },
+    {
+      "term": "지적",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1408,44 +1607,44 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "동덕여대 홍원식 교수, 제54대 한국언론학회 회장 선출"
+          "title": "소방 노조 대면해 \"상처가 됐다면 정말 죄송\"…'재정 문제' 지적"
         },
         {
           "source": "yna",
-          "title": "충남대 교수 237명 \"공주대 통합 재투표\"…평의원회 '불가' 의결(종합)"
+          "title": "\"이게 왜 허위공문서?\"…법원, 종합특검에 또 공소장 부실 지적"
         },
         {
           "source": "donga",
-          "title": "차기 언론학회장에 홍원식 교수"
+          "title": "“남자는 80에도 애낳으면서”…52세 임신 美 여배우, 이중잣대 지적"
         }
       ]
     },
     {
-      "term": "전국",
+      "term": "알림",
       "total": 3,
       "sourceCount": 3,
       "sources": [
-        "sbs",
         "yna",
-        "mk"
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
-          "source": "sbs",
-          "title": "[바로이뉴스] \"어쩔 수 없이 하는 듯한 사과에 전국 7만 소방관 공분\"…우리가 빨대? \"추미애 사퇴해라\""
-        },
-        {
           "source": "yna",
-          "title": "[날씨] 내일도 전국 흐려…경기 남부·충청엔 비 소식"
+          "title": "[알림] 연합뉴스 콘텐츠 저작권 고지"
         },
         {
-          "source": "mk",
-          "title": "“내일도 우산 챙기세요”…전국 흐리고 경기 남부·충청엔 비 소식"
+          "source": "kmib",
+          "title": "[알림] ‘실험미술 거장’ 이건용 작가와 함께하는 제5회 ‘아르브뤼 미술상’ 공모합니다"
+        },
+        {
+          "source": "hani",
+          "title": "10월21일 알림"
         }
       ]
     },
     {
-      "term": "반도체",
+      "term": "징역",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1456,44 +1655,140 @@
       "examples": [
         {
           "source": "yna",
-          "title": "뉴욕증시, 반도체·AI주 반등 속 혼조…나스닥 1.11%↑"
+          "title": "부천시장 경선후보 '허위 성추행 고소' 사주범에 징역 5년 구형"
         },
         {
           "source": "khan",
-          "title": "‘소부장·패키징’에 전하는 반도체 온기"
+          "title": "노동자 23명 사망, 대표는 징역 4년…유가족은 다시 무너졌다"
         },
         {
           "source": "kmib",
-          "title": "“반도체 호황을 소부장까지”⋯ SK하이닉스, 2조원 금융 지원"
+          "title": "23명 숨진 ‘아리셀 참사’ 대표 징역 15년 → 4년 확정"
         }
       ]
     },
     {
-      "term": "파리",
+      "term": "지연",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "yna",
-        "donga",
-        "khan"
+        "khan",
+        "kmib"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "파리 일부 지역 등에 야간 통금…폭력사태에 충격 빠진 프랑스(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "파리 휩쓴 청년 분노에 명품거리 쑥대밭… “이번 주말 2차 시위”"
+          "title": "\"이란, 중간선거 앞둔 트럼프에 타격 주려 종전협상 지연\""
         },
         {
           "source": "khan",
-          "title": "‘지옥의 밤’ 보낸 파리 상인들…“휴대폰, 노트북, 포켓몬 카드까지 털려”"
+          "title": "미, 패트리엇 공급 승인 지연…우크라 방공망 비상"
+        },
+        {
+          "source": "kmib",
+          "title": "대통령 전용기 뜬 체전 개막식 날, 제주공항 246편 지연·회항, 왜?"
         }
       ]
     },
     {
-      "term": "직원에",
+      "term": "혐의로",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "김관영 전 전북지사, 허위사실공표 혐의로 이원택 도지사 고소"
+        },
+        {
+          "source": "khan",
+          "title": "‘힙합 프로 출연’ 40대 래퍼, 대마 흡입 혐의로 재판행"
+        },
+        {
+          "source": "mk",
+          "title": "‘쇼미더머니’ 출연 40대 유명 래퍼, 대마 투약 혐의로 재판행"
+        }
+      ]
+    },
+    {
+      "term": "앞당겨야",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "李대통령, 아파트옥상 올라 3기 신도시 시찰…\"최대한 앞당겨야\"(종합)"
+        },
+        {
+          "source": "mk",
+          "title": "이 대통령 “주택 공급 성패는 속도…3기 신도시 착공 최대한 앞당겨야”"
+        },
+        {
+          "source": "hani",
+          "title": "계양 간 이 대통령 “3기 신도시 착공 앞당겨야” 속도전 주문"
+        }
+      ]
+    },
+    {
+      "term": "대마",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "공소청, '대마 흡입 혐의' 40대 래퍼 불구속 기소"
+        },
+        {
+          "source": "khan",
+          "title": "‘힙합 프로 출연’ 40대 래퍼, 대마 흡입 혐의로 재판행"
+        },
+        {
+          "source": "mk",
+          "title": "‘쇼미더머니’ 출연 40대 유명 래퍼, 대마 투약 혐의로 재판행"
+        }
+      ]
+    },
+    {
+      "term": "래퍼",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "mk"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "공소청, '대마 흡입 혐의' 40대 래퍼 불구속 기소"
+        },
+        {
+          "source": "khan",
+          "title": "‘힙합 프로 출연’ 40대 래퍼, 대마 흡입 혐의로 재판행"
+        },
+        {
+          "source": "mk",
+          "title": "‘쇼미더머니’ 출연 40대 유명 래퍼, 대마 투약 혐의로 재판행"
+        }
+      ]
+    },
+    {
+      "term": "이억원",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1504,20 +1799,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "'오픈AI 도청' 사우디 국적 직원에 왕가·군부 지원 정황"
+          "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\""
         },
         {
           "source": "mk",
-          "title": "“손오공과 나란히 약탈범 막았다”…홀로 매장 지킨 프랑스 직원에 응원 쏟아져"
+          "title": "“15억 이상 주택은 대출금지한대” SNS 글에...이억원 “전혀 사실 아냐”"
         },
         {
           "source": "kmib",
-          "title": "임광현, 靑 직원에 “쓴소리도 마다 않고 옳은 말 할 줄 알아야”"
+          "title": "[금융뒷담] 말 아낀 이억원, 잡음 커지는 금융위"
         }
       ]
     },
     {
-      "term": "부담",
+      "term": "주담대",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1528,63 +1823,63 @@
       "examples": [
         {
           "source": "yna",
-          "title": "美 주택건설업 체감경기 14년여만에 최저…고금리·건설비 부담"
+          "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\""
         },
         {
           "source": "donga",
-          "title": "韓은 제작비 부담 덜고, 日은 제작 노하우 얻고… 이 만남 드라마가 된다"
+          "title": "내년 금리 오를 위험 주담대 563조… 영끌 대출자들 “잠이 안와요”"
         },
         {
           "source": "kmib",
-          "title": "‘재정 빨대’ 논란 소방 예산, 국가직 전환에도 여전히 지자체 부담"
+          "title": "“15억 이상 주담대 전면 금지” 루머에 금융위 “전혀 사실 아냐”"
         }
       ]
     },
     {
-      "term": "분노",
+      "term": "사실",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"폭력 시위자에도, 정부에도 분노\"…프랑스 주민·상인들 분통"
-        },
-        {
-          "source": "khan",
-          "title": "이탈리아·포르투갈서도 생활비 폭등 ‘분노 폭발’"
-        },
-        {
-          "source": "mk",
-          "title": "“소방관 죽을 때마다 재발 방지 약속하더니”…동료 잃은 소방관들의 ‘분노’"
-        }
-      ]
-    },
-    {
-      "term": "마크롱",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
+        "mk",
         "kmib"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "마크롱 정부, 폭력사태 수습 안간힘…노란조끼 \"24일에도 시위\""
+          "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\""
         },
         {
-          "source": "khan",
-          "title": "민생 빠진 ‘네 탓 연설’…‘불’에 기름 부은 마크롱"
+          "source": "mk",
+          "title": "“15억 이상 주택은 대출금지한대” SNS 글에...이억원 “전혀 사실 아냐”"
         },
         {
           "source": "kmib",
-          "title": "마크롱 “폭력에 분노와 수치심 느껴”⋯ 정치권 “비겁한 권력” 좌우 없이 난타"
+          "title": "“15억 이상 주담대 전면 금지” 루머에 금융위 “전혀 사실 아냐”"
+        }
+      ]
+    },
+    {
+      "term": "아냐",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이억원 \"주담대 한도 추가 축소 사실 아냐…허위사실 수사의뢰\""
+        },
+        {
+          "source": "mk",
+          "title": "“15억 이상 주택은 대출금지한대” SNS 글에...이억원 “전혀 사실 아냐”"
+        },
+        {
+          "source": "kmib",
+          "title": "“15억 이상 주담대 전면 금지” 루머에 금융위 “전혀 사실 아냐”"
         }
       ]
     },
@@ -1595,289 +1890,25 @@
       "sources": [
         "yna",
         "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "중앙일보 인수 우협에 다우키움·CJ 컨소시엄 선정(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "중앙일보 인수 우선협상대상자에 ‘다우키움·CJ 컨소시엄’"
-        },
-        {
-          "source": "mk",
-          "title": "'다우키움·CJ 컨소시엄' 중앙일보 품는다"
-        }
-      ]
-    },
-    {
-      "term": "다우키움",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "중앙일보 인수 우협에 다우키움·CJ 컨소시엄 선정(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "중앙일보 인수 우선협상대상자에 ‘다우키움·CJ 컨소시엄’"
-        },
-        {
-          "source": "mk",
-          "title": "'다우키움·CJ 컨소시엄' 중앙일보 품는다"
-        }
-      ]
-    },
-    {
-      "term": "컨소시엄",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "중앙일보 인수 우협에 다우키움·CJ 컨소시엄 선정(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "중앙일보 인수 우선협상대상자에 ‘다우키움·CJ 컨소시엄’"
-        },
-        {
-          "source": "mk",
-          "title": "'다우키움·CJ 컨소시엄' 중앙일보 품는다"
-        }
-      ]
-    },
-    {
-      "term": "머스크",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
         "kmib"
       ],
       "examples": [
         {
           "source": "yna",
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\""
-        },
-        {
-          "source": "mk",
-          "title": "“美 모든 아이에 주식 1주씩”…머스크 약속, 105억달러 규모"
-        },
-        {
-          "source": "kmib",
-          "title": "머스크 “내년 美 모든 어린이에 스페이스X 1주 줄 것”"
-        }
-      ]
-    },
-    {
-      "term": "스페이스",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\""
+          "title": "[부고] 전익진(중앙일보 경인총국장)씨 모친상"
         },
         {
           "source": "khan",
-          "title": "“내년 미국 모든 어린이에게 스페이스X 주식 1주씩”···‘조만장자’ 머스크의 화끈한 플렉스"
+          "title": "범삼성가 ‘중앙일보 구하기’"
         },
         {
           "source": "kmib",
-          "title": "머스크 “내년 美 모든 어린이에 스페이스X 1주 줄 것”"
+          "title": "신세계, 중앙일보 인수전 참여⋯ 다우키움·CJ 컨소시엄에 투자"
         }
       ]
     },
     {
-      "term": "주씩",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "머스크 \"내년 미국 모든 어린이에 스페이스X 1주씩 줄 것\""
-        },
-        {
-          "source": "khan",
-          "title": "“내년 미국 모든 어린이에게 스페이스X 주식 1주씩”···‘조만장자’ 머스크의 화끈한 플렉스"
-        },
-        {
-          "source": "mk",
-          "title": "“美 모든 아이에 주식 1주씩”…머스크 약속, 105억달러 규모"
-        }
-      ]
-    },
-    {
-      "term": "다카이치",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "다카이치, 감세 재원 국채 발행 언급…\"엔화 신뢰 높일 것\"(종합)"
-        },
-        {
-          "source": "khan",
-          "title": "한국 “깊은 유감” 반발에도…반성 없는 다카이치, 야스쿠니에 또 공물"
-        },
-        {
-          "source": "kmib",
-          "title": "다카이치 출범 1년 지지율 ‘보합’⋯ ‘엔저·고물가’ ‘외교 문제’는 난제"
-        }
-      ]
-    },
-    {
-      "term": "한동훈",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "서울공소청장 \"한동훈 수사, 국민 눈높이에 안 맞는 부분 있다\"(종합2보)"
-        },
-        {
-          "source": "khan",
-          "title": "서울중앙공소청장 “한동훈 딸 수사 공조 요청 반려, 상당히 공감 어려워”"
-        },
-        {
-          "source": "kmib",
-          "title": "박철우 “李 공소취소 검토 안해⋯ 한동훈 딸 사건 처리 이례적”"
-        }
-      ]
-    },
-    {
-      "term": "수사",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "서울공소청장 \"한동훈 수사, 국민 눈높이에 안 맞는 부분 있다\"(종합2보)"
-        },
-        {
-          "source": "khan",
-          "title": "서울중앙공소청장 “한동훈 딸 수사 공조 요청 반려, 상당히 공감 어려워”"
-        },
-        {
-          "source": "kmib",
-          "title": "[사설] 국무회의 참석하면서 수사 독립성 지킬 수 있겠나"
-        }
-      ]
-    },
-    {
-      "term": "날씨",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[날씨] 내일도 전국 흐려…경기 남부·충청엔 비 소식"
-        },
-        {
-          "source": "khan",
-          "title": "[2026년 10월 20일 날씨]충청·남부에 ‘추위를 부르는 비’"
-        },
-        {
-          "source": "kmib",
-          "title": "오늘의 날씨 - 오전 (2026년 10월 20일)"
-        }
-      ]
-    },
-    {
-      "term": "건강",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "khan",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "법원, '통일교 정교유착' 한학자 총재 보석 허용…\"건강 고려\""
-        },
-        {
-          "source": "khan",
-          "title": "건강·생애주기 맞춘 삼성화재 보험 ‘더핏’"
-        },
-        {
-          "source": "kmib",
-          "title": "“나이보다 전신 건강 우선”⋯ 96세도 인공관절 수술 거뜬"
-        }
-      ]
-    },
-    {
-      "term": "의혹",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'대장동 항소포기 의혹' 박철우 \"중앙지검에 연락, 지시는 안해\""
-        },
-        {
-          "source": "mk",
-          "title": "‘통일교 정교유착 의혹’ 한학자 보석 허용…조건은 2억원·병원 거주"
-        },
-        {
-          "source": "kmib",
-          "title": "한강버스 의혹 난타전 된 서울시 국감⋯ 吳 “의심뿐인 공세”"
-        }
-      ]
-    },
-    {
-      "term": "소방이",
+      "term": "유럽",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1888,92 +1919,164 @@
       "examples": [
         {
           "source": "yna",
-          "title": "\"소방이 재정 쭉쭉\" 발언 부승찬에 김민석 경고…윤리심판원 조사"
+          "title": "외교부, 유럽 대규모 시위 확산에 재외국민 안전 점검"
         },
         {
           "source": "donga",
-          "title": "“소방이 재정 쭉쭉 빨아먹어”… 與 부승찬, 추미애 옹호 논란"
+          "title": "[횡설수설/우경임]유럽 청년 시위"
         },
         {
           "source": "khan",
-          "title": "추미애 ‘빨대’ 사과 뒤 부승찬 “소방이 재정 쭉쭉 빨아”"
+          "title": "[뉴스분석]“혼란은 이민자 탓” 본질 흐리는 극우…미·러 ‘프랑스 시위’ 유럽 극우와 같은 해석"
         }
       ]
     },
     {
-      "term": "필요한",
+      "term": "성장",
       "total": 3,
       "sourceCount": 3,
       "sources": [
         "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이소영 장관 \"국가 성장 프로젝트에 中企 참여 기회 확대\""
+        },
+        {
+          "source": "mk",
+          "title": "한국지역난방공사, 전남·광주지역 상생협력 본격화…지역 중소기업 성장 지원"
+        },
+        {
+          "source": "kmib",
+          "title": "“기술, 최빈국 성장 도와야⋯ ‘스몰 AI’ 보급 위해 한국과 협력”"
+        }
+      ]
+    },
+    {
+      "term": "참여",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "이소영 장관 \"국가 성장 프로젝트에 中企 참여 기회 확대\""
+        },
+        {
+          "source": "mk",
+          "title": "10대 피해자 의식 없어…인천 흉기난동 가해자 엄벌 서명에 1만5천명 참여"
+        },
+        {
+          "source": "kmib",
+          "title": "신세계, 중앙일보 인수전 참여⋯ 다우키움·CJ 컨소시엄에 투자"
+        }
+      ]
+    },
+    {
+      "term": "년까지",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "제이알리츠, \"2029년까지 다 갚겠다\"…채무 상환계획안 확정"
+        },
+        {
+          "source": "khan",
+          "title": "3기 신도시 찾은 이 대통령 “2030년까지 90% 착공해야”"
+        },
+        {
+          "source": "kmib",
+          "title": "李대통령 “3기 신도시 2030년까지 90% 착공”"
+        }
+      ]
+    },
+    {
+      "term": "연쇄방화",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "역삼 연쇄방화 70대, 특허등록증 온라인발행에 \"사기쳤다\" 앙심(종합2보)"
+        },
+        {
+          "source": "mk",
+          "title": "‘역삼 연쇄방화’ 70대 체포…4년 전, 같은 건물 방화 시도했다"
+        },
+        {
+          "source": "kmib",
+          "title": "‘역삼 연쇄방화’ 70대 “특허법인이 사기쳐⋯범행 3일 준비\""
+        }
+      ]
+    },
+    {
+      "term": "대사",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "yna",
+        "khan",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "강신철, 中대사 만나 \"한반도 긴장고조, 中이익에도 부합 안해\""
+        },
+        {
+          "source": "khan",
+          "title": "정부, 주우크라 대사 소환 이어…공관원 절반 철수 결정"
+        },
+        {
+          "source": "hani",
+          "title": "주우크라 대사 이어 공관원도 절반 철수…갈등 장기화하나"
+        }
+      ]
+    },
+    {
+      "term": "실증",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
         "khan",
         "mk"
       ],
       "examples": [
         {
-          "source": "yna",
-          "title": "李대통령 \"주식시장 조만간 필요한 조치…부동산 진폭 줄여야\""
+          "source": "donga",
+          "title": "현대차그룹 트럭 완전자율주행, 내년 도로서 실증 나선다"
         },
         {
           "source": "khan",
-          "title": "이 대통령 “한국 주식시장, 매우 저평가···조만간 필요한 조치”"
+          "title": "현대차·기아, ‘자율주행 4단계’ 대형트럭 운행 실증 추진"
         },
         {
           "source": "mk",
-          "title": "李대통령 \"韓증시 매우 저평가 … 필요한 정책 검토\""
+          "title": "“뒤에서 덮치는 졸음운전 트럭 없어지나요”…자율주행 내년 실증"
         }
       ]
     },
     {
-      "term": "부동산",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "yna",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "李대통령 \"주식시장 조만간 필요한 조치…부동산 진폭 줄여야\""
-        },
-        {
-          "source": "mk",
-          "title": "수도권 교통 호재에 대한 모든 것…매경플러스서 PDF 다운 받으세요 [부동산 손품노트]"
-        },
-        {
-          "source": "kmib",
-          "title": "李대통령 “부동산 투자 세금 없다시피⋯ 조세정의에 바람직하지 않아”"
-        }
-      ]
-    },
-    {
-      "term": "수도권",
-      "total": 3,
-      "sourceCount": 3,
-      "sources": [
-        "donga",
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "donga",
-          "title": "“내달 전월세값 더 뛸라” 수도권 아파트 입주 한달새 반토막"
-        },
-        {
-          "source": "mk",
-          "title": "수도권 교통 호재에 대한 모든 것…매경플러스서 PDF 다운 받으세요 [부동산 손품노트]"
-        },
-        {
-          "source": "kmib",
-          "title": "조희대에 추미애까지, 민주당 의원들 “수도권 쑥대밭 될 것”"
-        }
-      ]
-    },
-    {
-      "term": "지지율",
+      "term": "앞두고",
       "total": 3,
       "sourceCount": 3,
       "sources": [
@@ -1984,15 +2087,111 @@
       "examples": [
         {
           "source": "donga",
-          "title": "트럼프 지지율 33% ‘최저’… 중간선거 2주앞 상하원 모두 빨간불"
+          "title": "김장철 앞두고 배추값 소폭 내려"
         },
         {
           "source": "khan",
-          "title": "치솟는 물가에…트럼프 지지율 33% ‘최저치’, 52%는 ‘강력 반대’"
+          "title": "비대면진료 제도화 두 달 앞두고…“규제 과도” “안전 강화” 격론"
         },
         {
           "source": "kmib",
-          "title": "다카이치 출범 1년 지지율 ‘보합’⋯ ‘엔저·고물가’ ‘외교 문제’는 난제"
+          "title": "선전 APEC 앞두고 한·중 전략대화⋯ “북·미 대화 서둘러야”"
+        }
+      ]
+    },
+    {
+      "term": "월세",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "서울 아파트 월세 비중 50% 처음 돌파… 전세 거래 27% 줄어 주거비 부담 커져"
+        },
+        {
+          "source": "khan",
+          "title": "서울 아파트 월세 비중 50% 넘었다"
+        },
+        {
+          "source": "kmib",
+          "title": "‘전세의 월세화’…서울 아파트 월세 비중 50% 첫 돌파"
+        }
+      ]
+    },
+    {
+      "term": "유도무기",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "두산에너빌-LIG D&A, 유도무기 엔진 개발 맞손"
+        },
+        {
+          "source": "khan",
+          "title": "두산에너빌리티·LIG D A, 유도무기 엔진 개발 협력 MOU 체결"
+        },
+        {
+          "source": "kmib",
+          "title": "두산·LIG, 차세대 유도무기 국산화 맞손"
+        }
+      ]
+    },
+    {
+      "term": "승계",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "mk",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "세라젬 창업주, 전문경영인 양자 삼아 승계"
+        },
+        {
+          "source": "mk",
+          "title": "20년 동고동락한 직원 양자로 삼은 회장님…세라젬의 파격 지분 승계"
+        },
+        {
+          "source": "kmib",
+          "title": "20여년 직원을 입양 후계자로⋯세라젬의 파격 ‘양자 승계’"
+        }
+      ]
+    },
+    {
+      "term": "보는",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "donga",
+        "khan",
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "[지표로 보는 경제]10월 21일"
+        },
+        {
+          "source": "khan",
+          "title": "[뉴스 분석]청년 분노 눈감고 폭력만 보는 정치…격화되는 프랑스 시위"
+        },
+        {
+          "source": "kmib",
+          "title": "결국 李 대통령 방탄? 국힘이 보는 ‘曺탄핵’ 민주당 속내"
         }
       ]
     },
@@ -2001,27 +2200,194 @@
       "total": 3,
       "sourceCount": 3,
       "sources": [
-        "khan",
-        "mk",
-        "kmib"
+        "donga",
+        "kmib",
+        "hani"
       ],
       "examples": [
         {
-          "source": "khan",
-          "title": "여 ‘메가특구법’ 오늘 발의…‘52시간 특례’ 포함 전망"
-        },
-        {
-          "source": "mk",
-          "title": "남편이 집안일 많이 한다고는 하는데…아내와 격차, 아직도 ‘1시간 43분’"
+          "source": "donga",
+          "title": "[사설]與 ‘주 52시간 특례’ 찬반 법안 각각 발의… 왜 이리 무책임한가"
         },
         {
           "source": "kmib",
-          "title": "10년새 남편 가사·돌봄 참여 늘었지만 ‘有자녀’ 맞벌이 아내 1시간43분 더 한다"
+          "title": "희한한 메가특구 법안⋯ 與, ‘52시간 특례’ 포함·제외 동시 발의"
+        },
+        {
+          "source": "hani",
+          "title": "사회적 대화 한창인데…민주 ‘주52시간 예외’ 초광역특구법 발의"
         }
       ]
     },
     {
-      "term": "후티",
+      "term": "강화",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "khan",
+        "mk",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "khan",
+          "title": "비대면진료 제도화 두 달 앞두고…“규제 과도” “안전 강화” 격론"
+        },
+        {
+          "source": "mk",
+          "title": "국민연금, 자사주 보유·처분 의결권 기준 강화"
+        },
+        {
+          "source": "hani",
+          "title": "프랑스 이어 이탈리아도 시위 격화…군 배치하고 청소년 체포도 강화"
+        }
+      ]
+    },
+    {
+      "term": "입찰",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "LIG D&A, 방사청 입찰 2년간 막힌다…4억대 뇌물에 최고 수위 제재"
+        },
+        {
+          "source": "kmib",
+          "title": "LIG D A 4억대 뇌물 혐의, ‘방사청 입찰 2년 제한’ 철퇴"
+        },
+        {
+          "source": "hani",
+          "title": "방사청, LIG D&A에 ‘입찰 참가 제한 2년’ 최고 수준 재제 처분"
+        }
+      ]
+    },
+    {
+      "term": "통보",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "경찰 '금융기관 해킹' 중수청에 통보"
+        },
+        {
+          "source": "kmib",
+          "title": "경찰, 금융권 해킹 ‘중대범죄’ 판단⋯ “중수청 통보 예정”"
+        },
+        {
+          "source": "hani",
+          "title": "경찰 ‘금융기관 해킹’ 사건 중수청 통보…전자금융거래법 위반 추가 인지"
+        }
+      ]
+    },
+    {
+      "term": "건물",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "‘역삼 연쇄방화’ 70대 체포…4년 전, 같은 건물 방화 시도했다"
+        },
+        {
+          "source": "kmib",
+          "title": "역삼동 잇따라 불지른 70대 검거⋯ 4년 전 같은 건물 방화 시도‘실형’"
+        },
+        {
+          "source": "hani",
+          "title": "4년 전 ‘휘발유 난동’ 구속에도 같은 건물 또 불내…‘특허 앙심’ 70대 체포"
+        }
+      ]
+    },
+    {
+      "term": "특허법인이",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "[속보] 역삼방화 70대, 범행 동기 묻자 “특허법인이 사기쳐” 주장"
+        },
+        {
+          "source": "kmib",
+          "title": "‘역삼 연쇄방화’ 70대 “특허법인이 사기쳐⋯범행 3일 준비\""
+        },
+        {
+          "source": "hani",
+          "title": "‘강남 연쇄 방화’ 70대 “3일 전부터 준비…특허법인이 사기 쳐서” 주장"
+        }
+      ]
+    },
+    {
+      "term": "주장",
+      "total": 3,
+      "sourceCount": 3,
+      "sources": [
+        "mk",
+        "kmib",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "mk",
+          "title": "[속보] 역삼방화 70대, 범행 동기 묻자 “특허법인이 사기쳐” 주장"
+        },
+        {
+          "source": "kmib",
+          "title": "[사설] 북한의 적반하장식 주장⋯ 도발 시 단호하게 대응해야"
+        },
+        {
+          "source": "hani",
+          "title": "‘강남 연쇄 방화’ 70대 “3일 전부터 준비…특허법인이 사기 쳐서” 주장"
+        }
+      ]
+    },
+    {
+      "term": "장애인",
+      "total": 7,
+      "sourceCount": 2,
+      "sources": [
+        "yna",
+        "hani"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "장민호 아시아新·탁구 금 6개…한국, 장애인AG 하루 금메달 9개"
+        },
+        {
+          "source": "yna",
+          "title": "탁구 김기태, 장애인AG 통산 6번째 금메달…첫 3관왕 도전"
+        },
+        {
+          "source": "yna",
+          "title": "탁구 박진철, 김경현 3-0 꺾고 장애인AG 단식 3연패 달성"
+        }
+      ]
+    },
+    {
+      "term": "관왕",
       "total": 6,
       "sourceCount": 2,
       "sources": [
@@ -2031,182 +2397,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "국제유가, 러시아 제재 완화·후티 반군 석유시설 공격에 혼조"
+          "title": "탁구 김기태, 장애인AG 통산 6번째 금메달…첫 3관왕 도전"
         },
         {
           "source": "yna",
-          "title": "후티 공세에 결국…사우디 '사막의 다보스' 내년으로 전격 연기"
+          "title": "사이클 박현미·김채연, 장애인AG 2관왕…0.095초 차 역전 우승"
         },
         {
           "source": "yna",
-          "title": "후티 반군 \"사우디 아람코·리야드 공항 등 6곳 대규모 타격\""
+          "title": "[전국체전] 수영 한다경, 여자 자유형 400ｍ 한국신…황선우는 6관왕 무산(종합)"
         }
       ]
     },
     {
-      "term": "사우디",
+      "term": "잠실",
       "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'오픈AI 도청' 사우디 국적 직원에 왕가·군부 지원 정황"
-        },
-        {
-          "source": "yna",
-          "title": "후티 공세에 결국…사우디 '사막의 다보스' 내년으로 전격 연기"
-        },
-        {
-          "source": "yna",
-          "title": "후티 반군 \"사우디 아람코·리야드 공항 등 6곳 대규모 타격\""
-        }
-      ]
-    },
-    {
-      "term": "투자",
-      "total": 5,
-      "sourceCount": 2,
-      "sources": [
-        "mk",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "mk",
-          "title": "불확실성 시대 당신의 투자 전략은 [김승호의 투자전망] 2부"
-        },
-        {
-          "source": "mk",
-          "title": "삼정KPMG, 11월 2일 ‘해외 투자 진출 세미나’"
-        },
-        {
-          "source": "kmib",
-          "title": "선박금융·보험·투자 한곳에⋯ 부산 해양금융 기반 확대"
-        }
-      ]
-    },
-    {
-      "term": "소방",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "\"소방 처우 개선·장비 보완, 국가 차원 대책\""
-        },
-        {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "kmib",
-          "title": "‘재정 빨대’ 논란 소방 예산, 국가직 전환에도 여전히 지자체 부담"
-        }
-      ]
-    },
-    {
-      "term": "중간선거",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "美중간선거 'AI 광고' 봇물…1천800억원 투입해 네거티브전"
-        },
-        {
-          "source": "yna",
-          "title": "\"헤그세스는 재앙\"…중간선거 후 해임 노리는 美민주당"
-        },
-        {
-          "source": "yna",
-          "title": "트럼프·공화당, 중간선거 패색 먹구름에 벌써 '네탓' 내홍"
-        }
-      ]
-    },
-    {
-      "term": "내달",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
-        },
-        {
-          "source": "yna",
-          "title": "[가요소식] 있지 채령, 데뷔 7년 만에 내달 솔로 데뷔"
-        }
-      ]
-    },
-    {
-      "term": "민주당",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "kmib"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"헤그세스는 재앙\"…중간선거 후 해임 노리는 美민주당"
-        },
-        {
-          "source": "yna",
-          "title": "민주당 의회 장악 대비?…트럼프 참모들 변호사 선임 경쟁"
-        },
-        {
-          "source": "kmib",
-          "title": "조국당, 조희대 탄핵 압박… 민주당 “김건희 석방이 데드라인”"
-        }
-      ]
-    },
-    {
-      "term": "네타냐후",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"트럼프의 지지 선언, 네타냐후 지지율에 별 영향 없어\""
-        },
-        {
-          "source": "yna",
-          "title": "네타냐후, 총선 지지 트럼프와 통화…이란 언급하며 \"할일 남아\""
-        },
-        {
-          "source": "yna",
-          "title": "총선 앞 공군기지 찾은 네타냐후 \"우리를 시험하지 말라\""
-        }
-      ]
-    },
-    {
-      "term": "결국",
-      "total": 4,
       "sourceCount": 2,
       "sources": [
         "yna",
@@ -2215,67 +2420,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "후티 공세에 결국…사우디 '사막의 다보스' 내년으로 전격 연기"
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
         },
         {
           "source": "yna",
-          "title": "日 '부부 다른 성' 결국 무산?…\"행정서류만 결혼전 성씨 기재 추진\""
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
         },
         {
           "source": "yna",
-          "title": "18년 끌어온 대전역세권 개발 무산되나…한화 결국 포기"
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
         }
       ]
     },
     {
-      "term": "인사",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[인사] 산업통상부"
-        },
-        {
-          "source": "yna",
-          "title": "지역난방공사 사장 인선 공방…\"낙하산 인사\"·\"망신주기 그만\""
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 태권도 송다빈, 3연패 뒤 특별한 감사 인사 \"모든 게 오빠 덕분\""
-        }
-      ]
-    },
-    {
-      "term": "확성기방송",
-      "total": 4,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\"(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        },
-        {
-          "source": "yna",
-          "title": "[속보] 北김여정 \"남부국경 매우 불안정…대남 확성기방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "개최",
-      "total": 4,
+      "term": "뇌물",
+      "total": 5,
       "sourceCount": 2,
       "sources": [
         "yna",
@@ -2284,90 +2443,44 @@
       "examples": [
         {
           "source": "yna",
-          "title": "경북도교육청, 오는 24일 울릉도서 독도교육원 착공식 개최"
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재(종합)"
         },
         {
-          "source": "kmib",
-          "title": "중기중앙회, 제주서 ‘리더스포럼’ 개최"
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재"
         },
         {
-          "source": "kmib",
-          "title": "키움 DRX, 키움증권배 ‘철권 스타즈컵’ 개최"
+          "source": "yna",
+          "title": "[속보] 방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 제재"
         }
       ]
     },
     {
-      "term": "응급환자",
-      "total": 3,
+      "term": "점검",
+      "total": 4,
       "sourceCount": 2,
       "sources": [
         "sbs",
-        "donga"
+        "yna"
       ],
       "examples": [
         {
           "source": "sbs",
-          "title": "조문 가서 '응급환자 전용' 주차…논란 커지자"
+          "title": "한성숙 총리 \"정부 평가 기준은 국민 체감…자화자찬 아닌지 점검\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
+          "title": "외교부, 일본 대규모 지진 대비 모의 훈련…재외국민 보호 점검"
         },
         {
-          "source": "donga",
-          "title": "소방관 조문 김민석 차량, ‘응급환자 구역’ 주차 논란"
+          "source": "yna",
+          "title": "외교부, 유럽 대규모 시위 확산에 재외국민 안전 점검"
         }
       ]
     },
     {
-      "term": "안전",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "khan"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "이 대통령 \"국가가 책임지고 소방관 안전 지켜야…지원 강화\""
-        },
-        {
-          "source": "khan",
-          "title": "안전 실종된 죽음의 사업장 ‘대불산단’…2년 새 집으로 못 돌아간 노동자 15명"
-        },
-        {
-          "source": "khan",
-          "title": "핼러윈 기간 이태원 안전 관리 강화"
-        }
-      ]
-    },
-    {
-      "term": "필요",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "sbs",
-        "mk"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "[인터뷰] 박찬대 \"추미애, '소방 빨대' 발언 유감…농지 조사, 국민 수용성 높이는 쪽으로 정책 조정 필요\""
-        },
-        {
-          "source": "sbs",
-          "title": "김혜경 \"아이 키우는 데에 이젠 온 나라가 필요\"…권역모자의료센터 방문"
-        },
-        {
-          "source": "mk",
-          "title": "“월급 이체도 카드 실적도 필요 없다”…1억원까지 연 3.3% 주는 통장"
-        }
-      ]
-    },
-    {
-      "term": "김혜경",
-      "total": 3,
+      "term": "추미애",
+      "total": 4,
       "sourceCount": 2,
       "sources": [
         "sbs",
@@ -2376,115 +2489,23 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김혜경 \"아이 키우는 데에 이젠 온 나라가 필요\"…권역모자의료센터 방문"
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
         },
         {
           "source": "sbs",
-          "title": "김혜경 여사, IKAA 입양 동포 행사 참석…역대 영부인 중 처음"
+          "title": "[성민종합정치] 추미애 두둔하며 \"쭉쭉\" 민주 투톱 또 사과…허민 \"부승찬, 정치적 의도 의심\""
         },
         {
           "source": "kmib",
-          "title": "‘현장 내조’ 보폭 넓히는 김혜경 여사⋯ 문화·소수자·복지까지"
-        }
-      ]
-    },
-    {
-      "term": "반군",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "국제유가, 러시아 제재 완화·후티 반군 석유시설 공격에 혼조"
-        },
-        {
-          "source": "yna",
-          "title": "후티 반군 \"사우디 아람코·리야드 공항 등 6곳 대규모 타격\""
-        },
-        {
-          "source": "donga",
-          "title": "후티 반군 “사우디 석유시설·공항·군기지 등 6곳 공격”"
-        }
-      ]
-    },
-    {
-      "term": "공항",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"인천공항 비항공수익 66.6%…세계 주요 공항 대비 높아\""
-        },
-        {
-          "source": "yna",
-          "title": "후티 반군 \"사우디 아람코·리야드 공항 등 6곳 대규모 타격\""
-        },
-        {
-          "source": "donga",
-          "title": "후티 반군 “사우디 석유시설·공항·군기지 등 6곳 공격”"
-        }
-      ]
-    },
-    {
-      "term": "공격",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종"
-        },
-        {
-          "source": "donga",
-          "title": "후티 반군 “사우디 석유시설·공항·군기지 등 6곳 공격”"
-        }
-      ]
-    },
-    {
-      "term": "없어",
-      "total": 3,
-      "sourceCount": 2,
-      "sources": [
-        "yna",
-        "donga"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "\"트럼프의 지지 선언, 네타냐후 지지율에 별 영향 없어\""
-        },
-        {
-          "source": "yna",
-          "title": "박철우 서울공소청장 \"미래위 조사단, 불법이라 볼 수 없어\"(종합)"
-        },
-        {
-          "source": "donga",
-          "title": "서울-수원공소청장 “李 공소취소 검토-협의한 적 없어”"
+          "title": "[한마당-주민소환] 추미애, 진보·보수를 뭉치게 하다"
         }
       ]
     }
   ],
   "singleSourceTop": [
     {
-      "term": "여담야담",
-      "total": 4,
+      "term": "성민종합정치",
+      "total": 6,
       "sourceCount": 1,
       "sources": [
         "sbs"
@@ -2492,175 +2513,21 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[여담야담] 김민석 \"국무회의 공개는 불가역적\"…장성철 \"지금처럼 공개하는 게 맞아\" 의외의 찬성"
+          "title": "[성민종합정치] \"SNS는 목숨줄\"…성한용, 이 대통령 성남시장 시절 SNS 사고 방지 시스템 전격 공개"
         },
         {
           "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
+          "title": "[성민종합정치] 배수구 청소 자체 홍보 '설왕설래'…허민 \"막장 국회만 보다가 찡, 쇼라도 좋아\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 서용주 \"추, 골치 아픈 민주당의 '빨대' 돼버려\" 장성철 \"사과 진정성 안 느껴져\""
-        }
-      ]
-    },
-    {
-      "term": "금빛",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "서훈태 첫 금빛 총성…한국, 장애인AG 첫날 금메달 3개 수확"
-        },
-        {
-          "source": "yna",
-          "title": "'항저우 3관왕' 사이클 김정빈·윤중헌, 대회신기록…금빛 출발"
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 6관왕 도전 황선우, 연이틀 '금빛 물살'…육상 조엘진도 2관왕(종합)"
-        }
-      ]
-    },
-    {
-      "term": "관왕",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "'항저우 3관왕' 사이클 김정빈·윤중헌, 대회신기록…금빛 출발"
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 2관왕 오른 황선우 \"20일 6관왕 도전 고비…온 힘 기울일 것\""
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 6관왕 도전 황선우, 연이틀 '금빛 물살'…육상 조엘진도 2관왕(종합)"
-        }
-      ]
-    },
-    {
-      "term": "전국체전",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "[전국체전] 2관왕 오른 황선우 \"20일 6관왕 도전 고비…온 힘 기울일 것\""
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 6관왕 도전 황선우, 연이틀 '금빛 물살'…육상 조엘진도 2관왕(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "[전국체전] 수영 황선우, 이틀 연속 금빛 물살…6관왕 향해 전진"
-        }
-      ]
-    },
-    {
-      "term": "공방",
-      "total": 4,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "행안위 이어 국토위서도 추미애 '관사·관용차' 공방"
-        },
-        {
-          "source": "yna",
-          "title": "지역난방공사 사장 인선 공방…\"낙하산 인사\"·\"망신주기 그만\""
-        },
-        {
-          "source": "yna",
-          "title": "여야, 공소청 첫 국감서 공방…\"반쪽 검사\"·\"국민적 요구\"(종합)"
-        }
-      ]
-    },
-    {
-      "term": "국경",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "sbs"
-      ],
-      "examples": [
-        {
-          "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
-        },
-        {
-          "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌한 국면, 대한국 확성기 방송 재개 검토\""
-        }
-      ]
-    },
-    {
-      "term": "혼조",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "뉴욕증시, 반도체·AI주 반등 속 혼조…나스닥 1.11%↑"
-        },
-        {
-          "source": "yna",
-          "title": "국제유가, 러시아 제재 완화·후티 반군 석유시설 공격에 혼조"
-        },
-        {
-          "source": "yna",
-          "title": "뉴욕증시, 기술주 저가 매수에  혼조 출발"
-        }
-      ]
-    },
-    {
-      "term": "국회",
-      "total": 3,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "국회, 법사위 등 12개 국감…대미투자·국군사관학교 등 쟁점"
-        },
-        {
-          "source": "yna",
-          "title": "경찰, 아동학대 혐의 국회 어린이집 교사 2명·원장 송치"
-        },
-        {
-          "source": "yna",
-          "title": "\"연임 자격 있나\" 국회 질타에 고개 숙인 은행장들(종합2보)"
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
         }
       ]
     },
     {
       "term": "이란",
-      "total": 3,
+      "total": 6,
       "sourceCount": 1,
       "sources": [
         "yna"
@@ -2668,21 +2535,21 @@
       "examples": [
         {
           "source": "yna",
-          "title": "네타냐후, 총선 지지 트럼프와 통화…이란 언급하며 \"할일 남아\""
+          "title": "이란 안보수장 \"핵물질 한줌도 못내줘…요구조건 이행해야 협상\""
         },
         {
           "source": "yna",
-          "title": "전쟁중 이란·러 외무장관 회담…양국 공조 강조(종합)"
+          "title": "네타냐후 \"이란 정권은 독 품은 문어 머리…제거 최우선 과제\""
         },
         {
           "source": "yna",
-          "title": "이란 간 러시아 외무장관…양국 안보 공조"
+          "title": "이란 외무 \"러시아-이란, 역사상 지금처럼 긴밀했던 적 없어\""
         }
       ]
     },
     {
-      "term": "의회",
-      "total": 3,
+      "term": "여성",
+      "total": 4,
       "sourceCount": 1,
       "sources": [
         "yna"
@@ -2690,20 +2557,218 @@
       "examples": [
         {
           "source": "yna",
-          "title": "민주당 의회 장악 대비?…트럼프 참모들 변호사 선임 경쟁"
+          "title": "나이지리아서도 에볼라 확진…우간다서 입국한 여성"
         },
         {
           "source": "yna",
-          "title": "이집트 의회, '사우디 군사 지원' 승인 논의 내주로 연기"
+          "title": "남아공 해변서 수영하던 여성, 상어에 물려 사망"
         },
         {
           "source": "yna",
-          "title": "美의회 \"우크라에 정보 제한시 의회통지…한일과 정보협력 강화\""
+          "title": "모로코 첫 여성 총리 \"5% 경제성장, 2% 인플레 목표\""
         }
       ]
     },
     {
-      "term": "장애인",
+      "term": "국힘",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
+        },
+        {
+          "source": "sbs",
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
+        },
+        {
+          "source": "sbs",
+          "title": "국힘 김태규 \"검수원복이 맞다…우리 당 집권만 기다려 달라\""
+        }
+      ]
+    },
+    {
+      "term": "우크라이나",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        }
+      ]
+    },
+    {
+      "term": "전향적",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        }
+      ]
+    },
+    {
+      "term": "조치",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        },
+        {
+          "source": "sbs",
+          "title": "정부, 우크라이나 공관원 절반 철수 결정…\"전향적 조치 없다고 판단\""
+        },
+        {
+          "source": "sbs",
+          "title": "우크라이나 공관원 절반 철수…\"전향적 조치 없어\""
+        }
+      ]
+    },
+    {
+      "term": "부동산",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"3기 신도시 공급에 부동산 성패…속도 무엇보다 중요\""
+        }
+      ]
+    },
+    {
+      "term": "성패",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "sbs",
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
+        },
+        {
+          "source": "sbs",
+          "title": "이 대통령 \"3기 신도시 공급에 부동산 성패…속도 무엇보다 중요\""
+        }
+      ]
+    },
+    {
+      "term": "성한용",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] \"SNS는 목숨줄\"…성한용, 이 대통령 성남시장 시절 SNS 사고 방지 시스템 전격 공개"
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 성한용 \"민감한 현안, 격렬한 토론 필요한 건 비공개하면 더 효율적\""
+        }
+      ]
+    },
+    {
+      "term": "허민",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 배수구 청소 자체 홍보 '설왕설래'…허민 \"막장 국회만 보다가 찡, 쇼라도 좋아\""
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 추미애 두둔하며 \"쭉쭉\" 민주 투톱 또 사과…허민 \"부승찬, 정치적 의도 의심\""
+        }
+      ]
+    },
+    {
+      "term": "부승찬",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "sbs"
+      ],
+      "examples": [
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
+        },
+        {
+          "source": "sbs",
+          "title": "[성민종합정치] 추미애 두둔하며 \"쭉쭉\" 민주 투톱 또 사과…허민 \"부승찬, 정치적 의도 의심\""
+        },
+        {
+          "source": "sbs",
+          "title": "[자막뉴스] '소방이 재정 쭉쭉' 부승찬, 민주당 \"직권 조사!\" 불호령에 \"진심으로 사과드린다\""
+        }
+      ]
+    },
+    {
+      "term": "탁구",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2712,15 +2777,15 @@
       "examples": [
         {
           "source": "yna",
-          "title": "서훈태 첫 금빛 총성…한국, 장애인AG 첫날 금메달 3개 수확"
+          "title": "장민호 아시아新·탁구 금 6개…한국, 장애인AG 하루 금메달 9개"
         },
         {
           "source": "yna",
-          "title": "자전거 사고로 시력 잃은 박현미, 장애인 AG 사이클서 금메달"
+          "title": "탁구 김기태, 장애인AG 통산 6번째 금메달…첫 3관왕 도전"
         },
         {
           "source": "yna",
-          "title": "최휘영 장관, 장애인AG 북한 탁구 선수 승리에 박수 보내"
+          "title": "탁구 박진철, 김경현 3-0 꺾고 장애인AG 단식 3연패 달성"
         }
       ]
     },
@@ -2734,20 +2799,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "서훈태 첫 금빛 총성…한국, 장애인AG 첫날 금메달 3개 수확"
+          "title": "장민호 아시아新·탁구 금 6개…한국, 장애인AG 하루 금메달 9개"
         },
         {
           "source": "yna",
-          "title": "자전거 사고로 시력 잃은 박현미, 장애인 AG 사이클서 금메달"
+          "title": "탁구 김기태, 장애인AG 통산 6번째 금메달…첫 3관왕 도전"
         },
         {
           "source": "yna",
-          "title": "'한국 첫 금메달' 사격 서훈태 \"금메달 두 번 딴 것처럼 기뻐\""
+          "title": "육상 장민호, 장애인AG 100ｍ 금메달…10초48 아시아신기록"
         }
       ]
     },
     {
-      "term": "추진",
+      "term": "꺾고",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2756,20 +2821,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "日 '부부 다른 성' 결국 무산?…\"행정서류만 결혼전 성씨 기재 추진\""
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
         },
         {
           "source": "yna",
-          "title": "폭스바겐, 2030년까지 임금동결 추진…노조 반발"
+          "title": "탁구 박진철, 김경현 3-0 꺾고 장애인AG 단식 3연패 달성"
         },
         {
           "source": "yna",
-          "title": "추미애 \"경기국제공항 유치 계속 추진…용역 재개\""
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출"
         }
       ]
     },
     {
-      "term": "승리",
+      "term": "원가부정에",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2778,15 +2843,37 @@
       "examples": [
         {
           "source": "yna",
-          "title": "현대캐피탈·한전·대한항공, KOVO 컵대회 남자부 첫판 승리(종합2보)"
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재(종합)"
         },
         {
           "source": "yna",
-          "title": "필리핀, \"무력 쓰면 쉽게 승리\" 발언한 中대사 초치해 항의"
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재"
         },
         {
           "source": "yna",
-          "title": "2년 만에 KOVO 컵대회 돌아온 현대캐피탈, OK에 3-2 승리(종합)"
+          "title": "[속보] 방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 제재"
+        }
+      ]
+    },
+    {
+      "term": "입찰참가",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "yna"
+      ],
+      "examples": [
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재(종합)"
+        },
+        {
+          "source": "yna",
+          "title": "방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 강력제재"
+        },
+        {
+          "source": "yna",
+          "title": "[속보] 방사청, LIG D&A 뇌물·원가부정에 입찰참가 제한 2년 제재"
         }
       ]
     },
@@ -2800,20 +2887,20 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[프로농구 중간순위] 19일"
+          "title": "[프로농구 중간순위] 20일"
         },
         {
           "source": "yna",
-          "title": "프로농구 DB, 가스공사 4연승 막고 연패 탈출…이용우 3점포 5방"
+          "title": "프로농구 SK, 정관장 연승 저지하고 시즌 첫 승…안영준 21점"
         },
         {
           "source": "yna",
-          "title": "[프로농구 원주전적] DB 104-78 한국가스공사"
+          "title": "[프로농구 서울전적] SK 84-76 정관장"
         }
       ]
     },
     {
-      "term": "황선우",
+      "term": "전국체전",
       "total": 3,
       "sourceCount": 1,
       "sources": [
@@ -2822,15 +2909,37 @@
       "examples": [
         {
           "source": "yna",
-          "title": "[전국체전] 2관왕 오른 황선우 \"20일 6관왕 도전 고비…온 힘 기울일 것\""
+          "title": "[전국체전] 수영 한다경, 여자 자유형 400ｍ 한국신…황선우는 6관왕 무산(종합)"
         },
         {
           "source": "yna",
-          "title": "[전국체전] 6관왕 도전 황선우, 연이틀 '금빛 물살'…육상 조엘진도 2관왕(종합)"
+          "title": "[전국체전] 6관왕 무산된 황선우 \"아쉽지만, 많은 것 배웠다…더 훈련할 것\""
         },
         {
           "source": "yna",
-          "title": "[전국체전] 수영 황선우, 이틀 연속 금빛 물살…6관왕 향해 전진"
+          "title": "[전국체전] 수영 황선우, 6관왕 무산…개인혼영 200ｍ 실격"
+        }
+      ]
+    },
+    {
+      "term": "중동",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "donga"
+      ],
+      "examples": [
+        {
+          "source": "donga",
+          "title": "중동 불안에 유가 급등… WTI 103달러 넘어서"
+        },
+        {
+          "source": "donga",
+          "title": "“탱크 16개 분량이 2주면 동나”… 중동 빈자리 채우는 K윤활기유"
+        },
+        {
+          "source": "donga",
+          "title": "이노션, 美 - 중동 광고제서 7관왕"
         }
       ]
     },
@@ -2844,20 +2953,64 @@
       "examples": [
         {
           "source": "khan",
-          "title": "[포토뉴스]한복, 바르게 입고 나빌레라"
+          "title": "[포토뉴스]벌목 들어간 용인 반도체 산단 부지…환경단체들 “조기 공사 중단”"
         },
         {
           "source": "khan",
-          "title": "[포토뉴스]수익금은 연말 취약계층 ‘사랑의 선물’이 된다"
+          "title": "[포토뉴스]“주거지역 데이터센터 10개 난립 중단하라”"
         },
         {
           "source": "khan",
-          "title": "[포토뉴스]해방촌에서 선보이는 ‘코카콜라와 즐기기 좋은 메뉴’"
+          "title": "[포토뉴스]“여기가 왕과 왕비의 공간”"
         }
       ]
     },
     {
-      "term": "대한민국은",
+      "term": "커뮤니티",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "kmib",
+          "title": "‘더 커뮤니티2’ 흥행, 치밀한 수싸움·심리전 통했다"
+        },
+        {
+          "source": "kmib",
+          "title": "‘더 커뮤니티2’ 우승자 박세승 “승패보다 중요한 건 서로를 이해하는 것”"
+        },
+        {
+          "source": "kmib",
+          "title": "‘더 커뮤니티2’ 흥행…치밀한 수싸움과 반전 통했다"
+        }
+      ]
+    },
+    {
+      "term": "부산",
+      "total": 3,
+      "sourceCount": 1,
+      "sources": [
+        "kmib"
+      ],
+      "examples": [
+        {
+          "source": "kmib",
+          "title": "부산은행, 부산 대표 축제 7개에 후원금 2억원"
+        },
+        {
+          "source": "kmib",
+          "title": "부산, 익스피디아 ‘2027 올해의 여행지’…국내 유일 선정"
+        },
+        {
+          "source": "kmib",
+          "title": "부산 기술기업에 최대 100억원 투자…한·튀르키예 투자사 맞손"
+        }
+      ]
+    },
+    {
+      "term": "청와대",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2866,16 +3019,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         },
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         }
       ]
     },
     {
-      "term": "남쪽",
+      "term": "수사부터",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2884,16 +3037,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         },
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "중수청장 첫 국무회의…국힘 \"청와대·여당 수사부터\""
         }
       ]
     },
     {
-      "term": "철책선부터",
+      "term": "정책",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2902,16 +3055,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         },
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         }
       ]
     },
     {
-      "term": "동의",
+      "term": "좌우",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2920,16 +3073,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         },
         {
           "source": "sbs",
-          "title": "\"대한민국은 남쪽 철책선부터\"…\"동의 못 해\""
+          "title": "\"3기 신도시 공급, 부동산 정책 성패 좌우\""
         }
       ]
     },
     {
-      "term": "살벌",
+      "term": "실질적",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2938,16 +3091,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "김여정 \"남부 국경 살벌…대남 확성기 재개 검토\""
+          "title": "이 대통령 \"신청이 왜 필요하나…실질적 불평등 야기\""
         },
         {
           "source": "sbs",
-          "title": "북 김여정 \"남부 국경 살벌…확성기 재개 검토\""
+          "title": "이 대통령, 청년 대상 연금 지원사업에 \"신청제는 실질적 불평등\""
         }
       ]
     },
     {
-      "term": "민주",
+      "term": "불평등",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2956,16 +3109,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "'조희대 탄핵안' 동참 촉구…민주 \"여론 보겠다\""
+          "title": "이 대통령 \"신청이 왜 필요하나…실질적 불평등 야기\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] '응급환자 구역 주차·공연 강제 중단'에 민주, 사과 또 사과…주영진 \"일거수일투족, 국민 모두가 지켜보고 있어\""
+          "title": "이 대통령, 청년 대상 연금 지원사업에 \"신청제는 실질적 불평등\""
         }
       ]
     },
     {
-      "term": "장성철",
+      "term": "징계",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2974,16 +3127,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[여담야담] 김민석 \"국무회의 공개는 불가역적\"…장성철 \"지금처럼 공개하는 게 맞아\" 의외의 찬성"
+          "title": "[단독] 실탄 2만 발 유출에 '경징계'…심지어 셀프 징계?"
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 서용주 \"추, 골치 아픈 민주당의 '빨대' 돼버려\" 장성철 \"사과 진정성 안 느껴져\""
+          "title": "[성민종합정치] 허민 \"추미애·부승찬 징계 못할 것\" 성한용 \"민심에 밀려 징계할 것\""
         }
       ]
     },
     {
-      "term": "서용주",
+      "term": "쭉쭉",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -2992,16 +3145,16 @@
       "examples": [
         {
           "source": "sbs",
-          "title": "[여담야담] 서용주 \"추, 골치 아픈 민주당의 '빨대' 돼버려\" 장성철 \"사과 진정성 안 느껴져\""
+          "title": "[성민종합정치] 추미애 두둔하며 \"쭉쭉\" 민주 투톱 또 사과…허민 \"부승찬, 정치적 의도 의심\""
         },
         {
           "source": "sbs",
-          "title": "[여담야담] 추미애 '재정 빨대·사과 바라시니' 재차 사과…서용주 \"등 돌린 건 소방관 아닌 민심\""
+          "title": "[자막뉴스] '소방이 재정 쭉쭉' 부승찬, 민주당 \"직권 조사!\" 불호령에 \"진심으로 사과드린다\""
         }
       ]
     },
     {
-      "term": "뉴욕증시",
+      "term": "젤렌스키",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3010,16 +3163,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "뉴욕증시, 반도체·AI주 반등 속 혼조…나스닥 1.11%↑"
+          "title": "트럼프 \"러시아는 매우 큰 나라…젤렌스키, 종전 합의해야\""
         },
         {
           "source": "yna",
-          "title": "뉴욕증시, 기술주 저가 매수에  혼조 출발"
+          "title": "젤렌스키 \"미중러 종전회담 열리면 우리도 참여해야\""
         }
       ]
     },
     {
-      "term": "러시아",
+      "term": "기각",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3028,16 +3181,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "국제유가, 러시아 제재 완화·후티 반군 석유시설 공격에 혼조"
+          "title": "美법원, 샘 올트먼 여동생 성학대 의혹 소송 기각"
         },
         {
           "source": "yna",
-          "title": "이란 간 러시아 외무장관…양국 안보 공조"
+          "title": "'앞집이 한강 조망권 침해' 이중근 부영 회장 항고 기각"
         }
       ]
     },
     {
-      "term": "김정은과",
+      "term": "미중러",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3046,16 +3199,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "젤렌스키 \"미중러 종전회담 열리면 우리도 참여해야\""
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "日정부, 미중러 3자 회담 여부에 \"주시 중\""
         }
       ]
     },
     {
-      "term": "여부에",
+      "term": "유조선",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3064,16 +3217,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "하루에 3척이나…호르무즈 해협서 유조선 기뢰 충돌 '비상'(종합)"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "이란 혁명수비대 \"호르무즈서 유조선 2척 기뢰 충돌…운항 중단\""
         }
       ]
     },
     {
-      "term": "모르겠다",
+      "term": "기뢰",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3082,16 +3235,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "하루에 3척이나…호르무즈 해협서 유조선 기뢰 충돌 '비상'(종합)"
         },
         {
           "source": "yna",
-          "title": "[속보] 트럼프, 내달 中서 김정은과 회담 여부에 \"모르겠다\""
+          "title": "이란 혁명수비대 \"호르무즈서 유조선 2척 기뢰 충돌…운항 중단\""
         }
       ]
     },
     {
-      "term": "강릉",
+      "term": "충돌",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3100,16 +3253,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "김민석, 강릉 ITS 세계총회 방문…내년 보선 앞두고 민심공략"
+          "title": "하루에 3척이나…호르무즈 해협서 유조선 기뢰 충돌 '비상'(종합)"
         },
         {
           "source": "yna",
-          "title": "국민의힘, 우상호 '강릉 AI센터 유치' 허위사실 유포 혐의 고발"
+          "title": "이란 혁명수비대 \"호르무즈서 유조선 2척 기뢰 충돌…운항 중단\""
         }
       ]
     },
     {
-      "term": "대비",
+      "term": "클라우드",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3118,16 +3271,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "\"인천공항 비항공수익 66.6%…세계 주요 공항 대비 높아\""
+          "title": "구글 클라우드 장애로 영국 은행·공공의료 사이트 차질(종합)"
         },
         {
           "source": "yna",
-          "title": "민주당 의회 장악 대비?…트럼프 참모들 변호사 선임 경쟁"
+          "title": "구글 클라우드 네트워크 장애…영국 은행 등 웹사이트 차질"
         }
       ]
     },
     {
-      "term": "아이티",
+      "term": "은행",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3136,16 +3289,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종(종합)"
+          "title": "구글 클라우드 장애로 영국 은행·공공의료 사이트 차질(종합)"
         },
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종"
+          "title": "구글 클라우드 네트워크 장애…영국 은행 등 웹사이트 차질"
         }
       ]
     },
     {
-      "term": "갱단",
+      "term": "네타냐후",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3154,16 +3307,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종(종합)"
+          "title": "네타냐후 \"이란 정권은 독 품은 문어 머리…제거 최우선 과제\""
         },
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종"
+          "title": "밴스, 트럼프와 차별화하나…\"네타냐후 지지도 반대도 안해\""
         }
       ]
     },
     {
-      "term": "유엔지원군",
+      "term": "안해",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3172,16 +3325,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종(종합)"
+          "title": "밴스, 트럼프와 차별화하나…\"네타냐후 지지도 반대도 안해\""
         },
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종"
+          "title": "강신철, 中대사 만나 \"한반도 긴장고조, 中이익에도 부합 안해\""
         }
       ]
     },
     {
-      "term": "실종",
+      "term": "고소",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3190,16 +3343,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종(종합)"
+          "title": "부천시장 경선후보 '허위 성추행 고소' 사주범에 징역 5년 구형"
         },
         {
           "source": "yna",
-          "title": "아이티 갱단, 유엔지원군 공격…4명 실종"
+          "title": "김관영 전 전북지사, 허위사실공표 혐의로 이원택 도지사 고소"
         }
       ]
     },
     {
-      "term": "지지",
+      "term": "완벽했던",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3208,16 +3361,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "\"트럼프의 지지 선언, 네타냐후 지지율에 별 영향 없어\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
         },
         {
           "source": "yna",
-          "title": "네타냐후, 총선 지지 트럼프와 통화…이란 언급하며 \"할일 남아\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
         }
       ]
     },
     {
-      "term": "연기",
+      "term": "고별사",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3226,16 +3379,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "후티 공세에 결국…사우디 '사막의 다보스' 내년으로 전격 연기"
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
         },
         {
           "source": "yna",
-          "title": "이집트 의회, '사우디 군사 지원' 승인 논의 내주로 연기"
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
         }
       ]
     },
     {
-      "term": "총선",
+      "term": "만루포로",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3244,16 +3397,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "네타냐후, 총선 지지 트럼프와 통화…이란 언급하며 \"할일 남아\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
         },
         {
           "source": "yna",
-          "title": "총선 앞 공군기지 찾은 네타냐후 \"우리를 시험하지 말라\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
         }
       ]
     },
     {
-      "term": "식량",
+      "term": "지배한",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3262,16 +3415,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "교황, 젤렌스키와 통화…\"러 점령한 지역에 식량 전달되길\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영(종합)"
         },
         {
           "source": "yna",
-          "title": "WFP \"자금 부족으로 가자지구 50만명 식량 지원 축소\""
+          "title": "가장 완벽했던 잠실 고별사…145ｍ 만루포로 준PO 지배한 김도영"
         }
       ]
     },
     {
-      "term": "대선",
+      "term": "호르무즈서",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3280,16 +3433,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "0.6%p 차로 좁혀진 브라질 대선…룰라, 막판 맹추격"
+          "title": "\"이란, 호르무즈서 선박 기관실 집중 공격…선박 부족 우려\""
         },
         {
           "source": "yna",
-          "title": "프랑스 대선 반년 앞 대혼란…정치권 '네탓' 공방"
+          "title": "이란 혁명수비대 \"호르무즈서 유조선 2척 기뢰 충돌…운항 중단\""
         }
       ]
     },
     {
-      "term": "네탓",
+      "term": "아시아",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3298,16 +3451,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "트럼프·공화당, 중간선거 패색 먹구름에 벌써 '네탓' 내홍"
+          "title": "장민호 아시아新·탁구 금 6개…한국, 장애인AG 하루 금메달 9개"
         },
         {
           "source": "yna",
-          "title": "프랑스 대선 반년 앞 대혼란…정치권 '네탓' 공방"
+          "title": "'실버 오크' 와인 최고매출책임자 \"한국은 아시아 최대 시장\""
         }
       ]
     },
     {
-      "term": "밀라노서도",
+      "term": "최후의",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3316,16 +3469,16 @@
       "examples": [
         {
           "source": "yna",
-          "title": "밀라노서도 폭력시위…명품 매장 쇼윈도 막고 일찍 문닫아(종합)"
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출(종합)"
         },
         {
           "source": "yna",
-          "title": "이탈리아 밀라노서도 약탈·폭력 시위…271명 무더기 연행"
+          "title": "김도영, 잠실 최후의 만루포…KIA, LG 꺾고 23년 만에 PO 진출"
         }
       ]
     },
     {
-      "term": "막고",
+      "term": "아름다운",
       "total": 2,
       "sourceCount": 1,
       "sources": [
@@ -3334,119 +3487,11 @@
       "examples": [
         {
           "source": "yna",
-          "title": "밀라노서도 폭력시위…명품 매장 쇼윈도 막고 일찍 문닫아(종합)"
+          "title": "\"내 도전이 누군가의 용기가 되길\"…장민호의 아름다운 금빛질주"
         },
         {
           "source": "yna",
-          "title": "프로농구 DB, 가스공사 4연승 막고 연패 탈출…이용우 3점포 5방"
-        }
-      ]
-    },
-    {
-      "term": "안보",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "JP모건 '美 안보 이니셔티브' 1년…306조원 금융지원"
-        },
-        {
-          "source": "yna",
-          "title": "이란 간 러시아 외무장관…양국 안보 공조"
-        }
-      ]
-    },
-    {
-      "term": "외무장관",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "전쟁중 이란·러 외무장관 회담…양국 공조 강조(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 간 러시아 외무장관…양국 안보 공조"
-        }
-      ]
-    },
-    {
-      "term": "양국",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "전쟁중 이란·러 외무장관 회담…양국 공조 강조(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "이란 간 러시아 외무장관…양국 안보 공조"
-        }
-      ]
-    },
-    {
-      "term": "예멘",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "후티, 예멘 정부군 기지에 탄도미사일…최소 53명 사망(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"후티, 예멘 남부 정부군 기지에 탄도미사일…최소 20명 사망\""
-        }
-      ]
-    },
-    {
-      "term": "정부군",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "후티, 예멘 정부군 기지에 탄도미사일…최소 53명 사망(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"후티, 예멘 남부 정부군 기지에 탄도미사일…최소 20명 사망\""
-        }
-      ]
-    },
-    {
-      "term": "기지에",
-      "total": 2,
-      "sourceCount": 1,
-      "sources": [
-        "yna"
-      ],
-      "examples": [
-        {
-          "source": "yna",
-          "title": "후티, 예멘 정부군 기지에 탄도미사일…최소 53명 사망(종합)"
-        },
-        {
-          "source": "yna",
-          "title": "\"후티, 예멘 남부 정부군 기지에 탄도미사일…최소 20명 사망\""
+          "title": "'10년 동행' 로더에게 금메달을…'아름다운 이별' 꿈꾸는 박승우"
         }
       ]
     }
