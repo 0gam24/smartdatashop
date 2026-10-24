@@ -1,12 +1,26 @@
-# Today — 2026-10-21 (수) (KST)
+# Today — 2026-10-25 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-10-21 (수) — 오늘
+## 2026-10-25 (일) — 오늘
+
+- 📝 발행 **1건**:
+  - [청년미래적금 2차 68.8만명 신청 마감, 계좌개설은 11월 16일부터](https://smartdatashop.kr/tax-finance/youth-future-savings-round2-screening-schedule/) — 청년미래적금은 청년이 매달 저축하면 정부가 기여금을 더해 3년 뒤 목돈을 만들어 주는 자산형성 적금이다. …
+
+## 2026-10-24 (토)
+
+- 📝 발행 **1건**:
+  - [쿠팡 산업안전 감독 결과, 위반 205건 중 61건 사법처리](https://smartdatashop.kr/policy/coupang-labor-safety-inspection-result/) — 산업안전보건감독은 정부가 사업장의 안전조치와 산재 은폐 여부를 직접 점검하는 제도다. 고용노동부가 쿠팡 물…
+
+## 2026-10-23 (금)
+
+- 📝 발행 **1건**:
+  - [보증금 내면 비대면으로 신용카드, 혁신금융서비스 4건 신규 지정](https://smartdatashop.kr/tax-finance/deposit-based-credit-card-thin-filer/) — 혁신금융서비스는 금융위원회가 새 아이디어를 규제 예외로 시장에서 시험하도록 지정하는 제도다. 10월 21일…
+
+## 2026-10-21 (수)
 
 - 📝 발행 **1건**:
   - [건설현장 휴게시설 지원금 최대 500만원, 10월 19일 접수 시작](https://smartdatashop.kr/policy/construction-site-rest-facility-support/) — 건설현장 휴게시설 개선지원 사업은 건설근로자공제회가 중소규모 건설현장의 냉난방기·냉장고 같은 휴게 물품 구…
-- 🔄 자동 갱신 (24h): ECOS · ECOS 100 · 정부 RSS · 뉴스 키워드
 
 ## 2026-10-20 (화)
 
@@ -42,26 +56,6 @@
 
 - 📝 발행 **1건**:
   - [배달앱 원산지 고지 의무, 10월 22일부터 플랫폼에 떨어진다](https://smartdatashop.kr/policy/delivery-app-origin-labeling-notice-duty/) — 농수산물 원산지 표시법은 배달앱 같은 통신판매중개업자에게 입점업체 원산지 고지 의무를 지우는 법이다. 10…
-
-## 2026-10-11 (일)
-
-- 📝 발행 **1건**:
-  - [다크패턴 13개 유형 중 법으로 금지된 건 5가지뿐이다](https://smartdatashop.kr/policy/dark-pattern-guideline-cancel-button/) — 다크패턴은 소비자가 착각하거나 부주의하게 결제·가입하도록 꾸민 온라인 화면 설계를 뜻한다. 공정위가 13개…
-
-## 2026-10-10 (토)
-
-- 📝 발행 **1건**:
-  - [국민참여성장펀드 2차 55% 팔렸다, 10월 15일까지 선착순](https://smartdatashop.kr/tax-finance/national-growth-fund-round2-sales-pace/) — 국민참여성장펀드는 정부가 조성을 지원하고 민간 자산운용사가 운용하는 선착순 판매형 공모 펀드다. 2차 모집…
-
-## 2026-10-09 (금)
-
-- 📝 발행 **1건**:
-  - [금융권 개인정보 유출 사고, 보이스피싱 2차 피해 막는 법](https://smartdatashop.kr/policy/financial-data-leak-phishing-safeguard/) — 개인정보 유출 2차피해 특별대응기간은 보이스피싱·스미싱 사기를 막으려 금융당국이 한 달간 금융회사 점검과 …
-
-## 2026-10-08 (목)
-
-- 📝 발행 **1건**:
-  - [중고거래 신용카드 결제, 네이버 혁신금융서비스로 열린다](https://smartdatashop.kr/tax-finance/p2p-used-goods-credit-card-payment/) — 혁신금융서비스는 새 금융서비스를 시장에서 시험해 보도록 규제 예외를 한시적으로 주는 금융위원회 지정 제도다…
 
 ---
 
