@@ -1,8 +1,13 @@
-# Today — 2026-10-28 (수) (KST)
+# Today — 2026-10-29 (목) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-10-28 (수) — 오늘
+## 2026-10-29 (목) — 오늘
+
+- 📝 발행 **1건**:
+  - [오래된 공공 부실채권, 소멸시효 5년·15년 기준 신설](https://smartdatashop.kr/tax-finance/public-npl-statute-of-limitations-reform/) — 부실채권은 금융회사·공공기관이 회수하지 못한 연체채권이다. 금융위원회가 10월 28일 내놓은 개선방안에 따…
+
+## 2026-10-28 (수)
 
 - 📝 발행 **1건**:
   - [갤럭시 GOS 성능제한, 공정위 과징금 200억의 근거](https://smartdatashop.kr/policy/galaxy-gos-deceptive-ad-fine/) — GOS(게임 최적화 서비스)는 삼성 갤럭시가 고사양 게임 실행 시 성능을 낮추는 자체 기능이다. 공정거래위…
@@ -61,11 +66,6 @@
 
 - 📝 발행 **1건**:
   - [네이버페이·카카오페이·토스 선불충전금, 통지받고 환급받는다](https://smartdatashop.kr/tax-finance/bigtech-pay-prepaid-balance-refund/) — 선불충전금은 네이버페이·카카오페이·토스 같은 전자금융업자에 충전해 두고 쓰는 페이·머니 잔액이다. 금융위원…
-
-## 2026-10-15 (목)
-
-- 📝 발행 **1건**:
-  - [불법 가상자산 거래소 27곳 막혔다, 수수료는 신고사 62배](https://smartdatashop.kr/policy/illegal-crypto-exchange-site-block/) — 미신고 가상자산사업자는 특정금융거래정보법상 신고 없이 국내에서 가상자산을 거래하는 불법 업체를 뜻한다. 금…
 
 ---
 
