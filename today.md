@@ -1,8 +1,18 @@
-# Today — 2026-10-29 (목) (KST)
+# Today — 2026-10-31 (토) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-10-29 (목) — 오늘
+## 2026-10-31 (토) — 오늘
+
+- 📝 발행 **1건**:
+  - [장기요양 2027년 재가급여 한도 최대 37만원 인상, 보험료도 오른다](https://smartdatashop.kr/policy/long-term-care-2027-benefit-premium-increase/) — 장기요양보험은 거동이 어려운 어르신에게 방문요양 같은 돌봄 서비스를 지원하는 사회보험이다. 보건복지부가 1…
+
+## 2026-10-30 (금)
+
+- 📝 발행 **1건**:
+  - [2009년생 국민연금 첫 보험료, 국가가 대신 낸다](https://smartdatashop.kr/policy/national-pension-first-premium-support/) — 생애 첫 연금보험료 지원은 국민연금에 처음 가입하는 청년의 1개월분 보험료를 국가가 대신 내주는 제도다. …
+
+## 2026-10-29 (목)
 
 - 📝 발행 **1건**:
   - [오래된 공공 부실채권, 소멸시효 5년·15년 기준 신설](https://smartdatashop.kr/tax-finance/public-npl-statute-of-limitations-reform/) — 부실채권은 금융회사·공공기관이 회수하지 못한 연체채권이다. 금융위원회가 10월 28일 내놓은 개선방안에 따…
@@ -56,16 +66,6 @@
 
 - 📝 발행 **1건**:
   - [무기한 선물 레버리지 최대 200배, 국내법 보호는 없다](https://smartdatashop.kr/policy/offshore-perpetual-futures-risk-warning/) — 무기한 선물은 만기와 실물 인도 없이 24시간 거래되는 해외 파생상품으로, 레버리지가 최대 200배다. 금…
-
-## 2026-10-17 (토)
-
-- 📝 발행 **1건**:
-  - [제조업 취업자 27개월 만에 반등, 상용직 비중도 역대 최고치](https://smartdatashop.kr/stats/manufacturing-employment-27month-rebound/) — 9월 고용동향은 국가데이터처가 매달 발표하는 취업자·고용률·산업별 고용 통계다. 10월 16일 발표에서 제…
-
-## 2026-10-16 (금)
-
-- 📝 발행 **1건**:
-  - [네이버페이·카카오페이·토스 선불충전금, 통지받고 환급받는다](https://smartdatashop.kr/tax-finance/bigtech-pay-prepaid-balance-refund/) — 선불충전금은 네이버페이·카카오페이·토스 같은 전자금융업자에 충전해 두고 쓰는 페이·머니 잔액이다. 금융위원…
 
 ---
 
