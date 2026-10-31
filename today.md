@@ -1,8 +1,13 @@
-# Today — 2026-10-31 (토) (KST)
+# Today — 2026-11-01 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-10-31 (토) — 오늘
+## 2026-11-01 (일) — 오늘
+
+- 📝 발행 **1건**:
+  - [서울시 지방세 환급금 210억원, 11월에 찾아가는 법](https://smartdatashop.kr/tax-finance/seoul-tax-refund-november-campaign/) — 미환급금은 세금을 더 냈거나 돌려받을 세금을 아직 찾아가지 않아 지자체가 보관 중인 내 돈이다. 서울시는 …
+
+## 2026-10-31 (토)
 
 - 📝 발행 **1건**:
   - [장기요양 2027년 재가급여 한도 최대 37만원 인상, 보험료도 오른다](https://smartdatashop.kr/policy/long-term-care-2027-benefit-premium-increase/) — 장기요양보험은 거동이 어려운 어르신에게 방문요양 같은 돌봄 서비스를 지원하는 사회보험이다. 보건복지부가 1…
@@ -61,11 +66,6 @@
 
 - 📝 발행 **1건**:
   - [복지사각지대 19만 명 발굴, 불법사금융 피해자 복지로 바로 연결](https://smartdatashop.kr/policy/welfare-crisis-household-5th-screening/) — 복지사각지대 발굴·조사는 보건복지부가 빅데이터로 위기가구를 찾아 지원하는 상시 제도다. 10월 19일부터 …
-
-## 2026-10-18 (일)
-
-- 📝 발행 **1건**:
-  - [무기한 선물 레버리지 최대 200배, 국내법 보호는 없다](https://smartdatashop.kr/policy/offshore-perpetual-futures-risk-warning/) — 무기한 선물은 만기와 실물 인도 없이 24시간 거래되는 해외 파생상품으로, 레버리지가 최대 200배다. 금…
 
 ---
 
