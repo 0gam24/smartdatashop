@@ -1,8 +1,13 @@
-# Today — 2026-11-01 (일) (KST)
+# Today — 2026-11-02 (월) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-11-01 (일) — 오늘
+## 2026-11-02 (월) — 오늘
+
+- 📝 발행 **1건**:
+  - [퇴직연금 사외적립 2028~2030년 단계별 의무화 확정](https://smartdatashop.kr/tax-finance/retirement-pension-external-funding-mandate/) — 퇴직연금 사외적립 의무화는 회사가 퇴직급여를 사내에 두지 않고 금융회사에 반드시 쌓아 두게 하는 제도다. …
+
+## 2026-11-01 (일)
 
 - 📝 발행 **1건**:
   - [서울시 지방세 환급금 210억원, 11월에 찾아가는 법](https://smartdatashop.kr/tax-finance/seoul-tax-refund-november-campaign/) — 미환급금은 세금을 더 냈거나 돌려받을 세금을 아직 찾아가지 않아 지자체가 보관 중인 내 돈이다. 서울시는 …
@@ -61,11 +66,6 @@
 
 - 📝 발행 **1건**:
   - [취약노인 65만 명 낙상치료비·치매책임보험 무료 지원](https://smartdatashop.kr/policy/senior-fall-dementia-insurance-2027/) — 노인 통합지원사업은 보험업권 상생기금과 보건복지부 산하 노인지원기관이 함께 취약 어르신의 낙상·치매 위험을…
-
-## 2026-10-19 (월)
-
-- 📝 발행 **1건**:
-  - [복지사각지대 19만 명 발굴, 불법사금융 피해자 복지로 바로 연결](https://smartdatashop.kr/policy/welfare-crisis-household-5th-screening/) — 복지사각지대 발굴·조사는 보건복지부가 빅데이터로 위기가구를 찾아 지원하는 상시 제도다. 10월 19일부터 …
 
 ---
 
