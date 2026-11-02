@@ -1,8 +1,13 @@
-# Today — 2026-11-02 (월) (KST)
+# Today — 2026-11-03 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-11-02 (월) — 오늘
+## 2026-11-03 (화) — 오늘
+
+- 📝 발행 **1건**:
+  - [시민안전보험 자동가입, 보험금은 3년 안에 직접 청구해야 한다](https://smartdatashop.kr/tax-finance/citizen-safety-insurance-claim/) — 시민안전보험은 재난·사고 피해를 지방자치단체가 보상하도록 가입하는 보험이다. 금융감독원이 11월 2일 발표…
+
+## 2026-11-02 (월)
 
 - 📝 발행 **1건**:
   - [퇴직연금 사외적립 2028~2030년 단계별 의무화 확정](https://smartdatashop.kr/tax-finance/retirement-pension-external-funding-mandate/) — 퇴직연금 사외적립 의무화는 회사가 퇴직급여를 사내에 두지 않고 금융회사에 반드시 쌓아 두게 하는 제도다. …
@@ -61,11 +66,6 @@
 
 - 📝 발행 **1건**:
   - [건설현장 휴게시설 지원금 최대 500만원, 10월 19일 접수 시작](https://smartdatashop.kr/policy/construction-site-rest-facility-support/) — 건설현장 휴게시설 개선지원 사업은 건설근로자공제회가 중소규모 건설현장의 냉난방기·냉장고 같은 휴게 물품 구…
-
-## 2026-10-20 (화)
-
-- 📝 발행 **1건**:
-  - [취약노인 65만 명 낙상치료비·치매책임보험 무료 지원](https://smartdatashop.kr/policy/senior-fall-dementia-insurance-2027/) — 노인 통합지원사업은 보험업권 상생기금과 보건복지부 산하 노인지원기관이 함께 취약 어르신의 낙상·치매 위험을…
 
 ---
 
