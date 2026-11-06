@@ -1,8 +1,13 @@
-# Today — 2026-11-06 (금) (KST)
+# Today — 2026-11-07 (토) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-11-06 (금) — 오늘
+## 2026-11-07 (토) — 오늘
+
+- 📝 발행 **1건**:
+  - [근로장려금 기한후신청 12월 1일 마감, 미신청 26만가구 안내문](https://smartdatashop.kr/tax-finance/eitc-late-application-deadline/) — 근로·자녀장려금은 소득이 적은 근로·사업 가구에 국세청이 환급 형태로 지급하는 지원금이다. 국세청은 11월…
+
+## 2026-11-06 (금)
 
 - 📝 발행 **1건**:
   - [고당센터, 2028년부터 만성질환 통합관리센터로 바뀐다](https://smartdatashop.kr/policy/chronic-disease-center-reform-2028/) — 만성질환 통합관리센터는 지역 보건소가 고혈압·당뇨병 환자를 등록해 관리하는 '고당센터'의 새 이름이다. 질…
@@ -61,16 +66,6 @@
 
 - 📝 발행 **1건**:
   - [청년미래적금 2차 68.8만명 신청 마감, 계좌개설은 11월 16일부터](https://smartdatashop.kr/tax-finance/youth-future-savings-round2-screening-schedule/) — 청년미래적금은 청년이 매달 저축하면 정부가 기여금을 더해 3년 뒤 목돈을 만들어 주는 자산형성 적금이다. …
-
-## 2026-10-24 (토)
-
-- 📝 발행 **1건**:
-  - [쿠팡 산업안전 감독 결과, 위반 205건 중 61건 사법처리](https://smartdatashop.kr/policy/coupang-labor-safety-inspection-result/) — 산업안전보건감독은 정부가 사업장의 안전조치와 산재 은폐 여부를 직접 점검하는 제도다. 고용노동부가 쿠팡 물…
-
-## 2026-10-23 (금)
-
-- 📝 발행 **1건**:
-  - [보증금 내면 비대면으로 신용카드, 혁신금융서비스 4건 신규 지정](https://smartdatashop.kr/tax-finance/deposit-based-credit-card-thin-filer/) — 혁신금융서비스는 금융위원회가 새 아이디어를 규제 예외로 시장에서 시험하도록 지정하는 제도다. 10월 21일…
 
 ---
 
