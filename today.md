@@ -1,8 +1,13 @@
-# Today — 2026-11-07 (토) (KST)
+# Today — 2026-11-08 (일) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-11-07 (토) — 오늘
+## 2026-11-08 (일) — 오늘
+
+- 📝 발행 **1건**:
+  - [일자리·투자 늘린 중소기업, 정기세무조사 제외 신청 11월 30일 마감](https://smartdatashop.kr/tax-finance/sme-tax-audit-exclusion-deadline/) — 일자리창출·투자확대 중소기업 정기세무조사 제외 제도는 전년보다 고용이나 투자를 늘리겠다고 계획서를 낸 중소…
+
+## 2026-11-07 (토)
 
 - 📝 발행 **1건**:
   - [근로장려금 기한후신청 12월 1일 마감, 미신청 26만가구 안내문](https://smartdatashop.kr/tax-finance/eitc-late-application-deadline/) — 근로·자녀장려금은 소득이 적은 근로·사업 가구에 국세청이 환급 형태로 지급하는 지원금이다. 국세청은 11월…
@@ -61,11 +66,6 @@
 
 - 📝 발행 **1건**:
   - [여전사 부동산PF 대출한도 신설, 카드 결제대행 평가도 의무화](https://smartdatashop.kr/tax-finance/credit-specialty-finance-pf-loan-limit-update/) — 여신전문금융업감독규정은 카드사·캐피탈사 같은 여신전문금융회사의 영업 범위를 정하는 금융위 규정이다. 금융위…
-
-## 2026-10-25 (일)
-
-- 📝 발행 **1건**:
-  - [청년미래적금 2차 68.8만명 신청 마감, 계좌개설은 11월 16일부터](https://smartdatashop.kr/tax-finance/youth-future-savings-round2-screening-schedule/) — 청년미래적금은 청년이 매달 저축하면 정부가 기여금을 더해 3년 뒤 목돈을 만들어 주는 자산형성 적금이다. …
 
 ---
 
