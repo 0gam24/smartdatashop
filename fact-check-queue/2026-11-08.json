@@ -1,0 +1,153 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-07T20:36:55.232Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 13,
+  "summary": {
+    "risk": {
+      "low": 10,
+      "medium": 3,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 44.38,
+    "avgFootnotesPerArticle": 32.46,
+    "avgSourcesPerArticle": 1.85,
+    "totalClaims": 577,
+    "totalFootnotes": 422,
+    "totalSources": 24
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-10-26-credit-specialty-finance-pf-loan-limit-update.mdx",
+      "publishedAt": "2026-10-26T02:40:00+09:00",
+      "claimsCount": 25,
+      "footnoteCount": 37,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 25,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-10-27-base-rate-pause-october-2026.mdx",
+      "publishedAt": "2026-10-27T02:45:00+09:00",
+      "claimsCount": 71,
+      "footnoteCount": 46,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 23.67,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-10-28-galaxy-gos-deceptive-ad-fine.mdx",
+      "publishedAt": "2026-10-28T02:20:00+09:00",
+      "claimsCount": 29,
+      "footnoteCount": 25,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 29,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-10-29-public-npl-statute-of-limitations-reform.mdx",
+      "publishedAt": "2026-10-29T02:20:00+09:00",
+      "claimsCount": 39,
+      "footnoteCount": 33,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 39,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-10-30-national-pension-first-premium-support.mdx",
+      "publishedAt": "2026-10-30T02:20:00+09:00",
+      "claimsCount": 23,
+      "footnoteCount": 33,
+      "sourceUrlCount": 4,
+      "claimsPerSource": 5.75,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-10-31-long-term-care-2027-benefit-premium-increase.mdx",
+      "publishedAt": "2026-10-31T02:12:00+09:00",
+      "claimsCount": 51,
+      "footnoteCount": 32,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 25.5,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-01-seoul-tax-refund-november-campaign.mdx",
+      "publishedAt": "2026-11-01T02:12:00+09:00",
+      "claimsCount": 14,
+      "footnoteCount": 31,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 4.67,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-02-retirement-pension-external-funding-mandate.mdx",
+      "publishedAt": "2026-11-02T02:20:00+09:00",
+      "claimsCount": 9,
+      "footnoteCount": 25,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-03-citizen-safety-insurance-claim.mdx",
+      "publishedAt": "2026-11-03T02:45:00+09:00",
+      "claimsCount": 26,
+      "footnoteCount": 54,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 26,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-05-cpi-october-2-8-percent.mdx",
+      "publishedAt": "2026-11-05T02:12:00+09:00",
+      "claimsCount": 100,
+      "footnoteCount": 31,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 50,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-06-chronic-disease-center-reform-2028.mdx",
+      "publishedAt": "2026-11-06T02:15:00+09:00",
+      "claimsCount": 31,
+      "footnoteCount": 44,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 15.5,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-07-eitc-late-application-deadline.mdx",
+      "publishedAt": "2026-11-07T02:40:00+09:00",
+      "claimsCount": 81,
+      "footnoteCount": 20,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 40.5,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-08-sme-tax-audit-exclusion-deadline.mdx",
+      "publishedAt": "2026-11-08T02:30:00+09:00",
+      "claimsCount": 78,
+      "footnoteCount": 11,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 78,
+      "riskLevel": "medium"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
