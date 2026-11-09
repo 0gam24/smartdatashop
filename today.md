@@ -1,8 +1,13 @@
-# Today — 2026-11-09 (월) (KST)
+# Today — 2026-11-10 (화) (KST)
 
 > 매 cron + 매 빌드 자동 갱신. 직전 14일 발행 + 오늘 자동 활동 요약.
 
-## 2026-11-09 (월) — 오늘
+## 2026-11-10 (화) — 오늘
+
+- 📝 발행 **1건**:
+  - [신용융자 반대매매 막는 140%룰, 11월 9일부터 3개월 면제](https://smartdatashop.kr/market/credit-loan-margin-ratio-exemption/) — 신용공여 담보비율 유지의무는 증권사가 신용융자 투자자의 담보를 140% 이상 유지하도록 강제하는 규정이다.…
+
+## 2026-11-09 (월)
 
 - 📝 발행 **1건**:
   - [주식 양도세 기본공제 놓친 4687명에 국세청이 21억 환급](https://smartdatashop.kr/tax-finance/stock-capital-gains-basic-deduction-refund/) — 주식 양도소득세 기본공제는 한 해 국내·국외 주식 양도차익을 합쳐 250만원까지 빼주는 제도다. 국세청은 …
@@ -66,11 +71,6 @@
 
 - 📝 발행 **1건**:
   - [한국은행 기준금리 10월 동결, 3.00%서 숨 고르기](https://smartdatashop.kr/market/base-rate-pause-october-2026/) — 기준금리는 한국은행이 물가·성장 흐름을 보고 올리거나 내리는 정책금리다. 10월 22일 금통위는 7월·8월…
-
-## 2026-10-26 (월)
-
-- 📝 발행 **1건**:
-  - [여전사 부동산PF 대출한도 신설, 카드 결제대행 평가도 의무화](https://smartdatashop.kr/tax-finance/credit-specialty-finance-pf-loan-limit-update/) — 여신전문금융업감독규정은 카드사·캐피탈사 같은 여신전문금융회사의 영업 범위를 정하는 금융위 규정이다. 금융위…
 
 ---
 
