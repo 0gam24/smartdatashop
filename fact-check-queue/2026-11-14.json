@@ -1,0 +1,123 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-13T22:18:05.255Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 10,
+  "summary": {
+    "risk": {
+      "low": 7,
+      "medium": 3,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 38.4,
+    "avgFootnotesPerArticle": 30.7,
+    "avgSourcesPerArticle": 1.8,
+    "totalClaims": 384,
+    "totalFootnotes": 307,
+    "totalSources": 18
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-11-01-seoul-tax-refund-november-campaign.mdx",
+      "publishedAt": "2026-11-01T02:12:00+09:00",
+      "claimsCount": 14,
+      "footnoteCount": 31,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 4.67,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-02-retirement-pension-external-funding-mandate.mdx",
+      "publishedAt": "2026-11-02T02:20:00+09:00",
+      "claimsCount": 9,
+      "footnoteCount": 25,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-03-citizen-safety-insurance-claim.mdx",
+      "publishedAt": "2026-11-03T02:45:00+09:00",
+      "claimsCount": 26,
+      "footnoteCount": 54,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 26,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-05-cpi-october-2-8-percent.mdx",
+      "publishedAt": "2026-11-05T02:12:00+09:00",
+      "claimsCount": 100,
+      "footnoteCount": 31,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 50,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-06-chronic-disease-center-reform-2028.mdx",
+      "publishedAt": "2026-11-06T02:15:00+09:00",
+      "claimsCount": 31,
+      "footnoteCount": 44,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 15.5,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-07-eitc-late-application-deadline.mdx",
+      "publishedAt": "2026-11-07T02:40:00+09:00",
+      "claimsCount": 81,
+      "footnoteCount": 20,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 40.5,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-08-sme-tax-audit-exclusion-deadline.mdx",
+      "publishedAt": "2026-11-08T02:30:00+09:00",
+      "claimsCount": 78,
+      "footnoteCount": 11,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 78,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-09-stock-capital-gains-basic-deduction-refund.mdx",
+      "publishedAt": "2026-11-09T02:12:00+09:00",
+      "claimsCount": 24,
+      "footnoteCount": 29,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 8,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-10-credit-loan-margin-ratio-exemption.mdx",
+      "publishedAt": "2026-11-10T02:15:00+09:00",
+      "claimsCount": 18,
+      "footnoteCount": 28,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-11-jeonse-fraud-minimum-guarantee.mdx",
+      "publishedAt": "2026-11-11T02:30:00+09:00",
+      "claimsCount": 3,
+      "footnoteCount": 34,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 3,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
