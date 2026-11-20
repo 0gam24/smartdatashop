@@ -1,0 +1,63 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-20T22:52:20.004Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 4,
+  "summary": {
+    "risk": {
+      "low": 3,
+      "medium": 1,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 30.75,
+    "avgFootnotesPerArticle": 25.5,
+    "avgSourcesPerArticle": 1.75,
+    "totalClaims": 123,
+    "totalFootnotes": 102,
+    "totalSources": 7
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-11-08-sme-tax-audit-exclusion-deadline.mdx",
+      "publishedAt": "2026-11-08T02:30:00+09:00",
+      "claimsCount": 78,
+      "footnoteCount": 11,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 78,
+      "riskLevel": "medium"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-09-stock-capital-gains-basic-deduction-refund.mdx",
+      "publishedAt": "2026-11-09T02:12:00+09:00",
+      "claimsCount": 24,
+      "footnoteCount": 29,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 8,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-10-credit-loan-margin-ratio-exemption.mdx",
+      "publishedAt": "2026-11-10T02:15:00+09:00",
+      "claimsCount": 18,
+      "footnoteCount": 28,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-11-jeonse-fraud-minimum-guarantee.mdx",
+      "publishedAt": "2026-11-11T02:30:00+09:00",
+      "claimsCount": 3,
+      "footnoteCount": 34,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 3,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
