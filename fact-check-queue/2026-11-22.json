@@ -1,0 +1,53 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-21T21:57:36.072Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 3,
+  "summary": {
+    "risk": {
+      "low": 3,
+      "medium": 0,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 15,
+    "avgFootnotesPerArticle": 30.33,
+    "avgSourcesPerArticle": 2,
+    "totalClaims": 45,
+    "totalFootnotes": 91,
+    "totalSources": 6
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-11-09-stock-capital-gains-basic-deduction-refund.mdx",
+      "publishedAt": "2026-11-09T02:12:00+09:00",
+      "claimsCount": 24,
+      "footnoteCount": 29,
+      "sourceUrlCount": 3,
+      "claimsPerSource": 8,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-10-credit-loan-margin-ratio-exemption.mdx",
+      "publishedAt": "2026-11-10T02:15:00+09:00",
+      "claimsCount": 18,
+      "footnoteCount": 28,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-11-jeonse-fraud-minimum-guarantee.mdx",
+      "publishedAt": "2026-11-11T02:30:00+09:00",
+      "claimsCount": 3,
+      "footnoteCount": 34,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 3,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
