@@ -1,0 +1,43 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-22T22:15:08.058Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 2,
+  "summary": {
+    "risk": {
+      "low": 2,
+      "medium": 0,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 10.5,
+    "avgFootnotesPerArticle": 31,
+    "avgSourcesPerArticle": 1.5,
+    "totalClaims": 21,
+    "totalFootnotes": 62,
+    "totalSources": 3
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-11-10-credit-loan-margin-ratio-exemption.mdx",
+      "publishedAt": "2026-11-10T02:15:00+09:00",
+      "claimsCount": 18,
+      "footnoteCount": 28,
+      "sourceUrlCount": 2,
+      "claimsPerSource": 9,
+      "riskLevel": "low"
+    },
+    {
+      "collection": "pulse",
+      "filename": "2026-11-11-jeonse-fraud-minimum-guarantee.mdx",
+      "publishedAt": "2026-11-11T02:30:00+09:00",
+      "claimsCount": 3,
+      "footnoteCount": 34,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 3,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
