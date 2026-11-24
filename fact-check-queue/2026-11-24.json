@@ -1,0 +1,33 @@
+{
+  "agent": "fact-checker",
+  "ranAt": "2026-11-24T03:06:53.584Z",
+  "windowDays": 14,
+  "mode": "lite",
+  "auditedCount": 1,
+  "summary": {
+    "risk": {
+      "low": 1,
+      "medium": 0,
+      "high": 0
+    },
+    "avgClaimsPerArticle": 3,
+    "avgFootnotesPerArticle": 34,
+    "avgSourcesPerArticle": 1,
+    "totalClaims": 3,
+    "totalFootnotes": 34,
+    "totalSources": 1
+  },
+  "audited": [
+    {
+      "collection": "pulse",
+      "filename": "2026-11-11-jeonse-fraud-minimum-guarantee.mdx",
+      "publishedAt": "2026-11-11T02:30:00+09:00",
+      "claimsCount": 3,
+      "footnoteCount": 34,
+      "sourceUrlCount": 1,
+      "claimsPerSource": 3,
+      "riskLevel": "low"
+    }
+  ],
+  "note": "LITE: 로컬 정적 audit. FACT_CHECKER_MODE=full + ANTHROPIC_API_KEY 시 Claude 검증."
+}
